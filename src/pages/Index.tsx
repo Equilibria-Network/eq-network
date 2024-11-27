@@ -54,7 +54,7 @@ const Index = () => {
                   <p className="text-emerald-600">Investigating how coordination patterns work across different scales</p>
                 </div>
               </div>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">Apply to Research Stream</Button>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => window.open('https://forms.gle/Zfy4H5CnBsoPPX5aA', '_blank')}>Apply to Research Stream</Button>
             </div>
           </section>
 
@@ -83,7 +83,7 @@ const Index = () => {
                   <p className="text-emerald-600">Building bridges between different levels of organization</p>
                 </div>
               </div>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">Apply to Product Stream</Button>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => window.open('https://forms.gle/Zfy4H5CnBsoPPX5aA', '_blank')}>Apply to Product Stream</Button>
             </div>
           </section>
         </div>
