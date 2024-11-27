@@ -116,7 +116,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
             alt="Equilibria Network Logo" 
-            className="h-8 mx-auto"
+            className="h-16 mx-auto" // Changed from h-8 to h-16
           />
           <p className="text-emerald-600 text-sm">
             Copyright © {new Date().getFullYear()} Equilibria Network. All rights reserved.
