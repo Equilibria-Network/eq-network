@@ -15,14 +15,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       <main className="container max-w-6xl mx-auto px-4 py-12 space-y-20">
         {/* Hero Section */}
         <section className="text-center space-y-4 animate-fade-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent">
             Equilibria
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-emerald-800 max-w-2xl mx-auto">
             The Collective Intelligence and Coordination Network
           </p>
         </section>
@@ -30,82 +30,82 @@ const Index = () => {
         {/* Main Content */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Research Stream */}
-          <section className="bg-white p-8 rounded-xl border animate-fade-up">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6">Research Stream</h2>
+          <section className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 shadow-lg shadow-emerald-100/20 animate-fade-up">
+            <h2 className="text-3xl font-semibold text-emerald-800 mb-6">Research Stream</h2>
             <div className="space-y-6">
-              <p className="text-gray-600">
+              <p className="text-emerald-700">
                 We study how groups can make better decisions together as challenges grow more complex. Our research integrates insights from:
               </p>
               <div className="space-y-4">
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Information Theory & Collective Intelligence</h3>
-                  <p className="text-gray-600">Understanding how information flows through networks and how collective wisdom emerges</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Information Theory & Collective Intelligence</h3>
+                  <p className="text-emerald-600">Understanding how information flows through networks and how collective wisdom emerges</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Active Inference & System Design</h3>
-                  <p className="text-gray-600">Analyzing how systems maintain stability while adapting to new information</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Active Inference & System Design</h3>
+                  <p className="text-emerald-600">Analyzing how systems maintain stability while adapting to new information</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Trust-Truth Dynamics</h3>
-                  <p className="text-gray-600">Exploring how groups balance maintaining relationships with pursuing accurate beliefs</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Trust-Truth Dynamics</h3>
+                  <p className="text-emerald-600">Exploring how groups balance maintaining relationships with pursuing accurate beliefs</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Scale-Bridging Architecture</h3>
-                  <p className="text-gray-600">Investigating how coordination patterns work across different scales</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Scale-Bridging Architecture</h3>
+                  <p className="text-emerald-600">Investigating how coordination patterns work across different scales</p>
                 </div>
               </div>
-              <Button className="button-primary w-full">Apply to Research Stream</Button>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">Apply to Research Stream</Button>
             </div>
           </section>
 
           {/* Product Stream */}
-          <section className="bg-white p-8 rounded-xl border animate-fade-up">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6">Product Stream</h2>
+          <section className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 shadow-lg shadow-emerald-100/20 animate-fade-up">
+            <h2 className="text-3xl font-semibold text-emerald-800 mb-6">Product Stream</h2>
             <div className="space-y-6">
-              <p className="text-gray-600">
+              <p className="text-emerald-700">
                 We support the development of tools and frameworks that help groups coordinate effectively. Our product work centers on:
               </p>
               <div className="space-y-4">
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Collaborative Decision Tools</h3>
-                  <p className="text-gray-600">Supporting groups in reaching alignment while maintaining diverse perspectives</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Collaborative Decision Tools</h3>
+                  <p className="text-emerald-600">Supporting groups in reaching alignment while maintaining diverse perspectives</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Network Analysis & Visualization</h3>
-                  <p className="text-gray-600">Making complex relationships and dynamics visible and actionable</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Network Analysis & Visualization</h3>
+                  <p className="text-emerald-600">Making complex relationships and dynamics visible and actionable</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Belief Updating Systems</h3>
-                  <p className="text-gray-600">Helping organizations integrate new information effectively</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Belief Updating Systems</h3>
+                  <p className="text-emerald-600">Helping organizations integrate new information effectively</p>
                 </div>
-                <div className="card-hover bg-secondary p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">Cross-Scale Coordination Protocols</h3>
-                  <p className="text-gray-600">Building bridges between different levels of organization</p>
+                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
+                  <h3 className="font-semibold mb-2 text-emerald-800">Cross-Scale Coordination Protocols</h3>
+                  <p className="text-emerald-600">Building bridges between different levels of organization</p>
                 </div>
               </div>
-              <Button className="button-primary w-full">Apply to Product Stream</Button>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">Apply to Product Stream</Button>
             </div>
           </section>
         </div>
 
         {/* Call to Action */}
-        <section className="text-center space-y-6 bg-secondary p-8 rounded-xl animate-fade-up">
-          <h2 className="text-2xl font-semibold text-gray-900">
+        <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
+          <h2 className="text-2xl font-semibold text-emerald-800">
             Join Our Network
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-emerald-700 max-w-2xl mx-auto">
             Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
           </p>
           <form onSubmit={handleSubscribe} className="max-w-md mx-auto space-y-4">
             <Input
               type="email"
               placeholder="Enter your email"
-              className="input-primary"
+              className="border-emerald-200 focus:border-emerald-400 focus:ring-emerald-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Button type="submit" className="button-primary w-full">
+            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
               Get Involved
             </Button>
           </form>
