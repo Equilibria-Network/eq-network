@@ -110,6 +110,18 @@ const Index = () => {
             </Button>
           </form>
         </section>
+
+        {/* Footer */}
+        <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
+          <img 
+            src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
+            alt="Equilibria Network Logo" 
+            className="h-8 mx-auto"
+          />
+          <p className="text-emerald-600 text-sm">
+            Copyright © {new Date().getFullYear()} Equilibria Network. All rights reserved.
+          </p>
+        </footer>
       </main>
     </div>
   );
