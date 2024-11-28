@@ -6,6 +6,14 @@ import { toast } from "sonner";
 const Index = () => {
   const [email, setEmail] = useState("");
 
+  const handleClick = () => {
+    // @ts-ignore
+    if (window.ml) {
+      // @ts-ignore
+      window.ml('show', 'NU2hRJ', true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       <main className="container max-w-6xl mx-auto px-4 py-12 space-y-20">
@@ -88,6 +96,12 @@ const Index = () => {
           <p className="text-emerald-700 max-w-2xl mx-auto">
             Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
           </p>
+          <Button 
+            onClick={handleClick}
+            className="w-full max-w-md mx-auto bg-emerald-600 hover:bg-emerald-700 text-white"
+          >
+            Join Our Network
+          </Button>
           <div className="ml-embedded" data-form="NU2hRJ"></div>
         </section>
 
