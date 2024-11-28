@@ -97,11 +97,12 @@ const Index = () => {
           <p className="text-emerald-700 max-w-2xl mx-auto">
             Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
           </p>
-          <form onSubmit={handleSubscribe} className="max-w-md mx-auto space-y-4">
-            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-              Get Involved
-            </Button>
-          </form>
+          {/* Remove the form element and its button */}
+        </section>
+
+        {/* Newsletter Signup */}
+        <section className="text-center space-y-6 animate-fade-up">
+          <div className="ml-embedded" data-form="NU2hRJ"></div>
         </section>
 
         {/* Footer */}
