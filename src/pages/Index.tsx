@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import MailerLiteForm from "src\components";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -81,9 +82,7 @@ const Index = () => {
         </div>
 
         {/* Call to Action */}
-        <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
-          <div className="ml-embedded" data-form="NU2hRJ"></div>
-        </section>
+        <MailerLiteForm />
 
         {/* Footer */}
         <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
