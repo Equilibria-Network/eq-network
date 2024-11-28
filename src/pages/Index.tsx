@@ -2,10 +2,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import MailerLiteForm from "src\components";
 
 const Index = () => {
   const [email, setEmail] = useState("");
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    // @ts-ignore
+    if (window.ml) {
+      // @ts-ignore
+      window.ml('show', 'NU2hRJ', true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
@@ -82,14 +90,26 @@ const Index = () => {
         </div>
 
         {/* Call to Action */}
-        <MailerLiteForm />
+        <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
+          <h2 className="text-2xl font-semibold text-emerald-800">
+            Join Our Network
+          </h2>
+          <p className="text-emerald-700 max-w-2xl mx-auto">
+            Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
+          </p>
+          <form onSubmit={handleSubscribe} className="max-w-md mx-auto space-y-4">
+            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+              Get Involved
+            </Button>
+          </form>
+        </section>
 
         {/* Footer */}
         <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
           <img 
             src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
             alt="Equilibria Network Logo" 
-            className="h-16 mx-auto"
+            className="h-16 mx-auto" // Changed from h-8 to h-16
           />
           <p className="text-emerald-600 text-sm">
             Copyright © {new Date().getFullYear()} Equilibria Network. All rights reserved.
