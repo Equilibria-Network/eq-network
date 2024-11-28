@@ -6,15 +6,6 @@ import { toast } from "sonner";
 const Index = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    // @ts-ignore
-    if (window.ml) {
-      // @ts-ignore
-      window.ml('show', 'NU2hRJ', true);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       <main className="container max-w-6xl mx-auto px-4 py-12 space-y-20">
@@ -97,11 +88,7 @@ const Index = () => {
           <p className="text-emerald-700 max-w-2xl mx-auto">
             Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
           </p>
-          <form onSubmit={handleSubscribe} className="max-w-md mx-auto space-y-4">
-            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-              Get Involved
-            </Button>
-          </form>
+          <div className="ml-embedded" data-form="NU2hRJ"></div>
         </section>
 
         {/* Footer */}
@@ -109,7 +96,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
             alt="Equilibria Network Logo" 
-            className="h-16 mx-auto" // Changed from h-8 to h-16
+            className="h-16 mx-auto"
           />
           <p className="text-emerald-600 text-sm">
             Copyright © {new Date().getFullYear()} Equilibria Network. All rights reserved.
