@@ -89,6 +89,11 @@ const Index = () => {
           </section>
         </div>
 
+        {/* Call to Action */}
+        <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
+          {/* Remove the form element and its button */}
+        </section>
+
         {/* Newsletter Signup */}
         <section className="text-center space-y-6 animate-fade-up">
           <div className="ml-embedded" data-form="NU2hRJ"></div>
