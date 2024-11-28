@@ -6,14 +6,6 @@ import { toast } from "sonner";
 const Index = () => {
   const [email, setEmail] = useState("");
 
-  const handleClick = () => {
-    // @ts-ignore
-    if (window.ml) {
-      // @ts-ignore
-      window.ml('show', 'NU2hRJ', true);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       <main className="container max-w-6xl mx-auto px-4 py-12 space-y-20">
@@ -90,12 +82,7 @@ const Index = () => {
 
         {/* Call to Action */}
         <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
-          <Button 
-            onClick={handleClick}
-            className="w-full max-w-md mx-auto bg-emerald-600 hover:bg-emerald-700 text-white"
-          >
-            Join Our Network
-          </Button>
+          <div className="ml-embedded" data-form="NU2hRJ"></div>
         </section>
 
         {/* Footer */}
