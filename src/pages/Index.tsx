@@ -8,9 +8,10 @@ const Index = () => {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success("Thanks for subscribing!");
-      setEmail("");
+    // @ts-ignore
+    if (window.ml) {
+      // @ts-ignore
+      window.ml('show', 'NU2hRJ', true);
     }
   };
 
@@ -97,14 +98,6 @@ const Index = () => {
             Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
           </p>
           <form onSubmit={handleSubscribe} className="max-w-md mx-auto space-y-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="border-emerald-200 focus:border-emerald-400 focus:ring-emerald-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
               Get Involved
             </Button>
