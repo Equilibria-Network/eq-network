@@ -89,17 +89,6 @@ const Index = () => {
           </section>
         </div>
 
-        {/* Call to Action */}
-        <section className="text-center space-y-6 bg-emerald-50/50 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 animate-fade-up">
-          <h2 className="text-2xl font-semibold text-emerald-800">
-            Join Our Network
-          </h2>
-          <p className="text-emerald-700 max-w-2xl mx-auto">
-            Join us in developing the frameworks and tools needed for effective coordination in an increasingly complex world. Whether you're a researcher, builder, or practitioner, we provide spaces to connect, collaborate, and create impact.
-          </p>
-          {/* Remove the form element and its button */}
-        </section>
-
         {/* Newsletter Signup */}
         <section className="text-center space-y-6 animate-fade-up">
           <div className="ml-embedded" data-form="NU2hRJ"></div>
