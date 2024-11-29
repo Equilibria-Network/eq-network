@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import MailerLiteForm from "@/components/MailerLiteForm";
 
 const Index = () => {
   return (
@@ -12,7 +13,7 @@ const Index = () => {
           backgroundPosition: 'center 40%'
         }}
       >
-        <div className="absolute inset-0 bg-black/30" /> {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 container max-w-6xl mx-auto px-4 h-full flex flex-col justify-center">
           <h1 className="text-6xl md:text-7xl font-serif text-white mb-6" style={{ fontFamily: 'Freight Text Pro, serif' }}>
             Equilibria
@@ -42,7 +43,6 @@ const Index = () => {
                 <p className="text-black/70">Analyzing how systems maintain stability while adapting to new information</p>
               </div>
             </div>
-            <Button className="w-full">Express Interest in Research Stream</Button>
           </section>
 
           {/* Product Stream */}
@@ -61,13 +61,17 @@ const Index = () => {
                 <p className="text-black/70">Making complex relationships and dynamics visible and actionable</p>
               </div>
             </div>
-            <Button className="w-full">Express Interest in Product Stream</Button>
           </section>
         </div>
 
+        {/* Express Interest Button */}
+        <div className="text-center">
+          <Button className="w-full max-w-xl mx-auto">Express Interest in Our Work</Button>
+        </div>
+
         {/* Newsletter Section */}
-        <section className="max-w-xl mx-auto text-center">
-          <div className="ml-embedded" data-form="NU2hRJ"></div>
+        <section className="max-w-xl mx-auto">
+          <MailerLiteForm />
         </section>
 
         {/* Footer */}
