@@ -66,7 +66,7 @@ const Index = () => {
 
         {/* Express Interest Button */}
         <div className="text-center">
-          <Button className="w-full max-w-xl mx-auto">Express Interest in Our Work</Button>
+          <Button className="w-full max-w-xl mx-auto">Expression of Interest for Joining a Stream</Button>
         </div>
 
         {/* Newsletter Section */}
