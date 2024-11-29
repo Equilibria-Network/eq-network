@@ -4,7 +4,7 @@ import MailerLiteForm from "@/components/MailerLiteForm";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50/70 to-green-50/50">
       {/* Hero Section with New Image */}
       <div 
         className="h-[70vh] relative bg-cover bg-center"
@@ -34,11 +34,11 @@ const Index = () => {
               We study how groups can make better decisions together as challenges grow more complex. Our research integrates insights from:
             </p>
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="p-6 bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Information Theory & Collective Intelligence</h3>
                 <p className="text-black/70">Understanding how information flows through networks and how collective wisdom emerges</p>
               </div>
-              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="p-6 bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Active Inference & System Design</h3>
                 <p className="text-black/70">Analyzing how systems maintain stability while adapting to new information</p>
               </div>
@@ -52,11 +52,11 @@ const Index = () => {
               We support the development of tools and frameworks that help groups coordinate effectively. Our product work centers on:
             </p>
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="p-6 bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Collaborative Decision Tools</h3>
                 <p className="text-black/70">Supporting groups in reaching alignment while maintaining diverse perspectives</p>
               </div>
-              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="p-6 bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Network Analysis & Visualization</h3>
                 <p className="text-black/70">Making complex relationships and dynamics visible and actionable</p>
               </div>
@@ -75,7 +75,7 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="text-center space-y-4 pt-12 border-t border-gray-100">
+        <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
           <img 
             src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
             alt="Equilibria Network Logo" 
