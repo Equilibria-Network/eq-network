@@ -1,107 +1,82 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
 
 const Index = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    // @ts-ignore
-    if (window.ml) {
-      // @ts-ignore
-      window.ml('show', 'NU2hRJ', true);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
-      <main className="container max-w-6xl mx-auto px-4 py-12 space-y-20">
-        {/* Hero Section */}
-        <section className="text-center space-y-4 animate-fade-up">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-white">
+      {/* Hero Section with New Image */}
+      <div 
+        className="h-[70vh] relative bg-cover bg-center"
+        style={{
+          backgroundImage: 'url("/lovable-uploads/9c17967d-7c96-454d-be74-3a9c6a37fdc1.png")',
+          backgroundPosition: 'center 40%'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/30" /> {/* Overlay for better text readability */}
+        <div className="relative z-10 container max-w-6xl mx-auto px-4 h-full flex flex-col justify-center">
+          <h1 className="text-6xl md:text-7xl font-serif text-white mb-6" style={{ fontFamily: 'Freight Text Pro, serif' }}>
             Equilibria
           </h1>
-          <p className="text-xl text-emerald-800 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/90 max-w-2xl font-light">
             The Collective Intelligence and Coordination Network
           </p>
-        </section>
+        </div>
+      </div>
 
+      <main className="container max-w-6xl mx-auto px-4 py-20 space-y-20">
         {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-12">
           {/* Research Stream */}
-          <section className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 shadow-lg shadow-emerald-100/20 animate-fade-up">
-            <h2 className="text-3xl font-semibold text-emerald-800 mb-6">Research Stream</h2>
+          <section className="space-y-6">
+            <h2 className="text-3xl font-serif text-[#1a3c5b] mb-6" style={{ fontFamily: 'Freight Text Pro, serif' }}>Research Stream</h2>
+            <p className="text-black/80 leading-relaxed">
+              We study how groups can make better decisions together as challenges grow more complex. Our research integrates insights from:
+            </p>
             <div className="space-y-6">
-              <p className="text-emerald-700">
-                We study how groups can make better decisions together as challenges grow more complex. Our research integrates insights from:
-              </p>
-              <div className="space-y-4">
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Information Theory & Collective Intelligence</h3>
-                  <p className="text-emerald-600">Understanding how information flows through networks and how collective wisdom emerges</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Active Inference & System Design</h3>
-                  <p className="text-emerald-600">Analyzing how systems maintain stability while adapting to new information</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Trust-Truth Dynamics</h3>
-                  <p className="text-emerald-600">Exploring how groups balance maintaining relationships with pursuing accurate beliefs</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Scale-Bridging Architecture</h3>
-                  <p className="text-emerald-600">Investigating how coordination patterns work across different scales</p>
-                </div>
+              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Information Theory & Collective Intelligence</h3>
+                <p className="text-black/70">Understanding how information flows through networks and how collective wisdom emerges</p>
               </div>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => window.open('https://forms.gle/Zfy4H5CnBsoPPX5aA', '_blank')}>Expression of Interest</Button>
+              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Active Inference & System Design</h3>
+                <p className="text-black/70">Analyzing how systems maintain stability while adapting to new information</p>
+              </div>
             </div>
           </section>
 
           {/* Product Stream */}
-          <section className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-emerald-100 shadow-lg shadow-emerald-100/20 animate-fade-up">
-            <h2 className="text-3xl font-semibold text-emerald-800 mb-6">Product Stream</h2>
+          <section className="space-y-6">
+            <h2 className="text-3xl font-serif text-[#1a3c5b] mb-6" style={{ fontFamily: 'Freight Text Pro, serif' }}>Product Stream</h2>
+            <p className="text-black/80 leading-relaxed">
+              We support the development of tools and frameworks that help groups coordinate effectively. Our product work centers on:
+            </p>
             <div className="space-y-6">
-              <p className="text-emerald-700">
-                We support the development of tools and frameworks that help groups coordinate effectively. Our product work centers on:
-              </p>
-              <div className="space-y-4">
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Collaborative Decision Tools</h3>
-                  <p className="text-emerald-600">Supporting groups in reaching alignment while maintaining diverse perspectives</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Network Analysis & Visualization</h3>
-                  <p className="text-emerald-600">Making complex relationships and dynamics visible and actionable</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Belief Updating Systems</h3>
-                  <p className="text-emerald-600">Helping organizations integrate new information effectively</p>
-                </div>
-                <div className="card-hover bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
-                  <h3 className="font-semibold mb-2 text-emerald-800">Cross-Scale Coordination Protocols</h3>
-                  <p className="text-emerald-600">Building bridges between different levels of organization</p>
-                </div>
+              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Collaborative Decision Tools</h3>
+                <p className="text-black/70">Supporting groups in reaching alignment while maintaining diverse perspectives</p>
               </div>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => window.open('https://forms.gle/Zfy4H5CnBsoPPX5aA', '_blank')}>Expression of Interest</Button>
+              <div className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-xl font-medium text-[#1a3c5b] mb-2">Network Analysis & Visualization</h3>
+                <p className="text-black/70">Making complex relationships and dynamics visible and actionable</p>
+              </div>
             </div>
           </section>
         </div>
 
-          {/* Newsletter Signup */}
-          <section className="text-center space-y-6 animate-fade-up">
-            <div className="ml-embedded" data-form="NU2hRJ"></div>
-          </section>
+        {/* Newsletter Section */}
+        <section className="max-w-xl mx-auto text-center space-y-6 py-12">
+          <h2 className="text-3xl font-serif text-[#1a3c5b]" style={{ fontFamily: 'Freight Text Pro, serif' }}>Join Our Network</h2>
+          <div className="ml-embedded" data-form="NU2hRJ"></div>
+        </section>
 
         {/* Footer */}
-        <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
+        <footer className="text-center space-y-4 pt-12 border-t border-gray-100">
           <img 
             src="/lovable-uploads/30b10e59-0ac0-4796-8711-fa380fd1d7b9.png" 
             alt="Equilibria Network Logo" 
-            className="h-16 mx-auto" // Changed from h-8 to h-16
+            className="h-16 mx-auto"
           />
-          <p className="text-emerald-600 text-sm">
+          <p className="text-black/60 text-sm">
             Copyright © {new Date().getFullYear()} Equilibria Network. All rights reserved.
           </p>
         </footer>
