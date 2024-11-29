@@ -42,6 +42,7 @@ const Index = () => {
                 <p className="text-black/70">Analyzing how systems maintain stability while adapting to new information</p>
               </div>
             </div>
+            <Button className="w-full">Express Interest in Research Stream</Button>
           </section>
 
           {/* Product Stream */}
@@ -60,12 +61,12 @@ const Index = () => {
                 <p className="text-black/70">Making complex relationships and dynamics visible and actionable</p>
               </div>
             </div>
+            <Button className="w-full">Express Interest in Product Stream</Button>
           </section>
         </div>
 
         {/* Newsletter Section */}
-        <section className="max-w-xl mx-auto text-center space-y-6 py-12">
-          <h2 className="text-3xl font-serif text-[#1a3c5b]" style={{ fontFamily: 'Freight Text Pro, serif' }}>Join Our Network</h2>
+        <section className="max-w-xl mx-auto text-center">
           <div className="ml-embedded" data-form="NU2hRJ"></div>
         </section>
 
