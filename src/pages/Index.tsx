@@ -69,6 +69,19 @@ const Index = () => {
           <Button className="w-full max-w-xl mx-auto">Expression of Interest for Joining a Stream</Button>
         </div>
 
+        {/* About Us Section */}
+        <section className="space-y-8">
+          <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6" style={{ fontFamily: 'Freight Text Pro, serif' }}>About Us</h2>
+          <div className="bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg p-8 space-y-6">
+            <p className="text-black/80 leading-relaxed">
+              Equilibria Network emerged from a recognition that the rapid advancement of artificial intelligence requires new approaches to coordination and decision-making. Established in 2024, we operate at the intersection of research, technology, and governance, serving as a bridge between theoretical insights and practical solutions. Our network brings together leading researchers, experienced practitioners, and innovative builders who share our commitment to developing better coordination mechanisms for an AI-enabled world.
+            </p>
+            <p className="text-black/80 leading-relaxed">
+              Through our events, knowledge sharing initiatives, and direct support for coordination projects, we strengthen the connections between academic research and real-world applications. Based in London's AI ecosystem, we maintain active partnerships with research institutions, technology companies, and policy organizations globally.
+            </p>
+          </div>
+        </section>
+
         {/* Newsletter Section */}
         <section className="max-w-xl mx-auto">
           <MailerLiteForm />
