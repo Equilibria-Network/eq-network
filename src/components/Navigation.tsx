@@ -4,7 +4,7 @@ const Navigation = () => {
   const location = useLocation();
   
   return (
-    <nav className="bg-white/80 backdrop-blur-sm border-b border-emerald-100">
+    <nav className="bg-gradient-to-br from-emerald-50/70 to-green-50/50 border-b border-emerald-100">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
