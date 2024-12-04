@@ -93,15 +93,15 @@ const Index = () => {
         {/* Incubator Section */}
         <section className="space-y-8">
           <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6">About the Equilibria Incubator</h2>
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="w-full md:w-1/2">
-              <img 
-                src="/lovable-uploads/643b5892-d629-4437-814f-82b17f984b0a.png"
-                alt="Data center servers representing technological infrastructure"
-                className="rounded-lg w-full h-auto object-cover shadow-lg"
-              />
-            </div>
-            <div className="w-full md:w-1/2">
+          <div 
+            className="relative bg-cover bg-center rounded-lg overflow-hidden"
+            style={{
+              backgroundImage: 'url("/lovable-uploads/643b5892-d629-4437-814f-82b17f984b0a.png")',
+              minHeight: '600px'
+            }}
+          >
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="relative z-10 p-8 max-w-3xl mx-auto">
               <div className="bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg p-8">
                 <div className="prose prose-lg space-y-6 text-black/80">
                   <h3 className="text-2xl font-serif text-[#1a3c5b] mb-4">Our Experimental Incubator Model</h3>
