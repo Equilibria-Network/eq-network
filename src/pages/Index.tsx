@@ -90,16 +90,43 @@ const Index = () => {
           <Button className="w-full max-w-xl mx-auto bg-emerald-600 hover:bg-emerald-700">Expression of Interest for Joining a Stream</Button>
         </div>
 
-        {/* About Us Section */}
+        {/* Incubator Section */}
         <section className="space-y-8">
-          <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6">About Us</h2>
-          <div className="bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg p-8 space-y-6">
-            <p className="text-black/80 leading-relaxed">
-              Equilibria Network emerged from a recognition that the rapid advancement of artificial intelligence requires new approaches to coordination and decision-making. Established in 2024, we operate at the intersection of research, technology, and governance, serving as a bridge between theoretical insights and practical solutions. Our network brings together leading researchers, experienced practitioners, and innovative builders who share our commitment to developing better coordination mechanisms for an AI-enabled world.
-            </p>
-            <p className="text-black/80 leading-relaxed">
-              Through our events, knowledge sharing initiatives, and direct support for coordination projects, we strengthen the connections between academic research and real-world applications. Based in London's AI ecosystem, we maintain active partnerships with research institutions, technology companies, and policy organizations globally.
-            </p>
+          <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6">About the Equilibria Incubator</h2>
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="w-full md:w-1/2">
+              <img 
+                src="/lovable-uploads/643b5892-d629-4437-814f-82b17f984b0a.png"
+                alt="Data center servers representing technological infrastructure"
+                className="rounded-lg w-full h-auto object-cover shadow-lg"
+              />
+            </div>
+            <div className="w-full md:w-1/2">
+              <div className="bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg p-8">
+                <div className="prose prose-lg space-y-6 text-black/80">
+                  <h3 className="text-2xl font-serif text-[#1a3c5b] mb-4">Our Experimental Incubator Model</h3>
+                  <p className="leading-relaxed">
+                    We're building a different kind of incubator - one that practices the principles of better coordination it seeks to promote. Rather than following traditional accelerator models, we're exploring new ways to nurture projects that enhance human-AI coordination.
+                  </p>
+                  <p className="leading-relaxed">
+                    Drawing inspiration from decentralized science and novel organizational structures, we envision an incubator where collective intelligence tools guide project selection, where teams share risks and rewards through zebra group structures, and where knowledge becomes part of a growing commons that benefits all participants.
+                  </p>
+                  <p className="leading-relaxed">
+                    Our first steps are deliberate and experimental. Through our current events and research initiatives, we're learning what founders in this space need, what structures enable genuine collaboration, and how to measure impact in coordination technologies. These insights will shape our first cohort.
+                  </p>
+                  <h4 className="text-xl font-medium text-[#1a3c5b] mt-6 mb-4">Key elements we're exploring:</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>Using collective intelligence algorithms to match founders with opportunities and collaborators</li>
+                    <li>Implementing novel governance structures that align incentives across projects</li>
+                    <li>Building shared knowledge commons that grow more valuable with each cohort</li>
+                    <li>Testing new frameworks for measuring coordination capacity and impact</li>
+                  </ul>
+                  <p className="leading-relaxed mt-6">
+                    We're currently connecting with potential founders, mentors, and partners who share our curiosity about these possibilities. If you're interested in being part of our first cohort or contributing to the development of our model, we'd love to hear from you.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
