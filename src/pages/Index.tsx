@@ -26,19 +26,24 @@ const Index = () => {
 
       <main className="container max-w-6xl mx-auto px-4 py-20 space-y-20">
         {/* Introduction Text */}
-        <section className="prose prose-lg max-w-4xl mx-auto space-y-6 text-black/80">
-          <p className="leading-relaxed">
-            Humanity stands at a critical juncture. As artificial intelligence rapidly advances, our ability to make wise collective decisions becomes increasingly vital – yet our existing institutions and coordination systems struggle to keep pace with mounting complexity.
-          </p>
-          <p className="leading-relaxed">
-            Across many fields, we see fascinating experiments emerging that hint at new possibilities: Digital democracy platforms are transforming public engagement. Novel organizational structures like zebra groups are reimagining risk-sharing. Researchers are uncovering promising frameworks for collective intelligence. While no single approach has all the answers, these experiments suggest paths forward for combining human wisdom with computational tools.
-          </p>
-          <p className="leading-relaxed">
-            We believe there's a timely opportunity to weave these threads together. Equilibria was founded to create space for this exploration through an experimental incubator that nurtures projects at the frontier of human-AI coordination. Our hypothesis is that by bringing together researchers, builders, and practitioners in new ways, we can accelerate progress toward better coordination systems.
-          </p>
-          <p className="leading-relaxed">
-            We're committed to learning in public, sharing our uncertainties as well as our insights, and building alongside others who share this curiosity about what's possible.
-          </p>
+        <section className="space-y-8">
+          <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6">Our Vision</h2>
+          <div className="bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-lg p-8">
+            <div className="prose prose-lg max-w-4xl mx-auto space-y-6 text-black/80">
+              <p className="leading-relaxed">
+                Humanity stands at a critical juncture. As artificial intelligence rapidly advances, our ability to make wise collective decisions becomes increasingly vital – yet our existing institutions and coordination systems struggle to keep pace with mounting complexity.
+              </p>
+              <p className="leading-relaxed">
+                Across many fields, we see fascinating experiments emerging that hint at new possibilities: Digital democracy platforms are transforming public engagement. Novel organizational structures like zebra groups are reimagining risk-sharing. Researchers are uncovering promising frameworks for collective intelligence. While no single approach has all the answers, these experiments suggest paths forward for combining human wisdom with computational tools.
+              </p>
+              <p className="leading-relaxed">
+                We believe there's a timely opportunity to weave these threads together. Equilibria was founded to create space for this exploration through an experimental incubator that nurtures projects at the frontier of human-AI coordination. Our hypothesis is that by bringing together researchers, builders, and practitioners in new ways, we can accelerate progress toward better coordination systems.
+              </p>
+              <p className="leading-relaxed">
+                We're committed to learning in public, sharing our uncertainties as well as our insights, and building alongside others who share this curiosity about what's possible.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Main Content */}
