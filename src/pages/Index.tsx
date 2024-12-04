@@ -92,11 +92,10 @@ const Index = () => {
 
         {/* Incubator Section */}
         <section className="space-y-8">
-          <h2 className="text-3xl font-serif text-[#1a3c5b] text-center mb-6">About the Equilibria Incubator</h2>
           <div 
             className="relative bg-cover bg-center rounded-lg overflow-hidden"
             style={{
-              backgroundImage: 'url("/lovable-uploads/643b5892-d629-4437-814f-82b17f984b0a.png")',
+              backgroundImage: 'url("/lovable-uploads/e6d27c93-c520-4694-9824-9f4b54e1d13e.png")',
               minHeight: '600px'
             }}
           >
