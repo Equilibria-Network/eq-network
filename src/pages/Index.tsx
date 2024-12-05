@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import MailerLiteForm from "@/components/MailerLiteForm";
+import EmailOctopusForm from "@/components/EmailOctopusForm.tsx";
 
 const Index = () => {
   return (
@@ -142,7 +142,7 @@ const Index = () => {
 
         {/* Newsletter Section */}
         <section className="max-w-xl mx-auto">
-          <MailerLiteForm />
+          <EmailOctopusForm />
         </section>
 
         {/* Footer */}
