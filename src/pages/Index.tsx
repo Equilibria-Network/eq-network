@@ -87,7 +87,18 @@ const Index = () => {
 
         {/* Express Interest Button */}
         <div className="text-center">
-          <Button className="w-full max-w-xl mx-auto bg-emerald-600 hover:bg-emerald-700">Expression of Interest for Joining a Stream</Button>
+          <Button 
+            asChild 
+            className="w-full max-w-xl mx-auto bg-emerald-600 hover:bg-emerald-700"
+          >
+            <a 
+              href="https://forms.gle/iFaehTPDDJuGuUcT9"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Expression of Interest for Joining a Stream
+            </a>
+          </Button>
         </div>
 
         {/* Incubator Section */}

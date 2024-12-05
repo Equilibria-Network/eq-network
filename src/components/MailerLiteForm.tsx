@@ -1,33 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 
 declare global {
   interface Window {
     ml: any;
+    ml_account: string;
+    ml_webform_5876300: any;
   }
 }
 
 const MailerLiteForm = () => {
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+
   useEffect(() => {
+    // Set the account ID globally
+    window.ml_account = '1210546';
+
     // Create and load the universal script
     const script = document.createElement('script');
-    script.innerHTML = `
-      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-      ml('account', '1210546');
-    `;
+    script.src = 'https://static.mailerlite.com/js/universal.js';
+    script.async = true;
+    script.onload = () => setIsScriptLoaded(true);
+    
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
   const handleShowForm = () => {
-    if (window.ml) {
-      window.ml('show', 'NU2hRJ', true);
+    if (window.ml && isScriptLoaded) {
+      window.ml('show', {
+        'accountId': '1210546',
+        'formId': 'NU2hRJ'  // Replace with your actual form ID
+      });
+    } else {
+      console.log('MailerLite script not loaded yet');
     }
   };
 
