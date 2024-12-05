@@ -139,13 +139,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-          
-        <!--
-        {/* Newsletter Section */}
-        <section id="newsletter-section" className="max-w-xl mx-auto relative z-10">
-          <EmailOctopusForm />
-        </section>
-        -->
         {/* Footer */}
         <footer className="text-center space-y-4 pt-12 border-t border-emerald-100">
           <img 
