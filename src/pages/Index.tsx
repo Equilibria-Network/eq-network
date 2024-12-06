@@ -101,6 +101,26 @@ const Index = () => {
           </Button>
         </div>
 
+        {/* Contact Section */}
+        <section className="text-center space-y-4 py-12">
+          <h2 className="text-3xl font-serif text-[#1a3c5b] mb-4">Contact Us</h2>
+          <p className="text-black/70 max-w-xl mx-auto mb-6">
+            Have questions or want to learn more about Equilibria? We'd love to hear from you.
+          </p>
+          <Button 
+            asChild 
+            className="bg-emerald-600 hover:bg-emerald-700"
+          >
+            <a 
+              href="mailto:contact@eq-network.org"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Email Us
+            </a>
+          </Button>
+        </section>
+
         {/* Incubator Section */}
         <section className="space-y-8">
           <div 
