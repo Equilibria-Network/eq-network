@@ -1,69 +1,41 @@
-# Welcome to your Lovable project
+# Website
 
-## Project info
+This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-**URL**: https://lovable.dev/projects/a909d61f-ece3-44e8-ba86-e7d25674609e
+### Installation
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/a909d61f-ece3-44e8-ba86-e7d25674609e) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+$ yarn
 ```
 
-**Edit a file directly in GitHub**
+### Local Development
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+$ yarn start
+```
 
-**Use GitHub Codespaces**
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Build
 
-## What technologies are used for this project?
+```
+$ yarn build
+```
 
-This project is built with .
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Deployment
 
-## How can I deploy this project?
+Using SSH:
 
-Simply open [Lovable](https://lovable.dev/projects/a909d61f-ece3-44e8-ba86-e7d25674609e) and click on Share -> Publish.
+```
+$ USE_SSH=true yarn deploy
+```
 
-## I want to use a custom domain - is that possible?
+Not using SSH:
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

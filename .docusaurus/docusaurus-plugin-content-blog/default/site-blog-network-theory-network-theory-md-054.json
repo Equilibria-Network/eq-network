@@ -1,0 +1,58 @@
+{
+  "permalink": "/blog/network-theory",
+  "source": "@site/blog/network-theory/network-theory.md",
+  "title": "Network Theory",
+  "description": "This is a description of my second blog post",
+  "date": "2024-12-20T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "intelligence",
+      "permalink": "/blog/tags/intelligence"
+    },
+    {
+      "inline": true,
+      "label": "collective",
+      "permalink": "/blog/tags/collective"
+    },
+    {
+      "inline": true,
+      "label": "network",
+      "permalink": "/blog/tags/network"
+    }
+  ],
+  "readingTime": 2.335,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Markov Grey",
+      "title": "Author",
+      "socials": {},
+      "key": null,
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "/network-theory",
+    "title": "Network Theory",
+    "description": "This is a description of my second blog post",
+    "date": "2024-12-20T00:00:00.000Z",
+    "authors": [
+      {
+        "name": "Markov Grey",
+        "title": "Author"
+      }
+    ],
+    "tags": [
+      "intelligence",
+      "collective",
+      "network"
+    ],
+    "image": "./Images/1md_Image_1.png"
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Collective Intelligence",
+    "permalink": "/blog/collective-intelligence"
+  }
+}

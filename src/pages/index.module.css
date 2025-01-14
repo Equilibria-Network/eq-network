@@ -1,0 +1,19 @@
+/* src/pages/index.module.css */
+.mainContainer {
+  /* Styles for the main content wrapper */
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Any spacing between sections */
+.section {
+  margin-bottom: 4rem;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 966px) {
+  .section {
+    margin-bottom: 2rem;
+  }
+}

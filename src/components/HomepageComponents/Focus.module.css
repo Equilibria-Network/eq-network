@@ -1,0 +1,99 @@
+.section {
+  composes: section from './shared.module.css';
+  composes: sectionTransparent from './shared.module.css';
+}
+
+.container {
+  composes: container from './shared.module.css';
+}
+
+.card {
+  composes: card from './shared.module.css';
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}
+
+.streams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.streamCard {
+  height: 100%;
+}
+
+.streamTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.streamDescription {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2rem;
+}
+
+.streamItems {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.streamItem {
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.streamItem h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary-darker);
+}
+
+.streamItem p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .streams {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .streamTitle {
+    font-size: 1.75rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+}

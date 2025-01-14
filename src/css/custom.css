@@ -1,0 +1,82 @@
+@import url('https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your existing theme colors */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+}
+
+/* Dark theme colors */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+}
+
+[data-theme='light'] .sectionSolid {
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .sectionSolid {
+  background: var(--ifm-background-surface-color);
+}
+
+/* src/css/custom.css */
+/* Add these after your existing styles */
+
+/* Base responsive container */
+.container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Add responsive padding to main content */
+main {
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 0.5rem;
+  }
+}

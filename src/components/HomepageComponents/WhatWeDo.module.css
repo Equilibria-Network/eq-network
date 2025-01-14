@@ -1,0 +1,82 @@
+.section {
+  composes: section from './shared.module.css';
+  composes: sectionSolid from './shared.module.css';
+}
+
+.container {
+  composes: container from './shared.module.css';
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.largeTitle h2 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--ifm-color-primary);
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.description p {
+  margin-bottom: 1.5rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-top: 2rem;
+}
+
+.capability h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.capability ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.capability li {
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-emphasis-700);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.capability li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--ifm-color-primary);
+}
+
+@media (max-width: 768px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .largeTitle h2 {
+    font-size: 2.5rem;
+  }
+
+  .capabilities {
+    grid-template-columns: 1fr;
+  }
+}

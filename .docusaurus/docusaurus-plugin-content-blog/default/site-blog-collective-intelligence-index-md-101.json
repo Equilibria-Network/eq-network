@@ -1,0 +1,54 @@
+{
+  "permalink": "/blog/collective-intelligence",
+  "source": "@site/blog/collective-intelligence/index.md",
+  "title": "Collective Intelligence",
+  "description": "This is a description of my first blog post",
+  "date": "2024-12-20T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "intelligence",
+      "permalink": "/blog/tags/intelligence"
+    },
+    {
+      "inline": true,
+      "label": "collective",
+      "permalink": "/blog/tags/collective"
+    }
+  ],
+  "readingTime": 15.23,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Jonas Hallgren",
+      "title": "Author",
+      "imageUrl": "/img/authors/markov.png",
+      "socials": {},
+      "key": null,
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "/collective-intelligence",
+    "title": "Collective Intelligence",
+    "description": "This is a description of my first blog post",
+    "date": "2024-12-20T00:00:00.000Z",
+    "authors": [
+      {
+        "name": "Jonas Hallgren",
+        "title": "Author",
+        "imageUrl": "/img/authors/markov.png"
+      }
+    ],
+    "tags": [
+      "intelligence",
+      "collective"
+    ],
+    "image": "./Images/1md_Image_1.png"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Network Theory",
+    "permalink": "/blog/network-theory"
+  }
+}
