@@ -1,0 +1,53 @@
+/* src/components/HomepageComponents/Hero.module.css */
+.hero {
+  height: 60vh; /* Changed from 100vh */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  /* Removed background-image and related properties */
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7); /* Made slightly more opaque */
+  backdrop-filter: blur(2px);
+}
+
+[data-theme='dark'] .heroOverlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.heroContent {
+  padding: 2rem;
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+@media screen and (max-width: 966px) {
+  .hero {
+    height: 50vh; /* Shorter on mobile */
+  }
+  
+  .heroTitle {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "permalink": "/blog/post-1/post-1",
+  "source": "@site/blog/post-1/post-1.md",
+  "title": "Post 1",
+  "description": "This is a description of my the first blog post",
+  "date": "2024-12-20T00:00:00.000Z",
+  "tags": [],
+  "readingTime": 15.22,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Jonas Hallgren",
+      "key": null,
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "title": "Post 1",
+    "description": "This is a description of my the first blog post",
+    "date": "2024-12-20T00:00:00.000Z",
+    "author": "Jonas Hallgren",
+    "coverImage": "1md_Image_1.png"
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Network Theory",
+    "permalink": "/blog/network-theory"
+  }
+}
