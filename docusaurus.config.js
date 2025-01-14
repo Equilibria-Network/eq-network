@@ -1,12 +1,14 @@
 // docusaurus.config.js
 const config = {
-  title: 'Equilibria',
+  title: 'Equilibria Network',
   tagline: 'Your gateway to thoughtful content and insights',
-  url: 'https://equilibria.com',
+  url: 'https://eq-network.org/',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'equilibria',
-  projectName: 'equilibria-website',
+organizationName: 'Equilibria-Network',
+projectName: 'eq-network',
+deploymentBranch: 'gh-pages',
+trailingSlash: false,
 
   presets: [
     [
@@ -50,6 +52,10 @@ const config = {
           //{to: '/contact', label: 'Contact', position: 'right'},
         ],
       },
+  socials: {
+    //twitter: 'your-twitter-handle',  // if you have one
+    github: 'Equilibria-Network',
+  },
       footer: {
         style: 'dark',
         links: [
