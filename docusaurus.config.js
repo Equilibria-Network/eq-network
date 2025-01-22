@@ -2,8 +2,10 @@
 const config = {
   title: 'Equilibria Network',
   tagline: 'Your gateway to thoughtful content and insights',
-  url: 'https://eq-network.org/',
-  baseUrl: '/',
+  //url: 'https://eq-network.org/', 
+  //baseUrl: '/',
+  url: 'https://equilibria-network.github.io', // temp until DNS for domain gets updated
+  baseUrl: '/eq-network/', // temp until DNS for domain gets updated
   favicon: 'img/favicon.ico',
 organizationName: 'Equilibria-Network',
 projectName: 'eq-network',
