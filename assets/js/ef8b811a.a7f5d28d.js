@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[947],{6600:e=>{e.exports=JSON.parse('{"authors":[{"name":"Jonas Hallgren","title":"Equilibria Researcher","key":"jonas","page":null,"count":0},{"name":"Markov Grey","title":"Equilibria Researcher","key":"markov","page":null,"count":0}]}')}}]);
