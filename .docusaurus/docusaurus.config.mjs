@@ -4,13 +4,15 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "Equilibria",
+  "title": "Equilibria Network",
   "tagline": "Your gateway to thoughtful content and insights",
-  "url": "https://equilibria.com",
-  "baseUrl": "/",
+  "url": "https://equilibria-network.github.io",
+  "baseUrl": "/eq-network/",
   "favicon": "img/favicon.ico",
-  "organizationName": "equilibria",
-  "projectName": "equilibria-website",
+  "organizationName": "Equilibria-Network",
+  "projectName": "eq-network",
+  "deploymentBranch": "gh-pages",
+  "trailingSlash": false,
   "presets": [
     [
       "classic",
@@ -36,7 +38,7 @@ export default {
       "title": "Equilibria",
       "logo": {
         "alt": "Equilibria Logo",
-        "src": "img/logo.png"
+        "src": "img/logo-icon.svg"
       },
       "items": [
         {
@@ -46,6 +48,9 @@ export default {
         }
       ],
       "hideOnScroll": false
+    },
+    "socials": {
+      "github": "Equilibria-Network"
     },
     "footer": {
       "style": "dark",

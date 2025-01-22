@@ -2,10 +2,10 @@
 const config = {
   title: 'Equilibria Network',
   tagline: 'Your gateway to thoughtful content and insights',
-  //url: 'https://eq-network.org/', 
-  //baseUrl: '/',
-  url: 'https://equilibria-network.github.io', // temp until DNS for domain gets updated
-  baseUrl: '/eq-network/', // temp until DNS for domain gets updated
+  url: 'https://eq-network.org/', 
+  baseUrl: '/',
+  //url: 'https://equilibria-network.github.io', // temp until DNS for domain gets updated
+  //baseUrl: '/eq-network/', // temp until DNS for domain gets updated
   favicon: 'img/favicon.ico',
 organizationName: 'Equilibria-Network',
 projectName: 'eq-network',
@@ -46,7 +46,7 @@ trailingSlash: false,
         title: 'Equilibria',
         logo: {
           alt: 'Equilibria Logo',
-          src: 'img/logo.png',
+          src: 'img/logo-icon.svg',
         },
         items: [
           {to: '/blog', label: 'Blog', position: 'right'},
