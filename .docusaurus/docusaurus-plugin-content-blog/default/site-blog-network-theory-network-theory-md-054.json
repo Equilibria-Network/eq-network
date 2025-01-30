@@ -1,5 +1,5 @@
 {
-  "permalink": "/eq-network/blog/network-theory",
+  "permalink": "/blog/network-theory",
   "source": "@site/blog/network-theory/network-theory.md",
   "title": "Network Theory",
   "description": "This is a description of my second blog post",
@@ -8,17 +8,17 @@
     {
       "inline": true,
       "label": "intelligence",
-      "permalink": "/eq-network/blog/tags/intelligence"
+      "permalink": "/blog/tags/intelligence"
     },
     {
       "inline": true,
       "label": "collective",
-      "permalink": "/eq-network/blog/tags/collective"
+      "permalink": "/blog/tags/collective"
     },
     {
       "inline": true,
       "label": "network",
-      "permalink": "/eq-network/blog/tags/network"
+      "permalink": "/blog/tags/network"
     }
   ],
   "readingTime": 2.335,
@@ -51,8 +51,8 @@
     "image": "./Images/1md_Image_1.png"
   },
   "unlisted": false,
-  "nextItem": {
+  "prevItem": {
     "title": "Collective Intelligence",
-    "permalink": "/eq-network/blog/collective-intelligence"
+    "permalink": "/blog/collective-intelligence"
   }
 }

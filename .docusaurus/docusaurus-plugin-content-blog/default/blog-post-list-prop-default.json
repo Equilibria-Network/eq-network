@@ -2,14 +2,14 @@
   "title": "Recent posts",
   "items": [
     {
-      "title": "Network Theory",
-      "permalink": "/eq-network/blog/network-theory",
+      "title": "Collective Intelligence",
+      "permalink": "/blog/collective-intelligence",
       "unlisted": false,
       "date": "2024-12-20T00:00:00.000Z"
     },
     {
-      "title": "Collective Intelligence",
-      "permalink": "/eq-network/blog/collective-intelligence",
+      "title": "Network Theory",
+      "permalink": "/blog/network-theory",
       "unlisted": false,
       "date": "2024-12-20T00:00:00.000Z"
     }

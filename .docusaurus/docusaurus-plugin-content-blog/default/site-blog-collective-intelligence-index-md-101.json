@@ -1,5 +1,5 @@
 {
-  "permalink": "/eq-network/blog/collective-intelligence",
+  "permalink": "/blog/collective-intelligence",
   "source": "@site/blog/collective-intelligence/index.md",
   "title": "Collective Intelligence",
   "description": "This is a description of my first blog post",
@@ -8,12 +8,12 @@
     {
       "inline": true,
       "label": "intelligence",
-      "permalink": "/eq-network/blog/tags/intelligence"
+      "permalink": "/blog/tags/intelligence"
     },
     {
       "inline": true,
       "label": "collective",
-      "permalink": "/eq-network/blog/tags/collective"
+      "permalink": "/blog/tags/collective"
     }
   ],
   "readingTime": 15.23,
@@ -47,8 +47,8 @@
     "image": "./Images/1md_Image_1.png"
   },
   "unlisted": false,
-  "prevItem": {
+  "nextItem": {
     "title": "Network Theory",
-    "permalink": "/eq-network/blog/network-theory"
+    "permalink": "/blog/network-theory"
   }
 }

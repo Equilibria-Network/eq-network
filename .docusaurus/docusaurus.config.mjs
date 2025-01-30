@@ -6,8 +6,8 @@
 export default {
   "title": "Equilibria Network",
   "tagline": "Your gateway to thoughtful content and insights",
-  "url": "https://equilibria-network.github.io",
-  "baseUrl": "/eq-network/",
+  "url": "https://eq-network.org",
+  "baseUrl": "/",
   "favicon": "img/favicon.ico",
   "organizationName": "Equilibria-Network",
   "projectName": "eq-network",
