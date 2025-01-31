@@ -17,15 +17,12 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   
   return (
-    <Layout
-      title={siteConfig.title}
-      description={siteConfig.tagline}>
-      <Hero />
+    <Layout>
+      <Hero/>
       <main>
         <Mission />
         <WhoWeAre />
         <WhatWeDo />
-        <Focus />
         <RecentArticles />
         <StayCoordinated />
         <ContactForm />

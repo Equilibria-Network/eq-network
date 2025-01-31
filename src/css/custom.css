@@ -3,26 +3,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your existing theme colors */
+/* Base theme colors using the Equilibria blue palette */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary blue from the Equilibria logo text */
+  --ifm-color-primary: #003B7E;  /* Deep navy blue */
+  --ifm-color-primary-dark: #003571;
+  --ifm-color-primary-darker: #002F64;
+  --ifm-color-primary-darkest: #002855;
+  --ifm-color-primary-light: #0047A1;
+  --ifm-color-primary-lighter: #0055C4;
+  --ifm-color-primary-lightest: #0063E7;
+  
+  /* Additional brand colors from the butterfly pattern */
+  --equilibria-blue-light: #89CFF0;  /* Lighter blue from the pattern */
+  --equilibria-blue-accent: #4AB3F4;  /* Medium blue accent */
 }
 
-/* Dark theme colors */
+/* Dark theme colors - using lighter shades for better contrast */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #4AB3F4;  /* Using the medium blue as primary in dark mode */
+  --ifm-color-primary-dark: #3BA4E5;
+  --ifm-color-primary-darker: #2C95D6;
+  --ifm-color-primary-darkest: #1D86C7;
+  --ifm-color-primary-light: #59C2FF;
+  --ifm-color-primary-lighter: #68D1FF;
+  --ifm-color-primary-lightest: #77E0FF;
+  
+  /* Ensuring good contrast in dark mode */
+  --ifm-background-color: #002855;  /* Deep navy background */
+  --ifm-background-surface-color: #003B7E;  /* Slightly lighter navy for surfaces */
 }
 
 [data-theme='light'] .sectionSolid {
@@ -33,10 +42,7 @@
   background: var(--ifm-background-surface-color);
 }
 
-/* src/css/custom.css */
-/* Add these after your existing styles */
-
-/* Base responsive container */
+/* Your existing container and responsive styles remain unchanged */
 .container {
   width: 100%;
   padding-right: 1rem;
@@ -45,7 +51,7 @@
   margin-left: auto;
 }
 
-/* Responsive breakpoints */
+/* Responsive breakpoints remain unchanged */
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
@@ -70,9 +76,9 @@
   }
 }
 
-/* Add responsive padding to main content */
+/* Main content padding remains unchanged */
 main {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 @media (max-width: 768px) {

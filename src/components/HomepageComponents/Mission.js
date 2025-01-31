@@ -22,9 +22,6 @@ export default function Mission() {
               increasingly complex challenges.
             </p>
           </div>
-          <div className={styles.missionGraphWrapper}>
-            <NetworkGraph />
-          </div>
         </div>
       </div>
     </section>
