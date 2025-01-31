@@ -4,7 +4,7 @@ import styles from './WhoWeAre.module.css';
 
 export default function WhoWeAre() {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} ${styles.blueSection} section-full-width`}>
       <div className={styles.container}>
         <div className={styles.splitLayout}>
           <div className={styles.largeTitle}>
@@ -15,16 +15,13 @@ export default function WhoWeAre() {
           <div className={styles.description}>
             <div className={styles.card}>
               <p>
-                We are a diverse group of researchers, engineers, and practitioners 
-                working at the intersection of human coordination and artificial intelligence. 
-                Our team brings together expertise from complex systems, social science, 
-                machine learning, and organizational design.
+                We're an interdisciplinary team of researchers and builders working to transform how organizations make decisions in synergistic human and AI systems.
               </p>
               <p>
-                We believe that the future of human-AI coordination requires both technical 
-                innovation and deep understanding of human systems. Our interdisciplinary 
-                approach allows us to tackle these challenges from multiple angles, 
-                developing solutions that are both technically sound and socially aware.
+                As a hybrid research organization, we focus on foundational inquiry in tandem with impactful, practical solutions.
+              </p>
+              <p>
+                Our expertise spans complexity science, AI safety, and systems thinking, allowing us to bring important perspectives to the challenges of multi-agent systems and collective cognition.
               </p>
             </div>
           </div>

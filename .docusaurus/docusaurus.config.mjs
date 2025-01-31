@@ -5,9 +5,9 @@
  */
 export default {
   "title": "Equilibria Network",
-  "tagline": "Your gateway to thoughtful content and insights",
-  "url": "https://equilibria-network.github.io",
-  "baseUrl": "/eq-network/",
+  "tagline": "Better decision-making through computational coordination and collective intelligence.",
+  "url": "https://eq-network.org",
+  "baseUrl": "/",
   "favicon": "img/favicon.ico",
   "organizationName": "Equilibria-Network",
   "projectName": "eq-network",
@@ -35,18 +35,12 @@ export default {
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
     "navbar": {
-      "title": "Equilibria",
       "logo": {
-        "alt": "Equilibria Logo",
-        "src": "img/logo-icon.svg"
+        "alt": "Equilibria Network Logo",
+        "src": "img/logo_text.svg",
+        "srcDark": "img/logo_text.svg"
       },
-      "items": [
-        {
-          "to": "/blog",
-          "label": "Blog",
-          "position": "right"
-        }
-      ],
+      "items": [],
       "hideOnScroll": false
     },
     "socials": {
@@ -73,7 +67,7 @@ export default {
           ]
         }
       ],
-      "copyright": "Copyright © 2025 Equilibria. All rights reserved."
+      "copyright": "Copyright © 2025 Equilibria Network. All rights reserved."
     },
     "colorMode": {
       "defaultMode": "light",

@@ -1,14 +1,20 @@
+/* src/components/HomepageComponents/WhoWeAre.module.css */
 .section {
   composes: section from './shared.module.css';
-  composes: sectionTransparent from './shared.module.css';
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.blueSection {
+  background: var(--ifm-color-primary);
+  color: white;
 }
 
 .container {
   composes: container from './shared.module.css';
-}
-
-.card {
-  composes: card from './shared.module.css';
+  position: relative;
+  z-index: 1;
 }
 
 .splitLayout {
@@ -22,7 +28,7 @@
   font-size: 3.5rem;
   line-height: 1.1;
   margin: 0;
-  color: var(--ifm-color-primary);
+  color: inherit;
 }
 
 .description {
@@ -32,11 +38,18 @@
 
 .description p {
   margin-bottom: 1.5rem;
-  color: var(--ifm-color-emphasis-700);
+  color: inherit;
 }
 
 .description p:last-child {
   margin-bottom: 0;
+}
+
+.card {
+  composes: card from './shared.module.css';
+  background: transparent;
+  padding: 0;
+  color: inherit;
 }
 
 @media (max-width: 768px) {

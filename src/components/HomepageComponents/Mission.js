@@ -1,6 +1,5 @@
 // src/components/HomepageComponents/Mission.js
 import React from 'react';
-import NetworkGraph from './NetworkGraph';
 import styles from './Mission.module.css';
 
 export default function Mission() {
@@ -11,19 +10,20 @@ export default function Mission() {
           <div className={styles.missionText}>
             <h2>Our Mission</h2>
             <p>
-              At Equilibria Network, we're dedicated to advancing the frontier of human-AI coordination 
-              through research and practical applications. We explore the intersections of network theory, 
-              collective intelligence, and artificial intelligence to develop better ways for humans and 
-              machines to work together.
+              The future of decision-making lies in the intersection of human and artificial intelligence. We're witnessing a rapid transformation as organizations increasingly integrate AI into their workflows and entering a world where small numbers of humans oversee largescale semi-autonomous multi-agent systems.
             </p>
             <p>
-              Our mission is to create and nurture projects that enhance collective decision-making 
-              and knowledge sharing, leveraging both human wisdom and computational tools to address 
-              increasingly complex challenges.
+              Our mission is to foster resilience, agency, and positive-sum collaboration in hybrid human-AI systems, harnessing diverse intelligences for better decisions under uncertainty.
             </p>
           </div>
-          <div className={styles.missionGraphWrapper}>
-            <NetworkGraph />
+          <div className={styles.logoWrapper}>
+            <div className={styles.logoContainer}>
+              <img 
+                src="/Logo Files/SVG Vector/svg-02.svg" 
+                alt="Equilibria Network Butterfly Logo"
+                className={styles.logo}
+              />
+            </div>
           </div>
         </div>
       </div>

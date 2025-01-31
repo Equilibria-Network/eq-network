@@ -7,10 +7,10 @@ import {
   Mission, 
   WhoWeAre, 
   WhatWeDo, 
-  Focus,
-  RecentArticles,
-  StayCoordinated,
-  ContactForm 
+  // Focus,
+  // RecentArticles,
+  // StayCoordinated,
+  // ContactForm
 } from '../components/HomepageComponents';
 
 export default function Home() {
@@ -20,15 +20,16 @@ export default function Home() {
     <Layout
       title={siteConfig.title}
       description={siteConfig.tagline}>
+      <div className="parallax-background" />
       <Hero />
       <main>
         <Mission />
         <WhoWeAre />
         <WhatWeDo />
-        <Focus />
-        <RecentArticles />
-        <StayCoordinated />
-        <ContactForm />
+        {/* <Focus /> */}
+        {/* <RecentArticles /> */}
+        {/* <StayCoordinated /> */}
+        {/* <ContactForm /> */}
       </main>
     </Layout>
   );

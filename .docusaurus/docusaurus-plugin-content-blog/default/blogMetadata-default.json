@@ -1,5 +1,5 @@
 {
-  "blogBasePath": "/eq-network/blog",
+  "blogBasePath": "/blog",
   "blogTitle": "Blog",
-  "authorsListPath": "/eq-network/blog/authors"
+  "authorsListPath": "/blog/authors"
 }

@@ -1,7 +1,7 @@
 // docusaurus.config.js
 const config = {
   title: 'Equilibria Network',
-  tagline: 'Your gateway to thoughtful content and insights',
+  tagline: 'Better decision-making through computational coordination and collective intelligence.',
   url: 'https://eq-network.org/', 
   baseUrl: '/',
   //url: 'https://equilibria-network.github.io', // temp until DNS for domain gets updated
@@ -43,13 +43,14 @@ trailingSlash: false,
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Equilibria',
-        logo: {
-          alt: 'Equilibria Logo',
-          src: 'img/logo-icon.svg',
-        },
+        //title: 'Equilibria',
+  logo: {
+    alt: 'Equilibria Network Logo',
+    src: 'img/logo_text.svg',
+    srcDark: 'img/logo_text.svg',
+  },
         items: [
-          {to: '/blog', label: 'Blog', position: 'right'},
+          //{to: '/blog', label: 'Blog', position: 'right'},
           //{to: '/about', label: 'About', position: 'right'},
           //{to: '/contact', label: 'Contact', position: 'right'},
         ],
@@ -79,7 +80,7 @@ trailingSlash: false,
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Equilibria. All rights reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Equilibria Network. All rights reserved.`,
       },
     }),
 

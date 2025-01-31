@@ -3,98 +3,98 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/eq-network/__docusaurus/debug',
-    component: ComponentCreator('/eq-network/__docusaurus/debug', '749'),
+    path: '/__docusaurus/debug',
+    component: ComponentCreator('/__docusaurus/debug', '5ff'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/config',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/config', '9da'),
+    path: '/__docusaurus/debug/config',
+    component: ComponentCreator('/__docusaurus/debug/config', '5ba'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/content',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/content', '6fd'),
+    path: '/__docusaurus/debug/content',
+    component: ComponentCreator('/__docusaurus/debug/content', 'a2b'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/globalData',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/globalData', '910'),
+    path: '/__docusaurus/debug/globalData',
+    component: ComponentCreator('/__docusaurus/debug/globalData', 'c3c'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/metadata',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/metadata', 'f8d'),
+    path: '/__docusaurus/debug/metadata',
+    component: ComponentCreator('/__docusaurus/debug/metadata', '156'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/registry',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/registry', '619'),
+    path: '/__docusaurus/debug/registry',
+    component: ComponentCreator('/__docusaurus/debug/registry', '88c'),
     exact: true
   },
   {
-    path: '/eq-network/__docusaurus/debug/routes',
-    component: ComponentCreator('/eq-network/__docusaurus/debug/routes', 'e09'),
+    path: '/__docusaurus/debug/routes',
+    component: ComponentCreator('/__docusaurus/debug/routes', '000'),
     exact: true
   },
   {
-    path: '/eq-network/about',
-    component: ComponentCreator('/eq-network/about', '801'),
+    path: '/about',
+    component: ComponentCreator('/about', 'c49'),
     exact: true
   },
   {
-    path: '/eq-network/blog',
-    component: ComponentCreator('/eq-network/blog', 'b21'),
+    path: '/blog',
+    component: ComponentCreator('/blog', 'b97'),
     exact: true
   },
   {
-    path: '/eq-network/blog/archive',
-    component: ComponentCreator('/eq-network/blog/archive', '671'),
+    path: '/blog/archive',
+    component: ComponentCreator('/blog/archive', '182'),
     exact: true
   },
   {
-    path: '/eq-network/blog/authors',
-    component: ComponentCreator('/eq-network/blog/authors', '316'),
+    path: '/blog/authors',
+    component: ComponentCreator('/blog/authors', '0b7'),
     exact: true
   },
   {
-    path: '/eq-network/blog/collective-intelligence',
-    component: ComponentCreator('/eq-network/blog/collective-intelligence', '0a3'),
+    path: '/blog/collective-intelligence',
+    component: ComponentCreator('/blog/collective-intelligence', 'f66'),
     exact: true
   },
   {
-    path: '/eq-network/blog/network-theory',
-    component: ComponentCreator('/eq-network/blog/network-theory', 'a2b'),
+    path: '/blog/network-theory',
+    component: ComponentCreator('/blog/network-theory', '324'),
     exact: true
   },
   {
-    path: '/eq-network/blog/tags',
-    component: ComponentCreator('/eq-network/blog/tags', '05d'),
+    path: '/blog/tags',
+    component: ComponentCreator('/blog/tags', '287'),
     exact: true
   },
   {
-    path: '/eq-network/blog/tags/collective',
-    component: ComponentCreator('/eq-network/blog/tags/collective', '5bb'),
+    path: '/blog/tags/collective',
+    component: ComponentCreator('/blog/tags/collective', 'b0f'),
     exact: true
   },
   {
-    path: '/eq-network/blog/tags/intelligence',
-    component: ComponentCreator('/eq-network/blog/tags/intelligence', '750'),
+    path: '/blog/tags/intelligence',
+    component: ComponentCreator('/blog/tags/intelligence', 'e8e'),
     exact: true
   },
   {
-    path: '/eq-network/blog/tags/network',
-    component: ComponentCreator('/eq-network/blog/tags/network', '1e1'),
+    path: '/blog/tags/network',
+    component: ComponentCreator('/blog/tags/network', '53c'),
     exact: true
   },
   {
-    path: '/eq-network/contact',
-    component: ComponentCreator('/eq-network/contact', '219'),
+    path: '/contact',
+    component: ComponentCreator('/contact', 'abe'),
     exact: true
   },
   {
-    path: '/eq-network/',
-    component: ComponentCreator('/eq-network/', 'a48'),
+    path: '/',
+    component: ComponentCreator('/', '2e1'),
     exact: true
   },
   {
