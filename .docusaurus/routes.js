@@ -38,13 +38,8 @@ export default [
     exact: true
   },
   {
-    path: '/about',
-    component: ComponentCreator('/about', 'c49'),
-    exact: true
-  },
-  {
     path: '/blog',
-    component: ComponentCreator('/blog', 'b97'),
+    component: ComponentCreator('/blog', '4db'),
     exact: true
   },
   {
@@ -74,22 +69,17 @@ export default [
   },
   {
     path: '/blog/tags/collective',
-    component: ComponentCreator('/blog/tags/collective', 'b0f'),
+    component: ComponentCreator('/blog/tags/collective', 'edf'),
     exact: true
   },
   {
     path: '/blog/tags/intelligence',
-    component: ComponentCreator('/blog/tags/intelligence', 'e8e'),
+    component: ComponentCreator('/blog/tags/intelligence', '6e1'),
     exact: true
   },
   {
     path: '/blog/tags/network',
     component: ComponentCreator('/blog/tags/network', '53c'),
-    exact: true
-  },
-  {
-    path: '/contact',
-    component: ComponentCreator('/contact', 'abe'),
     exact: true
   },
   {

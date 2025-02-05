@@ -133,10 +133,29 @@ main {
 
 /* Full-width section styles */
 .section-full-width {
-  width: 100vw;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100vw;
+  left: calc(-50vw + 50%);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+main {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Update container styles */
+.container {
+  width: 100%;
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ifm-spacing-horizontal);
+  padding-right: var(--ifm-spacing-horizontal);
+  box-sizing: border-box;
 }

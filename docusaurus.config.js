@@ -58,30 +58,7 @@ trailingSlash: false,
   socials: {
     //twitter: 'your-twitter-handle',  // if you have one
     github: 'Equilibria-Network',
-  },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Content',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'About',
-                to: '/about',
-              },
-              {
-                label: 'Contact',
-                to: '/contact',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Equilibria Network. All rights reserved.`,
-      },
+  }
     }),
 
   // Math plugin configuration

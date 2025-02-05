@@ -46,29 +46,6 @@ export default {
     "socials": {
       "github": "Equilibria-Network"
     },
-    "footer": {
-      "style": "dark",
-      "links": [
-        {
-          "title": "Content",
-          "items": [
-            {
-              "label": "Blog",
-              "to": "/blog"
-            },
-            {
-              "label": "About",
-              "to": "/about"
-            },
-            {
-              "label": "Contact",
-              "to": "/contact"
-            }
-          ]
-        }
-      ],
-      "copyright": "Copyright © 2025 Equilibria Network. All rights reserved."
-    },
     "colorMode": {
       "defaultMode": "light",
       "disableSwitch": false,

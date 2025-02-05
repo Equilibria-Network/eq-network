@@ -51,7 +51,7 @@
     "image": "./Images/1md_Image_1.png"
   },
   "unlisted": false,
-  "prevItem": {
+  "nextItem": {
     "title": "Collective Intelligence",
     "permalink": "/blog/collective-intelligence"
   }
