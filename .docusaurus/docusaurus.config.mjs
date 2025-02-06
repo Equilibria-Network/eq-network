@@ -37,7 +37,7 @@ export default {
     "navbar": {
       "logo": {
         "alt": "Equilibria Network Logo",
-        "src": "img/logo_text.svg",
+        "src": "img/logo_icon_text_2.svg",
         "srcDark": "img/logo_text.svg"
       },
       "items": [],

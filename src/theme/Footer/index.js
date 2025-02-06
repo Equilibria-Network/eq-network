@@ -3,10 +3,25 @@ import React from 'react';
 import { ContactForm } from './ContactForm';
 import SocialBar from './SocialBar';
 
+const GradientDivider = ({ width = 'md' }) => {
+  const widthClasses = {
+    sm: 'max-w-xs',
+    md: 'max-w-2xl',
+    lg: 'max-w-4xl'
+  };
+
+  return (
+    <div className="w-full flex justify-center py-6">
+      <div className={`relative w-full ${widthClasses[width]}`}>
+        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </div>
+    </div>
+  );
+};
+
 export default function Footer() {
   return (
     <footer className="w-full bg-[var(--ifm-color-primary-darkest)] text-white">
-      {/* Social Links Bar - Easy to comment out */}
       <SocialBar />
       
       <div className="max-w-[var(--ifm-container-width)] mx-auto px-4 py-12">
@@ -56,9 +71,16 @@ export default function Footer() {
           </div>
         </div>
         
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-white/20 text-sm opacity-60 text-center">
-          © {new Date().getFullYear()} Equilibria Network. All rights reserved.
+        <GradientDivider width="lg" />
+        
+        {/* Enhanced Copyright */}
+        <div className="flex flex-col items-center text-center space-y-2">
+          <div className="flex items-center space-x-2 text-sm font-light tracking-wide">
+            <span className="text-white/60">© {new Date().getFullYear()}</span>
+            <span className="text-white/80">Equilibria Network</span>
+          </div>
+          <div className="flex items-center space-x-3 text-xs font-light text-white/40">
+          </div>
         </div>
       </div>
     </footer>

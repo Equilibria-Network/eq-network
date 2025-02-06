@@ -1,6 +1,6 @@
 .section {
   composes: section from './shared.module.css';
-  composes: sectionSolid from './shared.module.css';
+  background: transparent;
 }
 
 .container {

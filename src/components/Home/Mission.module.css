@@ -1,7 +1,7 @@
 /* src/components/HomepageComponents/Mission.module.css */
 .section {
   padding: 6rem 0;
-  background: var(--ifm-background-surface-color);
+  background: transparent !important;
 }
 
 .container {
@@ -15,10 +15,19 @@
   align-items: center;
 }
 
-.missionText h2 {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--ifm-color-primary);
+.missionText {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.logoContainer {
+  margin-bottom: 2.5rem;
+}
+
+.mainLogo {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
 }
 
 .missionText p {
@@ -34,7 +43,7 @@
   align-items: center;
 }
 
-.logoContainer {
+.butterflyLogoContainer {
   position: relative;
   width: 100%;
   max-width: 600px;
@@ -42,7 +51,7 @@
   transition: transform 0.3s ease-out;
 }
 
-.logo {
+.butterflyLogo {
   width: 100%;
   height: auto;
   animation: hover-vertical 6s ease-in-out infinite;
@@ -50,12 +59,12 @@
   transition: filter 0.3s ease-out;
 }
 
-.logoContainer:hover {
+.butterflyLogoContainer:hover {
   animation-play-state: paused;
   transform: scale(1.05);
 }
 
-.logoContainer:hover .logo {
+.butterflyLogoContainer:hover .butterflyLogo {
   filter: drop-shadow(0 0 15px var(--ifm-color-primary-lighter));
 }
 
@@ -89,11 +98,15 @@
     gap: 2rem;
   }
 
-  .missionText h2 {
-    font-size: 2.5rem;
+  .logoContainer {
+    margin-bottom: 2rem;
   }
 
-  .logoContainer {
+  .mainLogo {
+    max-width: 400px;
+  }
+
+  .butterflyLogoContainer {
     max-width: 400px;
     margin: 0 auto;
   }

@@ -11,7 +11,7 @@ import {
   // RecentArticles,
   // StayCoordinated,
   // ContactForm
-} from '../components/HomepageComponents';
+} from '../components/Home';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();

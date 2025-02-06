@@ -39,7 +39,7 @@ export default [
   },
   {
     path: '/blog',
-    component: ComponentCreator('/blog', '4db'),
+    component: ComponentCreator('/blog', 'b97'),
     exact: true
   },
   {
@@ -69,12 +69,12 @@ export default [
   },
   {
     path: '/blog/tags/collective',
-    component: ComponentCreator('/blog/tags/collective', 'edf'),
+    component: ComponentCreator('/blog/tags/collective', 'b0f'),
     exact: true
   },
   {
     path: '/blog/tags/intelligence',
-    component: ComponentCreator('/blog/tags/intelligence', '6e1'),
+    component: ComponentCreator('/blog/tags/intelligence', 'e8e'),
     exact: true
   },
   {

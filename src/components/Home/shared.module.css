@@ -13,8 +13,7 @@
 }
 
 .sectionTransparent {
-  /* Remove the transparency by using the same solid background */
-  background: var(--ifm-background-surface-color);
+  background: transparent;
   position: relative;
   z-index: 1;
 }
@@ -29,9 +28,9 @@
 /* Card style */
 .card {
   padding: 2rem;
-  background: var(--ifm-background-surface-color); /* Add solid background */
+  background: transparent;
 }
 
 [data-theme='dark'] .card {
-  background: var(--ifm-background-surface-color);
+  background: transparent;
 }

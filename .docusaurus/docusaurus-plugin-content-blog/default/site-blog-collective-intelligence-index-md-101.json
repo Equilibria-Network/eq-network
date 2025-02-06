@@ -47,7 +47,7 @@
     "image": "./Images/1md_Image_1.png"
   },
   "unlisted": false,
-  "prevItem": {
+  "nextItem": {
     "title": "Network Theory",
     "permalink": "/blog/network-theory"
   }

@@ -42,45 +42,35 @@ export default function SocialBar() {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-[var(--ifm-color-primary-darkest)] to-[var(--ifm-color-primary-darker)] relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(45deg, #000 25%, transparent 25%),
-            linear-gradient(-45deg, #000 25%, transparent 25%),
-            linear-gradient(45deg, transparent 75%, #000 75%),
-            linear-gradient(-45deg, transparent 75%, #000 75%)`,
-          backgroundSize: '4px 4px',
-          backgroundPosition: '0 0, 0 2px, 2px -2px, -2px 0px'
-        }}/>
-      </div>
-
-      <div className="max-w-[var(--ifm-container-width)] mx-auto px-4 py-4 relative">
-        <div className="flex justify-center space-x-8">
-          {socials.map((social) => (
-            <a
-              key={social.name}
-              href={social.href}
-              className="group relative flex items-center justify-center"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {/* Glowing background on hover */}
-              <div className="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transform group-hover:scale-150 transition-all duration-300 blur-xl"/>
-              
-              {/* Icon container */}
-              <div className="relative p-2 rounded-lg group-hover:text-white text-white/60 transition-all duration-300 transform group-hover:scale-110">
-                {social.icon}
-              </div>
-
-              <span className="sr-only">{social.name}</span>
-            </a>
-          ))}
+    <div className="bg-[var(--ifm-color-primary-darkest)]">
+      <div className="max-w-[var(--ifm-container-width)] mx-auto px-4">
+        <div className="relative flex flex-col items-center">
+          {/* Social Icons */}
+          <div className="flex justify-center space-x-8 py-4">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                className="group flex items-center justify-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="p-2 rounded-lg text-white/60 hover:text-white transition-colors duration-300">
+                  {social.icon}
+                </div>
+                <span className="sr-only">{social.name}</span>
+              </a>
+            ))}
+          </div>
+          
+          {/* Elegant Divider - adjusts width based on content */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full" style={{ maxWidth: `${socials.length * 80}px` }}>
+              <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Gradient fade to blend with footer */}
-      <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent"/>
     </div>
   );
 }
