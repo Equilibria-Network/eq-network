@@ -2,6 +2,14 @@
 
 This repository contains the source code for the Equilibria Network website.
 
+## Todo
+
+- [ ] Home: Lorenz Attractor animation
+- [ ] Home: Mission background transparency
+- [ ] Blog: Implement Page
+- [ ] Nav: Donate button
+- [ ] Nav: Search button
+
 ## Project Structure
 
 ```
