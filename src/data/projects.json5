@@ -1,0 +1,72 @@
+{
+  // Project status options: 'active', 'completed', 'on-hold', 'planning'
+  projects: [
+    {
+      id: 'project-1',
+      title: 'Multi-Agent Decision Systems',
+      shortDescription: 'Developing frameworks for coordinated decision-making in hybrid human-AI systems.',
+      fullDescription: `
+        This project explores novel approaches to enabling effective coordination between human and AI agents
+        in complex decision-making scenarios. We're developing both theoretical frameworks and practical
+        tools for implementation in real-world systems.
+      `,
+      status: 'active',
+      startDate: '2024-01',
+      team: [
+        {
+          name: 'Dr. Sarah Chen',
+          role: 'Lead Researcher',
+          avatar: '/img/team/placeholder.jpg'
+        },
+        {
+          name: 'Alex Rivera',
+          role: 'Systems Architect',
+          avatar: '/img/team/placeholder.jpg'
+        }
+      ],
+      tags: ['AI Systems', 'Decision Theory', 'Multi-Agent Coordination'],
+      links: {
+        github: 'https://github.com/Equilibria-Network/project-1',
+        paper: 'https://arxiv.org/abs/...',
+        demo: 'https://demo.example.com'
+      },
+      progress: 65, // Percentage of completion
+      updates: [
+        {
+          date: '2024-02-15',
+          content: 'Completed initial framework design and simulation environment'
+        }
+      ]
+    },
+    {
+      id: 'project-2',
+      title: 'Network Resilience Metrics',
+      shortDescription: 'Quantifying and improving resilience in distributed decision networks.',
+      fullDescription: `
+        Research into novel metrics and methodologies for measuring and enhancing the resilience
+        of distributed decision-making networks. This project combines network theory with
+        practical applications in organizational decision systems.
+      `,
+      status: 'planning',
+      startDate: '2024-03',
+      team: [
+        {
+          name: 'Dr. Michael Wong',
+          role: 'Principal Investigator',
+          avatar: '/img/team/placeholder.jpg'
+        }
+      ],
+      tags: ['Network Theory', 'Resilience', 'Metrics'],
+      links: {
+        github: 'https://github.com/Equilibria-Network/project-2'
+      },
+      progress: 15,
+      updates: [
+        {
+          date: '2024-03-01',
+          content: 'Initial research framework established'
+        }
+      ]
+    }
+  ]
+}

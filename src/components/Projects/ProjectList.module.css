@@ -1,0 +1,40 @@
+/* src/components/Projects/ProjectList.module.css */
+
+.container {
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.projectWrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 0;
+  background: rgba(0, 59, 126, 0.02);
+  border-radius: 8px;
+}
+
+.emptyStateText {
+  font-size: 1.25rem;
+  color: var(--ifm-color-emphasis-600);
+}
+

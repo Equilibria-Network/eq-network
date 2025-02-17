@@ -1,0 +1,185 @@
+/* src/components/Projects/RoadmapSection.module.css */
+.roadmap {
+  position: relative;
+  padding: 1rem 0;
+}
+
+.phase {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.phase:last-child {
+  padding-bottom: 0;
+}
+
+.phaseContent {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.phaseContent:hover {
+  transform: translateX(4px);
+}
+
+.phaseHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.statusIcon {
+  display: flex;
+  align-items: center;
+}
+
+.completedIcon {
+  color: var(--ifm-color-success);
+}
+
+.activeIcon {
+  color: var(--ifm-color-primary);
+}
+
+.plannedIcon {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.phaseName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ifm-color-emphasis-900);
+  flex: 1;
+}
+
+.progressIndicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-color-primary);
+  min-width: 3rem;
+}
+
+.progressBar {
+  width: 100px;
+  height: 4px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--ifm-color-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.completedDate {
+  font-size: 0.875rem;
+  color: var(--ifm-color-success);
+}
+
+.phaseDetails {
+  padding-left: 2.5rem;
+}
+
+.phaseDescription {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+  margin-bottom: 1rem;
+}
+
+.phaseDeliverables {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.deliverable {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+}
+
+.deliverable::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--ifm-color-primary-lighter);
+  border-radius: 50%;
+}
+
+.connector {
+  position: absolute;
+  left: 1.85rem;
+  top: calc(1.5rem + 20px);
+  bottom: 0;
+  width: 2px;
+  background: var(--ifm-color-emphasis-200);
+}
+
+.connector.completed {
+  background: var(--ifm-color-success);
+}
+
+.connector.active {
+  background: var(--ifm-color-primary);
+}
+
+/* Gradient effect for active connector */
+.connector.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: -1px;
+  height: 50%;
+  background: linear-gradient(to bottom, var(--ifm-color-primary), var(--ifm-color-emphasis-200));
+}
+
+@media (max-width: 768px) {
+  .phaseContent {
+    padding: 1rem;
+  }
+
+  .phaseHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .progressIndicator {
+    width: 100%;
+  }
+
+  .progressBar {
+    flex: 1;
+  }
+
+  .phaseDetails {
+    padding-left: 0;
+  }
+
+  .phaseDeliverables {
+    grid-template-columns: 1fr;
+  }
+}

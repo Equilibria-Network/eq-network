@@ -83,6 +83,11 @@ export default [
     exact: true
   },
   {
+    path: '/projects',
+    component: ComponentCreator('/projects', '05c'),
+    exact: true
+  },
+  {
     path: '/',
     component: ComponentCreator('/', '2e1'),
     exact: true

@@ -151,11 +151,18 @@
     ],
     "__props": "__props---blog-tags-network-541-71a"
   },
+  "/projects-05c": {
+    "__comp": "__comp---site-src-pages-projects-jsee-7-a5f",
+    "__context": {
+      "plugin": "plugin---projectsa-74-49b"
+    },
+    "config": "config---projects-5-e-9-d4c"
+  },
   "/-2e1": {
     "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
     "__context": {
-      "plugin": "plugin---a-74-9d6"
+      "plugin": "plugin---projectsa-74-49b"
     },
-    "config": "config---5-e-9-4f3"
+    "config": "config---projects-5-e-9-d4c"
   }
 }

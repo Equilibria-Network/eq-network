@@ -1,0 +1,75 @@
+/* src/components/Projects/ProjectCard.module.css */
+.card {
+  width: 100%;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.expandedContent {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-10px);
+}
+
+.expandedContent.expanded {
+  max-height: none;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 2rem;
+}
+
+.expandButton {
+  width: 100%;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--ifm-color-primary);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+  color: var(--ifm-color-primary-lighter);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .expandButton {
+    padding: 0.75rem 0;
+  }
+}

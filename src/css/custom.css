@@ -1,4 +1,5 @@
 @import url('https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css');
+@import './tippy.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,7 +21,7 @@
 
   /* Background colors */
   --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: transparent;
+  /*--ifm-background-surface-color: transparent;*/
 }
 
 /* Dark theme colors - using deeper blues for better contrast */

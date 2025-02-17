@@ -1,0 +1,290 @@
+/* src/components/Projects/ProgressTracker.module.css */
+.progressTracker {
+  --progress-track-color: var(--ifm-color-emphasis-200);
+  --progress-fill-color: var(--ifm-color-primary);
+  --progress-glow-color: rgba(0, 59, 126, 0.3);
+  
+  position: relative;
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.progressBarContainer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+}
+
+.progressBarTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: var(--progress-track-color);
+  border-radius: 2px;
+}
+
+.progressBarFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--progress-fill-color);
+  border-radius: 2px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressGlow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--progress-fill-color);
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.6;
+  animation: glowPulse 2s infinite;
+}
+
+.milestones {
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
+.milestoneMarker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.markerContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.markerContent:hover {
+  transform: translateY(-4px);
+}
+
+.markerIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ifm-background-color);
+  border: 2px solid var(--progress-track-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.markerContent.completed .markerIcon {
+  background: var(--progress-fill-color);
+  border-color: var(--progress-fill-color);
+  color: white;
+}
+
+.markerContent.active .markerIcon {
+  border-color: var(--progress-fill-color);
+  color: var(--progress-fill-color);
+}
+
+.markerContent.active .markerIcon::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid var(--progress-fill-color);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: pulse 2s infinite;
+}
+
+.progressRing {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 36px;
+  height: 36px;
+}
+
+.progressCircle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progressPath {
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s ease;
+}
+
+.markerLabel {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  text-align: center;
+  max-width: 120px;
+  position: absolute;
+  top: 100%;
+  margin-top: 0.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.markerContent:hover .markerLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.connectionLine {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  right: -200%;
+  height: 4px;
+  background: var(--progress-track-color);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.connectionLine.completed {
+  background: var(--progress-fill-color);
+}
+
+/* Tooltip Styles */
+.tooltipContent {
+  padding: 1rem;
+}
+
+.tooltipHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.milestoneName {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.progressBadge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+}
+
+.milestoneDescription {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.completionDate {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+}
+
+.deliverablesList {
+  margin: 0.75rem 0 0;
+  padding-left: 1rem;
+  list-style-type: none;
+}
+
+.deliverablesList li {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.25rem;
+  position: relative;
+}
+
+.deliverablesList li::before {
+  content: '•';
+  position: absolute;
+  left: -1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.2);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .progressTracker {
+    padding: 4rem 0;
+  }
+
+  .milestones {
+    height: 150px;
+  }
+
+  .markerLabel {
+    transform-origin: left center;
+    transform: rotate(-45deg) translateX(-50%);
+    left: 100%;
+    top: 50%;
+    margin-left: 1rem;
+    text-align: left;
+  }
+
+  .markerContent:hover .markerLabel {
+    transform: rotate(-45deg) translateX(-40%);
+  }
+
+  .connectionLine {
+    right: -100%;
+  }
+}

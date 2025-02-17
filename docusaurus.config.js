@@ -4,14 +4,20 @@ const config = {
   tagline: 'Better decision-making through computational coordination and collective intelligence.',
   url: 'https://eq-network.org/', 
   baseUrl: '/',
-  //url: 'https://equilibria-network.github.io', // temp until DNS for domain gets updated
-  //baseUrl: '/eq-network/', // temp until DNS for domain gets updated
   favicon: 'img/favicon.ico',
-organizationName: 'Equilibria-Network',
-projectName: 'eq-network',
-deploymentBranch: 'gh-pages',
-trailingSlash: false,
-
+	organizationName: 'Equilibria-Network',
+	projectName: 'eq-network',
+	deploymentBranch: 'gh-pages',
+	trailingSlash: false,
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'jsx',
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
+  },
   presets: [
     [
       'classic',
@@ -50,6 +56,7 @@ trailingSlash: false,
     srcDark: 'img/logo_text.svg',
   },
         items: [
+		  {to: '/projects', label: 'Projects', position: 'right'}
           //{to: '/blog', label: 'Blog', position: 'right'},
           //{to: '/about', label: 'About', position: 'right'},
           //{to: '/contact', label: 'Contact', position: 'right'},

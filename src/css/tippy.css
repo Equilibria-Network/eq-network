@@ -1,0 +1,40 @@
+/* src/css/tippy.css */
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/animations/shift-away.css';
+
+.tippy-box[data-theme~='custom'] {
+  background-color: var(--ifm-color-primary);
+  color: #ffffff;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 8px 24px rgba(0, 59, 126, 0.25);
+  max-width: 320px !important;
+  border-radius: 6px;
+}
+
+.tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: var(--ifm-color-primary);
+}
+
+.tippy-box[data-theme~='custom'] .tooltipTitle {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.tippy-box[data-theme~='custom'] .tooltipDescription {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.tippy-box[data-theme~='custom'] .tooltipMeta {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
