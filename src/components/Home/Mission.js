@@ -1,6 +1,8 @@
 // src/components/HomepageComponents/Mission.js
+// src/components/Home/Mission.js
 import React from 'react';
 import styles from './Mission.module.css';
+import LorenzAttractor from './LorenzAttractor';
 
 export default function Mission() {
   return (
@@ -23,13 +25,8 @@ export default function Mission() {
             </p>
           </div>
           <div className={styles.logoWrapper}>
-            <div className={styles.butterflyLogoContainer}>
-              <img 
-                //src="/Logo Files/SVG Vector/svg-02.svg" 
-                src="img/logo_icon.svg" 
-                alt="Equilibria Network Butterfly Logo"
-                className={styles.butterflyLogo}
-              />
+            <div className={styles.attractorContainer}>
+              <LorenzAttractor />
             </div>
           </div>
         </div>

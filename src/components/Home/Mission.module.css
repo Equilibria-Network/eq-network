@@ -1,4 +1,4 @@
-/* src/components/HomepageComponents/Mission.module.css */
+/* src/components/Home/Mission.module.css */
 .section {
   padding: 6rem 0;
   background: transparent !important;
@@ -38,58 +38,17 @@
 }
 
 .logoWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.butterflyLogoContainer {
+  aspect-ratio: 4/3;
+  width: 100%;
   position: relative;
+}
+
+.attractorContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 600px;
-  animation: flutter 12s ease-in-out infinite;
-  transition: transform 0.3s ease-out;
-}
-
-.butterflyLogo {
-  width: 100%;
-  height: auto;
-  animation: hover-vertical 6s ease-in-out infinite;
-  transform-origin: center;
-  transition: filter 0.3s ease-out;
-}
-
-.butterflyLogoContainer:hover {
-  animation-play-state: paused;
-  transform: scale(1.05);
-}
-
-.butterflyLogoContainer:hover .butterflyLogo {
-  filter: drop-shadow(0 0 15px var(--ifm-color-primary-lighter));
-}
-
-@keyframes flutter {
-  0%, 100% {
-    transform: translate(0, 0) rotate(2deg);
-  }
-  25% {
-    transform: translate(20px, -15px) rotate(-1deg);
-  }
-  50% {
-    transform: translate(0, -25px) rotate(1deg);
-  }
-  75% {
-    transform: translate(-20px, -15px) rotate(-2deg);
-  }
-}
-
-@keyframes hover-vertical {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(15px) scale(0.98);
-  }
+  height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -104,10 +63,5 @@
 
   .mainLogo {
     max-width: 400px;
-  }
-
-  .butterflyLogoContainer {
-    max-width: 400px;
-    margin: 0 auto;
   }
 }
