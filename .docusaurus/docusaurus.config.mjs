@@ -41,13 +41,7 @@ export default {
         "src": "img/logo_icon_text_2.svg",
         "srcDark": "img/logo_text.svg"
       },
-      "items": [
-        {
-          "to": "/projects",
-          "label": "Projects",
-          "position": "right"
-        }
-      ],
+      "items": [],
       "hideOnScroll": false
     },
     "socials": {
