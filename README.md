@@ -4,11 +4,17 @@ This repository contains the source code for the Equilibria Network website.
 
 ## Todo
 
-- [ ] Home: Lorenz Attractor animation
+- [ ] Home: Lorenz Attractor animation bounds/responsiveness
+- [ ] Nav: Bug: Light dark mode logo changes. Should be same.
 - [ ] Home: Mission background transparency
 - [ ] Blog: Implement Page
 - [ ] Nav: Donate button
 - [ ] Nav: Search button
+- [ ] Nav: Podcast button
+
+## Done
+- [x] Home: Lorenz Attractor animation
+- [x] Project: Basic page implementation
 
 ## Project Structure
 

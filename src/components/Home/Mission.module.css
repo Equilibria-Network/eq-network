@@ -37,18 +37,18 @@
   color: var(--ifm-color-emphasis-700);
 }
 
+/* src/components/Home/Mission.module.css */
 .logoWrapper {
-  aspect-ratio: 4/3;
   width: 100%;
   position: relative;
+  border: '2px solid green';  /* Debug outline */
 }
 
 .attractorContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
+  border: '2px solid purple';  /* Debug outline */
 }
 
 @media (max-width: 768px) {
@@ -63,5 +63,9 @@
 
   .mainLogo {
     max-width: 400px;
+  }
+
+  .logoWrapper {
+    max-width: 400px; /* Smaller maximum size on mobile */
   }
 }
