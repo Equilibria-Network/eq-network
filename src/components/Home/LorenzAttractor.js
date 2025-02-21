@@ -1,85 +1,107 @@
-// src/components/Home/LorenzAttractor.js
 import React, { useEffect, useRef } from 'react';
 
-// Constants for the Lorenz system
+// Centralized configuration for the Lorenz system
 const LORENZ_CONFIG = {
+  // System parameters
+  system: {
+    sigma: 10,
+    rho: 28,
+    beta: 8/3,
+    variation: 0.2,
+    dt: 0.005,      // Smaller dt for smoother curves
+    noise: 0.0001   // System noise
+  },
+  // Display bounds
   bounds: {
     x: [-20, 20],
     z: [0, 50]
   },
-  params: {
-    sigma: 10,
-    rho: 28,
-    beta: 8/3,
-    variation: 0.2, // Maximum random variation in parameters
-    dt: 0.01,      // Time step
-    noise: 0.0001   // System noise
-  },
+  // Animation settings
   animation: {
-    maxPoints: 2000,
-    startDrawingAt: 20,
-    strokeInterval: 5,
-    padding: 1,
-    colorBase: {r: 0, g: 59, b: 126},
-    colorVariationPeriod: 5000 // ms
+    maxPoints: 2000,        // Maximum number of points to track
+    startDrawingAt: 20,     // Start drawing after this many points
+    strokeInterval: 3,      // Draw stroke every N points for smoother lines
+    pointsPerFrame: 2,      // Points to calculate per frame
+    padding: 1             // Padding around the visualization
+  },
+  // Color settings - will be computed from CSS variables
+  colors: {
+    primary: undefined     // Will be set from --ifm-color-primary
   }
 };
 
-// Helper function to add random variation to a value
-const addRandomVariation = (value, variation) => {
-  return value + (Math.random() - 0.5) * variation;
+// Helper to get CSS variable color and convert to RGB
+const getCssColor = (variable) => {
+  const color = getComputedStyle(document.documentElement)
+    .getPropertyValue(variable)
+    .trim();
+  
+  // Handle hex colors
+  if (color.startsWith('#')) {
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    return { r, g, b };
+  }
+  
+  // Handle rgb/rgba colors
+  const match = color.match(/\d+/g);
+  if (match) {
+    return {
+      r: parseInt(match[0]),
+      g: parseInt(match[1]),
+      b: parseInt(match[2])
+    };
+  }
+  
+  return { r: 0, g: 59, b: 126 }; // Fallback color
 };
 
-// Generate initial point with slight randomization
-const generateInitialPoint = () => ({
-  x: addRandomVariation(-11.2, 2),
-  y: addRandomVariation(4.4, 2),
-  z: addRandomVariation(21.2, 2)
-});
-
-const LorenzAttractor = () => {
+const LorenzAttractor = ({
+  config = LORENZ_CONFIG,
+  className,
+  style
+}) => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const pointsRef = useRef([generateInitialPoint()]);
+  const pointsRef = useRef([{
+    x: -11.2 + (Math.random() - 0.5) * 2,
+    y: 4.4 + (Math.random() - 0.5) * 2,
+    z: 21.2 + (Math.random() - 0.5) * 2
+  }]);
   const animationRef = useRef(null);
-  
-  // Initialize Lorenz parameters with slight random variations
-  const paramsRef = useRef({
-    sigma: addRandomVariation(LORENZ_CONFIG.params.sigma, LORENZ_CONFIG.params.variation),
-    rho: addRandomVariation(LORENZ_CONFIG.params.rho, LORENZ_CONFIG.params.variation),
-    beta: addRandomVariation(LORENZ_CONFIG.params.beta, LORENZ_CONFIG.params.variation/2)
-  });
 
   useEffect(() => {
+    // Update colors from CSS variables
+    config.colors = {
+      primary: getCssColor('--ifm-color-primary')
+    };
+
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
     
     const ctx = canvas.getContext('2d');
-    
-    // Canvas resize handler
+
     const resizeCanvas = () => {
       const rect = container.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
     };
 
-    // Calculate next point in the Lorenz system
     const calculateNext = (point) => {
-      const { sigma, rho, beta } = paramsRef.current;
-      const { dt, noise } = LORENZ_CONFIG.params;
+      const { sigma, rho, beta, dt, noise } = config.system;
       const { x, y, z } = point;
       
       return {
-        x: x + (sigma * (y - x)) * dt + addRandomVariation(0, noise),
-        y: y + (x * (rho - z) - y) * dt + addRandomVariation(0, noise),
-        z: z + (x * y - beta * z) * dt + addRandomVariation(0, noise)
+        x: x + (sigma * (y - x)) * dt + (Math.random() - 0.5) * noise,
+        y: y + (x * (rho - z) - y) * dt + (Math.random() - 0.5) * noise,
+        z: z + (x * y - beta * z) * dt + (Math.random() - 0.5) * noise
       };
     };
 
-    // Project 3D point to 2D space
     const project = (point) => {
-      const { bounds, animation } = LORENZ_CONFIG;
+      const { bounds, animation } = config;
       const xRange = bounds.x[1] - bounds.x[0];
       const zRange = bounds.z[1] - bounds.z[0];
       
@@ -87,46 +109,43 @@ const LorenzAttractor = () => {
       const zScale = (canvas.height * animation.padding) / zRange;
       const scale = Math.min(xScale, zScale);
 
-      const xOffset = canvas.width / 2;
-      const zOffset = canvas.height / 2;
-
       return {
-        x: point.x * scale + xOffset,
-        y: -point.z * scale + zOffset + (zRange * scale / 2)
+        x: point.x * scale + canvas.width / 2,
+        y: -point.z * scale + canvas.height / 2 + (zRange * scale / 2)
       };
     };
 
-    // Animation loop
     const animate = () => {
-      const { maxPoints, startDrawingAt, strokeInterval, colorBase, colorVariationPeriod } = LORENZ_CONFIG.animation;
-      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const current = pointsRef.current[pointsRef.current.length - 1];
-      const next = calculateNext(current);
-      pointsRef.current.push(next);
+      // Calculate multiple points per frame
+      for(let i = 0; i < config.animation.pointsPerFrame; i++) {
+        const current = pointsRef.current[pointsRef.current.length - 1];
+        const next = calculateNext(current);
+        pointsRef.current.push(next);
+      }
       
-      if (pointsRef.current.length > maxPoints) {
-        pointsRef.current = pointsRef.current.slice(-maxPoints);
+      if (pointsRef.current.length > config.animation.maxPoints) {
+        pointsRef.current = pointsRef.current.slice(-config.animation.maxPoints);
       }
 
       ctx.globalCompositeOperation = 'destination-over';
       ctx.beginPath();
       
-      pointsRef.current.slice(startDrawingAt).forEach((point, i) => {
+      pointsRef.current.slice(config.animation.startDrawingAt).forEach((point, i) => {
         const projected = project(point);
-        const progress = i / (pointsRef.current.length - startDrawingAt);
+        const progress = i / (pointsRef.current.length - config.animation.startDrawingAt);
         const opacity = progress < 0.1 ? progress * 10 : 1;
         
-        const blueVariation = Math.sin(Date.now() / colorVariationPeriod) * 10;
-        ctx.strokeStyle = `rgba(${colorBase.r}, ${colorBase.g + blueVariation}, ${colorBase.b}, ${opacity})`;
+        const { primary } = config.colors;
+        ctx.strokeStyle = `rgba(${primary.r}, ${primary.g}, ${primary.b}, ${opacity})`;
         ctx.lineWidth = 1;
         
         if (i === 0) {
           ctx.moveTo(projected.x, projected.y);
         } else {
           ctx.lineTo(projected.x, projected.y);
-          if (i % strokeInterval === 0 || i === pointsRef.current.length - startDrawingAt - 1) {
+          if (i % config.animation.strokeInterval === 0 || i === pointsRef.current.length - config.animation.startDrawingAt - 1) {
             ctx.stroke();
             ctx.beginPath();
             ctx.moveTo(projected.x, projected.y);
@@ -137,10 +156,9 @@ const LorenzAttractor = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Setup and cleanup
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -148,20 +166,18 @@ const LorenzAttractor = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [config]);
 
   return (
-    <div 
-      ref={containerRef} 
-      style={{
-        width: '100%',
-        height: '500px',
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
+    <div ref={containerRef} className={className} style={{
+      width: '100%',
+      height: '500px',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...style
+    }}>
       <canvas
         ref={canvasRef}
         style={{

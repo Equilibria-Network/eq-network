@@ -1,4 +1,3 @@
-/* src/components/Home/Mission.module.css */
 .section {
   padding: 6rem 0;
   background: transparent !important;
@@ -10,18 +9,27 @@
 
 .missionContent {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.2fr 1fr; /* Wider column first for content */
   gap: 4rem;
   align-items: center;
 }
 
-.missionText {
-  font-size: 1.125rem;
-  line-height: 1.75;
+.contentRight {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  order: 1; /* Places content first on desktop */
+}
+
+.attractorContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  order: 2; /* Places attractor second on desktop */
 }
 
 .logoContainer {
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 .mainLogo {
@@ -30,42 +38,46 @@
   height: auto;
 }
 
-.missionText p {
+.descriptionText p {
   font-size: 1.125rem;
   line-height: 1.75;
   margin-bottom: 1.5rem;
   color: var(--ifm-color-emphasis-700);
 }
 
-/* src/components/Home/Mission.module.css */
-.logoWrapper {
-  width: 100%;
-  position: relative;
-  border: '2px solid green';  /* Debug outline */
-}
-
-.attractorContainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: '2px solid purple';  /* Debug outline */
+.descriptionText p:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
   .missionContent {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
   }
 
+  .contentRight {
+    display: contents; /* Makes children participate in parent's flex context */
+    order: unset; /* Reset desktop ordering */
+  }
+
+  .attractorContainer {
+    order: 2;
+  }
+
   .logoContainer {
-    margin-bottom: 2rem;
+    order: 1;
+  }
+
+  .descriptionText {
+    order: 3;
   }
 
   .mainLogo {
     max-width: 400px;
-  }
-
-  .logoWrapper {
-    max-width: 400px; /* Smaller maximum size on mobile */
   }
 }
