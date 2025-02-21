@@ -1,3 +1,4 @@
+// src/components/HomepageComponents/LorenzAttractor.js
 import React, { useEffect, useRef } from 'react';
 
 // Centralized configuration for the Lorenz system
@@ -8,8 +9,8 @@ const LORENZ_CONFIG = {
     rho: 28,
     beta: 8/3,
     variation: 0.2,
-    dt: 0.005,      // Smaller dt for smoother curves
-    noise: 0.0001   // System noise
+    dt: 0.005,
+    noise: 0.0001
   },
   // Display bounds
   bounds: {
@@ -18,15 +19,17 @@ const LORENZ_CONFIG = {
   },
   // Animation settings
   animation: {
-    maxPoints: 2000,        // Maximum number of points to track
-    startDrawingAt: 20,     // Start drawing after this many points
-    strokeInterval: 3,      // Draw stroke every N points for smoother lines
-    pointsPerFrame: 2,      // Points to calculate per frame
-    padding: 1             // Padding around the visualization
+    maxPoints: 2000,
+    startDrawingAt: 20,
+    strokeInterval: 3,
+    pointsPerFrame: 2,
+    padding: 1,
+    initialPoints: 300,  // Reduced number of initial points
+    initialSpeed: 2,     // Reduced speed multiplier for better accuracy
+    transitionFrames: 45 // Slightly faster transition to normal speed
   },
-  // Color settings - will be computed from CSS variables
   colors: {
-    primary: undefined     // Will be set from --ifm-color-primary
+    primary: undefined
   }
 };
 
@@ -36,7 +39,6 @@ const getCssColor = (variable) => {
     .getPropertyValue(variable)
     .trim();
   
-  // Handle hex colors
   if (color.startsWith('#')) {
     const r = parseInt(color.slice(1, 3), 16);
     const g = parseInt(color.slice(3, 5), 16);
@@ -44,7 +46,6 @@ const getCssColor = (variable) => {
     return { r, g, b };
   }
   
-  // Handle rgb/rgba colors
   const match = color.match(/\d+/g);
   if (match) {
     return {
@@ -54,7 +55,7 @@ const getCssColor = (variable) => {
     };
   }
   
-  return { r: 0, g: 59, b: 126 }; // Fallback color
+  return { r: 0, g: 59, b: 126 };
 };
 
 const LorenzAttractor = ({
@@ -64,6 +65,7 @@ const LorenzAttractor = ({
 }) => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
+  const frameCountRef = useRef(0);
   const pointsRef = useRef([{
     x: -11.2 + (Math.random() - 0.5) * 2,
     y: 4.4 + (Math.random() - 0.5) * 2,
@@ -72,7 +74,6 @@ const LorenzAttractor = ({
   const animationRef = useRef(null);
 
   useEffect(() => {
-    // Update colors from CSS variables
     config.colors = {
       primary: getCssColor('--ifm-color-primary')
     };
@@ -89,14 +90,32 @@ const LorenzAttractor = ({
       canvas.height = rect.height;
     };
 
-    const calculateNext = (point) => {
+    const calculateNext = (point, speedMultiplier = 1) => {
       const { sigma, rho, beta, dt, noise } = config.system;
       const { x, y, z } = point;
       
+      // For higher speeds, use multiple smaller steps instead of one large step
+      const steps = Math.ceil(speedMultiplier);
+      const stepDt = dt * speedMultiplier / steps;
+      
+      let currentX = x;
+      let currentY = y;
+      let currentZ = z;
+      
+      for (let i = 0; i < steps; i++) {
+        const dx = sigma * (currentY - currentX);
+        const dy = currentX * (rho - currentZ) - currentY;
+        const dz = currentX * currentY - beta * currentZ;
+        
+        currentX += dx * stepDt + (Math.random() - 0.5) * noise;
+        currentY += dy * stepDt + (Math.random() - 0.5) * noise;
+        currentZ += dz * stepDt + (Math.random() - 0.5) * noise;
+      }
+      
       return {
-        x: x + (sigma * (y - x)) * dt + (Math.random() - 0.5) * noise,
-        y: y + (x * (rho - z) - y) * dt + (Math.random() - 0.5) * noise,
-        z: z + (x * y - beta * z) * dt + (Math.random() - 0.5) * noise
+        x: currentX,
+        y: currentY,
+        z: currentZ
       };
     };
 
@@ -115,13 +134,33 @@ const LorenzAttractor = ({
       };
     };
 
+    // Pre-calculate initial points with faster speed
+    const preCalculatePoints = () => {
+      const points = [pointsRef.current[0]];
+      for (let i = 0; i < config.animation.initialPoints; i++) {
+        const current = points[points.length - 1];
+        const next = calculateNext(current, config.animation.initialSpeed);
+        points.push(next);
+      }
+      return points;
+    };
+
     const animate = () => {
+      frameCountRef.current++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Calculate multiple points per frame
+      // Calculate speed multiplier for transition period
+      let speedMultiplier = 1;
+      if (frameCountRef.current < config.animation.transitionFrames) {
+        speedMultiplier = config.animation.initialSpeed - 
+          (config.animation.initialSpeed - 1) * 
+          (frameCountRef.current / config.animation.transitionFrames);
+      }
+
+      // Calculate new points
       for(let i = 0; i < config.animation.pointsPerFrame; i++) {
         const current = pointsRef.current[pointsRef.current.length - 1];
-        const next = calculateNext(current);
+        const next = calculateNext(current, speedMultiplier);
         pointsRef.current.push(next);
       }
       
@@ -158,6 +197,11 @@ const LorenzAttractor = ({
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    
+    // Start with pre-calculated points
+    pointsRef.current = preCalculatePoints();
+    frameCountRef.current = 0;
+    
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
