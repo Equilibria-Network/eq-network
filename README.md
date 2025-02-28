@@ -13,6 +13,7 @@ This repository contains the source code for the Equilibria Network website.
 - [ ] Nav: Podcast button
 
 ## Done
+- [x] Footer: Socials links (Github, Linkedin, Substack)
 - [x] Home: Lorenz Attractor animation
 - [x] Home: Lorenz Attractor animation bounds/responsiveness
 - [x] Project: Basic page implementation
