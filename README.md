@@ -95,7 +95,6 @@ The website is hosted on GitHub Pages at `eq-network.org`. The domain is managed
    ```bash
    GIT_USER=<GITHUB_USERNAME> npm run deploy
    ```
-
 The site is automatically deployed to the `gh-pages` branch when changes are pushed to the main branch.
 
 ### Development Environment Setup
