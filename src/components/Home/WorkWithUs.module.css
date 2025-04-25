@@ -1,0 +1,63 @@
+.section {
+  composes: section from './shared.module.css';
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.blueSection {
+  background: var(--ifm-color-primary);
+}
+
+.container {
+  composes: container from './shared.module.css';
+  position: relative;
+  z-index: 1;
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.largeTitle h2 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 0;
+  color: white;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: white;
+}
+
+.description p {
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+.card {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .largeTitle h2 {
+    font-size: 2.5rem;
+  }
+}
+

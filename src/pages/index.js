@@ -7,6 +7,7 @@ import {
   Mission, 
   WhoWeAre, 
   WhatWeDo, 
+  WorkWithUs,
   // Focus,
   // RecentArticles,
   // StayCoordinated,
@@ -26,6 +27,7 @@ export default function Home() {
         <Mission />
         <WhoWeAre />
         <WhatWeDo />
+
         {/* <Focus /> */}
         {/* <RecentArticles /> */}
         {/* <StayCoordinated /> */}

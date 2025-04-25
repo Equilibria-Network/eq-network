@@ -20,10 +20,10 @@ export default function Mission() {
             </div>
             <div className={styles.descriptionText}>
               <p>
-                The future of decision-making lies in the intersection of human and artificial intelligence. We're witnessing a rapid transformation as organizations increasingly integrate AI into their workflows and entering a world where small numbers of humans oversee largescale semi-autonomous multi-agent systems.
+We are a hybrid research institute, developing mathematical frameworks that address how AI systems transform collective decision-making dynamics and power structures.
               </p>
               <p>
-                Our mission is to foster resilience, agency, and positive-sum collaboration in hybrid human-AI systems, harnessing diverse intelligences for better decisions under uncertainty.
+We combine research in active inference, decentralized consensus mechanisms, and social choice theory to map intervention points that can shift inadequate equilibria toward more robust, sustainable systems that benefit humanity.
               </p>
             </div>
           </div>

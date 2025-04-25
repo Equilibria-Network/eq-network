@@ -15,13 +15,13 @@ export default function WhoWeAre() {
           <div className={styles.description}>
             <div className={styles.card}>
               <p>
-                We're an interdisciplinary team of researchers and builders working to transform how organizations make decisions in synergistic human and AI systems.
+Equilibria Network is an interdisciplinary research organization focused on problems of destabilizing and emergent dynamics in complex system, and the problem of multi agent verifiable commit and trust mechanisms.
+
               </p>
               <p>
-                As a hybrid research organization, we focus on foundational inquiry in tandem with impactful, practical solutions.
-              </p>
-              <p>
-                Our expertise spans complexity science, AI safety, and systems thinking, allowing us to bring important perspectives to the challenges of multi-agent systems and collective cognition.
+
+True to our interdisciplinary nature, we are a team of researchers from diverse backgrounds including complexity science, computational biology, systems theory and AI safety.
+
               </p>
             </div>
           </div>
