@@ -27,6 +27,7 @@ export default function Home() {
         <Mission />
         <WhoWeAre />
         <WhatWeDo />
+        <WorkWithUs />
 
         {/* <Focus /> */}
         {/* <RecentArticles /> */}

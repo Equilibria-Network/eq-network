@@ -1,63 +1,252 @@
+/* src/components/Home/WorkWithUs.module.css */
 .section {
-  composes: section from './shared.module.css';
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
-}
-
-.blueSection {
+  padding: 6rem 0;
   background: var(--ifm-color-primary);
+  color: white;
 }
 
 .container {
-  composes: container from './shared.module.css';
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
   position: relative;
   z-index: 1;
 }
 
-.splitLayout {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  align-items: start;
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
 }
 
-.largeTitle h2 {
+.title {
   font-size: 3.5rem;
   line-height: 1.1;
-  margin: 0;
-  color: white;
-}
-
-.description {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: white;
-}
-
-.description p {
   margin-bottom: 1.5rem;
   color: white;
 }
 
-.description p:last-child {
-  margin-bottom: 0;
+.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.card {
-  background: transparent;
-  padding: 0;
-  color: inherit;
+.profilesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.profileCard {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.profileCard:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: rgba(255, 255, 255, 0.7);
+  transition: height 0.3s ease;
+}
+
+.profileCard:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.profileCard:hover:before {
+  height: 100%;
+}
+
+.profileCard.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+
+.profileTitle {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.profileDesc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.profileMore {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.profileCard:hover .profileMore {
+  color: white;
+}
+
+.profileDetail {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.profileDetailContent h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.profileLongDesc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.profileExpertise h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: white;
+  opacity: 0.9;
+}
+
+.expertiseTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.expertiseTag {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.expertiseTag:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.cta {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cta p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ctaButton {
+  display: inline-block;
+  background: white;
+  color: var(--ifm-color-primary);
+  border: none;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 992px) {
+  .profilesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .splitLayout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .section {
+    padding: 4rem 0;
   }
-
-  .largeTitle h2 {
+  
+  .title {
     font-size: 2.5rem;
   }
+  
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .profileDetail {
+    padding: 1.5rem;
+  }
+  
+  .profileDetailContent h3 {
+    font-size: 1.5rem;
+  }
+  
+  .cta p {
+    font-size: 1rem;
+  }
+  
+  .ctaButton {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+  }
 }
-
