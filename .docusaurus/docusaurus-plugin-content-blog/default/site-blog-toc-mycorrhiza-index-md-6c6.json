@@ -1,0 +1,74 @@
+{
+  "permalink": "/blog/toc-mycorrhiza",
+  "source": "@site/blog/toc-mycorrhiza/index.md",
+  "title": "Theory of Change - Agent Based Models for Collective Intelligence",
+  "description": "Exploring how agent-based models can help understand emergent behaviors in AI governance systems and complex networks.",
+  "date": "2025-05-09T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "simulation",
+      "permalink": "/blog/tags/simulation"
+    },
+    {
+      "inline": true,
+      "label": "collective-intelligence",
+      "permalink": "/blog/tags/collective-intelligence"
+    },
+    {
+      "inline": true,
+      "label": "complexity",
+      "permalink": "/blog/tags/complexity"
+    }
+  ],
+  "readingTime": 8.18,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Jonas Hallgren",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Jonas Hallgren",
+      "page": null
+    },
+    {
+      "name": "Markov Grey",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Markov Grey",
+      "page": null
+    },
+    {
+      "name": "Aaron Halpern",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Aaron Halpern",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "toc-mycorrhiza",
+    "title": "Theory of Change - Agent Based Models for Collective Intelligence",
+    "authors": [
+      "Jonas Hallgren",
+      "Markov Grey",
+      "Aaron Halpern"
+    ],
+    "tags": [
+      "simulation",
+      "collective-intelligence",
+      "complexity"
+    ],
+    "date": "2025-05-09",
+    "description": "Exploring how agent-based models can help understand emergent behaviors in AI governance systems and complex networks.",
+    "image": "./featured-image-2.jpg"
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Theory of Change - AI Governance",
+    "permalink": "/blog/toc-governance"
+  }
+}

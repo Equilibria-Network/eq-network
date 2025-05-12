@@ -38,8 +38,18 @@ export default [
     exact: true
   },
   {
+    path: '/about',
+    component: ComponentCreator('/about', 'c49'),
+    exact: true
+  },
+  {
     path: '/blog',
-    component: ComponentCreator('/blog', '4db'),
+    component: ComponentCreator('/blog', '100'),
+    exact: true
+  },
+  {
+    path: '/blog',
+    component: ComponentCreator('/blog', '1df'),
     exact: true
   },
   {
@@ -53,33 +63,33 @@ export default [
     exact: true
   },
   {
-    path: '/blog/collective-intelligence',
-    component: ComponentCreator('/blog/collective-intelligence', 'f66'),
-    exact: true
-  },
-  {
-    path: '/blog/network-theory',
-    component: ComponentCreator('/blog/network-theory', '324'),
-    exact: true
-  },
-  {
     path: '/blog/tags',
     component: ComponentCreator('/blog/tags', '287'),
     exact: true
   },
   {
-    path: '/blog/tags/collective',
-    component: ComponentCreator('/blog/tags/collective', 'edf'),
+    path: '/blog/tags/collective-intelligence',
+    component: ComponentCreator('/blog/tags/collective-intelligence', '99e'),
     exact: true
   },
   {
-    path: '/blog/tags/intelligence',
-    component: ComponentCreator('/blog/tags/intelligence', '6e1'),
+    path: '/blog/tags/complexity',
+    component: ComponentCreator('/blog/tags/complexity', '250'),
     exact: true
   },
   {
-    path: '/blog/tags/network',
-    component: ComponentCreator('/blog/tags/network', '53c'),
+    path: '/blog/tags/simulation',
+    component: ComponentCreator('/blog/tags/simulation', '027'),
+    exact: true
+  },
+  {
+    path: '/blog/toc-governance',
+    component: ComponentCreator('/blog/toc-governance', '4b8'),
+    exact: true
+  },
+  {
+    path: '/blog/toc-mycorrhiza',
+    component: ComponentCreator('/blog/toc-mycorrhiza', '65c'),
     exact: true
   },
   {

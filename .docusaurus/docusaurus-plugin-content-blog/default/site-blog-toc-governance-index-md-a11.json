@@ -1,0 +1,78 @@
+{
+  "permalink": "/blog/toc-governance",
+  "source": "@site/blog/toc-governance_/index.md",
+  "title": "Theory of Change - AI Governance",
+  "description": "Explainin governance stuff",
+  "date": "2025-05-09T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "simulation",
+      "permalink": "/blog/tags/simulation"
+    },
+    {
+      "inline": true,
+      "label": "collective-intelligence",
+      "permalink": "/blog/tags/collective-intelligence"
+    },
+    {
+      "inline": true,
+      "label": "complexity",
+      "permalink": "/blog/tags/complexity"
+    }
+  ],
+  "readingTime": 4.73,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Jonas Hallgren",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Jonas Hallgren",
+      "page": null
+    },
+    {
+      "name": "Markov Grey",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Markov Grey",
+      "page": null
+    },
+    {
+      "name": "Aaron Halpern",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "Aaron Halpern",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "toc-governance",
+    "title": "Theory of Change - AI Governance",
+    "authors": [
+      "Jonas Hallgren",
+      "Markov Grey",
+      "Aaron Halpern"
+    ],
+    "tags": [
+      "simulation",
+      "collective-intelligence",
+      "complexity"
+    ],
+    "date": "2025-05-09",
+    "description": "Explainin governance stuff",
+    "image": "./featured-image.jpg"
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Theory of Change - AI Governance",
+    "permalink": "/blog/toc-governance"
+  },
+  "nextItem": {
+    "title": "Theory of Change - Agent Based Models for Collective Intelligence",
+    "permalink": "/blog/toc-mycorrhiza"
+  }
+}

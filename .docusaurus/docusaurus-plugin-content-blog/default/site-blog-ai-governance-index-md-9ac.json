@@ -1,0 +1,54 @@
+{
+  "permalink": "/blog/ai-governance",
+  "source": "@site/blog/ai-governance/index.md",
+  "title": "Ai Governance",
+  "description": "Current AI governance approaches analyze systems in isolation, missing crucial emergent behaviors. Technical frameworks predominantly analyze AI systems as individual components rather than interconnected entities within complex networks. Academic research focuses on theoretical risks like misalignment, while industry develops responsible AI practices that apply primarily to single systems. Most regulatory frameworks typically mandate documentation requirements and auditing procedures that examine systems in isolation. (Reuel et al., 2025, Open Problems in Technical AI Governance).",
+  "date": "2025-05-09T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "equilibria-addresses-these-gaps-through-three-interconnected-approaches---stakeholder-networks-agent-based-simulations-and-mathematical-foundations",
+      "permalink": "/blog/tags/equilibria-addresses-these-gaps-through-three-interconnected-approaches-stakeholder-networks-agent-based-simulations-and-mathematical-foundations"
+    },
+    {
+      "inline": true,
+      "label": "current-ai-governance-approaches-analyze-systems-in-isolation-missing-crucial-emergent-behaviors",
+      "permalink": "/blog/tags/current-ai-governance-approaches-analyze-systems-in-isolation-missing-crucial-emergent-behaviors"
+    },
+    {
+      "inline": true,
+      "label": "the-networks-engage-specific-stakeholders-who-face-concrete-coordination-challenges",
+      "permalink": "/blog/tags/the-networks-engage-specific-stakeholders-who-face-concrete-coordination-challenges"
+    }
+  ],
+  "readingTime": 4.625,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Equilibria",
+      "title": "Researcher",
+      "url": "https://eq-network.org",
+      "imageURL": "/authors/placeholder.jpg",
+      "key": "equilibria",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "ai-governance",
+    "title": "Ai Governance",
+    "authors": [
+      "equilibria"
+    ],
+    "tags": [
+      "equilibria-addresses-these-gaps-through-three-interconnected-approaches---stakeholder-networks-agent-based-simulations-and-mathematical-foundations",
+      "current-ai-governance-approaches-analyze-systems-in-isolation-missing-crucial-emergent-behaviors",
+      "the-networks-engage-specific-stakeholders-who-face-concrete-coordination-challenges"
+    ],
+    "date": "2025-05-09"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Agent Based Models for Collective Intelligence",
+    "permalink": "/blog/mycorrhiza-agent-based-models"
+  }
+}

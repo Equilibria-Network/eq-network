@@ -1,0 +1,147 @@
+/* src/components/About/AboutHistory.module.css */
+.section {
+  padding: 5rem 0;
+  position: relative;
+  background: var(--ifm-background-surface-color);
+}
+
+.container {
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.sectionDescription {
+  text-align: center;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 150px;
+  width: 4px;
+  background: var(--ifm-color-primary-lightest);
+  border-radius: 2px;
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineYear {
+  width: 150px;
+  padding-right: 2rem;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  padding-top: 0.25rem;
+}
+
+.timelineContent {
+  position: relative;
+  padding-left: 2.5rem;
+  flex: 1;
+}
+
+.timelineContent::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  z-index: 1;
+}
+
+.timelineTitle {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.timelineDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .sectionDescription {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+  
+  .timelineLine {
+    left: 100px;
+  }
+  
+  .timelineYear {
+    width: 100px;
+    font-size: 1.2rem;
+    padding-right: 1.5rem;
+  }
+  
+  .timelineContent {
+    padding-left: 2rem;
+  }
+  
+  .timelineTitle {
+    font-size: 1.2rem;
+  }
+  
+  .timelineDescription {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .timelineLine {
+    left: 80px;
+  }
+  
+  .timelineYear {
+    width: 80px;
+    font-size: 1.1rem;
+    padding-right: 1rem;
+  }
+  
+  .timelineContent {
+    padding-left: 1.5rem;
+  }
+}

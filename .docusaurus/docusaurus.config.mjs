@@ -28,7 +28,8 @@ export default {
           "routeBasePath": "blog",
           "blogTitle": "Blog",
           "blogDescription": "Equilibria Network Blog",
-          "postsPerPage": 10
+          "postsPerPage": 10,
+          "authorsMapPath": "authors.yml"
         }
       }
     ]
@@ -41,7 +42,18 @@ export default {
         "src": "img/logo_icon_text_2.svg",
         "srcDark": "img/logo_text.svg"
       },
-      "items": [],
+      "items": [
+        {
+          "to": "/blog",
+          "label": "Blog",
+          "position": "right"
+        },
+        {
+          "to": "/about",
+          "label": "About",
+          "position": "right"
+        }
+      ],
       "hideOnScroll": false
     },
     "socials": {

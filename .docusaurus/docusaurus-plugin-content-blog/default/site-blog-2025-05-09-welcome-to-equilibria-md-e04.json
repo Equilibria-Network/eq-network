@@ -1,0 +1,60 @@
+{
+  "permalink": "/blog/welcome-to-equilibria",
+  "source": "@site/blog/2025-05-09-welcome-to-equilibria.md",
+  "title": "Welcome to the Equilibria Network Blog",
+  "description": "We're excited to launch our blog where we'll share insights from our research on collective intelligence, AI governance, and complex systems. This space will feature theoretical explorations, practical applications, and discussions on the cutting edge of our work.",
+  "date": "2025-05-09T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "welcome",
+      "permalink": "/blog/tags/welcome"
+    },
+    {
+      "inline": true,
+      "label": "introduction",
+      "permalink": "/blog/tags/introduction"
+    },
+    {
+      "inline": true,
+      "label": "equilibria",
+      "permalink": "/blog/tags/equilibria"
+    }
+  ],
+  "readingTime": 0.9,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Equilibria Team",
+      "title": "Equilibria Network Team",
+      "url": "https://github.com/Equilibria-Network",
+      "image_url": "https://github.com/Equilibria-Network.png",
+      "imageURL": "https://github.com/Equilibria-Network.png",
+      "socials": {},
+      "key": null,
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "welcome-to-equilibria",
+    "title": "Welcome to the Equilibria Network Blog",
+    "authors": {
+      "name": "Equilibria Team",
+      "title": "Equilibria Network Team",
+      "url": "https://github.com/Equilibria-Network",
+      "image_url": "https://github.com/Equilibria-Network.png",
+      "imageURL": "https://github.com/Equilibria-Network.png"
+    },
+    "tags": [
+      "welcome",
+      "introduction",
+      "equilibria"
+    ],
+    "image": "/img/logo_text.svg"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Collective Intelligence",
+    "permalink": "/blog/collective-intelligence"
+  }
+}

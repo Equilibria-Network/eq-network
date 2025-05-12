@@ -1,0 +1,42 @@
+[
+  {
+    "id": "aaron",
+    "name": "Aaron",
+    "role": "Research Lead",
+    "bio": "Working on mathematical foundations of collective intelligence and coordination mechanisms.",
+    "details": "Aaron leads our research initiatives on mathematical frameworks for collective intelligence systems. With a background in complex systems and category theory, he focuses on developing formal models that capture how information flows through networks of agents and how different coordination mechanisms respond under pressure.\n\nPrior to joining Equilibria Network, Aaron worked at the Santa Fe Institute where he researched non-equilibrium dynamics in social systems and developed novel mathematical approaches to understanding emergent behaviors in multi-agent environments.",
+    "image": "/team/aaron.png",
+    "socials": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "lesswrong": "https://www.lesswrong.com/users/user-name",
+      "arxiv": "https://arxiv.org/search/cs?searchtype=author&query=Author+Name"
+    }
+  },
+  {
+    "id": "jonas",
+    "name": "Jonas",
+    "role": "Complexity Researcher",
+    "bio": "Focused on complex systems modeling and emergent behaviors in multi-agent environments.",
+    "details": "Jonas specializes in complex systems modeling with particular emphasis on emergent properties in decentralized networks. His research combines insights from network science, statistical physics, and agent-based modeling to understand how local interactions give rise to global patterns and behaviors.\n\nHis current work explores how principles from biological collective intelligence could inform the design of more robust artificial systems that maintain coherent behavior across multiple scales without central control.",
+    "image": "/team/jonas.png",
+    "socials": {
+      "twitter": "https://twitter.com",
+      "github": "https://github.com",
+      "arxiv": "https://arxiv.org/search/cs?searchtype=author&query=Author+Name"
+    }
+  },
+  {
+    "id": "markov",
+    "name": "Markov",
+    "role": "Systems Theorist",
+    "bio": "Developing frameworks for resilient network structures and adaptive governance.",
+    "details": "Markov's research focuses on network defense dynamics and adaptive governance structures. He examines how information networks can maintain their integrity and functionality while facing increasingly sophisticated adversaries.\n\nBy combining insights from biological immune systems, network science, and information theory, he develops robust defensive mechanisms that emerge from local interactions rather than central control. His work aims to create networks that naturally strengthen through challenge while preserving essential functions.",
+    "image": "/team/markov.png",
+    "socials": {
+      "linkedin": "https://linkedin.com",
+      "twitter": "https://twitter.com",
+      "lesswrong": "https://www.lesswrong.com/users/user-name"
+    }
+  }
+]

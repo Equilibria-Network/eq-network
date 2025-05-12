@@ -35,6 +35,7 @@ const config = {
           blogTitle: 'Blog',
           blogDescription: 'Equilibria Network Blog',
           postsPerPage: 10,
+          authorsMapPath: 'authors.yml',
         }
       }),
     ],
@@ -56,9 +57,10 @@ const config = {
     srcDark: 'img/logo_text.svg',
   },
         items: [
-		  //{to: '/projects', label: 'Projects', position: 'right'}
-          //{to: '/blog', label: 'Blog', position: 'right'},
-          //{to: '/about', label: 'About', position: 'right'},
+          {to: '/blog', label: 'Blog', position: 'right'},
+          {to: '/about', label: 'About', position: 'right'}
+		  //{to: '/projects', label: 'Projects', position: 'right'},
+
           //{to: '/contact', label: 'Contact', position: 'right'},
         ],
       },

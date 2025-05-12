@@ -1,0 +1,17 @@
+{
+  "permalink": "/blog/Mycorrhiza 1ee71f3974888023bd4bdbbbb1a754d4",
+  "source": "@site/blog/Mycorrhiza 1ee71f3974888023bd4bdbbbb1a754d4.md",
+  "title": "Mycorrhiza",
+  "description": "AI governance needs to understand emergent behaviors that arise from interactions between systems rather than individual AI properties. AIs don't exist in isolation. They form interconnected networks with other complex systems  like politics, economics, or supply chains that create risks invisible when studying AI models alone. These interconnected complex systems have self-reinforcing dynamics that persist regardless of which specific agents execute them. They are in a sense “agent-agnostic”, because it is a process that potentially leads to gradual human disempowerment even without any individual agent (human or AI) being malicious or misaligned (Critch & Russel, 2023; Critch, 2021). Current AI governance approaches analyze individual AI systems for risks, safety and alignment but miss the collective dynamics that emerge when systems interact. Think about how studying a single tree wouldn't tell you about how resilient the entire forest is. In the same way analyzing AI systems in isolation misses critical systemic risks.",
+  "date": "2025-05-09T11:39:12.885Z",
+  "tags": [],
+  "readingTime": 8.12,
+  "hasTruncateMarker": false,
+  "authors": [],
+  "frontMatter": {},
+  "unlisted": false,
+  "nextItem": {
+    "title": "mycorrhiza/mycorrhiza-simulation",
+    "permalink": "/blog/mycorrhiza/mycorrhiza-simulation"
+  }
+}

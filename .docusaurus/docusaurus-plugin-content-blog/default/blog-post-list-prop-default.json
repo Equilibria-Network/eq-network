@@ -2,16 +2,16 @@
   "title": "Recent posts",
   "items": [
     {
-      "title": "Network Theory",
-      "permalink": "/blog/network-theory",
+      "title": "Theory of Change - AI Governance",
+      "permalink": "/blog/toc-governance",
       "unlisted": false,
-      "date": "2024-12-20T00:00:00.000Z"
+      "date": "2025-05-09T00:00:00.000Z"
     },
     {
-      "title": "Collective Intelligence",
-      "permalink": "/blog/collective-intelligence",
+      "title": "Theory of Change - Agent Based Models for Collective Intelligence",
+      "permalink": "/blog/toc-mycorrhiza",
       "unlisted": false,
-      "date": "2024-12-20T00:00:00.000Z"
+      "date": "2025-05-09T00:00:00.000Z"
     }
   ]
 }

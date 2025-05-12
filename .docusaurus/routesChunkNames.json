@@ -42,7 +42,14 @@
       "plugin": "plugin---docusaurus-debugb-38-ad3"
     }
   },
-  "/blog-4db": {
+  "/about-c49": {
+    "__comp": "__comp---site-src-pages-about-js-779-319",
+    "__context": {
+      "plugin": "plugin---abouta-74-d48"
+    },
+    "config": "config---about-5-e-9-bcb"
+  },
+  "/blog-100": {
     "__comp": "__comp---theme-blog-list-pagea-6-a-7ba",
     "__context": {
       "plugin": "plugin---blog-369-22e"
@@ -50,13 +57,20 @@
     "sidebar": "sidebar---blog-814-8ac",
     "items": [
       {
-        "content": "content---blogeae-1d2"
+        "content": "content---blog-825-3a5"
       },
       {
-        "content": "content---blog-3-dc-7ed"
+        "content": "content---blogeca-075"
       }
     ],
     "__props": "__props---blogc-15-573"
+  },
+  "/blog-1df": {
+    "__comp": "__comp---site-src-pages-blog-js-48-d-5c8",
+    "__context": {
+      "plugin": "plugin---abouta-74-d48"
+    },
+    "config": "config---about-5-e-9-bcb"
   },
   "/blog/archive-182": {
     "__comp": "__comp---theme-blog-archive-page-9-e-4-1d8",
@@ -76,28 +90,6 @@
     "sidebar": "sidebar---blog-814-8ac",
     "__props": "__props---blog-authorsef-8-44f"
   },
-  "/blog/collective-intelligence-f66": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
-      },
-      "plugin": "plugin---blog-369-22e"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-collective-intelligence-101-3c4"
-  },
-  "/blog/network-theory-324": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
-      },
-      "plugin": "plugin---blog-369-22e"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-network-theory-054-588"
-  },
   "/blog/tags-287": {
     "__comp": "__comp---theme-blog-tags-list-page-01-a-d0b",
     "__context": {
@@ -106,7 +98,7 @@
     "sidebar": "sidebar---blog-814-8ac",
     "__props": "__props---blog-tags-3-a-2-fa2"
   },
-  "/blog/tags/collective-edf": {
+  "/blog/tags/collective-intelligence-99e": {
     "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
     "__context": {
       "plugin": "plugin---blog-369-22e"
@@ -114,15 +106,15 @@
     "sidebar": "sidebar---blog-814-8ac",
     "items": [
       {
-        "content": "content---blogeae-1d2"
+        "content": "content---blog-825-3a5"
       },
       {
-        "content": "content---blog-3-dc-7ed"
+        "content": "content---blogeca-075"
       }
     ],
-    "__props": "__props---blog-tags-collective-77-f-855"
+    "__props": "__props---blog-tags-collective-intelligence-81-a-233"
   },
-  "/blog/tags/intelligence-6e1": {
+  "/blog/tags/complexity-250": {
     "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
     "__context": {
       "plugin": "plugin---blog-369-22e"
@@ -130,15 +122,15 @@
     "sidebar": "sidebar---blog-814-8ac",
     "items": [
       {
-        "content": "content---blogeae-1d2"
+        "content": "content---blog-825-3a5"
       },
       {
-        "content": "content---blog-3-dc-7ed"
+        "content": "content---blogeca-075"
       }
     ],
-    "__props": "__props---blog-tags-intelligenceb-9-d-a7d"
+    "__props": "__props---blog-tags-complexity-9-ca-4a9"
   },
-  "/blog/tags/network-53c": {
+  "/blog/tags/simulation-027": {
     "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
     "__context": {
       "plugin": "plugin---blog-369-22e"
@@ -146,23 +138,48 @@
     "sidebar": "sidebar---blog-814-8ac",
     "items": [
       {
-        "content": "content---blogeae-1d2"
+        "content": "content---blog-825-3a5"
+      },
+      {
+        "content": "content---blogeca-075"
       }
     ],
-    "__props": "__props---blog-tags-network-541-71a"
+    "__props": "__props---blog-tags-simulationf-42-73a"
+  },
+  "/blog/toc-governance-4b8": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "data": {
+        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+      },
+      "plugin": "plugin---blog-369-22e"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-toc-governancec-84-729"
+  },
+  "/blog/toc-mycorrhiza-65c": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "data": {
+        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+      },
+      "plugin": "plugin---blog-369-22e"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-toc-mycorrhiza-6-c-6-93f"
   },
   "/projects-05c": {
     "__comp": "__comp---site-src-pages-projects-jsee-7-a5f",
     "__context": {
-      "plugin": "plugin---projectsa-74-49b"
+      "plugin": "plugin---abouta-74-d48"
     },
-    "config": "config---projects-5-e-9-d4c"
+    "config": "config---about-5-e-9-bcb"
   },
   "/-2e1": {
     "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
     "__context": {
-      "plugin": "plugin---projectsa-74-49b"
+      "plugin": "plugin---abouta-74-d48"
     },
-    "config": "config---projects-5-e-9-d4c"
+    "config": "config---about-5-e-9-bcb"
   }
 }

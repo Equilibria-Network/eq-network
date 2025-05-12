@@ -1,8 +1,15 @@
-# blog/authors.yml
-jonas:
+Aaron Halpern:
+  image_url: /authors/placeholder.jpg
+  name: Aaron Halpern
+  title: Researcher
+  url: https://eq-network.org
+Jonas Hallgren:
+  image_url: /authors/placeholder.jpg
   name: Jonas Hallgren
-  title: Equilibria Researcher
-
-markov:
+  title: Researcher
+  url: https://eq-network.org
+Markov Grey:
+  image_url: /authors/placeholder.jpg
   name: Markov Grey
-  title: Equilibria Researcher
+  title: Researcher
+  url: https://eq-network.org
