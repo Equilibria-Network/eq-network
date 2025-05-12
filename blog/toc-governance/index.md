@@ -5,7 +5,7 @@ authors: [Jonas Hallgren, Markov Grey, Aaron Halpern]
 tags: [simulation, collective-intelligence, complexity]
 date: '2025-05-09'
 description: 'Explainin governance stuff'
-image: ./featured-image.jpg
+image: img/blog/featured-image.jpg
 ---
 import AudioPlayer from '@site/src/components/AudioPlayer';
 

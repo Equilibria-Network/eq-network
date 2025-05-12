@@ -5,7 +5,7 @@ authors: [Jonas Hallgren, Markov Grey, Aaron Halpern]
 tags: [simulation, collective-intelligence, complexity]
 date: '2025-05-09'
 description: 'Exploring how agent-based models can help understand emergent behaviors in AI governance systems and complex networks.'
-image: ./featured-image-2.jpg
+image: img/blog/featured-image-2.jpg
 ---
 import AudioPlayer from '@site/src/components/AudioPlayer';
 
