@@ -44,11 +44,6 @@ export default {
       },
       "items": [
         {
-          "to": "/blog",
-          "label": "Blog",
-          "position": "right"
-        },
-        {
           "to": "/about",
           "label": "About",
           "position": "right"

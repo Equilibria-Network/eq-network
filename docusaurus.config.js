@@ -57,7 +57,7 @@ const config = {
     srcDark: 'img/logo_text.svg',
   },
         items: [
-          {to: '/blog', label: 'Blog', position: 'right'},
+          //{to: '/blog', label: 'Blog', position: 'right'},
           {to: '/about', label: 'About', position: 'right'}
 		  //{to: '/projects', label: 'Projects', position: 'right'},
 
