@@ -1,6 +1,7 @@
+// src/components/Home/Mission.js - Updated import
 import React from 'react';
 import styles from './Mission.module.css';
-import LorenzAttractor from './LorenzAttractor';
+import LorenzAttractor from './Lorenz'; // Updated import path
 
 export default function Mission() {
   return (
