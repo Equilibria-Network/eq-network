@@ -1,4 +1,5 @@
 /* src/components/Home/WorkWithUs.module.css */
+
 .section {
   position: relative;
   overflow: hidden;
@@ -18,7 +19,7 @@
 .header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 5rem;
 }
 
 .title {
@@ -26,6 +27,7 @@
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: white;
+  font-weight: 700;
 }
 
 .subtitle {
@@ -34,189 +36,180 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.profilesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.profileCard {
+.profilesWrapper {
   position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
+  width: 100%;
 }
 
-.profileCard:before {
-  content: '';
+/* Interactive Diagram Grid */
+.diagramGrid {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 4rem;
+}
+
+/* Arrow Container */
+.arrowContainer {
   position: absolute;
-  left: 0;
   top: 0;
-  width: 4px;
-  height: 0;
-  background: rgba(255, 255, 255, 0.7);
-  transition: height 0.3s ease;
-}
-
-.profileCard:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-5px);
-}
-
-.profileCard:hover:before {
+  left: 0;
+  width: 100%;
   height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.profileCard.active {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: scale(1.02);
-}
-
-.profileTitle {
-  font-size: 1.4rem;
-  margin-bottom: 0.75rem;
-  color: white;
-}
-
-.profileDesc {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
-}
-
-.profileMore {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-.profileCard:hover .profileMore {
-  color: white;
-}
-
-.profileDetail {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 2.5rem;
-  margin-bottom: 3rem;
-  position: relative;
-  animation: fadeIn 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.closeButton {
+/* Bridge Arrow */
+.bridgeArrow {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 300px;
+  height: 140px;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.profileNode {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* The positioning will be handled by inline styles from the dynamic calculation */
+
+/* Hovered node state */
+.profileNode.hoveredNode {
+  transform: scale(1.08);
+  z-index: 5;
+}
+
+.nodeContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%; /* Circular shape */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.closeButton:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.profileDetailContent h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-.profileLongDesc {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2rem;
-}
-
-.profileExpertise h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: white;
-  opacity: 0.9;
-}
-
-.expertiseTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.expertiseTag {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
-
-.expertiseTag:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.cta {
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.cta p {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+.profileNode:hover .nodeContent {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.ctaButton {
-  display: inline-block;
-  background: white;
-  color: var(--ifm-color-primary);
-  border: none;
-  padding: 0.8rem 2.5rem;
+.hoveredNode .nodeContent {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.nodeTitle {
   font-size: 1.1rem;
   font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
   transition: all 0.3s ease;
+}
+
+.profileNode:hover .nodeTitle {
+  color: white;
+}
+
+/* Center CTA */
+.centerCta {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ifm-color-primary);
+  background: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ctaLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
-.ctaButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* Custom Tooltip Styling - Light Theme with Blue Text */
+:global(.tippy-box[data-theme~='light']) {
+  background-color: white;
+  color: var(--ifm-color-primary-darkest);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 400px !important;
 }
 
+:global(.tippy-box[data-theme~='light'] .tippy-content) {
+  padding: 1.5rem;
+}
+
+:global(.tippy-box[data-theme~='light'] .tippy-arrow) {
+  color: white;
+}
+
+.tooltipContent {
+  color: var(--ifm-color-primary-darkest);
+}
+
+.tooltipTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.tooltipDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* Responsive adjustments */
 @media (max-width: 992px) {
-  .profilesGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .diagramGrid {
+    height: 450px;
+  }
+  
+  .profileNode {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .nodeTitle {
+    font-size: 1rem;
+  }
+  
+  .bridgeArrow {
+    width: 250px;
+    height: 115px;
   }
 }
 
@@ -230,23 +223,36 @@
   }
   
   .subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .profileDetail {
-    padding: 1.5rem;
-  }
-  
-  .profileDetailContent h3 {
-    font-size: 1.5rem;
-  }
-  
-  .cta p {
     font-size: 1rem;
   }
   
-  .ctaButton {
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
+  .diagramGrid {
+    height: 400px;
+  }
+  
+  .profileNode {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .nodeTitle {
+    font-size: 0.9rem;
+  }
+  
+  .bridgeArrow {
+    width: 200px;
+    height: 92px;
+  }
+  
+  :global(.tippy-box[data-theme~='light']) {
+    max-width: 300px !important;
+  }
+  
+  .tooltipTitle {
+    font-size: 1.2rem;
+  }
+  
+  .tooltipDescription {
+    font-size: 0.9rem;
   }
 }

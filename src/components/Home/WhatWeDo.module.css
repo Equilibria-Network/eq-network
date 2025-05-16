@@ -13,7 +13,7 @@
 }
 
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .title {
@@ -30,34 +30,24 @@
   max-width: 800px;
 }
 
-/* Desktop Process Flow */
 .processFlow {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  position: relative;
-}
-
-.cardWithArrow, 
-.cardWithBottomArrow {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  position: relative;
-}
-
-/* Mobile layout */
-.mobileCardContainer {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
-  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-/* Card styles */
 .card {
-  width: 100%;
+  flex: 1;
+  max-width: 28%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card.animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cardInner {
@@ -71,6 +61,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .cardInner:hover {
@@ -79,147 +70,213 @@
   border-color: var(--ifm-color-primary-lighter);
 }
 
-.cardInner.expanded {
+.cardInner.activeCard {
+  background: rgba(var(--ifm-color-primary-rgb), 0.03);
+  border-color: var(--ifm-color-primary);
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  border-color: var(--ifm-color-primary);
-  z-index: 10;
 }
 
-/* Desktop arrow styles */
-.topArrow,
-.bottomArrow {
-  position: absolute;
-  width: 100%;
+.cardHeader {
   display: flex;
-  justify-content: center;
-  z-index: 5;
-}
-
-.topArrow {
-  top: -50px; /* Positioned further up above the card */
-  left: 60%; /* Moved more to the left */
-}
-
-.bottomArrow {
-  bottom: -50px; /* Positioned further below the card */
-  left: auto; /* Remove the incorrect left value */
-  right: 70%; /* Push it far to the right instead */
-  width: 250px; /* Make it wider to reach better */
-}
-
-/* Mobile arrow styles */
-.verticalArrow,
-.verticalDoubleArrow {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .cardIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
   background: rgba(0, 59, 126, 0.1);
   color: var(--ifm-color-primary);
-  margin-bottom: 1.5rem;
+  margin-right: 1rem;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.expanded .cardIcon {
+.activeCard .cardIcon {
   background: var(--ifm-color-primary);
   color: white;
 }
 
 .cardTitle {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin: 0;
   color: var(--ifm-color-primary);
   transition: all 0.3s ease;
+  line-height: 1.4;
 }
 
 .cardSummary {
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  height: 0;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-/* Only show summary on hover when NOT expanded */
-.cardInner:hover:not(.expanded) .cardSummary {
-  height: auto;
-  margin-bottom: 1rem;
-}
-
-.expanded .cardSummary {
-  height: 0;
-  margin: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .cardDetails {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
   color: var(--ifm-color-emphasis-700);
   font-size: 1rem;
   line-height: 1.6;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.4s ease;
 }
 
-.expanded .cardDetails {
-  max-height: 500px;
+.cardDetails.showDetails {
+  max-height: 300px;
   opacity: 1;
-  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.expandIndicator {
-  display: flex;
-  justify-content: center;
+.cardFooter {
   margin-top: auto;
+  display: flex;
+  justify-content: flex-start;
   padding-top: 1rem;
-  color: var(--ifm-color-primary);
-  transition: transform 0.3s ease;
 }
 
-.rotated {
-  transform: rotate(180deg);
+.readMoreButton {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.readMoreButton:hover {
+  opacity: 0.8;
+}
+
+.chevronRotated {
+  transform: rotate(90deg);
+}
+
+.arrowRight,
+.arrowBidirectional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--ifm-color-primary);
+  width: 60px;
+  opacity: 0;
+  position: relative;
+  height: 40px;
+  transition: all 0.4s ease;
+  cursor: help;
+}
+
+.arrowRight.animate,
+.arrowBidirectional.animate {
+  opacity: 1;
+}
+
+.arrowRight svg {
+  animation: pulseRight 2s infinite;
+}
+
+.arrowBidirectional {
+  height: 60px;
+}
+
+.arrowTop {
+  position: absolute;
+  top: 0;
+  animation: pulseRight 2s infinite;
+}
+
+.arrowBottom {
+  position: absolute;
+  bottom: 0;
+  animation: pulseLeft 2s infinite;
+}
+
+/* Sequence animation delays */
+.cardAppear:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.arrowAppear:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+.cardAppear:nth-child(3) {
+  transition-delay: 0.5s;
+}
+
+.arrowAppear:nth-child(4) {
+  transition-delay: 0.7s;
+}
+
+.cardAppear:nth-child(5) {
+  transition-delay: 0.9s;
+}
+
+@keyframes pulseRight {
+  0% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulseLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-5px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .processFlow {
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .cardWithArrow, 
-  .cardWithBottomArrow {
-    width: 100%;
-    max-width: 500px;
+    gap: 1.5rem;
   }
   
   .card {
-    margin-bottom: 1rem;
+    max-width: 100%;
+    width: 100%;
   }
   
-  .verticalArrow {
-    height: 93px;
-    margin: 0.5rem 0;
+  .arrowRight,
+  .arrowBidirectional {
+    transform: rotate(90deg);
+    margin: 1rem 0;
   }
   
-  .verticalDoubleArrow {
-    height: 160px;
-    margin: 0.5rem 0;
+  .animate.arrowRight,
+  .animate.arrowBidirectional {
+    transform: rotate(90deg);
+    opacity: 1;
   }
 }
-
-/* src/components/HomepageComponents/WhatWeDo.module.css (continued) */
 
 @media (max-width: 768px) {
   .section {
@@ -230,21 +287,21 @@
     font-size: 2.5rem;
   }
   
-  .verticalArrow,
-  .verticalDoubleArrow {
-    transform: scale(0.8);
-  }
-  
-  .cardInner {
-    padding: 1.5rem;
+  .cardHeader {
+    flex-direction: column;
+    text-align: center;
   }
   
   .cardIcon {
-    width: 50px;
-    height: 50px;
+    margin-right: 0;
+    margin-bottom: 1rem;
   }
   
   .cardTitle {
-    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .cardFooter {
+    justify-content: center;
   }
 }

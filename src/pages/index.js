@@ -8,10 +8,6 @@ import {
   WhoWeAre, 
   WhatWeDo, 
   WorkWithUs,
-  // Focus,
-  // RecentArticles,
-  // StayCoordinated,
-  // ContactForm
 } from '../components/Home';
 
 export default function Home() {
@@ -27,12 +23,7 @@ export default function Home() {
         <Mission />
         <WhoWeAre />
         <WhatWeDo />
-        <WorkWithUs />
-
-        {/* <Focus /> */}
-        {/* <RecentArticles /> */}
-        {/* <StayCoordinated /> */}
-        {/* <ContactForm /> */}
+        {/* <WorkWithUs /> */}
       </main>
     </Layout>
   );
