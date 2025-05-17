@@ -67,7 +67,7 @@
     "image": "img/blog/featured-image-2.jpg"
   },
   "unlisted": false,
-  "nextItem": {
+  "prevItem": {
     "title": "Theory of Change - AI Governance",
     "permalink": "/blog/toc-governance"
   }

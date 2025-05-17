@@ -1,7 +1,7 @@
-// src/components/Home/Mission.js - Updated import
+// src/components/Home/Mission.js
 import React from 'react';
 import styles from './Mission.module.css';
-import LorenzAttractor from './Lorenz_2'; // Updated import path
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 export default function Mission() {
   return (
@@ -9,7 +9,14 @@ export default function Mission() {
       <div className={styles.container}>
         <div className={styles.missionContent}>
           <div className={styles.attractorContainer}>
-            <LorenzAttractor />
+            {/* Use BrowserOnly to ensure Lorenz attractor only renders in browser */}
+            <BrowserOnly>
+              {() => {
+                // Dynamically import the component only in browser environment
+                const LorenzAttractor = require('./Lorenz_2').default;
+                return <LorenzAttractor />;
+              }}
+            </BrowserOnly>
           </div>
           <div className={styles.contentRight}>
             <div className={styles.logoContainer}>
@@ -21,10 +28,10 @@ export default function Mission() {
             </div>
             <div className={styles.descriptionText}>
               <p>
-We are a hybrid research institute, developing mathematical frameworks that address how AI systems transform collective decision-making dynamics and power structures.
+                We are a hybrid research institute, developing mathematical frameworks that address how AI systems transform collective decision-making dynamics and power structures.
               </p>
               <p>
-We combine research in active inference, decentralized consensus mechanisms, and social choice theory to map intervention points that can shift inadequate equilibria toward more robust, sustainable systems that benefit humanity.
+                We combine research in active inference, decentralized consensus mechanisms, and social choice theory to map intervention points that can shift inadequate equilibria toward more robust, sustainable systems that benefit humanity.
               </p>
             </div>
           </div>
