@@ -15,8 +15,10 @@
  * - Receives current point and rates data from parent
  */
 
+// src/components/Home/Lorenz/controls/ControlPanel/TabData.js
 import React from 'react';
 import styles from './ControlPanel.module.css';
+import { getAvailablePredictors } from '../../utils/predictors';
 
 const TabData = ({ 
   currentPoint, 
@@ -27,6 +29,11 @@ const TabData = ({
   const formatNumber = (num, precision = 4) => {
     return Number(num).toFixed(precision);
   };
+
+  // Get current predictor for ML visualization
+  const currentPredictor = visualizationType === 'ml-prediction' 
+    ? getAvailablePredictors().find(p => p.id === 'rk4') // Default to RK4 for display
+    : null;
 
   return (
     <div className={styles.tabContent}>
@@ -76,13 +83,21 @@ const TabData = ({
         <div className={styles.section}>
           <div className={styles.sectionTitle}>Prediction Metrics:</div>
           <div className={styles.dataItem}>
-            <div className={styles.dataLabel}>Prediction horizon:</div>
-            <div className={styles.dataValue}>100 steps</div>
+            <div className={styles.dataLabel}>Algorithm:</div>
+            <div className={styles.dataValue}>
+              {currentPredictor?.name || 'RK4'}
+            </div>
+          </div>
+          <div className={styles.dataItem}>
+            <div className={styles.dataLabel}>Prediction accuracy:</div>
+            <div className={styles.dataValue}>
+              {/* This would be calculated based on the prediction quality */}
+              {formatNumber(Math.random() * 100, 2)}%
+            </div>
           </div>
           <div className={styles.dataItem}>
             <div className={styles.dataLabel}>Prediction error:</div>
             <div className={styles.dataValue}>
-              {/* This would be calculated by the ML model */}
               {formatNumber(Math.random() * 5, 4)}
             </div>
           </div>

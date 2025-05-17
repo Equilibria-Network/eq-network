@@ -16,21 +16,30 @@
  * - Receives system parameters and change handlers from parent
  */
 
+// src/components/Home/Lorenz/controls/ControlPanel/TabParams.js
 import React from 'react';
 import { Info, Sliders } from 'lucide-react';
 import styles from './ControlPanel.module.css';
+import { getAvailablePredictors } from '../../utils/predictors';
 
 const TabParams = ({ 
   systemParams, 
   onParamChange, 
   isEditMode, 
   setIsEditMode,
-  visualizationType = 'standard'
+  visualizationType = 'standard',
+  mlParams = {}, // New parameter for ML-specific params
+  onMLParamChange = () => {} // New handler for ML-specific params
 }) => {
   // Format number with consistent precision
   const formatNumber = (num, precision = 2) => {
     return Number(num).toFixed(precision);
   };
+  
+  // Get available predictors for ML visualization
+  const availablePredictors = visualizationType === 'ml-prediction' 
+    ? getAvailablePredictors() 
+    : [];
   
   return (
     <div className={styles.tabContent}>
@@ -258,6 +267,78 @@ const TabParams = ({
             </div>
           )}
         </div>
+        
+        {/* ML Prediction specific parameters */}
+        {visualizationType === 'ml-prediction' && (
+          <>
+            <div className={styles.sectionDivider}></div>
+            <div className={styles.paramSectionTitle}>ML Prediction Settings</div>
+            
+            {/* Parameter: Prediction Algorithm */}
+            <div className={styles.paramItem}>
+              <div className={styles.paramHeader}>
+                <div className={styles.paramName}>
+                  <span className={styles.paramFullName}>prediction algorithm</span>
+                </div>
+                <div className={styles.paramValue}>
+                  {availablePredictors.find(p => p.id === mlParams.predictorId)?.name || 'RK4'}
+                </div>
+              </div>
+              
+              {isEditMode ? (
+                <div className={styles.algorithmSelector}>
+                  <div className={styles.algorithmButtons}>
+                    {availablePredictors.map(predictor => (
+                      <button
+                        key={predictor.id}
+                        className={`${styles.algorithmButton} ${mlParams.predictorId === predictor.id ? styles.activeAlgorithm : ''}`}
+                        onClick={() => onMLParamChange('predictor', predictor.id)}
+                      >
+                        {predictor.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.paramInfo}>
+                  The algorithm used to predict future states of the system. Different methods have varying accuracy and computational efficiency.
+                </div>
+              )}
+            </div>
+            
+            {/* Parameter: Prediction Steps */}
+            <div className={styles.paramItem}>
+              <div className={styles.paramHeader}>
+                <div className={styles.paramName}>
+                  <span className={styles.paramFullName}>prediction steps</span>
+                </div>
+                <div className={styles.paramValue}>{mlParams.predictionSteps || 50}</div>
+              </div>
+              
+              {isEditMode ? (
+                <div className={styles.paramSlider}>
+                  <input 
+                    type="range" 
+                    min="10" 
+                    max="200" 
+                    step="10" 
+                    value={mlParams.predictionSteps || 50} 
+                    onChange={(e) => onMLParamChange('steps', parseInt(e.target.value))}
+                    className={styles.slider}
+                  />
+                  <div className={styles.sliderRange}>
+                    <span>10</span>
+                    <span>200</span>
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.paramInfo}>
+                  How far into the future to predict. In chaotic systems like this, predictions become increasingly unreliable as the horizon increases.
+                </div>
+              )}
+            </div>
+          </>
+        )}
         
         {/* Presets section - shown only in edit mode */}
         {isEditMode && (

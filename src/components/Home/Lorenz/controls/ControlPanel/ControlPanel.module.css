@@ -821,3 +821,104 @@
     padding: 10px 8px;
   }
 }
+
+/* Additional styles for TabParams.js to add to ControlPanel.module.css */
+
+/* Section divider for ML prediction settings */
+.sectionDivider {
+  height: 1px;
+  width: 100%;
+  background: var(--ifm-color-emphasis-200);
+  margin: 24px 0 16px;
+}
+
+[data-theme='dark'] .sectionDivider {
+  background: var(--ifm-color-emphasis-700);
+}
+
+/* ML prediction section title */
+.paramSectionTitle {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ifm-color-primary-dark);
+  margin-bottom: 16px;
+}
+
+[data-theme='dark'] .paramSectionTitle {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* Algorithm selector container */
+.algorithmSelector {
+  margin-top: 8px;
+}
+
+/* Algorithm buttons container */
+.algorithmButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Individual algorithm button */
+.algorithmButton {
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.algorithmButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  transform: translateY(-1px);
+}
+
+/* Active algorithm button */
+.activeAlgorithm {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.activeAlgorithm:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+[data-theme='dark'] .algorithmButton {
+  background: var(--ifm-color-emphasis-800);
+  border-color: var(--ifm-color-emphasis-700);
+  color: var(--ifm-color-emphasis-500);
+}
+
+[data-theme='dark'] .algorithmButton:hover {
+  background: var(--ifm-color-emphasis-700);
+  color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .activeAlgorithm {
+  background: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+  color: white;
+}
+
+[data-theme='dark'] .activeAlgorithm:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .algorithmButton {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+  
+  .paramSectionTitle {
+    font-size: 14px;
+  }
+}

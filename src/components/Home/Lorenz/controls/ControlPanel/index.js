@@ -19,6 +19,7 @@
  * - TabData.js: For data tab content
  */
 
+// src/components/Home/Lorenz/controls/ControlPanel/index.js
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   X, 
@@ -41,7 +42,9 @@ const ControlPanel = ({
   currentPoint,
   currentRates,
   onParamChange,
-  visualizationType = 'standard' // Used to determine which info to show
+  visualizationType = 'standard',
+  mlParams = {}, // Add ML parameters
+  onMLParamChange = () => {} // Add ML parameter change handler
 }) => {
   const panelRef = useRef(null);
   const resizeHandleRef = useRef(null);
@@ -354,6 +357,8 @@ const ControlPanel = ({
               isEditMode={isEditMode}
               setIsEditMode={setIsEditMode}
               visualizationType={visualizationType}
+              mlParams={mlParams}
+              onMLParamChange={onMLParamChange}
             />
           )}
           

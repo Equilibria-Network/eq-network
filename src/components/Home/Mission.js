@@ -13,7 +13,7 @@ export default function Mission() {
             <BrowserOnly>
               {() => {
                 // Dynamically import the component only in browser environment
-                const LorenzAttractor = require('./Lorenz_2').default;
+                const LorenzAttractor = require('./Lorenz').default;
                 return <LorenzAttractor />;
               }}
             </BrowserOnly>

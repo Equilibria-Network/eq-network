@@ -1,4 +1,5 @@
 /* src/components/Home/Lorenz/LorenzAttractor.module.css */
+/* src/components/Home/Lorenz/LorenzAttractor.module.css */
 
 .container {
   width: 100%;
@@ -18,22 +19,32 @@
   background: transparent;
 }
 
+.visualizationWrapper {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Minimal Controls */
 .controls {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
   margin-top: -40px;
   position: relative;
   z-index: 2;
 }
 
-.button {
+/* Unified button style for all buttons */
+.button, .navButton {
   background: var(--ifm-color-primary);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,15 +53,51 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.button:hover {
+.button:hover, .navButton:hover {
   transform: scale(1.05);
   background-color: var(--ifm-color-primary-dark);
 }
 
-.button:active {
+.button:active, .navButton:active {
   transform: scale(0.95);
 }
 
 .activeButton {
   background: var(--ifm-color-primary-darker);
+}
+
+/* Prediction endpoint marker - visible in the canvas but not obtrusive */
+.predictionEndpoint {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 120, 80, 0.9);
+  box-shadow: 0 0 10px rgba(255, 120, 80, 0.6);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .button, 
+[data-theme='dark'] .navButton {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    height: 400px; /* Slightly smaller on mobile */
+  }
+  
+  .controls {
+    margin-top: -30px;
+    gap: 10px;
+  }
+  
+  .button, .navButton {
+    width: 32px;
+    height: 32px;
+  }
 }
