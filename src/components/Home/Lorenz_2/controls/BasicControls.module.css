@@ -1,0 +1,56 @@
+/* src/components/Home/Lorenz/controls/BasicControls.module.css */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+}
+
+.button {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  background-color: var(--ifm-color-primary-dark);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.activeButton {
+  background: var(--ifm-color-primary-darker);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .button {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls {
+    margin-top: -30px;
+    gap: 12px;
+  }
+  
+  .button {
+    width: 36px;
+    height: 36px;
+  }
+}

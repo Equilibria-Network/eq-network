@@ -1,0 +1,22 @@
+src/components/Home/Lorenz/
+├── index.js                 // Main export
+├── LorenzAttractor.js       // Core component 
+├── LorenzAttractor.module.css // Main component styles
+├── utils/
+│   ├── lorenzUtils.js       // Math functions & constants
+│   ├── useSimulation.js     // Simulation logic hook
+│   └── useCanvas.js         // Canvas rendering hook
+├── controls/
+│   ├── BasicControls.js     // Simple play/pause/info controls
+│   ├── BasicControls.module.css
+│   └── ControlPanel/        // Advanced controls panel
+│       ├── index.js         // Main panel wrapper
+│       ├── TabInfo.js       // Info tab content
+│       ├── TabParams.js     // Parameters tab content 
+│       ├── TabData.js       // Data tab content
+│       └── ControlPanel.module.css
+└── visualization/
+    ├── index.js             // Exports visualization components
+    ├── StandardView.js      // Default visualization
+    ├── DoubleTrajectory.js  // Butterfly effect visualization
+    └── MLPrediction.js      // ML prediction (placeholder)
