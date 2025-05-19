@@ -1,4 +1,4 @@
-// src/components/Home/Lorenz_2/LorenzAttractor.js
+// src/components/Home/Lorenz/LorenzAttractor.js
 /**
  * Main Lorenz Attractor visualization component.
  * 
@@ -48,11 +48,21 @@ const LorenzAttractor = ({ className, style }) => {
   const [predictionSteps, setPredictionSteps] = useState(50);
   const [predictorId, setPredictorId] = useState('rk4');
   
+  // Butterfly Effect state
+  const [initialSeparation, setInitialSeparation] = useState(0.000001);
+  
   // System state
   const [config, setConfig] = useState({
     ...LORENZ_CONFIG,
     colors: {
       primary: { r: 0, g: 59, b: 126 } // Default color
+    },
+    butterfly: {
+      initialSeparation: initialSeparation
+    },
+    display: {
+      ...LORENZ_CONFIG.display,
+      showTrajectoryDistance: true
     }
   });
   
@@ -66,7 +76,10 @@ const LorenzAttractor = ({ className, style }) => {
     currentRates,
     togglePlayPause,
     resetSimulation,
-    handleParamChange
+    handleParamChange,
+    initialSeed, // Expose initialSeed for DoubleTrajectory
+    pointsRef,
+    secondaryPointsRef
   } = simulation;
   
   // Initialize config with proper colors
@@ -113,6 +126,41 @@ const LorenzAttractor = ({ className, style }) => {
     }
   };
   
+  // Handle butterfly effect parameter changes
+  const onButterflyParamChange = (paramName, value) => {
+    if (paramName === 'separation') {
+      setInitialSeparation(value);
+      setConfig(prev => ({
+        ...prev,
+        butterfly: {
+          ...prev.butterfly,
+          initialSeparation: value
+        }
+      }));
+    }
+  };
+  
+  // Calculate trajectory distance for butterfly effect
+  const calculateTrajectoryDistance = () => {
+    if (visualizationType !== 'butterfly-effect') return null;
+    
+    if (pointsRef.current && secondaryPointsRef.current &&
+        pointsRef.current.length > 0 && secondaryPointsRef.current.length > 0) {
+      const p1 = pointsRef.current[pointsRef.current.length - 1];
+      const p2 = secondaryPointsRef.current[secondaryPointsRef.current.length - 1];
+      
+      if (p1 && p2) {
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dz = p1.z - p2.z;
+        
+        return Math.sqrt(dx*dx + dy*dy + dz*dz);
+      }
+    }
+    
+    return null;
+  };
+  
   // Navigate between visualization types
   const navigateVisualization = (direction) => {
     const types = Object.keys(visualizationTypes);
@@ -141,7 +189,19 @@ const LorenzAttractor = ({ className, style }) => {
     
     switch (visualizationType) {
       case 'butterfly-effect':
-        return <DoubleTrajectory {...visualizationProps} />;
+        // Create a butterfly-specific config
+        const butterflyConfig = {
+          ...config,
+          butterfly: {
+            initialSeparation: initialSeparation
+          },
+          display: {
+            ...config.display,
+            showSecondaryTrajectory: true
+          }
+        };
+        
+        return <DoubleTrajectory {...visualizationProps} config={butterflyConfig} />;
         
       case 'ml-prediction':
         return (
@@ -156,6 +216,15 @@ const LorenzAttractor = ({ className, style }) => {
       default:
         return <StandardView {...visualizationProps} />;
     }
+  };
+  
+  // Get the current trajectoryDistance for display
+  const trajectoryDistance = calculateTrajectoryDistance();
+  
+  // Create butterflyParams object for control panel
+  const butterflyParams = {
+    initialSeparation,
+    trajectoryDistance // Include current distance
   };
   
   return (
@@ -226,7 +295,12 @@ const LorenzAttractor = ({ className, style }) => {
         </button>
       </div>
       
-      {/* Control Panel - now includes ML prediction controls */}
+      {/* Visualization type indicator */}
+      <div className={styles.visualizationTypeIndicator}>
+        {visualizationTypes[visualizationType]}
+      </div>
+      
+      {/* Control Panel - now includes visualization-specific controls */}
       <ControlPanel 
         visible={showPanel}
         onClose={togglePanel}
@@ -240,6 +314,8 @@ const LorenzAttractor = ({ className, style }) => {
           predictionSteps
         }}
         onMLParamChange={onMLParamChange}
+        butterflyParams={butterflyParams}
+        onButterflyParamChange={onButterflyParamChange}
       />
     </div>
   );

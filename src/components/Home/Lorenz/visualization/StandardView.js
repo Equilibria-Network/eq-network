@@ -1,27 +1,15 @@
-// src/components/Home/Lorenz_2/visualization/StandardView.js
-/**
- * Standard visualization component for Lorenz attractor.
- * 
- * This component renders the standard single-trajectory Lorenz attractor
- * visualization, serving as the default and simplest view.
- * 
- * Responsibilities:
- * - Render the standard Lorenz attractor trajectory
- * - Use the shared simulation instance from the parent component
- * - Provide the foundation for other visualization types to extend
- * 
- * Dependencies:
- * - utils/useCanvas.js: For rendering the visualization
- */
+// src/components/Home/Lorenz/visualization/StandardView.js
+// Simplified version
 
 import React, { useRef, useEffect } from 'react';
 import { useCanvas } from '../utils/useCanvas';
 import styles from '../LorenzAttractor.module.css';
+import { getCssColor } from '../utils/lorenzUtils';
 
 const StandardView = ({ 
   config = {}, 
   isPlaying = true,
-  simulation, // Get simulation from parent
+  simulation, 
   onPlayPause = () => {}, 
   onReset = () => {} 
 }) => {
@@ -30,13 +18,17 @@ const StandardView = ({
   // Extract pointsRef from simulation
   const { pointsRef } = simulation;
   
+  // Get theme color
+  const primaryColor = getCssColor('--ifm-color-primary');
+  
   // Use canvas hook for rendering
   const { canvasRef, drawPoints } = useCanvas(containerRef, {
     config,
     pointsRef,
     colors: {
-      primary: { r: 0, g: 90, b: 200 }  // Blue for standard view
-    }
+      primary: primaryColor  // Theme color
+    },
+    lineWidth: 1.5          // Slightly thicker lines
   });
   
   // Force redraw when simulation state changes

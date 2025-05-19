@@ -1,25 +1,11 @@
+// src/components/Home/Lorenz/utils/useCanvas.js
 /**
  * Custom hook for canvas rendering of the Lorenz attractor.
- * 
- * This hook manages the canvas and rendering of Lorenz attractor trajectories,
- * separating the rendering concerns from simulation logic and UI.
- * 
- * Responsibilities:
- * - Manages canvas sizing and resize handling
- * - Renders primary and secondary trajectories
- * - Renders prediction trajectories with decreasing opacity
- * - Handles different perspective projections
- * - Manages canvas drawing and clearing
- * 
- * Dependencies:
- * - lorenzUtils.js: For projection functions and display configuration
  */
 
-// src/components/Home/Lorenz/utils/useCanvas.js
 import { useRef, useEffect } from 'react';
 import { projectPoint } from './lorenzUtils';
 
-// Export function directly
 export function useCanvas(
   containerRef, 
   {
@@ -29,12 +15,13 @@ export function useCanvas(
     predictionPointsRef = null,
     colors = { 
       primary: { r: 0, g: 59, b: 126 },
-      secondary: { r: 0, g: 180, b: 100 },
-      prediction: { r: 150, g: 150, b: 150 }
+      secondary: { r: 0, g: 0, b: 0 },
+      prediction: { r: 0, g: 0, b: 0 }
     },
     perspective = 'xz',
     showSecondaryTrajectory = false,
-    showPrediction = false
+    showPrediction = false,
+    lineWidth = 1.5
   }
 ) {
   const canvasRef = useRef(null);
@@ -75,13 +62,17 @@ export function useCanvas(
     // Set composition mode for overlapping lines
     ctx.globalCompositeOperation = 'source-over';
     
+    // Enable anti-aliasing for smoother lines
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    
     // Draw prediction trajectory if enabled
     if (showPrediction && predictionPointsRef && predictionPointsRef.current && predictionPointsRef.current.length > 0) {
       drawPredictionTrajectory(
         ctx, 
         canvas, 
         predictionPointsRef.current,
-        colors.prediction || { r: 150, g: 150, b: 150 },
+        colors.prediction || { r: 0, g: 0, b: 0 },
         perspective
       );
     }
@@ -117,9 +108,9 @@ export function useCanvas(
         config.animation.padding
       );
       
-      // Draw dot at current position
+      // Draw dot at current position with better appearance
       ctx.beginPath();
-      ctx.arc(projected.x, projected.y, 4, 0, 2 * Math.PI);
+      ctx.arc(projected.x, projected.y, 3, 0, 2 * Math.PI);
       ctx.fillStyle = `rgb(${colors.primary.r}, ${colors.primary.g}, ${colors.primary.b})`;
       ctx.fill();
     }
@@ -135,9 +126,9 @@ export function useCanvas(
         config.animation.padding
       );
       
-      // Draw dot at current position
+      // Draw dot at current position with better appearance
       ctx.beginPath();
-      ctx.arc(projected.x, projected.y, 4, 0, 2 * Math.PI);
+      ctx.arc(projected.x, projected.y, 3, 0, 2 * Math.PI);
       ctx.fillStyle = `rgb(${colors.secondary.r}, ${colors.secondary.g}, ${colors.secondary.b})`;
       ctx.fill();
     }
@@ -148,6 +139,11 @@ export function useCanvas(
     if (!points || points.length === 0) return;
     
     ctx.beginPath();
+    
+    // Set line style for high quality
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
     
     points.forEach((point, i) => {
       const projected = projectPoint(
@@ -162,7 +158,6 @@ export function useCanvas(
       const opacity = progress < 0.1 ? progress * 10 : 1;
       
       ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
-      ctx.lineWidth = 1;
       
       if (i === 0) {
         ctx.moveTo(projected.x, projected.y);
@@ -183,6 +178,11 @@ export function useCanvas(
     
     let prevX, prevY;
     
+    // Set better line style
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
     // Draw each prediction segment with decreasing opacity
     points.forEach((point, i) => {
       const projected = projectPoint(
@@ -201,7 +201,6 @@ export function useCanvas(
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(projected.x, projected.y);
         ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
-        ctx.lineWidth = 1;
         ctx.stroke();
       }
       
@@ -235,6 +234,8 @@ export function useCanvas(
     perspective, 
     showSecondaryTrajectory,
     showPrediction,
+    lineWidth,
+    colors
     // Note: We don't include pointsRef in dependencies as it would cause
     // excessive re-renders. Instead, the animation loop will trigger redraws.
   ]);

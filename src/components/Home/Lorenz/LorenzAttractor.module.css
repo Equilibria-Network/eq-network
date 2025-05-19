@@ -1,5 +1,4 @@
 /* src/components/Home/Lorenz/LorenzAttractor.module.css */
-/* src/components/Home/Lorenz/LorenzAttractor.module.css */
 
 .container {
   width: 100%;
@@ -17,6 +16,9 @@
   height: 100%;
   display: block;
   background: transparent;
+  /* Improve visual quality with anti-aliasing */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .visualizationWrapper {
@@ -24,6 +26,7 @@
   height: 100%;
   cursor: pointer;
   position: relative;
+  overflow: hidden; /* Prevent overflow of canvas during animations */
 }
 
 /* Minimal Controls */
@@ -35,6 +38,14 @@
   margin-top: -40px;
   position: relative;
   z-index: 2;
+  /* Add a subtle gradient background for better visibility */
+  background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+[data-theme='dark'] .controls {
+  background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
 }
 
 /* Unified button style for all buttons */
@@ -66,19 +77,6 @@
   background: var(--ifm-color-primary-darker);
 }
 
-/* Prediction endpoint marker - visible in the canvas but not obtrusive */
-.predictionEndpoint {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 120, 80, 0.9);
-  box-shadow: 0 0 10px rgba(255, 120, 80, 0.6);
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  pointer-events: none;
-}
-
 /* Dark mode adjustments */
 [data-theme='dark'] .button, 
 [data-theme='dark'] .navButton {
@@ -100,4 +98,30 @@
     width: 32px;
     height: 32px;
   }
+}
+
+/* High-quality rendering adjustments */
+@media (min-resolution: 2dppx) {
+  /* Specific adjustments for high-DPI displays */
+  .canvas {
+    image-rendering: auto; /* Let the browser decide the best rendering on high-DPI */
+  }
+}
+
+/* Animation for buttons */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--ifm-color-primary-rgb), 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(var(--ifm-color-primary-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--ifm-color-primary-rgb), 0);
+  }
+}
+
+.button:focus, .navButton:focus {
+  outline: none;
+  animation: pulse 1.5s infinite;
 }

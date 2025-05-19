@@ -17,7 +17,8 @@
  */
 
 // src/components/Home/Lorenz/controls/ControlPanel/TabParams.js
-import React from 'react';
+// src/components/Home/Lorenz/controls/ControlPanel/TabParams.js
+import React, { useState } from 'react';
 import { Info, Sliders } from 'lucide-react';
 import styles from './ControlPanel.module.css';
 import { getAvailablePredictors } from '../../utils/predictors';
@@ -31,6 +32,11 @@ const TabParams = ({
   mlParams = {}, // New parameter for ML-specific params
   onMLParamChange = () => {} // New handler for ML-specific params
 }) => {
+  // Track which parameter is currently being edited directly
+  const [editingParam, setEditingParam] = useState(null);
+  // Store current direct input value
+  const [directInputValue, setDirectInputValue] = useState('');
+  
   // Format number with consistent precision
   const formatNumber = (num, precision = 2) => {
     return Number(num).toFixed(precision);
@@ -40,6 +46,204 @@ const TabParams = ({
   const availablePredictors = visualizationType === 'ml-prediction' 
     ? getAvailablePredictors() 
     : [];
+    
+  // Handle direct input change
+  const handleDirectInputChange = (e) => {
+    setDirectInputValue(e.target.value);
+  };
+  
+  // Handle direct input submit
+  const handleDirectInputSubmit = (param) => {
+    if (directInputValue.trim() === '') return;
+    
+    const value = parseFloat(directInputValue);
+    if (!isNaN(value)) {
+      if (param === 'predictor') {
+        onMLParamChange('predictor', directInputValue);
+      } else if (param === 'steps') {
+        onMLParamChange('steps', value);
+      } else if (param === 'separation') {
+        // This would be implemented when we add initial separation control
+        // onMLParamChange('separation', value);
+      } else {
+        onParamChange(param, value);
+      }
+    }
+    
+    setEditingParam(null);
+    setDirectInputValue('');
+  };
+  
+  // Handle clicking on a parameter value to edit it directly
+  const handleParamClick = (param, currentValue) => {
+    setEditingParam(param);
+    setDirectInputValue(param === 'predictor' ? currentValue : formatNumber(currentValue, 4));
+  };
+  
+  // Handle key press in direct input field
+  const handleKeyPress = (e, param) => {
+    if (e.key === 'Enter') {
+      handleDirectInputSubmit(param);
+    } else if (e.key === 'Escape') {
+      setEditingParam(null);
+      setDirectInputValue('');
+    }
+  };
+  
+  // Render each parameter item
+  const renderParamItem = (name, symbol, value, description, min, max, step, onChange, precision = 2) => {
+    const isEditing = editingParam === name;
+    
+    return (
+      <div className={styles.paramItem}>
+        <div className={styles.paramHeader}>
+          <div className={styles.paramName}>
+            {symbol && <span className={styles.paramSymbol}>{symbol}</span>}
+            <span className={styles.paramFullName}>{name}</span>
+          </div>
+          
+          {isEditing ? (
+            <input
+              type="text"
+              value={directInputValue}
+              onChange={handleDirectInputChange}
+              onBlur={() => handleDirectInputSubmit(name)}
+              onKeyDown={(e) => handleKeyPress(e, name)}
+              className={styles.paramDirectInput}
+              autoFocus
+            />
+          ) : (
+            <div 
+              className={styles.paramValue}
+              onClick={() => handleParamClick(name, value)}
+              title="Click to edit directly"
+            >
+              {formatNumber(value, precision)}
+            </div>
+          )}
+        </div>
+        
+        {isEditMode && !isEditing ? (
+          <div className={styles.paramSlider}>
+            <input 
+              type="range" 
+              min={min} 
+              max={max} 
+              step={step} 
+              value={value} 
+              onChange={(e) => onChange(name, parseFloat(e.target.value))}
+              className={styles.slider}
+            />
+            <div className={styles.sliderRange}>
+              <span>{min}</span>
+              <span>{max}</span>
+            </div>
+          </div>
+        ) : !isEditing ? (
+          <div className={styles.paramInfo}>
+            {description}
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+  
+  // Render visualization-specific parameters first
+  const renderVisualizationSpecificParams = () => {
+    switch (visualizationType) {
+      case 'butterfly-effect':
+        return (
+          <>
+            <div className={styles.paramSectionTitle}>Butterfly Effect Settings</div>
+            {renderParamItem(
+              'separation',
+              null,
+              0.000001, // This would be pulled from actual state when implemented
+              'Initial separation between the two trajectories. Even a tiny difference leads to completely different paths over time.',
+              0.0000001,
+              0.001,
+              0.0000001,
+              () => {}, // This would be implemented when we add the parameter
+              7
+            )}
+            <div className={styles.sectionDivider}></div>
+          </>
+        );
+        
+      case 'ml-prediction':
+        return (
+          <>
+            <div className={styles.paramSectionTitle}>ML Prediction Settings</div>
+            
+            {/* Prediction Algorithm */}
+            <div className={styles.paramItem}>
+              <div className={styles.paramHeader}>
+                <div className={styles.paramName}>
+                  <span className={styles.paramFullName}>prediction algorithm</span>
+                </div>
+                {editingParam === 'predictor' ? (
+                  <input
+                    type="text"
+                    value={directInputValue}
+                    onChange={handleDirectInputChange}
+                    onBlur={() => handleDirectInputSubmit('predictor')}
+                    onKeyDown={(e) => handleKeyPress(e, 'predictor')}
+                    className={styles.paramDirectInput}
+                    autoFocus
+                  />
+                ) : (
+                  <div 
+                    className={styles.paramValue}
+                    onClick={() => handleParamClick('predictor', availablePredictors.find(p => p.id === mlParams.predictorId)?.name || 'RK4')}
+                    title="Click to select algorithm"
+                  >
+                    {availablePredictors.find(p => p.id === mlParams.predictorId)?.name || 'RK4'}
+                  </div>
+                )}
+              </div>
+              
+              {isEditMode && !editingParam ? (
+                <div className={styles.algorithmSelector}>
+                  <div className={styles.algorithmButtons}>
+                    {availablePredictors.map(predictor => (
+                      <button
+                        key={predictor.id}
+                        className={`${styles.algorithmButton} ${mlParams.predictorId === predictor.id ? styles.activeAlgorithm : ''}`}
+                        onClick={() => onMLParamChange('predictor', predictor.id)}
+                      >
+                        {predictor.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : !editingParam ? (
+                <div className={styles.paramInfo}>
+                  The algorithm used to predict future states of the system. Different methods have varying accuracy and computational efficiency.
+                </div>
+              ) : null}
+            </div>
+            
+            {/* Prediction Steps */}
+            {renderParamItem(
+              'steps',
+              null,
+              mlParams.predictionSteps || 50,
+              'How far into the future to predict. In chaotic systems like this, predictions become increasingly unreliable as the horizon increases.',
+              10,
+              200,
+              10,
+              (_, value) => onMLParamChange('steps', value),
+              0
+            )}
+            
+            <div className={styles.sectionDivider}></div>
+          </>
+        );
+        
+      default:
+        return null;
+    }
+  };
   
   return (
     <div className={styles.tabContent}>
@@ -47,7 +251,7 @@ const TabParams = ({
         <div className={styles.paramTitle}>
           <div className={styles.sectionTitle}>System Parameters</div>
           <p className={styles.paramDescription}>
-            Control the behavior of the Lorenz system
+            {isEditMode ? 'Click on values to edit directly or use sliders' : 'Control the behavior of the Lorenz system'}
           </p>
         </div>
         
@@ -72,272 +276,85 @@ const TabParams = ({
       </div>
       
       <div className={styles.paramsContainer}>
-        {/* Parameter: Sigma */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramSymbol}>σ</span>
-              <span className={styles.paramFullName}>sigma</span>
-            </div>
-            <div className={styles.paramValue}>{formatNumber(systemParams.sigma, 2)}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="1" 
-                max="20" 
-                step="0.1" 
-                value={systemParams.sigma} 
-                onChange={(e) => onParamChange('sigma', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>1</span>
-                <span>20</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Controls fluid viscosity and mixing rate. Higher values create more turbulence and faster mixing.
-            </div>
-          )}
-        </div>
+        {/* Render visualization-specific parameters first */}
+        {renderVisualizationSpecificParams()}
         
-        {/* Parameter: Rho */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramSymbol}>ρ</span>
-              <span className={styles.paramFullName}>rho</span>
-            </div>
-            <div className={styles.paramValue}>{formatNumber(systemParams.rho, 2)}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="0.1" 
-                max="50" 
-                step="0.1" 
-                value={systemParams.rho} 
-                onChange={(e) => onParamChange('rho', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>0.1</span>
-                <span>50</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Energy input parameter. The critical value of 24.74 is a bifurcation point where the system transitions to chaotic behavior.
-            </div>
-          )}
-        </div>
+        {/* Standard system parameters */}
+        <div className={styles.paramSectionTitle}>System Parameters</div>
         
-        {/* Parameter: Beta */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramSymbol}>β</span>
-              <span className={styles.paramFullName}>beta</span>
-            </div>
-            <div className={styles.paramValue}>{formatNumber(systemParams.beta, 2)}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="0.5" 
-                max="10" 
-                step="0.1" 
-                value={systemParams.beta} 
-                onChange={(e) => onParamChange('beta', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>0.5</span>
-                <span>10</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Determines spatial scaling. The classic value of 8/3 (≈2.67) creates the iconic butterfly shape of the Lorenz attractor.
-            </div>
-          )}
-        </div>
+        {/* Sigma */}
+        {renderParamItem(
+          'sigma',
+          'σ',
+          systemParams.sigma,
+          'Controls fluid viscosity and mixing rate. Higher values create more turbulence and faster mixing.',
+          1,
+          20,
+          0.1,
+          onParamChange
+        )}
         
-        {/* Parameter: Time Step */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramSymbol}>dt</span>
-              <span className={styles.paramFullName}>time step</span>
-            </div>
-            <div className={styles.paramValue}>{formatNumber(systemParams.dt, 4)}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="0.0001" 
-                max="0.01" 
-                step="0.0001" 
-                value={systemParams.dt} 
-                onChange={(e) => onParamChange('dt', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>0.0001</span>
-                <span>0.01</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Integration time step. Smaller values produce more accurate simulations but run slower.
-            </div>
-          )}
-        </div>
+        {/* Rho */}
+        {renderParamItem(
+          'rho',
+          'ρ',
+          systemParams.rho,
+          'Energy input parameter. The critical value of 24.74 is a bifurcation point where the system transitions to chaotic behavior.',
+          0.1,
+          50,
+          0.1,
+          onParamChange
+        )}
         
-        {/* Parameter: Noise */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramFullName}>noise</span>
-            </div>
-            <div className={styles.paramValue}>{formatNumber(systemParams.noise, 6)}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="0" 
-                max="0.001" 
-                step="0.00001" 
-                value={systemParams.noise} 
-                onChange={(e) => onParamChange('noise', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>0</span>
-                <span>0.001</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Random fluctuation magnitude that simulates small perturbations found in real-world systems.
-            </div>
-          )}
-        </div>
+        {/* Beta */}
+        {renderParamItem(
+          'beta',
+          'β',
+          systemParams.beta,
+          'Determines spatial scaling. The classic value of 8/3 (≈2.67) creates the iconic butterfly shape of the Lorenz attractor.',
+          0.5,
+          10,
+          0.1,
+          onParamChange
+        )}
         
-        {/* Parameter: Points Per Frame */}
-        <div className={styles.paramItem}>
-          <div className={styles.paramHeader}>
-            <div className={styles.paramName}>
-              <span className={styles.paramFullName}>points per frame</span>
-            </div>
-            <div className={styles.paramValue}>{systemParams.pointsPerFrame || 1}</div>
-          </div>
-          
-          {isEditMode ? (
-            <div className={styles.paramSlider}>
-              <input 
-                type="range" 
-                min="1" 
-                max="5" 
-                step="1" 
-                value={systemParams.pointsPerFrame || 1} 
-                onChange={(e) => onParamChange('pointsPerFrame', parseInt(e.target.value))}
-                className={styles.slider}
-              />
-              <div className={styles.sliderRange}>
-                <span>1</span>
-                <span>5</span>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.paramInfo}>
-              Animation speed - number of points calculated per frame. Higher values make the simulation run faster.
-            </div>
-          )}
-        </div>
+        {/* Time Step */}
+        {renderParamItem(
+          'dt',
+          'dt',
+          systemParams.dt,
+          'Integration time step. Smaller values produce more accurate simulations but run slower.',
+          0.0001,
+          0.01,
+          0.0001,
+          onParamChange,
+          4
+        )}
         
-        {/* ML Prediction specific parameters */}
-        {visualizationType === 'ml-prediction' && (
-          <>
-            <div className={styles.sectionDivider}></div>
-            <div className={styles.paramSectionTitle}>ML Prediction Settings</div>
-            
-            {/* Parameter: Prediction Algorithm */}
-            <div className={styles.paramItem}>
-              <div className={styles.paramHeader}>
-                <div className={styles.paramName}>
-                  <span className={styles.paramFullName}>prediction algorithm</span>
-                </div>
-                <div className={styles.paramValue}>
-                  {availablePredictors.find(p => p.id === mlParams.predictorId)?.name || 'RK4'}
-                </div>
-              </div>
-              
-              {isEditMode ? (
-                <div className={styles.algorithmSelector}>
-                  <div className={styles.algorithmButtons}>
-                    {availablePredictors.map(predictor => (
-                      <button
-                        key={predictor.id}
-                        className={`${styles.algorithmButton} ${mlParams.predictorId === predictor.id ? styles.activeAlgorithm : ''}`}
-                        onClick={() => onMLParamChange('predictor', predictor.id)}
-                      >
-                        {predictor.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className={styles.paramInfo}>
-                  The algorithm used to predict future states of the system. Different methods have varying accuracy and computational efficiency.
-                </div>
-              )}
-            </div>
-            
-            {/* Parameter: Prediction Steps */}
-            <div className={styles.paramItem}>
-              <div className={styles.paramHeader}>
-                <div className={styles.paramName}>
-                  <span className={styles.paramFullName}>prediction steps</span>
-                </div>
-                <div className={styles.paramValue}>{mlParams.predictionSteps || 50}</div>
-              </div>
-              
-              {isEditMode ? (
-                <div className={styles.paramSlider}>
-                  <input 
-                    type="range" 
-                    min="10" 
-                    max="200" 
-                    step="10" 
-                    value={mlParams.predictionSteps || 50} 
-                    onChange={(e) => onMLParamChange('steps', parseInt(e.target.value))}
-                    className={styles.slider}
-                  />
-                  <div className={styles.sliderRange}>
-                    <span>10</span>
-                    <span>200</span>
-                  </div>
-                </div>
-              ) : (
-                <div className={styles.paramInfo}>
-                  How far into the future to predict. In chaotic systems like this, predictions become increasingly unreliable as the horizon increases.
-                </div>
-              )}
-            </div>
-          </>
+        {/* Noise */}
+        {renderParamItem(
+          'noise',
+          null,
+          systemParams.noise,
+          'Random fluctuation magnitude that simulates small perturbations found in real-world systems.',
+          0,
+          0.001,
+          0.00001,
+          onParamChange,
+          6
+        )}
+        
+        {/* Points Per Frame */}
+        {renderParamItem(
+          'pointsPerFrame',
+          null,
+          systemParams.pointsPerFrame || 1,
+          'Animation speed - number of points calculated per frame. Higher values make the simulation run faster.',
+          1,
+          5,
+          1,
+          onParamChange,
+          0
         )}
         
         {/* Presets section - shown only in edit mode */}

@@ -1,31 +1,11 @@
-// src/components/Home/Lorenz_2/visualization/MLPrediction.js
-/**
- * Machine Learning Prediction visualization for Lorenz attractor.
- * 
- * This component shows the Lorenz attractor with an additional "shadow"
- * trajectory that represents ML-based prediction of future system states.
- * The prediction becomes less accurate the further into the future it goes,
- * visually demonstrating the limits of prediction in chaotic systems.
- * 
- * Responsibilities:
- * - Simulate the actual Lorenz system trajectory
- * - Generate predictions based on selected algorithm
- * - Visualize both the actual and predicted trajectories
- * - Allow users to select prediction algorithms
- * - Show prediction accuracy metrics
- * 
- * Dependencies:
- * - utils/lorenzUtils.js: For trajectory calculations
- * - utils/predictors.js: For prediction algorithms
- * - utils/useCanvas.js: For rendering the visualization
- */
-
 // src/components/Home/Lorenz/visualization/MLPrediction.js
+// Simplified version
+
 import React, { useRef, useState, useEffect } from 'react';
 import { useCanvas } from '../utils/useCanvas';
 import styles from '../LorenzAttractor.module.css';
 import { getAvailablePredictors, getAllPredictors } from '../utils/predictors';
-import { projectPoint } from '../utils/lorenzUtils';
+import { getCssColor } from '../utils/lorenzUtils';
 
 const MLPrediction = ({ 
   config, 
@@ -39,10 +19,17 @@ const MLPrediction = ({
   // Extract values from shared simulation
   const { pointsRef, currentPoint, currentRates } = simulation;
   
+  // Check for dark theme
+  const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+  
+  // Get theme color
+  const primaryColor = getCssColor('--ifm-color-primary');
+  const predictionColor = isDarkTheme 
+    ? { r: 255, g: 255, b: 255 } // White in dark mode
+    : { r: 0, g: 0, b: 0 };      // Black in light mode
+  
   // Local state for prediction rendering
   const [predictionStepSize, setPredictionStepSize] = useState(1.0);
-  const [endpointMarkerPosition, setEndpointMarkerPosition] = useState({ x: 0, y: 0 });
-  const [showEndpointMarker, setShowEndpointMarker] = useState(false);
   const [predictionPoints, setPredictionPoints] = useState([]);
   
   // Get current predictor
@@ -76,28 +63,6 @@ const MLPrediction = ({
     );
     
     setPredictionPoints(predictions);
-    
-    // Calculate the position of the endpoint marker (last prediction point)
-    if (predictions.length > 0 && canvasRef.current) {
-      const endPoint = predictions[predictions.length - 1];
-      const canvas = canvasRef.current;
-      const projectedPoint = projectPoint(
-        endPoint,
-        canvas,
-        config.display.bounds,
-        'xz', // Use the default perspective
-        config.animation.padding
-      );
-      
-      setEndpointMarkerPosition({
-        x: projectedPoint.x,
-        y: projectedPoint.y
-      });
-      
-      setShowEndpointMarker(true);
-    } else {
-      setShowEndpointMarker(false);
-    }
   }, [currentPoint, currentRates, predictorId, predictionSteps, predictionStepSize, config.system]);
   
   // Use canvas hook for rendering
@@ -106,10 +71,11 @@ const MLPrediction = ({
     pointsRef,
     predictionPointsRef: { current: predictionPoints },
     colors: {
-      primary: { r: 0, g: 90, b: 200 },    // Blue for actual trajectory
-      prediction: currentPredictor?.color || { r: 150, g: 150, b: 150 } // Color based on predictor
+      primary: primaryColor,     // Theme color
+      prediction: predictionColor// Black/White based on theme
     },
-    showPrediction: true
+    showPrediction: true,
+    lineWidth: 1.5              // Slightly thicker lines
   });
   
   // Force redraw when simulation or prediction state changes
@@ -120,18 +86,6 @@ const MLPrediction = ({
   return (
     <div ref={containerRef} className={styles.container}>
       <canvas ref={canvasRef} className={styles.canvas} />
-      
-      {/* Prediction endpoint marker */}
-      {showEndpointMarker && (
-        <div 
-          className={styles.predictionEndpoint}
-          style={{
-            left: `${endpointMarkerPosition.x}px`,
-            top: `${endpointMarkerPosition.y}px`
-          }}
-          title={`Prediction endpoint at ${predictionSteps} steps`}
-        />
-      )}
     </div>
   );
 };
