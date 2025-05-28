@@ -41,8 +41,8 @@ const LorenzAttractor = ({ className, style }) => {
   // Panel state
   const [showPanel, setShowPanel] = useState(false);
   
-  // Visualization type
-  const [visualizationType, setVisualizationType] = useState('standard');
+  // Visualization type - DEFAULT TO BUTTERFLY EFFECT
+  const [visualizationType, setVisualizationType] = useState('butterfly-effect');
   
   // ML Prediction state
   const [predictionSteps, setPredictionSteps] = useState(50);
@@ -214,7 +214,22 @@ const LorenzAttractor = ({ className, style }) => {
         
       case 'standard':
       default:
-        return <StandardView {...visualizationProps} />;
+        // COMMENTED OUT - SUPPRESS STANDARD VIEW FOR NOW
+        // return <StandardView {...visualizationProps} />;
+        
+        // Instead, show butterfly effect as fallback
+        const fallbackButterflyConfig = {
+          ...config,
+          butterfly: {
+            initialSeparation: initialSeparation
+          },
+          display: {
+            ...config.display,
+            showSecondaryTrajectory: true
+          }
+        };
+        
+        return <DoubleTrajectory {...visualizationProps} config={fallbackButterflyConfig} />;
     }
   };
   
@@ -295,10 +310,10 @@ const LorenzAttractor = ({ className, style }) => {
         </button>
       </div>
       
-      {/* Visualization type indicator */}
-      <div className={styles.visualizationTypeIndicator}>
+      {/* Visualization type indicator - REMOVED */}
+      {/* <div className={styles.visualizationTypeIndicator}>
         {visualizationTypes[visualizationType]}
-      </div>
+      </div> */}
       
       {/* Control Panel - now includes visualization-specific controls */}
       <ControlPanel 

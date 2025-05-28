@@ -1,0 +1,316 @@
+/* src/components/Research/ResearchCard.module.css */
+.card {
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  transform-origin: center;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+[data-theme='dark'] .card {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-400);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+/* Research Area Badge */
+.researchAreaBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--research-area-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 0 10px 0 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card Header */
+.cardHeader {
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-600);
+  font-weight: 500;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Authors */
+.authors {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+}
+
+/* Abstract */
+.abstract {
+  margin-bottom: 1.5rem;
+}
+
+.abstract p {
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Progress Section */
+.progressSection {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 59, 126, 0.04);
+  border-radius: 8px;
+  border-left: 4px solid var(--research-area-color);
+}
+
+[data-theme='dark'] .progressSection {
+  background: rgba(0, 59, 126, 0.1);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.progressLabel {
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.9rem;
+}
+
+.progressPercentage {
+  font-weight: 700;
+  color: var(--research-area-color);
+  font-size: 1.1rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--research-area-color), var(--ifm-color-primary-lighter));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.currentStage {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  font-weight: 500;
+}
+
+/* Metadata */
+.metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.timeRemaining {
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Expanded Content */
+.expandedContent {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Keywords */
+.keywords {
+  margin-bottom: 1.5rem;
+}
+
+.keywords h5 {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.keywordTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keywordTag {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-700);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .keywordTag {
+  background: var(--ifm-color-emphasis-800);
+  color: var(--ifm-color-emphasis-300);
+  border-color: var(--ifm-color-emphasis-600);
+}
+
+/* Collaborators */
+.collaborators {
+  margin-bottom: 1.5rem;
+}
+
+.collaborators h5 {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.collaborators ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.collaborators li {
+  padding: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Publication Info */
+.publicationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.venue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.funding {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.fundingLabel {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+/* Expand Button */
+.expandButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.expandButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .expandButton {
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-primary-lighter);
+}
+
+[data-theme='dark'] .expandButton:hover {
+  background: var(--ifm-color-emphasis-800);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+  }
+  
+  .metadata {
+    gap: 0.75rem;
+  }
+  
+  .metaItem {
+    flex-wrap: wrap;
+  }
+  
+  .keywordTags {
+    gap: 0.25rem;
+  }
+  
+  .keywordTag {
+    font-size: 0.75rem;
+  }
+}

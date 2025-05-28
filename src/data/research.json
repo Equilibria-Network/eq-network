@@ -1,0 +1,342 @@
+{
+  "papers": [
+    {
+      "id": "category-theory-governance",
+      "title": "Category Theory Foundations for AI Governance Systems",
+      "subtitle": "A Mathematical Framework for Multi-Agent Coordination",
+      "authors": [
+        "Dr. Sarah Chen",
+        "Prof. Michael Barr",
+        "Jonas Hallgren"
+      ],
+      "abstract": "We develop a categorical framework for understanding information flow and coordination mechanisms in AI governance systems, providing formal tools for analyzing emergent properties and intervention points in complex multi-agent environments.",
+      "keywords": ["category theory", "AI governance", "multi-agent systems", "formal methods"],
+      "researchArea": "Mathematical Foundations",
+      "startDate": "2024-08-15",
+      "expectedCompletion": "2025-06-30",
+      "status": "in-progress",
+      "currentStage": "analysis",
+      "progressStages": [
+        {
+          "id": "literature-review",
+          "name": "Literature Review",
+          "description": "Comprehensive survey of existing work",
+          "status": "completed",
+          "completedDate": "2024-10-15",
+          "duration": 60,
+          "deliverables": ["survey document", "bibliography"]
+        },
+        {
+          "id": "framework-development",
+          "name": "Framework Development",
+          "description": "Core mathematical framework construction",
+          "status": "completed",
+          "completedDate": "2024-12-20",
+          "duration": 65,
+          "deliverables": ["formal definitions", "proof sketches"]
+        },
+        {
+          "id": "analysis",
+          "name": "Theoretical Analysis",
+          "description": "Deep analysis and theorem proving",
+          "status": "active",
+          "progress": 75,
+          "duration": 90,
+          "deliverables": ["main theorems", "proofs", "examples"]
+        },
+        {
+          "id": "applications",
+          "name": "Applications & Case Studies",
+          "description": "Real-world applications and validation",
+          "status": "planned",
+          "duration": 45,
+          "deliverables": ["case studies", "implementation examples"]
+        },
+        {
+          "id": "writing",
+          "name": "Paper Writing",
+          "description": "Manuscript preparation and revision",
+          "status": "planned",
+          "duration": 60,
+          "deliverables": ["full manuscript", "submission materials"]
+        },
+        {
+          "id": "review",
+          "name": "Review & Submission",
+          "description": "Peer review and publication process",
+          "status": "planned",
+          "duration": 120,
+          "deliverables": ["submitted paper", "reviewer responses"]
+        }
+      ],
+      "collaborators": [
+        {
+          "name": "University College London",
+          "type": "academic",
+          "role": "Theoretical foundations"
+        },
+        {
+          "name": "Center for AI Safety",
+          "type": "research-institute",
+          "role": "Safety applications"
+        }
+      ],
+      "targetVenue": "Journal of Mathematical Structures in Computer Science",
+      "fundingSource": "Internal Research Fund",
+      "publicationStatus": "in-preparation"
+    },
+    {
+      "id": "morphological-computation-social",
+      "title": "Morphological Computation Principles in Social Coordination Systems",
+      "subtitle": "From Biological Self-Organization to AI Governance",
+      "authors": [
+        "Dr. Elena Santos",
+        "Dr. James Wong",
+        "Markov Grey"
+      ],
+      "abstract": "Investigating how principles of morphological computation from developmental biology can inform the design of robust, self-organizing AI governance systems that maintain coherence across multiple scales without centralized control.",
+      "keywords": ["morphological computation", "self-organization", "multi-scale systems", "bio-inspired AI"],
+      "researchArea": "Biological Computation",
+      "startDate": "2024-09-01",
+      "expectedCompletion": "2025-08-15",
+      "status": "in-progress",
+      "currentStage": "framework-development",
+      "progressStages": [
+        {
+          "id": "biological-analysis",
+          "name": "Biological Systems Study",
+          "description": "Analysis of natural morphological computation",
+          "status": "completed",
+          "completedDate": "2024-12-01",
+          "duration": 90,
+          "deliverables": ["biological survey", "mechanism catalog"]
+        },
+        {
+          "id": "framework-development",
+          "name": "Computational Framework",
+          "description": "Translation to computational principles",
+          "status": "active",
+          "progress": 60,
+          "duration": 75,
+          "deliverables": ["computational model", "algorithms"]
+        },
+        {
+          "id": "social-mapping",
+          "name": "Social System Mapping",
+          "description": "Application to social coordination",
+          "status": "planned",
+          "duration": 60,
+          "deliverables": ["social models", "coordination protocols"]
+        },
+        {
+          "id": "validation",
+          "name": "Validation & Testing",
+          "description": "Empirical validation of principles",
+          "status": "planned",
+          "duration": 45,
+          "deliverables": ["test results", "validation report"]
+        },
+        {
+          "id": "manuscript",
+          "name": "Manuscript Preparation",
+          "description": "Writing and revision process",
+          "status": "planned",
+          "duration": 50,
+          "deliverables": ["complete manuscript"]
+        }
+      ],
+      "collaborators": [
+        {
+          "name": "Tufts University (Levin Lab)",
+          "type": "academic",
+          "role": "Biological expertise"
+        },
+        {
+          "name": "Santa Fe Institute",
+          "type": "research-institute",
+          "role": "Complex systems theory"
+        }
+      ],
+      "targetVenue": "Nature Machine Intelligence",
+      "fundingSource": "NSF Grant",
+      "publicationStatus": "in-preparation"
+    },
+    {
+      "id": "network-resilience-dynamics",
+      "title": "Emergent Resilience in Decentralized Information Networks",
+      "subtitle": "Immune-Inspired Approaches to Network Defense",
+      "authors": [
+        "Aaron Halpern",
+        "Dr. Lisa Chen",
+        "Jonas Hallgren"
+      ],
+      "abstract": "We develop a framework for understanding how information networks can develop immune-like responses to manipulation and attack, drawing parallels between biological immune systems and distributed consensus mechanisms.",
+      "keywords": ["network resilience", "immune systems", "decentralized consensus", "information integrity"],
+      "researchArea": "Network Security",
+      "startDate": "2024-11-15",
+      "expectedCompletion": "2025-09-30",
+      "status": "in-progress",
+      "currentStage": "literature-review",
+      "progressStages": [
+        {
+          "id": "literature-review",
+          "name": "Literature & Threat Analysis",
+          "description": "Survey of network vulnerabilities and defenses",
+          "status": "active",
+          "progress": 80,
+          "duration": 45,
+          "deliverables": ["threat model", "defense survey"]
+        },
+        {
+          "id": "immune-modeling",
+          "name": "Immune System Modeling",
+          "description": "Mathematical models of biological immunity",
+          "status": "planned",
+          "duration": 60,
+          "deliverables": ["immune models", "adaptation mechanisms"]
+        },
+        {
+          "id": "network-application",
+          "name": "Network Application",
+          "description": "Adaptation to information networks",
+          "status": "planned",
+          "duration": 70,
+          "deliverables": ["network protocols", "defense algorithms"]
+        },
+        {
+          "id": "simulation",
+          "name": "Simulation & Testing",
+          "description": "Large-scale network simulations",
+          "status": "planned",
+          "duration": 55,
+          "deliverables": ["simulation results", "performance analysis"]
+        },
+        {
+          "id": "writing",
+          "name": "Paper Composition",
+          "description": "Manuscript writing and review",
+          "status": "planned",
+          "duration": 40,
+          "deliverables": ["final manuscript"]
+        }
+      ],
+      "collaborators": [
+        {
+          "name": "MIT CSAIL",
+          "type": "academic",
+          "role": "Network security expertise"
+        },
+        {
+          "name": "Protocol Labs",
+          "type": "industry",
+          "role": "Decentralized protocols"
+        }
+      ],
+      "targetVenue": "IEEE Transactions on Network Science and Engineering",
+      "fundingSource": "Industry Partnership",
+      "publicationStatus": "early-stage"
+    },
+    {
+      "id": "collective-intelligence-metrics",
+      "title": "Multi-Scale Metrics for Collective Intelligence Assessment",
+      "subtitle": "Beyond Performance: Measuring Emergent Capabilities",
+      "authors": [
+        "Markov Grey",
+        "Dr. Sarah Chen",
+        "Aaron Halpern"
+      ],
+      "abstract": "Developing comprehensive frameworks for measuring collective intelligence that capture both immediate performance and deeper systemic properties like adaptability, robustness, and emergent creativity in human-AI collaborative systems.",
+      "keywords": ["collective intelligence", "measurement frameworks", "emergent properties", "human-AI collaboration"],
+      "researchArea": "Measurement & Evaluation",
+      "startDate": "2024-10-01",
+      "expectedCompletion": "2025-07-15",
+      "status": "in-progress",
+      "currentStage": "validation",
+      "progressStages": [
+        {
+          "id": "framework-design",
+          "name": "Measurement Framework",
+          "description": "Core metrics and measurement protocols",
+          "status": "completed",
+          "completedDate": "2024-12-15",
+          "duration": 75,
+          "deliverables": ["metrics framework", "protocols"]
+        },
+        {
+          "id": "validation",
+          "name": "Empirical Validation",
+          "description": "Testing metrics on real systems",
+          "status": "active",
+          "progress": 45,
+          "duration": 90,
+          "deliverables": ["validation studies", "case analyses"]
+        },
+        {
+          "id": "refinement",
+          "name": "Framework Refinement",
+          "description": "Iterative improvement based on results",
+          "status": "planned",
+          "duration": 30,
+          "deliverables": ["refined metrics", "best practices"]
+        },
+        {
+          "id": "tools",
+          "name": "Implementation Tools",
+          "description": "Practical measurement tools and software",
+          "status": "planned",
+          "duration": 45,
+          "deliverables": ["software tools", "user guides"]
+        },
+        {
+          "id": "publication",
+          "name": "Publication Preparation",
+          "description": "Manuscript and supplementary materials",
+          "status": "planned",
+          "duration": 35,
+          "deliverables": ["complete manuscript", "tool documentation"]
+        }
+      ],
+      "collaborators": [
+        {
+          "name": "Stanford HAI",
+          "type": "academic",
+          "role": "Human-AI interaction"
+        },
+        {
+          "name": "Anthropic",
+          "type": "industry",
+          "role": "AI system evaluation"
+        }
+      ],
+      "targetVenue": "Proceedings of the ACM on Human-Computer Interaction",
+      "fundingSource": "Mixed Funding",
+      "publicationStatus": "in-preparation"
+    }
+  ],
+  "researchAreas": [
+    {
+      "id": "mathematical-foundations",
+      "name": "Mathematical Foundations",
+      "description": "Formal mathematical frameworks for complex systems",
+      "color": "#003B7E"
+    },
+    {
+      "id": "biological-computation",
+      "name": "Biological Computation",
+      "description": "Bio-inspired approaches to coordination and computation",
+      "color": "#0055C4"
+    },
+    {
+      "id": "network-security",
+      "name": "Network Security",
+      "description": "Resilience and security in distributed systems",
+      "color": "#89CFF0"
+    },
+    {
+      "id": "measurement-evaluation",
+      "name": "Measurement & Evaluation",
+      "description": "Frameworks for assessing complex system properties",
+      "color": "#4AB3F4"
+    }
+  ]
+}

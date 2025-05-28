@@ -1,5 +1,5 @@
 // src/components/Home/Lorenz/visualization/DoubleTrajectory.js
-// Simplified version
+// Updated with better color scheme for butterfly effect
 
 import React, { useRef, useEffect } from 'react';
 import { useCanvas } from '../utils/useCanvas';
@@ -18,12 +18,14 @@ const DoubleTrajectory = ({
   // Extract data from simulation
   const { pointsRef, secondaryPointsRef, initialSeed, resetSimulation } = simulation;
   
-  // Get theme colors
+  // Get theme colors with improved secondary color
   const primaryColor = getCssColor('--ifm-color-primary');
   const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+  
+  // Better secondary color scheme - vibrant green that complements the blue
   const secondaryColor = isDarkTheme 
-    ? { r: 255, g: 255, b: 255 } // White in dark mode
-    : { r: 0, g: 0, b: 0 };      // Black in light mode
+    ? { r: 34, g: 197, b: 94 }   // Emerald green for dark mode (emerald-500)
+    : { r: 16, g: 185, b: 129 }; // Emerald green for light mode (emerald-500)
   
   // Custom config for butterfly effect visualization
   const butterflyConfig = {
@@ -68,17 +70,17 @@ const DoubleTrajectory = ({
     }
   }, [butterflyConfig.butterfly.initialSeparation]);
   
-  // Use canvas hook for rendering
+  // Use canvas hook for rendering with improved colors
   const { canvasRef, drawPoints } = useCanvas(containerRef, {
     config: butterflyConfig,
     pointsRef,
     secondaryPointsRef,
     colors: {
-      primary: primaryColor,       // Theme color
-      secondary: secondaryColor    // Black/White based on theme
+      primary: primaryColor,       // Theme blue color
+      secondary: secondaryColor    // Vibrant emerald green
     },
     showSecondaryTrajectory: true,
-    lineWidth: 1.5                 // Slightly thicker lines
+    lineWidth: 1.8                 // Slightly thicker lines for better visibility
   });
   
   // Force redraw when simulation state changes

@@ -1,0 +1,181 @@
+/* src/components/Research/ResearchList.module.css */
+.section {
+  padding: 3rem 0 6rem;
+  position: relative;
+}
+
+.container {
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.searchContainer {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ifm-color-emphasis-600);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 59, 126, 0.1);
+}
+
+[data-theme='dark'] .searchInput {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-emphasis-300);
+}
+
+.filterContainer,
+.sortContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterIcon {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.filterSelect,
+.sortSelect {
+  padding: 10px 12px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterSelect:focus,
+.sortSelect:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 59, 126, 0.1);
+}
+
+[data-theme='dark'] .filterSelect,
+[data-theme='dark'] .sortSelect {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-emphasis-300);
+}
+
+/* Results info */
+.resultsInfo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultsCount {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Papers grid - full width cards */
+.papersGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.emptyState p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.clearFiltersButton {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clearFiltersButton:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .papersGrid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .searchContainer {
+    min-width: auto;
+  }
+  
+  .filterContainer,
+  .sortContainer {
+    justify-content: center;
+  }
+  
+  .papersGrid {
+    gap: 1rem;
+  }
+  
+  .resultsInfo {
+    text-align: center;
+  }
+}

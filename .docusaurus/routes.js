@@ -44,7 +44,7 @@ export default [
   },
   {
     path: '/blog',
-    component: ComponentCreator('/blog', '100'),
+    component: ComponentCreator('/blog', 'e3c'),
     exact: true
   },
   {
@@ -69,17 +69,17 @@ export default [
   },
   {
     path: '/blog/tags/collective-intelligence',
-    component: ComponentCreator('/blog/tags/collective-intelligence', '99e'),
+    component: ComponentCreator('/blog/tags/collective-intelligence', 'd5f'),
     exact: true
   },
   {
     path: '/blog/tags/complexity',
-    component: ComponentCreator('/blog/tags/complexity', '250'),
+    component: ComponentCreator('/blog/tags/complexity', '65a'),
     exact: true
   },
   {
     path: '/blog/tags/simulation',
-    component: ComponentCreator('/blog/tags/simulation', '027'),
+    component: ComponentCreator('/blog/tags/simulation', '3f2'),
     exact: true
   },
   {
@@ -95,6 +95,11 @@ export default [
   {
     path: '/projects',
     component: ComponentCreator('/projects', '05c'),
+    exact: true
+  },
+  {
+    path: '/research',
+    component: ComponentCreator('/research', 'e57'),
     exact: true
   },
   {
