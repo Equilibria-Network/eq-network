@@ -1,0 +1,105 @@
+.researchArea {
+  margin-bottom: 6rem;
+}
+
+.areaHeader {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--area-color);
+  gap: 1rem;
+}
+
+.areaIndicator {
+  width: 12px;
+  height: 12px;
+  background-color: var(--area-color);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+.areaContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.areaTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--area-color);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.areaDescription {
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.projectCount {
+  background-color: var(--area-color-alpha);
+  color: var(--area-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  height: fit-content;
+  flex-shrink: 0;
+}
+
+.papersGrid {
+  display: grid;
+  gap: 2rem;
+}
+
+.papersGridSingle {
+  grid-template-columns: 1fr;
+}
+
+.papersGridMultiple {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .papersGridMultiple {
+    grid-template-columns: 1fr;
+  }
+  
+  .areaTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .researchArea {
+    margin-bottom: 4rem;
+  }
+  
+  .areaHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .areaIndicator {
+    margin-top: 0;
+  }
+  
+  .areaTitle {
+    font-size: 1.8rem;
+  }
+  
+  .areaDescription {
+    font-size: 1rem;
+  }
+  
+  .projectCount {
+    align-self: flex-start;
+  }
+}

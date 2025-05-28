@@ -1,342 +1,298 @@
 {
   "papers": [
     {
-      "id": "category-theory-governance",
-      "title": "Category Theory Foundations for AI Governance Systems",
-      "subtitle": "A Mathematical Framework for Multi-Agent Coordination",
-      "authors": [
-        "Dr. Sarah Chen",
-        "Prof. Michael Barr",
-        "Jonas Hallgren"
-      ],
-      "abstract": "We develop a categorical framework for understanding information flow and coordination mechanisms in AI governance systems, providing formal tools for analyzing emergent properties and intervention points in complex multi-agent environments.",
-      "keywords": ["category theory", "AI governance", "multi-agent systems", "formal methods"],
+      "id": "langlands-ci",
+      "title": "Towards a Langlands Program for Collective Intelligence",
       "researchArea": "Mathematical Foundations",
-      "startDate": "2024-08-15",
-      "expectedCompletion": "2025-06-30",
-      "status": "in-progress",
-      "currentStage": "analysis",
+      "authors": ["Jonas Hallgren"],
+      "keyQuestion": "Can a common mathematical language, based on graph transformations and variational information dynamics, unify the study of collective intelligence across diverse disciplines and reveal fundamental structural correspondences?",
+      "abstract": "The study of collective intelligence currently spans multiple disciplines with distinct mathematical tools, from game theory to dynamical systems. This research points towards a unified mathematical framework, inspired by the Langlands Program, to bridge these approaches. We propose that diverse collective intelligence mechanisms—such as markets, networks, and democratic processes—can be expressed as specialized transformations on graph structures. This graph-centric, variational perspective enables compositional modeling of hybrid systems, multi-scale analysis connecting micro-behaviors to macro-patterns, and understanding of system evolution.",
+      "approach": "The project proposes using graph theory to represent CI systems, where system dynamics are expressed as transformations of graph structures. Variational principles (like free energy minimization) are used to understand the drivers of these transformations. The research aims to identify and formalize conjectured mathematical bridges between concepts like game-theoretic equilibria and dynamical system attractors, or micro-scale interactions and macro-patterns.",
+      "image": "/img/research/langlands_1.png",
       "progressStages": [
         {
-          "id": "literature-review",
-          "name": "Literature Review",
-          "description": "Comprehensive survey of existing work",
+          "id": "initial-story",
+          "name": "Initial Story",
           "status": "completed",
-          "completedDate": "2024-10-15",
-          "duration": 60,
-          "deliverables": ["survey document", "bibliography"]
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
         },
         {
-          "id": "framework-development",
-          "name": "Framework Development",
-          "description": "Core mathematical framework construction",
+          "id": "internal-review", 
+          "name": "Internal Review",
           "status": "completed",
-          "completedDate": "2024-12-20",
-          "duration": 65,
-          "deliverables": ["formal definitions", "proof sketches"]
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
         },
         {
-          "id": "analysis",
-          "name": "Theoretical Analysis",
-          "description": "Deep analysis and theorem proving",
+          "id": "external-review",
+          "name": "External Review",
           "status": "active",
           "progress": 75,
-          "duration": 90,
-          "deliverables": ["main theorems", "proofs", "examples"]
+          "type": "overleaf",
+          "link": "https://www.overleaf.com/project/..."
         },
         {
-          "id": "applications",
-          "name": "Applications & Case Studies",
-          "description": "Real-world applications and validation",
+          "id": "preprint",
+          "name": "Preprint",
           "status": "planned",
-          "duration": 45,
-          "deliverables": ["case studies", "implementation examples"]
+          "progress": 0,
+          "type": "arxiv",
+          "link": null
         },
         {
-          "id": "writing",
-          "name": "Paper Writing",
-          "description": "Manuscript preparation and revision",
+          "id": "beyond",
+          "name": "Journal",
           "status": "planned",
-          "duration": 60,
-          "deliverables": ["full manuscript", "submission materials"]
-        },
-        {
-          "id": "review",
-          "name": "Review & Submission",
-          "description": "Peer review and publication process",
-          "status": "planned",
-          "duration": 120,
-          "deliverables": ["submitted paper", "reviewer responses"]
+          "progress": 0,
+          "type": "journal",
+          "link": null
         }
       ],
-      "collaborators": [
+      "relatedResearch": [
         {
-          "name": "University College London",
-          "type": "academic",
-          "role": "Theoretical foundations"
+          "title": "Cooperate or Collapse: Emergence of Sustainable Cooperation in a Society of LLM Agents",
+          "authors": "Giorgio Piatti, Zhijing Jin, Max Kleiman-Weiner, Bernhard Schölkopf, Mrinmaya Sachan, Rada Mihalcea",
+          "year": "2024",
+          "venue": "NeurIPS 2024",
+          "link": "https://arxiv.org/abs/2404.16698",
+          "platform": "arxiv"
         },
         {
-          "name": "Center for AI Safety",
-          "type": "research-institute",
-          "role": "Safety applications"
+          "title": "Information Geometry and Its Applications",
+          "authors": "Shun-ichi Amari",
+          "year": "2016",
+          "venue": "Springer Tokyo",
+          "link": "https://link.springer.com/book/10.1007/978-4-431-55978-8",
+          "platform": "springer"
+        },
+        {
+          "title": "Designing Ecosystems of Intelligence from First Principles",
+          "authors": "Karl J Friston, Maxwell J D Ramstead, Alex B Kiefer, Alexander Tschantz, Christopher L Buckley, Mahault Albarracin, et al.",
+          "year": "2024",
+          "venue": "Collective Intelligence, 3(1)",
+          "link": "https://arxiv.org/abs/2212.01354",
+          "platform": "arxiv"
         }
-      ],
-      "targetVenue": "Journal of Mathematical Structures in Computer Science",
-      "fundingSource": "Internal Research Fund",
-      "publicationStatus": "in-preparation"
+      ]
     },
     {
-      "id": "morphological-computation-social",
-      "title": "Morphological Computation Principles in Social Coordination Systems",
-      "subtitle": "From Biological Self-Organization to AI Governance",
-      "authors": [
-        "Dr. Elena Santos",
-        "Dr. James Wong",
-        "Markov Grey"
-      ],
-      "abstract": "Investigating how principles of morphological computation from developmental biology can inform the design of robust, self-organizing AI governance systems that maintain coherence across multiple scales without centralized control.",
-      "keywords": ["morphological computation", "self-organization", "multi-scale systems", "bio-inspired AI"],
-      "researchArea": "Biological Computation",
-      "startDate": "2024-09-01",
-      "expectedCompletion": "2025-08-15",
-      "status": "in-progress",
-      "currentStage": "framework-development",
+      "id": "democratic-resilience",
+      "title": "Democratic Mechanisms Under Pressure: An LLM Simulation Study of Organizational Resilience",
+      "researchArea": "Computational Experiments",
+      "authors": ["Jonas Hallgren"],
+      "keyQuestion": "How do different democratic mechanisms (Predictive Direct, Representative, and Liquid Democracy) compare in maintaining collective utility under varying levels of adversarial pressure, and at what thresholds do they experience catastrophic failure?",
+      "abstract": "Democratic organizations are vulnerable to adversarial capture due to their openness. This research investigates the resilience of three democratic mechanisms—Predictive Direct, Representative, and Liquid Democracy—against such infiltration. Using a novel approach combining agent-based modeling with Large Language Models (LLMs) as cognitive engines, we simulate democratic decision-making in a resource allocation task under varying adversarial pressure. Our findings reveal that all mechanisms are more resilient than game theory predicts, with breakdown occurring at 70-90% adversarial concentration rather than 50-60%.",
+      "approach": "The study employs an agent-based simulation where LLM-powered agents, with varying cognitive resources and goals (aligned or adversarial), participate in one of three democratic mechanisms to make collective resource allocation decisions. Performance is measured by resource accumulation and resilience thresholds.",
+      "image": "/img/research/democratic_resilience_1.jpg",
       "progressStages": [
         {
-          "id": "biological-analysis",
-          "name": "Biological Systems Study",
-          "description": "Analysis of natural morphological computation",
+          "id": "initial-story",
+          "name": "Initial Story",
           "status": "completed",
-          "completedDate": "2024-12-01",
-          "duration": 90,
-          "deliverables": ["biological survey", "mechanism catalog"]
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
         },
         {
-          "id": "framework-development",
-          "name": "Computational Framework",
-          "description": "Translation to computational principles",
-          "status": "active",
-          "progress": 60,
-          "duration": 75,
-          "deliverables": ["computational model", "algorithms"]
-        },
-        {
-          "id": "social-mapping",
-          "name": "Social System Mapping",
-          "description": "Application to social coordination",
-          "status": "planned",
-          "duration": 60,
-          "deliverables": ["social models", "coordination protocols"]
-        },
-        {
-          "id": "validation",
-          "name": "Validation & Testing",
-          "description": "Empirical validation of principles",
-          "status": "planned",
-          "duration": 45,
-          "deliverables": ["test results", "validation report"]
-        },
-        {
-          "id": "manuscript",
-          "name": "Manuscript Preparation",
-          "description": "Writing and revision process",
-          "status": "planned",
-          "duration": 50,
-          "deliverables": ["complete manuscript"]
-        }
-      ],
-      "collaborators": [
-        {
-          "name": "Tufts University (Levin Lab)",
-          "type": "academic",
-          "role": "Biological expertise"
-        },
-        {
-          "name": "Santa Fe Institute",
-          "type": "research-institute",
-          "role": "Complex systems theory"
-        }
-      ],
-      "targetVenue": "Nature Machine Intelligence",
-      "fundingSource": "NSF Grant",
-      "publicationStatus": "in-preparation"
-    },
-    {
-      "id": "network-resilience-dynamics",
-      "title": "Emergent Resilience in Decentralized Information Networks",
-      "subtitle": "Immune-Inspired Approaches to Network Defense",
-      "authors": [
-        "Aaron Halpern",
-        "Dr. Lisa Chen",
-        "Jonas Hallgren"
-      ],
-      "abstract": "We develop a framework for understanding how information networks can develop immune-like responses to manipulation and attack, drawing parallels between biological immune systems and distributed consensus mechanisms.",
-      "keywords": ["network resilience", "immune systems", "decentralized consensus", "information integrity"],
-      "researchArea": "Network Security",
-      "startDate": "2024-11-15",
-      "expectedCompletion": "2025-09-30",
-      "status": "in-progress",
-      "currentStage": "literature-review",
-      "progressStages": [
-        {
-          "id": "literature-review",
-          "name": "Literature & Threat Analysis",
-          "description": "Survey of network vulnerabilities and defenses",
-          "status": "active",
-          "progress": 80,
-          "duration": 45,
-          "deliverables": ["threat model", "defense survey"]
-        },
-        {
-          "id": "immune-modeling",
-          "name": "Immune System Modeling",
-          "description": "Mathematical models of biological immunity",
-          "status": "planned",
-          "duration": 60,
-          "deliverables": ["immune models", "adaptation mechanisms"]
-        },
-        {
-          "id": "network-application",
-          "name": "Network Application",
-          "description": "Adaptation to information networks",
-          "status": "planned",
-          "duration": 70,
-          "deliverables": ["network protocols", "defense algorithms"]
-        },
-        {
-          "id": "simulation",
-          "name": "Simulation & Testing",
-          "description": "Large-scale network simulations",
-          "status": "planned",
-          "duration": 55,
-          "deliverables": ["simulation results", "performance analysis"]
-        },
-        {
-          "id": "writing",
-          "name": "Paper Composition",
-          "description": "Manuscript writing and review",
-          "status": "planned",
-          "duration": 40,
-          "deliverables": ["final manuscript"]
-        }
-      ],
-      "collaborators": [
-        {
-          "name": "MIT CSAIL",
-          "type": "academic",
-          "role": "Network security expertise"
-        },
-        {
-          "name": "Protocol Labs",
-          "type": "industry",
-          "role": "Decentralized protocols"
-        }
-      ],
-      "targetVenue": "IEEE Transactions on Network Science and Engineering",
-      "fundingSource": "Industry Partnership",
-      "publicationStatus": "early-stage"
-    },
-    {
-      "id": "collective-intelligence-metrics",
-      "title": "Multi-Scale Metrics for Collective Intelligence Assessment",
-      "subtitle": "Beyond Performance: Measuring Emergent Capabilities",
-      "authors": [
-        "Markov Grey",
-        "Dr. Sarah Chen",
-        "Aaron Halpern"
-      ],
-      "abstract": "Developing comprehensive frameworks for measuring collective intelligence that capture both immediate performance and deeper systemic properties like adaptability, robustness, and emergent creativity in human-AI collaborative systems.",
-      "keywords": ["collective intelligence", "measurement frameworks", "emergent properties", "human-AI collaboration"],
-      "researchArea": "Measurement & Evaluation",
-      "startDate": "2024-10-01",
-      "expectedCompletion": "2025-07-15",
-      "status": "in-progress",
-      "currentStage": "validation",
-      "progressStages": [
-        {
-          "id": "framework-design",
-          "name": "Measurement Framework",
-          "description": "Core metrics and measurement protocols",
+          "id": "internal-review",
+          "name": "Internal Review",
           "status": "completed",
-          "completedDate": "2024-12-15",
-          "duration": 75,
-          "deliverables": ["metrics framework", "protocols"]
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
         },
         {
-          "id": "validation",
-          "name": "Empirical Validation",
-          "description": "Testing metrics on real systems",
+          "id": "external-review",
+          "name": "External Review",
+          "status": "completed",
+          "progress": 100,
+          "type": "overleaf",
+          "link": "https://www.overleaf.com/project/..."
+        },
+        {
+          "id": "preprint",
+          "name": "Preprint",
+          "status": "completed",
+          "progress": 100,
+          "type": "arxiv",
+          "link": "https://arxiv.org/abs/..."
+        },
+        {
+          "id": "beyond",
+          "name": "Journal",
           "status": "active",
-          "progress": 45,
-          "duration": 90,
-          "deliverables": ["validation studies", "case analyses"]
-        },
-        {
-          "id": "refinement",
-          "name": "Framework Refinement",
-          "description": "Iterative improvement based on results",
-          "status": "planned",
-          "duration": 30,
-          "deliverables": ["refined metrics", "best practices"]
-        },
-        {
-          "id": "tools",
-          "name": "Implementation Tools",
-          "description": "Practical measurement tools and software",
-          "status": "planned",
-          "duration": 45,
-          "deliverables": ["software tools", "user guides"]
-        },
-        {
-          "id": "publication",
-          "name": "Publication Preparation",
-          "description": "Manuscript and supplementary materials",
-          "status": "planned",
-          "duration": 35,
-          "deliverables": ["complete manuscript", "tool documentation"]
+          "progress": 40,
+          "type": "journal",
+          "link": null
         }
       ],
-      "collaborators": [
+      "relatedResearch": [
         {
-          "name": "Stanford HAI",
-          "type": "academic",
-          "role": "Human-AI interaction"
+          "title": "Liquid Democracy: An Algorithmic Perspective",
+          "authors": "Anson Kahng, Simon Mackenzie, Ariel D. Procaccia",
+          "year": "2018",
+          "venue": "AAAI 2018",
+          "link": "https://arxiv.org/abs/1711.08033",
+          "platform": "arxiv"
         },
         {
-          "name": "Anthropic",
-          "type": "industry",
-          "role": "AI system evaluation"
+          "title": "Agent-Based Models of Collective Intelligence",
+          "authors": "Joshua M. Epstein",
+          "year": "2006",
+          "venue": "Princeton University Press",
+          "link": "https://press.princeton.edu/books/paperback/...",
+          "platform": "university-press"
+        }
+      ]
+    },
+    {
+      "id": "mycorrhiza-simulation",
+      "title": "Mycorrhiza: A Functional Framework for Multi-Agent Collective Intelligence Simulation",
+      "researchArea": "Mathematical Foundations",
+      "authors": ["Jonas Hallgren"],
+      "keyQuestion": "How can a process-centric, functional programming approach, separating mathematical process definition from computational execution, lead to more robust, verifiable, and scalable multi-agent simulations of collective intelligence?",
+      "abstract": "Traditional multi-agent simulations often become brittle and hard to verify as complexity grows. Mycorrhiza (GraphTransform) is a next-generation simulation platform built on a 'process-centric' paradigm. Inspired by category theory and functional programming, Mycorrhiza treats system dynamics as composable, pure graph transformations. This approach cleanly separates the mathematical definition of processes from their computational execution, enabling rigorous property verification, enhanced scalability via JAX integration, and modular design of complex collective intelligence models.",
+      "approach": "The framework is built on category theory, functional programming, and JAX acceleration. Key components include: Core (Immutable GraphState, Property system, Transform composition), Transformations (Pure functions for bottom-up and top-down processes), Services (Interfaces for external services like LLMs), and Execution Engine (Manages transformation application, strategy selection, property verification, and instrumentation).",
+      "image": "/img/research/mycorrhiza_architecture.jpg",
+      "progressStages": [
+        {
+          "id": "initial-story",
+          "name": "Initial Story",
+          "status": "completed",
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
+        },
+        {
+          "id": "internal-review",
+          "name": "Internal Review",
+          "status": "completed",
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
+        },
+        {
+          "id": "external-review",
+          "name": "External Review",
+          "status": "completed",
+          "progress": 100,
+          "type": "overleaf",
+          "link": "https://www.overleaf.com/project/..."
+        },
+        {
+          "id": "preprint",
+          "name": "Preprint",
+          "status": "active",
+          "progress": 65,
+          "type": "arxiv",
+          "link": null
+        },
+        {
+          "id": "beyond",
+          "name": "Journal",
+          "status": "planned",
+          "progress": 0,
+          "type": "journal",
+          "link": null
         }
       ],
-      "targetVenue": "Proceedings of the ACM on Human-Computer Interaction",
-      "fundingSource": "Mixed Funding",
-      "publicationStatus": "in-preparation"
+      "relatedResearch": [
+        {
+          "title": "JAX: Composable transformations of Python+NumPy programs",
+          "authors": "James Bradbury, Roy Frostig, Peter Hawkins, Matthew James Johnson, Chris Leary, Dougal Maclaurin, et al.",
+          "year": "2018",
+          "venue": "GitHub",
+          "link": "https://github.com/google/jax",
+          "platform": "github"
+        },
+        {
+          "title": "Category Theory for the Sciences",
+          "authors": "David I. Spivak",
+          "year": "2014",
+          "venue": "MIT Press",
+          "link": "https://mitpress.mit.edu/books/category-theory-sciences",
+          "platform": "university-press"
+        }
+      ]
+    },
+    {
+      "id": "ai-governance-frameworks",
+      "title": "Adaptive Governance Frameworks for AI Development and Deployment",
+      "researchArea": "Applied Governance",
+      "authors": ["Aaron Halpern", "Markov Grey"],
+      "keyQuestion": "How can we design governance frameworks that adapt dynamically to rapidly evolving AI capabilities while maintaining democratic legitimacy and preventing regulatory capture by powerful actors?",
+      "abstract": "As AI systems become more powerful and ubiquitous, traditional static governance approaches prove inadequate for managing their societal impacts. This research develops adaptive governance frameworks that can evolve with technological capabilities while preserving democratic oversight and preventing concentration of power. We propose multi-stakeholder coordination mechanisms that balance innovation incentives with safety requirements, drawing from complex adaptive systems theory and institutional design principles.",
+      "approach": "We combine empirical analysis of existing governance failures with theoretical work on adaptive institutions. The research involves stakeholder interviews, policy analysis, and simulation of governance mechanisms under different scenarios. We develop frameworks for continuous stakeholder engagement, dynamic risk assessment, and adaptive regulatory responses that can scale across different jurisdictions and technological contexts.",
+      "image": "/img/research/governance_frameworks.jpg",
+      "progressStages": [
+        {
+          "id": "initial-story",
+          "name": "Initial Story",
+          "status": "completed",
+          "progress": 100,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
+        },
+        {
+          "id": "internal-review",
+          "name": "Internal Review",
+          "status": "active",
+          "progress": 85,
+          "type": "google-doc",
+          "link": "https://docs.google.com/document/d/..."
+        },
+        {
+          "id": "external-review",
+          "name": "External Review",
+          "status": "planned",
+          "progress": 0,
+          "type": "overleaf",
+          "link": null
+        },
+        {
+          "id": "preprint",
+          "name": "Preprint",
+          "status": "planned",
+          "progress": 0,
+          "type": "arxiv",
+          "link": null
+        },
+        {
+          "id": "beyond",
+          "name": "Journal",
+          "status": "planned",
+          "progress": 0,
+          "type": "journal",
+          "link": null
+        }
+      ],
+      "relatedResearch": [
+        {
+          "title": "Governing Artificial Intelligence: Upholding Human Rights & Dignity",
+          "authors": "Berkman Klein Center for Internet & Society",
+          "year": "2023",
+          "venue": "Harvard University",
+          "link": "https://cyber.harvard.edu/publication/2023/ai-governance",
+          "platform": "university"
+        },
+        {
+          "title": "Model Governance for Large Language Models",
+          "authors": "Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras, Dilara Soylu, Michihiro Yasunaga, et al.",
+          "year": "2023",
+          "venue": "arXiv",
+          "link": "https://arxiv.org/abs/2310.10196",
+          "platform": "arxiv"
+        }
+      ]
     }
   ],
-  "researchAreas": [
-    {
-      "id": "mathematical-foundations",
-      "name": "Mathematical Foundations",
-      "description": "Formal mathematical frameworks for complex systems",
-      "color": "#003B7E"
-    },
-    {
-      "id": "biological-computation",
-      "name": "Biological Computation",
-      "description": "Bio-inspired approaches to coordination and computation",
-      "color": "#0055C4"
-    },
-    {
-      "id": "network-security",
-      "name": "Network Security",
-      "description": "Resilience and security in distributed systems",
-      "color": "#89CFF0"
-    },
-    {
-      "id": "measurement-evaluation",
-      "name": "Measurement & Evaluation",
-      "description": "Frameworks for assessing complex system properties",
-      "color": "#4AB3F4"
-    }
-  ]
+  "researchAreas": {
+    "Mathematical Foundations": "#003B7E",
+    "Computational Experiments": "#2563eb", 
+    "Research Tools & Infrastructure": "#7c3aed",
+    "Applied Governance": "#059669"
+  }
 }

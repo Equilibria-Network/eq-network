@@ -1,192 +1,204 @@
 // src/components/Research/ResearchModal.js
-import React, { useEffect } from 'react';
+import React from 'react';
+import { X } from 'lucide-react';
+import { Tooltip } from '../../utils/tooltip';
 import styles from './ResearchModal.module.css';
-import ProgressTimeline from './ProgressTimeline';
-import { 
-  X, 
-  Calendar, 
-  MapPin, 
-  Users, 
-  Target, 
-  Clock, 
-  ExternalLink,
-  DollarSign
-} from 'lucide-react';
 
-export default function ResearchModal({ paper, researchAreas, onClose }) {
-  // Get research area color
-  const researchArea = researchAreas.find(area => 
-    area.id === paper.researchArea.toLowerCase().replace(/[^a-z]/g, '-')
-  );
+export default function ResearchModal({ paper, isOpen, onClose }) {
+  if (!isOpen || !paper) return null;
 
-  // Format dates
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  // Calculate time remaining
-  const calculateTimeRemaining = () => {
-    const now = new Date();
-    const endDate = new Date(paper.expectedCompletion);
-    const timeDiff = endDate - now;
-    
-    if (timeDiff <= 0) return 'Overdue';
-    
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const months = Math.floor(days / 30);
-    
-    if (months > 0) {
-      return `${months} month${months > 1 ? 's' : ''} remaining`;
-    } else {
-      return `${days} day${days > 1 ? 's' : ''} remaining`;
+  // Helper function to get action text for tooltips
+  const getActionText = (type) => {
+    switch (type) {
+      case 'google-doc':
+        return 'view draft';
+      case 'overleaf':
+        return 'review';
+      case 'arxiv':
+        return 'read preprint';
+      case 'journal':
+        return 'read publication';
+      default:
+        return 'view';
     }
   };
 
-  // Handle escape key
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
+  // Helper function to get correct icon name
+  const getIconName = (type) => {
+    if (type === 'publication') return 'journal';
+    return type;
+  };
+
+  const areaColor = 'var(--ifm-color-primary)';
+
+  // Helper function to get progress stage descriptions
+  const getProgressDescription = (stageId, status) => {
+    const descriptions = {
+      'initial-story': {
+        completed: 'Initial research narrative and conceptual framework established.',
+        active: 'Developing the foundational story and research direction.',
+        planned: 'Will establish the core research narrative and initial framework.'
+      },
+      'internal-review': {
+        completed: 'Internal peer review completed with team feedback incorporated.',
+        active: 'Currently under internal review by team members and collaborators.',
+        planned: 'Will undergo thorough internal review and revision process.'
+      },
+      'external-review': {
+        completed: 'External expert review completed with revisions incorporated.',
+        active: 'Currently seeking external expert feedback and conducting revisions.',
+        planned: 'Will seek external expert review and incorporate feedback.'
+      },
+      'preprint': {
+        completed: 'Preprint published and available to the research community.',
+        active: 'Preparing preprint for publication on arXiv or similar platform.',
+        planned: 'Will prepare and publish preprint for community feedback.'
+      },
+      'beyond': {
+        completed: 'Published in peer-reviewed journal.',
+        active: 'Submitted to journal and undergoing peer review process.',
+        planned: 'Will submit to appropriate peer-reviewed journal for publication.'
       }
     };
-
-    document.addEventListener('keydown', handleEscape);
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [onClose]);
-
-  // Handle backdrop click
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+    
+    return descriptions[stageId]?.[status] || 'Progress stage in development.';
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={handleBackdropClick}>
-      <div className={styles.modalContent}>
-        {/* Header */}
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <button 
+          className={styles.modalCloseButton}
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <X size={24} />
+        </button>
+        
         <div className={styles.modalHeader}>
-          <div className={styles.headerContent}>
-            <div className={styles.researchAreaBadge} style={{ backgroundColor: researchArea?.color }}>
-              {paper.researchArea}
-            </div>
-            <h2 className={styles.modalTitle}>{paper.title}</h2>
-            {paper.subtitle && (
-              <h3 className={styles.modalSubtitle}>{paper.subtitle}</h3>
-            )}
+          <h2 className={styles.modalTitle}>{paper.title}</h2>
+          <div className={styles.modalAuthors}>
+            <span className={styles.modalTeamLabel}>Team:</span>
+            <span>{paper.authors.join(', ')}</span>
           </div>
-          <button className={styles.closeButton} onClick={onClose} aria-label="Close">
-            <X size={24} />
-          </button>
         </div>
 
-        {/* Content */}
         <div className={styles.modalBody}>
-          {/* Authors */}
-          <div className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <Users size={18} />
-              <h4>Authors</h4>
-            </div>
-            <p className={styles.authors}>{paper.authors.join(', ')}</p>
+          {/* Key Question */}
+          <div className={styles.modalSection}>
+            <h3 className={styles.modalSectionTitle}>Research Question</h3>
+            <p className={styles.modalSectionText}>{paper.keyQuestion}</p>
           </div>
+
+          {/* Project Image */}
+          {paper.image && (
+            <div className={styles.modalSection}>
+              <div className={styles.projectImage}>
+                <img 
+                  src={paper.image} 
+                  alt={`${paper.title} visualization`}
+                  className={styles.projectImageImg}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Abstract */}
-          <div className={styles.section}>
-            <h4>Abstract</h4>
-            <p className={styles.abstract}>{paper.abstract}</p>
+          <div className={styles.modalSection}>
+            <h3 className={styles.modalSectionTitle}>Abstract</h3>
+            <p className={styles.modalSectionText}>{paper.abstract}</p>
           </div>
 
-          {/* Timeline */}
-          <div className={styles.section}>
-            <h4>Progress Timeline</h4>
-            <ProgressTimeline 
-              stages={paper.progressStages} 
-              isCompact={false}
-              researchAreaColor={researchArea?.color}
-            />
+          {/* Approach */}
+          <div className={styles.modalSection}>
+            <h3 className={styles.modalSectionTitle}>Approach</h3>
+            <p className={styles.modalSectionText}>{paper.approach}</p>
           </div>
 
-          {/* Metadata Grid */}
-          <div className={styles.metadataGrid}>
-            <div className={styles.metadataSection}>
-              <h4>Timeline</h4>
-              <div className={styles.metadataItems}>
-                <div className={styles.metadataItem}>
-                  <Calendar size={16} />
-                  <span>Started {formatDate(paper.startDate)}</span>
-                </div>
-                <div className={styles.metadataItem}>
-                  <Target size={16} />
-                  <span>Due {formatDate(paper.expectedCompletion)}</span>
-                </div>
-                <div className={styles.metadataItem}>
-                  <Clock size={16} />
-                  <span className={styles.timeRemaining}>{calculateTimeRemaining()}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.metadataSection}>
-              <h4>Publication</h4>
-              <div className={styles.metadataItems}>
-                <div className={styles.metadataItem}>
-                  <MapPin size={16} />
-                  <span>{paper.targetVenue}</span>
-                </div>
-                <div className={styles.metadataItem}>
-                  <DollarSign size={16} />
-                  <span>{paper.fundingSource}</span>
-                </div>
-                {paper.publicDraftUrl && (
-                  <div className={styles.metadataItem}>
-                    <ExternalLink size={16} />
-                    <a 
-                      href={paper.publicDraftUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className={styles.draftLink}
+          {/* Progress Section - Vertical Stack with Descriptions */}
+          <div className={styles.modalSection}>
+            <h3 className={styles.modalSectionTitle}>Project Progress</h3>
+            <div className={styles.progressList}>
+              {paper.progressStages.map((stage) => (
+                <div 
+                  key={stage.id} 
+                  className={styles.progressItem}
+                  data-incomplete={stage.progress < 100 ? "true" : "false"}
+                >
+                  <div className={styles.progressItemHeader}>
+                    <div 
+                      className={styles.progressItemIcon}
+                      onClick={stage.link ? (e) => {
+                        e.stopPropagation();
+                        window.open(stage.link, '_blank');
+                      } : undefined}
+                      style={{ 
+                        cursor: stage.link ? 'pointer' : 'default',
+                        opacity: stage.link ? 1 : 0.6
+                      }}
                     >
-                      View Public Draft
-                    </a>
+                      <img 
+                        src={`/img/icons/${getIconName(stage.type)}.svg`}
+                        alt={stage.type}
+                        className={styles.progressIcon}
+                      />
+                    </div>
+                    <div className={styles.progressItemInfo}>
+                      <h4 className={styles.progressItemTitle}>{stage.name}</h4>
+                      <div className={styles.progressItemProgress}>
+                        <div className={styles.progressBar}>
+                          <div 
+                            className={styles.progressBarFill}
+                            style={{
+                              width: `${stage.progress}%`,
+                              backgroundColor: areaColor
+                            }}
+                          />
+                        </div>
+                        <span className={styles.progressPercent}>{stage.progress}%</span>
+                      </div>
+                    </div>
                   </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Keywords */}
-          <div className={styles.section}>
-            <h4>Keywords</h4>
-            <div className={styles.keywords}>
-              {paper.keywords.map(keyword => (
-                <span key={keyword} className={styles.keywordTag}>
-                  {keyword}
-                </span>
+                  <div className={styles.progressItemDescription}>
+                    {getProgressDescription(stage.id, stage.status)}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Collaborators */}
-          {paper.collaborators && paper.collaborators.length > 0 && (
-            <div className={styles.section}>
-              <h4>Collaborators</h4>
-              <div className={styles.collaborators}>
-                {paper.collaborators.map((collab, idx) => (
-                  <div key={idx} className={styles.collaborator}>
-                    <strong>{collab.name}</strong>
-                    <span className={styles.collaboratorType}>({collab.type})</span>
-                    <span className={styles.collaboratorRole}>{collab.role}</span>
-                  </div>
+          {/* Related Research - Horizontal Grid Cards */}
+          {paper.relatedResearch && paper.relatedResearch.length > 0 && (
+            <div className={styles.modalSection}>
+              <h3 className={styles.modalSectionTitle}>Related Research</h3>
+              <div className={styles.relatedPapers}>
+                {paper.relatedResearch.map((relatedPaper, index) => (
+                  <a 
+                    key={index}
+                    href={relatedPaper.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.relatedPaper}
+                  >
+                    <div className={styles.relatedPaperIcon}>
+                      <img 
+                        src={`/img/icons/${relatedPaper.platform}.svg`}
+                        alt={relatedPaper.platform}
+                        className={styles.platformIcon}
+                      />
+                    </div>
+                    <div className={styles.relatedPaperContent}>
+                      <h4 className={styles.relatedPaperTitle}>{relatedPaper.title}</h4>
+                      <p className={styles.relatedPaperMeta}>
+                        {relatedPaper.authors.includes('et al.') ? 
+                          relatedPaper.authors : 
+                          relatedPaper.authors.length > 50 ? 
+                            `${relatedPaper.authors.split(',')[0]} et al.` : 
+                            relatedPaper.authors
+                        } • {relatedPaper.year}
+                      </p>
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>

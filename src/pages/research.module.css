@@ -1,8 +1,5 @@
-/* src/components/Research/ResearchHeader.module.css */
-.header {
-  padding: 6rem 0 3rem;
-  position: relative;
-  background: transparent;
+.researchMain {
+  padding: 4rem 0 6rem;
 }
 
 .container {
@@ -11,31 +8,34 @@
   padding: 0 var(--ifm-spacing-horizontal);
 }
 
-.headerContent {
+.header {
   text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
+  margin-bottom: 5rem;
 }
 
 .title {
   font-size: 3.5rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
   color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
   font-weight: 700;
 }
 
 .subtitle {
   font-size: 1.25rem;
-  line-height: 1.6;
   color: var(--ifm-color-emphasis-700);
-  margin-bottom: 0;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* Responsive adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
+  .researchMain {
+    padding: 3rem 0 4rem;
+  }
+  
   .header {
-    padding: 4rem 0 2rem;
+    margin-bottom: 3rem;
   }
   
   .title {
