@@ -18,6 +18,8 @@ export default function ResearchModal({ paper, isOpen, onClose }) {
         return 'read preprint';
       case 'journal':
         return 'read publication';
+      case 'initial-story':
+        return 'view initial story';
       default:
         return 'view';
     }
@@ -26,6 +28,7 @@ export default function ResearchModal({ paper, isOpen, onClose }) {
   // Helper function to get correct icon name
   const getIconName = (type) => {
     if (type === 'publication') return 'journal';
+    if (type === 'google-doc') return 'initial-story';
     return type;
   };
 
@@ -145,20 +148,54 @@ export default function ResearchModal({ paper, isOpen, onClose }) {
                     </div>
                     <div className={styles.progressItemInfo}>
                       <h4 className={styles.progressItemTitle}>{stage.name}</h4>
-                      <div className={styles.progressItemProgress}>
-                        <div className={styles.progressBar}>
-                          <div 
-                            className={styles.progressBarFill}
-                            style={{
-                              width: `${stage.progress}%`,
-                              backgroundColor: areaColor
-                            }}
-                          />
+                      {/* Only show main progress bar if no sub-stages exist */}
+                      {(!stage.subStages || stage.subStages.length === 0) && (
+                        <div className={styles.progressItemProgress}>
+                          <div className={styles.progressBar}>
+                            <div 
+                              className={styles.progressBarFill}
+                              style={{
+                                width: `${stage.progress}%`,
+                                backgroundColor: areaColor
+                              }}
+                            />
+                          </div>
+                          <span className={styles.progressPercent}>{stage.progress}%</span>
                         </div>
-                        <span className={styles.progressPercent}>{stage.progress}%</span>
-                      </div>
+                      )}
                     </div>
                   </div>
+                  
+                  {/* Sub-stages - Granular Progress Chunks (replaces main bar when present) */}
+                  {stage.subStages && stage.subStages.length > 0 && (
+                    <div className={styles.subStagesContainer}>
+                      <div className={styles.subStagesGrid}>
+                        {stage.subStages.map((subStage, index) => (
+                          <div key={index} className={styles.subStageChunk}>
+                            <div className={styles.subStageBar}>
+                              <div 
+                                className={styles.subStageBarFill}
+                                style={{
+                                  width: `${subStage.progress}%`,
+                                  backgroundColor: areaColor
+                                }}
+                              />
+                              <span 
+                                className={styles.subStagePercentage}
+                                style={{
+                                  color: subStage.progress === 0 ? areaColor : 'white'
+                                }}
+                              >
+                                {subStage.progress}%
+                              </span>
+                            </div>
+                            <span className={styles.subStageLabel}>{subStage.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
                   <div className={styles.progressItemDescription}>
                     {getProgressDescription(stage.id, stage.status)}
                   </div>
