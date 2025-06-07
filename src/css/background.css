@@ -1,0 +1,44 @@
+/* src/css/background.css */
+/* Background pattern and parallax effects */
+
+/* Ensure body and main layout use standard Docusaurus background variable */
+body {
+  overflow-x: hidden;
+  background: var(--ifm-background-color);
+}
+
+/* Make sure the main layout wrapper uses standard variable */
+.main-wrapper {
+  background: var(--ifm-background-color);
+}
+
+/* Main content styles */
+main {
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--ifm-background-color);
+}
+
+/* Parallax background pattern container */
+.parallax-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image: url('/img/pattern.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Theme-specific background colors for the pattern */
+[data-theme='light'] .parallax-background {
+  filter: invert(0);
+}
+
+[data-theme='dark'] .parallax-background {
+  filter: invert(1);
+}

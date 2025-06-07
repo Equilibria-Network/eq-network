@@ -1,0 +1,30 @@
+/* src/css/layout.css */
+/* Layout and container styles */
+
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ifm-spacing-horizontal);
+  padding-right: var(--ifm-spacing-horizontal);
+  box-sizing: border-box;
+}
+
+/* Full-width section styles */
+.section-full-width {
+  position: relative;
+  width: 100vw;
+  left: calc(-50vw + 50%);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -1,99 +1,94 @@
 // src/theme/Footer/ContactForm.js
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
+import { Tooltip } from '@site/src/utils/tooltip';
+import styles from './ContactForm.module.css';
 
 function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [status, setStatus] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('sending');
-
-    const mailtoLink = `mailto:contact@eq-network.org?subject=Contact Form Submission from ${formData.name}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
-    
-    window.location.href = mailtoLink;
-    setStatus('sent');
-    
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
-
-    setTimeout(() => setStatus(''), 3000);
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [state, handleSubmit] = useForm("xblydgqv");
+  
+  if (state.succeeded) {
+    return (
+      <div>
+        <h2 className={styles.title}>Contact Us</h2>
+        <div className={styles.successMessage}>
+          <p className={styles.successTitle}>Thank you for your message!</p>
+          <p className={styles.successText}>We'll get back to you soon.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4 text-white">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
+    <div className={styles.contactForm}>
+      <h2 className={styles.title}>Contact Us</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputRow}>
+          <div className={styles.inputGroup}>
             <input
               type="text"
               id="name"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
+              className={styles.input}
               placeholder="Your name"
+              required
+            />
+            <ValidationError 
+              prefix="Name" 
+              field="name"
+              errors={state.errors}
+              className={styles.validationError}
             />
           </div>
 
-          <div>
+          <div className={styles.inputGroup}>
             <input
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
+              className={styles.input}
               placeholder="Your email"
+              required
+            />
+            <ValidationError 
+              prefix="Email" 
+              field="email"
+              errors={state.errors}
+              className={styles.validationError}
             />
           </div>
         </div>
 
-        <div>
+        <div className={styles.inputGroup}>
           <textarea
             id="message"
             name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows="3"
-            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
+            className={styles.textarea}
             placeholder="Your message"
+            required
+          />
+          <ValidationError 
+            prefix="Message" 
+            field="message"
+            errors={state.errors}
+            className={styles.validationError}
           />
         </div>
 
         <button 
           type="submit" 
-          className={clsx(
-            "px-6 py-2 rounded-md font-medium transition-colors",
-            status === 'sending' 
-              ? "bg-white/20 text-white/50 cursor-not-allowed" 
-              : "bg-white text-[var(--ifm-color-primary-darkest)] hover:bg-white/90"
-          )}
-          disabled={status === 'sending'}
+          className={`${styles.submitButton} ${
+            state.submitting ? styles.submitButtonDisabled : styles.submitButtonActive
+          }`}
+          disabled={state.submitting}
         >
-          {status === 'sending' ? 'Sending...' : 
-           status === 'sent' ? 'Sent!' : 
-           'Send Message'}
+          {state.submitting ? 'Sending...' : 'Send Message'}
         </button>
+        
+        <ValidationError 
+          errors={state.errors}
+          className={styles.validationError}
+        />
       </form>
     </div>
   );
@@ -101,57 +96,41 @@ function ContactForm() {
 
 function StayCoordinated() {
   const ConnectButton = ({ icon, title, subtitle, href }) => (
-    <a 
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex flex-col items-center p-6 rounded-xl border-2 border-[var(--ifm-color-primary)] text-[var(--ifm-color-primary)] hover:transform hover:-translate-y-1 transition-transform"
-    >
-      <div className="w-12 h-12 mb-4 flex items-center justify-center bg-[var(--ifm-color-primary-lightest)] rounded-full">
-        {icon}
-      </div>
-      <span className="text-sm opacity-80">{subtitle}</span>
-      <span className="font-bold">{title}</span>
-    </a>
+    <Tooltip content={`${subtitle} ${title}`}>
+      <a 
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.connectButton}
+      >
+        <div className={styles.connectIcon}>
+          {icon}
+        </div>
+        <div className={styles.connectContent}>
+          <span className={styles.connectSubtitle}>{subtitle}</span>
+          <span className={styles.connectTitle}>{title}</span>
+        </div>
+      </a>
+    </Tooltip>
   );
 
   return (
-    <div className="text-center">
-      <h2 className="text-2xl font-bold mb-4 text-[var(--ifm-color-primary)]">Stay Coordinated</h2>
-      <p className="text-[var(--ifm-color-emphasis-700)] mb-8">Connect with us and join our community</p>
+    <div className={styles.stayCoordinated}>
+      <h2 className={styles.coordinatedTitle}>Stay Coordinated</h2>
+      <p className={styles.coordinatedDescription}>Connect with us and join our community</p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className={styles.connectGrid}>
         <ConnectButton
           icon={
-            <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--ifm-color-primary)]" fill="none" stroke="currentColor">
-              <path d="M19 4H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V8h14v12z" />
-            </svg>
+            <img 
+              src="/img/socials/luma.svg" 
+              alt="Luma Calendar" 
+              className={styles.connectSvg}
+            />
           }
           title="Calendar"
           subtitle="View Our"
           href="https://lu.ma/calendar/cal-DywZJnk1m1uAMlD"
-        />
-
-        <ConnectButton
-          icon={
-            <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--ifm-color-primary)]" fill="none" stroke="currentColor">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeWidth="2" />
-            </svg>
-          }
-          title="Streams"
-          subtitle="Join Our"
-          href="https://forms.gle/iFaehTPDDJuGuUcT9"
-        />
-
-        <ConnectButton
-          icon={
-            <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--ifm-color-primary)]" fill="none" stroke="currentColor">
-              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-            </svg>
-          }
-          title="Email"
-          subtitle="Send Us"
-          href="mailto:contact@eq-network.org"
         />
       </div>
     </div>

@@ -1,85 +1,149 @@
 // src/theme/Footer/index.js
 import React from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { ContactForm } from './ContactForm';
-import SocialBar from './SocialBar';
+import styles from './Footer.module.css';
 
-const GradientDivider = ({ width = 'md' }) => {
-  const widthClasses = {
-    sm: 'max-w-xs',
-    md: 'max-w-2xl',
-    lg: 'max-w-4xl'
+// Social platform icon mappings
+const socialIcons = {
+  github: '/img/socials/github.svg',
+  linkedin: '/img/socials/linkedin.svg',
+  twitter: '/img/socials/twitter.svg',
+  substack: '/img/socials/substack.svg',
+  youtube: '/img/socials/youtube.svg',
+  discord: '/img/socials/discord.svg',
+  arxiv: '/img/socials/arxiv.svg',
+  lesswrong: '/img/socials/lesswrong.svg',
+};
+
+// URL builders for different platforms
+const buildSocialUrl = (platform, handle) => {
+  const urlBuilders = {
+    github: (handle) => `https://github.com/${handle}`,
+    linkedin: (handle) => `https://www.linkedin.com/company/${handle}`,
+    twitter: (handle) => `https://twitter.com/${handle}`,
+    substack: (handle) => `https://substack.com/@${handle}`,
+    youtube: (handle) => `https://youtube.com/@${handle}`,
+    discord: (handle) => handle, // Assume full URL
+    arxiv: (handle) => `https://arxiv.org/${handle}`,
+    lesswrong: (handle) => `https://lesswrong.com/users/${handle}`,
+    email: (email) => `mailto:${email}`,
+    website: (url) => url,
   };
-
-  return (
-    <div className="w-full flex justify-center py-6">
-      <div className={`relative w-full ${widthClasses[width]}`}>
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-    </div>
-  );
+  
+  return urlBuilders[platform] ? urlBuilders[platform](handle) : handle;
 };
 
 export default function Footer() {
+  const { siteConfig } = useDocusaurusContext();
+  const { themeConfig } = siteConfig;
+  const { socials } = themeConfig;
+
+  // Filter out platforms that don't have icons or values
+  const activeSocials = Object.entries(socials || {})
+    .filter(([platform, value]) => value && socialIcons[platform])
+    .map(([platform, value]) => ({
+      name: platform.charAt(0).toUpperCase() + platform.slice(1),
+      platform,
+      href: buildSocialUrl(platform, value),
+      icon: socialIcons[platform]
+    }));
+
+  // Fallback socials if config is empty
+  const fallbackSocials = [
+    {
+      name: 'GitHub',
+      platform: 'github',
+      href: 'https://github.com/Equilibria-Network',
+      icon: '/img/socials/github.svg'
+    },
+    {
+      name: 'LinkedIn',
+      platform: 'linkedin',
+      href: 'https://www.linkedin.com/company/equilibria-network',
+      icon: '/img/socials/linkedin.svg'
+    },
+    {
+      name: 'Substack',
+      platform: 'substack',
+      href: 'https://substack.com/@equilibria1',
+      icon: '/img/socials/substack.svg'
+    }
+  ];
+
+  const socialsToRender = activeSocials.length > 0 ? activeSocials : fallbackSocials;
+
   return (
-    <footer className="w-full bg-[var(--ifm-color-primary-darkest)] text-white">
-      <SocialBar />
-      
-      <div className="max-w-[var(--ifm-container-width)] mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Logo and Description */}
-          <div className="md:col-span-3">
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {/* Logo, Description and Social Icons */}
+          <div className={styles.logoSection}>
             <img 
               src="/img/logo_icon_text_2.svg"
               alt="Equilibria Network"
-              className="h-8 mb-4"
+              className={styles.logo}
             />
-            <p className="text-sm opacity-80 mb-4">
+            <p className={styles.description}>
               Fostering resilience, agency, and positive-sum collaboration in hybrid human-AI systems.
             </p>
+            
+            {/* Social Icons */}
+            <div className={styles.logoSocials}>
+              {socialsToRender.map((social) => (
+                <a
+                  key={social.platform}
+                  href={social.href}
+                  className={styles.logoSocialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                >
+                  <img 
+                    src={social.icon} 
+                    alt={social.name}
+                    className={styles.logoSocialIcon}
+                  />
+                </a>
+              ))}
+            </div>
           </div>
           
           {/* Contact Form */}
-          <div className="md:col-span-6">
+          <div className={styles.formSection}>
             <ContactForm />
           </div>
           
           {/* Links */}
-          <div className="md:col-span-3">
-            <h3 className="text-lg font-bold mb-4">Stay Coordinated</h3>
-            <ul className="space-y-2">
+          <div className={styles.linksSection}>
+            <h3 className={styles.linksTitle}>Stay Coordinated</h3>
+            <ul className={styles.linksList}>
               <li>
                 <a 
                   href="https://lu.ma/calendar/cal-DywZJnk1m1uAMlD"
-                  className="text-white hover:text-[var(--equilibria-blue-light)]"
+                  className={styles.link}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Calendar
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://forms.gle/iFaehTPDDJuGuUcT9"
-                  className="text-white hover:text-[var(--equilibria-blue-light)]"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Join Our Streams
+                  <img 
+                    src="/img/footer/calendar.svg" 
+                    alt="" 
+                    className={styles.linkIcon}
+                  />
+                  Luma Calendar
                 </a>
               </li>
             </ul>
           </div>
         </div>
         
-        <GradientDivider width="lg" />
+        <div className={styles.divider} />
         
-        {/* Enhanced Copyright */}
-        <div className="flex flex-col items-center text-center space-y-2">
-          <div className="flex items-center space-x-2 text-sm font-light tracking-wide">
-            <span className="text-white/60">© {new Date().getFullYear()}</span>
-            <span className="text-white/80">Equilibria Network</span>
-          </div>
-          <div className="flex items-center space-x-3 text-xs font-light text-white/40">
+        {/* Copyright */}
+        <div className={styles.copyright}>
+          <div className={styles.copyrightContent}>
+            <span className={styles.copyrightYear}>© {new Date().getFullYear()}</span>
+            <span className={styles.copyrightName}>Equilibria Network</span>
           </div>
         </div>
       </div>

@@ -1,84 +1,57 @@
 // docusaurus.config.js
-const config = {
-  title: 'Equilibria Network',
-  tagline: 'Better decision-making through computational coordination and collective intelligence.',
-  url: 'https://eq-network.org/', 
-  baseUrl: '/',
-  favicon: 'img/favicon.ico',
-	organizationName: 'Equilibria-Network',
-	projectName: 'eq-network',
-	deploymentBranch: 'gh-pages',
-	trailingSlash: false,
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve('esbuild-loader'),
-      options: {
-        loader: 'jsx',
-        target: isServer ? 'node12' : 'es2017',
-      },
-    }),
-  },
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: false,
-        theme: {
-          customCss: './src/css/custom.css',
-        },
+// Main configuration file that imports all config modules
 
-        blog: {
-          showReadingTime: true,
-          path: 'blog',
-          routeBasePath: 'blog',
-          blogTitle: 'Blog',
-          blogDescription: 'Equilibria Network Blog',
-          postsPerPage: 10,
-          authorsMapPath: 'authors.yml',
-        }
-      }),
+const path = require('path');
+const siteConfig = require('./config/site.config.js');
+const navbarConfig = require('./config/navbar.config.js');
+const footerConfig = require('./config/footer.config.js');
+const socialsConfig = require('./config/socials.config.js');
+const uiConfig = require('./config/ui.config.js');
+const webpackConfig = require('./config/webpack.config.js');
+const pluginsConfig = require('./config/plugins.config.js');
+const presetsConfig = require('./config/presets.config.js');
+
+const config = {
+  // Import basic site configuration
+  ...siteConfig,
+  
+  // Import webpack configuration
+  webpack: webpackConfig,
+  
+  // Import presets configuration
+  presets: presetsConfig,
+  
+  // Compose theme configuration from individual modules
+  themeConfig: {
+    ...uiConfig,
+    navbar: navbarConfig,
+    footer: footerConfig,
+    socials: socialsConfig,
+  },
+  
+  // Import plugin-related configurations
+  ...pluginsConfig,
+  
+  // Configure build tools to use config directory
+  plugins: [
+    // Configure PostCSS to use config directory
+    [
+      '@docusaurus/plugin-ideal-image',
+      {
+        quality: 70,
+        max: 1030,
+        min: 640,
+        steps: 2,
+        disableInDev: false,
+      },
     ],
   ],
-
-
-
-
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
-      navbar: {
-        //title: 'Equilibria',
-  logo: {
-    alt: 'Equilibria Network Logo',
-    src: 'img/logo_icon_text_2.svg',
-    srcDark: 'img/logo_text.svg',
+  
+  // Custom webpack configuration for Tailwind/PostCSS
+  customFields: {
+    postcssConfigPath: path.resolve(__dirname, 'config/postcss.config.js'),
+    tailwindConfigPath: path.resolve(__dirname, 'config/tailwind.config.js'),
   },
-        items: [
-          {to: '/about', label: 'About', position: 'right'},
-          // {to: '/research', label: 'Research', position: 'right'},
-          //{to: '/projects', label: 'Projects', position: 'right'},
-          //{to: '/blog', label: 'Blog', position: 'right'},
-          //{to: '/contact', label: 'Contact', position: 'right'},
-        ],
-      },
-  socials: {
-    //twitter: 'your-twitter-handle',  // if you have one
-    github: 'Equilibria-Network',
-  }
-    }),
-
-  // Math plugin configuration
-  stylesheets: [
-    {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
-      type: 'text/css',
-      integrity: 'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
-      crossorigin: 'anonymous',
-    },
-  ],
 };
 
 module.exports = config;

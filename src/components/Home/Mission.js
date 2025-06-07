@@ -18,6 +18,7 @@ export default function Mission() {
               }}
             </BrowserOnly>
           </div>
+          
           <div className={styles.contentRight}>
             <div className={styles.logoContainer}>
               <img 
@@ -26,12 +27,15 @@ export default function Mission() {
                 className={styles.mainLogo}
               />
             </div>
-            <div className={styles.descriptionText}>
-              <p>
-                We are a hybrid research institute, developing mathematical frameworks that address how AI systems transform collective decision-making dynamics and power structures.
-              </p>
-              <p>
-                We combine research in active inference, decentralized consensus mechanisms, and social choice theory to map intervention points that can shift inadequate equilibria toward more robust, sustainable systems that benefit humanity.
+            
+            <div className={styles.textContent}>
+              <h1 className={styles.claim}>
+                Modelling the impact of AI on civilization.
+              </h1>
+              
+              <p className={styles.description}>
+                We help decision makers test interventions before implementing them in the real world, 
+                using large scale simulations powered by rigorous mathematical foundations.
               </p>
             </div>
           </div>

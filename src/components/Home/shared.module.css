@@ -25,12 +25,15 @@
   padding: 0 var(--ifm-spacing-horizontal);
 }
 
-/* Card style */
+/* Card style - use solid background for proper visibility */
 .card {
   padding: 2rem;
-  background: transparent;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='dark'] .card {
-  background: transparent;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }

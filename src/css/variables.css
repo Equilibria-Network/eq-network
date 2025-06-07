@@ -1,0 +1,47 @@
+/* src/css/variables.css */
+/* Theme variables and color definitions */
+
+/* Base theme colors using the Equilibria blue palette */
+:root {
+  /* Primary blue from the Equilibria logo text */
+  --ifm-color-primary: #003B7E;  /* Deep navy blue */
+  --ifm-color-primary-dark: #003571;
+  --ifm-color-primary-darker: #002F64;
+  --ifm-color-primary-darkest: #002855;
+  --ifm-color-primary-light: #0047A1;
+  --ifm-color-primary-lighter: #0055C4;
+  --ifm-color-primary-lightest: #0063E7;
+  
+  /* Additional brand colors */
+  --equilibria-blue-light: #89CFF0;
+  --equilibria-blue-accent: #4AB3F4;
+
+  /* Background colors - MAIN BACKGROUND IS TRANSPARENT */
+  --ifm-background-color: transparent;  /* This is what Docusaurus uses for main background */
+  --ifm-background-surface-color: #ffffff;  /* Cards and surfaces remain solid */
+  
+  /* Navbar colors - ensure proper contrast */
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.95);
+  --ifm-navbar-link-color: var(--ifm-color-emphasis-800);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+}
+
+/* Dark theme colors - using deeper blues for better contrast */
+[data-theme='dark'] {
+  --ifm-color-primary: #003B7E;  /* Deep navy blue */
+  --ifm-color-primary-dark: #003571;
+  --ifm-color-primary-darker: #002F64;
+  --ifm-color-primary-darkest: #002855;
+  --ifm-color-primary-light: #0047A1;
+  --ifm-color-primary-lighter: #0055C4;
+  --ifm-color-primary-lightest: #0063E7;
+  
+  /* Dark mode backgrounds - MAIN BACKGROUND IS TRANSPARENT */
+  --ifm-background-color: transparent;  /* This is what Docusaurus uses for main background */
+  --ifm-background-surface-color: #2a2a2e;  /* Cards and surfaces remain solid */
+  
+  /* Dark navbar colors */
+  --ifm-navbar-background-color: rgba(0, 21, 41, 0.95);
+  --ifm-navbar-link-color: rgba(255, 255, 255, 0.8);
+  --ifm-navbar-link-hover-color: #ffffff;
+}
