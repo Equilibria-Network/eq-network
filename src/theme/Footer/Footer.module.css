@@ -4,7 +4,7 @@
   width: 100%;
   background: var(--ifm-color-primary-darkest);
   color: white;
-  margin-top: 6rem;
+  margin-top: 0; /* Removed the 6rem margin */
 }
 
 .container {

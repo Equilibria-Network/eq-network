@@ -1,30 +1,48 @@
-/* src/css/layout.css */
-/* Layout and container styles */
+/* src/css/variables.css */
+/* Theme variables and color definitions */
 
-/* Container styles */
-.container {
-  width: 100%;
-  max-width: var(--ifm-container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--ifm-spacing-horizontal);
-  padding-right: var(--ifm-spacing-horizontal);
-  box-sizing: border-box;
+/* Layout variables */
+:root {
+  --navbar-height: 60px;
 }
 
-/* Full-width section styles */
-.section-full-width {
-  position: relative;
-  width: 100vw;
-  left: calc(-50vw + 50%);
-  box-sizing: border-box;
-  margin: 0;
+/* Base theme colors using the Equilibria blue palette */
+:root {
+  /* Primary blue from the Equilibria logo text */
+  --ifm-color-primary: #003B7E;  /* Deep navy blue */
+  --ifm-color-primary-dark: #003571;
+  --ifm-color-primary-darker: #002F64;
+  --ifm-color-primary-darkest: #002855;
+  --ifm-color-primary-light: #0047A1;
+  --ifm-color-primary-lighter: #0055C4;
+  --ifm-color-primary-lightest: #0063E7;
+  
+  /* Additional brand colors */
+  --equilibria-blue-light: #89CFF0;
+  --equilibria-blue-accent: #4AB3F4;
+
+  /* Background colors - solid colors for cards and surfaces */
+  --ifm-background-color: transparent;
+  --ifm-background-surface-color: transparent;
+  
+  /* Content background - this will be transparent for the pattern */
+  --ifm-content-background: transparent;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+/* Dark theme colors - using deeper blues for better contrast */
+[data-theme='dark'] {
+  --ifm-color-primary: #0055C4;  /* Lighter blue for dark mode */
+  --ifm-color-primary-dark: #003B7E;
+  --ifm-color-primary-darker: #003571;
+  --ifm-color-primary-darkest: #002F64;
+  --ifm-color-primary-light: #0063E7;
+  --ifm-color-primary-lighter: #4AB3F4;
+  --ifm-color-primary-lightest: #89CFF0;
+  
+  /* Dark mode backgrounds - transparent for texture */
+  --ifm-background-color: transparent;
+  --ifm-background-surface-color: transparent;
+  
+  /* Content background - transparent for pattern */
+  --ifm-content-background: transparent;
 }

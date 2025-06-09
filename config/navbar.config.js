@@ -5,8 +5,8 @@ const navbarConfig = {
   // title: 'Equilibria', // Commented out since we use logo
   logo: {
     alt: 'Equilibria Network Logo',
-    src: 'img/logo_icon_text_2.svg',
-    srcDark: 'img/logo_text.svg',
+    src: 'img/logo_icon_text_2.svg', // Single logo file for both themes
+    // Removed srcDark - use same logo for both light and dark mode
   },
   
   items: [
@@ -20,8 +20,7 @@ const navbarConfig = {
   
   // Navbar behavior
   hideOnScroll: false,
-  // Remove the style: 'primary' - this was causing white text on white background
-  // style: 'primary',
+  style: 'primary',
   
   // Note: position and colorMode are not valid navbar properties in Docusaurus
   // colorMode should be at the root level of themeConfig

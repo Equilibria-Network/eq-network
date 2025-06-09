@@ -1,0 +1,391 @@
+/* src/components/Home2/Research.module.css */
+
+.section {
+  padding: 6rem 0;
+  position: relative;
+  background: transparent;
+}
+
+.container {
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%;
+}
+
+/* Section Header */
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* Streams Container */
+.streamsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+/* Individual Stream */
+.stream {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.streamContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  width: 100%;
+}
+
+/* Left Side - Main Content */
+.streamMain {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right Side - Questions */
+.streamQuestions {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left Side - Scanning */
+.streamMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.streamTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.boldClaim {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.imageContainer {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto 2rem auto; /* Center aligned */
+  display: flex;
+  justify-content: center;
+}
+
+.streamImage {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Right Side - Details */
+.streamDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.detailSection {
+  margin-bottom: 1rem;
+}
+
+.detailTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailText {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* FAQ Container - Direct Expandable */
+.faqContainer {
+  margin-top: 2rem;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+}
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+  line-height: 1.4;
+}
+
+.faqQuestion:hover {
+  color: var(--ifm-color-primary);
+}
+
+.faqQuestion span {
+  flex: 1;
+}
+
+.faqIcon {
+  transition: transform 0.2s ease;
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.faqIconExpanded {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding-bottom: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  animation: fadeIn 0.2s ease;
+  font-style: italic;
+}
+
+/* Learn More Link */
+.learnMore {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  text-align: center;
+}
+
+.learnMoreLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+}
+
+.learnMoreLink:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Dark mode specific adjustments */
+[data-theme='dark'] .learnMoreLink {
+  background: rgba(var(--ifm-color-primary-rgb), 0.15);
+}
+
+[data-theme='dark'] .learnMoreLink:hover {
+  background: var(--ifm-color-primary-lighter);
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Ensure all colors are properly responsive to light/dark mode */
+
+/* Section and container use default Docusaurus colors */
+.section {
+  padding: 6rem 0;
+  position: relative;
+  background: transparent;
+  color: var(--ifm-color-content); /* Responsive text color */
+}
+
+/* Headers use primary color which is already responsive */
+.title, .streamTitle {
+  color: var(--ifm-color-primary);
+}
+
+.boldClaim {
+  color: var(--ifm-color-primary);
+}
+
+/* Text content uses emphasis colors which are responsive */
+.description, .detailText {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.detailTitle {
+  color: var(--ifm-color-primary);
+}
+
+/* FAQ styling with responsive colors */
+.faqQuestion {
+  color: var(--ifm-color-emphasis-800);
+  border-bottom-color: var(--ifm-color-emphasis-200);
+}
+
+.faqQuestion:hover {
+  color: var(--ifm-color-primary);
+}
+
+.faqAnswer {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.faqIcon {
+  color: var(--ifm-color-primary);
+}
+
+.faqAnswer p {
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .streamsContainer {
+    gap: 6rem;
+  }
+  
+  .streamContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .streamTitle {
+    font-size: 2rem;
+  }
+  
+  .boldClaim {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .imageContainer {
+    max-width: 350px;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .example {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header {
+    margin-bottom: 4rem;
+  }
+  
+  .streamMain {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .streamsContainer {
+    gap: 4rem;
+  }
+  
+  .streamContent {
+    gap: 2rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .streamTitle {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .boldClaim {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .imageContainer {
+    max-width: 280px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .streamImage {
+    max-height: 220px;
+  }
+  
+  .example {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .faqQuestion {
+    font-size: 0.85rem;
+    padding: 0.75rem 0;
+  }
+  
+  .faqAnswer {
+    font-size: 0.85rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+  }
+}
