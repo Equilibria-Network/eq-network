@@ -38,8 +38,8 @@
             {"name": "Incorporating Feedback", "progress": 100}
           ]
         },
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 100, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 60, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
@@ -60,8 +60,8 @@
       "image": "/img/research/taxonomy-agents.png",
       "progressStages": [
         {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 100, "link": null},
-        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 100, "link": null},
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "active", "progress": 70, "link": null},
+        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 60, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "active", "progress": 0, "link": null},
         {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "planned", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
@@ -82,10 +82,10 @@
       "approach": "The program prioritizes analyzing the underlying graph (1-skeleton) to identify functional subgraphs based on distinct topological signatures. It proposes an exploratory path involving theoretical mathematics (formalizing signatures), computational analysis (identifying subgraphs), simulation/modeling, and empirical validation.",
       "image": "/img/research/graph-topology-ci.png",
       "progressStages": [
-        {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 100, "link": null},
-        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 100, "link": null},
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 100, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 50, "link": null},
+        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 0, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 0, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
@@ -96,7 +96,7 @@
     },
     {
       "id": "spectral-duality-emergence",
-      "title": "Mathematical Foundations of Emergent Collective Intelligence: A Spectral Duality Framework",
+      "title": "Convergent Collective Intelligence: Applying Geometric Deep Learning on Collective Intelligence Systems",
       "researchArea": "Mathematical Foundations",
       "authors": ["Jonas Hallgren"],
       "keyQuestion": "Can the emergence of common coordination structures like markets, networks, and democracies be explained as mathematically optimal solutions to specific information processing challenges, formalized through a spectral duality between signal processing and graph operator properties?",
@@ -105,9 +105,9 @@
       "image": "/img/research/spectral-duality-emergence.png",
       "progressStages": [
         {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 100, "link": null},
-        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 100, "link": null},
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 100, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 40, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 0, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
@@ -128,9 +128,9 @@
       "image": "/img/research/spectral-duality-variational.png",
       "progressStages": [
         {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 100, "link": null},
-        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 100, "link": null},
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 100, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 70, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 0, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
@@ -225,7 +225,7 @@
           ]
         },
         {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "active", "progress": 30, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
@@ -244,10 +244,10 @@
       "approach": "The core approach is to use category theory to create 'categorical bridges' between the domain of collective intelligence and well-established mathematical fields. This involves defining objects and morphisms for a 'Collective Intelligence' category (CollInt) and establishing functors that map concepts and theorems from source categories (like Graph Signal Processing or GDL) to CollInt, based on the principle that collective systems are error-minimizing information processors on graphs.",
       "image": "/img/research/categorical-framework-ci.png",
       "progressStages": [
-        {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 100, "link": null},
-        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 100, "link": null},
-        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 100, "link": null},
-        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 100, "link": null},
+        {"id": "initial-story", "name": "Initial Story", "type": "initial-story", "status": "completed", "progress": 80, "link": null},
+        {"id": "internal-review", "name": "Internal Review", "type": "google-doc", "status": "completed", "progress": 20, "link": null},
+        {"id": "external-review", "name": "External Review", "type": "overleaf", "status": "completed", "progress": 0, "link": null},
+        {"id": "preprint", "name": "Preprint", "type": "arxiv", "status": "completed", "progress": 0, "link": null},
         {"id": "beyond", "name": "Journal", "type": "journal", "status": "planned", "progress": 0, "link": null}
       ],
       "relatedResearch": [
