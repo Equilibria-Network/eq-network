@@ -12,7 +12,7 @@ const navbarConfig = {
   items: [
     { to: '/about', label: 'About', position: 'right' },
     // Future navigation items (commented for now)
-    { to: '/research', label: 'Research', position: 'right' },
+    // { to: '/research', label: 'Research', position: 'right' },
     // { to: '/projects', label: 'Projects', position: 'right' },
     // { to: '/blog', label: 'Blog', position: 'right' },
     // { to: '/contact', label: 'Contact', position: 'right' },
