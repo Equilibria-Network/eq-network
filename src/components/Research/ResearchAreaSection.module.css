@@ -1,3 +1,4 @@
+/* src/components/Research/ResearchAreaSection.module.css */
 .researchArea {
   margin-bottom: 6rem;
 }
@@ -9,6 +10,13 @@
   padding-bottom: 1rem;
   border-bottom: 3px solid var(--area-color);
   gap: 1rem;
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay */
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+[data-theme='dark'] .areaHeader {
+  background: rgba(27, 27, 29, 0.9); /* Semi-transparent dark overlay */
 }
 
 .areaIndicator {
@@ -74,6 +82,10 @@
   .areaTitle {
     font-size: 2rem;
   }
+  
+  .areaHeader {
+    padding: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -85,6 +97,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    padding: 1rem;
   }
   
   .areaIndicator {

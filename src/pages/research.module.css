@@ -1,16 +1,20 @@
+/* src/pages/research.module.css */
 .researchMain {
   padding: 4rem 0 6rem;
+  background: transparent !important; /* Force transparent background */
 }
 
 .container {
   max-width: var(--ifm-container-width);
   margin: 0 auto;
   padding: 0 var(--ifm-spacing-horizontal);
+  background: transparent !important; /* Force transparent background */
 }
 
 .header {
   text-align: center;
   margin-bottom: 5rem;
+  background: transparent !important; /* Force transparent background */
 }
 
 .title {

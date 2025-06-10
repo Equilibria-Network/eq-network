@@ -1,19 +1,14 @@
 /* src/components/Home2/FoundationsSection.module.css */
 
-/* Full-width semi-transparent blue background section */
+/* Full-width transparent section - same as simulations */
 .section {
-  background: rgba(0, 59, 126, 0.95); /* More transparent blue background */
-  padding: 8rem 0; /* Increased padding to match simulations */
+  background: transparent; /* No background color */
+  padding: 8rem 0;
   position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
-}
-
-/* Dark mode - lighter blue with transparency */
-[data-theme='dark'] .section {
-  background: rgba(0, 85, 196, 0.95); /* More transparent lighter blue */
 }
 
 .container {
@@ -39,7 +34,7 @@
 .streamTitle {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ifm-color-primary); /* Use theme primary color */
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
@@ -47,7 +42,7 @@
 .boldClaim {
   font-size: 1.375rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--ifm-color-emphasis-800); /* Use theme text color */
   margin-bottom: 2rem;
   line-height: 1.4;
 }
@@ -65,13 +60,17 @@
   height: auto;
   max-height: 250px;
   object-fit: contain;
-  transition: filter 0.3s ease;
-  filter: brightness(0) saturate(100%) invert(100%);
+  transition: transform 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%); /* Dark icons on white background */
+}
+
+[data-theme='dark'] .streamImage {
+  filter: brightness(0) saturate(100%) invert(100%); /* White icons in dark mode */
 }
 
 .description {
   font-size: 1.125rem;
-  color: #ffffff;
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
   margin: 0;
 }
@@ -88,17 +87,17 @@
 }
 
 .detailTitle {
-  font-size: 1.125rem;
+  font-size: 1.25rem; /* Increased from 1.125rem */
   font-weight: 600;
-  color: #ffffff;
+  color: var(--ifm-color-primary); /* Use primary color for contrast */
   margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .detailText {
-  font-size: 1rem;
-  color: #ffffff;
+  font-size: 1.125rem; /* Increased from 1rem */
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
   margin: 0;
 }
@@ -109,7 +108,11 @@
 }
 
 .faqItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .faqItem {
+  border-bottom-color: var(--ifm-color-emphasis-300);
 }
 
 .faqItem:last-child {
@@ -125,9 +128,9 @@
   padding: 1rem 0;
   background: none;
   border: none;
-  font-size: 0.9rem;
+  font-size: 1rem; /* Increased from 0.9rem */
   font-weight: 600;
-  color: #ffffff;
+  color: var(--ifm-color-emphasis-800); /* Use theme text color */
   cursor: pointer;
   text-align: left;
   transition: color 0.2s ease;
@@ -135,7 +138,7 @@
 }
 
 .faqQuestion:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ifm-color-primary);
 }
 
 .faqQuestion span {
@@ -144,9 +147,13 @@
 
 .faqIcon {
   transition: transform 0.2s ease;
-  color: #ffffff;
+  color: var(--ifm-color-primary);
   flex-shrink: 0;
   margin-top: 0.125rem;
+}
+
+[data-theme='dark'] .faqIcon {
+  color: var(--ifm-color-primary-lighter);
 }
 
 .faqIconExpanded {
@@ -155,9 +162,9 @@
 
 .faqAnswer {
   padding-bottom: 1rem;
-  color: #ffffff;
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: 1.05rem; /* Increased from 0.95rem */
   animation: fadeIn 0.2s ease;
   font-style: italic;
 }
@@ -166,34 +173,7 @@
   margin: 0;
 }
 
-/* Learn More Link */
-.learnMore {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: center;
-}
-
-.learnMoreLink {
-  display: inline-flex;
-  align-items: center;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.learnMoreLink:hover {
-  background: #ffffff;
-  color: var(--ifm-color-primary);
-  text-decoration: none;
-  transform: translateY(-1px);
-}
+/* Remove Learn More section completely */
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
@@ -261,13 +241,21 @@
     max-height: 220px;
   }
   
+  .detailTitle {
+    font-size: 1.125rem; /* Responsive scaling */
+  }
+  
+  .detailText {
+    font-size: 1rem; /* Responsive scaling */
+  }
+  
   .faqQuestion {
-    font-size: 0.85rem;
+    font-size: 0.95rem; /* Responsive scaling */
     padding: 0.75rem 0;
   }
   
   .faqAnswer {
-    font-size: 0.85rem;
+    font-size: 0.95rem; /* Responsive scaling */
     padding-bottom: 0.75rem;
   }
 }

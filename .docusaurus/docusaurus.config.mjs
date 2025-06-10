@@ -284,11 +284,6 @@ export default {
           "to": "/about",
           "label": "About",
           "position": "right"
-        },
-        {
-          "to": "/research",
-          "label": "Research",
-          "position": "right"
         }
       ],
       "hideOnScroll": false,

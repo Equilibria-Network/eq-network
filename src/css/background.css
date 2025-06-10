@@ -1,22 +1,32 @@
 /* src/css/background.css */
 /* Background pattern and parallax effects */
 
-/* Ensure body and main layout use standard Docusaurus background variable */
+/* Ensure body and main layout use transparent backgrounds for pattern visibility */
 body {
   overflow-x: hidden;
-  background: var(--ifm-background-color);
+  background: transparent !important;
 }
 
-/* Make sure the main layout wrapper uses standard variable */
-.main-wrapper {
-  background: var(--ifm-background-color);
+/* Force transparent backgrounds for both light and dark modes */
+body,
+html,
+.main-wrapper,
+main,
+.container-fluid,
+.container,
+article {
+  background: transparent !important;
 }
 
-/* Main content styles */
-main {
-  padding: 0;
-  overflow-x: hidden;
-  background: var(--ifm-background-color);
+/* Dark mode specific overrides */
+[data-theme='dark'] body,
+[data-theme='dark'] html,
+[data-theme='dark'] .main-wrapper,
+[data-theme='dark'] main,
+[data-theme='dark'] .container-fluid,
+[data-theme='dark'] .container,
+[data-theme='dark'] article {
+  background: transparent !important;
 }
 
 /* Parallax background pattern container */
@@ -37,8 +47,28 @@ main {
 /* Theme-specific background colors for the pattern */
 [data-theme='light'] .parallax-background {
   filter: invert(0);
+  opacity: 0.05;
 }
 
 [data-theme='dark'] .parallax-background {
   filter: invert(1);
+  opacity: 0.08; /* Slightly more visible in dark mode */
+}
+
+/* Ensure content sections are transparent but cards/surfaces remain solid */
+.section,
+section {
+  background: transparent !important;
+}
+
+/* Keep specific UI components with solid backgrounds */
+.card,
+.modal,
+.navbar,
+.footer,
+.dropdown,
+.menu,
+.pagination,
+.breadcrumbs {
+  /* These will keep their defined backgrounds for readability */
 }

@@ -1,21 +1,25 @@
 /* src/components/Home2/Audience.module.css */
 
 .section {
-  padding: 8rem 0;
+  padding: 6rem 0;
   position: relative;
   background: transparent;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .container {
   max-width: var(--ifm-container-width);
   margin: 0 auto;
   padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%;
 }
 
-/* Section Header - Simplified */
+/* Section Header - Compact */
 .header {
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 .title {
@@ -26,209 +30,159 @@
   line-height: 1.1;
 }
 
-/* Audience Grid - Similar to research sections */
+/* Grid with aligned elements */
 .audienceGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
-  margin-bottom: 6rem;
+  gap: 3rem;
+  align-items: start;
 }
 
-.audienceCard {
-  background: var(--ifm-background-surface-color);
-  border: 2px solid var(--ifm-color-emphasis-200);
-  border-radius: 16px;
-  padding: 0;
+/* Column structure for alignment */
+.audienceColumn {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }
 
-.audienceCard:hover {
-  border-color: var(--ifm-color-primary-lighter);
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-}
-
-[data-theme='dark'] .audienceCard {
-  background: var(--ifm-background-surface-color);
-  border-color: var(--ifm-color-emphasis-300);
-}
-
-[data-theme='dark'] .audienceCard:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Image Container - Like research sections */
-.imageContainer {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: var(--ifm-color-emphasis-50);
-}
-
-[data-theme='dark'] .imageContainer {
-  background: var(--ifm-color-emphasis-100);
-}
-
-.audienceImage {
-  width: 100%;
-  height: 100%;
-  max-width: 150px;
-  max-height: 150px;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  /* SVG coloring for light mode */
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
-}
-
-[data-theme='dark'] .audienceImage {
-  /* SVG coloring for dark mode */
-  filter: brightness(0) saturate(100%) invert(100%);
-}
-
-.audienceCard:hover .audienceImage {
-  transform: scale(1.1);
-}
-
-/* Card Content */
-.cardContent {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  text-align: left;
-}
-
+/* Aligned Titles - Same height */
 .cardTitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--ifm-color-primary);
   margin: 0 0 1.5rem 0;
   line-height: 1.2;
-  text-align: center;
+  min-height: 3.6rem; /* Fixed height for alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Aligned Images - Same height, BIGGER */
+.imageContainer {
+  width: 100%;
+  height: 180px; /* Increased from 120px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.audienceImage {
+  width: 140px; /* Increased from 80px */
+  height: 140px; /* Increased from 80px */
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  /* Specific targeting for audience images */
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+}
+
+[data-theme='dark'] .audienceImage {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.audienceColumn:hover .audienceImage {
+  transform: scale(1.1);
+}
+
+/* Aligned Claims - Same starting position */
 .cardClaim {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--ifm-color-emphasis-800);
-  margin: 0 0 2rem 0;
-  line-height: 1.4;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.3;
+  min-height: 4.5rem; /* Fixed height for alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
+/* Aligned Examples - Grow to fill remaining space */
 .cardExample {
-  background: var(--ifm-color-emphasis-50);
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: transparent;
+  padding: 1rem 0 0 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
   margin-top: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 [data-theme='dark'] .cardExample {
-  background: var(--ifm-color-emphasis-100);
+  border-top-color: var(--ifm-color-emphasis-300);
 }
 
 .exampleTitle {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--ifm-color-primary);
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .exampleText {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--ifm-color-emphasis-700);
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
   font-style: italic;
+  flex-grow: 1;
 }
 
-/* Bottom CTA */
-.bottomCta {
-  text-align: center;
-  padding: 3rem 2rem;
-  background: rgba(var(--ifm-color-primary-rgb), 0.05);
-  border-radius: 16px;
-  border: 1px solid rgba(var(--ifm-color-primary-rgb), 0.1);
-}
-
-[data-theme='dark'] .bottomCta {
-  background: rgba(var(--ifm-color-primary-rgb), 0.1);
-  border-color: rgba(var(--ifm-color-primary-rgb), 0.2);
-}
-
-.ctaText {
-  font-size: 1.25rem;
-  color: var(--ifm-color-emphasis-700);
-  margin: 0 0 2rem 0;
-  line-height: 1.5;
-}
-
-.ctaButton {
-  display: inline-flex;
-  align-items: center;
-  color: white;
-  background: var(--ifm-color-primary);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.125rem;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.ctaButton:hover {
-  background: var(--ifm-color-primary-darker);
-  color: white;
-  text-decoration: none;
-  transform: translateY(-2px);
-}
+/* Remove all CTA styles */
 
 /* Responsive Design */
 @media (max-width: 992px) {
   .section {
-    padding: 6rem 0;
+    min-height: auto;
+    padding: 4rem 0;
   }
   
   .audienceGrid {
     grid-template-columns: 1fr;
     gap: 3rem;
-    margin-bottom: 4rem;
   }
   
   .title {
     font-size: 2.5rem;
+    margin-bottom: 2rem;
   }
   
   .header {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
   }
   
-  .imageContainer {
-    height: 180px;
-  }
-  
+  /* Remove fixed heights on mobile for better flow */
   .cardTitle {
-    font-size: 1.75rem;
+    min-height: auto;
+    margin-bottom: 1rem;
+    font-size: 1.375rem;
   }
   
   .cardClaim {
-    font-size: 1.125rem;
+    min-height: auto;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .imageContainer {
+    height: 140px; /* Adjusted for mobile */
+    margin-bottom: 1rem;
+  }
+  
+  .audienceImage {
+    width: 100px; /* Adjusted for mobile */
+    height: 100px;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
   
   .title {
@@ -237,46 +191,26 @@
   
   .audienceGrid {
     gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  
-  .cardContent {
-    padding: 1.5rem;
   }
   
   .cardTitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   
   .cardClaim {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
   }
   
   .imageContainer {
-    height: 160px;
-    padding: 1.5rem;
+    height: 120px; /* Adjusted for smaller mobile */
   }
   
   .audienceImage {
-    max-width: 120px;
-    max-height: 120px;
+    width: 90px; /* Adjusted for smaller mobile */
+    height: 90px;
   }
   
-  .cardExample {
-    padding: 1.25rem;
-  }
-  
-  .bottomCta {
-    padding: 2rem 1.5rem;
-  }
-  
-  .ctaText {
-    font-size: 1.125rem;
-  }
-  
-  .ctaButton {
-    font-size: 1rem;
-    padding: 0.875rem 1.75rem;
+  .exampleText {
+    font-size: 0.85rem;
   }
 }

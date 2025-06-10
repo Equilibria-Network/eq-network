@@ -1,19 +1,14 @@
 /* src/components/Home2/SimulationsSection.module.css */
 
-/* Full-width semi-transparent BLUE background section (swapped from white) */
+/* Full-width transparent section - same as foundations */
 .section {
-  background: rgba(0, 59, 126, 0.95); /* Blue background - swapped from white */
+  background: transparent; /* No background color */
   padding: 8rem 0;
   position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
-}
-
-/* Dark mode - lighter blue with transparency */
-[data-theme='dark'] .section {
-  background: rgba(0, 85, 196, 0.95); /* Lighter blue for dark mode */
 }
 
 .container {
@@ -39,7 +34,7 @@
 .streamTitle {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-primary); /* Use theme primary color */
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
@@ -47,7 +42,7 @@
 .boldClaim {
   font-size: 1.375rem;
   font-weight: 600;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-emphasis-800); /* Use theme text color */
   margin-bottom: 2rem;
   line-height: 1.4;
 }
@@ -65,13 +60,17 @@
   height: auto;
   max-height: 250px;
   object-fit: contain;
-  transition: filter 0.3s ease;
-  filter: brightness(0) saturate(100%) invert(100%); /* White icons on blue background */
+  transition: transform 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%); /* Primary color icons */
+}
+
+[data-theme='dark'] .streamImage {
+  filter: brightness(0) saturate(100%) invert(100%); /* White icons in dark mode */
 }
 
 .description {
   font-size: 1.125rem;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
   margin: 0;
 }
@@ -90,7 +89,7 @@
 .detailTitle {
   font-size: 1.25rem; /* Increased from 1.125rem */
   font-weight: 600;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-primary); /* Use theme primary color */
   margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -98,7 +97,7 @@
 
 .detailText {
   font-size: 1.125rem; /* Increased from 1rem */
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
   margin: 0;
 }
@@ -109,7 +108,11 @@
 }
 
 .faqItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .faqItem {
+  border-bottom-color: var(--ifm-color-emphasis-300);
 }
 
 .faqItem:last-child {
@@ -127,7 +130,7 @@
   border: none;
   font-size: 1rem; /* Increased from 0.9rem */
   font-weight: 600;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-emphasis-800); /* Use theme text color */
   cursor: pointer;
   text-align: left;
   transition: color 0.2s ease;
@@ -135,7 +138,7 @@
 }
 
 .faqQuestion:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ifm-color-primary);
 }
 
 .faqQuestion span {
@@ -144,9 +147,13 @@
 
 .faqIcon {
   transition: transform 0.2s ease;
-  color: #ffffff;
+  color: var(--ifm-color-primary);
   flex-shrink: 0;
   margin-top: 0.125rem;
+}
+
+[data-theme='dark'] .faqIcon {
+  color: var(--ifm-color-primary-lighter);
 }
 
 .faqIconExpanded {
@@ -155,7 +162,7 @@
 
 .faqAnswer {
   padding-bottom: 1rem;
-  color: #ffffff; /* White text on blue background */
+  color: var(--ifm-color-emphasis-700); /* Use theme text color */
   line-height: 1.6;
   font-size: 1.05rem; /* Increased from 0.95rem */
   animation: fadeIn 0.2s ease;

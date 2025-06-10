@@ -17,7 +17,7 @@
 }
 
 .modalContent {
-  background: var(--ifm-background-surface-color);
+  background: #ffffff; /* Force white background in light mode */
   border-radius: 12px;
   width: 100%;
   max-width: 900px;
@@ -29,6 +29,13 @@
   /* Custom scrollbar */
   scrollbar-width: thin;
   scrollbar-color: var(--ifm-color-primary) var(--ifm-color-emphasis-200);
+}
+
+/* Force dark mode background */
+[data-theme='dark'] .modalContent {
+  background: #1b1b1d; /* Dark background for dark mode */
+  border-color: var(--ifm-color-emphasis-400);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* Webkit scrollbar styles */
@@ -49,11 +56,6 @@
 
 .modalContent::-webkit-scrollbar-thumb:hover {
   background: var(--ifm-color-primary-darker);
-}
-
-[data-theme='dark'] .modalContent {
-  border-color: var(--ifm-color-emphasis-400);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .modalCloseButton {
@@ -83,6 +85,7 @@
 .modalHeader {
   padding: 2rem 2rem 1rem 2rem;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: inherit; /* Inherit the solid background from modalContent */
 }
 
 .modalTitle {
@@ -109,6 +112,7 @@
 
 .modalBody {
   padding: 2rem;
+  background: inherit; /* Inherit the solid background from modalContent */
 }
 
 .modalSection {

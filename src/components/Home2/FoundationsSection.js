@@ -11,7 +11,6 @@ export default function FoundationsSection() {
 
   const { research } = homeContent;
   const stream = research.streams.find(s => s.id === 'foundations');
-  const { config } = research;
 
   const toggleFaq = (faqIndex) => {
     setExpandedFaq(expandedFaq === faqIndex ? null : faqIndex);
@@ -81,13 +80,6 @@ export default function FoundationsSection() {
                   </div>
                 );
               })}
-            </div>
-
-            {/* Learn More Link */}
-            <div className={styles.learnMore}>
-              <a href={config.learnMoreLink} className={styles.learnMoreLink}>
-                {config.learnMoreText}
-              </a>
             </div>
 
           </div>
