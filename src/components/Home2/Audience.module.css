@@ -1,10 +1,9 @@
 /* src/components/Home2/Audience.module.css */
 
 .section {
-  padding: 6rem 0;
+  padding: 8rem 0;
   position: relative;
   background: transparent;
-  color: var(--ifm-color-content);
 }
 
 .container {
@@ -13,45 +12,36 @@
   padding: 0 var(--ifm-spacing-horizontal);
 }
 
-/* Section Header */
+/* Section Header - Simplified */
 .header {
   text-align: center;
-  margin-bottom: 4rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 5rem;
 }
 
 .title {
   font-size: 3rem;
   font-weight: 700;
   color: var(--ifm-color-primary);
-  margin-bottom: 1rem;
+  margin: 0;
   line-height: 1.1;
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Audience Grid */
+/* Audience Grid - Similar to research sections */
 .audienceGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  margin-bottom: 4rem;
+  gap: 4rem;
+  margin-bottom: 6rem;
 }
 
-/* Audience Cards */
 .audienceCard {
   background: var(--ifm-background-surface-color);
   border: 2px solid var(--ifm-color-emphasis-200);
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 0;
+  text-align: center;
   transition: all 0.3s ease;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -59,8 +49,8 @@
 
 .audienceCard:hover {
   border-color: var(--ifm-color-primary-lighter);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
 
 [data-theme='dark'] .audienceCard {
@@ -69,96 +59,105 @@
 }
 
 [data-theme='dark'] .audienceCard:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Card Header */
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.cardIcon {
-  width: 56px;
-  height: 56px;
-  background: var(--ifm-color-primary);
-  color: white;
-  border-radius: 12px;
+/* Image Container - Like research sections */
+.imageContainer {
+  width: 100%;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  padding: 2rem;
+  background: var(--ifm-color-emphasis-50);
+}
+
+[data-theme='dark'] .imageContainer {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.audienceImage {
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  /* SVG coloring for light mode */
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+}
+
+[data-theme='dark'] .audienceImage {
+  /* SVG coloring for dark mode */
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.audienceCard:hover .audienceImage {
+  transform: scale(1.1);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
 }
 
 .cardTitle {
-  font-size: 1.375rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--ifm-color-primary);
-  margin: 0;
+  margin: 0 0 1.5rem 0;
   line-height: 1.2;
+  text-align: center;
 }
 
-/* Card Claim */
 .cardClaim {
-  margin-bottom: 1.5rem;
-}
-
-.claimText {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--ifm-color-primary);
-  margin: 0;
+  color: var(--ifm-color-emphasis-800);
+  margin: 0 0 2rem 0;
   line-height: 1.4;
+  text-align: center;
 }
 
-/* Card Description */
-.cardDescription {
-  margin-bottom: 1.5rem;
-}
-
-.descriptionText {
-  font-size: 1rem;
-  color: var(--ifm-color-emphasis-700);
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* Card Example */
 .cardExample {
+  background: var(--ifm-color-emphasis-50);
+  padding: 1.5rem;
+  border-radius: 12px;
   margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
 }
 
 [data-theme='dark'] .cardExample {
-  border-top-color: var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
 }
 
 .exampleTitle {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--ifm-color-primary);
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 1rem 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .exampleText {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--ifm-color-emphasis-700);
-  margin: 0;
   line-height: 1.6;
+  margin: 0;
   font-style: italic;
 }
 
 /* Bottom CTA */
 .bottomCta {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   background: rgba(var(--ifm-color-primary-rgb), 0.05);
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid rgba(var(--ifm-color-primary-rgb), 0.1);
 }
 
@@ -168,9 +167,9 @@
 }
 
 .ctaText {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: var(--ifm-color-emphasis-700);
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 2rem 0;
   line-height: 1.5;
 }
 
@@ -192,19 +191,18 @@
   color: white;
   text-decoration: none;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive Design */
 @media (max-width: 992px) {
   .section {
-    padding: 4rem 0;
+    padding: 6rem 0;
   }
   
   .audienceGrid {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 3rem;
+    margin-bottom: 4rem;
   }
   
   .title {
@@ -212,56 +210,69 @@
   }
   
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
   
-  .audienceCard {
-    padding: 1.75rem;
+  .imageContainer {
+    height: 180px;
+  }
+  
+  .cardTitle {
+    font-size: 1.75rem;
+  }
+  
+  .cardClaim {
+    font-size: 1.125rem;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 3rem 0;
+    padding: 4rem 0;
   }
   
   .title {
     font-size: 2rem;
   }
   
-  .subtitle {
-    font-size: 1.125rem;
+  .audienceGrid {
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
   
-  .audienceCard {
+  .cardContent {
     padding: 1.5rem;
-  }
-  
-  .cardHeader {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-  }
-  
-  .cardIcon {
-    width: 48px;
-    height: 48px;
   }
   
   .cardTitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
   
-  .claimText {
+  .cardClaim {
     font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
   
-  .bottomCta {
+  .imageContainer {
+    height: 160px;
     padding: 1.5rem;
   }
   
+  .audienceImage {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  
+  .cardExample {
+    padding: 1.25rem;
+  }
+  
+  .bottomCta {
+    padding: 2rem 1.5rem;
+  }
+  
   .ctaText {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
   
   .ctaButton {

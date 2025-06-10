@@ -1,17 +1,23 @@
 // src/pages/home2.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { 
   Hero, 
   Research, 
-  Audience, 
-  AboutUs,
-  WorkWithUs,
+  Audience,
 } from '../components/Home2';
 
 export default function Home2() {
   const {siteConfig} = useDocusaurusContext();
+  
+  // Add body class for page-specific styles
+  useEffect(() => {
+    document.documentElement.classList.add('home2-page');
+    return () => {
+      document.documentElement.classList.remove('home2-page');
+    };
+  }, []);
   
   return (
     <Layout
@@ -77,12 +83,18 @@ export default function Home2() {
           margin-top: 0 !important;
         }
       `}</style>
-      <Hero />
+      
+      {/* Add IDs for scroll progress and navigation */}
+      <div id="hero">
+        <Hero />
+      </div>
       <main style={{ marginBottom: 0, paddingBottom: 0, background: 'transparent' }}>
-        <Research />
-        <Audience />
-        <AboutUs />
-        <WorkWithUs />
+        <div id="research">
+          <Research />
+        </div>
+        <div id="audience">
+          <Audience />
+        </div>
       </main>
     </Layout>
   );

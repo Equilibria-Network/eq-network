@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "tagline": "Modelling the impact of AI on civilization.",
+    "description": "We help decision makers test interventions before implementing them in the real world, using large scale simulations powered by rigorous mathematical foundations.",
+    "highlights": ["simulations", "mathematical foundations"]
+  },
+  
+  "research": {
+    "title": "Two Core Research Streams",
+    "streams": [
+      {
+        "id": "simulations",
+        "title": "Agent-Based Simulations",
+        "claim": "We discover collective behavior laws that no human observation could find.",
+        "image": "/img/home/research/agent_based_model.svg",
+        "description": "We can run thousands of controlled experiments on societal simulations - impossible in the real world but essential if you want to make better decisions in a rapidly transforming world.",
+        "example": "Our research revealed that jailbreaking LLMs to act as consistent adversaries produces unstable results - even with explicit \"attack the system\" prompts, the agents drift toward cooperative behavior over time. This makes democratic mechanisms appear unrealistically resilient. We're now building simulation frameworks that pair RL agents (trained with explicit negative rewards) as adversaries with LLM agents as defenders. This hybrid approach creates more realistic stress-testing environments that match real-world conditions, where human defenders exhibit nuanced reasoning while genuine threats maintain consistent pressure over time.",
+        "hideExample": true,
+        "faqs": [
+          {
+            "question": "Are you claiming you can test governance mechanisms before deploying them on real populations?",
+            "answer": "Yes. We can model how democratic systems break down, how coordination mechanisms fail, how multi-agent AI systems go rogue - and test interventions before implementing them on millions of people. We're building a laboratory for collective decision-making."
+          },
+          {
+            "question": "Can you really predict something as chaotic and complex as collective behavior?",
+            "answer": "We don't predict the weather - we predict the climate. We can't tell you if a specific democracy will fail next Tuesday, but we can show when democratic systems become unstable. Just like climatologists can't predict tomorrow's weather but can predict long-term warming trends."
+          },
+          {
+            "question": "Why hasn't someone already built these simulations? What makes yours different from existing agent-based models?",
+            "answer": "We combine proven mathematical frameworks from different fields using composition techniques that weren't computationally feasible before. The breakthrough is timing: LLMs now provide the cognitive engines for boundedly rational agents, while modern computational power lets us run these composed mathematical frameworks at scale. Previous simulations were limited by either hand-coded behavioral rules or computational constraints. We can now mathematically compose existing models in ways that preserve their theoretical guarantees while scaling to complex multi-agent scenarios that mirror real-world institutional dynamics."
+          }
+        ]
+      },
+      {
+        "id": "foundations",
+        "title": "Mathematical Foundations",
+        "claim": "We're discovering the mathematical laws that govern all collective intelligence.",
+        "image": "/img/home/research/mathematical_foundations.svg",
+        "description": "We use category theory to import proven theorems from network science directly into social systems, creating a \"periodic table\" of coordination mechanisms instead of building new math from scratch.",
+        "example": "We developed frameworks showing that markets, networks, and democracies aren't cultural accidents - they're optimal solutions to different information processing problems. Markets for compressible information (prices), networks for local structure, democracies for aggregation. This explains why the same structures appear from ant colonies to AI systems, and lets us predict which coordination mechanisms will emerge in new domains like multi-agent AI.",
+        "faqs": [
+          {
+            "question": "You're claiming coordination mechanisms follow mathematical laws like crystals forming?",
+            "answer": "Yes. We're proving that markets, democracies, and networks aren't cultural accidents - they're mathematically optimal solutions to different information processing problems. Just like physics explains why crystals form specific shapes, we're discovering the mathematical principles that explain why specific coordination structures emerge."
+          },
+          {
+            "question": "Isn't this just game theory or multi-agent reinforcement learning with fancy math words?",
+            "answer": "Game theory assumes fixed rules and perfect rationality. Multi-agent RL finds good strategies within existing games. We're discovering the mathematical principles that determine which coordination structures emerge in the first place - why markets work for some problems, why democracies exist at all."
+          },
+          {
+            "question": "Why hasn't someone already solved this? Surely mathematicians have studied collective behavior before.",
+            "answer": "They have - but in isolated domains. Economists study markets, political scientists study democracy, computer scientists study networks. Category theory lets us import proven theorems from all these fields into one unified framework. We're not inventing new math, we're finding the hidden connections between existing math."
+          }
+        ]
+      }
+    ],
+    "config": {
+      "learnMoreText": "Learn more about our research →",
+      "learnMoreLink": "/research"
+    }
+  },
+  
+  "audience": {
+    "title": "Who This Matters To",
+    "audiences": [
+      {
+        "id": "policymakers",
+        "title": "Policymakers",
+        "image": "/img/home/audience/policymaker.svg",
+        "claim": "We can help you see and quantify the potential impact of your governance proposals on wide populations before implementation",
+        "example": "Semiconductor supply chain policies often create hidden vulnerabilities when critical nodes concentrate in adversarial regions. We're building models to reveal which interventions actually increase resilience versus which just look good on paper."
+      },
+      {
+        "id": "researchers",
+        "title": "AI Safety Researchers", 
+        "image": "/img/home/audience/researcher.svg",
+        "claim": "We can help you evaluate emergent risks and the safety of multi-agent AI systems",
+        "example": "We're building mathematical frameworks to predict where multi-agent AI systems break down and identify the control levers needed to prevent those breakdowns. Our approach combines phase transition analysis - mapping the critical points where collective AI behavior shifts from beneficial to harmful - with top-down control theory that reveals which interventions can steer these systems toward pro-social outcomes before problems emerge."
+      },
+      {
+        "id": "labs",
+        "title": "AI Labs",
+        "image": "/img/home/audience/ai_lab.svg",
+        "claim": "Predict emergent behaviors before expensive deployment",
+        "example": "AI systems from many organizations will need to coordinate someday. Should they trade information like a market, vote like democracies, or try some other type of coordination mechanism? We are designing simulations to tell you which approach will work best before you spend millions building systems that end up with coordination failures."
+      }
+    ]
+  },
+  
+  "metadata": {
+    "lastUpdated": "2024-12-19",
+    "version": "1.1",
+    "author": "Equilibria Network Team"
+  }
+}

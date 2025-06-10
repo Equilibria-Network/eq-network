@@ -3,9 +3,27 @@ import React from 'react';
 import styles from './Hero.module.css';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
+// Import centralized content
+import homeContent from '../../data/home.json';
+
 export default function Hero() {
+  const { hero } = homeContent;
+
+  // Helper to wrap highlighted terms in spans
+  const renderTextWithHighlights = (text, highlights = []) => {
+    if (!highlights.length) return text;
+    
+    let result = text;
+    highlights.forEach(highlight => {
+      const regex = new RegExp(`\\b${highlight}\\b`, 'gi');
+      result = result.replace(regex, `<span class="${styles.highlight}">${highlight}</span>`);
+    });
+    
+    return { __html: result };
+  };
+
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} snap-section hero`}>
       <div className={styles.container}>
         <div className={styles.heroContent}>
           {/* Left Section - Text Content - Desktop Only */}
@@ -21,15 +39,15 @@ export default function Hero() {
             
             {/* Tagline Area */}
             <div className={styles.taglineArea}>
-              <p className={styles.tagline}>Modelling the impact of AI on civilization.</p>
+              <p className={styles.tagline}>{hero.tagline}</p>
             </div>
             
             {/* Description Area */}
             <div className={styles.descriptionArea}>
-              <p className={styles.description}>
-                We help decision makers test interventions before implementing them in the real world, 
-                using large scale <span className={styles.highlight}>simulations</span> powered by rigorous <span className={styles.highlight}>mathematical foundations</span>.
-              </p>
+              <p 
+                className={styles.description}
+                dangerouslySetInnerHTML={renderTextWithHighlights(hero.description, hero.highlights)}
+              />
             </div>
           </div>
           
@@ -62,15 +80,15 @@ export default function Hero() {
           <div className={styles.bottomTextSection}>
             {/* Tagline Area */}
             <div className={styles.taglineArea}>
-              <p className={styles.tagline}>Modelling the impact of AI on civilization.</p>
+              <p className={styles.tagline}>{hero.tagline}</p>
             </div>
             
             {/* Description Area */}
             <div className={styles.descriptionArea}>
-              <p className={styles.description}>
-                We help decision makers test interventions before implementing them in the real world, 
-                using large scale <span className={styles.highlight}>simulations</span> powered by rigorous <span className={styles.highlight}>mathematical foundations</span>.
-              </p>
+              <p 
+                className={styles.description}
+                dangerouslySetInnerHTML={renderTextWithHighlights(hero.description, hero.highlights)}
+              />
             </div>
           </div>
         </div>

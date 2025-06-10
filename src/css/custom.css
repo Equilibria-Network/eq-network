@@ -7,6 +7,7 @@
 @import './navbar.css';
 @import './layout.css';
 @import './tippy.css';
+@import './soft-snap.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

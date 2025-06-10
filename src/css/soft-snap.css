@@ -1,0 +1,63 @@
+/* src/css/soft-snap.css */
+/* Soft snap scrolling styles - add this to your custom.css or create a new file */
+
+
+
+/* Soft snap scrolling styles */
+html.home2-page {
+  scroll-snap-type: y proximity; /* proximity = gentle, mandatory = aggressive */
+  scroll-behavior: smooth; /* Smooth scrolling for navigation links */
+}
+
+/* Each main section gets snap alignment */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal; /* Allows scrolling through sections */
+  min-height: 100vh; /* Flexible height that can expand */
+  position: relative;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hero section should always be full height */
+.snap-section.hero {
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* For sections that might have overflow content */
+.snap-section.allow-overflow {
+  min-height: 100vh;
+  /* Content can extend beyond viewport if needed */
+}
+
+/* Special handling for the last section to avoid awkward footer snapping */
+.snap-section:last-child {
+  scroll-snap-align: end;
+  min-height: calc(100vh - 200px); /* Account for footer */
+}
+
+/* On mobile, reduce the snap effect and min-height */
+@media (max-width: 768px) {
+  html.home2-page {
+    scroll-snap-type: none; /* Disable on mobile for better touch experience */
+  }
+  
+  .snap-section {
+    min-height: auto; /* Let content determine height on mobile */
+    scroll-snap-align: none;
+    padding: 1rem 0;
+  }
+  
+  .snap-section.hero {
+    min-height: 100vh; /* Keep hero full height on mobile */
+    padding: 0;
+  }
+  
+  .snap-section:last-child {
+    min-height: auto;
+    scroll-snap-align: none;
+  }
+}

@@ -1,44 +1,25 @@
-/* src/components/Home2/Research.module.css */
+/* src/components/Home2/FoundationsSection.module.css */
 
+/* Full-width semi-transparent blue background section */
 .section {
-  padding: 6rem 0;
+  background: rgba(0, 59, 126, 0.95); /* More transparent blue background */
+  padding: 8rem 0; /* Increased padding to match simulations */
   position: relative;
-  background: transparent;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Dark mode - lighter blue with transparency */
+[data-theme='dark'] .section {
+  background: rgba(0, 85, 196, 0.95); /* More transparent lighter blue */
 }
 
 .container {
   max-width: var(--ifm-container-width);
   margin: 0 auto;
   padding: 0 var(--ifm-spacing-horizontal);
-  width: 100%;
-}
-
-/* Section Header */
-.header {
-  text-align: center;
-  margin-bottom: 5rem;
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--ifm-color-primary);
-  margin: 0;
-  line-height: 1.1;
-}
-
-/* Streams Container */
-.streamsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-}
-
-/* Individual Stream */
-.stream {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .streamContent {
@@ -55,22 +36,10 @@
   flex-direction: column;
 }
 
-/* Right Side - Questions */
-.streamQuestions {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Left Side - Scanning */
-.streamMain {
-  display: flex;
-  flex-direction: column;
-}
-
 .streamTitle {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--ifm-color-primary);
+  color: #ffffff;
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
@@ -78,7 +47,7 @@
 .boldClaim {
   font-size: 1.375rem;
   font-weight: 600;
-  color: var(--ifm-color-primary);
+  color: #ffffff;
   margin-bottom: 2rem;
   line-height: 1.4;
 }
@@ -86,7 +55,7 @@
 .imageContainer {
   width: 100%;
   max-width: 350px;
-  margin: 0 auto 2rem auto; /* Center aligned */
+  margin: 0 auto 2rem auto;
   display: flex;
   justify-content: center;
 }
@@ -96,11 +65,13 @@
   height: auto;
   max-height: 250px;
   object-fit: contain;
+  transition: filter 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .description {
   font-size: 1.125rem;
-  color: var(--ifm-color-emphasis-700);
+  color: #ffffff;
   line-height: 1.6;
   margin: 0;
 }
@@ -119,7 +90,7 @@
 .detailTitle {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--ifm-color-primary);
+  color: #ffffff;
   margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -127,18 +98,18 @@
 
 .detailText {
   font-size: 1rem;
-  color: var(--ifm-color-emphasis-700);
+  color: #ffffff;
   line-height: 1.6;
   margin: 0;
 }
 
-/* FAQ Container - Direct Expandable */
+/* FAQ Container */
 .faqContainer {
   margin-top: 2rem;
 }
 
 .faqItem {
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .faqItem:last-child {
@@ -156,7 +127,7 @@
   border: none;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--ifm-color-emphasis-800);
+  color: #ffffff;
   cursor: pointer;
   text-align: left;
   transition: color 0.2s ease;
@@ -164,7 +135,7 @@
 }
 
 .faqQuestion:hover {
-  color: var(--ifm-color-primary);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .faqQuestion span {
@@ -173,7 +144,7 @@
 
 .faqIcon {
   transition: transform 0.2s ease;
-  color: var(--ifm-color-primary);
+  color: #ffffff;
   flex-shrink: 0;
   margin-top: 0.125rem;
 }
@@ -184,99 +155,44 @@
 
 .faqAnswer {
   padding-bottom: 1rem;
-  color: var(--ifm-color-emphasis-700);
+  color: #ffffff;
   line-height: 1.6;
   font-size: 0.95rem;
   animation: fadeIn 0.2s ease;
   font-style: italic;
 }
 
+.faqAnswer p {
+  margin: 0;
+}
+
 /* Learn More Link */
 .learnMore {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
 }
 
 .learnMoreLink {
   display: inline-flex;
   align-items: center;
-  color: var(--ifm-color-primary);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
-  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .learnMoreLink:hover {
-  background: var(--ifm-color-primary);
-  color: white;
+  background: #ffffff;
+  color: var(--ifm-color-primary);
   text-decoration: none;
   transform: translateY(-1px);
-}
-
-/* Dark mode specific adjustments */
-[data-theme='dark'] .learnMoreLink {
-  background: rgba(var(--ifm-color-primary-rgb), 0.15);
-}
-
-[data-theme='dark'] .learnMoreLink:hover {
-  background: var(--ifm-color-primary-lighter);
-  color: var(--ifm-color-primary-darkest);
-}
-
-/* Ensure all colors are properly responsive to light/dark mode */
-
-/* Section and container use default Docusaurus colors */
-.section {
-  padding: 6rem 0;
-  position: relative;
-  background: transparent;
-  color: var(--ifm-color-content); /* Responsive text color */
-}
-
-/* Headers use primary color which is already responsive */
-.title, .streamTitle {
-  color: var(--ifm-color-primary);
-}
-
-.boldClaim {
-  color: var(--ifm-color-primary);
-}
-
-/* Text content uses emphasis colors which are responsive */
-.description, .detailText {
-  color: var(--ifm-color-emphasis-700);
-}
-
-.detailTitle {
-  color: var(--ifm-color-primary);
-}
-
-/* FAQ styling with responsive colors */
-.faqQuestion {
-  color: var(--ifm-color-emphasis-800);
-  border-bottom-color: var(--ifm-color-emphasis-200);
-}
-
-.faqQuestion:hover {
-  color: var(--ifm-color-primary);
-}
-
-.faqAnswer {
-  color: var(--ifm-color-emphasis-700);
-}
-
-.faqIcon {
-  color: var(--ifm-color-primary);
-}
-
-.faqAnswer p {
-  margin: 0;
 }
 
 @keyframes fadeIn {
@@ -287,11 +203,8 @@
 /* Responsive Design */
 @media (max-width: 992px) {
   .section {
-    padding: 4rem 0;
-  }
-  
-  .streamsContainer {
-    gap: 6rem;
+    padding: 6rem 0;
+    min-height: auto;
   }
   
   .streamContent {
@@ -299,34 +212,19 @@
     gap: 3rem;
   }
   
-  .title {
-    font-size: 2.5rem;
-  }
-  
   .streamTitle {
     font-size: 2rem;
+    text-align: center;
   }
   
   .boldClaim {
     font-size: 1.25rem;
     margin-bottom: 2rem;
+    text-align: center;
   }
   
   .imageContainer {
-    max-width: 350px;
     margin-bottom: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .example {
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .header {
-    margin-bottom: 4rem;
   }
   
   .streamMain {
@@ -336,19 +234,12 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 3rem 0;
-  }
-  
-  .streamsContainer {
-    gap: 4rem;
+    padding: 4rem 0;
+    min-height: auto;
   }
   
   .streamContent {
     gap: 2rem;
-  }
-  
-  .title {
-    font-size: 2rem;
   }
   
   .streamTitle {
@@ -370,11 +261,6 @@
     max-height: 220px;
   }
   
-  .example {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
-  
   .faqQuestion {
     font-size: 0.85rem;
     padding: 0.75rem 0;
@@ -383,9 +269,5 @@
   .faqAnswer {
     font-size: 0.85rem;
     padding-bottom: 0.75rem;
-  }
-  
-  .header {
-    margin-bottom: 3rem;
   }
 }
