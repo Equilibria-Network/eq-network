@@ -27,6 +27,7 @@
     "@mdx-js/react": "^3.0.0",
     "@tippyjs/react": "^4.2.6",
     "clsx": "^2.0.0",
+    "d3": "^7.9.0",
     "docusaurus-plugin-matomo": "^0.0.8",
     "docusaurus-plugin-sass": "^0.2.6",
     "docusaurus-plugin-umami": "^2.0.0",

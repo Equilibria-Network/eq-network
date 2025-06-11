@@ -1,10 +1,10 @@
 // src/components/Home/Lorenz/visualization/MLPrediction.js
-// Simplified version
+// Mathematically accurate branching predictions implementation
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useCanvas } from '../utils/useCanvas';
 import styles from '../LorenzAttractor.module.css';
-import { getAvailablePredictors, getAllPredictors } from '../utils/predictors';
+import { getAllPredictors } from '../utils/predictors';
 import { getCssColor } from '../utils/lorenzUtils';
 
 const MLPrediction = ({ 
@@ -19,69 +19,134 @@ const MLPrediction = ({
   // Extract values from shared simulation
   const { pointsRef, currentPoint, currentRates } = simulation;
   
-  // Check for dark theme
-  const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
-  
-  // Get theme color
+  // Get theme colors
   const primaryColor = getCssColor('--ifm-color-primary');
-  const predictionColor = isDarkTheme 
-    ? { r: 255, g: 255, b: 255 } // White in dark mode
-    : { r: 0, g: 0, b: 0 };      // Black in light mode
   
-  // Local state for prediction rendering
-  const [predictionStepSize, setPredictionStepSize] = useState(1.0);
-  const [predictionPoints, setPredictionPoints] = useState([]);
-  
-  // Get current predictor
-  const allPredictors = getAllPredictors();
-  const currentPredictor = allPredictors.find(p => p.id === predictorId) || 
-                           getAvailablePredictors()[0];
-  
-  // Custom config for ML prediction visualization
-  const mlConfig = {
-    ...config,
-    display: {
-      ...config.display,
-      showPrediction: true
-    }
+  // Algorithm colors - mathematically distinct and accessible
+  const algorithmColors = {
+    'linear': { r: 220, g: 50, b: 47 },    // Red - fails quickly
+    'euler': { r: 255, g: 126, b: 0 },     // Orange - medium accuracy
+    'rk4': { r: 40, g: 167, b: 69 },       // Green - high accuracy
+    'predicted-rk4': { r: 138, g: 43, b: 226 }, // Purple - ML/Advanced
   };
   
-  // Update prediction when current point or predictor changes
-  useEffect(() => {
-    if (!currentPoint || !currentPredictor || currentPredictor.status !== 'available') return;
-    
-    // Get prediction function
-    const predictFn = currentPredictor.fn;
-    if (!predictFn) return;
-    
-    // Generate prediction
-    const predictions = predictFn(
-      currentPoint, 
-      config.system,
-      predictionSteps,
-      predictionStepSize
-    );
-    
-    setPredictionPoints(predictions);
-  }, [currentPoint, currentRates, predictorId, predictionSteps, predictionStepSize, config.system]);
+  // Algorithm metadata for display
+  const algorithmInfo = {
+    'linear': { name: 'Linear', accuracy: 'Low', description: 'dx/dt extrapolation' },
+    'euler': { name: 'Euler', accuracy: 'Medium', description: 'Forward Euler method' },
+    'rk4': { name: 'RK4', accuracy: 'High', description: 'Runge-Kutta 4th order' },
+    'predicted-rk4': { name: 'ML-RK4', accuracy: 'Variable', description: 'ML-enhanced prediction' }
+  };
   
-  // Use canvas hook for rendering
+  // State for predictions and errors
+  const [predictions, setPredictions] = useState({});
+  const [predictionErrors, setPredictionErrors] = useState({});
+  const [actualTrajectory, setActualTrajectory] = useState([]);
+  
+  // Get available predictors
+  const availablePredictors = getAllPredictors().filter(p => p.status === 'available');
+  
+  // Generate mathematically accurate predictions
+  useEffect(() => {
+    if (!currentPoint || !currentRates) return;
+    
+    const newPredictions = {};
+    const newErrors = {};
+    
+    // Current state for all algorithms
+    const startingPoint = { ...currentPoint };
+    const systemParams = config.system;
+    
+    // Generate predictions for each available algorithm
+    availablePredictors.forEach(predictor => {
+      if (predictor.fn) {
+        try {
+          // Generate prediction using the algorithm's mathematical model
+          const prediction = predictor.fn(
+            startingPoint,
+            systemParams,
+            predictionSteps,
+            1.0 // Step size multiplier
+          );
+          
+          newPredictions[predictor.id] = prediction;
+          
+          // Calculate mathematical error metrics
+          if (actualTrajectory.length > 0) {
+            const error = calculatePredictionError(prediction, actualTrajectory);
+            newErrors[predictor.id] = error;
+          } else {
+            newErrors[predictor.id] = 0;
+          }
+          
+        } catch (error) {
+          console.warn(`Prediction failed for ${predictor.id}:`, error);
+          newPredictions[predictor.id] = [];
+          newErrors[predictor.id] = Infinity;
+        }
+      }
+    });
+    
+    setPredictions(newPredictions);
+    setPredictionErrors(newErrors);
+    
+  }, [currentPoint, currentRates, predictionSteps, config.system, actualTrajectory]);
+  
+  // Track actual trajectory for error calculation
+  useEffect(() => {
+    if (pointsRef.current && pointsRef.current.length > 0) {
+      // Keep last N points for error comparison
+      const recentPoints = pointsRef.current.slice(-predictionSteps);
+      setActualTrajectory(recentPoints);
+    }
+  }, [pointsRef.current, predictionSteps]);
+  
+  // Calculate mathematical prediction error (Euclidean distance)
+  const calculatePredictionError = (prediction, actual) => {
+    if (!prediction || !actual || prediction.length === 0 || actual.length === 0) {
+      return 0;
+    }
+    
+    const minLength = Math.min(prediction.length, actual.length);
+    let totalError = 0;
+    
+    for (let i = 0; i < minLength; i++) {
+      const pred = prediction[i];
+      const act = actual[i];
+      
+      if (pred && act) {
+        const dx = pred.x - act.x;
+        const dy = pred.y - act.y;
+        const dz = pred.z - act.z;
+        totalError += Math.sqrt(dx*dx + dy*dy + dz*dz);
+      }
+    }
+    
+    return totalError / minLength; // Average error per step
+  };
+  
+  // Enhanced canvas rendering with branching predictions
   const { canvasRef, drawPoints } = useCanvas(containerRef, {
-    config: mlConfig,
+    config,
     pointsRef,
-    predictionPointsRef: { current: predictionPoints },
+    branchingPredictions: predictions,
+    algorithmColors,
     colors: {
-      primary: primaryColor,     // Theme color
-      prediction: predictionColor// Black/White based on theme
+      primary: primaryColor
     },
-    showPrediction: true,
-    lineWidth: 1.5              // Slightly thicker lines
+    showBranchingPredictions: true,
+    lineWidth: 1.8
   });
   
-  // Force redraw when simulation or prediction state changes
+  // Force redraw when predictions change
   useEffect(() => {
     drawPoints();
-  }, [isPlaying, drawPoints, predictionPoints]);
+  }, [isPlaying, drawPoints, predictions]);
+  
+  // Get sorted algorithms by accuracy for display
+  const sortedAlgorithms = availablePredictors
+    .filter(p => predictions[p.id] && predictions[p.id].length > 0)
+    .sort((a, b) => (predictionErrors[a.id] || 0) - (predictionErrors[b.id] || 0));
   
   return (
     <div ref={containerRef} className={styles.container}>

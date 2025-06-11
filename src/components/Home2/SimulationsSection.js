@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styles from './SimulationsSection.module.css';
 import { ChevronDown } from 'lucide-react';
+import DemocraticMechanisms from './Democratic/DemocraticMechanisms';
 
 // Import centralized content
 import homeContent from '../../data/home.json';
@@ -30,11 +31,8 @@ export default function SimulationsSection() {
             </p>
             
             <div className={styles.imageContainer}>
-              <img 
-                src={stream.image}
-                alt={stream.title}
-                className={styles.streamImage}
-              />
+              {/* Replace static image with interactive visualization */}
+              <DemocraticMechanisms />
             </div>
             
             <p className={styles.description}>

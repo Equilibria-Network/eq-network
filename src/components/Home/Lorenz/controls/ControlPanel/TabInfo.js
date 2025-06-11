@@ -1,14 +1,12 @@
-// src/components/Home/Lorenz_2/controls/ControlPanel/TabInfo.js
+// src/components/Home/Lorenz/controls/ControlPanel/TabInfo.js
 /**
  * Information tab content for the Lorenz attractor control panel.
  * 
- * This component renders educational information about the Lorenz system,
- * its relevance to Equilibria Network's work, and its significance in
- * understanding complex systems and emergent behaviors.
+ * This component renders educational information about the Lorenz system
+ * and its significance in understanding complex systems and emergent behaviors.
  * 
  * Responsibilities:
  * - Display information about the Lorenz attractor
- * - Relate the visualization to Equilibria's mission
  * - Adapt content based on visualization type
  * 
  * Dependencies:
@@ -18,7 +16,7 @@
 import React from 'react';
 import styles from './ControlPanel.module.css';
 
-const TabInfo = ({ visualizationType = 'standard' }) => {
+const TabInfo = ({ visualizationType = 'butterfly-effect' }) => {
   // Render different content based on visualization type
   switch (visualizationType) {
     case 'butterfly-effect':
@@ -27,32 +25,27 @@ const TabInfo = ({ visualizationType = 'standard' }) => {
           <div className={styles.section}>
             <div className={styles.sectionTitle}>The Butterfly Effect</div>
             <p className={styles.description}>
-              You're seeing two trajectories (blue and green) with nearly identical 
-              initial conditions (difference of only 0.000001). Watch how they follow similar paths
-              at first but eventually diverge completely.
+              Two trajectories with nearly identical initial conditions (difference of 0.000001) 
+              diverge exponentially over time. This demonstrates sensitive dependence on initial 
+              conditions - a hallmark of chaotic systems.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Why This Matters for Equilibria</div>
+            <div className={styles.sectionTitle}>Exponential Divergence</div>
             <p className={styles.description}>
-              This demonstration illustrates a core challenge in complex systems governance: small 
-              differences in initial conditions or minor interventions can lead to dramatically 
-              different outcomes over time.
-            </p>
-            <p className={styles.description}>
-              At Equilibria Network, we develop frameworks for understanding these sensitive 
-              dependencies in AI governance systems, helping identify where small changes might 
-              have outsized impacts on systemic outcomes.
+              Small differences compound over time. What starts as a microscopic separation 
+              becomes dramatically different trajectories, making long-term prediction 
+              fundamentally impossible despite perfect knowledge of the underlying equations.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Implications for AI Governance</div>
+            <div className={styles.sectionTitle}>Universal Principle</div>
             <p className={styles.description}>
-              AI systems interact with other complex systems like markets, politics, and information 
-              networks. Ensuring these hybrid systems remain stable and beneficial despite their chaotic 
-              potential is central to our research on collective intelligence.
+              This sensitivity appears across many complex systems - from weather patterns 
+              to population dynamics to economic markets. Understanding these dependencies 
+              is crucial for recognizing the limits of prediction and control.
             </p>
           </div>
         </div>
@@ -62,75 +55,84 @@ const TabInfo = ({ visualizationType = 'standard' }) => {
       return (
         <div className={styles.tabContent}>
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Prediction in Chaotic Systems</div>
+            <div className={styles.sectionTitle}>Algorithm Comparison</div>
             <p className={styles.description}>
-              This visualization demonstrates both the power and limitations of prediction in 
-              chaotic systems. The faint gray line shows an ML model's prediction of future states, 
-              with accuracy diminishing over time.
+              Multiple prediction algorithms branch from the current point, each using 
+              different mathematical approaches. Watch how they diverge and fail at different rates.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Connection to Our Research</div>
+            <div className={styles.sectionTitle}>Visual Legend</div>
+            <div className={styles.algorithmList}>
+              <div className={styles.algorithmItem}>
+                <div className={styles.colorLine} style={{backgroundColor: '#dc3245'}}></div>
+                <div className={styles.algorithmInfo}>
+                  <strong>Linear (Red, Dashed)</strong> - Simple dx/dt extrapolation. Fails quickly as it cannot account for changing rates.
+                </div>
+              </div>
+              <div className={styles.algorithmItem}>
+                <div className={styles.colorLine} style={{backgroundColor: '#ff7e00'}}></div>
+                <div className={styles.algorithmInfo}>
+                  <strong>Euler (Orange, Dash-Dot)</strong> - Forward Euler method. Recalculates rates at each step for better accuracy.
+                </div>
+              </div>
+              <div className={styles.algorithmItem}>
+                <div className={styles.colorLine} style={{backgroundColor: '#28a745'}}></div>
+                <div className={styles.algorithmInfo}>
+                  <strong>RK4 (Green, Solid)</strong> - Fourth-order Runge-Kutta. Most mathematically accurate numerical integration.
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles.section}>
+            <div className={styles.sectionTitle}>Mathematical Accuracy</div>
             <p className={styles.description}>
-              At Equilibria Network, we explore the fundamental limits of prediction in complex multi-agent 
-              systems. Understanding these boundaries is essential for designing realistic AI governance 
-              frameworks that don't rely on unreasonable predictive capabilities.
-            </p>
-            <p className={styles.description}>
-              Our work on social choice theory and decentralized consensus mechanisms accounts for the 
-              inherent unpredictability in these systems while still providing robust governance approaches.
+              Higher-order methods maintain accuracy longer, but all face fundamental limits 
+              in chaotic systems. The Lyapunov exponent determines how quickly small errors 
+              compound, creating an absolute ceiling on prediction horizons.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Practical Implications</div>
+            <div className={styles.sectionTitle}>Error Accumulation</div>
             <p className={styles.description}>
-              Rather than trying to predict exact trajectories far into the future, our research focuses 
-              on identifying stable equilibria and intervention points that can maintain desirable 
-              system properties despite uncertainty and chaos.
+              Notice how prediction lines fade as they extend further - this represents 
+              growing uncertainty. Even with perfect mathematical models, sensitive 
+              dependence on initial conditions makes long-term prediction impossible.
             </p>
           </div>
         </div>
       );
     
-    case 'standard':
     default:
       return (
         <div className={styles.tabContent}>
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>The Lorenz Attractor & Complex Systems</div>
+            <div className={styles.sectionTitle}>The Lorenz System</div>
             <p className={styles.description}>
-              The Lorenz attractor visualized here demonstrates how simple mathematical rules can 
-              generate complex, unpredictable behavior—a key concept in chaos theory and complex 
-              systems research.
+              Three coupled differential equations describing atmospheric convection. 
+              Despite their mathematical simplicity, they generate infinitely complex, 
+              non-repeating behavior constrained to a finite region of phase space.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Connection to Equilibria Network</div>
+            <div className={styles.sectionTitle}>Strange Attractor</div>
             <p className={styles.description}>
-              At Equilibria Network, we study complex systems and emergent behavior to understand 
-              how AI systems interact with human societies. This visualization serves as a symbol 
-              of our approach: analyzing the underlying patterns in seemingly chaotic interactions.
-            </p>
-            <p className={styles.description}>
-              Just as the Lorenz system produces the butterfly-shaped attractor you see here, 
-              AI governance systems exhibit emergent properties that can't be understood by 
-              looking at individual components in isolation.
+              The butterfly-shaped structure emerges from the system's dynamics without 
+              being explicitly programmed. This strange attractor has fractal structure - 
+              infinite detail at every scale of magnification.
             </p>
           </div>
           
           <div className={styles.section}>
-            <div className={styles.sectionTitle}>Our Approach</div>
+            <div className={styles.sectionTitle}>Bifurcation Point</div>
             <p className={styles.description}>
-              We develop mathematical frameworks and agent-based models inspired by complex systems 
-              science to map intervention points that can shift inadequate equilibria toward more 
-              robust, sustainable systems that benefit humanity.
-            </p>
-            <p className={styles.description}>
-              By understanding the attractors and phase transitions in governance systems, we can 
-              design frameworks that maintain human agency and control even as AI capabilities grow.
+              When the parameter ρ exceeds 24.74, the system transitions from stable 
+              fixed points to chaotic behavior. This bifurcation represents a 
+              fundamental change in system dynamics at a precise mathematical threshold.
             </p>
           </div>
         </div>

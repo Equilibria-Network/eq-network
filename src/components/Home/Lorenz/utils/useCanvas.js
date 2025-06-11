@@ -1,7 +1,5 @@
 // src/components/Home/Lorenz/utils/useCanvas.js
-/**
- * Custom hook for canvas rendering of the Lorenz attractor.
- */
+// Enhanced to handle branching predictions rendering
 
 import { useRef, useEffect } from 'react';
 import { projectPoint } from './lorenzUtils';
@@ -13,6 +11,8 @@ export function useCanvas(
     pointsRef,
     secondaryPointsRef = null,
     predictionPointsRef = null,
+    branchingPredictions = null, // New: object with multiple predictions
+    algorithmColors = {}, // New: colors for each algorithm
     colors = { 
       primary: { r: 0, g: 59, b: 126 },
       secondary: { r: 0, g: 0, b: 0 },
@@ -21,6 +21,7 @@ export function useCanvas(
     perspective = 'xz',
     showSecondaryTrajectory = false,
     showPrediction = false,
+    showBranchingPredictions = false, // New flag
     lineWidth = 1.5
   }
 ) {
@@ -66,7 +67,12 @@ export function useCanvas(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
     
-    // Draw prediction trajectory if enabled
+    // Draw branching predictions if enabled
+    if (showBranchingPredictions && branchingPredictions) {
+      drawBranchingPredictions(ctx, canvas, branchingPredictions, algorithmColors, perspective);
+    }
+    
+    // Draw single prediction trajectory if enabled (legacy support)
     if (showPrediction && predictionPointsRef && predictionPointsRef.current && predictionPointsRef.current.length > 0) {
       drawPredictionTrajectory(
         ctx, 
@@ -97,28 +103,104 @@ export function useCanvas(
       perspective
     );
     
-    // Draw current point marker for both trajectories
-    if (pointsRef.current.length > 0) {
-      const lastPoint = pointsRef.current[pointsRef.current.length - 1];
-      const projected = projectPoint(
-        lastPoint,
-        canvas,
-        config.display.bounds,
-        perspective,
-        config.animation.padding
-      );
-      
-      // Draw dot at current position with better appearance
-      ctx.beginPath();
-      ctx.arc(projected.x, projected.y, 3, 0, 2 * Math.PI);
-      ctx.fillStyle = `rgb(${colors.primary.r}, ${colors.primary.g}, ${colors.primary.b})`;
-      ctx.fill();
-    }
+    // Draw current point markers
+    drawCurrentPointMarkers(ctx, canvas, perspective);
+  };
+  
+  // NEW: Draw branching predictions from multiple algorithms
+  const drawBranchingPredictions = (ctx, canvas, predictions, algorithmColors, perspective) => {
+    if (!predictions || Object.keys(predictions).length === 0) return;
     
-    // Draw secondary current point marker if enabled
-    if (showSecondaryTrajectory && secondaryPointsRef && secondaryPointsRef.current.length > 0) {
-      const lastPoint = secondaryPointsRef.current[secondaryPointsRef.current.length - 1];
+    // Get current point as branch origin
+    const currentPoint = pointsRef.current[pointsRef.current.length - 1];
+    if (!currentPoint) return;
+    
+    // Draw each prediction branch
+    Object.entries(predictions).forEach(([algorithmId, predictionPoints]) => {
+      if (!predictionPoints || predictionPoints.length === 0) return;
+      
+      const color = algorithmColors[algorithmId] || { r: 128, g: 128, b: 128 };
+      
+      // Draw the prediction branch
+      drawPredictionBranch(ctx, canvas, currentPoint, predictionPoints, color, perspective, algorithmId);
+    });
+  };
+  
+  // NEW: Draw a single prediction branch with mathematical accuracy
+  const drawPredictionBranch = (ctx, canvas, startPoint, predictionPoints, color, perspective, algorithmId) => {
+    if (!predictionPoints || predictionPoints.length === 0) return;
+    
+    // Project starting point
+    const startProjected = projectPoint(
+      startPoint,
+      canvas,
+      config.display.bounds,
+      perspective,
+      config.animation.padding
+    );
+    
+    // Set line style based on algorithm
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    // Different line styles for different algorithms
+    const lineStyles = {
+      'linear': [5, 5], // Dashed - least accurate
+      'euler': [10, 3], // Dash-dot - medium accuracy  
+      'rk4': [], // Solid - most accurate
+      'predicted-rk4': [2, 2] // Dotted - ML prediction
+    };
+    
+    const dashPattern = lineStyles[algorithmId] || [];
+    ctx.setLineDash(dashPattern);
+    
+    // Draw branch starting from current point
+    ctx.beginPath();
+    ctx.moveTo(startProjected.x, startProjected.y);
+    
+    let prevX = startProjected.x;
+    let prevY = startProjected.y;
+    
+    // Draw each prediction segment with fading opacity
+    predictionPoints.forEach((point, i) => {
       const projected = projectPoint(
+        point, 
+        canvas, 
+        config.display.bounds, 
+        perspective,
+        config.animation.padding
+      );
+      
+      // Opacity decreases with prediction distance (uncertainty grows)
+      const progress = i / predictionPoints.length;
+      const baseOpacity = 0.8;
+      const opacity = baseOpacity * (1 - progress * 0.7); // Fade from 0.8 to 0.24
+      
+      // Draw line segment
+      ctx.beginPath();
+      ctx.moveTo(prevX, prevY);
+      ctx.lineTo(projected.x, projected.y);
+      ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
+      ctx.stroke();
+      
+      prevX = projected.x;
+      prevY = projected.y;
+    });
+    
+    // Reset line dash
+    ctx.setLineDash([]);
+    
+    // Draw prediction origin marker
+    ctx.beginPath();
+    ctx.arc(startProjected.x, startProjected.y, 4, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`;
+    ctx.fill();
+    
+    // Draw prediction endpoint marker with label (if prediction exists)
+    if (predictionPoints.length > 0) {
+      const lastPoint = predictionPoints[predictionPoints.length - 1];
+      const endProjected = projectPoint(
         lastPoint,
         canvas,
         config.display.bounds,
@@ -126,11 +208,54 @@ export function useCanvas(
         config.animation.padding
       );
       
-      // Draw dot at current position with better appearance
+      // Draw endpoint marker
       ctx.beginPath();
-      ctx.arc(projected.x, projected.y, 3, 0, 2 * Math.PI);
-      ctx.fillStyle = `rgb(${colors.secondary.r}, ${colors.secondary.g}, ${colors.secondary.b})`;
+      ctx.arc(endProjected.x, endProjected.y, 3, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
       ctx.fill();
+      
+      // Draw algorithm name label
+      const algorithmNames = {
+        'linear': 'Linear',
+        'euler': 'Euler', 
+        'rk4': 'RK4',
+        'predicted-rk4': 'ML-RK4'
+      };
+      
+      const labelText = algorithmNames[algorithmId] || algorithmId;
+      
+      // Set text style
+      ctx.font = '11px sans-serif';
+      ctx.fontWeight = '600';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      
+      // Calculate label position (offset to avoid overlapping with dot)
+      const labelX = endProjected.x + 6;
+      const labelY = endProjected.y;
+      
+      // Draw text background for better readability
+      const textMetrics = ctx.measureText(labelText);
+      const padding = 2;
+      const bgX = labelX - padding;
+      const bgY = labelY - 6;
+      const bgWidth = textMetrics.width + (padding * 2);
+      const bgHeight = 12;
+      
+      // Semi-transparent background
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fillRect(bgX, bgY, bgWidth, bgHeight);
+      
+      // Dark mode adjustment
+      const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDarkTheme) {
+        ctx.fillStyle = 'rgba(33, 37, 41, 0.8)';
+        ctx.fillRect(bgX, bgY, bgWidth, bgHeight);
+      }
+      
+      // Draw text
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`;
+      ctx.fillText(labelText, labelX, labelY);
     }
   };
   
@@ -144,6 +269,7 @@ export function useCanvas(
     ctx.lineWidth = lineWidth;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.setLineDash([]); // Solid line for main trajectory
     
     points.forEach((point, i) => {
       const projected = projectPoint(
@@ -172,7 +298,7 @@ export function useCanvas(
     });
   };
   
-  // Helper function to draw prediction trajectory with decreasing opacity
+  // Helper function to draw prediction trajectory with decreasing opacity (legacy)
   const drawPredictionTrajectory = (ctx, canvas, points, color, perspective) => {
     if (!points || points.length === 0) return;
     
@@ -182,6 +308,7 @@ export function useCanvas(
     ctx.lineWidth = lineWidth;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.setLineDash([2, 2]); // Dotted line for single predictions
     
     // Draw each prediction segment with decreasing opacity
     points.forEach((point, i) => {
@@ -208,20 +335,44 @@ export function useCanvas(
       prevY = projected.y;
     });
     
-    // Draw dot at the start of prediction (only if we have points)
-    if (points.length > 0) {
-      const firstPoint = points[0];
+    ctx.setLineDash([]); // Reset line dash
+  };
+  
+  // Draw current point markers for all trajectories
+  const drawCurrentPointMarkers = (ctx, canvas, perspective) => {
+    // Draw primary current point marker
+    if (pointsRef.current.length > 0) {
+      const lastPoint = pointsRef.current[pointsRef.current.length - 1];
       const projected = projectPoint(
-        firstPoint,
+        lastPoint,
         canvas,
         config.display.bounds,
         perspective,
         config.animation.padding
       );
       
+      // Draw dot at current position with better appearance
       ctx.beginPath();
-      ctx.arc(projected.x, projected.y, 3, 0, 2 * Math.PI);
-      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
+      ctx.arc(projected.x, projected.y, 4, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgb(${colors.primary.r}, ${colors.primary.g}, ${colors.primary.b})`;
+      ctx.fill();
+    }
+    
+    // Draw secondary current point marker if enabled
+    if (showSecondaryTrajectory && secondaryPointsRef && secondaryPointsRef.current.length > 0) {
+      const lastPoint = secondaryPointsRef.current[secondaryPointsRef.current.length - 1];
+      const projected = projectPoint(
+        lastPoint,
+        canvas,
+        config.display.bounds,
+        perspective,
+        config.animation.padding
+      );
+      
+      // Draw dot at current position with better appearance
+      ctx.beginPath();
+      ctx.arc(projected.x, projected.y, 4, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgb(${colors.secondary.r}, ${colors.secondary.g}, ${colors.secondary.b})`;
       ctx.fill();
     }
   };
@@ -234,10 +385,11 @@ export function useCanvas(
     perspective, 
     showSecondaryTrajectory,
     showPrediction,
+    showBranchingPredictions,
+    branchingPredictions,
     lineWidth,
-    colors
-    // Note: We don't include pointsRef in dependencies as it would cause
-    // excessive re-renders. Instead, the animation loop will trigger redraws.
+    colors,
+    algorithmColors
   ]);
   
   return {
