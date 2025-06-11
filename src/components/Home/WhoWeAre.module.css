@@ -1,3 +1,4 @@
+/* src/components/HomepageComponents/WhoWeAre.module.css */
 .section {
   composes: section from './shared.module.css';
   position: relative;
@@ -6,7 +7,14 @@
 }
 
 .blueSection {
-  background: var(--ifm-color-primary);
+  background: var(--ifm-color-primary) !important; /* Force solid background */
+  background-color: var(--ifm-color-primary) !important;
+}
+
+/* Ensure solid background in dark mode too */
+[data-theme='dark'] .blueSection {
+  background: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-primary) !important;
 }
 
 .container {
@@ -26,18 +34,18 @@
   font-size: 3.5rem;
   line-height: 1.1;
   margin: 0;
-  color: white;
+  color: white !important; /* Force white text */
 }
 
 .description {
   font-size: 1.125rem;
   line-height: 1.75;
-  color: white;
+  color: white !important; /* Force white text */
 }
 
 .description p {
   margin-bottom: 1.5rem;
-  color: white;
+  color: white !important; /* Force white text */
 }
 
 .description p:last-child {
@@ -47,7 +55,7 @@
 .card {
   background: transparent;
   padding: 0;
-  color: inherit;
+  color: white !important; /* Force white text */
 }
 
 @media (max-width: 768px) {
