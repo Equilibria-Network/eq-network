@@ -168,20 +168,6 @@
     "sidebar": "sidebar---blog-814-8ac",
     "content": "content---blog-toc-mycorrhiza-6-c-6-93f"
   },
-  "/home2-421": {
-    "__comp": "__comp---site-src-pages-home-2-jsae-5-c0c",
-    "__context": {
-      "plugin": "plugin---abouta-74-d48"
-    },
-    "config": "config---about-5-e-9-bcb"
-  },
-  "/projects-05c": {
-    "__comp": "__comp---site-src-pages-projects-jsee-7-a5f",
-    "__context": {
-      "plugin": "plugin---abouta-74-d48"
-    },
-    "config": "config---about-5-e-9-bcb"
-  },
   "/research-e57": {
     "__comp": "__comp---site-src-pages-research-js-45-d-372",
     "__context": {
