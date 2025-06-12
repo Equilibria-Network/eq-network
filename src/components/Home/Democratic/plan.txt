@@ -1,0 +1,36 @@
+src/components/Home2/Democratic/
+├── index.js                          // Main export
+├── DemocraticMechanisms.js           // Core component coordinator
+├── DemocraticMechanisms.module.css   // Main component styles
+├── utils/
+│   ├── democraticUtils.js            // Theme colors, positioning utilities
+│   ├── nodeCreation.js               // Node positioning and creation logic
+│   ├── connectionCreation.js         // Connection logic for all phases
+│   ├── rendering.js                  // D3 rendering functions (mesh, nodes, connections)
+│   └── useD3Visualization.js         // Custom hook for D3 lifecycle management
+├── controls/
+│   ├── BasicControls.js              // Play/pause/reset/info buttons
+│   ├── BasicControls.module.css      // Basic control styles
+│   └── ControlPanel/                 // Advanced control panel
+│       ├── index.js                  // Main panel wrapper
+│       ├── TabInfo.js                // Info about current mechanism
+│       ├── TabParams.js              // Adversarial ratio, system health controls
+│       ├── TabComparison.js          // Compare different mechanisms
+│       └── ControlPanel.module.css   // Panel styles
+├── mechanisms/
+│   ├── index.js                      // Export all mechanism types
+│   ├── DirectDemocracy.js            // Direct democracy implementation
+│   ├── RepresentativeDemocracy.js    // Representative democracy (future)
+│   ├── LiquidDemocracy.js            // Liquid democracy (future)
+│   └── mechanismTypes.js             // Mechanism type definitions and metadata
+├── visualization/
+│   ├── index.js                      // Export visualization components
+│   ├── NetworkView.js                // Standard network visualization
+│   ├── ComparisonView.js             // Side-by-side mechanism comparison
+│   └── HealthDashboard.js            // System health visualization overlay
+└── config/
+    ├── mechanismConfigs.js           // Mechanism-specific configurations
+    ├── visualConfigs.js              // Visual styling constants
+    ├── nodeConfigs.js                // Node types and properties
+    └── animationConfigs.js           // Animation timing and effects
+
