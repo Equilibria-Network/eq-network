@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { 
   Hero, 
+  Publications,
   Audience,
 } from '../components/Home';
 
@@ -88,6 +89,9 @@ export default function Home2() {
         <Hero />
       </div>
       <main style={{ marginBottom: 0, paddingBottom: 0, background: 'transparent' }}>
+        <div id="publications">
+          <Publications />
+        </div>
         <div id="audience">
           <Audience />
         </div>
