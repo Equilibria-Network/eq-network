@@ -2,14 +2,14 @@
   "title": "All posts",
   "items": [
     {
-      "title": "Theory of Change - AI Governance",
-      "permalink": "/blog/toc-governance",
+      "title": "Theory of Change - Agent Based Models for Collective Intelligence",
+      "permalink": "/blog/toc-mycorrhiza",
       "unlisted": false,
       "date": "2025-05-09T00:00:00.000Z"
     },
     {
-      "title": "Theory of Change - Agent Based Models for Collective Intelligence",
-      "permalink": "/blog/toc-mycorrhiza",
+      "title": "Theory of Change - AI Governance",
+      "permalink": "/blog/toc-governance",
       "unlisted": false,
       "date": "2025-05-09T00:00:00.000Z"
     }

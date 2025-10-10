@@ -289,6 +289,11 @@ export default {
           "to": "/research",
           "label": "Research",
           "position": "right"
+        },
+        {
+          "to": "/faq",
+          "label": "FAQ",
+          "position": "right"
         }
       ],
       "hideOnScroll": false,

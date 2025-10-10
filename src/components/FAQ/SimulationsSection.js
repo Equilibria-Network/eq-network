@@ -1,16 +1,16 @@
-// src/components/Home2/FoundationsSection.js
+// src/components/FAQ/SimulationsSection.js
 import React, { useState } from 'react';
-import styles from './FoundationsSection.module.css';
+import styles from './SimulationsSection.module.css';
 import { ChevronDown } from 'lucide-react';
+import DemocraticMechanisms from './Democratic/DemocraticMechanisms';
 
 // Import centralized content
-import homeContent from '../../data/home.json';
+import faqContent from '../../data/faq.json';
 
-export default function FoundationsSection() {
+export default function SimulationsSection() {
   const [expandedFaq, setExpandedFaq] = useState(null);
 
-  const { research } = homeContent;
-  const stream = research.streams.find(s => s.id === 'foundations');
+  const stream = faqContent.sections.find(s => s.id === 'simulations');
 
   const toggleFaq = (faqIndex) => {
     setExpandedFaq(expandedFaq === faqIndex ? null : faqIndex);
@@ -30,11 +30,8 @@ export default function FoundationsSection() {
             </p>
             
             <div className={styles.imageContainer}>
-              <img 
-                src={stream.image}
-                alt={stream.title}
-                className={styles.streamImage}
-              />
+              {/* Replace static image with interactive visualization */}
+              <DemocraticMechanisms />
             </div>
             
             <p className={styles.description}>

@@ -1,6 +1,7 @@
 export default {
   "__comp---site-src-pages-about-js-779-319": [() => import(/* webpackChunkName: "__comp---site-src-pages-about-js-779-319" */ "@site/src/pages/about.js"), "@site/src/pages/about.js", require.resolveWeak("@site/src/pages/about.js")],
   "__comp---site-src-pages-blog-js-48-d-5c8": [() => import(/* webpackChunkName: "__comp---site-src-pages-blog-js-48-d-5c8" */ "@site/src/pages/blog.js"), "@site/src/pages/blog.js", require.resolveWeak("@site/src/pages/blog.js")],
+  "__comp---site-src-pages-faq-jsdf-2-53f": [() => import(/* webpackChunkName: "__comp---site-src-pages-faq-jsdf-2-53f" */ "@site/src/pages/faq.js"), "@site/src/pages/faq.js", require.resolveWeak("@site/src/pages/faq.js")],
   "__comp---site-src-pages-index-jsc-4-f-f99": [() => import(/* webpackChunkName: "__comp---site-src-pages-index-jsc-4-f-f99" */ "@site/src/pages/index.js"), "@site/src/pages/index.js", require.resolveWeak("@site/src/pages/index.js")],
   "__comp---site-src-pages-research-js-45-d-372": [() => import(/* webpackChunkName: "__comp---site-src-pages-research-js-45-d-372" */ "@site/src/pages/research.js"), "@site/src/pages/research.js", require.resolveWeak("@site/src/pages/research.js")],
   "__comp---theme-blog-archive-page-9-e-4-1d8": [() => import(/* webpackChunkName: "__comp---theme-blog-archive-page-9-e-4-1d8" */ "@theme/BlogArchivePage"), "@theme/BlogArchivePage", require.resolveWeak("@theme/BlogArchivePage")],

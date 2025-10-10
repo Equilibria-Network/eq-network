@@ -67,7 +67,7 @@
     "image": "img/blog/featured-image.jpg"
   },
   "unlisted": false,
-  "nextItem": {
+  "prevItem": {
     "title": "Theory of Change - Agent Based Models for Collective Intelligence",
     "permalink": "/blog/toc-mycorrhiza"
   }

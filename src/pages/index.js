@@ -1,10 +1,9 @@
-// src/pages/home2.js
+// src/pages/index.js
 import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { 
   Hero, 
-  Research, 
   Audience,
 } from '../components/Home';
 
@@ -89,9 +88,6 @@ export default function Home2() {
         <Hero />
       </div>
       <main style={{ marginBottom: 0, paddingBottom: 0, background: 'transparent' }}>
-        <div id="research">
-          <Research />
-        </div>
         <div id="audience">
           <Audience />
         </div>
