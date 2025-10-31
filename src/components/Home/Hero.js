@@ -23,7 +23,7 @@ export default function Hero() {
   };
 
   return (
-    <section className={`${styles.section} snap-section hero`}>
+    <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.heroContent}>
           {/* Left Section - Text Content - Desktop Only */}

@@ -1,0 +1,222 @@
+/* src/components/About/AboutHero.module.css */
+
+.section {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+  background: transparent !important;
+  padding: 10rem 0;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background: transparent !important;
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: center;
+  background: transparent !important;
+  width: 100vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Left Section - Desktop */
+.leftSection {
+  padding: 2rem 2rem 2rem 6rem; /* Comfortable breathing room */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+/* Mobile reorganization */
+.topTextSection,
+.bottomTextSection {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .topTextSection,
+  .bottomTextSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+  
+  .heroContent {
+    max-width: 100vw;
+    margin: 0;
+  }
+}
+
+/* Text element subdivisions */
+.titleArea {
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+
+.subtitleArea {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.textArea {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: 5.5rem;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  text-align: left;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ifm-color-primary);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* Right Section */
+.rightSection {
+  padding: 2rem 6rem 2rem 2rem; /* Matching left section */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightTextContainer {
+  width: 100%;
+  max-width: 500px;
+}
+
+.rightText {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  text-align: left;
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 992px) {
+  .section {
+    padding: 1.5rem 0;
+  }
+  
+  .heroContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .topTextSection {
+    padding: 1rem 2rem 0.5rem 2rem;
+  }
+  
+  .bottomTextSection {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .leftSection,
+  .rightSection {
+    display: none;
+  }
+  
+  .title {
+    font-size: 3.25rem;
+    text-align: center;
+  }
+  
+  .subtitle {
+    font-size: 1.125rem;
+    text-align: center;
+  }
+  
+  .text {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 1.25rem 0;
+  }
+  
+  .topTextSection {
+    padding: 0.75rem 1.5rem 0.5rem 1.5rem;
+  }
+  
+  .bottomTextSection {
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .text {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 1rem 0;
+  }
+  
+  .title {
+    font-size: 2.25rem;
+  }
+  
+  .subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .text {
+    font-size: 0.9rem;
+  }
+}

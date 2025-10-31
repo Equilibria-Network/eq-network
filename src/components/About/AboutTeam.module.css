@@ -142,7 +142,6 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping if many social links */
 }
 
 .socialLink {
@@ -156,21 +155,6 @@
   color: var(--ifm-color-emphasis-700);
   transition: all 0.2s ease;
   border: 1.5px solid var(--ifm-color-emphasis-500);
-  overflow: hidden; /* For SVG icons */
-}
-
-/* Styling for custom SVG icons */
-.socialSvg {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  /* Adjusting colors for dark/light mode */
-  filter: var(--ifm-social-icon-filter, none);
-}
-
-[data-theme='dark'] .socialSvg {
-  /* Filter to make SVGs visible in dark mode if needed */
-  --ifm-social-icon-filter: brightness(1.8);
 }
 
 [data-theme='dark'] .socialLink {
@@ -183,11 +167,6 @@
   background: var(--ifm-color-primary);
   color: white;
   transform: translateY(-2px);
-}
-
-.socialLink:hover .socialSvg {
-  /* Make SVGs white on hover */
-  filter: brightness(10);
 }
 
 /* Expanded View Styles */
@@ -330,8 +309,7 @@
   height: 40px;
 }
 
-.expandedSocials .socialLink svg,
-.expandedSocials .socialLink .socialSvg {
+.expandedSocials .socialLink svg {
   width: 20px;
   height: 20px;
 }

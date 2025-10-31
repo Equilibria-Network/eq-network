@@ -10,7 +10,7 @@ export default function Audience() {
   const { title, audiences } = audience;
 
   return (
-    <section className={`${styles.section} snap-section allow-overflow`}>
+    <section className={styles.section}>
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>

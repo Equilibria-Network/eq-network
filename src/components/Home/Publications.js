@@ -9,7 +9,7 @@ export default function Publications() {
   const { sectionTitle, sectionDescription, publications } = publicationsData;
 
   return (
-    <section className={`${styles.section} snap-section`}>
+    <section className={styles.section}>
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>

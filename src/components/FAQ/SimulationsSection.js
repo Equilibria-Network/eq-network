@@ -17,7 +17,7 @@ export default function SimulationsSection() {
   };
 
   return (
-    <section className={`${styles.section} snap-section`}>
+    <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.streamContent}>
           
