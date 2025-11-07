@@ -49,17 +49,8 @@ export default function RoadmapDetails({ selectedPhase }) {
             <h2 className={styles.phaseTitle}>Phase {id}: {name}</h2>
             <p className={styles.tagline}>{details.tagline}</p>
 
-            {/* Render detail values as simple paragraphs without headings */}
-            {Object.entries(details).map(([key, value]) => {
-              // Skip tagline since we already showed it
-              if (key === 'tagline') return null;
-
-              return (
-                <p key={key} className={styles.detailText}>
-                  {value}
-                </p>
-              );
-            })}
+            {/* Single description paragraph */}
+            <p className={styles.detailText}>{details.description}</p>
 
             {/* Published Research Section */}
             {publications && publications.length > 0 && (
@@ -89,7 +80,8 @@ export default function RoadmapDetails({ selectedPhase }) {
                           {Object.entries(pub.links)
                             .filter(([platform, url]) => url !== pub.primaryLink)
                             .map(([platform, url]) => (
- <a                              
+                              
+                          <a 
                                 key={platform}
                                 href={url}
                                 target="_blank"

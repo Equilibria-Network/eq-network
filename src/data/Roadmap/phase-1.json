@@ -4,13 +4,11 @@
   "researcher": {
     "fullName": "Norbert Wiener",
     "lastName": "Wiener",
-    "image": "/img/roadmap/wiener.png"
+    "image": "/img/roadmap/wiener.svg"
   },
   "details": {
     "tagline": "Understanding Multi-Scale Coordination",
-    "whyNow": "You cannot measure what you don't understand, and you cannot design solutions to problems you haven't properly characterized. Current AI safety work focuses on aligning individual systems, but risks like gradual disempowerment emerge from how multiple agents and systems coordinate (or fail to coordinate) at scale. We need theoretical frameworks that bridge computer science, economics, political science, and complexity science to even articulate the right problems.",
-    "whatWereDoing": "We're establishing frameworks for understanding how coordination mechanisms maintain or lose alignment with human values as systems scale. This includes developing taxonomies of agency across different scales (the \"phylogeny of agents\"), mapping catastrophic coordination failures (like gradual disempowerment), and identifying high-priority problems where better mechanisms could prevent existential risks. This theoretical work scopes what we'll build infrastructure to test.",
-    "progressAndScope": "We've published foundational research on gradual disempowerment (how economic, cultural, and political systems drift from human interests), phylogeny of agents (understanding different types of agency across disciplines), and toy models of system-level safety evaluations (demonstrating multi-agent evaluation approaches). Current work includes synthesizing these insights into coherent frameworks, identifying 3-5 specific coordination challenges to focus on, and building the research community needed for subsequent phases. This phase completes when we have validated theoretical frameworks and concrete specifications for what evaluation infrastructure needs to test."
+    "description": "The first phase focuses on exploration: What exactly are these multi-scale collective intelligence problems? How should we even think about them? What frameworks from different fields (economics, political science, complexity science) might help? We focus on exploratory research to find the right frames and map the problem space. This means reading across disciplines, testing different ways of thinking about collective intelligence, identifying which specific problems matter most, and figuring out what questions we're actually trying to answer. Work from this phase focuses on understanding agency across different scales, thinking about creating infrastructure to test how institutional defenses hold up under pressure, and exploring how processes (not just agents) can get misaligned as systems drift away from human values. The scope is to identify core problems and develop good frameworks for thinking about them."
   },
   "publications": [
     {

@@ -4,13 +4,11 @@
   "researcher": {
     "fullName": "Jay Wright Forrester",
     "lastName": "Forrester",
-    "image": "/img/roadmap/forrester.png"
+    "image": "/img/roadmap/forrester.svg"
   },
   "details": {
     "tagline": "From Testing to Creating",
-    "whyNow": "Once you have sufficient data on what works and validated simulation that predicts reality, you can shift from testing others' proposals to systematically generating novel mechanisms. This requires two capabilities built in previous phases: (1) large-scale simulation that accurately models group dynamics at millions/billions of nodes, and (2) enough empirical data to guide generation toward mechanisms that actually improve wellbeing, not just pass narrow tests.",
-    "whatWereDoing": "We transition from \"evaluation service\" to \"generative design lab.\" Using accumulated evidence and large-scale simulation (now modeling complex system dynamics with millions of nodes), we systematically create new coordination mechanisms that no human has proposed. This isn't random exploration - we're using social science metrics for measuring collective wellbeing, defense against adversarial dynamics, and alignment with human values to guide generation. We test mechanisms for propagation and defense through large-scale complex systems.",
-    "shiftInValue": "Before, partners came to us to test their ideas. Now, partners come because we can design mechanisms for their specific context - \"You need a governance system for a 10,000-person online community that's robust to coordinated attacks and maintains epistemic health? Here are three novel mechanisms we've designed and validated.\" Real-world deployment continues but now includes mechanisms that exist nowhere else. This phase may reveal we need more foundational theory (loop back to Phase 1) or that our simulation doesn't capture crucial dynamics (loop to Phase 2). Success means we're reliably generating mechanisms that outperform existing approaches."
+    "description": "This phase involves shifting from evaluation service to generative design. Instead of just testing mechanisms researchers propose, we start creating novel coordination mechanisms informed by accumulated evidence. Testing other people's proposals is valuable, but the real breakthrough comes when you can systematically generate new mechanisms that nobody's thought of yet. This requires two things built in earlier phases: enough empirical data to know what actually works, and simulation that's scaled up to model complex system dynamics with millions or billions of interacting nodes. At that scale, you can test how information propagates through large populations, how defenses hold up against coordinated attacks across entire systems."
   },
   "publications": []
 }

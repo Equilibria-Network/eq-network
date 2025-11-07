@@ -26,7 +26,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .title {
@@ -38,6 +38,28 @@
   margin: 0;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* ============================================
+   OVERVIEW TEXT
+   ============================================ */
+
+.overview {
+  max-width: 900px;
+  margin: 0 auto 4rem auto;
+  text-align: center;
+}
+
+.overviewText {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', 'Palatino', serif;
+}
+
+[data-theme='dark'] .overviewText {
+  color: var(--ifm-color-emphasis-800);
 }
 
 /* ============================================
@@ -143,7 +165,7 @@
 }
 
 /* ============================================
-   IMAGE CONTAINER & PORTRAIT - MONOCHROME, ORIGINAL COLORS ON HOVER
+   IMAGE CONTAINER & PORTRAIT - SVG SUPPORT
    ============================================ */
 
 .imageContainer {
@@ -159,15 +181,14 @@
 .portrait {
   width: 140px;
   height: 140px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  border-radius: 4px;
-  /* Monochrome by default */
+  /* SVGs will inherit colors naturally, but add grayscale for PNGs */
   filter: grayscale(100%);
   transition: all 0.3s ease;
 }
 
-/* Show original image colors on hover - no grayscale filter */
+/* Show original colors on hover */
 .card:hover .portrait {
   filter: grayscale(0%);
   transform: scale(1.05);
@@ -251,6 +272,14 @@
     font-size: 4.5rem;
   }
   
+  .overview {
+    margin-bottom: 3rem;
+  }
+  
+  .overviewText {
+    font-size: 1.0625rem;
+  }
+  
   .portrait {
     width: 120px;
     height: 120px;
@@ -283,11 +312,20 @@
   }
   
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
   
   .title {
     font-size: 3.5rem;
+  }
+  
+  .overview {
+    margin-bottom: 2.5rem;
+  }
+  
+  .overviewText {
+    font-size: 1rem;
+    text-align: left;
   }
   
   .portrait {
@@ -323,11 +361,19 @@
   }
   
   .header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
   
   .title {
     font-size: 2.5rem;
+  }
+  
+  .overview {
+    margin-bottom: 2rem;
+  }
+  
+  .overviewText {
+    font-size: 0.9375rem;
   }
   
   .portrait {
