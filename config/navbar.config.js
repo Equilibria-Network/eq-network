@@ -10,9 +10,10 @@ const navbarConfig = {
   },
   
   items: [
-    { to: '/about', label: 'About', position: 'right' },
-    { to: '/research', label: 'Research', position: 'right' },
+    // { to: '/research', label: 'Research', position: 'right' },
+    { to: '/roadmap', label: 'Roadmap', position: 'right' },
     { to: '/faq', label: 'FAQ', position: 'right' },
+    { to: '/about', label: 'About', position: 'right' },
     // Future navigation items (commented for now)
     // { to: '/projects', label: 'Projects', position: 'right' },
     // { to: '/blog', label: 'Blog', position: 'right' },

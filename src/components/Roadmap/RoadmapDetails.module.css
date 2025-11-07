@@ -1,0 +1,422 @@
+/* src/components/Roadmap/RoadmapDetails.module.css */
+
+/* ============================================
+   CUSTOM FONT DECLARATIONS
+   ============================================ */
+
+/* Virgil (Excalidraw) - Used for headings */
+@font-face {
+  font-family: 'Virgil';
+  src: url('https://excalidraw.com/Virgil.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+   SECTION LAYOUT
+   ============================================ */
+
+.section {
+  padding: 3rem 0 5rem 0;
+  background: transparent;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================
+   DETAILS CONTENT - TWO COLUMN LAYOUT
+   ============================================ */
+
+.detailsContent {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ============================================
+   LEFT - IMAGE SECTION
+   ============================================ */
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 2rem;
+}
+
+.largeImage {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  /* Monochrome effect */
+  filter: grayscale(100%);
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+[data-theme='dark'] .largeImage {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.imageName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-align: center;
+  font-family: 'Virgil', 'Comic Sans MS', cursive, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ============================================
+   RIGHT - TEXT SECTION
+   ============================================ */
+
+.textSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.phaseTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-family: 'Virgil', 'Comic Sans MS', cursive, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  line-height: 1.4;
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+  font-style: italic;
+}
+
+[data-theme='dark'] .tagline {
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* ============================================
+   DETAIL BLOCKS
+   ============================================ */
+
+.detailBlock {
+  margin-top: 1rem;
+}
+
+.detailHeading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+  font-family: 'Virgil', 'Comic Sans MS', cursive, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.detailText {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+}
+
+[data-theme='dark'] .detailText {
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* ============================================
+   PUBLICATIONS SECTION
+   ============================================ */
+
+.publicationsSection {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .publicationsSection {
+  border-top-color: var(--ifm-color-emphasis-400);
+}
+
+.publicationsHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.3;
+  font-family: 'Virgil', 'Comic Sans MS', cursive, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.publicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ============================================
+   INDIVIDUAL PUBLICATION ITEMS
+   ============================================ */
+
+.publicationItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.publicationItem:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--ifm-color-primary);
+  transform: translateX(4px);
+}
+
+[data-theme='dark'] .publicationItem {
+  background: rgba(30, 30, 30, 0.5);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .publicationItem:hover {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: var(--ifm-color-primary);
+}
+
+.publicationHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.publicationTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  min-width: 200px;
+}
+
+.publicationLink {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+  transition: color 0.2s ease;
+}
+
+.publicationLink:hover {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: underline;
+}
+
+[data-theme='dark'] .publicationLink:hover {
+  color: var(--ifm-color-primary-light);
+}
+
+.publicationType {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+}
+
+[data-theme='dark'] .publicationType {
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* ============================================
+   PLATFORM LINKS
+   ============================================ */
+
+.publicationLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.linksLabel {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+}
+
+[data-theme='dark'] .linksLabel {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.platformLink {
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+  text-transform: capitalize;
+}
+
+.platformLink:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .platformLink {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 992px) {
+  .detailsContent {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .imageSection {
+    position: static;
+    margin-bottom: 1rem;
+  }
+  
+  .largeImage {
+    max-width: 300px;
+  }
+  
+  .phaseTitle {
+    font-size: 2rem;
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+  }
+  
+  .publicationsSection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0 4rem 0;
+  }
+  
+  .largeImage {
+    max-width: 250px;
+  }
+  
+  .phaseTitle {
+    font-size: 1.75rem;
+  }
+  
+  .tagline {
+    font-size: 1.125rem;
+  }
+  
+  .detailHeading {
+    font-size: 1.125rem;
+  }
+  
+  .detailText {
+    font-size: 1rem;
+  }
+  
+  .publicationsHeading {
+    font-size: 1.25rem;
+  }
+  
+  .publicationTitle {
+    font-size: 1rem;
+  }
+  
+  .publicationHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 1.5rem 0 3rem 0;
+  }
+  
+  .textSection {
+    gap: 1.5rem;
+  }
+  
+  .largeImage {
+    max-width: 200px;
+  }
+  
+  .phaseTitle {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .detailHeading {
+    font-size: 1rem;
+  }
+  
+  .detailText {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+  
+  .publicationsHeading {
+    font-size: 1.125rem;
+  }
+  
+  .publicationItem {
+    padding: 1rem;
+  }
+  
+  .publicationTitle {
+    font-size: 0.9375rem;
+  }
+  
+  .publicationLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

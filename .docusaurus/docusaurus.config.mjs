@@ -281,18 +281,18 @@ export default {
       },
       "items": [
         {
-          "to": "/about",
-          "label": "About",
-          "position": "right"
-        },
-        {
-          "to": "/research",
-          "label": "Research",
+          "to": "/roadmap",
+          "label": "Roadmap",
           "position": "right"
         },
         {
           "to": "/faq",
           "label": "FAQ",
+          "position": "right"
+        },
+        {
+          "to": "/about",
+          "label": "About",
           "position": "right"
         }
       ],

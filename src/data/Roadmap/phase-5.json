@@ -1,0 +1,16 @@
+{
+  "id": 5,
+  "name": "ECOSYSTEM",
+  "researcher": {
+    "fullName": "John Forbes Nash Jr.",
+    "lastName": "Nash",
+    "image": "/img/roadmap/nash.jpg"
+  },
+  "details": {
+    "tagline": "Self-Sustaining Global Infrastructure",
+    "whyEndpoint": "Equilibria's goal isn't to permanently own coordination infrastructure but to seed something the world recognizes as essential and maintains collectively. This phase represents transition from \"our project\" to \"global commons.\"",
+    "whatThisLooks": "The entire platform is 100% open source. Multiple organizations maintain and extend the infrastructure. Universities teach coordination design using our frameworks. Governments and companies routinely test policies before implementation. New researchers join the ecosystem without needing Equilibria's permission. The simulation and generation capabilities are widely recognized as instrumentally valuable infrastructure for collective intelligence.",
+    "endOfRoadmap": "When coordination mechanism design and testing is as routine as software testing, when the frameworks are self-evident enough to be taught broadly, when improvements come from the global community rather than Equilibria specifically, the founding team's role naturally diminishes. This isn't organizational failure - it's mission success. The roadmap ends here because Equilibria as an institution becomes unnecessary. The infrastructure, practices, and knowledge continue without us."
+  },
+  "publications": []
+}

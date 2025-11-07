@@ -1,0 +1,355 @@
+/* src/components/Roadmap/RoadmapCards.module.css */
+
+/* ============================================
+   SECTION LAYOUT
+   ============================================ */
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 5rem 0 2rem 0;
+  background: transparent;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================
+   PAGE TITLE - Georgia Serif
+   ============================================ */
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 5.5rem;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================
+   CARDS WRAPPER - 5 EQUAL COLUMNS
+   ============================================ */
+
+.cardsWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ============================================
+   INDIVIDUAL CARDS - CLEAN MINIMAL DESIGN
+   ============================================ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--ifm-color-primary);
+  transition: width 0.3s ease;
+}
+
+.card:hover::before {
+  width: 80%;
+}
+
+.cardActive::before {
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0.5rem 1.5rem 0.5rem;
+  position: relative;
+}
+
+/* ============================================
+   PHASE NUMBER BADGE
+   ============================================ */
+
+.phaseNumber {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.card:hover .phaseNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.cardActive .phaseNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+[data-theme='dark'] .phaseNumber {
+  background: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .card:hover .phaseNumber,
+[data-theme='dark'] .cardActive .phaseNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+/* ============================================
+   IMAGE CONTAINER & PORTRAIT - MONOCHROME, ORIGINAL COLORS ON HOVER
+   ============================================ */
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 1.5rem 0;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.portrait {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+  /* Monochrome by default */
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Show original image colors on hover - no grayscale filter */
+.card:hover .portrait {
+  filter: grayscale(0%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+/* Show original colors when card is active/selected */
+.cardActive .portrait {
+  filter: grayscale(0%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   RESEARCHER NAME - PRIMARY/PROMINENT
+   ============================================ */
+
+.researcherName {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-family: Georgia, 'Times New Roman', 'Palatino', serif;
+  transition: color 0.3s ease;
+}
+
+.card:hover .researcherName {
+  color: var(--ifm-color-primary-dark);
+}
+
+[data-theme='dark'] .card:hover .researcherName {
+  color: var(--ifm-color-primary-light);
+}
+
+/* ============================================
+   PHASE NAME - SECONDARY/MUTED
+   ============================================ */
+
+.phaseName {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.card:hover .phaseName {
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .phaseName {
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .card:hover .phaseName {
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET & MOBILE
+   ============================================ */
+
+/* Tablet - 3 columns */
+@media (max-width: 992px) {
+  .cardsWrapper {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 1.5rem;
+  }
+  
+  .section {
+    min-height: auto;
+    padding: 4rem 0 2rem 0;
+  }
+  
+  .title {
+    font-size: 4.5rem;
+  }
+  
+  .portrait {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .researcherName {
+    font-size: 1.25rem;
+  }
+  
+  .phaseName {
+    font-size: 0.75rem;
+  }
+  
+  .phaseNumber {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Mobile - 2 columns */
+@media (max-width: 768px) {
+  .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+  }
+  
+  .section {
+    padding: 3rem 0 2rem 0;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+  }
+  
+  .portrait {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .researcherName {
+    font-size: 1.125rem;
+  }
+  
+  .phaseName {
+    font-size: 0.75rem;
+    min-height: 3rem;
+  }
+  
+  .phaseNumber {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Small Mobile - Single column */
+@media (max-width: 480px) {
+  .cardsWrapper {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .section {
+    padding: 2.5rem 0 2rem 0;
+  }
+  
+  .header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .portrait {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .researcherName {
+    font-size: 1.25rem;
+  }
+  
+  .phaseName {
+    font-size: 0.8125rem;
+    min-height: auto;
+  }
+  
+  .phaseNumber {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8125rem;
+  }
+}
