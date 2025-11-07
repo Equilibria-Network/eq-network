@@ -165,20 +165,17 @@
   /* Monochrome by default */
   filter: grayscale(100%);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Show original image colors on hover - no grayscale filter */
 .card:hover .portrait {
   filter: grayscale(0%);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
 
 /* Show original colors when card is active/selected */
 .cardActive .portrait {
   filter: grayscale(0%);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* ============================================

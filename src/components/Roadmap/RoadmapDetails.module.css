@@ -72,7 +72,6 @@
   object-fit: cover;
   /* Monochrome effect */
   filter: grayscale(100%);
-  border: 2px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
