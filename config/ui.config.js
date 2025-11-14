@@ -9,7 +9,7 @@ const uiConfig = {
   colorMode: {
     defaultMode: 'light',
     disableSwitch: false,
-    respectPrefersColorScheme: true,
+    respectPrefersColorScheme: false,
   },
   
   // Prism theme for code blocks
