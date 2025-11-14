@@ -2,9 +2,10 @@
   "id": 4,
   "name": "GENERATION",
   "researcher": {
-    "fullName": "Jay Wright Forrester",
-    "lastName": "Forrester",
-    "image": "/img/roadmap/forrester.svg"
+    "fullName": "Stafford Beer",
+    "lastName": "Beer",
+    "image": "/img/roadmap/beer.svg",
+    "bio": "Management cybernetician who pioneered the application of systems thinking to organizational design, creating novel governance structures based on viable system principles."
   },
   "details": {
     "tagline": "From Testing to Creating",

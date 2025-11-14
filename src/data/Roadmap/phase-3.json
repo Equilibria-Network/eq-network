@@ -2,9 +2,10 @@
   "id": 3,
   "name": "VALIDATION",
   "researcher": {
-    "fullName": "René Descartes",
-    "lastName": "Descartes",
-    "image": "/img/roadmap/descartes.svg"
+    "fullName": "Elinor Ostrom",
+    "lastName": "Ostrom",
+    "image": "/img/roadmap/ostrom.svg",
+    "bio": "Nobel Prize-winning political economist who demonstrated through empirical research how communities successfully govern shared resources without centralized control."
   },
   "details": {
     "tagline": "Multiple Domains, Building Confidence",

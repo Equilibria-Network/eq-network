@@ -1,10 +1,11 @@
 {
   "id": 5,
-  "name": "ECOSYSTEM",
+  "name": "Equilibrium",
   "researcher": {
     "fullName": "John Forbes Nash Jr.",
     "lastName": "Nash",
-    "image": "/img/roadmap/nash.svg"
+    "image": "/img/roadmap/nash.svg",
+    "bio": "Mathematician and Nobel laureate whose equilibrium concept revealed how stable, self-sustaining patterns emerge from independent agents pursuing their own interests."
   },
   "details": {
     "tagline": "Self-Sustaining Global Infrastructure",

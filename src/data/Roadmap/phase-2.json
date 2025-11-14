@@ -1,10 +1,11 @@
 {
   "id": 2,
-  "name": "PILOT INFRASTRUCTURE",
+  "name": "Construction",
   "researcher": {
-    "fullName": "Vilfredo Pareto",
-    "lastName": "Pareto",
-    "image": "/img/roadmap/pareto.svg"
+    "fullName": "Norbert Wiener",
+    "lastName": "Wiener",
+    "image": "/img/roadmap/wiener.svg",
+    "bio": "Mathematician and philosopher who founded cybernetics, establishing frameworks for understanding communication and control in complex systems."
   },
   "details": {
     "tagline": "Building for One Use Case, Testing Immediately",

@@ -1,10 +1,11 @@
 {
   "id": 1,
-  "name": "FOUNDATIONS",
+  "name": "FOUNDATION",
   "researcher": {
-    "fullName": "Norbert Wiener",
-    "lastName": "Wiener",
-    "image": "/img/roadmap/wiener.svg"
+    "fullName": "David Hume",
+    "lastName": "Hume",
+    "image": "/img/roadmap/hume.svg",
+    "bio": "Scottish Enlightenment philosopher who pioneered empirical approaches to understanding human nature, causation, and the foundations of knowledge."
   },
   "details": {
     "tagline": "Understanding Multi-Scale Coordination",

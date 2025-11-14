@@ -69,15 +69,33 @@
   max-width: 350px;
   height: auto;
   aspect-ratio: 1;
-  object-fit: cover;
-  /* Monochrome effect */
-  filter: grayscale(100%);
+  object-fit: contain;
   border-radius: 8px;
   margin-bottom: 1.5rem;
+  
+  /* Light mode: grayscale */
+  filter: grayscale(100%);
 }
 
+/* Dark mode: Pure white monochrome - simplified approach */
 [data-theme='dark'] .largeImage {
-  border-color: var(--ifm-color-emphasis-400);
+  filter: brightness(0) invert(1);
+}
+
+/* Researcher bio text - muted, subtle */
+.researcherBio {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+[data-theme='dark'] .researcherBio {
+  color: var(--ifm-color-emphasis-700);
 }
 
 .imageName {
@@ -177,69 +195,65 @@
 .publicationsList {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 /* ============================================
-   INDIVIDUAL PUBLICATION ITEMS
+   INDIVIDUAL PUBLICATION ITEMS - SINGLE LINE
    ============================================ */
 
 .publicationItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  transition: all 0.3s ease;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  transition: padding-left 0.2s ease;
+}
+
+.publicationItem:last-child {
+  border-bottom: none;
 }
 
 .publicationItem:hover {
-  background: rgba(255, 255, 255, 0.8);
-  border-color: var(--ifm-color-primary);
-  transform: translateX(4px);
+  padding-left: 0.5rem;
 }
 
 [data-theme='dark'] .publicationItem {
-  background: rgba(30, 30, 30, 0.5);
-  border-color: var(--ifm-color-emphasis-400);
+  border-bottom-color: var(--ifm-color-emphasis-300);
 }
 
-[data-theme='dark'] .publicationItem:hover {
-  background: rgba(40, 40, 40, 0.8);
-  border-color: var(--ifm-color-primary);
+/* Single line layout: text on left, icons on right */
+.publicationLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
-.publicationHeader {
+/* Left side: title and type */
+.publicationText {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+  flex: 1;
+  min-width: 0; /* Allow text to shrink */
 }
 
 .publicationTitle {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 600;
-  margin: 0;
-  line-height: 1.4;
-  flex: 1;
-  min-width: 200px;
-}
-
-.publicationLink {
   color: var(--ifm-color-primary);
   text-decoration: none;
   font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
   transition: color 0.2s ease;
+  line-height: 1.4;
 }
 
-.publicationLink:hover {
+.publicationTitle:hover {
   color: var(--ifm-color-primary-dark);
   text-decoration: underline;
 }
 
-[data-theme='dark'] .publicationLink:hover {
+[data-theme='dark'] .publicationTitle:hover {
   color: var(--ifm-color-primary-light);
 }
 
@@ -248,6 +262,7 @@
   color: var(--ifm-color-emphasis-600);
   font-style: italic;
   font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+  white-space: nowrap;
 }
 
 [data-theme='dark'] .publicationType {
@@ -255,47 +270,63 @@
 }
 
 /* ============================================
-   PLATFORM LINKS
+   PLATFORM ICONS - MONOCHROME THEME COLOR
    ============================================ */
 
-.publicationLinks {
+.platformIcons {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 0.25rem;
+  flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
-.linksLabel {
-  font-size: 0.875rem;
-  color: var(--ifm-color-emphasis-600);
-  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
-}
-
-[data-theme='dark'] .linksLabel {
-  color: var(--ifm-color-emphasis-700);
-}
-
-.platformLink {
-  font-size: 0.875rem;
-  color: var(--ifm-color-primary);
-  text-decoration: none;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
+.platformIconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s ease;
   border-radius: 4px;
-  transition: all 0.2s ease;
-  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
-  text-transform: capitalize;
+  position: relative;
 }
 
-.platformLink:hover {
-  background: var(--ifm-color-primary);
-  color: white;
-  border-color: var(--ifm-color-primary);
+.platformIconLink:hover {
+  transform: translateY(-2px);
 }
 
-[data-theme='dark'] .platformLink {
-  border-color: var(--ifm-color-emphasis-400);
+.platformIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.2s ease;
+  
+  /* Light mode: Convert to primary theme color (#003B7E) 
+     Technique: Make black, then colorize to specific hue */
+  filter: 
+    brightness(0) 
+    saturate(100%) 
+    invert(19%) 
+    sepia(98%) 
+    saturate(2572%) 
+    hue-rotate(198deg) 
+    brightness(93%) 
+    contrast(101%);
+}
+
+/* Dark mode: Pure white icons */
+[data-theme='dark'] .platformIcon {
+  filter: brightness(0) invert(1);
+}
+
+/* Hover states - slightly more emphasis */
+.platformIconLink:hover .platformIcon {
+  opacity: 0.7;
+}
+
+[data-theme='dark'] .platformIconLink:hover .platformIcon {
+  opacity: 0.8;
 }
 
 /* ============================================
@@ -315,6 +346,10 @@
   
   .largeImage {
     max-width: 300px;
+  }
+  
+  .researcherBio {
+    max-width: 280px;
   }
   
   .phaseTitle {
@@ -338,6 +373,11 @@
   
   .largeImage {
     max-width: 250px;
+  }
+  
+  .researcherBio {
+    font-size: 0.875rem;
+    max-width: 240px;
   }
   
   .phaseTitle {
@@ -364,10 +404,17 @@
     font-size: 1rem;
   }
   
-  .publicationHeader {
+  /* Stack publication line on smaller screens */
+  .publicationLine {
     flex-direction: column;
-    gap: 0.5rem;
     align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .publicationText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 }
 
@@ -381,6 +428,11 @@
   }
   
   .largeImage {
+    max-width: 200px;
+  }
+  
+  .researcherBio {
+    font-size: 0.8125rem;
     max-width: 200px;
   }
   
@@ -406,16 +458,20 @@
   }
   
   .publicationItem {
-    padding: 1rem;
+    padding: 0.5rem 0;
   }
   
   .publicationTitle {
     font-size: 0.9375rem;
   }
   
-  .publicationLinks {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .platformIconLink {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .platformIcon {
+    width: 18px;
+    height: 18px;
   }
 }

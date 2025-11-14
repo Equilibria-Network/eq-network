@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 import { RoadmapCards, RoadmapDetails } from '../components/Roadmap';
 
 export default function Roadmap() {
-  const [selectedPhase, setSelectedPhase] = useState(1); // Phase 1 selected by default
+  const [selectedPhase, setSelectedPhase] = useState(null);
   
   useEffect(() => {
     document.documentElement.classList.add('roadmap-page');

@@ -4,7 +4,7 @@ import styles from './RoadmapCards.module.css';
 
 export default function RoadmapCards({ selectedPhase, onPhaseSelect }) {
   const [phases, setPhases] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     // Load all phase files
@@ -23,19 +23,17 @@ export default function RoadmapCards({ selectedPhase, onPhaseSelect }) {
           phase4.default,
           phase5.default
         ]);
-        setLoading(false);
+        
+        // Trigger animation after phases are loaded
+        setTimeout(() => setIsLoaded(true), 50);
       } catch (error) {
         console.error('Error loading phase data:', error);
-        setLoading(false);
+        setIsLoaded(true); // Still show UI even if error
       }
     };
 
     loadPhases();
   }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <section className={styles.section}>
@@ -54,14 +52,15 @@ export default function RoadmapCards({ selectedPhase, onPhaseSelect }) {
 
         {/* Phase Cards */}
         <div className={styles.cardsWrapper}>
-          {phases.map((phase) => (
+          {phases.map((phase, index) => (
             <div 
               key={phase.id} 
-              className={`${styles.card} ${selectedPhase === phase.id ? styles.cardActive : ''}`}
+              className={`${styles.card} ${selectedPhase === phase.id ? styles.cardActive : ''} ${isLoaded ? styles.cardVisible : ''}`}
+              style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => onPhaseSelect(phase.id)}
             >
               <div className={styles.cardContent}>
-                {/* Phase Number Badge */}
+                {/* Phase Number Badge - Now on LEFT */}
                 <div className={styles.phaseNumber}>{phase.id}</div>
                 
                 {/* Portrait Image - SVG */}
@@ -73,14 +72,14 @@ export default function RoadmapCards({ selectedPhase, onPhaseSelect }) {
                   />
                 </div>
                 
-                {/* Researcher Name - Primary */}
-                <div className={styles.researcherName}>
-                  {phase.researcher.lastName}
-                </div>
-                
-                {/* Phase Name - Secondary/Muted */}
+                {/* Phase Name - NOW PRIMARY/PROMINENT */}
                 <div className={styles.phaseName}>
                   {phase.name}
+                </div>
+                
+                {/* Researcher Name - NOW SECONDARY/MUTED */}
+                <div className={styles.researcherName}>
+                  {phase.researcher.lastName}
                 </div>
               </div>
             </div>
