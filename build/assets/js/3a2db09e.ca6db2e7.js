@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[121],{8070:e=>{e.exports=JSON.parse('{"tags":[{"label":"simulation","permalink":"/blog/tags/simulation","count":2},{"label":"collective-intelligence","permalink":"/blog/tags/collective-intelligence","count":2},{"label":"complexity","permalink":"/blog/tags/complexity","count":2}]}')}}]);

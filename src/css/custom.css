@@ -6,6 +6,7 @@
 @import './background.css';
 @import './navbar.css';
 @import './layout.css';
+@import './sidebar.css';
 @import './tippy.css';
 @tailwind base;
 @tailwind components;

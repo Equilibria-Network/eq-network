@@ -1,0 +1,176 @@
+/* src/css/sidebar.css */
+/* Mobile navbar sidebar styling - clean white/dark backgrounds without theme colors */
+
+/* ========== MOBILE SIDEBAR BACKGROUND COLORS ========== */
+
+/* Light mode - white sidebar background */
+[data-theme='light'] .navbar-sidebar {
+  background-color: #ffffff !important;
+}
+
+/* Dark mode - dark sidebar background */
+[data-theme='dark'] .navbar-sidebar {
+  background-color: #1b1b1d !important;
+}
+
+/* ========== SIDEBAR BACKDROP ========== */
+
+/* The semi-transparent overlay behind the sidebar */
+.navbar-sidebar__backdrop {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ========== SIDEBAR TEXT COLORS ========== */
+
+/* Light mode - dark text on white background */
+[data-theme='light'] .navbar-sidebar .menu__link {
+  color: #1c1e21 !important;
+}
+
+/* Dark mode - light text on dark background */
+[data-theme='dark'] .navbar-sidebar .menu__link {
+  color: #e3e3e3 !important;
+}
+
+/* ========== REMOVE ALL BACKGROUND HIGHLIGHTS ========== */
+
+/* Remove ALL backgrounds from menu items */
+.navbar-sidebar .menu__link,
+.navbar-sidebar .menu__link:hover,
+.navbar-sidebar .menu__link:focus,
+.navbar-sidebar .menu__link:active,
+.navbar-sidebar .menu__list-item,
+.navbar-sidebar .menu__list-item:hover {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ========== ACTIVE STATE - ONLY COLOR AND BOLD ========== */
+
+/* Active items - bold and primary color, no backgrounds */
+.navbar-sidebar .menu__link--active {
+  font-weight: 700 !important;
+  color: var(--ifm-color-primary) !important;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* Hover state - only color change, no backgrounds */
+.navbar-sidebar .menu__link:hover {
+  color: var(--ifm-color-primary) !important;
+  transition: color 0.2s ease !important;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* ========== SIDEBAR BRAND SECTION ========== */
+
+/* The top section with logo and close button */
+[data-theme='light'] .navbar-sidebar__brand {
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme='dark'] .navbar-sidebar__brand {
+  background-color: #1b1b1d !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ========== CLEAN MENU STYLING ========== */
+
+/* Remove any default backgrounds from menu containers */
+.navbar-sidebar .menu {
+  background: transparent !important;
+  padding: 1rem 0 !important;
+}
+
+.navbar-sidebar .menu__list {
+  background: transparent !important;
+}
+
+/* Menu item spacing and styling */
+.navbar-sidebar .menu__list-item {
+  margin: 0.25rem 0 !important;
+}
+
+.navbar-sidebar .menu__link {
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0 !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+/* ========== CLOSE BUTTON STYLING ========== */
+
+/* Make close button match theme */
+.navbar-sidebar__close {
+  color: var(--ifm-color-emphasis-600) !important;
+}
+
+.navbar-sidebar__close:hover {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* ========== REMOVE BORDERS AND SHADOWS ========== */
+
+/* Remove all borders and shadows from sidebar */
+.navbar-sidebar,
+.navbar-sidebar__items,
+.navbar-sidebar__item {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ========== SCROLLBAR STYLING (if sidebar has scrollable content) ========== */
+
+/* Custom scrollbar for webkit browsers */
+.navbar-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.navbar-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Light mode scrollbar */
+[data-theme='light'] .navbar-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+[data-theme='light'] .navbar-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode scrollbar */
+[data-theme='dark'] .navbar-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+[data-theme='dark'] .navbar-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox scrollbar */
+.navbar-sidebar {
+  scrollbar-width: thin;
+}
+
+[data-theme='light'] .navbar-sidebar {
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+[data-theme='dark'] .navbar-sidebar {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* ========== TRANSITION EFFECTS ========== */
+
+/* Smooth transitions for all color changes */
+.navbar-sidebar .menu__link {
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+}

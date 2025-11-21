@@ -30,7 +30,7 @@ export default {
       {
         "docs": false,
         "theme": {
-          "customCss": "./src/css/custom.css"
+          "customCss": "/home/grey/Git/eq-network/src/css/custom.css"
         },
         "blog": {
           "showReadingTime": true,
@@ -55,7 +55,7 @@ export default {
     "colorMode": {
       "defaultMode": "light",
       "disableSwitch": false,
-      "respectPrefersColorScheme": true
+      "respectPrefersColorScheme": false
     },
     "prism": {
       "theme": {
