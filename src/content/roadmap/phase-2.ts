@@ -1,0 +1,19 @@
+// src/content/roadmap/phase-2.ts
+
+import type { RoadmapPhase } from './types';
+
+export const phase2: RoadmapPhase = {
+  id: 2,
+  name: "CONSTRUCTION",
+  researcher: {
+    fullName: "Norbert Wiener",
+    lastName: "Wiener",
+    image: "/img/roadmap/wiener.svg",
+    bio: "Mathematician and philosopher who founded cybernetics, establishing frameworks for understanding communication and control in complex systems."
+  },
+  details: {
+    tagline: "Building for One Use Case, Testing Immediately",
+    description: "Once we have solid frameworks to think about collective intelligence problems, we need a way to test them. If someone designs a safety measure, like a new voting system or defense mechanism against misinformation, we need to build infrastructure to stress-test it. Does it hold up when bad actors coordinate against it? What breaks first? We need a laboratory to actually test the dynamics. This phase involves building simulation infrastructure that acts as a proving ground for system-level safety measures. This lets us test proposed defensive processes through thousands of scenarios with agents trying to game it, manipulate it, or break it. The goal is to build infrastructure that provides immediate practical value, helping test ideas rigorously before anyone tries implementing them for real."
+  },
+  publications: []
+};

@@ -1,0 +1,43 @@
+---
+// src/layouts/Layout.astro
+import Navbar from '@components/layout/Navbar';
+import Footer from '@components/layout/Footer';
+import '@styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'Equilibria Network',
+  description = 'Exploring the design space of collective intelligence through simulations and mathematical foundations.'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Parallax Background Pattern -->
+    <div class="parallax-background"></div>
+    
+    <!-- Navbar -->
+    <Navbar client:load />
+    
+    <!-- Main Content -->
+    <main>
+      <slot />
+    </main>
+    
+    <!-- Footer -->
+    <Footer client:load />
+  </body>
+</html>

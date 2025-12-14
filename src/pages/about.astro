@@ -1,0 +1,13 @@
+---
+// src/pages/about.astro
+import Layout from '@/layouts/Layout.astro';
+import AboutHero from '@components/about/AboutHero';
+import AboutPhilosophy from '@components/about/AboutPhilosophy';
+import AboutTeam from '@components/about/AboutTeam';
+---
+
+<Layout title="About - Equilibria Network">
+  <AboutHero client:load />
+  <AboutPhilosophy client:load />
+  <AboutTeam client:load />
+</Layout>

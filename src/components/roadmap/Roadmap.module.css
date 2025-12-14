@@ -1,0 +1,544 @@
+/* src/components/roadmap/Roadmap.module.css */
+
+.roadmapWrapper {
+  width: 100%;
+}
+
+/* Header Section */
+.headerSection {
+  padding: 8rem 0 4rem;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Hero Content - Two Column Layout */
+.heroContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.rightColumn {
+  display: flex;
+  align-items: center;
+}
+
+.mainTitle {
+  font-size: 4.5rem;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--color-primary);
+  margin: 0;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+  font-family: Georgia, 'Times New Roman', 'Palatino', serif;
+}
+
+/* Phase Cards Section */
+.cardsSection {
+  padding: 4rem 0;
+  background: transparent;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem 1.5rem;
+}
+
+.phaseCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem 2rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  /* Initial state for animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Staggered entrance animation */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phaseCard:nth-child(1) { animation-delay: 0ms; }
+.phaseCard:nth-child(2) { animation-delay: 100ms; }
+.phaseCard:nth-child(3) { animation-delay: 200ms; }
+.phaseCard:nth-child(4) { animation-delay: 300ms; }
+.phaseCard:nth-child(5) { animation-delay: 400ms; }
+
+/* Bottom border indicator */
+.phaseCard::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.phaseCard:hover::before {
+  width: 80%;
+}
+
+.phaseCardActive::before {
+  width: 100%;
+}
+
+.phaseCard:hover {
+  transform: translateY(-8px);
+}
+
+.phaseNumber {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 59, 126, 0.1);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.phaseCard:hover .phaseNumber {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.phaseCardActive .phaseNumber {
+  background: var(--color-primary);
+  color: white;
+}
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 1.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.portrait {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  transition: all 0.3s ease;
+}
+
+.phaseCard:hover .portrait {
+  transform: scale(1.05);
+}
+
+.phaseName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  font-family: Georgia, 'Times New Roman', 'Palatino', serif;
+  transition: color 0.3s ease;
+}
+
+.phaseCard:hover .phaseName {
+  color: var(--color-primary-dark);
+}
+
+.researcherName {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.phaseCard:hover .researcherName {
+  opacity: 0.8;
+}
+
+/* Details Section */
+.detailsSection {
+  padding: 4rem 0 6rem;
+  background: transparent;
+}
+
+.detailsContent {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.imageSection {
+  position: sticky;
+  top: calc(var(--navbar-height) + 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.largeImage {
+  width: 100%;
+  height: auto;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+}
+
+.researcherBio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.textSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.phaseTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.phaseTagline {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.3;
+  opacity: 0.9;
+}
+
+.phaseDescription {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+}
+
+.publicationsSection {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 59, 126, 0.15);
+}
+
+.publicationsHeading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+}
+
+.publicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.publicationItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(0, 59, 126, 0.03);
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.publicationItem:hover {
+  background: rgba(0, 59, 126, 0.06);
+}
+
+.publicationLink {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.publicationLink:hover {
+  opacity: 0.7;
+}
+
+.publicationMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.publicationType {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.publicationLinks {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.platformLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.platformLink:hover {
+  opacity: 0.7;
+}
+
+.platformIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+  }
+  
+  .detailsContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .imageSection {
+    position: static;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .headerSection {
+    padding: 6rem 0 3rem;
+  }
+  
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+  
+  .cardsSection {
+    padding: 3.5rem 0;
+  }
+  
+  .portrait {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .phaseName {
+    font-size: 1.125rem;
+  }
+  
+  .researcherName {
+    font-size: 0.75rem;
+  }
+  
+  .phaseNumber {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .mainTitle {
+    font-size: 2.75rem;
+  }
+  
+  .tagline {
+    font-size: 1.125rem;
+  }
+
+  .cardsSection {
+    padding: 3rem 0;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1.5rem;
+  }
+
+  .phaseCard {
+    padding: 1.25rem 0.75rem 1.75rem 0.75rem;
+  }
+
+  .portrait {
+    width: 110px;
+    height: 110px;
+  }
+
+  .phaseName {
+    font-size: 1rem;
+  }
+
+  .researcherName {
+    font-size: 0.75rem;
+  }
+  
+  .phaseNumber {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .detailsSection {
+    padding: 3rem 0 4rem;
+  }
+
+  .phaseTitle {
+    font-size: 2rem;
+  }
+
+  .phaseTagline {
+    font-size: 1.125rem;
+  }
+
+  .phaseDescription {
+    font-size: 1rem;
+  }
+
+  .researcherBio {
+    font-size: 0.875rem;
+  }
+
+  .publicationMeta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerSection {
+    padding: 5rem 0 2.5rem;
+  }
+  
+  .mainTitle {
+    font-size: 2.25rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .portrait {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .phaseName {
+    font-size: 1.125rem;
+  }
+  
+  .researcherName {
+    font-size: 0.8125rem;
+  }
+
+  .publicationItem {
+    padding: 1rem;
+  }
+}

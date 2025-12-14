@@ -1,0 +1,219 @@
+/* src/components/home/Publications.module.css */
+
+.section {
+  padding: 6rem 0;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.description {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Card Grid Container */
+.publicationsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Card Wrapper - for positioning shadow card */
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3.5/5; /* Taller playing card proportions */
+  text-decoration: none;
+  perspective: 1000px;
+}
+
+/* Main Card */
+.cardContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background: url('/img/parallax/white-paper-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 0px solid rgba(0, 59, 126, 0.15);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* White overlay to brighten the texture - sits between background and content */
+.cardContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 12px;
+}
+
+/* Image Container */
+.imageContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+  /* filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%); */
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+/* Text Content */
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Shadow Card - appears behind on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary-darkest);
+  border-radius: 12px;
+  z-index: 1;
+  opacity: 0;
+  transform: rotate(0deg) translate(0, 0);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Individual card hover - shadow card pops out at angle */
+.card:hover::before {
+  opacity: 1;
+  transform: rotate(-5deg) translate(-8px, 8px);
+}
+
+.card:hover .cardContent {
+  transform: rotate(2deg) translate(4px, -4px);
+  border-color: var(--color-primary);
+}
+
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.card:hover .cardTitle {
+  color: var(--color-primary-dark);
+}
+
+.cardType {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.35;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .cardType {
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .publicationsGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .publicationsGrid {
+    gap: 1.5rem;
+  }
+
+  .cardContent {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.125rem;
+  }
+}

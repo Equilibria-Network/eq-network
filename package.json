@@ -1,68 +1,26 @@
 {
-  "name": "my-website",
-  "version": "0.0.0",
-  "private": true,
+  "name": "astro-equilibria",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@docusaurus/core": "3.6.3",
-    "@docusaurus/plugin-client-redirects": "^3.6.3",
-    "@docusaurus/plugin-google-gtag": "^3.6.3",
-    "@docusaurus/plugin-ideal-image": "^3.6.3",
-    "@docusaurus/plugin-pwa": "^3.6.3",
-    "@docusaurus/plugin-sitemap": "^3.6.3",
-    "@docusaurus/preset-classic": "3.6.3",
-    "@easyops-cn/docusaurus-search-local": "^0.46.1",
-    "@formspree/react": "^3.0.0",
-    "@giscus/react": "^3.0.0",
-    "@mdx-js/react": "^3.0.0",
-    "@tippyjs/react": "^4.2.6",
-    "clsx": "^2.0.0",
-    "d3": "^7.9.0",
-    "docusaurus-plugin-matomo": "^0.0.8",
-    "docusaurus-plugin-sass": "^0.2.6",
-    "docusaurus-plugin-umami": "^2.0.0",
-    "lucide-react": "^0.475.0",
-    "prism-react-renderer": "^2.4.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "rehype-katex": "^7.0.1",
-    "remark-math": "^6.0.0",
-    "sass": "^1.83.0",
-    "tippy.js": "^6.3.7"
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/react": "^3.6.3",
+    "@formspree/react": "^2.5.1",
+    "astro": "^4.16.19",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.6.3",
-    "@docusaurus/types": "3.6.3",
-    "@tailwindcss/typography": "^0.5.15",
-    "autoprefixer": "^10.4.20",
-    "esbuild-loader": "^4.3.0",
-    "json5-loader": "^4.0.1",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 3 chrome version",
-      "last 3 firefox version",
-      "last 5 safari version"
-    ]
-  },
-  "engines": {
-    "node": ">=18.0"
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.9.3"
   }
 }

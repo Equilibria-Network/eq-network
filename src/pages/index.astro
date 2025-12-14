@@ -1,0 +1,13 @@
+---
+// src/pages/index.astro
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@components/home/Hero';
+import Publications from '@components/home/Publications';
+import Audience from '@components/home/Audience';
+---
+
+<Layout title="Equilibria Network - Designing New Forms Of Collective Intelligence">
+  <Hero client:load />
+  <Publications client:load />
+  <Audience client:load />
+</Layout>
