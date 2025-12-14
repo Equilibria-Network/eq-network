@@ -33,6 +33,8 @@ jobs:
         run: pnpm install
       
       - name: Build with Astro
+        env:
+          PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
         run: pnpm run build
       
       - name: Upload artifact
@@ -50,4 +52,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
