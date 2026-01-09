@@ -7,7 +7,8 @@ export default function Footer() {
   const footerLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Roadmap', href: '/roadmap' }
+    { label: 'Roadmap', href: '/roadmap' },
+    { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true }
   ];
 
   const socials = [
@@ -61,7 +62,11 @@ export default function Footer() {
             <ul className={styles.linksList}>
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className={styles.link}>
+                  <a 
+                    href={link.href} 
+                    className={styles.link}
+                    {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+                  >
                     {link.label}
                   </a>
                 </li>
