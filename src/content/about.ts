@@ -17,6 +17,25 @@ export interface AboutContent {
   };
 }
 
+// Advisor interface (similar to TeamMember but with affiliation and no details/socials)
+export interface Advisor {
+  id: string;
+  name: string;
+  affiliation: string;
+  bio: string;
+  image: string;
+  website?: string;
+}
+
+// Partner interface
+export interface Partner {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  website: string;
+}
+
 export const aboutContent: AboutContent = {
   hero: {
     title: "About",
@@ -61,3 +80,34 @@ export const aboutContent: AboutContent = {
     ]
   }
 };
+
+// Advisors data
+export const advisors: Advisor[] = [
+  {
+    id: "david-hyland",
+    name: "David Hyland",
+    affiliation: "Oxford University",
+    bio: "Postdoctoral researcher at Oxford University under Michael Woolridge working on Active Inference and Mechanism Design.",
+    image: "/img/about/advisors/david-hyland.jfif",
+    website: "https://www.linkedin.com/in/david-h-88a499135/"
+  },
+  {
+    id: "david-norman",
+    name: "David Norman",
+    affiliation: "Cooperative AI Foundation (CAIF)",
+    bio: "David Norman is the Managing Director of the Cooperative AI Foundation (CAIF), which supports research to improve the cooperative intelligence of advanced AI systems for the benefit of all.",
+    image: "/img/about/advisors/david-norman.webp",
+    website: "https://www.linkedin.com/in/davidnorman8/"
+  }
+];
+
+// Partners data
+export const partners: Partner[] = [
+  {
+    id: "digital-democracy-world",
+    name: "Digital Democracy World",
+    description: "An organization building Flowback, a platform for digital democracy. They're working on Liquid Futarchy, a new form of collective intelligence, and we're helping them explore how to make it optimal in terms of robustness.",
+    logo: "/img/about/partners/digital-democracy-world.svg",
+    website: "https://digitaldemocracy.world"
+  }
+];
