@@ -87,7 +87,7 @@ export const advisors: Advisor[] = [
     id: "david-hyland",
     name: "David Hyland",
     affiliation: "Oxford University",
-    bio: "Postdoctoral researcher at Oxford University under Michael Woolridge working on Active Inference and Mechanism Design.",
+    bio: "Postdoctoral researcher at Oxford University under Michael Woolridge working on bounded rationality and incentive design in multi-agent systems",
     image: "/img/about/advisors/david-hyland.jfif",
     website: "https://www.linkedin.com/in/david-h-88a499135/"
   },
