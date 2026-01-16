@@ -1,0 +1,15 @@
+---
+// src/pages/products.astro
+import Layout from '@/layouts/Layout.astro';
+import ProductsHero from '@components/products/ProductsHero';
+import ProductsExploration from '@components/products/ProductsExploration';
+import ProductsCoordination from '@components/products/ProductsCoordination';
+import ProductsConnection from '@components/products/ProductsConnection';
+---
+
+<Layout title="Products - Equilibria Network" currentPath="/products">
+  <ProductsHero client:load />
+  <ProductsExploration client:load />
+  <ProductsCoordination client:load />
+  <ProductsConnection client:load />
+</Layout>

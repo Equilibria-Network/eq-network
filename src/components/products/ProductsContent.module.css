@@ -1,0 +1,161 @@
+/* src/components/products/ProductsContent.module.css */
+
+/* Hero Section */
+.heroSection {
+  padding: 8rem 0 4rem;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.pageTitle {
+  font-size: 4.5rem;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 2rem 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heroDescription {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+  max-width: 900px;
+  font-family: Georgia, 'Times New Roman', 'Palatino', serif;
+}
+
+/* Sections Wrapper */
+.sectionsWrapper {
+  padding: 4rem 0 6rem;
+  background: transparent;
+}
+
+.sectionItem {
+  margin-bottom: 5rem;
+}
+
+.sectionItem:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 2rem 0;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+/* Blue underline under section titles */
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.contentText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.paragraph {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .heroSection {
+    padding: 6rem 0 3rem;
+  }
+
+  .pageTitle {
+    font-size: 3.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1.125rem;
+  }
+
+  .sectionsWrapper {
+    padding: 3rem 0 5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 5rem 0 2.5rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .pageTitle {
+    font-size: 2.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .sectionsWrapper {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .sectionItem {
+    margin-bottom: 4rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 2.25rem;
+  }
+
+  .heroDescription {
+    font-size: 0.95rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}

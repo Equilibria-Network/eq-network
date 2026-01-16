@@ -26,8 +26,9 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/roadmap', label: 'Roadmap' }
+    { href: '/roadmap', label: 'Roadmap' },
+    { href: '/products', label: 'Products' },
+    { href: '/about', label: 'About' }
   ];
 
   // On home page: show logo only when scrolled
