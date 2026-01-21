@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { roadmapPhases, roadmapOverview } from '@content/roadmap';
 import type { PublicationLinks } from '@content/roadmap';
+import { SubareasSection } from './RoadmapWithSubareas';
 import styles from './Roadmap.module.css';
 
 export default function Roadmap() {
@@ -95,9 +96,9 @@ export default function Roadmap() {
                         <div className={styles.publicationsList}>
                           {currentPhase.publications.map((pub) => (
                             <div key={pub.id} className={styles.publicationItem}>
-                              <a 
-                                href={pub.primaryLink} 
-                                target="_blank" 
+                              <a
+                                href={pub.primaryLink}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className={styles.publicationLink}
                               >
@@ -119,8 +120,8 @@ export default function Roadmap() {
                                           className={styles.platformLink}
                                           aria-label={`Read on ${platform}`}
                                         >
-                                          <img 
-                                            src={platformIcons[platform]} 
+                                          <img
+                                            src={platformIcons[platform]}
                                             alt={platform}
                                             className={styles.platformIcon}
                                           />
@@ -134,6 +135,14 @@ export default function Roadmap() {
                           ))}
                         </div>
                       </div>
+                    )}
+
+                    {/* Research Areas */}
+                    {currentPhase.subareas && (
+                      <SubareasSection
+                        subareas={currentPhase.subareas}
+                        overview={currentPhase.subareasOverview}
+                      />
                     )}
                   </div>
                 </div>

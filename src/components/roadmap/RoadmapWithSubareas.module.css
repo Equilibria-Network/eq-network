@@ -1,0 +1,335 @@
+/* Research Areas Section */
+.subareasSection {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 59, 126, 0.15);
+}
+
+.subareasHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+}
+
+.subareasOverview {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0 0 2rem 0;
+  opacity: 0.85;
+}
+
+/* Grid Layout */
+.subareasGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .subareasGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Subarea Card - Open Layout */
+.subareaCard {
+  padding: 2rem;
+  background: rgba(0, 59, 126, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 59, 126, 0.1);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.subareaCard:hover {
+  background: rgba(0, 59, 126, 0.05);
+  border-color: rgba(0, 59, 126, 0.2);
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.subareaTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* Summary - Always Visible */
+.subareaSummary {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.75;
+}
+
+/* Goal Section - Always Visible */
+.goalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid rgba(0, 59, 126, 0.3);
+}
+
+.miniHeading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.goalText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  white-space: pre-line;
+  opacity: 0.85;
+}
+
+/* Details Toggle */
+.detailsToggle {
+  margin-top: 0.5rem;
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid rgba(0, 59, 126, 0.2);
+  border-radius: 6px;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.toggleButton:hover {
+  background: rgba(0, 59, 126, 0.05);
+  border-color: var(--color-primary);
+}
+
+.toggleIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Details Content */
+.detailsContent {
+  margin-top: 0.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 6px;
+}
+
+.subareaDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Section Headers */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.sectionText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  white-space: pre-line;
+  opacity: 0.85;
+}
+
+/* Work Items */
+.workList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.workItem {
+  padding: 1rem;
+  background: rgba(0, 59, 126, 0.02);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background 0.2s ease;
+  border: 1px solid rgba(0, 59, 126, 0.1);
+}
+
+.workItem:hover {
+  background: rgba(0, 59, 126, 0.04);
+  border-color: rgba(0, 59, 126, 0.2);
+}
+
+.workHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.workTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.workDescription {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.75;
+}
+
+.workLink {
+  display: inline-block;
+  font-size: 0.8125rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.workLink:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.linkPlaceholder {
+  font-size: 0.8125rem;
+  color: var(--text-color);
+  font-style: italic;
+  opacity: 0.4;
+}
+
+/* Status Badges */
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.statusPublished {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.statusInReview {
+  background-color: rgba(0, 59, 126, 0.7);
+  color: white;
+}
+
+.statusActive {
+  background-color: rgba(0, 59, 126, 0.9);
+  color: white;
+}
+
+.statusDraft {
+  background-color: rgba(0, 59, 126, 0.5);
+  color: white;
+}
+
+.statusConcept {
+  background-color: rgba(0, 59, 126, 0.15);
+  color: var(--color-primary);
+}
+
+.statusNotStarted {
+  background-color: rgba(0, 59, 126, 0.08);
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+/* Lists */
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.list li {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.list li::marker {
+  color: var(--color-primary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .subareasGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .subareaCard {
+    padding: 1.5rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .goalSection {
+    padding: 0.875rem;
+  }
+
+  .detailsContent {
+    padding: 1rem;
+  }
+}
