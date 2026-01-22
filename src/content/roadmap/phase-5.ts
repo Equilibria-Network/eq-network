@@ -4,7 +4,7 @@ import type { RoadmapPhase } from './types';
 
 export const phase5: RoadmapPhase = {
   id: 5,
-  name: "EQUILIBRIUM",
+  name: "Equilibrium",
   researcher: {
     fullName: "John Forbes Nash Jr.",
     lastName: "Nash",
@@ -12,7 +12,7 @@ export const phase5: RoadmapPhase = {
     bio: "Mathematician and Nobel laureate whose equilibrium concept revealed how stable, self-sustaining patterns emerge from independent agents pursuing their own interests."
   },
   details: {
-    tagline: "Self-Sustaining Global Infrastructure",
+    tagline: "Equilibrium: Self-Sustaining Networks",
     description: "When the frameworks, practices, and paradigm of thinking become self-sustaining without the founding team, the mission succeeds. New researchers extend the work in directions the original team never imagined. Multiple institutions maintain the infrastructure. The ideas spread because they're instrumentally useful - better coordination mechanisms actually work better. This is the end of the roadmap because the work continues without us. It's genuinely valuable, not because we're still around to push it."
   },
   publications: []
