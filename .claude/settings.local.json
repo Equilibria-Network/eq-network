@@ -1,0 +1,7 @@
+{
+  "enabledMcpjsonServers": [
+    "brave-search",
+    "fetch"
+  ],
+  "enableAllProjectMcpServers": true
+}

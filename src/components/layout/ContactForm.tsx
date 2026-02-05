@@ -5,8 +5,8 @@ import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
-  const [state, handleSubmit] = useForm(formspreeEndpoint);
-  
+  const [state, handleSubmit] = useForm(formspreeEndpoint || 'placeholder');
+
   if (state.succeeded) {
     return (
       <div className={styles.contactForm}>
