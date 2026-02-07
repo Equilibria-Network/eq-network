@@ -34,17 +34,19 @@
 
 /* Card Grid Container */
 .publicationsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  max-width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 /* Card Wrapper - for positioning shadow card */
 .card {
   position: relative;
-  width: 100%;
+  flex: 0 1 calc(20% - 1.6rem); /* 5 per row accounting for gap */
+  min-width: 200px;
   aspect-ratio: 3.5/5; /* Taller playing card proportions */
   text-decoration: none;
   perspective: 1000px;
@@ -119,7 +121,7 @@
   z-index: 1;
 }
 
-/* Shadow Card - appears behind on hover */
+/* Shadow Card - appears behind on hover with hatching */
 .card::before {
   content: '';
   position: absolute;
@@ -127,7 +129,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--color-primary-darkest);
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    var(--color-primary-darkest) 2px,
+    var(--color-primary-darkest) 4px
+  );
+  border: 2px solid var(--color-primary-darkest);
   border-radius: 12px;
   z-index: 1;
   opacity: 0;
@@ -176,11 +186,25 @@
 }
 
 /* Responsive */
+@media (max-width: 1400px) {
+  .card {
+    flex: 0 1 calc(25% - 1.5rem); /* 4 per row */
+  }
+}
+
+@media (max-width: 1100px) {
+  .card {
+    flex: 0 1 calc(33.333% - 1.34rem); /* 3 per row */
+  }
+}
+/* Responsive - Switch to list view on smaller screens */
 @media (max-width: 992px) {
+  .card {
+    flex: 0 1 calc(50% - 1rem); /* 2 per row */
+  }
+  
   .publicationsGrid {
-    grid-template-columns: 1fr;
     gap: 2rem;
-    max-width: 400px;
   }
 }
 
@@ -205,15 +229,77 @@
     font-size: 1rem;
   }
 
+  /* Switch to list view */
   .publicationsGrid {
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card {
+    flex: none;
+    width: 100%;
+    aspect-ratio: unset;
+    min-width: unset;
   }
 
   .cardContent {
-    padding: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .imageContainer {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0;
+    padding: 0.25rem;
+  }
+
+  .textContent {
+    flex: 1;
+    gap: 0.25rem;
   }
 
   .cardTitle {
-    font-size: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .cardType {
+    font-size: 0.7rem;
+  }
+
+  /* Disable card tilt effect on mobile */
+  .card::before {
+    display: none;
+  }
+
+  .card:hover .cardContent {
+    transform: none;
+  }
+
+  .cardContent {
+    transition: background 0.2s ease;
+  }
+
+  .cardContent:active {
+    background: rgba(0, 59, 126, 0.05);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    flex: 0 1 100%;
+  }
+  
+  .publicationsGrid {
+    gap: 0.75rem;
+  }
+
+  .cardTitle {
+    font-size: 0.95rem;
   }
 }

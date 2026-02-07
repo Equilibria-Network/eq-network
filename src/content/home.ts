@@ -80,6 +80,20 @@ export const homeContent: HomeContent = {
         type: "blog post",
         image: "/img/home/publications/philogeny.png",
         primaryLink: "https://www.lesswrong.com/posts/vqfT5QCWa66gsfziB/a-phylogeny-of-agents"
+      },
+      {
+        id: "spectral-signatures",
+        title: "Spectral Signatures of Gradual Disempowerment",
+        type: "blog post",
+        image: null,
+        primaryLink: "https://substack.com/home/post/p-187091496"
+      },
+      {
+        id: "atoms-knowledge",
+        title: "The Atoms of Knowledge Aren't Universal",
+        type: "blog post",
+        image: "/img/home/publications/atoms.svg",
+        primaryLink: "https://substack.com/home/post/p-187091496"
       }
     ]
   }
