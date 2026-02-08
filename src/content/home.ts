@@ -85,7 +85,7 @@ export const homeContent: HomeContent = {
         id: "spectral-signatures",
         title: "Spectral Signatures of Gradual Disempowerment",
         type: "blog post",
-        image: null,
+        image: "/img/home/publications/spectral.png",
         primaryLink: "https://substack.com/home/post/p-187091496"
       },
       {
