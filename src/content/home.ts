@@ -93,7 +93,7 @@ export const homeContent: HomeContent = {
         title: "The Atoms of Knowledge Aren't Universal",
         type: "blog post",
         image: "/img/home/publications/atoms.svg",
-        primaryLink: "https://substack.com/home/post/p-187091496"
+        primaryLink: "https://equilibria1.substack.com/p/bridges-not-primitives"
       }
     ]
   }
