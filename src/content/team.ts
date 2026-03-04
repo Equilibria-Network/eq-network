@@ -23,7 +23,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "jonas",
     name: "Jonas Hallgren",
-    role: "Research and Operations Lead",
+    role: "Director",
     bio: "Developing multi-agent coordination systems that remain stable and aligned even under competitive pressures.",
     details: "Jonas directs our research architecture and operational systems, drawing from four years of dedicated experience in AI safety research with special focus on multi-agent coordination through active inference frameworks. His technical expertise was refined as Chief Scientific Officer at a Collective Intelligence startup where he developed algorithms for AI agent coordination.\n\nHis contributions to AI safety education include curriculum design during his internship at SERI MATS and creating structured research programs like the Distillation for Alignment Practicum and the Alignment Mapping Program. Jonas co-founded AI Safety Sweden (now AI Safety Collab) and helped organize Future Forum, bringing together over 300 participants including industry leaders like Daniella Amodei and Sam Altman.\n\nAt Equilibria Network, Jonas designs research architectures that balance theoretical exploration with practical implementation, creating structured environments where complex coordination challenges can be systematically addressed.",
     image: "/img/about/team/jonas-sketch.png",
