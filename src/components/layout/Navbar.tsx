@@ -26,6 +26,7 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/explainer', label: 'Thesis' },
     { href: '/roadmap', label: 'Roadmap' },
     { href: '/products', label: 'Products' },
     { href: '/about', label: 'About' }

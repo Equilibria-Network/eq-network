@@ -1,7 +1,13 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "Bash(cd:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "brave-search",
     "fetch"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
