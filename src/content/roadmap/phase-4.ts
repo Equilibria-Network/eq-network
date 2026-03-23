@@ -4,16 +4,16 @@ import type { RoadmapPhase } from './types';
 
 export const phase4: RoadmapPhase = {
   id: 4,
-  name: "Generation",
+  name: "Validation",
   researcher: {
-    fullName: "Stafford Beer",
-    lastName: "Beer",
-    image: "/img/roadmap/beer.svg",
-    bio: "Management cybernetician who pioneered the application of systems thinking to organizational design, creating novel governance structures based on viable system principles."
+    fullName: "Elinor Ostrom",
+    lastName: "Ostrom",
+    image: "/img/roadmap/ostrom.svg",
+    bio: "Nobel Prize-winning political economist who demonstrated through empirical research how communities successfully govern shared resources without centralized control."
   },
   details: {
-    tagline: "Generation: Move from testing to creating",
-    description: "This phase involves shifting from evaluation service to generative design. Instead of just testing mechanisms researchers propose, we start creating novel coordination mechanisms informed by accumulated evidence. Testing other people's proposals is valuable, but the real breakthrough comes when you can systematically generate new mechanisms that nobody's thought of yet. This requires two things built in earlier phases: enough empirical data to know what actually works, and simulation that's scaled up to model complex system dynamics with millions or billions of interacting nodes. At that scale, you can test how information propagates through large populations, how defenses hold up against coordinated attacks across entire systems."
+    tagline: "Validation: Test in multiple domains to build confidence",
+    description: "Testing mechanisms in one domain proves the concept works. But if you want to claim your simulations are reliable—that they actually predict real-world outcomes—you need evidence across multiple contexts. This phase is about building confidence: do mechanisms that perform well in simulation consistently succeed when actually implemented in real-world situations? After the RL and LLM environments from Phase 3 have identified which mechanisms are robust, the next step expands to handle different types of coordination problems and runs pilot tests in real-world programs to bridge the theory-practice gap. Each new domain tested helps validate (or challenge) the predictive validity of the simulation infrastructure. The scope is to accumulate a dataset showing what mechanisms work under what conditions and identify the boundaries—where do our models work well, where do they fail? If testing reveals our frameworks missed something important, we loop back and refine earlier phases."
   },
   publications: []
 };

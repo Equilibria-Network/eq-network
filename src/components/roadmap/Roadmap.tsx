@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { roadmapPhases } from '@content/roadmap';
 import RoadmapHero from './RoadmapHero';
 import PhaseList from './PhaseList';
-import PhaseDetails from './PhaseDetails';
+import PhaseOverview from './PhaseOverview';
+import PhaseBody from './PhaseBody';
+import ResearchGraph from '../research/ResearchGraph';
 import styles from './Roadmap.module.css';
 
 export default function Roadmap() {
@@ -15,23 +17,34 @@ export default function Roadmap() {
     <div className={styles.roadmapWrapper}>
       <RoadmapHero />
 
-      {/* Side-by-Side Layout */}
+      {/* Phase Navigation + Overview */}
       <section className={styles.mainContentSection}>
         <div className={styles.container}>
           <div className={styles.splitLayout}>
-            {/* Left Sidebar - Phase Navigation */}
-            <PhaseList 
+            <PhaseList
               selectedPhase={selectedPhase}
               onPhaseSelect={setSelectedPhase}
             />
-
-            {/* Right Panel - Phase Details */}
             <main className={styles.detailsPanel}>
-              {currentPhase && <PhaseDetails phase={currentPhase} />}
+              {currentPhase && <PhaseOverview phase={currentPhase} />}
             </main>
           </div>
         </div>
       </section>
+
+      {/* Tech Tree */}
+      <ResearchGraph />
+
+      {/* Detailed Research Areas & Publications */}
+      {currentPhase && (
+        <section className={styles.mainContentSection}>
+          <div className={styles.container}>
+            <div className={styles.bodyPanel}>
+              <PhaseBody phase={currentPhase} />
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

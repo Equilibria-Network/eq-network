@@ -12,8 +12,8 @@ export const phase2: RoadmapPhase = {
     bio: "Mathematician and philosopher who founded cybernetics, establishing frameworks for understanding communication and control in complex systems."
   },
   details: {
-    tagline: "Construction: Testing the foundations.",
-    description: "Once we have solid frameworks to think about collective intelligence problems, we need a way to test them. If someone designs a safety measure, like a new voting system or defense mechanism against misinformation, we need to build infrastructure to stress-test it. Does it hold up when bad actors coordinate against it? What breaks first? We need a laboratory to actually test the dynamics. This phase involves building simulation infrastructure that acts as a proving ground for system-level safety measures. This lets us test proposed defensive processes through thousands of scenarios with agents trying to game it, manipulate it, or break it. The goal is to build infrastructure that provides immediate practical value, helping test ideas rigorously before anyone tries implementing them for real."
+    tagline: "Construction: Build new coordination mechanisms from cybernetic principles.",
+    description: "With the cybernetic foundations established in Phase 1, this phase focuses on generating novel coordination mechanisms that improve on existing designs. Using the mathematical language and agent taxonomies developed earlier, we systematically construct new mechanisms—voting systems, resource allocation protocols, information aggregation methods—grounded in the formal frameworks of feedback, control, and communication that cybernetics provides. Wiener's insight that intelligent behavior emerges from circular causal processes guides the design: every mechanism we build must have clear feedback loops, measurable performance criteria, and well-understood failure modes. The goal is to produce a portfolio of candidate mechanisms that are theoretically grounded and ready for rigorous testing."
   },
   publications: []
 };

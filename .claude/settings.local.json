@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(pnpm add:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(pnpm build:*)",
+      "Bash(npx astro:*)",
+      "WebSearch"
     ]
   },
   "enableAllProjectMcpServers": true,
