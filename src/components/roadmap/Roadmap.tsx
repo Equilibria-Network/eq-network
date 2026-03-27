@@ -35,8 +35,8 @@ export default function Roadmap() {
       {/* Tech Tree */}
       <ResearchGraph />
 
-      {/* Detailed Research Areas & Publications */}
-      {currentPhase && (
+      {/* Detailed Research Areas & Publications — commented out for now */}
+      {/* {currentPhase && (
         <section className={styles.mainContentSection}>
           <div className={styles.container}>
             <div className={styles.bodyPanel}>
@@ -44,7 +44,7 @@ export default function Roadmap() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
     </div>
   );
 }
