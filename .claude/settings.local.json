@@ -5,7 +5,10 @@
       "Bash(cd:*)",
       "Bash(pnpm build:*)",
       "Bash(npx astro:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npx tsc:*)",
+      "Bash(ls C:/GitHub/eq-network/src/*.css)",
+      "Bash(pnpm remove:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

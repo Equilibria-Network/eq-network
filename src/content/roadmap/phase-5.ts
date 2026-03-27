@@ -13,7 +13,7 @@ export const phase5: RoadmapPhase = {
   },
   details: {
     tagline: "Equilibrium: Self-Sustaining Networks",
-    description: "When the frameworks, practices, and paradigm of thinking become self-sustaining without the founding team, the mission succeeds. New researchers extend the work in directions the original team never imagined. Multiple institutions maintain the infrastructure. The ideas spread because they're instrumentally useful - better coordination mechanisms actually work better. This is the end of the roadmap because the work continues without us."
+    description: "When the frameworks, practices, and paradigm of thinking become self-sustaining without the founding team, the mission succeeds. New researchers extend the work in directions the original team never imagined. Multiple institutions maintain the infrastructure. The ideas spread because they're instrumentally useful — better coordination mechanisms actually work better."
   },
   publications: []
 };

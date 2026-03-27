@@ -12,7 +12,7 @@
   margin: 0 auto;
 }
 
-/* Sticky visual panel */
+/* Sticky visual panel — locks to viewport alongside text */
 .visualPanel {
   position: sticky;
   top: var(--navbar-height, 60px);
@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  will-change: transform, opacity;
+  z-index: 2;
+  background: var(--color-bg, #ffffff);
 }
 
 .visualContainer {
@@ -32,10 +33,10 @@
   position: relative;
 }
 
-/* Narrative text column */
+/* Narrative text column — vertically centered to match visual */
 .narrativeColumn {
   padding: 2rem 3rem;
-  padding-top: 40vh;
+  padding-top: 20vh;
   padding-bottom: 60vh;
 }
 
@@ -46,7 +47,7 @@
   padding: 4rem 2rem 6rem;
 }
 
-/* Responsive: tablet */
+/* Responsive: tablet — visual on top, text scrolls under */
 @media (max-width: 992px) {
   .scrollContainer {
     display: block;
@@ -55,21 +56,28 @@
   .visualPanel {
     position: sticky;
     top: var(--navbar-height, 60px);
-    height: 50vh;
+    height: 45vh;
     padding: 1.5rem;
+    z-index: 2;
+    background: var(--color-bg, #ffffff);
+    /* subtle bottom edge so text doesn't bleed into visual */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   .narrativeColumn {
+    position: relative;
+    z-index: 1;
     padding: 2rem;
     padding-top: 2rem;
     padding-bottom: 60vh;
+    background: var(--color-bg, #ffffff);
   }
 }
 
 /* Responsive: small tablet / large phone */
 @media (max-width: 768px) {
   .visualPanel {
-    height: 40vh;
+    height: 38vh;
     padding: 1rem;
   }
 

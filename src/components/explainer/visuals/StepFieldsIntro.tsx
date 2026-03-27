@@ -46,13 +46,10 @@ const FIELDS = [
 
 export default function StepFieldsIntro({ width, height }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const drawnRef = useRef(false);
 
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg || width < 10 || height < 10) return;
-    if (drawnRef.current) return;
-    drawnRef.current = true;
 
     while (svg.firstChild) svg.removeChild(svg.firstChild);
 

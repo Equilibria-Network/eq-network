@@ -22,8 +22,17 @@ const COL_LABELS = ['Foundations', 'Construction', 'Simulation', 'Validation'];
 const PAPER_STATUS_COLORS: Record<string, string> = {
   published: '#003B7E',
   active: '#0055C4',
+  wip: '#4AB3F4',
   draft: '#4AB3F4',
   concept: '#999',
+};
+
+const PAPER_STATUS_LABELS: Record<string, string> = {
+  published: 'published',
+  active: 'in progress',
+  wip: 'work in progress',
+  draft: 'work in progress',
+  concept: 'early concept',
 };
 
 export default function CardModal({ cardId, onClose }: Props) {
@@ -81,7 +90,7 @@ export default function CardModal({ cardId, onClose }: Props) {
                     className={styles.paperStatus}
                     style={{ color: PAPER_STATUS_COLORS[paper.status] || '#999' }}
                   >
-                    {paper.status}
+                    {PAPER_STATUS_LABELS[paper.status] || paper.status}
                   </span>
                 )}
               </div>
