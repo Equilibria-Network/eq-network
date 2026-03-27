@@ -188,7 +188,7 @@ export const researchContent: ResearchContent = {
         {
           id: 'partner-implementations',
           name: 'Partner Implementations',
-          shortDescription: 'MetaGov, digital democracy orgs — testing in real production systems.',
+          shortDescription: 'Testing with existing organisations and governance platforms.',
           description: 'Partnering with organisations already building governance infrastructure to test variations of their existing systems based on verified mechanisms. This provides ecological validity and real-world data.',
           status: 'planned',
         },
