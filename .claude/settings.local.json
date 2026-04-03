@@ -8,7 +8,16 @@
       "WebSearch",
       "Bash(npx tsc:*)",
       "Bash(ls C:/GitHub/eq-network/src/*.css)",
-      "Bash(pnpm remove:*)"
+      "Bash(pnpm remove:*)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:www.deepmind.com)",
+      "WebFetch(domain:futureoflife.org)",
+      "WebFetch(domain:deepmind.google)",
+      "WebFetch(domain:www.santafe.edu)",
+      "WebFetch(domain:safe.ai)",
+      "WebFetch(domain:www.cooperativeai.com)",
+      "WebFetch(domain:hai.stanford.edu)",
+      "WebFetch(domain:www.alignment.org)"
     ]
   },
   "enableAllProjectMcpServers": true,

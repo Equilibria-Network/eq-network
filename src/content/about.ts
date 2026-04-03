@@ -98,6 +98,14 @@ export const advisors: Advisor[] = [
     bio: "David Norman is the Managing Director of the Cooperative AI Foundation (CAIF), which supports research to improve the cooperative intelligence of advanced AI systems for the benefit of all.",
     image: "/img/about/advisors/david-norman.webp",
     website: "https://www.linkedin.com/in/davidnorman8/"
+  },
+  {
+    id: "jobst-heitzig",
+    name: "Jobst Heitzig",
+    affiliation: "Potsdam Institute for Climate Impact Research (PIK)",
+    bio: "Senior Scientist and Working Group Leader at PIK, leading the Behavioural Game Theory and Interacting Agents group. Researches climate policy, complex networks, and tipping elements through the lens of game theory and nonlinear dynamics.",
+    image: "/img/about/advisors/jobst-heitzig.jpeg",
+    website: "https://www.pik-potsdam.de/members/heitzig"
   }
 ];
 
