@@ -95,7 +95,7 @@ export const advisors: Advisor[] = [
     id: "david-norman",
     name: "David Norman",
     affiliation: "Cooperative AI Foundation (CAIF)",
-    bio: "David Norman is the Managing Director of the Cooperative AI Foundation (CAIF), which supports research to improve the cooperative intelligence of advanced AI systems for the benefit of all.",
+    bio: "David Norman was the Managing Director of the Cooperative AI Foundation (CAIF) between Nov 2023 and Feb 2026, and is currently a board member for London Initiative for Safe AI (LISA).",
     image: "/img/about/advisors/david-norman.webp",
     website: "https://www.linkedin.com/in/davidnorman8/"
   },
