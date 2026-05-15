@@ -12,15 +12,6 @@ export interface TeamMember {
 
 export const teamMembers: TeamMember[] = [
   {
-    id: "aaron",
-    name: "Aaron Halpern",
-    role: "Strategy and Ecosystem Lead",
-    bio: "Complexity scientist and systems design enthusiast bridging diverse disciplines to solve collective intelligence challenges. PhD from University College London on the origin of genetic coding with expertise in cultural evolution and practical problem reframing.",
-    details: "Aaron is a complexity scientist and systems design enthusiast. After completing his PhD on the origin of genetic coding at University College London, Aaron worked across diverse, fast-moving roles consulting on emerging technology trends and on projects in pre-seed venture capital, leading him to meet the Equilibria Network founding team. His interests span cultural evolution, collective intelligence, metascience, and using the phrase \"I was just listening to a podcast about...\" Aaron is at his best when helping a team reframe problems, finding practical creative solutions, and sharing insights from across disciplines.",
-    image: "/img/about/team/aaron-sketch.png",
-    socials: {}
-  },
-  {
     id: "jonas",
     name: "Jonas Hallgren",
     role: "Director",

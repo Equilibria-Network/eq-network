@@ -84,6 +84,14 @@ export const aboutContent: AboutContent = {
 // Advisors data
 export const advisors: Advisor[] = [
   {
+    id: "aaron-halpern",
+    name: "Aaron Halpern",
+    affiliation: "Intelligence Rising",
+    bio: "Co-founder of Equilibria Network and Chair of the Board. Now Game Design and Research Lead at Intelligence Rising, with a PhD from University College London and a background spanning interdisciplinary research, systems design, and early-stage technical startups.",
+    image: "/img/about/advisors/aaron-sketch.png",
+    website: "https://www.linkedin.com/in/aaron-halpern-429197195/"
+  },
+  {
     id: "david-hyland",
     name: "David Hyland",
     affiliation: "Oxford University",
