@@ -1,0 +1,211 @@
+/* src/components/lab/ScenarioSection.module.css */
+
+.section {
+  padding: 4rem 0;
+  background: transparent;
+  scroll-margin-top: calc(var(--navbar-height, 60px) + 1rem);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.visualColumn {
+  position: sticky;
+  top: calc(var(--navbar-height, 80px) + 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visualFrame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.visualFrame svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.orderLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-color);
+  opacity: 0.5;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.anchor {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.65;
+  margin: 0;
+}
+
+.anchor a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.story {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.9;
+  margin: 0;
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subsectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.subsectionText {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+}
+
+.defenseList {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.defenseItem {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.engineNote {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* Responsive — collapse mirrors ProductsCoordination */
+@media (max-width: 992px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .visualColumn {
+    position: static;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subsectionText,
+  .defenseItem {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .textColumn {
+    gap: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .story {
+    font-size: 1rem;
+  }
+
+  .subsectionText,
+  .defenseItem {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+}

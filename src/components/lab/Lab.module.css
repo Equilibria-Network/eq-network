@@ -1,0 +1,76 @@
+/* src/components/lab/Lab.module.css */
+
+.page {
+  background: transparent;
+}
+
+.intro {
+  padding: 2rem 0 1rem;
+  /* Anchor target: clear the fixed navbar when jumped to. */
+  scroll-margin-top: calc(var(--navbar-height, 60px) + 1rem);
+}
+
+.introContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.introTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.introTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.introBody {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.85;
+  max-width: 720px;
+  margin: 0;
+}
+
+.closingContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .introTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .introContainer,
+  .closingContainer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .introTitle {
+    font-size: 1.75rem;
+  }
+
+  .introBody {
+    font-size: 1rem;
+  }
+}

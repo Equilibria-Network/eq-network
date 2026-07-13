@@ -1,0 +1,9 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import LabPage from '@components/lab/Lab';
+import { labContent } from '@content/lab';
+---
+
+<Layout title={labContent.pageTitle} description={labContent.pageDescription}>
+  <LabPage client:load />
+</Layout>

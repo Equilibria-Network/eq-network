@@ -1,0 +1,24 @@
+/* src/components/lab/StatusChip.module.css */
+
+.chip {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
+.live {
+  background: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+}
+
+.inDesign {
+  background: transparent;
+  color: #666;
+  border: 1px dashed #999;
+}

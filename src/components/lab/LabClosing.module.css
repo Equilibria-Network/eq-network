@@ -1,0 +1,72 @@
+/* src/components/lab/LabClosing.module.css */
+
+.closing {
+  text-align: center;
+  border-top: 2px solid #eee;
+  padding-top: 3rem;
+}
+
+.headline {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary, #003B7E);
+  margin-bottom: 1.25rem;
+}
+
+.body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.linkCard {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.linkCard:hover {
+  border-color: var(--color-primary, #003B7E);
+  box-shadow: 0 4px 12px rgba(0, 59, 126, 0.1);
+}
+
+.linkLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary, #003B7E);
+  margin-bottom: 0.5rem;
+}
+
+.linkDescription {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 992px) {
+  .links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .links {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .headline {
+    font-size: 1.6rem;
+  }
+}

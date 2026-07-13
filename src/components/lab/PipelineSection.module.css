@@ -1,0 +1,153 @@
+/* src/components/lab/PipelineSection.module.css */
+
+.section {
+  padding: 4rem 0;
+  background: transparent;
+  scroll-margin-top: calc(var(--navbar-height, 60px) + 1rem);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.intro {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.85;
+  max-width: 720px;
+  margin: 0 0 3rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem 2.5rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.stepNumber {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stepTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.stepBody {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-color);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.imageFrame {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.note {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin: 2.5rem 0 0;
+  max-width: 720px;
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+  }
+
+  .imageFrame {
+    padding: 0.6rem;
+  }
+}

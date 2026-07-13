@@ -1,0 +1,145 @@
+/* src/components/lab/Leaderboard.module.css */
+
+.section {
+  padding: 4rem 0;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.caption {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0 0 2rem;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.illustrativeBadge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+  border: 1px dashed #999;
+  border-radius: 3px;
+  padding: 0.2rem 0.6rem;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+/* Wide table scrolls inside its own container; the page never scrolls sideways. */
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--color-primary);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid #eee;
+  color: var(--text-color);
+  opacity: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.mechanismHeader {
+  min-width: 200px;
+}
+
+.mechanismCell {
+  font-weight: 600;
+}
+
+.combinedHeader,
+.combinedCell {
+  background: rgba(74, 179, 244, 0.08);
+}
+
+.note {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 1.5rem 0 0;
+  max-width: 720px;
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .table {
+    font-size: 0.95rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 1rem;
+  }
+}

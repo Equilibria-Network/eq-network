@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Form Section */}
-          <div className={styles.formSection}>
+          <div id="contact" className={styles.formSection}>
             <ContactForm />
           </div>
 
