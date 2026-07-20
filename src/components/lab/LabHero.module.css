@@ -30,6 +30,19 @@
   letter-spacing: -0.02em;
 }
 
+.badge {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #666;
+  border: 1px dashed #999;
+  border-radius: 3px;
+  padding: 0.3rem 0.75rem;
+  line-height: 1.2;
+  margin-top: -0.5rem;
+}
+
 .subline {
   font-size: 1.375rem;
   line-height: 1.6;

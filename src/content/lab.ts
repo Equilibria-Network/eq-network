@@ -71,6 +71,7 @@ export interface LabContent {
   pageDescription: string;
   hero: {
     question: string;
+    badge: string;
     subline: string;
     kicker: string;
     honesty: string;
@@ -112,6 +113,7 @@ export const labContent: LabContent = {
 
   hero: {
     question: 'Which institutions survive AI?',
+    badge: '[prototype]',
     subline:
       'As AI outcompetes people in the economy, culture, and politics, which mechanisms keep humans in control of the future?',
     kicker: 'Five toy scenarios. Composable defenses. Measured outcomes.',
