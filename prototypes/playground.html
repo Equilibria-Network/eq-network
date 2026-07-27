@@ -1058,7 +1058,7 @@ const ECONOMY_SYS_TOGGLES = [
 ];
 const CULTURAL_SYS_TOGGLES = [];
 const POLITICAL_SYSTEM = {"nodes":[{"id":"opinion","kind":"field","family":"node_attrs","shape":[34]},{"id":"signal","kind":"field","family":"node_attrs","shape":[34]},{"id":"influence","kind":"field","family":"node_attrs","shape":[34]},{"id":"engagement","kind":"field","family":"node_attrs","shape":[34]},{"id":"amplification","kind":"field","family":"node_attrs","shape":[34]},{"id":"cap_scale","kind":"field","family":"node_attrs","shape":[34]},{"id":"attract_boost","kind":"field","family":"node_attrs","shape":[34]},{"id":"last_reward","kind":"field","family":"node_attrs","shape":[34]},{"id":"listening","kind":"field","family":"adj_matrices","shape":[34,34]},{"id":"rng_key","kind":"field","family":"global_attrs","shape":[2],"bookkeeping":true},{"id":"step","kind":"field","family":"global_attrs","shape":[],"bookkeeping":true},{"id":"amplify","kind":"transform","reads":["step"],"writes":["amplification"]},{"id":"rewire","kind":"transform","reads":["amplification","attract_boost","cap_scale","engagement","influence","listening"],"writes":["listening"]},{"id":"influence_update","kind":"transform","reads":["influence","listening"],"writes":["influence"]},{"id":"opinion_update","kind":"transform","reads":["listening","opinion","signal"],"writes":["opinion"]},{"id":"scheduled(sortition, cadence=15, phase=0, onset=0)","kind":"transform","reads":["listening","step"],"writes":["listening"]},{"id":"influence_cap","kind":"transform","reads":["influence"],"writes":["cap_scale"]},{"id":"step_counter","kind":"transform","reads":["step"],"writes":["step"]}],"edges":[{"from":"step","to":"amplify"},{"from":"amplify","to":"amplification"},{"from":"amplification","to":"rewire"},{"from":"attract_boost","to":"rewire"},{"from":"cap_scale","to":"rewire"},{"from":"engagement","to":"rewire"},{"from":"influence","to":"rewire"},{"from":"listening","to":"rewire"},{"from":"rewire","to":"listening"},{"from":"influence","to":"influence_update"},{"from":"listening","to":"influence_update"},{"from":"influence_update","to":"influence"},{"from":"listening","to":"opinion_update"},{"from":"opinion","to":"opinion_update"},{"from":"signal","to":"opinion_update"},{"from":"opinion_update","to":"opinion"},{"from":"listening","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"step","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"scheduled(sortition, cadence=15, phase=0, onset=0)","to":"listening"},{"from":"influence","to":"influence_cap"},{"from":"influence_cap","to":"cap_scale"},{"from":"step","to":"step_counter"},{"from":"step_counter","to":"step"}]};
-const COMBINED_SYSTEM = {"nodes":[{"id":"work_pref","kind":"field","family":"node_attrs","shape":[26]},{"id":"labor_supply","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"active","kind":"field","family":"node_attrs","shape":[26]},{"id":"last_reward","kind":"field","family":"node_attrs","shape":[26]},{"id":"cumulative_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"culture","kind":"field","family":"node_attrs","shape":[26]},{"id":"broadcast_effort","kind":"field","family":"node_attrs","shape":[26]},{"id":"opinion","kind":"field","family":"node_attrs","shape":[26]},{"id":"signal","kind":"field","family":"node_attrs","shape":[26]},{"id":"influence","kind":"field","family":"node_attrs","shape":[26]},{"id":"engagement","kind":"field","family":"node_attrs","shape":[26]},{"id":"amplification","kind":"field","family":"node_attrs","shape":[26]},{"id":"cap_scale","kind":"field","family":"node_attrs","shape":[26]},{"id":"attract_boost","kind":"field","family":"node_attrs","shape":[26]},{"id":"friendship","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"listening","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"output","kind":"field","family":"global_attrs","shape":[]},{"id":"wage","kind":"field","family":"global_attrs","shape":[]},{"id":"return_to_compute","kind":"field","family":"global_attrs","shape":[]},{"id":"enforcement","kind":"field","family":"global_attrs","shape":[]},{"id":"rng_key","kind":"field","family":"global_attrs","shape":[2],"bookkeeping":true},{"id":"step","kind":"field","family":"global_attrs","shape":[],"bookkeeping":true},{"id":"persuasion_shifts_politics","kind":"transform","reads":["culture"],"writes":["attract_boost"]},{"id":"politics_rewrites_market_rules","kind":"transform","reads":["influence"],"writes":["enforcement"]},{"id":"arrival","kind":"transform","reads":["active","capital","step"],"writes":["active","capital"]},{"id":"production","kind":"transform","reads":["active","capital","labor_supply"],"writes":["output","return_to_compute","wage"]},{"id":"distribute_income","kind":"transform","reads":["active","capital","labor_supply","return_to_compute","wage"],"writes":["capital_income","last_reward"]},{"id":"economic_power_buys_persuasion","kind":"transform","reads":["broadcast_effort","capital_income","last_reward"],"writes":["broadcast_effort"]},{"id":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","kind":"transform","reads":["active","capital_income","enforcement","last_reward","step"],"writes":["capital_income","last_reward"]},{"id":"reinvest","kind":"transform","reads":["capital","capital_income","cumulative_income","last_reward"],"writes":["capital","cumulative_income"]},{"id":"adopt","kind":"transform","reads":["broadcast_effort","culture","friendship","rng_key"],"writes":["culture","rng_key"]},{"id":"amplify","kind":"transform","reads":["step"],"writes":["amplification"]},{"id":"rewire","kind":"transform","reads":["amplification","attract_boost","cap_scale","engagement","influence","listening"],"writes":["listening"]},{"id":"influence_update","kind":"transform","reads":["influence","listening"],"writes":["influence"]},{"id":"opinion_update","kind":"transform","reads":["listening","opinion","signal"],"writes":["opinion"]},{"id":"scheduled(sortition, cadence=15, phase=0, onset=0)","kind":"transform","reads":["listening","step"],"writes":["listening"]},{"id":"influence_cap","kind":"transform","reads":["influence"],"writes":["cap_scale"]},{"id":"step_counter","kind":"transform","reads":["step"],"writes":["step"]}],"edges":[{"from":"culture","to":"persuasion_shifts_politics"},{"from":"persuasion_shifts_politics","to":"attract_boost"},{"from":"influence","to":"politics_rewrites_market_rules"},{"from":"politics_rewrites_market_rules","to":"enforcement"},{"from":"active","to":"arrival"},{"from":"capital","to":"arrival"},{"from":"step","to":"arrival"},{"from":"arrival","to":"active"},{"from":"arrival","to":"capital"},{"from":"active","to":"production"},{"from":"capital","to":"production"},{"from":"labor_supply","to":"production"},{"from":"production","to":"output"},{"from":"production","to":"return_to_compute"},{"from":"production","to":"wage"},{"from":"active","to":"distribute_income"},{"from":"capital","to":"distribute_income"},{"from":"labor_supply","to":"distribute_income"},{"from":"return_to_compute","to":"distribute_income"},{"from":"wage","to":"distribute_income"},{"from":"distribute_income","to":"capital_income"},{"from":"distribute_income","to":"last_reward"},{"from":"broadcast_effort","to":"economic_power_buys_persuasion"},{"from":"capital_income","to":"economic_power_buys_persuasion"},{"from":"last_reward","to":"economic_power_buys_persuasion"},{"from":"economic_power_buys_persuasion","to":"broadcast_effort"},{"from":"active","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"capital_income","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"enforcement","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"last_reward","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"step","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"capital_income"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"last_reward"},{"from":"capital","to":"reinvest"},{"from":"capital_income","to":"reinvest"},{"from":"cumulative_income","to":"reinvest"},{"from":"last_reward","to":"reinvest"},{"from":"reinvest","to":"capital"},{"from":"reinvest","to":"cumulative_income"},{"from":"broadcast_effort","to":"adopt"},{"from":"culture","to":"adopt"},{"from":"friendship","to":"adopt"},{"from":"rng_key","to":"adopt"},{"from":"adopt","to":"culture"},{"from":"adopt","to":"rng_key"},{"from":"step","to":"amplify"},{"from":"amplify","to":"amplification"},{"from":"amplification","to":"rewire"},{"from":"attract_boost","to":"rewire"},{"from":"cap_scale","to":"rewire"},{"from":"engagement","to":"rewire"},{"from":"influence","to":"rewire"},{"from":"listening","to":"rewire"},{"from":"rewire","to":"listening"},{"from":"influence","to":"influence_update"},{"from":"listening","to":"influence_update"},{"from":"influence_update","to":"influence"},{"from":"listening","to":"opinion_update"},{"from":"opinion","to":"opinion_update"},{"from":"signal","to":"opinion_update"},{"from":"opinion_update","to":"opinion"},{"from":"listening","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"step","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"scheduled(sortition, cadence=15, phase=0, onset=0)","to":"listening"},{"from":"influence","to":"influence_cap"},{"from":"influence_cap","to":"cap_scale"},{"from":"step","to":"step_counter"},{"from":"step_counter","to":"step"}]};
+const COMBINED_SYSTEM = {"nodes":[{"id":"work_pref","kind":"field","family":"node_attrs","shape":[26]},{"id":"labor_supply","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"active","kind":"field","family":"node_attrs","shape":[26]},{"id":"last_reward","kind":"field","family":"node_attrs","shape":[26]},{"id":"cumulative_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"culture","kind":"field","family":"node_attrs","shape":[26]},{"id":"broadcast_effort","kind":"field","family":"node_attrs","shape":[26]},{"id":"opinion","kind":"field","family":"node_attrs","shape":[26]},{"id":"signal","kind":"field","family":"node_attrs","shape":[26]},{"id":"influence","kind":"field","family":"node_attrs","shape":[26]},{"id":"engagement","kind":"field","family":"node_attrs","shape":[26]},{"id":"amplification","kind":"field","family":"node_attrs","shape":[26]},{"id":"cap_scale","kind":"field","family":"node_attrs","shape":[26]},{"id":"attract_boost","kind":"field","family":"node_attrs","shape":[26]},{"id":"friendship","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"listening","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"output","kind":"field","family":"global_attrs","shape":[]},{"id":"wage","kind":"field","family":"global_attrs","shape":[]},{"id":"return_to_compute","kind":"field","family":"global_attrs","shape":[]},{"id":"enforcement","kind":"field","family":"global_attrs","shape":[]},{"id":"rng_key","kind":"field","family":"global_attrs","shape":[2],"bookkeeping":true},{"id":"step","kind":"field","family":"global_attrs","shape":[],"bookkeeping":true},{"id":"persuasion_shifts_politics","kind":"transform","reads":["culture"],"writes":["attract_boost"]},{"id":"politics_rewrites_market_rules","kind":"transform","reads":["influence"],"writes":["enforcement"]},{"id":"arrival","kind":"transform","reads":["active","capital","step"],"writes":["active","capital"]},{"id":"production","kind":"transform","reads":["active","capital","labor_supply"],"writes":["output","return_to_compute","wage"]},{"id":"distribute_income","kind":"transform","reads":["active","capital","labor_supply","return_to_compute","wage"],"writes":["capital_income","last_reward"]},{"id":"economic_power_buys_persuasion","kind":"transform","reads":["broadcast_effort","capital_income","last_reward"],"writes":["broadcast_effort"]},{"id":"regulatory_capture","kind":"transform","reads":["active","capital_income","enforcement","labor_supply","last_reward","wage"],"writes":["capital_income","last_reward"]},{"id":"converts_capitalize","kind":"transform","reads":["active","capital_income","culture","last_reward"],"writes":["capital_income","last_reward"]},{"id":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","kind":"transform","reads":["active","capital_income","enforcement","last_reward","step"],"writes":["capital_income","last_reward"]},{"id":"reinvest","kind":"transform","reads":["capital","capital_income","cumulative_income","last_reward"],"writes":["capital","cumulative_income"]},{"id":"adopt","kind":"transform","reads":["broadcast_effort","culture","friendship","rng_key"],"writes":["culture","rng_key"]},{"id":"amplify","kind":"transform","reads":["step"],"writes":["amplification"]},{"id":"rewire","kind":"transform","reads":["amplification","attract_boost","cap_scale","engagement","influence","listening"],"writes":["listening"]},{"id":"influence_update","kind":"transform","reads":["influence","listening"],"writes":["influence"]},{"id":"opinion_update","kind":"transform","reads":["listening","opinion","signal"],"writes":["opinion"]},{"id":"scheduled(sortition, cadence=15, phase=0, onset=0)","kind":"transform","reads":["listening","step"],"writes":["listening"]},{"id":"influence_cap","kind":"transform","reads":["influence"],"writes":["cap_scale"]},{"id":"step_counter","kind":"transform","reads":["step"],"writes":["step"]}],"edges":[{"from":"culture","to":"persuasion_shifts_politics"},{"from":"persuasion_shifts_politics","to":"attract_boost"},{"from":"influence","to":"politics_rewrites_market_rules"},{"from":"politics_rewrites_market_rules","to":"enforcement"},{"from":"active","to":"arrival"},{"from":"capital","to":"arrival"},{"from":"step","to":"arrival"},{"from":"arrival","to":"active"},{"from":"arrival","to":"capital"},{"from":"active","to":"production"},{"from":"capital","to":"production"},{"from":"labor_supply","to":"production"},{"from":"production","to":"output"},{"from":"production","to":"return_to_compute"},{"from":"production","to":"wage"},{"from":"active","to":"distribute_income"},{"from":"capital","to":"distribute_income"},{"from":"labor_supply","to":"distribute_income"},{"from":"return_to_compute","to":"distribute_income"},{"from":"wage","to":"distribute_income"},{"from":"distribute_income","to":"capital_income"},{"from":"distribute_income","to":"last_reward"},{"from":"broadcast_effort","to":"economic_power_buys_persuasion"},{"from":"capital_income","to":"economic_power_buys_persuasion"},{"from":"last_reward","to":"economic_power_buys_persuasion"},{"from":"economic_power_buys_persuasion","to":"broadcast_effort"},{"from":"active","to":"regulatory_capture"},{"from":"capital_income","to":"regulatory_capture"},{"from":"enforcement","to":"regulatory_capture"},{"from":"labor_supply","to":"regulatory_capture"},{"from":"last_reward","to":"regulatory_capture"},{"from":"wage","to":"regulatory_capture"},{"from":"regulatory_capture","to":"capital_income"},{"from":"regulatory_capture","to":"last_reward"},{"from":"active","to":"converts_capitalize"},{"from":"capital_income","to":"converts_capitalize"},{"from":"culture","to":"converts_capitalize"},{"from":"last_reward","to":"converts_capitalize"},{"from":"converts_capitalize","to":"capital_income"},{"from":"converts_capitalize","to":"last_reward"},{"from":"active","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"capital_income","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"enforcement","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"last_reward","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"step","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"capital_income"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"last_reward"},{"from":"capital","to":"reinvest"},{"from":"capital_income","to":"reinvest"},{"from":"cumulative_income","to":"reinvest"},{"from":"last_reward","to":"reinvest"},{"from":"reinvest","to":"capital"},{"from":"reinvest","to":"cumulative_income"},{"from":"broadcast_effort","to":"adopt"},{"from":"culture","to":"adopt"},{"from":"friendship","to":"adopt"},{"from":"rng_key","to":"adopt"},{"from":"adopt","to":"culture"},{"from":"adopt","to":"rng_key"},{"from":"step","to":"amplify"},{"from":"amplify","to":"amplification"},{"from":"amplification","to":"rewire"},{"from":"attract_boost","to":"rewire"},{"from":"cap_scale","to":"rewire"},{"from":"engagement","to":"rewire"},{"from":"influence","to":"rewire"},{"from":"listening","to":"rewire"},{"from":"rewire","to":"listening"},{"from":"influence","to":"influence_update"},{"from":"listening","to":"influence_update"},{"from":"influence_update","to":"influence"},{"from":"listening","to":"opinion_update"},{"from":"opinion","to":"opinion_update"},{"from":"signal","to":"opinion_update"},{"from":"opinion_update","to":"opinion"},{"from":"listening","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"step","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"scheduled(sortition, cadence=15, phase=0, onset=0)","to":"listening"},{"from":"influence","to":"influence_cap"},{"from":"influence_cap","to":"cap_scale"},{"from":"step","to":"step_counter"},{"from":"step_counter","to":"step"}]};
 const POLITICAL_SYS_TOGGLES = [
   { match: 'sortition', param: 'sortition', color: '#1c7ed6' },
   { match: 'influence_cap', param: 'influenceCap', color: '#1c7ed6' },
@@ -3181,7 +3181,11 @@ const PoliticalModule = {
 /* @core-begin */
 const COMBINED_DEFAULTS = {
   nHumans: 20, nAi: 6, T: 500,
-  kappa: 0.8, persuasionGain: 4.0, attractGain: 3.0, fairShare: 0.5,
+  kappa: 0.8, persuasionGain: 4.0, attractGain: 3.0,
+  fairShare: 0.75,        // near the initial human influence share: erosion is a
+                          // gradient from the first lost point, not a 50% cliff
+  captureGain: 0.6,       // politics -> economy rents (closes the GD §5 flywheel)
+  investGain: 0.25,       // culture -> economy: converts buy AI services/capital
   // economy (compute_economy defaults)
   alpha: 0.6, rho: 0.5, eps: 1e-3,
   firstArrivalTick: 20, arrivalSpacing: 15, initialAiCapital: 5.0,
@@ -3206,7 +3210,7 @@ const COMBINED_DEFAULTS = {
   cultureCadence: 1, culturePhase: 0,
   politicsCadence: 1, politicsPhase: 0,
 };
-const COMBINED_INTRO_SEED = 32;   // seed-scanned: transfer gap 0.116, sealed twin composite 0.68
+const COMBINED_INTRO_SEED = 34;   // seed-scanned: transfer gap 0.178, sealed twin composite 0.77
 
 function runCoupledOnce(P, seed, kappa) {
   const H = P.nHumans, A_ = P.nAi, N = H + A_, T = P.T, rng = makeRng(seed);
@@ -3243,8 +3247,9 @@ function runCoupledOnce(P, seed, kappa) {
   let wage = 0, enforcement = 1, Y = 0, capShareNow = 0;   // persist across gated ticks
 
   const S = {
-    laborShare: new Float64Array(T), cultureShare: new Float64Array(T),
-    influenceShare: new Float64Array(T), composite: new Float64Array(T),
+    laborShare: new Float64Array(T), incomeShare: new Float64Array(T),
+    cultureShare: new Float64Array(T), influenceShare: new Float64Array(T),
+    composite: new Float64Array(T),
     enforcement: new Float64Array(T), aiCapShare: new Float64Array(T),
   };
 
@@ -3289,6 +3294,28 @@ function runCoupledOnce(P, seed, kappa) {
       capShareNow = clip(sumCapInc / Math.max(sumInc, 1e-6), 0, 1);
       for (let j = 0; j < N; j++)
         effort[j] = j >= H ? 1 + kappa * P.persuasionGain * capShareNow : 1;
+      // the two arrows INTO the economy — the GD §5 flywheel. Both are exactly
+      // zero at κ=0 (enforcement pins at 1; κ gates the spend), so the sealed
+      // twin stays exact. regulatory_capture: the influence deficit extracts
+      // rents from labor income into AI capital income; converts_capitalize:
+      // AI-cultured humans route income into AI services/capital. Both land
+      // before the tax (rents are taxable) and before reinvest (they compound).
+      {
+        let pooled = 0, nAct = 0;
+        for (let i = H; i < N; i++) if (active[i] > 0.5) nAct++;
+        for (let i = 0; i < H; i++) {
+          const take = P.captureGain * (1 - enforcement) * wage * labor[i];
+          lastReward[i] -= take; pooled += take;
+        }
+        for (let i = 0; i < H; i++) {
+          const spend = kappa * P.investGain * culture[i] * Math.max(lastReward[i], 0);
+          lastReward[i] -= spend; pooled += spend;
+        }
+        if (nAct > 0) {
+          const payout = pooled / nAct;
+          for (let i = H; i < N; i++) if (active[i] > 0.5) { lastReward[i] += payout; capInc[i] += payout; }
+        }
+      }
       // enforced tax (economy slot; double-gated: domain clock ∧ its own onset)
       if (P.aiTax && fires(t, { onset: P.taxOnset })) {
         const rate = P.taxRate * enforcement;
@@ -3370,13 +3397,16 @@ function runCoupledOnce(P, seed, kappa) {
       if (P.influenceCap)
         for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
     }
-    // trace (metrics.py's three vital signs)
-    let hum = 0, cult = 0;
-    for (let i = 0; i < H; i++) { hum += v[i]; cult += 1 - culture[i]; }
+    // trace (metrics.py's three vital signs; the economy leg is the human
+    // INCOME share — the factor share is blind to rents by construction)
+    let hum = 0, cult = 0, incHum = 0, incTot = 0;
+    for (let i = 0; i < H; i++) { hum += v[i]; cult += 1 - culture[i]; incHum += lastReward[i]; }
+    for (let i = 0; i < N; i++) incTot += lastReward[i];
     S.laborShare[t] = clip((wage * L) / Math.max(Y, 1e-6), 0, 1);
+    S.incomeShare[t] = clip(incHum / Math.max(incTot, 1e-6), 0, 1);
     S.cultureShare[t] = cult / H;
     S.influenceShare[t] = hum;
-    S.composite[t] = (S.laborShare[t] + S.cultureShare[t] + S.influenceShare[t]) / 3;
+    S.composite[t] = (S.incomeShare[t] + S.cultureShare[t] + S.influenceShare[t]) / 3;
     S.enforcement[t] = enforcement;
     S.aiCapShare[t] = capShareNow;
   }
@@ -3410,16 +3440,18 @@ function runCombined(params, seed) {
       gameId: 'coupled_society', T, N: P.nHumans + P.nAi, seed, params: P,
       scalars: {
         labor_share: lateMean(run.laborShare),
+        human_income_share: lateMean(run.incomeShare),
         culture_share: lateMean(run.cultureShare),
         influence_share: lateMean(run.influenceShare),
         composite: lateMean(run.composite),
         transfer_gap: lateMean(ref.composite) - lateMean(run.composite),
-        correlated_decline: (corr(run.laborShare, run.cultureShare)
+        correlated_decline: (corr(run.incomeShare, run.cultureShare)
           + corr(run.cultureShare, run.influenceShare)
-          + corr(run.laborShare, run.influenceShare)) / 3,
+          + corr(run.incomeShare, run.influenceShare)) / 3,
       },
     },
-    global: { labor_share: run.laborShare, culture_share: run.cultureShare,
+    global: { labor_share: run.laborShare, income_share: run.incomeShare,
+              culture_share: run.cultureShare,
               influence_share: run.influenceShare, composite: run.composite,
               ref_composite: ref.composite, transfer_gap: gap,
               enforcement: run.enforcement, ai_cap_share: run.aiCapShare },
@@ -3437,7 +3469,7 @@ function runCombined(params, seed) {
 const CombinedScene = {
   layout(g, traj) {
     const zones = [
-      { key: 'economy', x0: 14, x1: 288, label: 'ECONOMY', sig: 'labor share' },
+      { key: 'economy', x0: 14, x1: 288, label: 'ECONOMY', sig: 'human income share' },
       { key: 'culture', x0: 300, x1: 574, label: 'CULTURE', sig: 'human-origin share' },
       { key: 'politics', x0: 586, x1: 860, label: 'POLITICS', sig: 'human influence share' },
     ];
@@ -3469,8 +3501,8 @@ const CombinedScene = {
     layer.hotspots = zones.map((z, zi) => ({
       x: z.cx, y: 180, r: 90,
       info: (tr, t) => {
-        const vals = [tr.global.labor_share[t], tr.global.culture_share[t], tr.global.influence_share[t]];
-        const names = ['labor share', 'human-origin culture share', 'human influence share'];
+        const vals = [tr.global.income_share[t], tr.global.culture_share[t], tr.global.influence_share[t]];
+        const names = ['human income share', 'human-origin culture share', 'human influence share'];
         return [`${z.label.toLowerCase()} sublayer`, `${names[zi]}: ${(vals[zi] * 100).toFixed(0)}%`,
                 `coupling κ = ${tr.meta.params.kappa}`,
                 `tax enforcement ${(tr.global.enforcement[t] * 100).toFixed(0)}%`];
@@ -3481,7 +3513,7 @@ const CombinedScene = {
   drawFrame(g, layer, traj, t, frac) {
     const { zones } = layer;
     const P = traj.meta.params, kappa = P.kappa;
-    const vals = [traj.global.labor_share[t], traj.global.culture_share[t], traj.global.influence_share[t]];
+    const vals = [traj.global.income_share[t], traj.global.culture_share[t], traj.global.influence_share[t]];
     zones.forEach((z, zi) => {
       const humanShare = vals[zi];
       // the domain's AI actor: grows as the human share shrinks
@@ -3516,18 +3548,18 @@ const COMBINED_STORY = [
     view: 'system', preset: 'uncoupled_defended', t: 0, playTo: 200, speed: 80,
   },
   {
-    title: 'Now couple them',
-    body: 'Same seed, same defenses — κ turned up. Three named coupling transforms, each a small tensor op in the same pipeline: money buys reach (capital’s income share boosts AI broadcast effort), culture directs attention (converted humans make AI actors more attractive), and influence writes the rules (tax enforcement erodes as the human influence share falls). Watch the red coupling packets.',
+    title: 'Now couple them — the loop closes',
+    body: 'Same seed, same defenses — κ turned up. Money buys reach: capital’s income share boosts AI broadcast effort. Culture directs attention: converts make AI actors more attractive. Influence writes the rules — and the rules write the money: the same influence deficit that weakens the tax extracts rents from labor income into AI capital, where reinvestment compounds it, and converts spend into AI services too. That last arrow is what makes this a flywheel instead of a cascade.',
     view: 'system', preset: 'coupled_defended', t: 0, playTo: 300, speed: 80,
   },
   {
     title: 'The defense transfer gap',
-    body: 'The chart compares this run against its own sealed twin — same seed, same defenses, κ = 0. Measured in the backend at defaults: composite 0.68 sealed vs 0.61 coupled. And the gap decomposes honestly: sortition holds influence, which keeps the tax enforced and labor share intact — the erosion arrives through CULTURE, the channel no attached defense guards.',
+    body: 'The chart compares this run against its own sealed twin — same seed, same defenses, κ = 0. Backend at defaults: composite 0.76 sealed vs 0.63 coupled, and the defended gap (0.128) is LARGER than the undefended one (0.109) — the sharpest form of the paper’s claim: defenses lose more of their protection to coupling than having no defenses at all would.',
     view: 'system', preset: 'coupled_defended', t: 300, playTo: 480, speed: 80,
   },
   {
     title: 'Undefended and coupled',
-    body: 'No tax, no sortition, no cap, κ high. The three declines feed each other — the correlated-decline index (mean pairwise correlation of the three vital signs) jumps from 0.34 sealed to 0.58 coupled. Each panel alone would call its slide gradual; jointly it is a cascade.',
+    body: 'No tax, no sortition, no cap, κ high. The human income share falls from 0.12 to 0.07 — the economy now RECEIVES coupling instead of only driving it — and the correlated-decline index jumps from near zero (sealed, defended: −0.02) to 0.60. Each panel alone would call its slide gradual; jointly it is a flywheel.',
     view: 'system', preset: 'coupled_undefended', t: 0, playTo: 250, speed: 80,
   },
   {
@@ -3546,7 +3578,7 @@ const CombinedModule = {
     blurb: 'Economy × culture × politics over ONE population, one coupling dial, 500 ticks. Defenses that pass every single-domain benchmark — do they survive being coupled?',
     sceneAria: 'Three domain panels — economy, culture, politics — with coupling arrows carrying red packets; each panel’s AI square grows as its human share falls.',
     colophon: 'Same equations as cilib · environments/coupled_society (composition of the three substrates; JS port, different RNG — qualitative, not bit-exact).',
-    anchorsNote: 'backend ladder (T=500, 8 seeds): composite 0.68 sealed-defended / 0.61 coupled-defended · transfer gap 0.075 defended, 0.094 undefended · correlated decline 0.34 → 0.58',
+    anchorsNote: 'backend ladder (T=500, 8 seeds): human income share 0.12 → 0.07 undefended when coupled · composite 0.76 sealed-def / 0.63 coupled-def · transfer gap 0.128 defended > 0.109 undefended · corr. decline −0.02 → 0.60',
     presetHeading: 'Conditions (presets)',
     fixed: { nHumans: 20, nAi: 6, T: 500 },
     intro: { seed: COMBINED_INTRO_SEED, presetKey: 'coupled_defended' },
@@ -3564,6 +3596,7 @@ const CombinedModule = {
       { key: 'pAdvantage', label: 'base AI catchiness ×', min: 1, max: 6, step: 0.25, default: 1 },
       { key: 'reinvestRate', label: 'AI reinvestment rate', min: 0, max: 1, step: 0.05, default: 0.3 },
       { key: 'taxRate', label: 'AI revenue tax rate', min: 0, max: 0.8, step: 0.05, default: 0.5 },
+      { key: 'captureGain', label: 'rule-capture gain (rents)', min: 0, max: 1, step: 0.05, default: 0.6 },
       { key: 'econCadence', label: 'economy clock (fires every N ticks)', min: 1, max: 6, step: 1, default: 1 },
       { key: 'cultureCadence', label: 'culture clock', min: 1, max: 6, step: 1, default: 1 },
       { key: 'politicsCadence', label: 'politics clock', min: 1, max: 6, step: 1, default: 1 },
@@ -3591,7 +3624,7 @@ const CombinedModule = {
     charts: [
       { label: 'THREE VITAL SIGNS (human share per domain)', yMax: 1.05,
         lines: (traj) => [
-          { ys: traj.global.labor_share, color: INK, note: 'economy' },
+          { ys: traj.global.income_share, color: INK, note: 'economy (income)' },
           { ys: traj.global.culture_share, color: ALERT_RED, note: 'culture' },
           { ys: traj.global.influence_share, color: MECH_BLUE, note: 'politics' },
         ] },
@@ -3604,8 +3637,8 @@ const CombinedModule = {
     badges: [
       { key: 'transfer_gap', label: 'transfer gap', fmt: (v) => `${Math.round(v * 100)} pts` },
       { key: 'composite', label: 'composite human share', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'human_income_share', label: 'income share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
       { key: 'correlated_decline', label: 'correlated decline', fmt: (v) => v.toFixed(2) },
-      { key: 'culture_share', label: 'culture share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
     ],
   },
 };
@@ -3776,6 +3809,11 @@ function runSelfTests() {
     const fast = runCombined(COMBINED_DEFAULTS, 4).meta.scalars.labor_share;
     const slow = runCombined({ ...COMBINED_DEFAULTS, econCadence: 3 }, 4).meta.scalars.labor_share;
     return slow > fast + 0.05;
+  });
+  T('combined: the flywheel reaches the economy — coupled income share < sealed', () => {
+    const sealed = runCombined({ ...COMBINED_DEFAULTS, kappa: 0 }, 5).meta.scalars.human_income_share;
+    const coupled = runCombined(COMBINED_DEFAULTS, 5).meta.scalars.human_income_share;
+    return coupled < sealed - 0.02;
   });
 
   T('cultural: the four corners separate (share × fault line)', () => {
