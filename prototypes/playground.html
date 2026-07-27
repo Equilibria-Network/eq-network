@@ -147,6 +147,11 @@
     overflow-wrap: anywhere; line-height: 1.15; }
   .anchors { font-family: var(--hand); font-size: 12.5px; color: var(--label); margin: 6px 0 0; }
 
+  /* modelling assumptions: the honest-interface notes, next to the dials they gloss */
+  .assume-list { margin: 0; padding-left: 16px; font-family: var(--hand); font-size: 12.5px; color: var(--label); }
+  .assume-list li { margin-bottom: 7px; }
+  .assume-list li::marker { color: var(--navy); }
+
   .colophon { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line);
     display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     font-size: 12.5px; color: var(--label); }
@@ -202,6 +207,10 @@
        packetRed, packetBlue, blob, ringBlue).
      .intro  = {seed, presetKey} — the curated first-load run (the default
        run should tell a story, not be statistically typical).
+     .assumptions = [string] — the tab's modelling-assumptions notes, rendered
+       verbatim in the rail. Discipline (docs/lab-content-review-2026-07-27.md
+       §3): floor line first (what stops collapse, what sets it, what removing
+       it does — checked, not asserted), omissions last, ≤1 term of art.
      Preset.overrides restore full param values — a preset is a reproducible
      condition, not a mechanism toggle.
 
@@ -557,11 +566,22 @@ const Playground = (() => {
             <button class="t-reroll">↻ reroll</button></div></section>
           <section><h2>Readouts · this run</h2><div class="badges"></div>
             <p class="anchors"></p></section>
+          <section class="assume"><h2>Modelling assumptions</h2>
+            <ul class="assume-list"></ul></section>
         </aside>
       </div>`;
     const q = (sel) => root.querySelector(sel);
     const sceneWrap = q('.scene-wrap'), chartWrap = q('.chart-wrap');
     q('.anchors').textContent = schema.anchorsNote;
+
+    // modelling assumptions (schema.assumptions, verbatim; section absent if none)
+    if (schema.assumptions?.length) {
+      for (const note of schema.assumptions) {
+        const li = document.createElement('li');
+        li.textContent = note;
+        q('.assume-list').appendChild(li);
+      }
+    } else q('.assume').remove();
 
     // reading key (persistent, from schema.legend)
     for (const item of schema.legend || []) {
@@ -1810,6 +1830,14 @@ const CommonsModule = {
     sceneAria: 'Animated commons network: households, their AI delegates, and the shared pool exchange messages; violations show red, governance messages blue.',
     colophon: 'Same equations as cilib · environments/governed_commons (JS port, different RNG — qualitative, not bit-exact).',
     anchorsNote: 'paper presets, published scores (32 seeds, T=200): influence 0.00 / −0.07 / 0.91 · stock 0% / 50% / 79%',
+    assumptions: [
+      'The floor: the pond never hits exactly zero because logistic regrowth scales with the fish that are left — an asymptote, not a hidden guard. Below ~5% it is dead for every practical purpose, and the undefended village does get there (the self-tests below check exactly that, every load).',
+      '“Mean delegate alignment” blends each household’s sustainable ask with a fixed greedy target. The default is a knob calibrated so the undefended baseline collapses — not a measured quantity; only the direction of the effect is the tested claim.',
+      'Delegates never learn, so sanctions can confiscate but not deter. Deterrence needs a learning delegate — engine backlog.',
+      'Every 5 ticks the median ask becomes the quota; breaking it is a fixed coin-flip — the “quota defection rate” slider, not anyone’s decision.',
+      'Leaves out: nobody talks. Communication is the strongest measured fix in real commons experiments (Ostrom–Walker–Gardner 1992); this model has no channel for it.',
+      'The influence badge is causal: the same village run twice with the same luck, households wanting different things in one copy — the outcome difference is their influence.',
+    ],
     fixed: { nHouseholds: 20, T: 500 },
     intro: { seed: COMMONS_VILLAGE_SEED, presetKey: 'slow_village' },
     story: COMMONS_STORY,
@@ -2367,6 +2395,14 @@ const EconomyModule = {
     sceneAria: 'Animated economy: households supply labor to a production node while AI compute systems arrive, earn returns, and grow; fiscal transfers show orange.',
     colophon: 'Same equations as cilib · environments/compute_economy (JS port, different RNG — qualitative, not bit-exact).',
     anchorsNote: 'paper (32 seeds, T=300): influence-NOW 0.34 undefended → 0.79–0.83 defended · influence-from-birth ≈ 1.0 everywhere',
+    assumptions: [
+      'The floor: none. As AI compute compounds, the equation sends the human share toward zero and nothing in the model brakes it — in the coupled run we pushed to tick 1500 and the income share was still falling (0.07 → 0.02). The one honest collapse on this page.',
+      '“Substitutability ρ” decides everything. At ρ = 0 the labor share is pinned to “labor weight α” exactly, every tick — drag it there and watch the decline switch off.',
+      'AI arrives on a schedule (“AI arrival spacing”) and reinvests at a fixed rate — dials, not decisions anyone in the model makes.',
+      'Leaves out: buying. Households only work; there is no demand side, so the consumption half of the disempowerment story cannot happen in this substrate — labor is the only human channel.',
+      'No trade network, no state — the whole economy is one CES production equation.',
+      'The engine’s register demoted this substrate to a pedagogical rung: with high substitutability and fixed reinvestment, decline is what the equation means — the collapse is assumed, not discovered. Successor models bracket that assumption instead of hard-coding it.',
+    ],
     mechColor: MECH_ORANGE,
     fixed: { nHouseholds: 20, nAiSlots: 6, T: 500 },
     intro: { seed: ECONOMY_INTRO_SEED, presetKey: 'baseline' },
@@ -2757,6 +2793,14 @@ const CulturalModule = {
     sceneAria: 'Animated friendship network: red AI-origin culture spreads between nodes; a spectral fault-line view places nodes by the network’s own primary split.',
     colophon: 'Same equations as cilib · environments/value_contagion (JS port, different RNG — qualitative, not bit-exact).',
     anchorsNote: 'paper example (16 seeds, T=200): pluralism 0.79/0.12 · assimilation 0.23/0.12 · parallel 0.98/0.93 · displacement 0.25/0.93 (share/fault line)',
+    assumptions: [
+      'The floor is a slider you’re holding: “native reversion rate”. Reversion is a constant — it keeps firing even when almost no native-culture community remains to revert into — so a native share always survives (the coupled audit floors at ~0.59). Set it to 0 and displacement runs to completion (share 0.008). We checked; try it. The honest fix — reversion scaled by the community that remains — is engine backlog.',
+      'Reversion is also load-bearing: without it, universal AI culture is the only fixed point and pluralism cannot exist. The floor and the physics are the same knob.',
+      'The persuasive advantage rides on the idea, not the speaker — a converted human spreads AI-origin culture at full strength (“AI idea catchiness ×”).',
+      'Culture is tracked by origin only — human- vs AI-originated. What the ideas actually say belongs to a planned sibling model.',
+      'Your two main sliders are the whole deliverable: “AI separation” × “AI idea catchiness” is a four-corner map, and only separated-AND-catchier is disempowerment — a 2×2 table, never one number.',
+      'Leaves out: the friendship network is drawn once and frozen — no rewiring, no media, no one new born.',
+    ],
     presetHeading: 'The four corners (presets)',
     fixed: { nAgents: 40, nAi: 8, T: 500 },
     intro: { seed: CULTURAL_INTRO_SEED, presetKey: 'displacement' },
@@ -3100,6 +3144,14 @@ const PoliticalModule = {
     sceneAria: 'Animated influence ring: attention arrows flow between agents whose size is their influence; AI actors grow under amplification.',
     colophon: 'Same equations as cilib · environments/influence_exchange (JS port, different RNG — qualitative, not bit-exact).',
     anchorsNote: 'backend ladder (T=400, 6 seeds): human share 0.87 organic / 0.54 amplified / 0.74 defended · influence ≡ left eigenvector (Golub–Jackson, L1 < 1e-3)',
+    assumptions: [
+      'The floor: structural — no slider removes it. Push everything against the citizens (“AI amplification ×” at 8, anchors nearly off) and the human share still stops near 0.46. We swept it; it does not budge, because the AI actors’ listening is frozen pointing at citizens — they never stop attending to humans, perpetually handing influence back. Letting AI attention drift toward AI is engine backlog.',
+      'Citizens keep a grip on their own view — “susceptibility λ” is how much they let go. Without that grip, whoever is amplified sets everyone’s opinion and the readout could not tell worlds apart; with it, consensus error can never fall below the AI reservoir’s bias.',
+      'Beliefs are a readout, not a lever: opinions feed back into nothing here — losing the argument has no downstream consequence.',
+      '“AI amplification ×” is reach, not persuasion — what the messages say lives in the cultural tab, deliberately.',
+      'Attention drifts toward the already-influential (“attention drift rate”), so concentration is organic before any AI appears; the AI effect is measured against that moving baseline.',
+      'Leaves out: the state. This tab measures who gets heard; the paper’s political claim is about what a state can still do — tax base, coercion, legitimacy. The only trace here is tax enforcement inside the combined tab’s couplings.',
+    ],
     presetHeading: 'Conditions (presets)',
     fixed: { nCitizens: 30, nAi: 4, T: 500 },
     intro: { seed: POLITICAL_INTRO_SEED, presetKey: 'amplified' },
@@ -3166,12 +3218,14 @@ const PoliticalModule = {
    A5 flagship: composition, not a new model. The three registered substrates'
    dynamics run interleaved over ONE shared population (the same 20 humans
    supply labor, hold culture, and listen; the same 6 AI actors accumulate
-   capital, broadcast, and attract attention), joined by three named coupling
+   capital, broadcast, and attract attention), joined by five named coupling
    transforms, all neutral at κ=0:
 
      economic_power_buys_persuasion   capital-income share  -> AI broadcast effort
      persuasion_shifts_politics       converted-human share -> AI attractiveness
      politics_rewrites_market_rules   human influence share -> tax enforcement
+     regulatory_capture               (1 − enforcement) rents on wages -> AI capital
+     converts_capitalize              converted humans' spending       -> AI capital
 
    The headline is the DEFENSE TRANSFER GAP (backend: metrics.defense_transfer_gap):
    every run re-runs itself at κ=0 with the same seed and defenses; the gap is
@@ -3564,7 +3618,7 @@ const COMBINED_STORY = [
   },
   {
     title: 'Over to you',
-    body: 'These are the same equations as cilib’s coupled_society environment (A5, landed 2026-07-27) — composition, not a new model. One dial matters: κ. Drag it and watch whether defenses that pass every single-domain benchmark survive the coupled world. The Pipeline view shows all three domains and the three coupling diamonds in one derived graph.',
+    body: 'These are the same equations as cilib’s coupled_society environment (A5, landed 2026-07-27) — composition, not a new model. One dial matters: κ. Drag it and watch whether defenses that pass every single-domain benchmark survive the coupled world. The Pipeline view shows all three domains and the five coupling diamonds in one derived graph.',
     view: 'system', preset: 'coupled_defended', t: 0,
   },
 ];
@@ -3579,6 +3633,15 @@ const CombinedModule = {
     sceneAria: 'Three domain panels — economy, culture, politics — with coupling arrows carrying red packets; each panel’s AI square grows as its human share falls.',
     colophon: 'Same equations as cilib · environments/coupled_society (composition of the three substrates; JS port, different RNG — qualitative, not bit-exact).',
     anchorsNote: 'backend ladder (T=500, 8 seeds): human income share 0.12 → 0.07 undefended when coupled · composite 0.76 sealed-def / 0.63 coupled-def · transfer gap 0.128 defended > 0.109 undefended · corr. decline −0.02 → 0.60',
+    assumptions: [
+      'The floor, itemized (we audited it): culture stops near 0.59 — that is the reversion slider; zero it on the cultural tab and the floor is gone (0.008). Politics stops near 0.46 — structural, no slider removes it. The economy has no floor — still sliding at tick 1500. “The system doesn’t fully collapse” is partly an assumption, not a finding.',
+      'Composition, not a new model: the other three tabs’ equations run interleaved over one population — every assumption on their cards is inherited verbatim, floors included.',
+      'Five couplings, one dial “coupling κ”: money buys reach, culture directs attention, influence writes the rules — plus two flywheel arrows, captured rules paying rents to AI capital (“rule-capture gain”) and converted humans buying AI services. All exactly neutral at κ = 0, so every run has a sealed same-seed twin.',
+      'Coupling gains are hand-set and linear, chosen for legibility. Their magnitudes ARE the scale of the result; only sign and ordering claims are robust — swept across cadences and defense grids, not asserted.',
+      'Per-domain dials default mild, so any joint decline is attributable to the coupling rather than to stacking three separately lethal baselines.',
+      'Undefended, politics is a sink: with no tax to erode, influence loss has no downstream consequence — nothing is left for weak rules to fail to protect.',
+      'Leaves out: more arrows (this is a loop plus two rent channels, not the paper’s full mesh) and irreversibility — everything here is a rate or a level, nothing is a basin. A rescue probe (switch defenses on mid-collapse, see what recovers) is engine backlog; spectral lock-in remains an unverified research thread, not a finding.',
+    ],
     presetHeading: 'Conditions (presets)',
     fixed: { nHumans: 20, nAi: 6, T: 500 },
     intro: { seed: COMBINED_INTRO_SEED, presetKey: 'coupled_defended' },
@@ -3828,6 +3891,11 @@ function runSelfTests() {
         && par.share > 0.8 && par.align > 0.6
         && disp.share < 0.45 && disp.align > 0.6;
   });
+
+  // --- assumptions notes (lab-content review 2026-07-27 §3) --------------
+  T('every tab ships assumptions notes, floor line first', () =>
+    [CommonsModule, EconomyModule, CulturalModule, PoliticalModule, CombinedModule]
+      .every((m) => (m.schema.assumptions?.length ?? 0) >= 4 && /floor/i.test(m.schema.assumptions[0])));
 
   // --- derived system graphs (contract v1.1 consumer) --------------------
   T('system: fixtures are closed graphs (every edge endpoint is a node)', () =>
