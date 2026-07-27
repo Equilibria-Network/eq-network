@@ -5,7 +5,8 @@ Sources: a four-reader cold-read panel of the per-scenario "Modelling
 assumptions" cards (reaction files + synthesis in the engine repo at
 `Collective Intelligence Library/cold-read/lab-assumptions-cards-2026-07-27/`)
 plus a collapse audit of the coupled model
-(`scratchpad/collapse-audit.py`; numbers reproduced below). Panel: an
+(`experiments/assumption_audits/collapse_audit.py` in the engine repo; numbers
+reproduced below). Panel: an
 Ostrom-tradition ABM scholar (fresh-careful), a 17-year-old who played the
 sliders first (the register's own bar; distracted), a JASSS-editor-like ABM
 standards reader (90 seconds, hostile), a Gradual-Disempowerment-co-author-like

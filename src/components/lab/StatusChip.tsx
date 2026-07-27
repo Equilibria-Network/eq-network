@@ -4,7 +4,7 @@ import styles from './StatusChip.module.css';
 import type { ScenarioStatus } from '@content/lab';
 
 const STATUS_LABELS: Record<ScenarioStatus, string> = {
-  live: 'Live',
+  live: 'Playable',
   'in-design': 'In design',
 };
 
