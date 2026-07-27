@@ -70,6 +70,20 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
               </ul>
             </div>
 
+            {scenario.assumptions && scenario.assumptions.length > 0 && (
+              <details className={styles.assumptions}>
+                <summary className={styles.assumptionsSummary}>Modelling assumptions</summary>
+                <ul className={styles.assumptionsList}>
+                  {scenario.assumptions.map((a) => (
+                    <li key={a.text} className={styles.assumptionsItem}>
+                      {a.text}
+                      {a.omits && <span className={styles.assumptionsOmits}> — leaves out: {a.omits}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+
             {scenario.engineNote && <p className={styles.engineNote}>{scenario.engineNote}</p>}
           </div>
         </div>

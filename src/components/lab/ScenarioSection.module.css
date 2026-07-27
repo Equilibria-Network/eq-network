@@ -209,3 +209,40 @@
     font-size: 1.5rem;
   }
 }
+
+/* modelling-assumptions disclosure — the site's dashed "honest hedge" idiom
+   (StatusChip .inDesign / LabHero .badge), italic-meta voice from .engineNote */
+.assumptions {
+  border: 1px dashed #999;
+  border-radius: 3px;
+  padding: 0.75rem 1rem;
+}
+
+.assumptionsSummary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+.assumptionsList {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.assumptionsItem {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.assumptionsOmits {
+  font-style: italic;
+  opacity: 0.7;
+}

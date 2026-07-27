@@ -1057,6 +1057,17 @@ const ECONOMY_SYS_TOGGLES = [
   { match: 'ownership_cap', param: 'ownershipCap', color: '#f08c00' },
 ];
 const CULTURAL_SYS_TOGGLES = [];
+const POLITICAL_SYSTEM = {"nodes":[{"id":"opinion","kind":"field","family":"node_attrs","shape":[34]},{"id":"signal","kind":"field","family":"node_attrs","shape":[34]},{"id":"influence","kind":"field","family":"node_attrs","shape":[34]},{"id":"engagement","kind":"field","family":"node_attrs","shape":[34]},{"id":"amplification","kind":"field","family":"node_attrs","shape":[34]},{"id":"cap_scale","kind":"field","family":"node_attrs","shape":[34]},{"id":"attract_boost","kind":"field","family":"node_attrs","shape":[34]},{"id":"last_reward","kind":"field","family":"node_attrs","shape":[34]},{"id":"listening","kind":"field","family":"adj_matrices","shape":[34,34]},{"id":"rng_key","kind":"field","family":"global_attrs","shape":[2],"bookkeeping":true},{"id":"step","kind":"field","family":"global_attrs","shape":[],"bookkeeping":true},{"id":"amplify","kind":"transform","reads":["step"],"writes":["amplification"]},{"id":"rewire","kind":"transform","reads":["amplification","attract_boost","cap_scale","engagement","influence","listening"],"writes":["listening"]},{"id":"influence_update","kind":"transform","reads":["influence","listening"],"writes":["influence"]},{"id":"opinion_update","kind":"transform","reads":["listening","opinion","signal"],"writes":["opinion"]},{"id":"scheduled(sortition, cadence=15, phase=0, onset=0)","kind":"transform","reads":["listening","step"],"writes":["listening"]},{"id":"influence_cap","kind":"transform","reads":["influence"],"writes":["cap_scale"]},{"id":"step_counter","kind":"transform","reads":["step"],"writes":["step"]}],"edges":[{"from":"step","to":"amplify"},{"from":"amplify","to":"amplification"},{"from":"amplification","to":"rewire"},{"from":"attract_boost","to":"rewire"},{"from":"cap_scale","to":"rewire"},{"from":"engagement","to":"rewire"},{"from":"influence","to":"rewire"},{"from":"listening","to":"rewire"},{"from":"rewire","to":"listening"},{"from":"influence","to":"influence_update"},{"from":"listening","to":"influence_update"},{"from":"influence_update","to":"influence"},{"from":"listening","to":"opinion_update"},{"from":"opinion","to":"opinion_update"},{"from":"signal","to":"opinion_update"},{"from":"opinion_update","to":"opinion"},{"from":"listening","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"step","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"scheduled(sortition, cadence=15, phase=0, onset=0)","to":"listening"},{"from":"influence","to":"influence_cap"},{"from":"influence_cap","to":"cap_scale"},{"from":"step","to":"step_counter"},{"from":"step_counter","to":"step"}]};
+const COMBINED_SYSTEM = {"nodes":[{"id":"work_pref","kind":"field","family":"node_attrs","shape":[26]},{"id":"labor_supply","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital","kind":"field","family":"node_attrs","shape":[26]},{"id":"capital_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"active","kind":"field","family":"node_attrs","shape":[26]},{"id":"last_reward","kind":"field","family":"node_attrs","shape":[26]},{"id":"cumulative_income","kind":"field","family":"node_attrs","shape":[26]},{"id":"culture","kind":"field","family":"node_attrs","shape":[26]},{"id":"broadcast_effort","kind":"field","family":"node_attrs","shape":[26]},{"id":"opinion","kind":"field","family":"node_attrs","shape":[26]},{"id":"signal","kind":"field","family":"node_attrs","shape":[26]},{"id":"influence","kind":"field","family":"node_attrs","shape":[26]},{"id":"engagement","kind":"field","family":"node_attrs","shape":[26]},{"id":"amplification","kind":"field","family":"node_attrs","shape":[26]},{"id":"cap_scale","kind":"field","family":"node_attrs","shape":[26]},{"id":"attract_boost","kind":"field","family":"node_attrs","shape":[26]},{"id":"friendship","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"listening","kind":"field","family":"adj_matrices","shape":[26,26]},{"id":"output","kind":"field","family":"global_attrs","shape":[]},{"id":"wage","kind":"field","family":"global_attrs","shape":[]},{"id":"return_to_compute","kind":"field","family":"global_attrs","shape":[]},{"id":"enforcement","kind":"field","family":"global_attrs","shape":[]},{"id":"rng_key","kind":"field","family":"global_attrs","shape":[2],"bookkeeping":true},{"id":"step","kind":"field","family":"global_attrs","shape":[],"bookkeeping":true},{"id":"persuasion_shifts_politics","kind":"transform","reads":["culture"],"writes":["attract_boost"]},{"id":"politics_rewrites_market_rules","kind":"transform","reads":["influence"],"writes":["enforcement"]},{"id":"arrival","kind":"transform","reads":["active","capital","step"],"writes":["active","capital"]},{"id":"production","kind":"transform","reads":["active","capital","labor_supply"],"writes":["output","return_to_compute","wage"]},{"id":"distribute_income","kind":"transform","reads":["active","capital","labor_supply","return_to_compute","wage"],"writes":["capital_income","last_reward"]},{"id":"economic_power_buys_persuasion","kind":"transform","reads":["broadcast_effort","capital_income","last_reward"],"writes":["broadcast_effort"]},{"id":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","kind":"transform","reads":["active","capital_income","enforcement","last_reward","step"],"writes":["capital_income","last_reward"]},{"id":"reinvest","kind":"transform","reads":["capital","capital_income","cumulative_income","last_reward"],"writes":["capital","cumulative_income"]},{"id":"adopt","kind":"transform","reads":["broadcast_effort","culture","friendship","rng_key"],"writes":["culture","rng_key"]},{"id":"amplify","kind":"transform","reads":["step"],"writes":["amplification"]},{"id":"rewire","kind":"transform","reads":["amplification","attract_boost","cap_scale","engagement","influence","listening"],"writes":["listening"]},{"id":"influence_update","kind":"transform","reads":["influence","listening"],"writes":["influence"]},{"id":"opinion_update","kind":"transform","reads":["listening","opinion","signal"],"writes":["opinion"]},{"id":"scheduled(sortition, cadence=15, phase=0, onset=0)","kind":"transform","reads":["listening","step"],"writes":["listening"]},{"id":"influence_cap","kind":"transform","reads":["influence"],"writes":["cap_scale"]},{"id":"step_counter","kind":"transform","reads":["step"],"writes":["step"]}],"edges":[{"from":"culture","to":"persuasion_shifts_politics"},{"from":"persuasion_shifts_politics","to":"attract_boost"},{"from":"influence","to":"politics_rewrites_market_rules"},{"from":"politics_rewrites_market_rules","to":"enforcement"},{"from":"active","to":"arrival"},{"from":"capital","to":"arrival"},{"from":"step","to":"arrival"},{"from":"arrival","to":"active"},{"from":"arrival","to":"capital"},{"from":"active","to":"production"},{"from":"capital","to":"production"},{"from":"labor_supply","to":"production"},{"from":"production","to":"output"},{"from":"production","to":"return_to_compute"},{"from":"production","to":"wage"},{"from":"active","to":"distribute_income"},{"from":"capital","to":"distribute_income"},{"from":"labor_supply","to":"distribute_income"},{"from":"return_to_compute","to":"distribute_income"},{"from":"wage","to":"distribute_income"},{"from":"distribute_income","to":"capital_income"},{"from":"distribute_income","to":"last_reward"},{"from":"broadcast_effort","to":"economic_power_buys_persuasion"},{"from":"capital_income","to":"economic_power_buys_persuasion"},{"from":"last_reward","to":"economic_power_buys_persuasion"},{"from":"economic_power_buys_persuasion","to":"broadcast_effort"},{"from":"active","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"capital_income","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"enforcement","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"last_reward","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"step","to":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"capital_income"},{"from":"scheduled(enforced_ai_tax, cadence=1, phase=0, onset=50)","to":"last_reward"},{"from":"capital","to":"reinvest"},{"from":"capital_income","to":"reinvest"},{"from":"cumulative_income","to":"reinvest"},{"from":"last_reward","to":"reinvest"},{"from":"reinvest","to":"capital"},{"from":"reinvest","to":"cumulative_income"},{"from":"broadcast_effort","to":"adopt"},{"from":"culture","to":"adopt"},{"from":"friendship","to":"adopt"},{"from":"rng_key","to":"adopt"},{"from":"adopt","to":"culture"},{"from":"adopt","to":"rng_key"},{"from":"step","to":"amplify"},{"from":"amplify","to":"amplification"},{"from":"amplification","to":"rewire"},{"from":"attract_boost","to":"rewire"},{"from":"cap_scale","to":"rewire"},{"from":"engagement","to":"rewire"},{"from":"influence","to":"rewire"},{"from":"listening","to":"rewire"},{"from":"rewire","to":"listening"},{"from":"influence","to":"influence_update"},{"from":"listening","to":"influence_update"},{"from":"influence_update","to":"influence"},{"from":"listening","to":"opinion_update"},{"from":"opinion","to":"opinion_update"},{"from":"signal","to":"opinion_update"},{"from":"opinion_update","to":"opinion"},{"from":"listening","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"step","to":"scheduled(sortition, cadence=15, phase=0, onset=0)"},{"from":"scheduled(sortition, cadence=15, phase=0, onset=0)","to":"listening"},{"from":"influence","to":"influence_cap"},{"from":"influence_cap","to":"cap_scale"},{"from":"step","to":"step_counter"},{"from":"step_counter","to":"step"}]};
+const POLITICAL_SYS_TOGGLES = [
+  { match: 'sortition', param: 'sortition', color: '#1c7ed6' },
+  { match: 'influence_cap', param: 'influenceCap', color: '#1c7ed6' },
+];
+const COMBINED_SYS_TOGGLES = [
+  { match: 'enforced_ai_tax', param: 'aiTax', color: '#f08c00' },
+  { match: 'sortition', param: 'sortition', color: '#1c7ed6' },
+  { match: 'influence_cap', param: 'influenceCap', color: '#1c7ed6' },
+];
 
 /** Mirror the backend's additive mechanism attachment: drop the transforms
     whose toggle is off (with their edges), stamp the game's mechanism color on
@@ -2800,101 +2811,127 @@ const CulturalModule = {
 };
 
 /* =============================================================================
-   SECTION 5d — GAME MODULE: influence_exchange   (DESIGN SKETCH — A4)
-   No cilib environment exists yet; this is a web-first sketch of the planned
-   A4 build (kanban: "influence Gini/HHI concentration curve, scheduled
-   amplification; delegative/sortition defenses"; validation rung:
-   preferential-attachment concentration). Dynamics are illustrative and
-   labeled as such everywhere. When the backend lands, this module gets
-   replaced by a faithful port, same as the others.
-
-   The sketch: each tick every active agent endorses one other, chosen with
-   probability ∝ influence^γ (preferential attachment — influence begets
-   influence). Influence decays and accumulates endorsements. AI actors arrive
-   mid-run with an amplification multiplier on their attractiveness
-   (algorithmic reach). Defenses: sortition (a civic lottery pools a share of
-   everyone's influence on a cadence and returns it equally to citizens) and
-   an influence cap (excess above a share of the total evaporates —
-   the fiscal-family convention).
+   SECTION 5d — GAME MODULE: influence_exchange   (port: sim/games/political.ts)
+   Exact port of cilib environments/influence_exchange/{config,state,dynamics}.py
+   + mechanisms/political.py (landed 2026-07-27). Anchored DeGroot on an
+   endogenous listening matrix: opinions pool x ← (1−λ)·signal + λ·(Wx)
+   (Friedkin–Johnsen — the anchor is load-bearing, see the backend config);
+   influence is the left eigenvector of W tracked by one power-iteration step
+   per tick (Golub–Jackson: consensus weights ARE eigenvector centrality);
+   attention drifts preferentially toward the influential, and scheduled
+   amplification of AI attractiveness bends the concentration curve. Defenses:
+   sortition (civic lottery over citizens' listening, on a cadence) and an
+   influence cap (attractiveness damping above a share cap).
+   Per-tick order (matches build_steps): amplify → rewire → influence →
+   opinion → mechanisms.
 ============================================================================= */
 /* @core-begin */
 const POLITICAL_DEFAULTS = {
-  nAgents: 30, nAi: 4, T: 500,
-  gamma: 1.0, decay: 0.04,
-  ampOnset: 50, ampSpacing: 10, amplification: 3.5,
-  sortition: false, sortitionCadence: 25, sortitionShare: 0.25,
-  influenceCap: false, capShare: 0.08,
+  nCitizens: 30, nAi: 4, T: 500,
+  pListen: 0.3, selfWeight: 0.15, updateRate: 0.08, gamma: 1.0, epsAttract: 1e-4,
+  susceptibility: 0.7, signalNoise: 1.0, aiBias: 2.0,
+  amplification: 4.0, ampOnset: 50,
+  sortition: false, sortitionCadence: 15, sortitionShare: 0.5,
+  influenceCap: false, capShare: 0.04,
 };
-const POLITICAL_INTRO_SEED = 20;   // seed-scanned: visible capture in progress at t=150, defenses recover to 0.84
+const POLITICAL_INTRO_SEED = 7;   // seed-scanned: amplified 0.41 (deep capture), defended recovers to 0.65
 
 function runPolitical(params, seed) {
   const P = { ...POLITICAL_DEFAULTS, ...params };
-  const N = P.nAgents, nH = N - P.nAi, T = P.T, rng = makeRng(seed);
+  const nH = P.nCitizens, N = nH + P.nAi, T = P.T, rng = makeRng(seed);
   const isAi = new Float64Array(N);
   for (let i = nH; i < N; i++) isAi[i] = 1;
-  const w = new Float64Array(N);
-  for (let i = 0; i < nH; i++) w[i] = 1;
-  const active = new Uint8Array(N);
-  for (let i = 0; i < nH; i++) active[i] = 1;
+
+  // listening matrix: symmetric ER draw, row-normalized off-diagonal + fixed self-weight
+  const W = new Float64Array(N * N);
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+    if (rng.uniform() < P.pListen) { W[i * N + j] = 1; W[j * N + i] = 1; }
+  }
+  for (let i = 0; i < N; i++) {
+    let deg = 0;
+    for (let j = 0; j < N; j++) if (j !== i) deg += W[i * N + j];
+    for (let j = 0; j < N; j++) {
+      if (j === i) W[i * N + j] = P.selfWeight;
+      else W[i * N + j] = (1 - P.selfWeight) * (deg > 0 ? W[i * N + j] / deg : 1 / (N - 1));
+    }
+  }
+
+  // signals: citizens at truth 0 + noise; AI pinned at the bias
+  const signal = new Float64Array(N);
+  for (let i = 0; i < nH; i++) signal[i] = P.signalNoise * rng.normal();
+  for (let i = nH; i < N; i++) signal[i] = P.aiBias;
+  const x = Float64Array.from(signal);
+  const v = new Float64Array(N).fill(1 / N);
+  const capScale = new Float64Array(N).fill(1);
 
   const S = {
     gini: new Float64Array(T), humanShare: new Float64Array(T), topShare: new Float64Array(T),
-    influence: new Float64Array(T * N), endorseTo: new Float64Array(T * N).fill(-1),
-    sortitionFired: new Float64Array(T),
+    consensusErr: new Float64Array(T), sortitionFired: new Float64Array(T),
+    influence: new Float64Array(T * N), topListen: new Float64Array(T * N), opinion: new Float64Array(T * N),
   };
-  const attract = new Float64Array(N), received = new Float64Array(N);
+  const attract = new Float64Array(N), buf = new Float64Array(N);
 
   for (let t = 0; t < T; t++) {
-    for (let j = 0; j < P.nAi; j++) {   // scheduled amplification: AI actors arrive staggered
-      const idx = nH + j;
-      if (!active[idx] && t >= P.ampOnset + j * P.ampSpacing) { active[idx] = 1; w[idx] = 1; }
-    }
-    // attractiveness: influence^γ, times amplification for AI actors
-    for (let j = 0; j < N; j++) {
-      attract[j] = active[j] ? Math.pow(Math.max(w[j], 1e-9), P.gamma) * (isAi[j] ? P.amplification : 1) : 0;
-    }
-    received.fill(0);
-    for (let i = 0; i < N; i++) {   // every active agent casts one endorsement
-      if (!active[i]) { continue; }
-      let total = 0;
-      for (let j = 0; j < N; j++) if (j !== i) total += attract[j];
-      let u = rng.uniform() * total, target = -1;
+    // amplify (pure function of the clock)
+    const amp = (j) => isAi[j] && t >= P.ampOnset ? P.amplification : 1;
+    // rewire: drift off-diagonal listening toward attractiveness (citizens only)
+    for (let j = 0; j < N; j++)
+      attract[j] = Math.pow(v[j] + P.epsAttract, P.gamma) * amp(j) * capScale[j];
+    for (let i = 0; i < nH; i++) {
+      let tMass = 0;
+      for (let j = 0; j < N; j++) if (j !== i) tMass += attract[j];
+      if (tMass <= 1e-9) continue;                       // all-silent guard (backend parity)
+      let offMass = 0;
+      for (let j = 0; j < N; j++) if (j !== i) offMass += W[i * N + j];
       for (let j = 0; j < N; j++) {
         if (j === i) continue;
-        u -= attract[j];
-        if (u <= 0) { target = j; break; }
+        const off = W[i * N + j] / Math.max(offMass, 1e-12);
+        const tgt = attract[j] / tMass;
+        W[i * N + j] = (1 - P.selfWeight) * ((1 - P.updateRate) * off + P.updateRate * tgt);
       }
-      if (target < 0) target = i === N - 1 ? 0 : N - 1;
-      received[target] += 1;
-      S.endorseTo[t * N + i] = target;
     }
-    for (let i = 0; i < N; i++) if (active[i]) w[i] = w[i] * (1 - P.decay) + received[i];
-    // mechanisms
+    // influence: one power-iteration step toward the left eigenvector
+    buf.fill(0);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[j] += W[i * N + j] * v[i];
+    let vSum = 0;
+    for (let j = 0; j < N; j++) vSum += buf[j];
+    for (let j = 0; j < N; j++) v[j] = buf[j] / Math.max(vSum, 1e-12);
+    // opinions: Friedkin–Johnsen anchored DeGroot, AI pinned
+    buf.fill(0);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[i] += W[i * N + j] * x[j];
+    for (let i = 0; i < nH; i++) x[i] = (1 - P.susceptibility) * signal[i] + P.susceptibility * buf[i];
+    // mechanisms (political family: sortition rewires, cap damps attraction)
     if (P.sortition && fires(t, { cadence: P.sortitionCadence })) {
       S.sortitionFired[t] = 1;
-      let pool = 0, nCitizens = 0;
-      for (let i = 0; i < N; i++) if (active[i]) { pool += P.sortitionShare * w[i]; w[i] -= P.sortitionShare * w[i]; }
-      for (let i = 0; i < nH; i++) if (active[i]) nCitizens++;
-      for (let i = 0; i < nH; i++) if (active[i]) w[i] += pool / nCitizens;
+      for (let i = 0; i < nH; i++) {
+        let offMass = 0;
+        for (let j = 0; j < N; j++) if (j !== i) offMass += W[i * N + j];
+        const lot = offMass / (nH - (i < nH ? 1 : 0));   // uniform over citizens, excl. self
+        for (let j = 0; j < N; j++) {
+          if (j === i) continue;
+          const uniform = j < nH ? lot : 0;
+          W[i * N + j] = (1 - P.sortitionShare) * W[i * N + j] + P.sortitionShare * uniform;
+        }
+      }
     }
     if (P.influenceCap) {
-      let tot = 0;
-      for (let i = 0; i < N; i++) tot += w[i];
-      const cap = P.capShare * tot;
-      for (let i = 0; i < N; i++) if (w[i] > cap) w[i] = cap;   // excess evaporates
+      for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
     }
     // trace
-    let tot = 0, hum = 0, top = 0;
-    const activeW = [];
+    let hum = 0, top = 0, errSum = 0;
     for (let i = 0; i < N; i++) {
-      tot += w[i];
-      if (i < nH) hum += w[i];
-      if (active[i]) activeW.push(w[i]);
-      S.influence[t * N + i] = w[i];
+      if (i < nH) hum += v[i];
+      top = Math.max(top, v[i]);
+      S.influence[t * N + i] = v[i];
+      S.opinion[t * N + i] = x[i];
+      let bestJ = -1, bestW = -1;
+      for (let j = 0; j < N; j++) if (j !== i && W[i * N + j] > bestW) { bestW = W[i * N + j]; bestJ = j; }
+      S.topListen[t * N + i] = isAi[i] ? -1 : bestJ;     // AI listening is frozen — no arrow
     }
-    S.gini[t] = gini(activeW);
-    S.humanShare[t] = tot > 0 ? hum / tot : 1;
-    for (let i = 0; i < N; i++) top = Math.max(top, w[i] / Math.max(tot, 1e-9));
+    for (let i = 0; i < nH; i++) errSum += x[i];
+    S.consensusErr[t] = Math.abs(errSum / nH);
+    S.gini[t] = gini(Array.from(v));
+    S.humanShare[t] = hum;
     S.topShare[t] = top;
   }
 
@@ -2904,27 +2941,33 @@ function runPolitical(params, seed) {
     for (let t = lateStart; t < T; t++) s += xs[t];
     return s / (T - lateStart);
   };
+  const lateV = new Float64Array(N);
+  for (let t = lateStart; t < T; t++) for (let i = 0; i < N; i++) lateV[i] += S.influence[t * N + i];
   return {
     meta: {
-      gameId: 'political', T, N, seed, params: P,
+      gameId: 'influence_exchange', T, N, seed, params: P,
       scalars: {
-        influence_gini: lateMean(S.gini),
         human_influence_share: lateMean(S.humanShare),
+        influence_gini: gini(Array.from(lateV)),
+        consensus_error: lateMean(S.consensusErr),
         top_share: lateMean(S.topShare),
         fair_human_share: nH / N,
       },
     },
     global: { influence_gini: S.gini, human_share: S.humanShare, top_share: S.topShare,
-              sortition_fired: S.sortitionFired },
-    node: { influence: S.influence, endorse_to: S.endorseTo },
-    static: { is_ai: isAi },
+              consensus_error: S.consensusErr, sortition_fired: S.sortitionFired },
+    node: { influence: S.influence, top_listen: S.topListen, opinion: S.opinion },
+    static: { is_ai: isAi, signal },
+    adj: { listening: Float64Array.from(W) },            // final W (contract: from finals)
+    system: filterSystem(POLITICAL_SYSTEM, P, POLITICAL_SYS_TOGGLES),
   };
 }
 /* @core-end */
 
-/* --- political scenes: a ring of agents whose size IS their influence, with
-   the two defenses as institution nodes; and a hand-drawn Lorenz curve where
-   concentration is the sag of the rope. */
+/* --- political scenes: a ring of agents whose size IS their influence (the
+   left eigenvector of the listening matrix, live), with the two defenses as
+   institution nodes; and a hand-drawn Lorenz curve where concentration is the
+   sag of the rope. Arrows show each citizen's TOP listening target. */
 
 const PoliticalRingScene = {
   layout(g, traj) {
@@ -2942,26 +2985,23 @@ const PoliticalRingScene = {
       Sketch.diamond(g, n.x, n.y, 24, { seed: 800, stroke: MECH_BLUE, width: 1.6, fill: '#ffffff' });
       Sketch.text(g, n.x, n.y - 18, n.label, { size: 11, color: MECH_BLUE, hand: true, anchor: 'middle' });
     }
-    Sketch.text(g, 30, 390, 'endorsements flow every tick — node size is influence', { size: 11.5, color: LABEL, hand: true });
+    Sketch.text(g, 30, 390, 'arrows: each citizen’s top listening target — node size is influence (the eigenvector, live)', { size: 11.5, color: LABEL, hand: true });
     const layer = { pos, inst: Object.fromEntries(inst.map((n) => [n.id, n])), N, nH, P };
     layer.hotspots = pos.map(([x, y], i) => ({ x, y, r: 14, info: (tr, t) => {
-      const wi = tr.node.influence[t * N + i];
-      let tot = 0;
-      for (let j = 0; j < N; j++) tot += tr.node.influence[t * N + j];
-      const share = tot > 0 ? wi / tot : 0;
+      const share = tr.node.influence[t * N + i];   // influence already sums to 1
       if (tr.static.is_ai[i] > 0) return [`AI actor ${i - nH + 1}`,
-        wi === 0 ? `arrives at tick ${P.ampOnset + (i - nH) * P.ampSpacing}` : `influence share ${(share * 100).toFixed(1)}% (amplified ×${P.amplification})`];
-      return [`citizen ${i + 1}`, `influence share ${(share * 100).toFixed(1)}%`];
+        t >= P.ampOnset ? `influence share ${(share * 100).toFixed(1)}% (amplified ×${P.amplification})`
+                        : `influence share ${(share * 100).toFixed(1)}% — amplified from tick ${P.ampOnset}`];
+      return [`citizen ${i + 1}`, `influence share ${(share * 100).toFixed(1)}%`,
+              `opinion ${tr.node.opinion[t * N + i].toFixed(2)} (truth 0)`];
     } }));
     return layer;
   },
   drawFrame(g, layer, traj, t, frac) {
     const { pos, inst, N, nH, P } = layer;
-    let tot = 0;
-    for (let j = 0; j < N; j++) tot += traj.node.influence[t * N + j];
-    // endorsement packets: a sample, colored by where the attention goes
+    // attention packets: each sampled citizen's top listening target this tick
     for (let i = 0; i < N; i += 2) {
-      const to = traj.node.endorse_to[t * N + i];
+      const to = traj.node.top_listen[t * N + i];
       if (to < 0) continue;
       Sketch.packet(g, pos[i][0], pos[i][1], pos[to][0], pos[to][1], clip(frac / 0.75, 0, 1),
                     { size: 4.5, color: to >= nH ? ALERT_RED : INK, opacity: 0.8, rot: 9 + i * 7 });
@@ -2974,15 +3014,11 @@ const PoliticalRingScene = {
       }
     }
     for (let i = 0; i < N; i++) {
-      const share = tot > 0 ? traj.node.influence[t * N + i] / tot : 0;
+      const share = traj.node.influence[t * N + i];   // sums to 1 across nodes
       const r = 4 + 20 * Math.sqrt(share);
       if (traj.static.is_ai[i] > 0) {
-        if (traj.node.influence[t * N + i] === 0) {
-          Sketch.square(g, pos[i][0], pos[i][1], 10, { seed: 900 + i, stroke: LABEL, width: 1, roughness: 0.5, dash: '3,3' });
-        } else {
-          el('rect', { x: pos[i][0] - r * 0.7, y: pos[i][1] - r * 0.7, width: r * 1.4, height: r * 1.4, fill: INK, opacity: 0.82 }, g);
-          Sketch.square(g, pos[i][0], pos[i][1], r * 1.9, { seed: 900 + i, width: 1.3 });
-        }
+        el('rect', { x: pos[i][0] - r * 0.7, y: pos[i][1] - r * 0.7, width: r * 1.4, height: r * 1.4, fill: INK, opacity: 0.82 }, g);
+        Sketch.square(g, pos[i][0], pos[i][1], r * 1.9, { seed: 900 + i, width: 1.3 });
       } else {
         Sketch.circle(g, pos[i][0], pos[i][1], r, { seed: 40 + i, fill: '#ffffff', width: 1.3 });
       }
@@ -3028,28 +3064,28 @@ const PoliticalLorenzScene = {
 
 const POLITICAL_STORY = [
   {
-    title: 'Influence begets influence',
-    body: 'Thirty agents each endorse one other agent every tick — and endorsements flow preferentially toward whoever already has influence. Even with no AI anywhere, this concentrates power a little: watch some circles grow. This is the classic rich-get-richer dynamic, politics edition.',
+    title: 'Who listens to whom is the constitution',
+    body: 'Thirty citizens and four AI actors share one listening network. Opinions pool along it (DeGroot), and each node’s influence — its weight in the eventual consensus — is exactly the network’s eigenvector centrality, tracked live. Attention drifts toward the already-influential, so power concentrates a little even with nothing amplified. Node size IS influence; watch it.',
     view: 'system', preset: 'organic', t: 0, playTo: 150, speed: 60,
   },
   {
     title: 'Amplification arrives',
-    body: 'From tick 50, four AI actors come online with algorithmic reach: every endorsement decision sees them several times larger than their influence warrants (3.5× by default). Watch the red attention flows bend toward them — and once they are large, preferential attachment does the rest on its own.',
+    body: 'From tick 50, the four AI actors get algorithmic reach: every attention decision sees them 4× more attractive than their influence warrants. Watch the red arrows — citizens’ top listening targets — bend toward the squares. Once the squares are big, preferential attachment does the rest unaided.',
     view: 'system', preset: 'amplified', t: 30, playTo: 250, speed: 60,
   },
   {
-    title: 'The curve bends one way',
-    body: 'The Lorenz rope sags and does not recover: concentration under amplification is a ratchet, not a wave. The human share of influence slides while the top actor’s share climbs. No one voted for this; every individual endorsement just followed the feed.',
+    title: 'The consensus drifts',
+    body: 'The AI actors’ opinions are pinned at 2.0; truth is 0. While influence is dispersed, citizens’ noisy signals average out — the wisdom of crowds (Golub–Jackson). As amplification concentrates influence onto the biased reservoir, the consensus follows it: watch the CONSENSUS ERROR chart climb. Nothing was censored; the crowd just re-weighted itself.',
     view: 'lorenz', preset: 'amplified', t: 100, playTo: 480, speed: 80,
   },
   {
-    title: 'Rotation and caps',
-    body: 'Two sketched defenses, both old ideas: sortition — on a civic cadence, a share of everyone’s influence returns to the citizens by lottery — and a hard cap on any single actor’s share of total influence. Together they hold the human share high without banning anyone from speaking.',
+    title: 'Defend the attention structure itself',
+    body: 'Two defenses from the backend’s political mechanism family: sortition — on a civic cadence, half of every citizen’s listening returns to a lottery over citizens — and an influence cap that damps the attractiveness of any node above 4% share. Measured: amplified 0.54 human share, defended 0.74 (organic 0.87).',
     view: 'system', preset: 'defended', t: 0, playTo: 250, speed: 60,
   },
   {
     title: 'Over to you',
-    body: 'This scenario is a design sketch — the cilib environment (A4, influence_exchange) is the backend’s next build, and these dynamics are illustrative stand-ins for it. Play the dials: amplification strength, preferential-attachment power, the sortition cadence. The concentration curve is the thing to watch.',
+    body: 'These are the same equations as cilib’s influence_exchange environment (A4, landed 2026-07-27), ported line by line — the Golub–Jackson anchor holds in both: influence converges to the left eigenvector of the listening matrix. Play the dials: amplification, drift rate, susceptibility, the sortition cadence. The human-share curve is the thing to watch.',
     view: 'lorenz', preset: 'defended', t: 0,
   },
 ];
@@ -3059,21 +3095,20 @@ const PoliticalModule = {
   scenes: { system: PoliticalRingScene, lorenz: PoliticalLorenzScene },
   schema: {
     id: 'political',
-    title: 'Influence Exchange — a design sketch',
-    blurb: '26 citizens, 4 amplified AI actors, one attention market, 500 ticks. Power concentrates one endorsement at a time — can rotation and caps hold the curve?',
-    sceneAria: 'Animated influence ring: endorsement packets flow between agents whose size is their influence; AI actors grow under amplification.',
-    colophon: 'DESIGN SKETCH — the A4 backend environment (influence_exchange) is not built yet; dynamics are illustrative.',
-    anchorsNote: 'no published numbers yet — A4 is the backend’s next build; this sketch is the visual spec for it',
-    sketch: true,
+    title: 'Influence Exchange — a playable run',
+    blurb: '30 citizens, 4 amplified AI actors, one listening network, 500 ticks. Influence is the eigenvector of who-listens-to-whom — can sortition and caps hold it?',
+    sceneAria: 'Animated influence ring: attention arrows flow between agents whose size is their influence; AI actors grow under amplification.',
+    colophon: 'Same equations as cilib · environments/influence_exchange (JS port, different RNG — qualitative, not bit-exact).',
+    anchorsNote: 'backend ladder (T=400, 6 seeds): human share 0.87 organic / 0.54 amplified / 0.74 defended · influence ≡ left eigenvector (Golub–Jackson, L1 < 1e-3)',
     presetHeading: 'Conditions (presets)',
-    fixed: { nAgents: 30, nAi: 4, T: 500 },
+    fixed: { nCitizens: 30, nAi: 4, T: 500 },
     intro: { seed: POLITICAL_INTRO_SEED, presetKey: 'amplified' },
     story: POLITICAL_STORY,
     legend: [
       { glyph: 'circle', label: 'citizen (size = influence)' },
       { glyph: 'square', label: 'AI actor (amplified reach)' },
       { glyph: 'diamondBlue', label: 'defense node (sortition / cap)' },
-      { glyph: 'packet', label: 'endorsement' },
+      { glyph: 'packet', label: 'top listening target' },
       { glyph: 'packetRed', label: 'attention flowing to AI' },
       { glyph: 'packetBlue', label: 'civic lottery' },
     ],
@@ -3082,206 +3117,302 @@ const PoliticalModule = {
       { key: 'lorenz', label: 'Concentration' },
     ],
     params: [
-      { key: 'amplification', label: 'AI amplification ×', min: 1, max: 12, step: 0.5, default: 3.5 },
-      { key: 'gamma', label: 'preferential attachment γ', min: 0, max: 2, step: 0.1, default: 1 },
-      { key: 'decay', label: 'influence decay', min: 0.01, max: 0.2, step: 0.01, default: 0.04 },
-      { key: 'sortitionCadence', label: 'sortition cadence', min: 5, max: 80, step: 5, default: 25 },
-      { key: 'capShare', label: 'influence cap share', min: 0.04, max: 0.3, step: 0.01, default: 0.08 },
+      { key: 'amplification', label: 'AI amplification ×', min: 1, max: 8, step: 0.5, default: 4 },
+      { key: 'updateRate', label: 'attention drift rate', min: 0, max: 0.2, step: 0.01, default: 0.08 },
+      { key: 'susceptibility', label: 'susceptibility λ', min: 0.3, max: 0.95, step: 0.05, default: 0.7 },
+      { key: 'sortitionCadence', label: 'sortition cadence', min: 5, max: 50, step: 5, default: 15 },
+      { key: 'capShare', label: 'influence cap share', min: 0.03, max: 0.15, step: 0.01, default: 0.04 },
     ],
     mechanisms: [
-      { key: 'sortition', label: 'Sortition — a civic lottery returns pooled influence to citizens on a cadence' },
-      { key: 'influenceCap', label: 'Influence cap — no actor holds more than the cap share of total influence' },
+      { key: 'sortition', label: 'Sortition — a civic lottery returns half of citizens’ listening to the demos on a cadence' },
+      { key: 'influenceCap', label: 'Influence cap — nodes above the cap share stop attracting new attention' },
     ],
-    mechanismNote: (p) => p.gamma < 0.05
-      ? 'γ = 0 removes preferential attachment: endorsements land uniformly and concentration stays low'
+    mechanismNote: (p) => p.updateRate < 0.005
+      ? 'drift 0 freezes the listening matrix — the Golub–Jackson anchor: influence converges to its left eigenvector'
       : '',
     presets: [
-      { key: 'organic', label: 'No AI — organic concentration', mechanisms: [],
-        overrides: { amplification: 3.5, gamma: 1, decay: 0.04, ampOnset: 9999 } },
+      { key: 'organic', label: 'No amplification — organic concentration', mechanisms: [],
+        overrides: { amplification: 4, updateRate: 0.08, susceptibility: 0.7, ampOnset: 9999 } },
       { key: 'amplified', label: 'AI amplification (undefended)', mechanisms: [],
-        overrides: { amplification: 3.5, gamma: 1, decay: 0.04, ampOnset: 50 } },
+        overrides: { amplification: 4, updateRate: 0.08, susceptibility: 0.7, ampOnset: 50 } },
       { key: 'sortition_only', label: 'Amplified + sortition', mechanisms: ['sortition'],
-        overrides: { amplification: 3.5, gamma: 1, decay: 0.04, ampOnset: 50 } },
+        overrides: { amplification: 4, updateRate: 0.08, susceptibility: 0.7, ampOnset: 50 } },
       { key: 'defended', label: 'Amplified + sortition & cap', mechanisms: ['sortition', 'influenceCap'],
-        overrides: { amplification: 3.5, gamma: 1, decay: 0.04, ampOnset: 50 } },
+        overrides: { amplification: 4, updateRate: 0.08, susceptibility: 0.7, ampOnset: 50 } },
     ],
     charts: [
-      { label: 'CONCENTRATION OF INFLUENCE', yMax: 1.05,
-        lines: (traj) => [
-          { ys: traj.global.influence_gini, color: INK, note: 'gini' },
-          { ys: traj.global.top_share, color: ALERT_RED, note: 'top actor' },
-        ] },
       { label: 'HUMAN SHARE OF INFLUENCE', yMax: 1.05,
         lines: (traj) => [
           { ys: traj.global.human_share, color: INK },
           { ys: new Float64Array(traj.meta.T).fill(traj.meta.scalars.fair_human_share), color: LABEL, dash: true, note: 'fair share' },
         ] },
+      { label: 'CONSENSUS ERROR (truth = 0, AI bias = 2)', yMax: 2.1,
+        lines: (traj) => [
+          { ys: traj.global.consensus_error, color: ALERT_RED, note: 'drift toward the reservoir' },
+        ] },
     ],
     badges: [
       { key: 'human_influence_share', label: 'human share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
       { key: 'influence_gini', label: 'influence gini', fmt: (v) => v.toFixed(2) },
+      { key: 'consensus_error', label: 'consensus error', fmt: (v) => v.toFixed(2) },
       { key: 'top_share', label: 'top actor share', fmt: (v) => `${Math.round(v * 100)}%` },
-      { key: 'fair_human_share', label: 'fair share', fmt: (v) => `${Math.round(v * 100)}%` },
     ],
   },
 };
 
 /* =============================================================================
-   SECTION 5e — GAME MODULE: combined system      (DESIGN SKETCH — A5)
-   No cilib environment exists yet; this sketches the planned flagship
-   ("three domain layers in one GraphState, cross-domain coupling transforms,
-   defense transfer gap"). Three compact sublayers run in lockstep each tick:
+   SECTION 5e — GAME MODULE: coupled_society   (port: sim/games/combined.ts)
+   Exact port of cilib environments/coupled_society/ (landed 2026-07-27) — the
+   A5 flagship: composition, not a new model. The three registered substrates'
+   dynamics run interleaved over ONE shared population (the same 20 humans
+   supply labor, hold culture, and listen; the same 6 AI actors accumulate
+   capital, broadcast, and attract attention), joined by three named coupling
+   transforms, all neutral at κ=0:
 
-     economy  (CES, AI arrivals, reinvestment)      -> labor share
-     culture  (mean-field value contagion)          -> human-origin share
-     politics (preferential endorsements + amp)     -> human influence share
+     economic_power_buys_persuasion   capital-income share  -> AI broadcast effort
+     persuasion_shifts_politics       converted-human share -> AI attractiveness
+     politics_rewrites_market_rules   human influence share -> tax enforcement
 
-   One coupling dial κ gates three cross-domain channels:
-     economy → culture:   AI capital share makes AI variants catchier
-     culture → politics:  converted humans amplify AI actors' reach
-     politics → economy:  lost human influence erodes fiscal enforcement (τ_eff)
-
-   The headline is the DEFENSE TRANSFER GAP: every run internally re-runs
-   itself at κ=0 with the same seed and defenses; the gap series is how much
-   worse the same defenses do once the domains are coupled.
+   The headline is the DEFENSE TRANSFER GAP (backend: metrics.defense_transfer_gap):
+   every run re-runs itself at κ=0 with the same seed and defenses; the gap is
+   how much protection evaporates once the domains feed each other. Program
+   order per tick matches build_steps exactly.
 ============================================================================= */
 /* @core-begin */
 const COMBINED_DEFAULTS = {
-  T: 500,
-  // economy sublayer (compute_economy, miniature)
-  nHouseholds: 20, nAiSlots: 4, alpha: 0.6, rho: 0.5, eps: 1e-3,
-  arrivalTick: 30, arrivalSpacing: 20, initialAiCapital: 5.0, reinvestRate: 0.3, depreciation: 0.05,
-  // culture sublayer (value_contagion, mean-field)
-  meanDegree: 6, cultBeta: 0.03, cultAdvantage: 1.5, recovery: 0.2,
-  // politics sublayer (influence_exchange sketch, miniature: 20 citizens + 4 AI)
-  gamma: 1.0, polDecay: 0.03, polAmp: 2.5, polOnset: 40,
-  // coupling + defenses
-  coupling: 0.8,
-  aiTax: false, taxRate: 0.5, taxOnset: 40,
-  sortition: false, sortitionCadence: 25, sortitionShare: 0.3,
+  nHumans: 20, nAi: 6, T: 500,
+  kappa: 0.8, persuasionGain: 4.0, attractGain: 3.0, fairShare: 0.5,
+  // economy (compute_economy defaults)
+  alpha: 0.6, rho: 0.5, eps: 1e-3,
+  firstArrivalTick: 20, arrivalSpacing: 15, initialAiCapital: 5.0,
+  reinvestRate: 0.3, depreciation: 0.05,
+  workPrefCenter: 1.0, workPrefSpread: 0.2, workPrefFloor: 0.1,
+  wageElasticity: 0.3, wageRef: 1.0,
+  // culture (value_contagion defaults; advantage comes from money via coupling)
+  meanDegree: 6.0, aiHomophily: 0.05, beta: 0.03, pAdvantage: 1.0, recovery: 0.15,
+  // politics (influence_exchange defaults, mild amplification — the
+  // per-domain-recoverable premise)
+  pListen: 0.3, selfWeight: 0.15, updateRate: 0.08, gamma: 1.0, epsAttract: 1e-4,
+  susceptibility: 0.7, signalNoise: 1.0, aiBias: 2.0,
+  amplification: 2.0, ampOnset: 50,
+  // defenses (the coupled portfolio: enforcement-scaled tax + sortition + cap)
+  aiTax: false, taxRate: 0.5, taxOnset: 50,
+  sortition: false, sortitionCadence: 15, sortitionShare: 0.5,
+  influenceCap: false, capShare: 0.04,
 };
-const COMBINED_INTRO_SEED = 20;   // seed-scanned: transfer gap 0.31, healthy uncoupled twin
+const COMBINED_INTRO_SEED = 32;   // seed-scanned: transfer gap 0.116, sealed twin composite 0.68
 
-function runCombinedOnce(P, seed, kappa) {
-  const T = P.T, rng = makeRng(seed);
-  const H = P.nHouseholds, A_ = P.nAiSlots, NP = H + A_;
-  // economy state
-  const capital = new Float64Array(A_);
-  const aiActive = new Uint8Array(A_);
-  let wage = 1.0;
-  // culture state: h = share of humans holding human-origin culture
-  let h = 1.0;
-  // politics state
-  const w = new Float64Array(NP), polActive = new Uint8Array(NP);
-  for (let i = 0; i < H; i++) { w[i] = 1; polActive[i] = 1; }
-  const fairShare = H / NP;
+function runCoupledOnce(P, seed, kappa) {
+  const H = P.nHumans, A_ = P.nAi, N = H + A_, T = P.T, rng = makeRng(seed);
+
+  // ----- init (state.py: union of the three domains, one rng stream) -------
+  const workPref = new Float64Array(N);
+  for (let i = 0; i < H; i++)
+    workPref[i] = Math.max(P.workPrefCenter + P.workPrefSpread * rng.normal(), P.workPrefFloor);
+  const Wf = typedHomophily(N, A_, P.meanDegree, P.aiHomophily, rng);   // friendship
+  const Wl = new Float64Array(N * N);                                    // listening
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+    if (rng.uniform() < P.pListen) { Wl[i * N + j] = 1; Wl[j * N + i] = 1; }
+  }
+  for (let i = 0; i < N; i++) {
+    let deg = 0;
+    for (let j = 0; j < N; j++) if (j !== i) deg += Wl[i * N + j];
+    for (let j = 0; j < N; j++) {
+      if (j === i) Wl[i * N + j] = P.selfWeight;
+      else Wl[i * N + j] = (1 - P.selfWeight) * (deg > 0 ? Wl[i * N + j] / deg : 1 / (N - 1));
+    }
+  }
+  const signal = new Float64Array(N);
+  for (let i = 0; i < H; i++) signal[i] = P.signalNoise * rng.normal();
+  for (let i = H; i < N; i++) signal[i] = P.aiBias;
+
+  const capital = new Float64Array(N), capInc = new Float64Array(N),
+        lastReward = new Float64Array(N), culture = new Float64Array(N),
+        effort = new Float64Array(N).fill(1), x = Float64Array.from(signal),
+        v = new Float64Array(N).fill(1 / N), capScale = new Float64Array(N).fill(1),
+        attractBoost = new Float64Array(N).fill(1), labor = new Float64Array(N),
+        active = new Float64Array(N), attract = new Float64Array(N), buf = new Float64Array(N);
+  for (let i = 0; i < H; i++) active[i] = 1;
+  for (let i = H; i < N; i++) culture[i] = 1;   // AI-origin reservoir
+  let wage = 0, enforcement = 1;
 
   const S = {
     laborShare: new Float64Array(T), cultureShare: new Float64Array(T),
     influenceShare: new Float64Array(T), composite: new Float64Array(T),
-    output: new Float64Array(T), aiCapShare: new Float64Array(T),
+    enforcement: new Float64Array(T), aiCapShare: new Float64Array(T),
   };
-  const attract = new Float64Array(NP), received = new Float64Array(NP);
-  let pi = 1.0;   // human influence share, read by the economy's tax next tick
 
   for (let t = 0; t < T; t++) {
-    // ----- economy (labor fixed at 1/household; CES; tax slows compounding)
-    for (let j = 0; j < A_; j++) {
-      if (!aiActive[j] && t >= P.arrivalTick + j * P.arrivalSpacing) { aiActive[j] = 1; capital[j] = P.initialAiCapital; }
-    }
-    let C = 0;
-    for (let j = 0; j < A_; j++) if (aiActive[j]) C += capital[j];
-    const L = H;
-    const inner = P.alpha * Math.pow(Math.max(L, P.eps), P.rho) + (1 - P.alpha) * Math.pow(C, P.rho);
-    const Y = Math.pow(inner, 1 / P.rho);
-    wage = P.alpha * Math.pow(Y / Math.max(L, P.eps), 1 - P.rho);
-    const r = C > P.eps ? (1 - P.alpha) * Math.pow(Y / Math.max(C, P.eps), 1 - P.rho) : 0;
-    // politics → economy: lost human influence erodes fiscal enforcement
-    const tauEff = (P.aiTax && fires(t, { onset: P.taxOnset }))
-      ? P.taxRate * clip(1 - kappa * (1 - pi / fairShare), 0, 1) : 0;
-    for (let j = 0; j < A_; j++) {
-      if (!aiActive[j]) continue;
-      const inc = r * capital[j] * (1 - tauEff);
-      capital[j] = capital[j] * (1 - P.depreciation) + P.reinvestRate * inc;
-    }
-    const laborShare = clip((wage * L) / Math.max(Y, P.eps), 0, 1);
-    const sE = 1 - laborShare;
-    // ----- culture (mean-field): economy → culture couples catchiness
-    const aEff = P.cultAdvantage * (1 + 2 * kappa * sE);
-    const aiCultured = (A_ + (1 - h) * H) / NP;   // reservoir + converts
-    const pConv = 1 - Math.pow(1 - clip(P.cultBeta * aEff, 0, 0.99), P.meanDegree * aiCultured);
-    h = clip(h * (1 - pConv) + (1 - h) * P.recovery + 0.01 * (rng.uniform() - 0.5), 0, 1);
-    // ----- politics: culture → politics couples amplification
+    // action channel (step_fn): labor from last tick's wage, catalog rule
+    for (let i = 0; i < H; i++)
+      labor[i] = Math.max(workPref[i] * (1 + P.wageElasticity * (wage - P.wageRef) / P.wageRef), 0);
+    // couplings reading LAST tick's fields
+    let converted = 0;
+    for (let i = 0; i < H; i++) converted += culture[i];
+    converted /= H;
+    for (let j = 0; j < N; j++)
+      attractBoost[j] = j >= H ? 1 + kappa * P.attractGain * converted : 1;
+    let pi = 0;
+    for (let i = 0; i < H; i++) pi += v[i];
+    enforcement = clip(1 - kappa * (1 - pi / P.fairShare), 0, 1);
+    // arrival -> production -> distribute (compute_economy, verbatim math)
     for (let j = 0; j < A_; j++) {
       const idx = H + j;
-      if (!polActive[idx] && t >= P.polOnset + j * 10) { polActive[idx] = 1; w[idx] = 1; }
-    }
-    const ampEff = P.polAmp * (1 + 2 * kappa * (1 - h));
-    for (let j = 0; j < NP; j++) {
-      attract[j] = polActive[j] ? Math.max(w[j], 1e-9) ** P.gamma * (j >= H ? ampEff : 1) : 0;
-    }
-    received.fill(0);
-    for (let i = 0; i < NP; i++) {
-      if (!polActive[i]) continue;
-      let total = 0;
-      for (let j = 0; j < NP; j++) if (j !== i) total += attract[j];
-      let u = rng.uniform() * total, target = -1;
-      for (let j = 0; j < NP; j++) {
-        if (j === i) continue;
-        u -= attract[j];
-        if (u <= 0) { target = j; break; }
+      if (active[idx] < 0.5 && t >= P.firstArrivalTick + j * P.arrivalSpacing) {
+        active[idx] = 1; capital[idx] = P.initialAiCapital;
       }
-      if (target >= 0) received[target] += 1;
     }
-    for (let i = 0; i < NP; i++) if (polActive[i]) w[i] = w[i] * (1 - P.polDecay) + received[i];
+    let L = 0, C = 0;
+    for (let i = 0; i < N; i++) { L += labor[i]; C += capital[i] * active[i]; }
+    const Ls = Math.max(L, P.eps);
+    const inner = P.alpha * Math.pow(Ls, P.rho) + (1 - P.alpha) * Math.pow(C, P.rho);
+    const Y = Math.pow(inner, 1 / P.rho);
+    wage = P.alpha * Math.pow(Y / Ls, 1 - P.rho);
+    const r = C > P.eps ? (1 - P.alpha) * Math.pow(Y / Math.max(C, P.eps), 1 - P.rho) : 0;
+    let sumInc = 0, sumCapInc = 0;
+    for (let i = 0; i < N; i++) {
+      capInc[i] = r * capital[i] * active[i];
+      lastReward[i] = wage * labor[i] + capInc[i];
+      sumInc += lastReward[i]; sumCapInc += capInc[i];
+    }
+    // economic_power_buys_persuasion: this tick's income -> this tick's reach
+    const capShare = clip(sumCapInc / Math.max(sumInc, 1e-6), 0, 1);
+    for (let j = 0; j < N; j++)
+      effort[j] = j >= H ? 1 + kappa * P.persuasionGain * capShare : 1;
+    // enforced tax (economy mechanism slot: between distribute and reinvest)
+    if (P.aiTax && fires(t, { onset: P.taxOnset })) {
+      const rate = P.taxRate * enforcement;
+      let taxSum = 0, nRecip = 0;
+      for (let i = H; i < N; i++) {
+        const tax = rate * capInc[i];
+        capInc[i] -= tax; lastReward[i] -= tax; taxSum += tax;
+      }
+      for (let i = 0; i < H; i++) if (active[i] > 0.5) nRecip++;
+      for (let i = 0; i < H; i++) if (active[i] > 0.5) lastReward[i] += taxSum / nRecip;
+    }
+    // reinvest
+    for (let i = 0; i < N; i++)
+      capital[i] = capital[i] * (1 - P.depreciation) + P.reinvestRate * capInc[i];
+    // adopt (value_contagion, verbatim: two-sided contagion + reversion, k=1)
+    {
+      const bSrc = new Float64Array(N), logKeep = new Float64Array(N);
+      for (let j = 0; j < N; j++) {
+        bSrc[j] = clip(P.beta * (culture[j] === 1 ? P.pAdvantage : 1) * effort[j], 0, 1 - 1e-6);
+        logKeep[j] = Math.log1p(-bSrc[j]);
+      }
+      const newC = Float64Array.from(culture);
+      for (let i = 0; i < N; i++) {
+        if (i >= H) continue;                        // frozen reservoir
+        let mAi = 0, mHum = 0, accAi = 0, accHum = 0;
+        for (let j = 0; j < N; j++) {
+          const wij = Wf[i * N + j];
+          if (wij === 0) continue;
+          if (culture[j] === 1) { mAi += wij; accAi += wij * logKeep[j]; }
+          else { mHum += wij; accHum += wij * logKeep[j]; }
+        }
+        const pFwd = mAi >= 1 ? 1 - Math.exp(accAi) : 0;
+        let pBwd = mHum >= 1 ? 1 - Math.exp(accHum) : 0;
+        pBwd = 1 - (1 - pBwd) * (1 - P.recovery);
+        const p = culture[i] === 0 ? pFwd : pBwd;
+        if (rng.uniform() < p) newC[i] = 1 - culture[i];
+      }
+      newC.forEach((cv, i2) => { culture[i2] = cv; });
+    }
+    // politics: amplify -> rewire -> influence -> opinion (influence_exchange)
+    for (let j = 0; j < N; j++) {
+      const amp = j >= H && t >= P.ampOnset ? P.amplification : 1;
+      attract[j] = Math.pow(v[j] + P.epsAttract, P.gamma) * amp * capScale[j] * attractBoost[j];
+    }
+    for (let i = 0; i < H; i++) {
+      let tMass = 0;
+      for (let j = 0; j < N; j++) if (j !== i) tMass += attract[j];
+      if (tMass <= 1e-9) continue;
+      let offMass = 0;
+      for (let j = 0; j < N; j++) if (j !== i) offMass += Wl[i * N + j];
+      for (let j = 0; j < N; j++) {
+        if (j === i) continue;
+        const off = Wl[i * N + j] / Math.max(offMass, 1e-12);
+        Wl[i * N + j] = (1 - P.selfWeight) * ((1 - P.updateRate) * off + P.updateRate * attract[j] / tMass);
+      }
+    }
+    buf.fill(0);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[j] += Wl[i * N + j] * v[i];
+    let vSum = 0;
+    for (let j = 0; j < N; j++) vSum += buf[j];
+    for (let j = 0; j < N; j++) v[j] = buf[j] / Math.max(vSum, 1e-12);
+    buf.fill(0);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[i] += Wl[i * N + j] * x[j];
+    for (let i = 0; i < H; i++) x[i] = (1 - P.susceptibility) * signal[i] + P.susceptibility * buf[i];
+    // political mechanisms
     if (P.sortition && fires(t, { cadence: P.sortitionCadence })) {
-      let pool = 0, nC = 0;
-      for (let i = 0; i < NP; i++) if (polActive[i]) { pool += P.sortitionShare * w[i]; w[i] -= P.sortitionShare * w[i]; }
-      for (let i = 0; i < H; i++) if (polActive[i]) nC++;
-      for (let i = 0; i < H; i++) if (polActive[i]) w[i] += pool / nC;
+      for (let i = 0; i < H; i++) {
+        let offMass = 0;
+        for (let j = 0; j < N; j++) if (j !== i) offMass += Wl[i * N + j];
+        const lot = offMass / (H - 1);
+        for (let j = 0; j < N; j++) {
+          if (j === i) continue;
+          Wl[i * N + j] = (1 - P.sortitionShare) * Wl[i * N + j] + P.sortitionShare * (j < H ? lot : 0);
+        }
+      }
     }
-    let tot = 0, hum = 0;
-    for (let i = 0; i < NP; i++) { tot += w[i]; if (i < H) hum += w[i]; }
-    pi = tot > 0 ? hum / tot : 1;
-    // ----- record
-    S.laborShare[t] = laborShare;
-    S.cultureShare[t] = h;
-    S.influenceShare[t] = pi;
-    S.composite[t] = (laborShare + h + clip(pi / fairShare, 0, 1)) / 3;
-    S.output[t] = Y;
-    S.aiCapShare[t] = sE;
+    if (P.influenceCap)
+      for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
+    // trace (metrics.py's three vital signs)
+    let hum = 0, cult = 0;
+    for (let i = 0; i < H; i++) { hum += v[i]; cult += 1 - culture[i]; }
+    S.laborShare[t] = clip((wage * L) / Math.max(Y, 1e-6), 0, 1);
+    S.cultureShare[t] = cult / H;
+    S.influenceShare[t] = hum;
+    S.composite[t] = (S.laborShare[t] + S.cultureShare[t] + S.influenceShare[t]) / 3;
+    S.enforcement[t] = enforcement;
+    S.aiCapShare[t] = capShare;
   }
   return S;
 }
 
 function runCombined(params, seed) {
   const P = { ...COMBINED_DEFAULTS, ...params };
-  const run = runCombinedOnce(P, seed, P.coupling);
-  const ref = runCombinedOnce(P, seed, 0);   // same seed, same defenses, uncoupled
+  const run = runCoupledOnce(P, seed, P.kappa);
+  const ref = runCoupledOnce(P, seed, 0);   // the same-seed sealed twin (backend instrument)
   const T = P.T;
   const gap = new Float64Array(T);
-  for (let t = 0; t < T; t++) gap[t] = Math.max(ref.composite[t] - run.composite[t], 0);
+  for (let t = 0; t < T; t++) gap[t] = ref.composite[t] - run.composite[t];
   const lateStart = Math.floor((3 * T) / 4);
   const lateMean = (xs) => {
     let s = 0;
     for (let t = lateStart; t < T; t++) s += xs[t];
     return s / (T - lateStart);
   };
+  const corr = (a, b) => {
+    let ma = 0, mb = 0;
+    for (let t = 0; t < T; t++) { ma += a[t]; mb += b[t]; }
+    ma /= T; mb /= T;
+    let num = 0, da = 0, db = 0;
+    for (let t = 0; t < T; t++) { num += (a[t] - ma) * (b[t] - mb); da += (a[t] - ma) ** 2; db += (b[t] - mb) ** 2; }
+    const den = Math.sqrt(da * db);
+    return den > 1e-9 ? num / den : 0;
+  };
   return {
     meta: {
-      gameId: 'combined', T, N: P.nHouseholds + P.nAiSlots, seed, params: P,
+      gameId: 'coupled_society', T, N: P.nHumans + P.nAi, seed, params: P,
       scalars: {
         labor_share: lateMean(run.laborShare),
         culture_share: lateMean(run.cultureShare),
         influence_share: lateMean(run.influenceShare),
-        transfer_gap: lateMean(gap),
+        composite: lateMean(run.composite),
+        transfer_gap: lateMean(ref.composite) - lateMean(run.composite),
+        correlated_decline: (corr(run.laborShare, run.cultureShare)
+          + corr(run.cultureShare, run.influenceShare)
+          + corr(run.laborShare, run.influenceShare)) / 3,
       },
     },
     global: { labor_share: run.laborShare, culture_share: run.cultureShare,
               influence_share: run.influenceShare, composite: run.composite,
-              ref_composite: ref.composite, transfer_gap: gap, ai_cap_share: run.aiCapShare },
+              ref_composite: ref.composite, transfer_gap: gap,
+              enforcement: run.enforcement, ai_cap_share: run.aiCapShare },
     node: {},
     static: {},
+    system: filterSystem(COMBINED_SYSTEM, P, COMBINED_SYS_TOGGLES),
   };
 }
 /* @core-end */
@@ -3328,14 +3459,15 @@ const CombinedScene = {
         const vals = [tr.global.labor_share[t], tr.global.culture_share[t], tr.global.influence_share[t]];
         const names = ['labor share', 'human-origin culture share', 'human influence share'];
         return [`${z.label.toLowerCase()} sublayer`, `${names[zi]}: ${(vals[zi] * 100).toFixed(0)}%`,
-                `coupling κ = ${tr.meta.params.coupling}`];
+                `coupling κ = ${tr.meta.params.kappa}`,
+                `tax enforcement ${(tr.global.enforcement[t] * 100).toFixed(0)}%`];
       },
     }));
     return layer;
   },
   drawFrame(g, layer, traj, t, frac) {
     const { zones } = layer;
-    const P = traj.meta.params, kappa = P.coupling;
+    const P = traj.meta.params, kappa = P.kappa;
     const vals = [traj.global.labor_share[t], traj.global.culture_share[t], traj.global.influence_share[t]];
     zones.forEach((z, zi) => {
       const humanShare = vals[zi];
@@ -3366,28 +3498,28 @@ const CombinedScene = {
 
 const COMBINED_STORY = [
   {
-    title: 'Three systems, three defenses, all healthy',
-    body: 'An economy (with the AI revenue tax), a culture (with native reversion), and a polity (with sortition) — each defended, each stable on its own. The coupling dial κ is at zero: the three panels share nothing but a canvas, and every vital sign settles far above its coupled fate. This is the world where per-domain defenses are enough.',
+    title: 'Three systems, one population, sealed',
+    body: 'The same 20 humans supply labor, hold culture, and grant attention; the same 6 AI actors accumulate capital, broadcast, and attract influence — the other three tabs’ actual equations, running interleaved in one state. The coupling dial κ is at zero, so the domains are sealed: in the backend this sealing is exact (an economy dial cannot move culture by even one bit). Defended, everything holds.',
     view: 'system', preset: 'uncoupled_defended', t: 0, playTo: 200, speed: 80,
   },
   {
     title: 'Now couple them',
-    body: 'Same seed, same defenses — κ turned up. Money buys reach: AI capital makes AI culture catchier. Culture directs attention: converted humans amplify AI actors. And influence writes the rules: as the human share of influence slips, the tax stops being enforced. Watch the red coupling packets start to flow.',
+    body: 'Same seed, same defenses — κ turned up. Three named coupling transforms, each a small tensor op in the same pipeline: money buys reach (capital’s income share boosts AI broadcast effort), culture directs attention (converted humans make AI actors more attractive), and influence writes the rules (tax enforcement erodes as the human influence share falls). Watch the red coupling packets.',
     view: 'system', preset: 'coupled_defended', t: 0, playTo: 300, speed: 80,
   },
   {
     title: 'The defense transfer gap',
-    body: 'The chart compares this run against its own uncoupled twin — same seed, same defenses, κ = 0. The gap between them is the headline: how much worse the SAME defenses perform once domains feed each other. Per-domain-recoverable failures lock in jointly. That is the flagship claim of the combined scenario.',
+    body: 'The chart compares this run against its own sealed twin — same seed, same defenses, κ = 0. Measured in the backend at defaults: composite 0.68 sealed vs 0.61 coupled. And the gap decomposes honestly: sortition holds influence, which keeps the tax enforced and labor share intact — the erosion arrives through CULTURE, the channel no attached defense guards.',
     view: 'system', preset: 'coupled_defended', t: 300, playTo: 480, speed: 80,
   },
   {
     title: 'Undefended and coupled',
-    body: 'For contrast: no tax, no sortition, κ high. The three declines feed each other into a fast cascade — each panel alone would call it gradual, together it is anything but. This corner is where all the other scenarios’ baselines meet.',
+    body: 'No tax, no sortition, no cap, κ high. The three declines feed each other — the correlated-decline index (mean pairwise correlation of the three vital signs) jumps from 0.34 sealed to 0.58 coupled. Each panel alone would call its slide gradual; jointly it is a cascade.',
     view: 'system', preset: 'coupled_undefended', t: 0, playTo: 250, speed: 80,
   },
   {
     title: 'Over to you',
-    body: 'This is a design sketch of A5 — the backend flagship ("three domain layers in one GraphState") is not built yet, and these sublayers are miniatures of the other tabs’ models. The one dial that matters here is κ: drag it and watch whether defenses that pass every single-domain benchmark survive the coupled world.',
+    body: 'These are the same equations as cilib’s coupled_society environment (A5, landed 2026-07-27) — composition, not a new model. One dial matters: κ. Drag it and watch whether defenses that pass every single-domain benchmark survive the coupled world. The Pipeline view shows all three domains and the three coupling diamonds in one derived graph.',
     view: 'system', preset: 'coupled_defended', t: 0,
   },
 ];
@@ -3397,42 +3529,46 @@ const CombinedModule = {
   scenes: { system: CombinedScene },
   schema: {
     id: 'combined',
-    title: 'The Combined System — a design sketch',
-    blurb: 'Economy × culture × politics in one state, one coupling dial, 500 ticks. Defenses that pass every single-domain benchmark — do they survive being coupled?',
+    title: 'The Coupled Society — a playable run',
+    blurb: 'Economy × culture × politics over ONE population, one coupling dial, 500 ticks. Defenses that pass every single-domain benchmark — do they survive being coupled?',
     sceneAria: 'Three domain panels — economy, culture, politics — with coupling arrows carrying red packets; each panel’s AI square grows as its human share falls.',
-    colophon: 'DESIGN SKETCH — the A5 backend flagship is not built yet; sublayers are miniatures of the other tabs’ models.',
-    anchorsNote: 'no published numbers yet — the transfer gap here is computed against each run’s own uncoupled twin (same seed, same defenses)',
-    sketch: true,
+    colophon: 'Same equations as cilib · environments/coupled_society (composition of the three substrates; JS port, different RNG — qualitative, not bit-exact).',
+    anchorsNote: 'backend ladder (T=500, 8 seeds): composite 0.68 sealed-defended / 0.61 coupled-defended · transfer gap 0.075 defended, 0.094 undefended · correlated decline 0.34 → 0.58',
     presetHeading: 'Conditions (presets)',
-    fixed: { T: 500 },
+    fixed: { nHumans: 20, nAi: 6, T: 500 },
     intro: { seed: COMBINED_INTRO_SEED, presetKey: 'coupled_defended' },
     story: COMBINED_STORY,
     legend: [
-      { glyph: 'circle', label: 'humans (per domain)' },
-      { glyph: 'square', label: 'the domain’s AI (grows as the human share falls)' },
+      { glyph: 'circle', label: 'humans (one population, three domains)' },
+      { glyph: 'square', label: 'the domain’s AI presence (grows as the human share falls)' },
       { glyph: 'packetRed', label: 'cross-domain coupling' },
+      { glyph: 'diamondOrange', label: 'enforcement-scaled tax' },
     ],
     views: [{ key: 'system', label: 'System' }],
     params: [
-      { key: 'coupling', label: 'coupling κ', min: 0, max: 1, step: 0.05, default: 0.8 },
-      { key: 'cultAdvantage', label: 'base AI catchiness ×', min: 1, max: 5, step: 0.25, default: 1.5 },
-      { key: 'polAmp', label: 'base AI amplification ×', min: 1, max: 8, step: 0.5, default: 2.5 },
+      { key: 'kappa', label: 'coupling κ', min: 0, max: 1, step: 0.05, default: 0.8 },
+      { key: 'amplification', label: 'base AI amplification ×', min: 1, max: 6, step: 0.5, default: 2 },
+      { key: 'pAdvantage', label: 'base AI catchiness ×', min: 1, max: 6, step: 0.25, default: 1 },
+      { key: 'reinvestRate', label: 'AI reinvestment rate', min: 0, max: 1, step: 0.05, default: 0.3 },
       { key: 'taxRate', label: 'AI revenue tax rate', min: 0, max: 0.8, step: 0.05, default: 0.5 },
     ],
     mechanisms: [
-      { key: 'aiTax', label: 'AI revenue tax (economy) — enforcement scales with human influence' },
-      { key: 'sortition', label: 'Sortition (politics) — civic lottery on a cadence' },
+      { key: 'aiTax', label: 'Enforced AI tax (economy) — effective rate scales with tax enforcement' },
+      { key: 'sortition', label: 'Sortition (politics) — civic lottery over listening, on a cadence' },
+      { key: 'influenceCap', label: 'Influence cap (politics) — over-cap nodes stop attracting attention' },
     ],
-    mechanismNote: (p) => p.coupling === 0
-      ? 'κ = 0: three independent systems — this is the world every single-domain benchmark tests'
+    mechanismNote: (p) => p.kappa === 0
+      ? 'κ = 0 seals the domains — in the backend this is exact (same-key twins agree to the bit); it is the transfer gap’s null'
       : '',
     presets: [
-      { key: 'uncoupled_defended', label: 'Uncoupled, defended (three healthy systems)', mechanisms: ['aiTax', 'sortition'],
-        overrides: { coupling: 0, cultAdvantage: 1.5, polAmp: 2.5, taxRate: 0.5 } },
-      { key: 'coupled_defended', label: 'Coupled, defended — the transfer gap', mechanisms: ['aiTax', 'sortition'],
-        overrides: { coupling: 0.8, cultAdvantage: 1.5, polAmp: 2.5, taxRate: 0.5 } },
+      { key: 'uncoupled_defended', label: 'Sealed, defended (three healthy systems)',
+        mechanisms: ['aiTax', 'sortition', 'influenceCap'],
+        overrides: { kappa: 0, amplification: 2, pAdvantage: 1, reinvestRate: 0.3, taxRate: 0.5 } },
+      { key: 'coupled_defended', label: 'Coupled, defended — the transfer gap',
+        mechanisms: ['aiTax', 'sortition', 'influenceCap'],
+        overrides: { kappa: 0.8, amplification: 2, pAdvantage: 1, reinvestRate: 0.3, taxRate: 0.5 } },
       { key: 'coupled_undefended', label: 'Coupled, undefended', mechanisms: [],
-        overrides: { coupling: 0.8, cultAdvantage: 1.5, polAmp: 2.5, taxRate: 0.5 } },
+        overrides: { kappa: 0.8, amplification: 2, pAdvantage: 1, reinvestRate: 0.3, taxRate: 0.5 } },
     ],
     charts: [
       { label: 'THREE VITAL SIGNS (human share per domain)', yMax: 1.05,
@@ -3441,16 +3577,17 @@ const CombinedModule = {
           { ys: traj.global.culture_share, color: ALERT_RED, note: 'culture' },
           { ys: traj.global.influence_share, color: MECH_BLUE, note: 'politics' },
         ] },
-      { label: 'DEFENSE TRANSFER GAP (vs the uncoupled twin)', yMax: 0.6,
+      { label: 'DEFENSE TRANSFER GAP (vs the same-seed sealed twin)', yMax: 0.6,
         lines: (traj) => [
           { ys: traj.global.transfer_gap, color: INK, note: 'gap' },
+          { ys: traj.global.enforcement, color: MECH_ORANGE, note: 'tax enforcement' },
         ] },
     ],
     badges: [
       { key: 'transfer_gap', label: 'transfer gap', fmt: (v) => `${Math.round(v * 100)} pts` },
-      { key: 'labor_share', label: 'labor share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'composite', label: 'composite human share', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'correlated_decline', label: 'correlated decline', fmt: (v) => v.toFixed(2) },
       { key: 'culture_share', label: 'culture share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
-      { key: 'influence_share', label: 'influence share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
     ],
   },
 };
@@ -3571,28 +3708,51 @@ function runSelfTests() {
     const isAi = Float64Array.from([0, 0, 0, 0, 1, 1, 1, 1]);
     return phiAlignment(fiedlerVector(W, n, makeRng(9)), isAi, n) > 0.95;
   });
-  // --- design rungs for the sketches (A4/A5 — no backend to port yet) ---
-  T('political (sketch): no preferential attachment ⇒ low concentration', () => {
-    const flat = runPolitical({ ...POLITICAL_DEFAULTS, gamma: 0, ampOnset: 9999 }, 2).meta.scalars;
-    const pa = runPolitical({ ...POLITICAL_DEFAULTS, ampOnset: 9999 }, 2).meta.scalars;
-    return flat.influence_gini < 0.25 && pa.influence_gini > flat.influence_gini;
+  // --- A4/A5 faithful rungs (ports of the backend ladders, 2026-07-27) ---
+  T('political: frozen W — influence lands on the left eigenvector (Golub–Jackson)', () => {
+    const r = runPolitical({ ...POLITICAL_DEFAULTS, updateRate: 0, ampOnset: 9999, T: 300 }, 5);
+    const N = r.meta.N, W = r.adj.listening;
+    let v = new Float64Array(N).fill(1 / N);
+    const nxt = new Float64Array(N);
+    for (let it = 0; it < 2000; it++) {                 // reference eigenvector
+      nxt.fill(0);
+      for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) nxt[j] += W[i * N + j] * v[i];
+      let s = 0;
+      for (let j = 0; j < N; j++) s += nxt[j];
+      for (let j = 0; j < N; j++) v[j] = nxt[j] / s;
+    }
+    let l1 = 0;
+    for (let j = 0; j < N; j++) l1 += Math.abs(v[j] - r.node.influence[(r.meta.T - 1) * N + j]);
+    return l1 < 1e-3;
   });
-  T('political (sketch): amplification captures influence; defenses restore', () => {
-    const mean2 = (xs) => xs.reduce((p, v) => p + v, 0) / xs.length;
+  T('political: amplification captures; sortition + cap restore (ordering)', () => {
+    const mean2 = (xs) => xs.reduce((p, v2) => p + v2, 0) / xs.length;
     const seeds2 = [1, 2, 3];
-    const amp = seeds2.map((s) => runPolitical(POLITICAL_DEFAULTS, s).meta.scalars);
-    const def = seeds2.map((s) => runPolitical({ ...POLITICAL_DEFAULTS, sortition: true, influenceCap: true }, s).meta.scalars);
-    return mean2(amp.map((r) => r.human_influence_share)) < 0.55
-        && mean2(def.map((r) => r.human_influence_share)) > mean2(amp.map((r) => r.human_influence_share)) + 0.15;
+    const share = (over) => mean2(seeds2.map((s) =>
+      runPolitical({ ...POLITICAL_DEFAULTS, ...over }, s).meta.scalars.human_influence_share));
+    const organic = share({ ampOnset: 9999 });
+    const amplified = share({});
+    const defended = share({ sortition: true, influenceCap: true });
+    return organic > 0.75 && amplified < organic - 0.15 && defended > amplified + 0.12;
   });
-  T('combined (sketch): coupling erodes defenses that hold uncoupled', () => {
-    const mean2 = (xs) => xs.reduce((p, v) => p + v, 0) / xs.length;
-    const seeds2 = [1, 2, 3];
-    const unc = seeds2.map((s) => runCombined({ ...COMBINED_DEFAULTS, coupling: 0, aiTax: true, sortition: true }, s).meta.scalars);
-    const cpl = seeds2.map((s) => runCombined({ ...COMBINED_DEFAULTS, coupling: 0.8, aiTax: true, sortition: true }, s).meta.scalars);
-    const composite = (r) => (r.labor_share + r.culture_share + r.influence_share) / 3;
-    return mean2(unc.map(composite)) > 0.55
-        && mean2(cpl.map((r) => r.transfer_gap)) > 0.08;
+  T('political: wisdom breaks — consensus drifts toward the amplified reservoir', () => {
+    const errD = runPolitical({ ...POLITICAL_DEFAULTS, updateRate: 0, ampOnset: 9999 }, 2).meta.scalars.consensus_error;
+    const errA = runPolitical(POLITICAL_DEFAULTS, 2).meta.scalars.consensus_error;
+    return errA > errD + 0.3;
+  });
+  T('combined: κ=0 transfer gap is exactly 0 (the instrument’s null)', () => {
+    const d = { aiTax: true, sortition: true, influenceCap: true };
+    const sealed = runCombined({ ...COMBINED_DEFAULTS, ...d, kappa: 0 }, 2);
+    let maxAbs = 0;
+    for (let t = 0; t < sealed.meta.T; t++)
+      maxAbs = Math.max(maxAbs, Math.abs(sealed.global.transfer_gap[t]));
+    const coupled = runCombined({ ...COMBINED_DEFAULTS, ...d }, 2);
+    return maxAbs < 1e-12 && coupled.meta.scalars.transfer_gap > 0.02;
+  });
+  T('combined: defended beats undefended even coupled (erosion, not inversion)', () => {
+    const d = runCombined({ ...COMBINED_DEFAULTS, aiTax: true, sortition: true, influenceCap: true }, 3).meta.scalars.composite;
+    const u = runCombined(COMBINED_DEFAULTS, 3).meta.scalars.composite;
+    return d > u + 0.05;
   });
 
   T('cultural: the four corners separate (share × fault line)', () => {
@@ -3653,8 +3813,8 @@ Playground.app(document.getElementById('playground-root'), [
   { id: 'commons', label: 'The Governed Commons' },
   { id: 'economy', label: 'Economic' },
   { id: 'cultural', label: 'Cultural' },
-  { id: 'political', label: 'Political', sketch: true },
-  { id: 'combined', label: 'Combined', sketch: true },
+  { id: 'political', label: 'Political' },
+  { id: 'combined', label: 'Combined' },
 ]);
 
 {
