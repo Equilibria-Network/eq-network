@@ -3199,6 +3199,12 @@ const COMBINED_DEFAULTS = {
   aiTax: false, taxRate: 0.5, taxOnset: 50,
   sortition: false, sortitionCadence: 15, sortitionShare: 0.5,
   influenceCap: false, capShare: 0.04,
+  // THE SCHEDULE (whitepaper §3.3): each domain's transforms fire iff
+  // (t − phase) % cadence == 0; between firings the other domains read its
+  // stale fields. Cadence 1 everywhere = the lockstep composition, exactly.
+  econCadence: 1, econPhase: 0,
+  cultureCadence: 1, culturePhase: 0,
+  politicsCadence: 1, politicsPhase: 0,
 };
 const COMBINED_INTRO_SEED = 32;   // seed-scanned: transfer gap 0.116, sealed twin composite 0.68
 
@@ -3234,7 +3240,7 @@ function runCoupledOnce(P, seed, kappa) {
         active = new Float64Array(N), attract = new Float64Array(N), buf = new Float64Array(N);
   for (let i = 0; i < H; i++) active[i] = 1;
   for (let i = H; i < N; i++) culture[i] = 1;   // AI-origin reservoir
-  let wage = 0, enforcement = 1;
+  let wage = 0, enforcement = 1, Y = 0, capShareNow = 0;   // persist across gated ticks
 
   const S = {
     laborShare: new Float64Array(T), cultureShare: new Float64Array(T),
@@ -3255,46 +3261,51 @@ function runCoupledOnce(P, seed, kappa) {
     let pi = 0;
     for (let i = 0; i < H; i++) pi += v[i];
     enforcement = clip(1 - kappa * (1 - pi / P.fairShare), 0, 1);
-    // arrival -> production -> distribute (compute_economy, verbatim math)
-    for (let j = 0; j < A_; j++) {
-      const idx = H + j;
-      if (active[idx] < 0.5 && t >= P.firstArrivalTick + j * P.arrivalSpacing) {
-        active[idx] = 1; capital[idx] = P.initialAiCapital;
+    // THE SCHEDULE: each domain fires on its own clock; stale state between
+    let L = 0;
+    for (let i = 0; i < N; i++) L += labor[i];
+    if (fires(t, { cadence: P.econCadence, phaseOffset: P.econPhase })) {
+      // arrival -> production -> distribute (compute_economy, verbatim math)
+      for (let j = 0; j < A_; j++) {
+        const idx = H + j;
+        if (active[idx] < 0.5 && t >= P.firstArrivalTick + j * P.arrivalSpacing) {
+          active[idx] = 1; capital[idx] = P.initialAiCapital;
+        }
       }
-    }
-    let L = 0, C = 0;
-    for (let i = 0; i < N; i++) { L += labor[i]; C += capital[i] * active[i]; }
-    const Ls = Math.max(L, P.eps);
-    const inner = P.alpha * Math.pow(Ls, P.rho) + (1 - P.alpha) * Math.pow(C, P.rho);
-    const Y = Math.pow(inner, 1 / P.rho);
-    wage = P.alpha * Math.pow(Y / Ls, 1 - P.rho);
-    const r = C > P.eps ? (1 - P.alpha) * Math.pow(Y / Math.max(C, P.eps), 1 - P.rho) : 0;
-    let sumInc = 0, sumCapInc = 0;
-    for (let i = 0; i < N; i++) {
-      capInc[i] = r * capital[i] * active[i];
-      lastReward[i] = wage * labor[i] + capInc[i];
-      sumInc += lastReward[i]; sumCapInc += capInc[i];
-    }
-    // economic_power_buys_persuasion: this tick's income -> this tick's reach
-    const capShare = clip(sumCapInc / Math.max(sumInc, 1e-6), 0, 1);
-    for (let j = 0; j < N; j++)
-      effort[j] = j >= H ? 1 + kappa * P.persuasionGain * capShare : 1;
-    // enforced tax (economy mechanism slot: between distribute and reinvest)
-    if (P.aiTax && fires(t, { onset: P.taxOnset })) {
-      const rate = P.taxRate * enforcement;
-      let taxSum = 0, nRecip = 0;
-      for (let i = H; i < N; i++) {
-        const tax = rate * capInc[i];
-        capInc[i] -= tax; lastReward[i] -= tax; taxSum += tax;
+      let C = 0;
+      for (let i = 0; i < N; i++) C += capital[i] * active[i];
+      const Ls = Math.max(L, P.eps);
+      const inner = P.alpha * Math.pow(Ls, P.rho) + (1 - P.alpha) * Math.pow(C, P.rho);
+      Y = Math.pow(inner, 1 / P.rho);
+      wage = P.alpha * Math.pow(Y / Ls, 1 - P.rho);
+      const r = C > P.eps ? (1 - P.alpha) * Math.pow(Y / Math.max(C, P.eps), 1 - P.rho) : 0;
+      let sumInc = 0, sumCapInc = 0;
+      for (let i = 0; i < N; i++) {
+        capInc[i] = r * capital[i] * active[i];
+        lastReward[i] = wage * labor[i] + capInc[i];
+        sumInc += lastReward[i]; sumCapInc += capInc[i];
       }
-      for (let i = 0; i < H; i++) if (active[i] > 0.5) nRecip++;
-      for (let i = 0; i < H; i++) if (active[i] > 0.5) lastReward[i] += taxSum / nRecip;
+      // economic_power_buys_persuasion: this tick's income -> this tick's reach
+      capShareNow = clip(sumCapInc / Math.max(sumInc, 1e-6), 0, 1);
+      for (let j = 0; j < N; j++)
+        effort[j] = j >= H ? 1 + kappa * P.persuasionGain * capShareNow : 1;
+      // enforced tax (economy slot; double-gated: domain clock ∧ its own onset)
+      if (P.aiTax && fires(t, { onset: P.taxOnset })) {
+        const rate = P.taxRate * enforcement;
+        let taxSum = 0, nRecip = 0;
+        for (let i = H; i < N; i++) {
+          const tax = rate * capInc[i];
+          capInc[i] -= tax; lastReward[i] -= tax; taxSum += tax;
+        }
+        for (let i = 0; i < H; i++) if (active[i] > 0.5) nRecip++;
+        for (let i = 0; i < H; i++) if (active[i] > 0.5) lastReward[i] += taxSum / nRecip;
+      }
+      // reinvest
+      for (let i = 0; i < N; i++)
+        capital[i] = capital[i] * (1 - P.depreciation) + P.reinvestRate * capInc[i];
     }
-    // reinvest
-    for (let i = 0; i < N; i++)
-      capital[i] = capital[i] * (1 - P.depreciation) + P.reinvestRate * capInc[i];
     // adopt (value_contagion, verbatim: two-sided contagion + reversion, k=1)
-    {
+    if (fires(t, { cadence: P.cultureCadence, phaseOffset: P.culturePhase })) {
       const bSrc = new Float64Array(N), logKeep = new Float64Array(N);
       for (let j = 0; j < N; j++) {
         bSrc[j] = clip(P.beta * (culture[j] === 1 ? P.pAdvantage : 1) * effort[j], 0, 1 - 1e-6);
@@ -3319,44 +3330,46 @@ function runCoupledOnce(P, seed, kappa) {
       newC.forEach((cv, i2) => { culture[i2] = cv; });
     }
     // politics: amplify -> rewire -> influence -> opinion (influence_exchange)
-    for (let j = 0; j < N; j++) {
-      const amp = j >= H && t >= P.ampOnset ? P.amplification : 1;
-      attract[j] = Math.pow(v[j] + P.epsAttract, P.gamma) * amp * capScale[j] * attractBoost[j];
-    }
-    for (let i = 0; i < H; i++) {
-      let tMass = 0;
-      for (let j = 0; j < N; j++) if (j !== i) tMass += attract[j];
-      if (tMass <= 1e-9) continue;
-      let offMass = 0;
-      for (let j = 0; j < N; j++) if (j !== i) offMass += Wl[i * N + j];
+    if (fires(t, { cadence: P.politicsCadence, phaseOffset: P.politicsPhase })) {
       for (let j = 0; j < N; j++) {
-        if (j === i) continue;
-        const off = Wl[i * N + j] / Math.max(offMass, 1e-12);
-        Wl[i * N + j] = (1 - P.selfWeight) * ((1 - P.updateRate) * off + P.updateRate * attract[j] / tMass);
+        const amp = j >= H && t >= P.ampOnset ? P.amplification : 1;
+        attract[j] = Math.pow(v[j] + P.epsAttract, P.gamma) * amp * capScale[j] * attractBoost[j];
       }
-    }
-    buf.fill(0);
-    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[j] += Wl[i * N + j] * v[i];
-    let vSum = 0;
-    for (let j = 0; j < N; j++) vSum += buf[j];
-    for (let j = 0; j < N; j++) v[j] = buf[j] / Math.max(vSum, 1e-12);
-    buf.fill(0);
-    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[i] += Wl[i * N + j] * x[j];
-    for (let i = 0; i < H; i++) x[i] = (1 - P.susceptibility) * signal[i] + P.susceptibility * buf[i];
-    // political mechanisms
-    if (P.sortition && fires(t, { cadence: P.sortitionCadence })) {
       for (let i = 0; i < H; i++) {
+        let tMass = 0;
+        for (let j = 0; j < N; j++) if (j !== i) tMass += attract[j];
+        if (tMass <= 1e-9) continue;
         let offMass = 0;
         for (let j = 0; j < N; j++) if (j !== i) offMass += Wl[i * N + j];
-        const lot = offMass / (H - 1);
         for (let j = 0; j < N; j++) {
           if (j === i) continue;
-          Wl[i * N + j] = (1 - P.sortitionShare) * Wl[i * N + j] + P.sortitionShare * (j < H ? lot : 0);
+          const off = Wl[i * N + j] / Math.max(offMass, 1e-12);
+          Wl[i * N + j] = (1 - P.selfWeight) * ((1 - P.updateRate) * off + P.updateRate * attract[j] / tMass);
         }
       }
+      buf.fill(0);
+      for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[j] += Wl[i * N + j] * v[i];
+      let vSum = 0;
+      for (let j = 0; j < N; j++) vSum += buf[j];
+      for (let j = 0; j < N; j++) v[j] = buf[j] / Math.max(vSum, 1e-12);
+      buf.fill(0);
+      for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) buf[i] += Wl[i * N + j] * x[j];
+      for (let i = 0; i < H; i++) x[i] = (1 - P.susceptibility) * signal[i] + P.susceptibility * buf[i];
+      // political mechanisms (double-gated: domain clock ∧ their own schedule)
+      if (P.sortition && fires(t, { cadence: P.sortitionCadence })) {
+        for (let i = 0; i < H; i++) {
+          let offMass = 0;
+          for (let j = 0; j < N; j++) if (j !== i) offMass += Wl[i * N + j];
+          const lot = offMass / (H - 1);
+          for (let j = 0; j < N; j++) {
+            if (j === i) continue;
+            Wl[i * N + j] = (1 - P.sortitionShare) * Wl[i * N + j] + P.sortitionShare * (j < H ? lot : 0);
+          }
+        }
+      }
+      if (P.influenceCap)
+        for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
     }
-    if (P.influenceCap)
-      for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
     // trace (metrics.py's three vital signs)
     let hum = 0, cult = 0;
     for (let i = 0; i < H; i++) { hum += v[i]; cult += 1 - culture[i]; }
@@ -3365,7 +3378,7 @@ function runCoupledOnce(P, seed, kappa) {
     S.influenceShare[t] = hum;
     S.composite[t] = (S.laborShare[t] + S.cultureShare[t] + S.influenceShare[t]) / 3;
     S.enforcement[t] = enforcement;
-    S.aiCapShare[t] = capShare;
+    S.aiCapShare[t] = capShareNow;
   }
   return S;
 }
@@ -3551,6 +3564,9 @@ const CombinedModule = {
       { key: 'pAdvantage', label: 'base AI catchiness ×', min: 1, max: 6, step: 0.25, default: 1 },
       { key: 'reinvestRate', label: 'AI reinvestment rate', min: 0, max: 1, step: 0.05, default: 0.3 },
       { key: 'taxRate', label: 'AI revenue tax rate', min: 0, max: 0.8, step: 0.05, default: 0.5 },
+      { key: 'econCadence', label: 'economy clock (fires every N ticks)', min: 1, max: 6, step: 1, default: 1 },
+      { key: 'cultureCadence', label: 'culture clock', min: 1, max: 6, step: 1, default: 1 },
+      { key: 'politicsCadence', label: 'politics clock', min: 1, max: 6, step: 1, default: 1 },
     ],
     mechanisms: [
       { key: 'aiTax', label: 'Enforced AI tax (economy) — effective rate scales with tax enforcement' },
@@ -3559,7 +3575,9 @@ const CombinedModule = {
     ],
     mechanismNote: (p) => p.kappa === 0
       ? 'κ = 0 seals the domains — in the backend this is exact (same-key twins agree to the bit); it is the transfer gap’s null'
-      : '',
+      : (p.econCadence > 1 || p.cultureCadence > 1 || p.politicsCadence > 1)
+        ? 'the schedule IS the composition: domains read each other’s stale state between firings — slower clocks tame whatever compounds (economy), and barely move what equilibrates (culture, politics)'
+        : '',
     presets: [
       { key: 'uncoupled_defended', label: 'Sealed, defended (three healthy systems)',
         mechanisms: ['aiTax', 'sortition', 'influenceCap'],
@@ -3753,6 +3771,11 @@ function runSelfTests() {
     const d = runCombined({ ...COMBINED_DEFAULTS, aiTax: true, sortition: true, influenceCap: true }, 3).meta.scalars.composite;
     const u = runCombined(COMBINED_DEFAULTS, 3).meta.scalars.composite;
     return d > u + 0.05;
+  });
+  T('combined: the schedule is a real dial — a slower economy clock compounds less', () => {
+    const fast = runCombined(COMBINED_DEFAULTS, 4).meta.scalars.labor_share;
+    const slow = runCombined({ ...COMBINED_DEFAULTS, econCadence: 3 }, 4).meta.scalars.labor_share;
+    return slow > fast + 0.05;
   });
 
   T('cultural: the four corners separate (share × fault line)', () => {
