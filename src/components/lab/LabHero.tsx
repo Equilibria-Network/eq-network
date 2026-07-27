@@ -1,6 +1,6 @@
 // src/components/lab/LabHero.tsx
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Play } from 'lucide-react';
 import styles from './LabHero.module.css';
 import type { LabContent } from '@content/lab';
 
@@ -17,10 +17,16 @@ export default function LabHero({ hero }: LabHeroProps) {
         <p className={styles.subline}>{hero.subline}</p>
         <p className={styles.kicker}>{hero.kicker}</p>
         <p className={styles.honesty}>{hero.honesty}</p>
-        <a href="#scenarios" className={styles.scrollCta}>
-          {hero.scrollCtaLabel}
-          <ChevronDown size={18} aria-hidden="true" />
-        </a>
+        <div className={styles.ctaRow}>
+          <a href={hero.playgroundCta.href} className={styles.playCta}>
+            <Play size={16} aria-hidden="true" />
+            {hero.playgroundCta.label}
+          </a>
+          <a href="#scenarios" className={styles.scrollCta}>
+            {hero.scrollCtaLabel}
+            <ChevronDown size={18} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );

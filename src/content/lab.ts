@@ -76,6 +76,8 @@ export interface LabContent {
     kicker: string;
     honesty: string;
     scrollCtaLabel: string;
+    /** Above-the-fold link to the interactive playground page. */
+    playgroundCta: { href: string; label: string };
   };
   scenariosIntro: {
     title: string;
@@ -120,6 +122,7 @@ export const labContent: LabContent = {
     honesty:
       'These are toy models — the smallest systems where each failure dynamic appears clearly. They produce candidate indicators, not measurements of the world.',
     scrollCtaLabel: 'Explore the scenarios',
+    playgroundCta: { href: '/lab/playground', label: 'Open the playground' },
   },
 
   scenariosIntro: {
@@ -361,6 +364,12 @@ export const labContent: LabContent = {
     body:
       'The Lab is open source: preset environments, composable mechanisms, shared metrics. Design a mechanism, run it against a scenario, and see how much influence it preserves. If you have an idea about how groups should decide, this is the wind tunnel.',
     links: [
+      {
+        href: '/lab/playground',
+        label: 'Open the playground',
+        description:
+          'Run the five scenarios yourself: 500-tick simulations, composable defenses, hand-drawn live views.',
+      },
       {
         href: 'https://github.com/eq-network/Collective-Intelligence-Library',
         label: 'The engine',

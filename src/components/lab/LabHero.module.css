@@ -72,11 +72,40 @@
   max-width: 560px;
 }
 
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.playCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background: var(--color-primary);
+  text-decoration: none;
+  border: 1px solid var(--color-primary);
+  border-radius: 3px;
+  padding: 0.75rem 1.5rem;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.playCta:hover {
+  background: transparent;
+  color: var(--color-primary);
+}
+
 .scrollCta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
