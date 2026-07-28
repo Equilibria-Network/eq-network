@@ -1,5 +1,5 @@
 // src/components/home/LorenzAttractor.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   LORENZ_CONFIG,
   createInitialSeed,
@@ -79,8 +79,17 @@ export default function LorenzAttractor() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const animate = () => {
-      // Calculate new points
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const drawFrame = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawTrajectory(ctx, pointsRef.current, LORENZ_CONFIG.colors.primary, 0.8, true);
+      drawTrajectory(ctx, secondaryPointsRef.current, LORENZ_CONFIG.colors.secondary, 0.6, false);
+    };
+
+    const step = () => {
       for (let i = 0; i < LORENZ_CONFIG.animation.pointsPerFrame; i++) {
         // Primary trajectory
         const nextPoint = calculateNext(currentPointRef.current, systemRef.current);
@@ -100,23 +109,46 @@ export default function LorenzAttractor() {
           secondaryPointsRef.current.shift();
         }
       }
+    };
 
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw both trajectories with different colors
-      drawTrajectory(ctx, pointsRef.current, LORENZ_CONFIG.colors.primary, 0.8, true);
-      drawTrajectory(ctx, secondaryPointsRef.current, LORENZ_CONFIG.colors.secondary, 0.6, false);
-
+    const animate = () => {
+      step();
+      drawFrame();
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Respect reduced-motion: draw a single static frame and never animate.
+    if (prefersReducedMotion) {
+      drawFrame();
+      return;
+    }
 
-    return () => {
+    // Only run the loop while the canvas is on screen; pause when scrolled away.
+    let running = false;
+    const start = () => {
+      if (running) return;
+      running = true;
+      animate();
+    };
+    const stop = () => {
+      running = false;
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) start();
+        else stop();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
+    return () => {
+      stop();
+      observer.disconnect();
     };
   }, [dimensions]);
 
@@ -181,6 +213,7 @@ export default function LorenzAttractor() {
         width={dimensions.width}
         height={dimensions.height}
         className={styles.canvas}
+        aria-hidden="true"
       />
     </div>
   );

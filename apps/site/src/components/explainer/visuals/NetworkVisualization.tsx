@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo, useCallback } from 'react';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
 import rough from 'roughjs';
 import {
   CLUSTERS,
@@ -92,6 +92,16 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
     for (const [id, pos] of targetPositions) {
       const prev = prevPositions.current.get(id);
       startPositions.set(id, prev ? { ...prev } : { ...pos });
+    }
+
+    // Respect reduced-motion: skip the tween and snap to the target layout.
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      drawFrame(svg, targetPositions, edges, activeStep);
+      prevPositions.current = targetPositions;
+      return;
     }
 
     const duration = 600;
