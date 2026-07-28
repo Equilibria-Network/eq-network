@@ -8,7 +8,7 @@ export const phase1: RoadmapPhase = {
   researcher: {
     fullName: 'David Hume',
     lastName: 'Hume',
-    image: '/img/roadmap/hume.svg',
+    image: '/img/roadmap/hume.webp',
     bio: 'Scottish Enlightenment philosopher who pioneered empirical approaches to understanding human nature, causation, and the foundations of knowledge.',
   },
   details: {

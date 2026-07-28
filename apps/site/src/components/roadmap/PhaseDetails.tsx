@@ -41,6 +41,8 @@ export default function PhaseDetails({ phase }: PhaseDetailsProps) {
           src={phase.researcher.image}
           alt={phase.researcher.fullName}
           className={styles.largeImage}
+          loading="lazy"
+          decoding="async"
         />
         <p className={styles.researcherBio}>{phase.researcher.bio}</p>
       </div>
@@ -104,6 +106,8 @@ export default function PhaseDetails({ phase }: PhaseDetailsProps) {
                                       src={icon}
                                       alt={platform}
                                       className={styles.platformIcon}
+                                      loading="lazy"
+                                      decoding="async"
                                     />
                                   </a>
                                 ))}
@@ -153,7 +157,13 @@ export default function PhaseDetails({ phase }: PhaseDetailsProps) {
                                 className={styles.platformLink}
                                 onClick={(e) => e.stopPropagation()}
                               >
-                                <img src={icon} alt={platform} className={styles.platformIcon} />
+                                <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src={icon}
+                                  alt={platform}
+                                  className={styles.platformIcon}
+                                />
                               </a>
                             ))}
                           </div>

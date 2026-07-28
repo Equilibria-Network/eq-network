@@ -8,7 +8,7 @@ export const phase2: RoadmapPhase = {
   researcher: {
     fullName: 'Norbert Wiener',
     lastName: 'Wiener',
-    image: '/img/roadmap/wiener.svg',
+    image: '/img/roadmap/wiener.webp',
     bio: 'Mathematician and philosopher who founded cybernetics, establishing frameworks for understanding communication and control in complex systems.',
   },
   details: {

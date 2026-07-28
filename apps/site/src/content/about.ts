@@ -52,32 +52,32 @@ export const aboutContent: AboutContent = {
       {
         title: 'We partner with existing organizations.',
         text: "The theory develops from what we're seeing in practice.",
-        icon: '/img/about/philosophy/partner.svg',
+        icon: '/img/about/philosophy/partner.webp',
       },
       {
         title: 'We engage in interdisciplinary dialogue.',
         text: "We've structured ourselves as both a focused research team and a broader network to make interdisciplinary collisions more likely, creating more surface area for useful accidents.",
-        icon: '/img/about/philosophy/dialogue.svg',
+        icon: '/img/about/philosophy/dialogue.webp',
       },
       {
         title: 'We assume someone already solved our problem, just in a different field.',
         text: 'We read across disciplines - game theory, cybernetics, information theory, organizational behavior - looking for patterns that repeat across contexts.',
-        icon: '/img/about/philosophy/rubik.svg',
+        icon: '/img/about/philosophy/rubik.webp',
       },
       {
         title: 'We test things on ourselves first.',
         text: 'When we discover something about how groups work better, we implement it in our own processes before suggesting it elsewhere. This has changed how we run meetings, make decisions, and share information.',
-        icon: '/img/about/philosophy/test.svg',
+        icon: '/img/about/philosophy/test.webp',
       },
       {
         title: 'We take play seriously.',
         text: 'Mammals evolved it as a learning mechanism. Time for exploration alongside execution, permission to pursue unexpected tangents, explicit switching between modes.',
-        icon: '/img/about/philosophy/play.svg',
+        icon: '/img/about/philosophy/play.webp',
       },
       {
         title: 'Make the implicit explicit.',
         text: 'We make things explicit that usually stay implicit - what good work means here, how we make decisions, what we do when we disagree. Building shared language as we go.',
-        icon: '/img/about/philosophy/bulb.svg',
+        icon: '/img/about/philosophy/bulb.webp',
       },
     ],
   },
@@ -98,7 +98,7 @@ export const advisors: Advisor[] = [
     name: 'David Hyland',
     affiliation: 'Oxford University',
     bio: 'Postdoctoral researcher at Oxford University under Michael Woolridge working on bounded rationality and incentive design in multi-agent systems',
-    image: '/img/about/advisors/david-hyland.jfif',
+    image: '/img/about/advisors/david-hyland.jpg',
     website: 'https://www.linkedin.com/in/david-h-88a499135/',
   },
   {

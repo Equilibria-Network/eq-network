@@ -16,6 +16,8 @@ export default function ProductsCoordination() {
               src={coordination.image}
               alt={coordination.title}
               className={styles.productImage}
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

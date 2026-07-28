@@ -47,7 +47,13 @@ export default function AboutTeam() {
                 {/* Front Side */}
                 <div className={styles.cardFront}>
                   <div className={styles.imageContainer}>
-                    <img src={member.image} alt={member.name} className={styles.memberImage} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={member.image}
+                      alt={member.name}
+                      className={styles.memberImage}
+                    />
                   </div>
 
                   <div className={styles.frontContent}>

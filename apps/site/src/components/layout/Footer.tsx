@@ -39,6 +39,8 @@ export default function Footer() {
               src="/img/logo/logo_text_only.svg"
               alt="Equilibria Network"
               className={styles.logo}
+              loading="lazy"
+              decoding="async"
             />
             <p className={styles.description}>
               Exploring the design space of collective intelligence through simulations and
@@ -54,7 +56,13 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.name}
                 >
-                  <img src={social.icon} alt={social.name} className={styles.logoSocialIcon} />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={social.icon}
+                    alt={social.name}
+                    className={styles.logoSocialIcon}
+                  />
                 </a>
               ))}
             </div>

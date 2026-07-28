@@ -8,7 +8,7 @@ export const phase4: RoadmapPhase = {
   researcher: {
     fullName: 'Elinor Ostrom',
     lastName: 'Ostrom',
-    image: '/img/roadmap/ostrom.svg',
+    image: '/img/roadmap/ostrom.webp',
     bio: 'Nobel Prize-winning political economist who demonstrated through empirical research how communities successfully govern shared resources without centralized control.',
   },
   details: {

@@ -8,7 +8,7 @@ export const phase5: RoadmapPhase = {
   researcher: {
     fullName: 'John Forbes Nash Jr.',
     lastName: 'Nash',
-    image: '/img/roadmap/nash.svg',
+    image: '/img/roadmap/nash.webp',
     bio: 'Mathematician and Nobel laureate whose equilibrium concept revealed how stable, self-sustaining patterns emerge from independent agents pursuing their own interests.',
   },
   details: {

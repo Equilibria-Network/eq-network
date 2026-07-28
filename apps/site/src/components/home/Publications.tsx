@@ -28,7 +28,13 @@ export default function Publications() {
               <div className={styles.cardContent}>
                 {pub.image && (
                   <div className={styles.imageContainer}>
-                    <img src={pub.image} alt={pub.title} className={styles.cardImage} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={pub.image}
+                      alt={pub.title}
+                      className={styles.cardImage}
+                    />
                   </div>
                 )}
                 <div className={styles.textContent}>

@@ -31,10 +31,11 @@ _(Audit 0001 F3 "add rel=noopener" and B2 "wrong newsletter link" were both retr
 
 ## Deferred (feature work — not part of the current cleanup phase)
 
-| Task                                                              | From                 | Summary                                                                |
-| ----------------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------- |
-| [task-0003-eu-form-handler](task-0003-eu-form-handler.md)         | ADR-0002 (withdrawn) | Migrate the contact form to an EU-resident handler (owner will decide) |
-| [task-0004-privacy-policy-page](task-0004-privacy-policy-page.md) | Owner request        | Write a `/privacy` page (pairs with the form work)                     |
+| Task                                                                          | From                 | Summary                                                                                               |
+| ----------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
+| [task-0003-eu-form-handler](task-0003-eu-form-handler.md)                     | ADR-0002 (withdrawn) | Migrate the contact form to an EU-resident handler (owner will decide)                                |
+| [task-0004-privacy-policy-page](task-0004-privacy-policy-page.md)             | Owner request        | Write a `/privacy` page (pairs with the form work)                                                    |
+| [task-0006-visual-asset-regeneration](task-0006-visual-asset-regeneration.md) | Owner idea           | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
 
 ## Done
 

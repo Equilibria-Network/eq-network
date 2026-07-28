@@ -29,6 +29,8 @@ export default function Audience() {
                     src={audienceItem.image}
                     alt={audienceItem.title}
                     className={styles.audienceImage}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

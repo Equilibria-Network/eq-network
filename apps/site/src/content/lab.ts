@@ -422,25 +422,25 @@ export const labContent: LabContent = {
       'Every scenario above is an instance of the same pipeline: compose a world, schedule mechanisms as processes over time, run it, read the system’s properties. These are the working design sketches of the interface we’re building.',
     steps: [
       {
-        img: '/img/lab/pipeline-build.png',
+        img: '/img/lab/pipeline-build.webp',
         alt: 'Graph editor sketch: add nodes and edges, add a democracy (blue diamond) or a market (orange square) as first-class nodes, mark sub-networks as countries',
         title: 'Compose the world',
         body: 'Agents, relationships, and mechanisms are all first-class objects in a graph editor. Drop in a democracy, wire up a market, mark a sub-network as a country or a regulator.',
       },
       {
-        img: '/img/lab/pipeline-schedule.png',
+        img: '/img/lab/pipeline-schedule.webp',
         alt: 'Schedule sketch: rows for Democracy, Network (Forum), and Market mechanisms, with blocks showing when each runs across timesteps T=1 to T=10',
         title: 'Schedule the mechanisms',
         body: 'Mechanisms are processes, not fixtures. A schedule says when each one runs — a vote every fourth step, a market open all quarter — and the schedule itself can change as the run unfolds.',
       },
       {
-        img: '/img/lab/pipeline-run.png',
+        img: '/img/lab/pipeline-run.webp',
         alt: 'Simulation sketch: four panels T=1 to T=4 where a red dynamic spreads through a network of agents while a blue-hatched regulator system holds part of the graph',
         title: 'Run the simulation',
         body: 'Hundreds of steps of message passing, trust updates, and spreading dynamics. Sub-networks like a regulator system hold part of the graph while contagion tests the rest.',
       },
       {
-        img: '/img/lab/pipeline-visualisations.png',
+        img: '/img/lab/pipeline-visualisations.webp',
         alt: 'Visualisations sketch: message passing views, trust updates with blue up and red down arrows, a per-mechanism market view, and metrics over time on a log scale',
         title: 'Visualise and measure',
         body: 'Every run can be seen from any angle: messages being passed, trust rising and falling edge by edge, per-mechanism views like the market’s own network, and metrics over time — the influence and concentration curves the scenarios above are built to bend.',

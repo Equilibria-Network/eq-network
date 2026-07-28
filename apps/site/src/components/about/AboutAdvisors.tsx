@@ -27,7 +27,13 @@ export default function AboutAdvisors() {
             >
               <div className={styles.card}>
                 <div className={styles.imageContainer}>
-                  <img src={advisor.image} alt={advisor.name} className={styles.advisorImage} />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={advisor.image}
+                    alt={advisor.name}
+                    className={styles.advisorImage}
+                  />
                 </div>
 
                 <div className={styles.content}>

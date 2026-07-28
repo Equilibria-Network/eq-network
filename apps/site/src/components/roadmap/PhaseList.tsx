@@ -24,6 +24,8 @@ export default function PhaseList({ selectedPhase, onPhaseSelect }: PhaseListPro
                 src={phase.researcher.image}
                 alt={phase.researcher.fullName}
                 className={styles.navPortrait}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className={styles.phaseNavText}>

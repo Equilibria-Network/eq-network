@@ -19,6 +19,8 @@ export default function PhaseOverview({ phase }: Props) {
           src={phase.researcher.image}
           alt={phase.researcher.fullName}
           className={styles.largeImage}
+          loading="lazy"
+          decoding="async"
         />
         <p className={styles.researcherBio}>{phase.researcher.bio}</p>
       </div>

@@ -19,7 +19,13 @@ export default function AboutPhilosophy() {
             <div key={index} className={styles.principleItem}>
               {/* Large Icon */}
               <div className={styles.iconContainer}>
-                <img src={principle.icon} alt="" className={styles.icon} />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={principle.icon}
+                  alt=""
+                  className={styles.icon}
+                />
               </div>
 
               {/* Text Content */}

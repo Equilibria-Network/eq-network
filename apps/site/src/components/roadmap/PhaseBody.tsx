@@ -54,7 +54,13 @@ function PublicationCard({ pub }: { pub: Publication }) {
                 className={styles.platformLink}
                 onClick={(e) => e.stopPropagation()}
               >
-                <img src={icon} alt={platform} className={styles.platformIcon} />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={icon}
+                  alt={platform}
+                  className={styles.platformIcon}
+                />
               </a>
             ))}
           </div>

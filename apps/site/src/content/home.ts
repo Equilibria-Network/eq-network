@@ -60,7 +60,7 @@ export const homeContent: HomeContent = {
       {
         id: 'labs',
         title: 'AI Labs',
-        image: '/img/home/audience/ai_lab.svg',
+        image: '/img/home/audience/ai_lab.webp',
         claim: 'Predict emergent behaviors before expensive deployment',
         example:
           'AI systems from many organizations will need to coordinate someday. Should they trade information like a market, vote like democracies, or try some other type of coordination mechanism? We are designing simulations to tell you which approach will work best before you spend millions building systems that end up with coordination failures.',
@@ -76,7 +76,7 @@ export const homeContent: HomeContent = {
         id: 'system-level-safety',
         title: 'System Level Safety Evaluations',
         type: 'blog post',
-        image: '/img/home/publications/system.svg',
+        image: '/img/home/publications/system.webp',
         primaryLink:
           'https://www.lesswrong.com/posts/AJo2HFT8TdY2B3wNJ/system-level-safety-evaluations',
       },
@@ -84,7 +84,7 @@ export const homeContent: HomeContent = {
         id: 'phylogeny-agents',
         title: 'A Phylogeny of Agents',
         type: 'blog post',
-        image: '/img/home/publications/philogeny.png',
+        image: '/img/home/publications/philogeny.webp',
         primaryLink: 'https://www.lesswrong.com/posts/vqfT5QCWa66gsfziB/a-phylogeny-of-agents',
       },
       {

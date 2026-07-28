@@ -8,7 +8,7 @@ export const phase3: RoadmapPhase = {
   researcher: {
     fullName: 'Stafford Beer',
     lastName: 'Beer',
-    image: '/img/roadmap/beer.svg',
+    image: '/img/roadmap/beer.webp',
     bio: 'Management cybernetician who pioneered the application of systems thinking to organizational design, creating novel governance structures based on viable system principles.',
   },
   details: {

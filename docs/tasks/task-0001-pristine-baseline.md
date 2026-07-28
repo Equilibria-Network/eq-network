@@ -84,20 +84,23 @@ Visual-identity alignment is tracked separately in
 
 ## Phase 4 — Image payload (biggest visitor-facing win: ~42 MB → target < 5 MB)
 
-_Likely a Proposed ADR: adopt `astro:assets` as the image pipeline._
-
-- [ ] **P3** Migrate `<img>` to Astro `<Image>`/`<Picture>` (format, resize, `srcset`, dimensions,
-      lazy-load in one move).
-- [ ] **P1** Re-export the multi-MB auto-traced SVGs (`philogeny.svg` 6.7 MB, `dialogue.svg`,
-      `system-level-safety-evals.svg`, roadmap philosopher SVGs) as optimized raster, or `svgo` + path
-      simplification.
-- [ ] **P2** Downscale oversized PNGs (`jonas.png` 3.4 MB @ 2018×1910, `pipeline-run.png`) to display size,
-      convert to WebP.
-- [ ] **P4** Delete the unused PNG/SVG twins (20+ pairs) — after confirming which is referenced.
-- [ ] **P5** Normalize `david-hyland.jfif` to `.jpg`/`.png`.
-- [ ] **P6** Compress or replace the 400 KB parallax `texture.jpg`.
-- [ ] Dead-asset sweep of `public/` (e.g. `socials/luma.svg`, `substack.png`) — do this _after_ dead code
-      is resolved.
+- [x] **P1** Heavy auto-traced SVGs re-exported to sized WebP (philosophy icons, ai_lab, system, roadmap
+      portraits); references updated in content files.
+- [x] **P2** Oversized PNGs downscaled to WebP (philogeny, the 4 pipeline images).
+- [x] **P5** `david-hyland.jfif` → `.jpg`; reference updated.
+- [x] **P6** Parallax `texture.jpg` 400 KB → 40 KB; `white-paper-texture.jpg` 1.1 MB → 64 KB (in place).
+- [x] Lazy-loading (`loading="lazy" decoding="async"`) added to 17 below-the-fold images.
+- [ ] **P3 (deferred follow-up)** Full `astro:assets` `<Image>`/`<Picture>` migration (srcset, dimensions,
+      build-time optimization). Likely a Proposed ADR. Not done — the above captured the bulk of the win
+      without the structural asset-import change.
+- [ ] **P4 — dead assets to delete in the final dead-code commit (~36 MB):** the now-unreferenced originals
+      replaced above, their PNG twins, and pre-existing dead assets. Confirmed zero-reference:
+      `about/philosophy/{dialogue,partner,play,bulb,rubik,test}.svg` + the `{partner,play,bulb,rubik,test}.png`
+      twins; `home/audience/ai_lab.{svg,png}`; `home/publications/{system.svg,system.png,philogeny.png,philogeny.svg,system-level-safety-evals.svg,system-level-safety-evals.webp}`;
+      `roadmap/{wiener,ostrom,beer,hume,nash}.{svg,png}` and the pre-dead `roadmap/{descartes,forrester,pareto}.{svg,png}`;
+      `lab/pipeline-{run,build,visualisations,schedule}.png`; `about/team/jonas.png`;
+      `about/advisors/david-hyland.{jfif,png}`; plus the earlier-noted `socials/{luma.svg,substack.png}`.
+      Verify zero-reference again at removal time.
 
 ## Phase 5 — Accessibility (public site; real users)
 

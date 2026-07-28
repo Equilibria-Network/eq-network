@@ -28,6 +28,8 @@ export default function AboutPartners() {
                   src={partner.logo}
                   alt={`${partner.name} logo`}
                   className={styles.partnerLogo}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
