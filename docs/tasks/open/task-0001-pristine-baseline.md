@@ -96,14 +96,11 @@ Visual-identity alignment is tracked separately in
 - [ ] **P3 (deferred follow-up)** Full `astro:assets` `<Image>`/`<Picture>` migration (srcset, dimensions,
       build-time optimization). Likely a Proposed ADR. Not done — the above captured the bulk of the win
       without the structural asset-import change.
-- [ ] **P4 — dead assets to delete in the final dead-code commit (~36 MB):** the now-unreferenced originals
-      replaced above, their PNG twins, and pre-existing dead assets. Confirmed zero-reference:
-      `about/philosophy/{dialogue,partner,play,bulb,rubik,test}.svg` + the `{partner,play,bulb,rubik,test}.png`
-      twins; `home/audience/ai_lab.{svg,png}`; `home/publications/{system.svg,system.png,philogeny.png,philogeny.svg,system-level-safety-evals.svg,system-level-safety-evals.webp}`;
-      `roadmap/{wiener,ostrom,beer,hume,nash}.{svg,png}` and the pre-dead `roadmap/{descartes,forrester,pareto}.{svg,png}`;
-      `lab/pipeline-{run,build,visualisations,schedule}.png`; `about/team/jonas.png`;
-      `about/advisors/david-hyland.{jfif,png}`; plus the earlier-noted `socials/{luma.svg,substack.png}`.
-      Verify zero-reference again at removal time.
+- [x] **P4 — dead assets removed in the final dead-code commit — DONE (~37 MB; `public/img` 42 MB → 5.2 MB).**
+      Removed via a CSS-inclusive zero-reference scan (58 image files: the WebP-conversion originals and their
+      twins, plus social icons only used by the deleted `SocialBar`) plus an inverse check that every image path
+      still referenced in `src/` resolves. **Kept deliberately:** all logo variants (brand kit for task-0008) and
+      `public/img/useful-image-stash/` (a deliberately named parking spot — flagged for the owner to decide).
 
 ## Phase 5 — Accessibility (public site; real users) — DONE
 
@@ -134,8 +131,8 @@ Visual-identity alignment is tracked separately in
 ## Phase 6 — Maintainability refactors
 
 - [ ] **M1** Collapse `ProductsExploration`/`ProductsCoordination` into one data-driven `<ProductSection>` + one CSS module (~150 lines + a whole module removed).
-- [ ] **M2/M3** Centralize social + nav + footer link data into one typed content module; delete the
-      divergent inline arrays. (After Phase 1 confirms canonical URLs.)
+- [x] **M2/M3 — done.** Nav + footer + social link data live in one typed module (`content/site.ts`, via
+      M6); the divergent inline arrays and the dead `SocialBar`/`social.ts` were removed in the dead-code commit.
 - [ ] **M8** Replace the 23× `#003b7e` literals and the ad-hoc grey ramp with tokens; add semantic tokens
       (`--text-muted`, `--border`, `--success`, `--error`). _Overlaps task-0002._
 - [ ] **M4** Extract a shared `<Section>`/`<SectionHeader>` primitive and a `.container` utility (replaces
@@ -159,7 +156,8 @@ Visual-identity alignment is tracked separately in
       dead-code commit).
 - [ ] **M7** Convert `404.astro` inline styles to a CSS module.
 - [ ] **M10** Split `content/lab.ts` (508 lines) per scenario, mirroring the roadmap content split.
-- [ ] **M11** Type `pub: any` in `PhaseBody.tsx` using the existing `Publication` type.
+- [x] **M11 — moot.** `PhaseBody.tsx` was deleted in the dead-code commit (owner decision), so its `pub: any`
+      no longer exists.
 
 ## Phase 7 — Privacy / governance (from audit-0001)
 
