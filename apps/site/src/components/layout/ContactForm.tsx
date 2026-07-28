@@ -6,19 +6,7 @@ import styles from './ContactForm.module.css';
 export default function ContactForm() {
   const c = siteContent.contact;
   const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
-  const isConfigured = Boolean(formspreeEndpoint);
   const [state, handleSubmit] = useForm(formspreeEndpoint || 'placeholder');
-
-  // Without a configured endpoint the form would post to a dead placeholder and
-  // fail silently. Show a clear notice instead of a broken-looking form.
-  if (!isConfigured) {
-    return (
-      <div className={styles.contactForm}>
-        <h2 className={styles.title}>{c.heading}</h2>
-        <p>{c.notConfigured}</p>
-      </div>
-    );
-  }
 
   if (state.succeeded) {
     return (

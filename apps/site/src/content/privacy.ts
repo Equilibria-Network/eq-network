@@ -101,6 +101,6 @@ export const privacyContent: PrivacyContent = {
   contact: {
     heading: 'Contact',
     body: 'For any privacy question or request, email us at',
-    email: 'privacy@eq-network.org',
+    email: 'contact@eq-network.org',
   },
 };

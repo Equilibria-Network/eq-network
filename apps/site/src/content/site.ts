@@ -38,7 +38,6 @@ export interface SiteContent {
   };
   contact: {
     heading: string;
-    notConfigured: string;
     successTitle: string;
     successText: string;
     fields: {
@@ -111,8 +110,6 @@ export const siteContent: SiteContent = {
   },
   contact: {
     heading: 'Contact Us',
-    notConfigured:
-      'The contact form is not configured yet. Please reach out via one of the links in the footer.',
     successTitle: 'Thank you for your message!',
     successText: "We'll get back to you soon.",
     fields: {

@@ -78,7 +78,11 @@ Visual-identity alignment is tracked separately in
 - [x] **B3** `/favicon.ico` now exists at `public/favicon.ico` (copied from `img/logo/`).
 - [x] **B4** Playground favicon points to `/favicon.ico` (avoids shipping the 518 KB logo SVG).
 - [x] **B8** `var(--color-bg …)` → `var(--bg-color …)` in `Explainer.module.css` (3 refs).
-- [x] **B6** `ContactForm` shows a notice instead of a silently-broken form when the endpoint is unset.
+- [x] **B6 — reverted (owner).** The added "not configured" guard hid the whole form when the endpoint env
+      var was absent (e.g. local dev with no `.env`). Owner confirmed the form was 100% working and must
+      always render, so the guard was removed — `ContactForm` renders unconditionally via
+      `useForm(endpoint || 'placeholder')`, matching the original. In production the `PUBLIC_FORMSPREE_ENDPOINT`
+      repo secret is injected; for local submission testing, add it to `apps/site/.env`.
 - [x] **B7** `AboutTeam` click-outside now dismisses the flipped card on any non-card click.
 - [ ] **B9** Footer year hydration nuance — left as-is (low; documented).
 - [x] **B10** `Hero.renderTextWithHighlights` now escapes regex metacharacters in the highlight term.
@@ -165,7 +169,7 @@ Visual-identity alignment is tracked separately in
       (`pages/privacy.astro` + `content/privacy.ts`), also linked from the footer. Detail:
       [`audit-0001-privacy-notice.md`](../done/audit-0001-privacy-notice.md) and
       [`task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md). **Draft** — needs owner
-      legal review + confirmation of the `privacy@eq-network.org` inbox.
+      legal review + confirmation of the `contact@eq-network.org` inbox.
 - [ ] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch.
 - [ ] **F7** (optional) Add `@astrojs/sitemap`.
 

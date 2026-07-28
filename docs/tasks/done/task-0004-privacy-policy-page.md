@@ -15,7 +15,7 @@ discloses what is collected, why, the lawful basis, the processors (GitHub Pages
 international transfers, retention, cookies (none), data-subject rights, and a privacy contact.
 
 **Still needs the owner:** (1) a legal review of the draft copy, and (2) confirmation that the privacy
-contact inbox `privacy@eq-network.org` exists and routes (or a different role inbox). Update
+contact inbox `contact@eq-network.org` exists and routes (or a different role inbox). Update
 `content/privacy.ts` when the form handler changes (task-0003).
 
 ## Problem
