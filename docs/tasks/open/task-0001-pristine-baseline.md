@@ -65,9 +65,12 @@ Visual-identity alignment is tracked separately in
       regenerated for the workspace. Landed with the workspace migration (task-0005).
 - [x] **C3** Removed the stale `@utils/*` tsconfig alias.
 - [x] **C4** Moved `@astrojs/check` to `devDependencies`.
-- [ ] **C5** Schedule an isolated dependency-upgrade pass (Astro 4→7, React 18→19, `@astrojs/react` 3→6,
-      `lucide-react` 0→1) — **after** CI reproducibility (C1) lands. Its own careful effort; likely a
-      Proposed ADR given the Astro/React major jumps.
+- [x] **C5 — done 2026-07-28.** Board-wide dependency + toolchain upgrade: Astro 4→7, React 18→19,
+      `@astrojs/react` 3→6, `@formspree/react` 2→3, `lucide-react` 0→1, TypeScript 5→6, ESLint 9→10 (+the
+      root lint/format stack), and the five GitHub Actions to their latest majors. Verified green
+      (`pnpm check` + a browser smoke test of the hydrated islands). TypeScript **7** deferred (the native
+      compiler is not yet supported by `@astrojs/check`/`typescript-eslint`). Recorded in
+      [ADR-0007](../../adr/0007-dependency-upgrade-2026-07.md).
 - [ ] Do NOT add husky / lint-staged / commitlint — wrong altitude for this project (recorded in
       CONTRIBUTING §3).
 

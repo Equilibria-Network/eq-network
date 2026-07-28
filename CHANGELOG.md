@@ -4,6 +4,35 @@ All notable changes to this site are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/). This is a continuously-deployed static site, so
 entries are dated rather than semver-tagged.
 
+## [2026-07-28] — Dependency and toolchain upgrade
+
+A board-wide version bump off the inherited majors, in verified layers.
+
+### Changed
+
+- **Astro 4 to 7**, React 18 to 19 (`@astrojs/react` 3 to 6), `@formspree/react` 2 to 3, `lucide-react`
+  0 to 1, and TypeScript 5 to 6.
+- **Root toolchain:** ESLint 9 to 10, `eslint-plugin-astro` 1 to 3, `globals` 15 to 17, and the
+  Prettier/config-prettier stack.
+- **GitHub Actions** bumped to their latest majors (`checkout` 7, `setup-node` 7,
+  `upload-pages-artifact` 5, `deploy-pages` 5, `pnpm/action-setup` 6).
+- React 19 migration touch-ups: an explicit initial value for the one bare `useRef`, and removal of the
+  now-dead `import React` from 28 component files (the automatic JSX runtime no longer needs it).
+
+### Removed
+
+- The last unreferenced image assets (`useful-image-stash/`).
+
+### Security
+
+- Clears the bulk of the outstanding dependency alerts by moving off the old majors.
+
+### Notes
+
+- TypeScript **7** (the native compiler) is deferred: `@astrojs/check` and `typescript-eslint` do not
+  support it yet. See [ADR-0007](docs/adr/0007-dependency-upgrade-2026-07.md); ADR-0006 (i18n-readiness)
+  is now Accepted.
+
 ## [2026-07-28] — Engineering baseline
 
 The first tracked entry. A cleanup pass to bring the inherited site to a clean, enforceable baseline
