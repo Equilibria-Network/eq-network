@@ -1,244 +1,161 @@
 // src/content/brand.ts
-// Copy and data for the /brand page. The page renders the brand identity FROM the
-// real design tokens and motifs, so it doubles as a living check: if the running
-// site and this page disagree, the brand has drifted. Canonical written contract:
-// apps/site/docs/context/10-visual-language.md.
+// Data for the /brand page. NOTE: this page is currently a PROTOTYPE exploration,
+// not the settled brand. It proposes one direction ("blueprint / measured") built
+// on the two cornerstones the owner endorsed: the Lorenz attractor and the hatched
+// card. We iterate on prototypes here, then settle; the settled version becomes the
+// real brand page that informs the rest of the site. Copy stays out of components
+// (ADR-0004).
+
+export interface Mark {
+  label: string; // mono annotation
+  src: string;
+  dark?: boolean; // show on a dark panel
+  note: string;
+}
 
 export interface Swatch {
   name: string;
-  hex: string;
-  token: string; // CSS custom property in variables.css / Tailwind @theme
-  utility: string; // Tailwind utility, e.g. "bg-primary"
-  onDark?: boolean; // swatch is dark enough to need light text
-  note?: string;
+  hex: string; // display value
+  token: string;
+  role: string;
+  dark?: boolean;
 }
 
-export interface LogoLockup {
+export interface TypeFace {
+  role: string; // mono tag
   name: string;
-  file: string; // path under /public
-  note: string;
-  onDark?: boolean; // preview on a dark panel instead of paper
-}
-
-export interface TypeSpecimen {
-  label: string;
-  fontClass: string; // "font-serif" | "font-sans"
+  fontClass: string;
   sample: string;
   usage: string;
 }
 
-export interface ScaleStep {
-  token: string;
-  size: string;
-  use: string;
-}
-
 export interface Motif {
+  tag: string;
   title: string;
   body: string;
 }
 
-export interface UsageRule {
-  do: string;
-  dont: string;
-}
-
 export interface BrandContent {
-  title: string;
+  prototypeNote: string;
+  eyebrow: string;
+  wordmark: string;
   tagline: string;
   intro: string;
-  hero: { src: string; alt: string; caption: string };
-  sections: {
-    logo: string;
-    colour: string;
-    type: string;
-    motifs: string;
-    usage: string;
-  };
-  logos: LogoLockup[];
-  logoNote: string;
+  system: { tag: string; equations: string[]; params: string };
+  sections: { mark: string; colour: string; type: string; motifs: string };
+  markIntro: string;
+  marks: Mark[];
   swatches: Swatch[];
   colourNote: string;
-  typeSpecimens: TypeSpecimen[];
-  typeScale: ScaleStep[];
-  weightsNote: string;
+  faces: TypeFace[];
   motifs: Motif[];
-  usage: UsageRule[];
-  contact: { heading: string; body: string; email: string };
+  closing: { title: string; body: string; email: string };
 }
 
 export const brandContent: BrandContent = {
-  title: 'Brand',
-  tagline: 'The Equilibria Network visual identity, in one place.',
+  prototypeNote:
+    'Prototype — a direction, not the brand. We are exploring, not locking in. Everything here is up for iteration.',
+  eyebrow: 'Identity / exploration',
+  wordmark: 'Equilibria',
+  tagline: 'Designing new forms of collective intelligence.',
   intro:
-    'These are the building blocks of the Equilibria Network brand — the logo, palette, type, and the ' +
-    'hand-drawn motifs that make the work recognisable. This page renders straight from the design ' +
-    'tokens, so it is also the honest reference: if something here looks off, the system has drifted.',
-  hero: {
-    src: '/img/brand/brand-hero.webp',
-    alt: 'Hand-drawn network of nodes settling into balance, in Equilibria navy.',
-    caption: 'Proposed brand illustration (generated) — the hand-drawn network-in-balance motif.',
+    'One direction for the Equilibria identity: measured and minimal, drawn like a blueprint — clear ' +
+    'lines, sharp edges, honest structure — around the two things worth keeping: the Lorenz attractor and ' +
+    'the hatched card.',
+  system: {
+    tag: 'the mark is the math',
+    equations: ['dx/dt = σ (y − x)', 'dy/dt = x (ρ − z) − y', 'dz/dt = x y − β z'],
+    params: 'σ = 10   ρ = 28   β = 8/3',
   },
   sections: {
-    logo: 'Logo',
+    mark: 'Mark',
     colour: 'Colour',
-    type: 'Typography',
-    motifs: 'Signature motifs',
-    usage: 'Usage',
+    type: 'Type',
+    motifs: 'System',
   },
-  logos: [
+  markIntro:
+    'The mark is the Lorenz attractor, regenerated from the equations as a clean single path — a few ' +
+    'orbits, not a scribble. 11 KB of SVG instead of 518 KB of hand-traced hairlines.',
+  marks: [
     {
-      name: 'Icon',
-      file: '/img/logo/logo_icon.svg',
-      note: 'The standalone mark. Use where the name is already clear.',
+      label: '01 / mark · navy',
+      src: '/img/brand/marks/lorenz-bold.svg',
+      note: 'Primary. Bold enough to hold at small sizes.',
     },
     {
-      name: 'Icon + wordmark',
-      file: '/img/logo/logo_icon_text_big.svg',
-      note: 'The primary lockup. Default for headers and covers.',
+      label: '02 / mark · reversed',
+      src: '/img/brand/marks/lorenz-white.svg',
+      dark: true,
+      note: 'On ink / dark sections.',
     },
     {
-      name: 'Icon + wordmark (compact)',
-      file: '/img/logo/logo_icon_text_small.svg',
-      note: 'The inline lockup for tight horizontal space.',
+      label: '03 / mark · line',
+      src: '/img/brand/marks/lorenz-thin.svg',
+      note: 'Lighter weight for large or quiet uses.',
     },
     {
-      name: 'Wordmark',
-      file: '/img/logo/logo_text_only.svg',
-      note: 'Type only, for contexts that already carry the icon.',
+      label: '04 / mark · accent',
+      src: '/img/brand/marks/lorenz-accent.svg',
+      note: 'Accent, used sparingly.',
     },
   ],
-  logoNote:
-    'Keep clear space around the logo equal to the height of the icon, and never redraw, recolour, ' +
-    'stretch, or add effects to it. On dark backgrounds use the mark as-is; it is built to hold navy.',
   swatches: [
     {
-      name: 'Brand navy',
+      name: 'Ink',
       hex: '#003B7E',
       token: '--color-primary',
-      utility: 'bg-primary',
-      onDark: true,
-      note: 'The brand. A 7-step ramp (--color-primary-dark … --color-primary-lightest) extends it.',
+      role: 'Text, mark, structure',
+      dark: true,
     },
-    {
-      name: 'Navy light',
-      hex: '#0047A1',
-      token: '--color-primary-light',
-      utility: 'bg-primary-light',
-      onDark: true,
-    },
-    {
-      name: 'Accent blue',
-      hex: '#4AB3F4',
-      token: '--color-accent',
-      utility: 'bg-accent',
-      note: 'Decorative and small accents only — too light for body text on white.',
-    },
-    {
-      name: 'Sky',
-      hex: '#89CFF0',
-      token: '--color-sky',
-      utility: 'bg-sky',
-      note: 'Soft fills and highlights.',
-    },
-    {
-      name: 'Ink',
-      hex: '#000000',
-      token: '--text-color',
-      utility: 'text-ink',
-      onDark: true,
-      note: 'Body text on white.',
-    },
-    {
-      name: 'Paper',
-      hex: '#FFFFFF',
-      token: '--bg-color',
-      utility: 'bg-paper',
-      note: 'The background.',
-    },
+    { name: 'Accent', hex: '#4AB3F4', token: '--color-accent', role: 'Highlights, sparingly' },
+    { name: 'Void', hex: '#0B1F3A', token: '--color-void', role: 'Dark sections', dark: true },
+    { name: 'Paper', hex: '#F6F4EC', token: '--color-paper', role: 'Ground — never flat white' },
+    { name: 'Line', hex: '#003B7E26', token: '--color-line', role: 'Hairlines + hatch (15% ink)' },
   ],
   colourNote:
-    'Quieter text is opacity on ink (0.85 muted, 0.65 quiet, 0.5 faint) — never a grey hex. Semantic ' +
-    'status colours (the explainer/lab reds, greens, oranges) are not yet ratified and should not be extended.',
-  typeSpecimens: [
+    'Restrained on purpose: ink and paper carry the page, one accent, one dark. Quieter text is opacity ' +
+    'on ink, not a grey. Texture comes from hatch and hairlines, not colour or a photo.',
+  faces: [
     {
-      label: 'Serif — Georgia',
-      fontClass: 'font-serif',
-      sample: 'Designing new forms of collective intelligence.',
-      usage:
-        'Editorial: interior-page hero titles and long-form description. Serif carries the gravitas.',
+      role: 'display',
+      name: 'Space Grotesk',
+      fontClass: 'ff-display',
+      sample: 'Equilibria',
+      usage: 'Wordmark and headings. Technical grotesk — precise, a little mechanical.',
     },
     {
-      label: 'Sans — system UI',
-      fontClass: 'font-sans',
-      sample: 'Designing new forms of collective intelligence.',
-      usage: 'Product and UI: body copy, navigation, labels, buttons.',
+      role: 'mono',
+      name: 'IBM Plex Mono',
+      fontClass: 'ff-mono',
+      sample: 'σ ρ β / 01 / DATA',
+      usage: 'Labels, annotations, coordinates, and data — the blueprint voice.',
     },
   ],
-  typeScale: [
-    { token: '--fs-hero', size: '4.5rem', use: 'Interior hero title' },
-    { token: '--fs-h1', size: '3rem', use: 'Page title' },
-    { token: '--fs-h2', size: '2.5rem', use: 'Section header' },
-    { token: '--fs-h3', size: '1.75rem', use: 'Subsection' },
-    { token: '--fs-lg', size: '1.25rem', use: 'Lead / standfirst' },
-    { token: '--fs-body', size: '1.125rem', use: 'Body (line-height 1.7)' },
-    { token: '--fs-sm', size: '0.95rem', use: 'Meta / captions' },
-    { token: '--fs-xs', size: '0.8rem', use: 'Micro-labels / badges' },
-  ],
-  weightsNote:
-    'Weights: 700 for headings and the tagline, 600 for subheads, labels, and CTAs, 500 sparingly. ' +
-    'Body sets at 1.125rem / 1.7.',
   motifs: [
     {
-      title: 'Hand-drawn roughjs visuals',
-      body: 'The differentiator. Sketchy imperfect strokes (roughness ~0.4–1.2) in navy and accent, used for the hero and the explainer/lab diagrams.',
+      tag: 'a',
+      title: 'Hairline frame + ticks',
+      body: 'Content sits on a drawn sheet: a 1px ink-15% frame with corner ticks, like a measured drawing.',
     },
     {
-      title: 'Parallax paper texture',
-      body: 'A fixed, full-viewport paper texture at ~3% opacity behind transparent content — the quiet warmth under everything.',
+      tag: 'b',
+      title: 'Diagonal hatch',
+      body: 'The texture that replaces flat white and the old photo. A fine 45° hatch in ink-6%, nothing more.',
     },
     {
-      title: 'Textured card, tilting shadow',
-      body: 'Publication and roadmap cards sit on paper texture and tilt on a soft overshoot easing when hovered.',
+      tag: 'c',
+      title: 'Hatched card',
+      body: 'The card the site already gets right, elevated: sharp edges, hatch ground, a hairline border, a mono tag.',
     },
     {
-      title: 'Section-title underline',
-      body: 'A left-aligned heading with an 80×3px navy underline. The section-header signature (used for every heading on this page).',
-    },
-    {
-      title: 'Dashed "honest hedge" badge',
-      body: 'A 1px dashed border with a muted uppercase micro-label, marking anything illustrative, in-design, or assumption-based.',
-    },
-    {
-      title: 'Two-column serif hero',
-      body: 'The interior-page hero: a 4.5rem uppercase Georgia title beside a serif description, in a 1fr / 1.2fr split.',
+      tag: 'd',
+      title: 'Annotated rule',
+      body: 'Section breaks are a full hairline with a mono label riding on it — the drawing-callout motif.',
     },
   ],
-  usage: [
-    {
-      do: 'Pull colour and type from the tokens.',
-      dont: 'Type a raw hex or rem outside the token layer.',
-    },
-    {
-      do: 'Use the section-underline heading and the shared card.',
-      dont: 'Re-invent a heading or card style per page.',
-    },
-    {
-      do: 'Mark illustrative content with the dashed hedge badge.',
-      dont: 'Present a mock-up or assumption as if it were final.',
-    },
-    {
-      do: 'Give the logo clear space and leave it navy.',
-      dont: 'Recolour, stretch, rotate, or add effects to the logo.',
-    },
-    {
-      do: 'Honour prefers-reduced-motion in any animated visual.',
-      dont: 'Ship a roughjs/canvas loop that ignores the setting.',
-    },
-  ],
-  contact: {
-    heading: 'Using the brand',
-    body: 'For partnership, press, or questions about using these assets, reach us at ',
+  closing: {
+    title: 'This is a draft',
+    body: 'React to it — keep, cut, or push further — and it becomes the next prototype. Reach us at ',
     email: 'contact@eq-network.org',
   },
 };
