@@ -40,11 +40,12 @@ Visual-identity alignment is tracked separately in
       B2 retracted. The dead `social.ts` value `equilibria.substack.com` is the stale one.
 - [x] **X/Twitter — resolved:** no X/Twitter account exists; do not add one. Remove the dead `social.ts`
       twitter reference when clearing dead code.
-- [ ] **Dead-code intent — partially resolved:** `SocialBar.tsx` + `content/social.ts` are unused and their
+- [x] **Dead-code intent — resolved:** `SocialBar.tsx` + `content/social.ts` are unused and their
       values are stale; the correct fix is one authoritative `social.ts` (canonical values above) consumed by
       the Footer, and delete the duplicate `SocialBar` — folded into task-0002 M2 (one source of truth for
-      links). **Still needs owner:** is the roadmap detailed-publications view (`PhaseBody`, dormant/commented
-      in `Roadmap.tsx`; `PhaseDetails.tsx` unused) coming back (re-enable + delete the old) or not (delete both)?
+      links). **Roadmap view — owner decided 2026-07-28: delete both.** The detailed publications-per-phase
+      view is not coming back; remove the dormant `PhaseBody` (and its commented import in `Roadmap.tsx`) and
+      the unused `PhaseDetails.tsx` in the final dead-code commit.
 - [x] **License — resolved: MIT.** `LICENSE` added (`Copyright (c) 2024-2026 Equilibria Network`).
       (Note: MIT is a software licence; the research PDFs/prose under `public/` may warrant separate terms —
       revisit if any are third-party or meant to be all-rights-reserved.)
@@ -125,7 +126,14 @@ Visual-identity alignment is tracked separately in
       23 redeclarations). _Overlaps task-0002._
 - [ ] **M9** Consolidate the ~20 one-off breakpoints into 3–4 named ones. _Overlaps task-0002._
 - [ ] **M5** Converge on one content-injection convention (orchestrator prop-drilling, as `Lab.tsx` does).
-- [ ] **M6** Move hard-coded section headings / footer tagline / `404.astro` copy into content files.
+- [ ] **M6 — expanded to a "zero hardcoded strings" sweep (i18n-readiness hygiene).** Move ALL user-facing
+      copy into `src/content/` — not just the known stragglers (section headings, footer tagline, `404.astro`),
+      but every hardcoded heading/label/CTA/nav/alt/placeholder in components, pages, and the layout.
+      Components render content; no user-facing string literal lives in code. This is good hygiene now AND the
+      cheap prerequisite that makes an eventual i18n pass a locale layer over an already-clean content tree
+      rather than a codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Proposed) and
+      [`../deferred/task-0007-i18n.md`](../deferred/task-0007-i18n.md). The i18n _runtime_ (locale routing,
+      catalogs, switcher) is explicitly NOT built now — only the externalization discipline.
 - [ ] **M7** Convert `404.astro` inline styles to a CSS module.
 - [ ] **M10** Split `content/lab.ts` (508 lines) per scenario, mirroring the roadmap content split.
 - [ ] **M11** Type `pub: any` in `PhaseBody.tsx` using the existing `Publication` type.

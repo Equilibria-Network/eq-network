@@ -124,6 +124,7 @@ document an already-shipped choice still start `Proposed` until the owner ratifi
 | 2026-07-28     | Shared design system (tokens + components + lint)           | [ADR-0003](docs/adr/0003-visual-language-system.md)            | Accepted  |
 | 2026-07-28     | Privacy deep dive before integrating a data service         | [ADR-0004](docs/adr/0004-privacy-review-before-integration.md) | Accepted  |
 | 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/) | [ADR-0005](docs/adr/0005-repo-topology.md)                     | Accepted  |
+| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred  | [ADR-0006](docs/adr/0006-i18n-readiness.md)                    | Proposed  |
 
 Dates are approximate and back-filled from repository history; the ADRs record what is known.
 
