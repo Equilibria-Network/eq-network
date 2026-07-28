@@ -103,17 +103,31 @@ Visual-identity alignment is tracked separately in
       `about/advisors/david-hyland.{jfif,png}`; plus the earlier-noted `socials/{luma.svg,substack.png}`.
       Verify zero-reference again at removal time.
 
-## Phase 5 — Accessibility (public site; real users)
+## Phase 5 — Accessibility (public site; real users) — DONE
 
-- [ ] **A1** Add an `<h1>` to home, research, explainer; fix heading order.
-- [ ] **A2** Convert click-handling `<div>`s (team/advisor/partner/research cards) to real `<button>`s.
-- [ ] **A3** Add a global `:focus-visible` style; stop stripping input outline without a replacement.
-- [ ] **A4** Gate `LorenzAttractor` + roughjs animations on `prefers-reduced-motion` and viewport visibility.
-- [ ] **A5** Make `CardModal` a real dialog (role/aria, focus trap, Escape, focus restore).
-- [ ] **A6** `aria-hidden="true"` on the decorative Lorenz `<canvas>`.
-- [ ] **A7** Darken muted grey text to meet WCAG AA (`#999`/`#bbb` currently fail).
-- [ ] **A8** Add Open Graph / Twitter / canonical meta and a skip-to-content link; wrap nav in `<header>`.
-- [ ] **B5** Add associated `<label>`s to the contact-form fields.
+- [x] **A1** Added a top-level `<h1>` to home, research, explainer (visually hidden via `.sr-only`
+      where the design has no visible page title); other pages already had one. Playground prototype's
+      internal h3-before-h2 is inside `prototypes/playground.html` (raw-injected, outside the component
+      tree) and is left for the playground's own work.
+- [x] **A2** Team flip-cards → `<button>` (with `aria-pressed`); advisor/partner cards that open a link
+      → `<a target="_blank" rel="noopener noreferrer">` (also dropped the popup-blockable `window.open`).
+      The research tech-tree cards were already real `<button>`s.
+- [x] **A3** Added a global `:focus-visible` outline in `global.css`.
+- [x] **A4** `LorenzAttractor` draws a static frame under `prefers-reduced-motion` and only animates while
+      on-screen (IntersectionObserver); `NetworkVisualization` snaps to the target layout under reduced
+      motion. `ScenarioVisual` already honoured both.
+- [x] **A5** `CardModal` is now a real dialog: `role="dialog"` + `aria-modal` + `aria-labelledby`, Escape to
+      close, focus trap, focus-in on open + restore on close, and entrance animation disabled under reduced
+      motion.
+- [x] **A6** `aria-hidden="true"` on the decorative Lorenz `<canvas>`.
+- [x] **A7** Darkened the failing `#999`/`#bbb` muted **text** (close glyph, planned/future status badges,
+      papers heading, research hint, paper-status text) to a passing grey. Left: `#666` text (already
+      passes AA), dashed `#999` **borders** (non-text hedge motif), and the `#888` "IN DESIGN" SVG stamp
+      (decorative). All remaining greys are hex pending the token migration (task-0002 M8).
+- [x] **A8** Added canonical + Open Graph + Twitter meta, a skip-to-content link, and wrapped the nav in
+      `<header>` with `<main id="main-content" tabindex="-1">`. **Follow-up:** a raster `og:image`
+      (1200x630) social card — no asset exists yet; pairs with task-0006 visual assets.
+- [x] **B5** Associated visually-hidden `<label>`s with the contact-form fields (placeholder is not a label).
 
 ## Phase 6 — Maintainability refactors
 
