@@ -49,21 +49,39 @@ presenting at least:
 - Follows the same content-in-`src/content/` discipline as the rest of the site (ADR-0004 / M6).
 - The site domain is `eq-network.org`, so the page is `eq-network.org/brand`.
 
-## v1 progress (2026-07-28)
+## Reframing (2026-07-28): prototype, not a locked brand
 
-Built as the first user of the Tailwind foundation ([ADR-0006](../../adr/0006-tailwind-design-system.md)),
-ahead of task-0002 Stage 1 (the owner wanted the brand page to lead). Present: logo lockups (with download
-links), the colour palette (hex + token + utility), the two type families and the scale, the signature
-motifs rendered **live** (a roughjs sample drawn on canvas, the tilting textured card, the dashed hedge
-badge, the section-underline heading), usage do/don't, and a generated hand-drawn hero illustration
-(`public/img/brand/brand-hero.webp`, via the image-generation skill — a **proposal** for the owner to
-accept or replace). Layout uses Tailwind utilities; motifs are the bespoke scoped-CSS layer.
+The owner's direction: **there is no identity yet — we are exploring.** The page is a surface for
+**prototypes** that reinvent and elevate the identity; we iterate, settle, and only then does it become
+the real brand page that informs the rest of the site. Do **not** catalogue the inherited look.
 
-Still open / to iterate:
+Cornerstones to keep (owner-endorsed): the **Lorenz attractor** (hero animation + the mark) and the
+**hatched card**. Aesthetic target: **hatched / sketch / blueprint / measured but minimal** — clear
+lines, sharp edges, purposeful — in the spirit of tailwindcss.com, with the structure of a clean
+institutional brand page (ref: cesia.org/brand). The background texture is **only** to avoid flat white;
+its colour/design is not endorsed (use a CSS hatch, not the green photo).
 
-- Owner review of the generated hero (keep / regenerate / commission); it can double as the `og:image`
-  social card (task-0001 A8) once cropped to 1200x630.
-- Clear-space / "don't" logo examples are described but not yet shown as diagrams.
-- Type scale is illustrative (`--fs-*` tokens are still target, not yet defined in `@theme`); it converges
-  with task-0002 Stage 1 when the tokens land.
+### Prototype v1 — "blueprint" direction (built 2026-07-28)
+
+`src/pages/brand.astro` + `src/content/brand.ts`. A measured/blueprint exploration: a drawn hairline
+sheet with corner ticks, a fine 45° diagonal hatch as the ground, mono annotations (IBM Plex Mono),
+tight display type (Space Grotesk, self-hosted via `@fontsource`), sharp edges throughout, and a
+restrained ink/accent/void/paper/line palette. Sections: mark, colour, type, system (the hatched cards).
+
+**The mark was reinvented**: regenerated from the Lorenz equations as a clean single SVG path (a few
+orbits, not a scribble) via `scripts/gen-lorenz-mark.mjs` — 11 KB each vs the old 518 KB hand-traced
+logo. Four weights in `public/img/brand/marks/` (navy / reversed-white / thin / accent).
+
+The earlier "catalogue the existing look" version and its generated hand-drawn hero were **scrapped** on
+owner feedback.
+
+### Open / to iterate (this is a draft, expect churn)
+
+- This is one direction. Iterate on the owner's reaction; other directions are on the table.
+- The Lorenz mark needs owner sign-off, then it should replace the site logo (`public/img/logo/`) and
+  favicon; currently only the `/brand` marks use it.
+- Space Grotesk / IBM Plex Mono are a **proposed** pairing (self-hosted, no CDN), swappable.
+- The rest of the site chrome (navbar/footer) is still the old look; it clashes with the prototype and
+  is redesigned later (task-0002 Stage 2) once the identity settles.
+- `og:image` social card can be derived from the mark once the direction is settled (task-0001 A8).
 - Not yet deployed (pending the push decision).
