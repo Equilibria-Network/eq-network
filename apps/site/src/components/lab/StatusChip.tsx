@@ -1,12 +1,9 @@
 // src/components/lab/StatusChip.tsx
 import React from 'react';
 import styles from './StatusChip.module.css';
-import type { ScenarioStatus } from '@content/lab';
+import { labContent, type ScenarioStatus } from '@content/lab';
 
-const STATUS_LABELS: Record<ScenarioStatus, string> = {
-  live: 'Live',
-  'in-design': 'In design',
-};
+const STATUS_LABELS = labContent.ui.statusLabels;
 
 interface StatusChipProps {
   status: ScenarioStatus;

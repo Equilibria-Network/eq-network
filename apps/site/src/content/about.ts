@@ -17,6 +17,26 @@ export interface AboutContent {
   };
 }
 
+// UI copy for the about-page section headers and card hints
+export interface AboutUi {
+  team: {
+    title: string;
+    subtitle: string;
+    flipHint: string;
+    backHint: string;
+  };
+  advisors: {
+    title: string;
+    subtitle: string;
+    visitHint: string;
+  };
+  partners: {
+    title: string;
+    subtitle: string;
+    visitLabel: string;
+  };
+}
+
 // Advisor interface (similar to TeamMember but with affiliation and no details/socials)
 export interface Advisor {
   id: string;
@@ -80,6 +100,25 @@ export const aboutContent: AboutContent = {
         icon: '/img/about/philosophy/bulb.webp',
       },
     ],
+  },
+};
+
+export const aboutUi: AboutUi = {
+  team: {
+    title: 'Team',
+    subtitle: 'The people building Equilibria Network',
+    flipHint: 'Click to read more',
+    backHint: 'Click to return',
+  },
+  advisors: {
+    title: 'Advisors',
+    subtitle: 'Expert guidance from across disciplines',
+    visitHint: 'Click to visit profile',
+  },
+  partners: {
+    title: 'Partner Organizations',
+    subtitle: 'Collaborating to advance collective intelligence',
+    visitLabel: 'Visit website →',
   },
 };
 

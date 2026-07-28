@@ -4,7 +4,7 @@ import { productsContent } from '@content/products';
 import styles from './ProductsExploration.module.css';
 
 export default function ProductsExploration() {
-  const { exploration } = productsContent;
+  const { exploration, sectionTitles } = productsContent;
 
   return (
     <section className={styles.section}>
@@ -27,22 +27,22 @@ export default function ProductsExploration() {
             <p className={styles.tagline}>{exploration.tagline}</p>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>The problem:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.problem}</h3>
               <p className={styles.subsectionText}>{exploration.sections.problem}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>What we're building:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.building}</h3>
               <p className={styles.subsectionText}>{exploration.sections.building}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>What it unlocks:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.unlocks}</h3>
               <p className={styles.subsectionText}>{exploration.sections.unlocks}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>Where we are:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.status}</h3>
               <p className={styles.subsectionText}>{exploration.sections.status}</p>
             </div>
           </div>

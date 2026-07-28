@@ -1,9 +1,11 @@
 // src/components/about/AboutTeam.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { teamMembers } from '@content/team';
+import { aboutUi } from '@content/about';
 import styles from './AboutTeam.module.css';
 
 export default function AboutTeam() {
+  const { team } = aboutUi;
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -32,8 +34,8 @@ export default function AboutTeam() {
     <section className={styles.section} ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Team</h2>
-          <p className={styles.subtitle}>The people building Equilibria Network</p>
+          <h2 className={styles.sectionTitle}>{team.title}</h2>
+          <p className={styles.subtitle}>{team.subtitle}</p>
         </div>
 
         <div className={styles.teamGrid}>
@@ -62,7 +64,7 @@ export default function AboutTeam() {
                     <h3 className={styles.memberName}>{member.name}</h3>
                     <p className={styles.memberRole}>{member.role}</p>
                     <p className={styles.memberBio}>{member.bio}</p>
-                    <p className={styles.clickHint}>Click to read more</p>
+                    <p className={styles.clickHint}>{team.flipHint}</p>
                   </div>
                 </div>
 
@@ -77,7 +79,7 @@ export default function AboutTeam() {
                         </p>
                       ))}
                     </div>
-                    <p className={styles.clickHint}>Click to return</p>
+                    <p className={styles.clickHint}>{team.backHint}</p>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import styles from './Audience.module.css';
 
 export default function Audience() {
   const { audience } = homeContent;
-  const { title, audiences } = audience;
+  const { title, exampleLabel, audiences } = audience;
 
   return (
     <section className={styles.section}>
@@ -39,7 +39,7 @@ export default function Audience() {
 
                 {/* Example Fourth */}
                 <div className={styles.cardExample}>
-                  <h4 className={styles.exampleTitle}>Example</h4>
+                  <h4 className={styles.exampleTitle}>{exampleLabel}</h4>
                   <p className={styles.exampleText}>{audienceItem.example}</p>
                 </div>
               </div>

@@ -5,6 +5,7 @@
 import React, { useState, useCallback, useRef, useLayoutEffect } from 'react';
 import CardModal from './CardModal';
 import { CARDS, ARROWS, HEADERS, PHASE_DESCRIPTIONS } from './graphData';
+import { researchContent } from '@content/research';
 import styles from './ResearchGraph.module.css';
 
 interface ArrowPath {
@@ -86,7 +87,7 @@ export default function ResearchGraph() {
       {/* ─── View 1: Overview ─── */}
       {view === 'overview' && (
         <div className={styles.overview}>
-          <p className={styles.hint}>Click a phase to explore the research areas</p>
+          <p className={styles.hint}>{researchContent.ui.overviewHint}</p>
           <div className={styles.pipeline}>
             {HEADERS.map((header, i) => (
               <React.Fragment key={i}>
@@ -104,7 +105,7 @@ export default function ResearchGraph() {
                       <span className={styles.pipelineArrowHead} />
                     </div>
                     <span className={styles.pipelineArrowLabel}>
-                      {['inspires the', 'which we test in', 'which we deploy in'][i]}
+                      {researchContent.ui.pipelineConnectors[i]}
                     </span>
                   </div>
                 )}
@@ -119,9 +120,9 @@ export default function ResearchGraph() {
         <div className={styles.detail}>
           <div className={styles.detailTop}>
             <button className={styles.backBtn} onClick={() => setView('overview')}>
-              &larr; Overview
+              {researchContent.ui.backButton}
             </button>
-            <p className={styles.hint}>Click any card for details. Hover to see connections.</p>
+            <p className={styles.hint}>{researchContent.ui.detailHint}</p>
           </div>
 
           <div className={styles.grid} ref={containerRef}>

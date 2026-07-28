@@ -76,6 +76,27 @@ export interface LabClosingLink {
   description: string;
 }
 
+/** Static UI labels rendered by the lab components (no data, just chrome). */
+export interface LabUi {
+  scenario: {
+    /** Prefix before `scenario.order`. Keep the trailing space exactly. */
+    orderPrefix: string;
+    dynamicTitle: string;
+    inTheLabTitle: string;
+    measuresTitle: string;
+    defensesTitle: string;
+    assumptionsSummary: string;
+    /** Glue between an assumption and its omission. Keep the exact spaces + em dash. */
+    omitsPrefix: string;
+  };
+  leaderboard: {
+    illustrativeBadge: string;
+    mechanismHeader: string;
+  };
+  /** Human labels for each scenario status, keyed by the status value. */
+  statusLabels: Record<ScenarioStatus, string>;
+}
+
 export interface LabContent {
   pageTitle: string;
   pageDescription: string;
@@ -116,6 +137,7 @@ export interface LabContent {
     body: string;
     links: LabClosingLink[];
   };
+  ui: LabUi;
 }
 
 export const labContent: LabContent = {
@@ -500,5 +522,25 @@ export const labContent: LabContent = {
         description: 'Researchers, mechanism designers, funders: tell us what you would test.',
       },
     ],
+  },
+
+  ui: {
+    scenario: {
+      orderPrefix: 'Scenario ',
+      dynamicTitle: 'The dynamic',
+      inTheLabTitle: 'In the Lab',
+      measuresTitle: 'What we measure',
+      defensesTitle: 'Defenses to try',
+      assumptionsSummary: 'Modelling assumptions',
+      omitsPrefix: ' — leaves out: ',
+    },
+    leaderboard: {
+      illustrativeBadge: 'Illustrative',
+      mechanismHeader: 'Mechanism',
+    },
+    statusLabels: {
+      live: 'Live',
+      'in-design': 'In design',
+    },
   },
 };

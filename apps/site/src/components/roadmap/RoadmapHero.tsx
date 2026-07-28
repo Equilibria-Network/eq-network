@@ -9,7 +9,7 @@ export default function RoadmapHero() {
       <div className={styles.container}>
         <div className={styles.heroContent}>
           <div className={styles.leftColumn}>
-            <h1 className={styles.mainTitle}>Roadmap</h1>
+            <h1 className={styles.mainTitle}>{roadmapOverview.ui.heroTitle}</h1>
             <p className={styles.tagline}>{roadmapOverview.tagline}</p>
           </div>
           <div className={styles.rightColumn}>

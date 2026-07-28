@@ -26,9 +26,32 @@ export interface Phase {
   subAreas: SubArea[];
 }
 
+/** User-facing UI copy for the research components (CardModal, ResearchGraph). */
+export interface ResearchUI {
+  /** CardModal: phase column labels, indexed by card.col. */
+  colLabels: string[];
+  /** CardModal: sub-area status → display label. */
+  statusLabels: Record<string, string>;
+  /** CardModal: publication status → display label. */
+  paperStatusLabels: Record<string, string>;
+  /** CardModal: close-button accessible label. */
+  closeLabel: string;
+  /** CardModal: heading above the working-notes list. */
+  workingNotesHeading: string;
+  /** ResearchGraph: overview-view hint. */
+  overviewHint: string;
+  /** ResearchGraph: connector labels between pipeline phases. */
+  pipelineConnectors: string[];
+  /** ResearchGraph: detail-view back button. */
+  backButton: string;
+  /** ResearchGraph: detail-view hint. */
+  detailHint: string;
+}
+
 export interface ResearchContent {
   title: string;
   subtitle: string;
+  ui: ResearchUI;
   phases: Phase[];
 }
 
@@ -36,6 +59,29 @@ export const researchContent: ResearchContent = {
   title: 'Research',
   subtitle:
     'Our pipeline from foundational questions to real-world validation — an empirical approach to institutional design.',
+
+  ui: {
+    colLabels: ['Foundations', 'Construction', 'Simulation', 'Validation'],
+    statusLabels: {
+      active: 'Active',
+      early: 'Early',
+      planned: 'Planned',
+      future: 'Future',
+    },
+    paperStatusLabels: {
+      published: 'published',
+      active: 'in progress',
+      wip: 'work in progress',
+      draft: 'work in progress',
+      concept: 'early concept',
+    },
+    closeLabel: 'Close',
+    workingNotesHeading: 'Working Notes & Early Explorations',
+    overviewHint: 'Click a phase to explore the research areas',
+    pipelineConnectors: ['inspires the', 'which we test in', 'which we deploy in'],
+    backButton: '← Overview',
+    detailHint: 'Click any card for details. Hover to see connections.',
+  },
 
   phases: [
     // ─── Phase 1: Foundation ─────────────────────────────────────

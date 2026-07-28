@@ -2,6 +2,7 @@
 // The high-level phase content: researcher, tagline, description.
 
 import React from 'react';
+import { roadmapOverview } from '@content/roadmap';
 import type { RoadmapPhase } from '@content/roadmap/types';
 import styles from './PhaseDetails.module.css';
 
@@ -27,7 +28,10 @@ export default function PhaseOverview({ phase }: Props) {
 
       <div className={styles.textSection}>
         <h2 className={styles.phaseTitle}>
-          Phase {phase.id}: {phase.researcher.lastName}
+          {roadmapOverview.ui.phaseLabelPrefix}
+          {phase.id}
+          {roadmapOverview.ui.phaseLabelSeparator}
+          {phase.researcher.lastName}
         </h2>
         <p className={styles.phaseTagline}>{phase.details.tagline}</p>
         {descriptionParagraphs.map((paragraph, index) => (

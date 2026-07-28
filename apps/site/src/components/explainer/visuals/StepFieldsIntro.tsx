@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import rough from 'roughjs';
 import { SOCIETY_NODES, SOCIETY_EDGES } from './societyLayout';
+import { explainerContent } from '@content/explainer';
 
 interface Props {
   width: number;
@@ -8,10 +9,12 @@ interface Props {
 }
 
 /** The 4 research fields as institutional blocks */
+const { fieldLabels, fieldSubtitles } = explainerContent.ui;
+
 const FIELDS = [
   {
-    label: 'Complex Systems',
-    subtitle: 'emergent behavior',
+    label: fieldLabels.complexSystems,
+    subtitle: fieldSubtitles.complexSystems,
     color: '#e67e22',
     // Positioned in quadrants
     qx: 0.25,
@@ -19,24 +22,24 @@ const FIELDS = [
     seed: 5001,
   },
   {
-    label: 'Comp. Social Science',
-    subtitle: 'institutions & norms',
+    label: fieldLabels.compSocialScience,
+    subtitle: fieldSubtitles.compSocialScience,
     color: '#3498db',
     qx: 0.75,
     qy: 0.25,
     seed: 5002,
   },
   {
-    label: 'Cooperative AI',
-    subtitle: 'joint strategies',
+    label: fieldLabels.cooperativeAI,
+    subtitle: fieldSubtitles.cooperativeAI,
     color: '#2ecc71',
     qx: 0.25,
     qy: 0.72,
     seed: 5003,
   },
   {
-    label: 'Agent Foundations',
-    subtitle: 'theoretical groundwork',
+    label: fieldLabels.agentFoundations,
+    subtitle: fieldSubtitles.agentFoundations,
     color: '#e74c3c',
     qx: 0.75,
     qy: 0.72,

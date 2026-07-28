@@ -1,7 +1,9 @@
 // src/components/lab/Leaderboard.tsx
 import React from 'react';
 import styles from './Leaderboard.module.css';
-import type { LabContent, Scenario, ScenarioId } from '@content/lab';
+import { labContent, type LabContent, type Scenario, type ScenarioId } from '@content/lab';
+
+const { leaderboard: leaderboardUi } = labContent.ui;
 
 interface LeaderboardProps {
   leaderboard: LabContent['leaderboard'];
@@ -18,7 +20,7 @@ export default function Leaderboard({ leaderboard, scenarios }: LeaderboardProps
       <div className={styles.container}>
         <h2 className={styles.title}>{leaderboard.title}</h2>
         <p className={styles.caption}>
-          <span className={styles.illustrativeBadge}>Illustrative</span>
+          <span className={styles.illustrativeBadge}>{leaderboardUi.illustrativeBadge}</span>
           {leaderboard.caption}
         </p>
 
@@ -26,7 +28,7 @@ export default function Leaderboard({ leaderboard, scenarios }: LeaderboardProps
           <table className={styles.table}>
             <thead>
               <tr>
-                <th className={styles.mechanismHeader}>Mechanism</th>
+                <th className={styles.mechanismHeader}>{leaderboardUi.mechanismHeader}</th>
                 {leaderboard.columns.map((columnId) => (
                   <th
                     key={columnId}

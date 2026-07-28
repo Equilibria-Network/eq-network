@@ -1,6 +1,12 @@
 // src/content/roadmap/overview.ts
 
 export const roadmapOverview = {
+  // User-facing UI labels for the roadmap page.
+  ui: {
+    heroTitle: 'Roadmap',
+    phaseLabelPrefix: 'Phase ',
+    phaseLabelSeparator: ': ',
+  },
   tagline:
     'Our path from understanding coordination failures to building self-sustaining infrastructure.',
   description:

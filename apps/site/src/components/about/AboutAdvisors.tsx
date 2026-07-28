@@ -1,14 +1,15 @@
 // src/components/about/AboutAdvisors.tsx
-import { advisors } from '@content/about';
+import { advisors, aboutUi } from '@content/about';
 import styles from './AboutAdvisors.module.css';
 
 export default function AboutAdvisors() {
+  const { advisors: advisorsUi } = aboutUi;
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Advisors</h2>
-          <p className={styles.subtitle}>Expert guidance from across disciplines</p>
+          <h2 className={styles.sectionTitle}>{advisorsUi.title}</h2>
+          <p className={styles.subtitle}>{advisorsUi.subtitle}</p>
         </div>
 
         <div className={styles.advisorsGrid}>
@@ -30,7 +31,7 @@ export default function AboutAdvisors() {
                   <h3 className={styles.advisorName}>{advisor.name}</h3>
                   <p className={styles.advisorAffiliation}>{advisor.affiliation}</p>
                   {advisor.bio && <p className={styles.advisorBio}>{advisor.bio}</p>}
-                  {clickable && <p className={styles.clickHint}>Click to visit profile</p>}
+                  {clickable && <p className={styles.clickHint}>{advisorsUi.visitHint}</p>}
                 </div>
               </div>
             );

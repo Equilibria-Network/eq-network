@@ -10,6 +10,7 @@ import {
   getDriftedPositions,
   type NetworkEdge,
 } from './networkLayout';
+import { explainerContent } from '@content/explainer';
 
 interface Props {
   activeStep: number;
@@ -276,7 +277,7 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
           bl.setAttribute('fill', BRIDGE_COLOR);
           bl.setAttribute('font-weight', '700');
           bl.setAttribute('font-family', 'inherit');
-          bl.textContent = 'Equilibria';
+          bl.textContent = explainerContent.ui.bridgeLabel;
           svg.appendChild(bl);
         }
       }

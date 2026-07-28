@@ -4,7 +4,7 @@ import { productsContent } from '@content/products';
 import styles from './ProductsCoordination.module.css';
 
 export default function ProductsCoordination() {
-  const { coordination } = productsContent;
+  const { coordination, sectionTitles } = productsContent;
 
   return (
     <section className={styles.section}>
@@ -27,22 +27,22 @@ export default function ProductsCoordination() {
             <p className={styles.tagline}>{coordination.tagline}</p>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>The problem:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.problem}</h3>
               <p className={styles.subsectionText}>{coordination.sections.problem}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>What we're building:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.building}</h3>
               <p className={styles.subsectionText}>{coordination.sections.building}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>What it unlocks:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.unlocks}</h3>
               <p className={styles.subsectionText}>{coordination.sections.unlocks}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>Where we are:</h3>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.status}</h3>
               <p className={styles.subsectionText}>{coordination.sections.status}</p>
             </div>
           </div>

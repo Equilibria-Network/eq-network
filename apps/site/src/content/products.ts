@@ -6,6 +6,13 @@ export interface ProductsContent {
     leftText: string;
     rightText: string;
   };
+  /** Shared subsection titles, rendered by both product sections. */
+  sectionTitles: {
+    problem: string;
+    building: string;
+    unlocks: string;
+    status: string;
+  };
   exploration: {
     title: string;
     tagline: string;
@@ -40,6 +47,13 @@ export const productsContent: ProductsContent = {
     leftText: 'Open-source tools for studying and improving how groups coordinate.',
     rightText:
       'Two projects, one foundation: coordination mechanisms can be simulated, tested, and designed—not just deployed and hoped for.',
+  },
+
+  sectionTitles: {
+    problem: 'The problem:',
+    building: "What we're building:",
+    unlocks: 'What it unlocks:',
+    status: 'Where we are:',
   },
 
   exploration: {

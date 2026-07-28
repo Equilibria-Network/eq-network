@@ -22,6 +22,25 @@ export interface ExplainerContent {
     body: string;
     links: ExplainerClosingLink[];
   };
+  /** Copy used by the explainer's visual components: the per-section labels, the
+   *  step-number prefix, the research-field block labels, and the bridge-node label. */
+  ui: {
+    sectionLabels: Record<ExplainerStep['section'], string>;
+    stepPrefix: string;
+    fieldLabels: {
+      complexSystems: string;
+      compSocialScience: string;
+      cooperativeAI: string;
+      agentFoundations: string;
+    };
+    fieldSubtitles: {
+      complexSystems: string;
+      compSocialScience: string;
+      cooperativeAI: string;
+      agentFoundations: string;
+    };
+    bridgeLabel: string;
+  };
 }
 
 export const explainerContent: ExplainerContent = {
@@ -92,5 +111,25 @@ export const explainerContent: ExplainerContent = {
         description: 'The team and our philosophy',
       },
     ],
+  },
+  ui: {
+    sectionLabels: {
+      problem: 'The Problem',
+      solution: 'The Solution',
+    },
+    stepPrefix: 'Step ',
+    fieldLabels: {
+      complexSystems: 'Complex Systems',
+      compSocialScience: 'Comp. Social Science',
+      cooperativeAI: 'Cooperative AI',
+      agentFoundations: 'Agent Foundations',
+    },
+    fieldSubtitles: {
+      complexSystems: 'emergent behavior',
+      compSocialScience: 'institutions & norms',
+      cooperativeAI: 'joint strategies',
+      agentFoundations: 'theoretical groundwork',
+    },
+    bridgeLabel: 'Equilibria',
   },
 };

@@ -3,6 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import { CARDS } from './graphData';
+import { researchContent } from '@content/research';
 import styles from './CardModal.module.css';
 
 interface Props {
@@ -10,14 +11,9 @@ interface Props {
   onClose: () => void;
 }
 
-const STATUS_LABELS: Record<string, string> = {
-  active: 'Active',
-  early: 'Early',
-  planned: 'Planned',
-  future: 'Future',
-};
+const STATUS_LABELS: Record<string, string> = researchContent.ui.statusLabels;
 
-const COL_LABELS = ['Foundations', 'Construction', 'Simulation', 'Validation'];
+const COL_LABELS = researchContent.ui.colLabels;
 
 const PAPER_STATUS_COLORS: Record<string, string> = {
   published: '#003B7E',
@@ -27,13 +23,7 @@ const PAPER_STATUS_COLORS: Record<string, string> = {
   concept: '#595959',
 };
 
-const PAPER_STATUS_LABELS: Record<string, string> = {
-  published: 'published',
-  active: 'in progress',
-  wip: 'work in progress',
-  draft: 'work in progress',
-  concept: 'early concept',
-};
+const PAPER_STATUS_LABELS: Record<string, string> = researchContent.ui.paperStatusLabels;
 
 export default function CardModal({ cardId, onClose }: Props) {
   const card = CARDS.find((c) => c.id === cardId);
@@ -90,7 +80,11 @@ export default function CardModal({ cardId, onClose }: Props) {
         tabIndex={-1}
         ref={modalRef}
       >
-        <button className={styles.close} onClick={onClose} aria-label="Close">
+        <button
+          className={styles.close}
+          onClick={onClose}
+          aria-label={researchContent.ui.closeLabel}
+        >
           &times;
         </button>
 
@@ -115,7 +109,7 @@ export default function CardModal({ cardId, onClose }: Props) {
 
         {card.papers && card.papers.length > 0 && (
           <div className={styles.papers}>
-            <h3 className={styles.papersHeading}>Working Notes & Early Explorations</h3>
+            <h3 className={styles.papersHeading}>{researchContent.ui.workingNotesHeading}</h3>
             {card.papers.map((paper, i) => (
               <div key={i} className={styles.paperRow}>
                 {paper.status && (

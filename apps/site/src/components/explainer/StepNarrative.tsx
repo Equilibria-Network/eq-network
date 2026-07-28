@@ -1,17 +1,12 @@
 import React, { forwardRef } from 'react';
 import styles from './StepNarrative.module.css';
-import type { ExplainerStep } from '@content/explainer';
+import { explainerContent, type ExplainerStep } from '@content/explainer';
 
 interface StepNarrativeProps {
   step: ExplainerStep;
   isActive: boolean;
   showSectionLabel?: boolean;
 }
-
-const SECTION_LABELS: Record<string, string> = {
-  problem: 'The Problem',
-  solution: 'The Solution',
-};
 
 const StepNarrative = forwardRef<HTMLDivElement, StepNarrativeProps>(
   ({ step, isActive, showSectionLabel = false }, ref) => (
@@ -22,10 +17,13 @@ const StepNarrative = forwardRef<HTMLDivElement, StepNarrativeProps>(
     >
       {showSectionLabel && (
         <div className={`${styles.sectionLabel} ${styles[step.section]}`}>
-          {SECTION_LABELS[step.section]}
+          {explainerContent.ui.sectionLabels[step.section]}
         </div>
       )}
-      <div className={styles.stepNumber}>Step {step.id}</div>
+      <div className={styles.stepNumber}>
+        {explainerContent.ui.stepPrefix}
+        {step.id}
+      </div>
       <h2 className={styles.headline}>{step.headline}</h2>
       <p className={styles.body}>{step.body}</p>
     </div>

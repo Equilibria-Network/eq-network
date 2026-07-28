@@ -3,7 +3,9 @@ import React from 'react';
 import styles from './ScenarioSection.module.css';
 import StatusChip from './StatusChip';
 import ScenarioVisual from './visuals/ScenarioVisual';
-import type { Scenario } from '@content/lab';
+import { labContent, type Scenario } from '@content/lab';
+
+const { scenario: scenarioUi } = labContent.ui;
 
 interface ScenarioSectionProps {
   scenario: Scenario;
@@ -21,7 +23,10 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
           <div className={styles.textColumn}>
             <div className={styles.metaRow}>
               <StatusChip status={scenario.status} />
-              <span className={styles.orderLabel}>Scenario {scenario.order}</span>
+              <span className={styles.orderLabel}>
+                {scenarioUi.orderPrefix}
+                {scenario.order}
+              </span>
             </div>
 
             <h2 className={styles.title}>{scenario.name}</h2>
@@ -39,17 +44,17 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
             <p className={styles.story}>{scenario.story}</p>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>The dynamic</h3>
+              <h3 className={styles.subsectionTitle}>{scenarioUi.dynamicTitle}</h3>
               <p className={styles.subsectionText}>{scenario.dynamic}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>In the Lab</h3>
+              <h3 className={styles.subsectionTitle}>{scenarioUi.inTheLabTitle}</h3>
               <p className={styles.subsectionText}>{scenario.example}</p>
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>What we measure</h3>
+              <h3 className={styles.subsectionTitle}>{scenarioUi.measuresTitle}</h3>
               <ul className={styles.defenseList}>
                 {scenario.measures.map((measure) => (
                   <li key={measure} className={styles.defenseItem}>
@@ -60,7 +65,7 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
             </div>
 
             <div className={styles.subsection}>
-              <h3 className={styles.subsectionTitle}>Defenses to try</h3>
+              <h3 className={styles.subsectionTitle}>{scenarioUi.defensesTitle}</h3>
               <ul className={styles.defenseList}>
                 {scenario.defenses.map((defense) => (
                   <li key={defense} className={styles.defenseItem}>
@@ -72,13 +77,18 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
 
             {scenario.assumptions && scenario.assumptions.length > 0 && (
               <details className={styles.assumptions}>
-                <summary className={styles.assumptionsSummary}>Modelling assumptions</summary>
+                <summary className={styles.assumptionsSummary}>
+                  {scenarioUi.assumptionsSummary}
+                </summary>
                 <ul className={styles.assumptionsList}>
                   {scenario.assumptions.map((a) => (
                     <li key={a.text} className={styles.assumptionsItem}>
                       {a.text}
                       {a.omits && (
-                        <span className={styles.assumptionsOmits}> — leaves out: {a.omits}</span>
+                        <span className={styles.assumptionsOmits}>
+                          {scenarioUi.omitsPrefix}
+                          {a.omits}
+                        </span>
                       )}
                     </li>
                   ))}

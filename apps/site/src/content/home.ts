@@ -8,6 +8,7 @@ export interface HomeContent {
   };
   audience: {
     title: string;
+    exampleLabel: string;
     audiences: Array<{
       id: string;
       title: string;
@@ -39,6 +40,7 @@ export const homeContent: HomeContent = {
 
   audience: {
     title: 'Who This Matters To',
+    exampleLabel: 'Example',
     audiences: [
       {
         id: 'policymakers',

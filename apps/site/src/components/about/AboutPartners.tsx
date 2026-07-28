@@ -1,14 +1,15 @@
 // src/components/about/AboutPartners.tsx
-import { partners } from '@content/about';
+import { partners, aboutUi } from '@content/about';
 import styles from './AboutPartners.module.css';
 
 export default function AboutPartners() {
+  const { partners: partnersUi } = aboutUi;
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Partner Organizations</h2>
-          <p className={styles.subtitle}>Collaborating to advance collective intelligence</p>
+          <h2 className={styles.sectionTitle}>{partnersUi.title}</h2>
+          <p className={styles.subtitle}>{partnersUi.subtitle}</p>
         </div>
 
         <div className={styles.partnersGrid}>
@@ -33,7 +34,7 @@ export default function AboutPartners() {
               <div className={styles.partnerContent}>
                 <h3 className={styles.partnerName}>{partner.name}</h3>
                 <p className={styles.partnerDescription}>{partner.description}</p>
-                <p className={styles.visitLink}>Visit website →</p>
+                <p className={styles.visitLink}>{partnersUi.visitLabel}</p>
               </div>
             </a>
           ))}
