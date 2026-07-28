@@ -23,13 +23,13 @@ The `audit-*` files below are the granular details for individual sub-items of t
 
 ## Deferred (feature work — not part of the current cleanup phase)
 
-| Task                                                                                   | From                 | Summary                                                                                               |
-| -------------------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| [audit-0001-privacy-notice](deferred/audit-0001-privacy-notice.md)                     | Audit 0001 · F1      | Tell contact-form visitors what happens to their data                                                 |
-| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                     | ADR-0002 (withdrawn) | Migrate the contact form to an EU-resident handler (owner will decide)                                |
-| [task-0004-privacy-policy-page](deferred/task-0004-privacy-policy-page.md)             | Owner request        | Write a `/privacy` page (pairs with the form work)                                                    |
-| [task-0006-visual-asset-regeneration](deferred/task-0006-visual-asset-regeneration.md) | Owner idea           | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
-| [task-0007-i18n](deferred/task-0007-i18n.md)                                           | ADR-0006             | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
+| Task                                                                                   | From            | Summary                                                                                               |
+| -------------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| [audit-0001-privacy-notice](deferred/audit-0001-privacy-notice.md)                     | Audit 0001 · F1 | Tell contact-form visitors what happens to their data                                                 |
+| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                     | Privacy stance  | EU-resident contact-form handler — a future enhancement (Formspree ships today; not a removal)        |
+| [task-0004-privacy-policy-page](deferred/task-0004-privacy-policy-page.md)             | Owner request   | Write a `/privacy` page (pairs with the form work)                                                    |
+| [task-0006-visual-asset-regeneration](deferred/task-0006-visual-asset-regeneration.md) | Owner idea      | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
+| [task-0007-i18n](deferred/task-0007-i18n.md)                                           | ADR-0006        | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
 
 ## Done
 

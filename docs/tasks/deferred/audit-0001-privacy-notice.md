@@ -1,7 +1,7 @@
 # Add a privacy notice to the contact form
 
 - Provenance: audit-0001
-- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F1), `../../adr/0002-formspree-contact-form.md`
+- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F1), `../../privacy/data-map.md`
 - Status: todo
 - Owner: unassigned
 - Priority: now

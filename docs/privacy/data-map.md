@@ -25,8 +25,9 @@ No accounts, no behavioural tracking, no location data, no special-category data
 ## Notes and open points
 
 - The house preference is self-hosted or EU-resident processing. Both current processors are US-based.
-  This is a recorded, accepted trade-off for a low-volume static site — see
-  [`../adr/0002-formspree-contact-form.md`](../adr/0002-formspree-contact-form.md).
+  This is a recorded, accepted trade-off for a low-volume static site — see `CONTRIBUTING.md` §1 (Formspree
+  is the current, endorsed handler) and the EU-migration enhancement
+  [`../tasks/deferred/task-0003-eu-form-handler.md`](../tasks/deferred/task-0003-eu-form-handler.md).
 - The site does not yet tell a visitor what happens to a contact submission. A short privacy note next to
   the form (or a linked privacy page) would close that gap. Tracked as
   [`../tasks/deferred/audit-0001-privacy-notice.md`](../tasks/deferred/audit-0001-privacy-notice.md).

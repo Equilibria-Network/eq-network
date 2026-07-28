@@ -27,7 +27,8 @@ Visual-identity alignment is tracked separately in
 
 - [x] Untrack and gitignore `.claude/settings.local.json`; harden `.gitignore` (incl. Windows entries).
 - [x] Add `AGENTS.md` + `CLAUDE.md` agent guardrails; add root `CONTRIBUTING.md`; set up `docs/`.
-- [x] Back-fill ADR-0001 (Astro static) and ADR-0002 (Formspree) — **Proposed, awaiting owner sign-off**.
+- [x] Back-fill ADR-0001 (Astro static) — **Proposed, awaiting owner sign-off**. (An ADR-0002 for Formspree
+      was drafted then removed: the form handler is an operative default recorded in `CONTRIBUTING.md`, not an ADR.)
 - [x] Two audits recorded (recon + deep-dive).
 
 ## Phase 1 — Owner confirmations (these gate other fixes)
@@ -49,7 +50,8 @@ Visual-identity alignment is tracked separately in
 - [x] **License — resolved: MIT.** `LICENSE` added (`Copyright (c) 2024-2026 Equilibria Network`).
       (Note: MIT is a software licence; the research PDFs/prose under `public/` may warrant separate terms —
       revisit if any are third-party or meant to be all-rights-reserved.)
-- [x] ADR-0001 accepted; ADR-0002 withdrawn (contact-form handler is feature work — see task-0003).
+- [x] ADR-0001 accepted. Formspree is the endorsed contact-form handler (operative default in
+      `CONTRIBUTING.md`, not an ADR); an EU-resident alternative is a deferred future enhancement (task-0003).
 
 ## Phase 2 — Tooling guardrails (cheap; stops debt re-accumulating)
 

@@ -41,8 +41,8 @@ urgent, and several items are deliberately logged as "accepted" rather than "to 
 The contact form sends a name, email, and message to Formspree (US-headquartered, Cloud Act) with no
 statement to the visitor about what happens to their data. For an organisation whose contact address sits
 in the EU, a one-line notice next to the form (or a short privacy page linked from it) is the cheap,
-correct fix. The processor choice itself is an accepted trade-off, recorded in
-[ADR-0002](../adr/0002-formspree-contact-form.md); the missing _notice_ is the gap.
+correct fix. The processor choice itself is an accepted trade-off, recorded in `CONTRIBUTING.md` §1 and
+[`../privacy/data-map.md`](../privacy/data-map.md); the missing _notice_ is the gap.
 Tracked: [`../tasks/deferred/audit-0001-privacy-notice.md`](../tasks/deferred/audit-0001-privacy-notice.md).
 
 ### F2 — CI installs without a frozen lockfile (build reproducibility) — low

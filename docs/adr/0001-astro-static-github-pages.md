@@ -22,8 +22,8 @@ every push to `main`. Serve it on the custom domain `eq-network.org` via `public
   (no server-side code, no database).
 - **Enables:** content stays in typed files under `src/content/`, editable without touching layout.
 - **Constrains:** no server-side rendering, no per-request logic, no response headers (GitHub Pages cannot
-  set them, which rules out a server-set Content-Security-Policy — see
-  [ADR-0002](0002-formspree-contact-form.md) for how the one form is handled without a backend).
+  set them, which rules out a server-set Content-Security-Policy). The one contact form is handled without a
+  backend via a third-party handler (Formspree) — see [`../privacy/data-map.md`](../privacy/data-map.md).
 - **Constrains:** dynamic behaviour must run client-side or be delegated to a third-party service.
 
 ## Amendment (2026-07-28): client-side simulation direction

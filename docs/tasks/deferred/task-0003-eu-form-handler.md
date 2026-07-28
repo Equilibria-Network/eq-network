@@ -1,16 +1,18 @@
-# Migrate the contact form to an EU-resident handler
+# Migrate the contact form to an EU-resident handler (future enhancement)
 
-- Provenance: task-0003 (reclassified from the withdrawn ADR-0002)
-- Links back to: [`../../adr/0002-formspree-contact-form.md`](../../adr/0002-formspree-contact-form.md), [`../../privacy/data-map.md`](../../privacy/data-map.md)
-- Status: deferred (feature work) — owner will pick a handler later; not part of the current cleanup phase
+- Provenance: task-0003 (house privacy stance; `CONTRIBUTING.md` §1)
+- Links back to: [`../../privacy/data-map.md`](../../privacy/data-map.md)
+- Status: deferred (future enhancement) — owner will pick a handler later; not part of the current cleanup phase
 - Owner: unassigned
-- Priority: later (feature)
+- Priority: later (enhancement)
 
 ## Problem
 
-The contact form posts name/email/message to Formspree (US-headquartered → Cloud-Act exposure). The house
-preference is self-hosted or EU-resident processing. Switch to an EU-resident (or self-hosted) form handler
-that does the same job.
+The contact form works today on **Formspree (US)** — this is the endorsed, shipping handler (see
+`CONTRIBUTING.md` §1). Formspree is US-headquartered (Cloud-Act exposure), and the house preference is
+self-hosted or EU-resident processing. This task is the **optional enhancement** of switching to an
+EU-resident (or self-hosted) handler that does the same job. It is not a removal: Formspree stays until a
+chosen replacement is live.
 
 ## Done when
 
