@@ -85,3 +85,57 @@ owner feedback.
   is redesigned later (task-0002 Stage 2) once the identity settles.
 - `og:image` social card can be derived from the mark once the direction is settled (task-0001 A8).
 - Not yet deployed (pending the push decision).
+
+## Iteration 2 (owner feedback, 2026-07-28)
+
+Several parallel prototypes were built (`/brand` = A blueprint, `/brand/b` = engineering drawing,
+`/brand/c` = cyanotype, `/brand/d` = minimal, `/brand/elements` = component options) plus a d3 graph
+study (`/brand/graph`). Owner reactions:
+
+**Locked-in likes**
+
+- **Directions A, B, D** are all liked; **C (cyanotype) rejected** ("too deeptech modern").
+- **Trunk = a combination of A + B.**
+- The **faded light-grey graph-paper look from B**, paired with measurements / dimension arrows, is a
+  core aesthetic to carry through (there will be many interactive elements). "Old-school math /
+  architecture blueprint."
+- **Research card = elements Option 2** (hatched header strip), BUT with the **existing home-page card
+  behaviour**: hover tilt + hatch background (and flip for detail if needed) — do NOT invent a new hover.
+- **Tooltip = elements Option 1** (solid, above).
+- **Hover states**: keep the site's EXISTING hover (home/about); none of the elements-page hover options.
+- The **generated hand-drawn hero was scrapped** (wrong medium); the Lorenz mark is the hero.
+
+**The mark**
+
+- Must be **symmetric** — both wings identical, "halfway between an infinity symbol and a butterfly."
+  The asymmetric Lorenz-envelope mark and its "curve" were rejected; open/never-closing loops read as
+  broken for a logo (artistic liberty is fine). Keep the **thick outer contour + thin inner** treatment.
+- New options generated (`scripts/gen-lorenz-mark.mjs`, now a symmetric cardioid pair):
+  `sym-concentric` (nested contours), `sym-noise` (jittered/organic inner), `sym-spiral` (continuous
+  inner spiral = different topology), `sym-infinity` (flatter, more infinity-like), plus reversed/accent.
+  **Awaiting owner pick** before wiring into the pages and replacing the site logo/favicon.
+
+**Graphs / interactive visuals (e.g. the thesis page)**
+
+- Owner did not like the static graph mocks; graphs are the hard case because they are **interactive and
+  must transform** to communicate the point. Decision: **programmatic, not image generation** (image-gen
+  is raster/static; only good for decorative backdrops). We are **not locked to static JS/Astro** — free
+  to use **d3** (chosen: `d3-force` + `d3-selection`/`d3-transition` + `d3-drag`) or other viz frameworks.
+  A first d3 prototype lives at `/brand/graph` (blueprint-styled society network on faint graph paper,
+  with a state-propagation transform + reheat + drag; honours reduced-motion) plus static style studies
+  (force / lattice / DAG). Think complex-systems / graph-theory aesthetics.
+- Note: the thesis page graphs "not showing" on the dev server was the recurring **Vite dep-cache 504**
+  (roughjs island fails to fetch after a dep change) — a dev-only artifact fixed by restarting the dev
+  server; the production build is clean. Restart `astro dev` after any dependency change.
+
+## Next steps (build the trunk once the mark is picked)
+
+1. Owner picks a symmetric mark option (+ any tweak to weight / inner topology).
+2. Wire the chosen mark into the pages; remove the rejected `v-*` and old `lorenz-*` / `sym-*` losers.
+3. Build the **A+B trunk**: engineering-drawing structure (title block, dimension lines, registration
+   ticks) + A's section rhythm, on true white, with the faded graph-paper grid used deliberately —
+   including **filling the side whitespace** with grid/hatch instead of leaving it empty.
+4. Adopt the chosen components: research card = option 2 + existing tilt/hatch/flip hover; tooltip = solid-above; keep the site's existing hover elsewhere.
+5. Graph visuals: build out the d3 approach for the real thesis-page transforms.
+6. Then task-0006 (regenerate every image to a sketch/hatch/blueprint variant) once the visual language
+   is locked — do it once, against a fixed style reference, so all imagery is consistent.
