@@ -1,7 +1,14 @@
 # ADR-0002: A shared design system (tokens + reusable components + a checker)
 
-- Status: Accepted (2026-07-28)
+- Status: Superseded by [ADR-0006](0006-tailwind-design-system.md) (2026-07-28)
 - Date: 2026-07-28
+
+> **Superseded.** The _concept_ below (define tokens once, assemble pages from reusable components,
+> catch drift mechanically, and keep the redesign as a separate second stage) still holds. The
+> _mechanism_ does not: this ADR proposed a bespoke CSS-Modules-plus-stylelint system and explicitly
+> ruled out Tailwind. The owner reversed that call in favour of leaning on an established framework.
+> [ADR-0006](0006-tailwind-design-system.md) adopts Tailwind v4 as the foundation and carries the
+> concept forward. Read this ADR for the _why a system at all_; read ADR-0006 for the _how_.
 
 ## The problem, in plain terms
 

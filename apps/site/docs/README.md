@@ -38,10 +38,11 @@ The shared authoring templates (ADR, task, lesson, handoff) live once at the rep
 | ADR                                                   | Decision                                                   |
 | ----------------------------------------------------- | ---------------------------------------------------------- |
 | [0001](adr/0001-astro-static-github-pages.md)         | Astro static site published to GitHub Pages                |
-| [0002](adr/0002-visual-language-system.md)            | A shared design system (tokens + components + a checker)   |
+| [0002](adr/0002-visual-language-system.md)            | A shared design system (concept) — _superseded by 0006_    |
 | [0003](adr/0003-privacy-review-before-integration.md) | Privacy-policy deep dive before integrating a data service |
 | [0004](adr/0004-i18n-readiness.md)                    | i18n readiness now, i18n runtime deferred                  |
 | [0005](adr/0005-dependency-upgrade-2026-07.md)        | Dependency and toolchain upgrade (2026-07)                 |
+| [0006](adr/0006-tailwind-design-system.md)            | Tailwind v4 as the design-system foundation                |
 
 The monorepo-topology decision that produced `apps/site` is repo-wide:
 [`../../../docs/adr/0001-monorepo-topology.md`](../../../docs/adr/0001-monorepo-topology.md).

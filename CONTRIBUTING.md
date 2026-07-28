@@ -120,14 +120,15 @@ the ADR is the record.
 agent or contributor may draft an ADR, but does not accept it on the owner's behalf. Back-filled ADRs that
 document an already-shipped choice still start `Proposed` until the owner ratifies the write-up.
 
-| Date           | Decision                                                      | ADR                                                                      | Status   |
-| -------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------ | -------- |
-| 2025 (approx.) | Migrate from Docusaurus to Astro static output                | [ADR-0001](apps/site/docs/adr/0001-astro-static-github-pages.md)         | Accepted |
-| 2026-07-28     | Shared design system (tokens + components + lint)             | [ADR-0002](apps/site/docs/adr/0002-visual-language-system.md)            | Accepted |
-| 2026-07-28     | Privacy deep dive before integrating a data service           | [ADR-0003](apps/site/docs/adr/0003-privacy-review-before-integration.md) | Accepted |
-| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/)   | [ADR-0001](docs/adr/0001-monorepo-topology.md)                           | Accepted |
-| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                    | Accepted |
-| 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)        | Accepted |
+| Date           | Decision                                                      | ADR                                                                      | Status     |
+| -------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------- |
+| 2025 (approx.) | Migrate from Docusaurus to Astro static output                | [ADR-0001](apps/site/docs/adr/0001-astro-static-github-pages.md)         | Accepted   |
+| 2026-07-28     | Shared design system (concept)                                | [ADR-0002](apps/site/docs/adr/0002-visual-language-system.md)            | Superseded |
+| 2026-07-28     | Privacy deep dive before integrating a data service           | [ADR-0003](apps/site/docs/adr/0003-privacy-review-before-integration.md) | Accepted   |
+| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/)   | [ADR-0001](docs/adr/0001-monorepo-topology.md)                           | Accepted   |
+| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                    | Accepted   |
+| 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)        | Accepted   |
+| 2026-07-28     | Tailwind v4 as the design-system foundation                   | [ADR-0006](apps/site/docs/adr/0006-tailwind-design-system.md)            | Accepted   |
 
 Dates are approximate and back-filled from repository history; the ADRs record what is known.
 
