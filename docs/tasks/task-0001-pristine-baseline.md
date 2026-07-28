@@ -57,9 +57,9 @@ Visual-identity alignment is tracked separately in
       Proposed ADR._
 - [ ] **Prettier** config + **`.editorconfig`** — end the formatting drift.
 - [ ] **CI lint/format-check step** in `deploy.yml` once the above exist.
-- [ ] **CI reproducibility (C1 + F2):** add a `packageManager` field to `package.json`, align the CI pnpm
-      version to the v9 lockfile (CI currently pins pnpm 8), and switch to `pnpm install --frozen-lockfile`.
-      Detail: [`audit-0002-frozen-lockfile.md`](audit-0002-frozen-lockfile.md).
+- [x] **CI reproducibility (C1 + F2) — done:** root `package.json` pins `packageManager: pnpm@11.17.0`;
+      CI uses `pnpm/action-setup@v4` (reads that pin) and `pnpm install --frozen-lockfile`; lockfile
+      regenerated for the workspace. Landed with the workspace migration (task-0005).
 - [ ] **C3** Remove the stale `@utils/*` tsconfig alias (and the README `utils/` mention) — no `src/utils/`.
 - [ ] **C4** Move `@astrojs/check` from `dependencies` to `devDependencies`.
 - [ ] **C5** Schedule an isolated dependency-upgrade pass (Astro 4→7, React 18→19, `@astrojs/react` 3→6,

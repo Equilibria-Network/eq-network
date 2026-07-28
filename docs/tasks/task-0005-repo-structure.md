@@ -2,9 +2,9 @@
 
 - Provenance: task-0005
 - Links back to: [`../adr/0005-repo-topology.md`](../adr/0005-repo-topology.md)
-- Status: ready — ADR-0005 accepted (Option B, pnpm-workspace monorepo); awaiting go-ahead to execute
+- Status: done (2026-07-28) — workspace established; site builds from `apps/site`
 - Owner: unassigned
-- Priority: now (this is the first structural step; other cleanup lands inside the new layout)
+- Priority: —
 
 ## Goal
 
