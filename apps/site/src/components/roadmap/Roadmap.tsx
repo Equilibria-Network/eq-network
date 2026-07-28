@@ -1,13 +1,9 @@
 // src/components/roadmap/Roadmap.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { roadmapPhases } from '@content/roadmap';
 import RoadmapHero from './RoadmapHero';
 import PhaseList from './PhaseList';
 import PhaseOverview from './PhaseOverview';
-// Rendered block is commented out below; kept pending the roadmap detailed-view
-// decision (docs/tasks/task-0001-pristine-baseline.md). Remove with that decision.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import PhaseBody from './PhaseBody';
 import ResearchGraph from '../research/ResearchGraph';
 import styles from './Roadmap.module.css';
 
@@ -34,17 +30,6 @@ export default function Roadmap() {
 
       {/* Tech Tree */}
       <ResearchGraph />
-
-      {/* Detailed Research Areas & Publications — commented out for now */}
-      {/* {currentPhase && (
-        <section className={styles.mainContentSection}>
-          <div className={styles.container}>
-            <div className={styles.bodyPanel}>
-              <PhaseBody phase={currentPhase} />
-            </div>
-          </div>
-        </section>
-      )} */}
     </div>
   );
 }
