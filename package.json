@@ -10,7 +10,8 @@
     "preview": "pnpm --filter @eq-network/site preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check": "pnpm format:check && pnpm lint && pnpm build"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
