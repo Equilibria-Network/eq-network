@@ -1,5 +1,4 @@
 // src/components/about/AboutPhilosophy.tsx
-import React from 'react';
 import { aboutContent } from '@content/about';
 import styles from './AboutPhilosophy.module.css';
 

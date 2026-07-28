@@ -1,5 +1,4 @@
 // src/components/roadmap/RoadmapHero.tsx
-import React from 'react';
 import { roadmapOverview } from '@content/roadmap';
 import styles from './RoadmapHero.module.css';
 

@@ -1,5 +1,4 @@
 // src/components/about/AboutHero.tsx
-import React from 'react';
 import { aboutContent } from '@content/about';
 import styles from './AboutHero.module.css';
 

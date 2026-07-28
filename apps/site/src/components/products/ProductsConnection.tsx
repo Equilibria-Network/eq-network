@@ -1,5 +1,4 @@
 // src/components/products/ProductsConnection.tsx
-import React from 'react';
 import { productsContent } from '@content/products';
 import styles from './ProductsConnection.module.css';
 

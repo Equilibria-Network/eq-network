@@ -1,7 +1,6 @@
 // src/components/lab/PipelineSection.tsx
 // "How the Lab works": the authoring pipeline shown through the actual
 // interface design sketches (Excalidraw exports, embedded as images).
-import React from 'react';
 import styles from './PipelineSection.module.css';
 import type { LabContent } from '@content/lab';
 

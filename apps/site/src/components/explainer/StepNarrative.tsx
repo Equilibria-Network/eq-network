@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import styles from './StepNarrative.module.css';
 import { explainerContent, type ExplainerStep } from '@content/explainer';
 

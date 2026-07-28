@@ -1,5 +1,4 @@
 // src/components/lab/LabClosing.tsx
-import React from 'react';
 import styles from './LabClosing.module.css';
 import type { LabContent } from '@content/lab';
 

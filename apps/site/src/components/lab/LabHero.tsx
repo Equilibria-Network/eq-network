@@ -1,5 +1,4 @@
 // src/components/lab/LabHero.tsx
-import React from 'react';
 import { ChevronDown, Play } from 'lucide-react';
 import styles from './LabHero.module.css';
 import type { LabContent } from '@content/lab';

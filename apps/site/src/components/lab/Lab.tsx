@@ -1,5 +1,4 @@
 // src/components/lab/Lab.tsx
-import React from 'react';
 import styles from './Lab.module.css';
 import { labContent } from '@content/lab';
 import LabHero from './LabHero';

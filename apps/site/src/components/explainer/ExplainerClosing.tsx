@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ExplainerClosing.module.css';
 import type { ExplainerContent } from '@content/explainer';
 

@@ -1,5 +1,4 @@
 // src/components/roadmap/PhaseList.tsx
-import React from 'react';
 import { roadmapPhases } from '@content/roadmap';
 import styles from './PhaseList.module.css';
 

@@ -1,7 +1,7 @@
 // src/components/lab/ReadingKey.tsx
 // Thin legend strip: teaches the animation grammar in ~5 seconds before the
 // scenario sections use it. Static roughjs glyphs, drawn once per mount.
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import rough from 'roughjs';
 import styles from './ReadingKey.module.css';
 import { labContent, type ReadingKeyGlyph } from '@content/lab';

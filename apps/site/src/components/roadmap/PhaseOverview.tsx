@@ -1,7 +1,6 @@
 // src/components/roadmap/PhaseOverview.tsx
 // The high-level phase content: researcher, tagline, description.
 
-import React from 'react';
 import { roadmapOverview } from '@content/roadmap';
 import type { RoadmapPhase } from '@content/roadmap/types';
 import styles from './PhaseDetails.module.css';

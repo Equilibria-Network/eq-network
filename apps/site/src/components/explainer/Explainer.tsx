@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import styles from './Explainer.module.css';
 import StepNarrative from './StepNarrative';
 import ExplainerClosing from './ExplainerClosing';

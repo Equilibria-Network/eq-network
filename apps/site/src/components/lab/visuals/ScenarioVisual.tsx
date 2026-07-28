@@ -4,7 +4,7 @@
 // Perf: the rAF loop only runs during the 600ms beat transitions, and the
 // whole loop pauses while the section is off-screen (all five instances mount
 // at page load per the site's client:load convention).
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import rough from 'roughjs';
 import type { Scenario } from '@content/lab';
 import type { DrawContext } from './types';

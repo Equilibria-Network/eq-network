@@ -1,5 +1,4 @@
 // src/components/lab/ScenarioSection.tsx
-import React from 'react';
 import styles from './ScenarioSection.module.css';
 import StatusChip from './StatusChip';
 import ScenarioVisual from './visuals/ScenarioVisual';

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import rough from 'roughjs';
 import { SOCIETY_NODES, SOCIETY_EDGES, COOPERATIVE_REGION, COLORS } from './societyLayout';
 

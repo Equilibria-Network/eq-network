@@ -1,4 +1,3 @@
-import React from 'react';
 import StepSocietyNetwork from './StepSocietyNetwork';
 import StepDefection from './StepDefection';
 import StepBadEquilibria from './StepBadEquilibria';

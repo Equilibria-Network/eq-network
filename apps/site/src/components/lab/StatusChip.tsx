@@ -1,5 +1,4 @@
 // src/components/lab/StatusChip.tsx
-import React from 'react';
 import styles from './StatusChip.module.css';
 import { labContent, type ScenarioStatus } from '@content/lab';
 

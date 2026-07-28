@@ -14,7 +14,7 @@ import styles from './LorenzAttractor.module.css';
 
 export default function LorenzAttractor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 

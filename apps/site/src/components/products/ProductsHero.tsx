@@ -1,5 +1,4 @@
 // src/components/products/ProductsHero.tsx
-import React from 'react';
 import { productsContent } from '@content/products';
 import styles from './ProductsHero.module.css';
 

@@ -1,5 +1,4 @@
 // src/components/home/Audience.tsx
-import React from 'react';
 import { homeContent } from '@content/home';
 import styles from './Audience.module.css';
 

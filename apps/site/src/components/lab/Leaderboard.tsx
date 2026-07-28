@@ -1,5 +1,4 @@
 // src/components/lab/Leaderboard.tsx
-import React from 'react';
 import styles from './Leaderboard.module.css';
 import { labContent, type LabContent, type Scenario, type ScenarioId } from '@content/lab';
 

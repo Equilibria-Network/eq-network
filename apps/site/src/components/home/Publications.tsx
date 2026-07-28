@@ -1,5 +1,4 @@
 // src/components/home/Publications.tsx
-import React from 'react';
 import { homeContent } from '@content/home';
 import styles from './Publications.module.css';
 
