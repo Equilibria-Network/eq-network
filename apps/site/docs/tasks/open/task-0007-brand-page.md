@@ -2,10 +2,12 @@
 
 - Provenance: task-0007 (owner request)
 - Links back to: [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
-  [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md),
+  [`../../adr/0006-tailwind-design-system.md`](../../adr/0006-tailwind-design-system.md),
+  [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md) (superseded),
   [`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md),
   [`../deferred/task-0005-visual-asset-regeneration.md`](../deferred/task-0005-visual-asset-regeneration.md)
-- Status: todo
+- Status: v1 built 2026-07-28 (`src/pages/brand.astro` + `src/content/brand.ts`, linked from the footer;
+  not yet deployed) — iterating on visual polish and the generated hero asset
 - Owner: unassigned
 - Priority: soon
 
@@ -46,3 +48,22 @@ presenting at least:
   result once that identity is defined.
 - Follows the same content-in-`src/content/` discipline as the rest of the site (ADR-0004 / M6).
 - The site domain is `eq-network.org`, so the page is `eq-network.org/brand`.
+
+## v1 progress (2026-07-28)
+
+Built as the first user of the Tailwind foundation ([ADR-0006](../../adr/0006-tailwind-design-system.md)),
+ahead of task-0002 Stage 1 (the owner wanted the brand page to lead). Present: logo lockups (with download
+links), the colour palette (hex + token + utility), the two type families and the scale, the signature
+motifs rendered **live** (a roughjs sample drawn on canvas, the tilting textured card, the dashed hedge
+badge, the section-underline heading), usage do/don't, and a generated hand-drawn hero illustration
+(`public/img/brand/brand-hero.webp`, via the image-generation skill — a **proposal** for the owner to
+accept or replace). Layout uses Tailwind utilities; motifs are the bespoke scoped-CSS layer.
+
+Still open / to iterate:
+
+- Owner review of the generated hero (keep / regenerate / commission); it can double as the `og:image`
+  social card (task-0001 A8) once cropped to 1200x630.
+- Clear-space / "don't" logo examples are described but not yet shown as diagrams.
+- Type scale is illustrative (`--fs-*` tokens are still target, not yet defined in `@theme`); it converges
+  with task-0002 Stage 1 when the tokens land.
+- Not yet deployed (pending the push decision).

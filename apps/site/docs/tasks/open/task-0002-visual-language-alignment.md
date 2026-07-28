@@ -1,12 +1,21 @@
 # Improve and align the site's UI/UX on a shared, enforceable design system
 
 - Provenance: task-0002 (umbrella)
-- Links back to: [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md) (proposed),
+- Links back to: [`../../adr/0006-tailwind-design-system.md`](../../adr/0006-tailwind-design-system.md) (foundation, accepted),
+  [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md) (concept, superseded),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
   [`../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
-- Status: proposed — awaiting owner sign-off on ADR-0002 and the per-page approach
+- Status: in progress — foundation is **Tailwind v4** ([ADR-0006](../../adr/0006-tailwind-design-system.md),
+  wired 2026-07-28); Stage 1 (migrate tokens/primitives onto it) not yet started. Per-page approach still
+  needs owner sign-off.
 - Owner: unassigned
 - Priority: soon (large)
+
+> **Mechanism update (2026-07-28):** the design-system foundation is Tailwind v4, not the bespoke
+> CSS-Modules-plus-stylelint plan described in the Stage-1 bullets below. Read those bullets for _what_
+> Stage 1 delivers (tokens defined once, shared `.u-container`/`.u-section` and `SectionHeader`/`PageHero`/
+> `Card` primitives, a lint gate); the _how_ is now Tailwind `@theme` + `@utility` + components, per
+> ADR-0006. The `/brand` page (task-0007) already dogfoods the token layer.
 
 ## Goal
 

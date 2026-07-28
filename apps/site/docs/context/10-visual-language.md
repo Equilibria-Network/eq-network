@@ -8,10 +8,13 @@ When it and the running site disagree, the site wins and this doc gets fixed. Wh
 with this doc, the page is drifting — fix the page.
 
 Status note: the tokens and primitives below are the **target** system. Much of it currently lives as
-copy-pasted CSS values rather than tokens; see [ADR-0002](../adr/0002-visual-language-system.md) (proposed)
-and [`../tasks/open/task-0002-visual-language-alignment.md`](../tasks/open/task-0002-visual-language-alignment.md)
-for the migration. Where a token name below does not yet exist in `apps/site/src/styles/variables.css`, it is
-proposed, not current.
+copy-pasted CSS values rather than tokens; the foundation is now Tailwind v4
+([ADR-0006](../adr/0006-tailwind-design-system.md), superseding the bespoke plan in
+[ADR-0002](../adr/0002-visual-language-system.md)), with the migration tracked in
+[`../tasks/open/task-0002-visual-language-alignment.md`](../tasks/open/task-0002-visual-language-alignment.md).
+The `/brand` page (`src/pages/brand.astro`) renders these tokens and motifs live and is the working
+reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css` (`@theme`) or
+`variables.css`, it is proposed, not current.
 
 ## Colour
 
@@ -71,5 +74,5 @@ proposed, not current.
 - [ ] Breakpoints come from the named set.
 - [ ] New interactive/animated visuals honour `prefers-reduced-motion`.
 
-Enforcement (stylelint rules that will fail CI on violation) is described in
-[ADR-0002](../adr/0002-visual-language-system.md).
+Enforcement (a lint gate that fails CI when a raw value is used instead of a token) is planned as part
+of the Tailwind migration in [ADR-0006](../adr/0006-tailwind-design-system.md) and task-0002 Stage 1.
