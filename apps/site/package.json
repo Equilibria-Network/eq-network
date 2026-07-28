@@ -16,6 +16,10 @@
     "@formspree/react": "^3.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.4",
+    "d3-drag": "^3.0.0",
+    "d3-force": "^3.0.0",
+    "d3-selection": "^3.0.0",
+    "d3-transition": "^3.0.1",
     "lucide-react": "^1.27.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -24,6 +28,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@types/d3-drag": "^3.0.7",
+    "@types/d3-force": "^3.0.10",
+    "@types/d3-selection": "^3.0.11",
+    "@types/d3-transition": "^3.0.9",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "typescript": "^6.0.3"
