@@ -22,6 +22,14 @@ const b = brandContent;
   <div class="bp">
     <!-- prototype banner -->
     <div class="proto-banner ff-mono">{b.prototypeNote}</div>
+    <nav class="proto-switch ff-mono">
+      <span>proto /</span>
+      <a href="/brand" aria-current="page">A · blueprint</a>
+      <a href="/brand/b">B · engineering</a>
+      <a href="/brand/c">C · cyanotype</a>
+      <a href="/brand/d">D · minimal</a>
+      <a href="/brand/elements">elements</a>
+    </nav>
 
     <div class="sheet">
       <!-- Hero -->
@@ -30,7 +38,7 @@ const b = brandContent;
         <div class="hero-grid">
           <div class="hero-mark">
             <img
-              src="/img/brand/marks/lorenz-bold.svg"
+              src="/img/brand/marks/v-contour.svg"
               alt="Equilibria Lorenz mark"
               width="200"
               height="200"
@@ -144,7 +152,7 @@ const b = brandContent;
       --ink: #003b7e;
       --accent: #4ab3f4;
       --void: #0b1f3a;
-      --paper: #f6f4ec;
+      --paper: #ffffff;
       --line: rgba(0, 59, 126, 0.16);
       --hatch: rgba(0, 59, 126, 0.06);
       background: var(--paper);
@@ -165,6 +173,33 @@ const b = brandContent;
       text-align: center;
       padding: 0.55rem 1rem;
     }
+    .proto-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.72rem;
+      background: #fff;
+    }
+    .proto-switch span {
+      opacity: 0.5;
+    }
+    .proto-switch a {
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .proto-switch a:hover {
+      opacity: 1;
+    }
+    .proto-switch a[aria-current='page'] {
+      opacity: 1;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+    }
 
     /* The drawn sheet: hatched ground + hairline frame with corner ticks */
     .sheet {
@@ -172,13 +207,7 @@ const b = brandContent;
       max-width: 1120px;
       margin: 0 auto;
       padding: 4.5rem 3.5rem 5rem;
-      background-image: repeating-linear-gradient(
-        45deg,
-        var(--hatch) 0,
-        var(--hatch) 1px,
-        transparent 1px,
-        transparent 8px
-      );
+      background: var(--paper);
     }
     .sheet::before {
       content: '';

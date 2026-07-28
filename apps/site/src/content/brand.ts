@@ -74,28 +74,29 @@ export const brandContent: BrandContent = {
     motifs: 'System',
   },
   markIntro:
-    'The mark is the Lorenz attractor, regenerated from the equations as a clean single path — a few ' +
-    'orbits, not a scribble. 11 KB of SVG instead of 518 KB of hand-traced hairlines.',
+    'The mark is the Lorenz attractor, taken as closed contours — a thick outer loop with a few nested ' +
+    'inner rings for fill. Clean vector paths regenerated from the equations, a fraction of the old 518 KB ' +
+    'hand-traced logo.',
   marks: [
     {
       label: '01 / mark · navy',
-      src: '/img/brand/marks/lorenz-bold.svg',
+      src: '/img/brand/marks/v-contour.svg',
       note: 'Primary. Bold enough to hold at small sizes.',
     },
     {
       label: '02 / mark · reversed',
-      src: '/img/brand/marks/lorenz-white.svg',
+      src: '/img/brand/marks/v-contour-white.svg',
       dark: true,
       note: 'On ink / dark sections.',
     },
     {
       label: '03 / mark · line',
-      src: '/img/brand/marks/lorenz-thin.svg',
+      src: '/img/brand/marks/v-duo.svg',
       note: 'Lighter weight for large or quiet uses.',
     },
     {
       label: '04 / mark · accent',
-      src: '/img/brand/marks/lorenz-accent.svg',
+      src: '/img/brand/marks/v-contour-accent.svg',
       note: 'Accent, used sparingly.',
     },
   ],
@@ -109,7 +110,7 @@ export const brandContent: BrandContent = {
     },
     { name: 'Accent', hex: '#4AB3F4', token: '--color-accent', role: 'Highlights, sparingly' },
     { name: 'Void', hex: '#0B1F3A', token: '--color-void', role: 'Dark sections', dark: true },
-    { name: 'Paper', hex: '#F6F4EC', token: '--color-paper', role: 'Ground — never flat white' },
+    { name: 'Paper', hex: '#FFFFFF', token: '--color-paper', role: 'Ground — clean white' },
     { name: 'Line', hex: '#003B7E26', token: '--color-line', role: 'Hairlines + hatch (15% ink)' },
   ],
   colourNote:
