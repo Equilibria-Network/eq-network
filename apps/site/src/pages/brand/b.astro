@@ -1,0 +1,738 @@
+---
+// src/pages/brand/b.astro
+// PROTOTYPE brand exploration — direction "B / engineering drawing". Not the
+// settled brand. The page is staged like an old engineering / architectural
+// drawing sheet: a fine graph-paper grid in a few framed panels, dimension
+// lines with end-ticks and mono measurement labels, crosshair registration
+// marks, and a corner title block. Mostly clean white. Self-contained: inline
+// content + scoped <style> only; no shared files touched.
+import Layout from '@/layouts/Layout.astro';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+
+const swatches = [
+  { hex: '#003B7E', name: 'Ink / Navy', role: 'primary' },
+  { hex: '#4AB3F4', name: 'Accent', role: 'signal' },
+  { hex: '#0B1F3A', name: 'Dark', role: 'ground' },
+  { hex: '#FFFFFF', name: 'Paper', role: 'field' },
+];
+---
+
+<Layout
+  title="Brand B (prototype) - Equilibria Network"
+  description="Prototype identity exploration, direction B: the Equilibria system staged as a measured engineering drawing sheet, built on the Lorenz mark and a hatched card motif."
+>
+  <div class="sheet-wrap">
+    <!-- prototype switcher -->
+    <nav class="proto-switch ff-mono">
+      <span>proto /</span>
+      <a href="/brand">A</a>
+      <a href="/brand/b" aria-current="page">B</a>
+      <a href="/brand/c">C</a>
+      <a href="/brand/d">D</a>
+      <a href="/brand/elements">elements</a>
+    </nav>
+
+    <div class="drawing">
+      <!-- sheet border + corner registration marks -->
+      <span class="reg reg-tl" aria-hidden="true"></span>
+      <span class="reg reg-tr" aria-hidden="true"></span>
+      <span class="reg reg-bl" aria-hidden="true"></span>
+      <span class="reg reg-br" aria-hidden="true"></span>
+
+      <!-- header strip -->
+      <header class="head">
+        <span class="ff-mono head-ref">DWG&nbsp;/&nbsp;EQ-B</span>
+        <span class="ff-mono head-note">IDENTITY EXPLORATION — SHEET B — NOT FINAL</span>
+        <span class="ff-mono head-ref">REV&nbsp;A</span>
+      </header>
+
+      <!-- ============ MARK: centerpiece with dimension annotations ============ -->
+      <section class="block">
+        <div class="rule ff-mono"><span>01 — mark / contour</span></div>
+
+        <div class="mark-stage">
+          <!-- vertical dimension, left of the panel -->
+          <div class="dim-v" aria-hidden="true"><span class="ff-mono">96</span></div>
+
+          <div class="grid-panel mark-panel">
+            <span class="ch ch-tl" aria-hidden="true"></span>
+            <span class="ch ch-tr" aria-hidden="true"></span>
+            <span class="ch ch-bl" aria-hidden="true"></span>
+            <span class="ch ch-br" aria-hidden="true"></span>
+
+            <span class="ff-mono panel-id">FIG.01</span>
+            <img
+              class="mark-img"
+              src="/img/brand/marks/v-contour.svg"
+              alt="Equilibria contour mark — Lorenz attractor, thick outer and thin inner rings"
+              width="240"
+              height="240"
+            />
+            <span class="ff-mono radius-tag">R&nbsp;=&nbsp;110</span>
+          </div>
+
+          <!-- horizontal dimension, below the panel -->
+          <div class="dim-h" aria-hidden="true"><span class="ff-mono">96</span></div>
+          <p class="mark-caption ff-mono">
+            contour mark · thick outer + thin inner rings · nom. Ø 96 units
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ WORDMARK + tagline ============ -->
+      <section class="block">
+        <div class="rule ff-mono"><span>02 — wordmark</span></div>
+        <div class="wordmark-row">
+          <img
+            class="lockup-mark"
+            src="/img/brand/marks/v-duo.svg"
+            alt="Equilibria mark, minimal"
+            width="96"
+            height="96"
+          />
+          <div>
+            <h1 class="ff-display wordmark">Equilibria</h1>
+            <p class="ff-display tagline">Designing new forms of collective intelligence.</p>
+          </div>
+        </div>
+        <div class="baseline ff-mono" aria-hidden="true">
+          <span class="tick"></span>baseline<span class="dots"></span>x-height +0<span
+            class="tick tick-r"></span>
+        </div>
+      </section>
+
+      <!-- ============ COLOUR row ============ -->
+      <section class="block">
+        <div class="rule ff-mono"><span>03 — colour / spec</span></div>
+        <div class="swatch-row">
+          {
+            swatches.map((s) => (
+              <figure class="swatch">
+                <div
+                  class={`chip ${s.hex === '#FFFFFF' ? 'chip-paper' : ''}`}
+                  style={`background:${s.hex}`}
+                />
+                <figcaption class="ff-mono">
+                  <span class="swatch-hex">{s.hex}</span>
+                  <span class="swatch-name">{s.name}</span>
+                  <span class="swatch-role">{s.role}</span>
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- ============ TYPE specimen ============ -->
+      <section class="block">
+        <div class="rule ff-mono"><span>04 — type / specimen</span></div>
+        <div class="type-grid">
+          <div class="face">
+            <span class="ff-mono face-role">[ display ] Space Grotesk · 400/500/700</span>
+            <p class="ff-display face-sample">Aa Ee Rr 01</p>
+            <p class="ff-mono face-usage">headings · wordmark · display</p>
+          </div>
+          <div class="face">
+            <span class="ff-mono face-role">[ mono ] IBM Plex Mono · 400/500</span>
+            <p class="ff-mono face-sample">Aa Ee Rr 01</p>
+            <p class="ff-mono face-usage">labels · annotation · data · dimensions</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ HATCHED CARD motif ============ -->
+      <section class="block">
+        <div class="rule ff-mono"><span>05 — motif / hatched card</span></div>
+        <div class="card-row">
+          <div class="hatched-card">
+            <span class="ff-mono card-tag">DET.A</span>
+            <strong class="ff-display card-title">Hatched card</strong>
+            <p class="card-body">
+              A sharp-edged panel filled with 45&deg; hatch, drawn from the ink at low opacity. Used
+              to give one region weight — a called-out detail on an otherwise clean sheet.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TITLE BLOCK (corner of the drawing sheet) ============ -->
+      <div class="title-block ff-mono">
+        <div class="tb-cell tb-wide">
+          <span class="tb-key">project</span>
+          <span class="tb-val">Equilibria Network — Identity</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-key">scale</span>
+          <span class="tb-val">1 : 1</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-key">units</span>
+          <span class="tb-val">grid = 8</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-key">drawn</span>
+          <span class="tb-val">EQ</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-key">sheet</span>
+          <span class="tb-val">B / 04</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-key">rev</span>
+          <span class="tb-val tb-accent">A</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ============ direction B — engineering drawing ============ */
+    .sheet-wrap {
+      --ink: #003b7e;
+      --accent: #4ab3f4;
+      --dark: #0b1f3a;
+      --line: rgba(0, 59, 126, 0.15);
+      --hatch: rgba(0, 59, 126, 0.07);
+      --grid-fine: rgba(0, 59, 126, 0.055);
+      --grid-major: rgba(0, 59, 126, 0.12);
+      background: #ffffff;
+      color: var(--ink);
+      padding: 1.5rem;
+    }
+    .ff-display {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+    .ff-mono {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
+    /* prototype switcher */
+    .proto-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      max-width: 1120px;
+      margin: 0 auto 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .proto-switch span {
+      opacity: 0.55;
+    }
+    .proto-switch a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--line);
+      opacity: 0.7;
+    }
+    .proto-switch a[aria-current='page'] {
+      opacity: 1;
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    /* the drawing sheet */
+    .drawing {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      border: 1px solid var(--ink);
+      padding: 3.25rem 3rem 4.5rem;
+      background: #ffffff;
+    }
+
+    /* corner registration crosshairs on the sheet */
+    .reg {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+    .reg::before,
+    .reg::after {
+      content: '';
+      position: absolute;
+      background: var(--ink);
+      opacity: 0.55;
+    }
+    .reg::before {
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      transform: translateX(-0.5px);
+    }
+    .reg::after {
+      top: 50%;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      transform: translateY(-0.5px);
+    }
+    .reg-tl {
+      left: 10px;
+      top: 10px;
+    }
+    .reg-tr {
+      right: 10px;
+      top: 10px;
+    }
+    .reg-bl {
+      left: 10px;
+      bottom: 10px;
+    }
+    .reg-br {
+      right: 10px;
+      bottom: 10px;
+    }
+
+    /* header strip */
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.85rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+    .head-ref {
+      color: var(--ink);
+    }
+    .head-note {
+      opacity: 0.55;
+      text-align: center;
+    }
+
+    /* section rule */
+    .rule {
+      position: relative;
+      border-top: 1px solid var(--ink);
+      margin: 0 0 1.75rem;
+    }
+    .rule span {
+      position: absolute;
+      top: -0.72rem;
+      left: 0;
+      background: #ffffff;
+      padding-right: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .block {
+      margin-bottom: 3.5rem;
+    }
+
+    /* graph-paper grid ground (used only inside framed panels) */
+    .grid-panel {
+      position: relative;
+      border: 1px solid var(--line);
+      background-color: #ffffff;
+      background-image:
+        linear-gradient(var(--grid-fine) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-fine) 1px, transparent 1px),
+        linear-gradient(var(--grid-major) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+      background-size:
+        8px 8px,
+        8px 8px,
+        40px 40px,
+        40px 40px;
+    }
+    /* small crosshair ticks at panel corners */
+    .ch {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      pointer-events: none;
+    }
+    .ch::before,
+    .ch::after {
+      content: '';
+      position: absolute;
+      background: var(--ink);
+    }
+    .ch::before {
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+    }
+    .ch::after {
+      top: 50%;
+      left: 0;
+      height: 1px;
+      width: 100%;
+    }
+    .ch-tl {
+      left: 6px;
+      top: 6px;
+    }
+    .ch-tr {
+      right: 6px;
+      top: 6px;
+    }
+    .ch-bl {
+      left: 6px;
+      bottom: 6px;
+    }
+    .ch-br {
+      right: 6px;
+      bottom: 6px;
+    }
+
+    /* mark stage + dimension lines */
+    .mark-stage {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 360px);
+      grid-template-rows: auto auto auto;
+      gap: 0 0.75rem;
+      justify-content: start;
+      align-items: stretch;
+    }
+    .mark-panel {
+      grid-column: 2;
+      grid-row: 1;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .panel-id {
+      position: absolute;
+      top: 0.6rem;
+      left: 0.7rem;
+      font-size: 0.68rem;
+      opacity: 0.55;
+    }
+    .radius-tag {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.7rem;
+      font-size: 0.68rem;
+      color: var(--accent);
+    }
+    .mark-img {
+      width: 66%;
+      height: auto;
+    }
+
+    /* horizontal dimension: line + end ticks + centered label */
+    .dim-h {
+      position: relative;
+      grid-column: 2;
+      grid-row: 2;
+      height: 1px;
+      background: var(--ink);
+      margin-top: 1.4rem;
+    }
+    .dim-h::before,
+    .dim-h::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      width: 1px;
+      height: 11px;
+      background: var(--ink);
+    }
+    .dim-h::before {
+      left: 0;
+    }
+    .dim-h::after {
+      right: 0;
+    }
+    .dim-h span {
+      position: absolute;
+      top: -0.72rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      padding: 0 0.45rem;
+      font-size: 0.72rem;
+      color: var(--ink);
+    }
+
+    /* vertical dimension: line + end ticks + rotated label */
+    .dim-v {
+      position: relative;
+      grid-column: 1;
+      grid-row: 1;
+      width: 1px;
+      background: var(--ink);
+      justify-self: end;
+      margin-right: 0.2rem;
+    }
+    .dim-v::before,
+    .dim-v::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      height: 1px;
+      width: 11px;
+      background: var(--ink);
+    }
+    .dim-v::before {
+      top: 0;
+    }
+    .dim-v::after {
+      bottom: 0;
+    }
+    .dim-v span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      background: #ffffff;
+      padding: 0 0.45rem;
+      font-size: 0.72rem;
+      color: var(--ink);
+    }
+
+    .mark-caption {
+      grid-column: 2;
+      grid-row: 3;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      opacity: 0.6;
+      line-height: 1.5;
+    }
+
+    /* wordmark */
+    .wordmark-row {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    .lockup-mark {
+      width: 84px;
+      height: auto;
+      flex: none;
+    }
+    .wordmark {
+      font-size: clamp(2.75rem, 7vw, 4.75rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .tagline {
+      font-size: clamp(1rem, 2.2vw, 1.45rem);
+      font-weight: 500;
+      margin-top: 0.55rem;
+      opacity: 0.9;
+    }
+    /* annotated baseline under the wordmark */
+    .baseline {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      opacity: 0.55;
+      border-top: 1px solid var(--line);
+      padding-top: 0.55rem;
+    }
+    .baseline .tick {
+      width: 1px;
+      height: 10px;
+      background: var(--ink);
+    }
+    .baseline .dots {
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--ink) 0,
+        var(--ink) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+      opacity: 0.6;
+    }
+
+    /* colour row */
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .swatch {
+      border: 1px solid var(--line);
+    }
+    .chip {
+      height: 96px;
+    }
+    .chip-paper {
+      background-image:
+        linear-gradient(45deg, var(--line) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--line) 25%, transparent 25%);
+      background-size: 10px 10px;
+      background-position:
+        0 0,
+        5px 5px;
+      background-color: #fff !important;
+      background-repeat: repeat;
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+    .swatch figcaption {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.7rem 0.8rem 0.85rem;
+      border-top: 1px solid var(--line);
+    }
+    .swatch-hex {
+      font-size: 0.78rem;
+      color: var(--ink);
+    }
+    .swatch-name {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+    .swatch-role {
+      font-size: 0.7rem;
+      opacity: 0.55;
+    }
+
+    /* type specimen */
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .face {
+      border-left: 1px solid var(--ink);
+      padding-left: 1.15rem;
+    }
+    .face-role {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      opacity: 0.6;
+    }
+    .face-sample {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      margin: 0.4rem 0 0.5rem;
+      color: var(--ink);
+    }
+    .face-usage {
+      font-size: 0.72rem;
+      opacity: 0.6;
+    }
+
+    /* hatched card */
+    .card-row {
+      display: grid;
+      grid-template-columns: minmax(0, 460px);
+    }
+    .hatched-card {
+      position: relative;
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.5rem 1.6rem;
+      background-color: #ffffff;
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--hatch) 0,
+        var(--hatch) 1px,
+        transparent 1px,
+        transparent 7px
+      );
+    }
+    .card-tag {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.9rem;
+      font-size: 0.7rem;
+      opacity: 0.5;
+    }
+    .card-title {
+      display: block;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .card-body {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--dark);
+      opacity: 0.82;
+      max-width: 42ch;
+    }
+
+    /* title block, bottom-right of the sheet */
+    .title-block {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border: 1px solid var(--ink);
+      margin-top: 3.5rem;
+      font-size: 0.7rem;
+    }
+    .tb-cell {
+      border-right: 1px solid var(--line);
+      padding: 0.55rem 0.7rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .tb-cell:last-child {
+      border-right: 0;
+    }
+    .tb-wide {
+      grid-column: span 2;
+    }
+    .tb-key {
+      opacity: 0.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.62rem;
+    }
+    .tb-val {
+      color: var(--ink);
+    }
+    .tb-accent {
+      color: var(--accent);
+    }
+
+    @media (max-width: 820px) {
+      .drawing {
+        padding: 2.75rem 1.4rem 3.5rem;
+      }
+      .mark-stage {
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+      }
+      .wordmark-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .swatch-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .type-grid {
+        grid-template-columns: 1fr;
+      }
+      .title-block {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tb-wide {
+        grid-column: span 2;
+      }
+      .tb-cell {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+  </style>
+</Layout>

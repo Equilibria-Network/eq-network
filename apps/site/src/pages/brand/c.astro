@@ -1,0 +1,508 @@
+---
+// src/pages/brand/c.astro
+// PROTOTYPE brand exploration C — the "cyanotype / dark blueprint" direction.
+// A deep navy-to-near-black ground with the white Lorenz mark as centerpiece,
+// hairline frame, corner ticks, and light-blue data drawn like an inverted
+// blueprint. Fully self-contained: inline content plus scoped CSS. Not final.
+import Layout from '@/layouts/Layout.astro';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+
+const swatches = [
+  { hex: '#081726', name: 'Abyss', role: 'Primary ground' },
+  { hex: '#0B1F3A', name: 'Deep', role: 'Panel ground' },
+  { hex: '#003B7E', name: 'Navy', role: 'Structure' },
+  { hex: '#4AB3F4', name: 'Cyan', role: 'Accent / light' },
+  { hex: '#FFFFFF', name: 'Chalk', role: 'Ink on dark' },
+];
+
+const faces = [
+  {
+    role: 'display',
+    name: 'Space Grotesk',
+    cls: 'ff-display',
+    sample: 'Equilibria',
+    usage:
+      'Wordmark, headlines and large statements. Tight tracking, drawn in chalk-white on the blueprint ground.',
+  },
+  {
+    role: 'mono',
+    name: 'IBM Plex Mono',
+    cls: 'ff-mono',
+    sample: 'x = sigma (y - x)',
+    usage:
+      'Labels, coordinates, equations and captions. The measured voice annotating the drawing in light cyan.',
+  },
+];
+
+const motifs = [
+  {
+    tag: '01 / exposure',
+    title: 'Inverted ground',
+    body: 'The cyanotype reverses the page: structure is drawn in light on a dark exposure. White carries the form, cyan carries the reading.',
+  },
+  {
+    tag: '02 / attractor',
+    title: 'A system, not a logo',
+    body: 'The Lorenz attractor is the mark. Two orbits that never repeat yet never diverge: equilibrium held in motion, not at rest.',
+  },
+];
+---
+
+<Layout
+  title="Brand C (prototype) - Equilibria Network"
+  description="A prototype exploration of the Equilibria Network identity: a dark cyanotype blueprint with the white Lorenz mark, hairlines and light-on-dark data."
+>
+  <div class="cyano">
+    <div class="proto-banner ff-mono">
+      prototype exploration C / cyanotype (dark blueprint) — not the settled brand
+    </div>
+
+    <nav class="proto-switch ff-mono">
+      <span>proto /</span>
+      <a href="/brand">A</a>
+      <a href="/brand/b">B</a>
+      <a href="/brand/c" aria-current="page">C</a>
+      <a href="/brand/d">D</a>
+      <a href="/brand/elements">elements</a>
+    </nav>
+
+    <div class="sheet">
+      <!-- Hero -->
+      <header class="hero">
+        <div class="corner-coords ff-mono">
+          <span>N 41.9 / E 12.5</span>
+          <span>rho 28 &middot; sigma 10 &middot; beta 8/3</span>
+        </div>
+
+        <span class="tag ff-mono">cyanotype // blueprint no.3</span>
+
+        <div class="mark-stage">
+          <img
+            class="mark-glow"
+            src="/img/brand/marks/v-contour-white.svg"
+            alt="Equilibria Lorenz mark, drawn in white"
+            width="360"
+            height="360"
+          />
+        </div>
+
+        <h1 class="ff-display wordmark">Equilibria</h1>
+        <p class="ff-display tagline">Designing new forms of collective intelligence.</p>
+
+        <div class="system ff-mono">
+          <span class="system-tag">// lorenz system</span>
+          <span>x&#775; = &sigma;(y &minus; x)</span>
+          <span>y&#775; = x(&rho; &minus; z) &minus; y</span>
+          <span>z&#775; = xy &minus; &beta;z</span>
+        </div>
+      </header>
+
+      <!-- Colour -->
+      <section>
+        <div class="rule ff-mono"><span>colour / light on dark</span></div>
+        <div class="swatch-grid">
+          {
+            swatches.map((s) => (
+              <div class="swatch">
+                <div
+                  class="chip"
+                  style={`background:${s.hex};${s.hex === '#FFFFFF' ? 'box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25);' : ''}`}
+                />
+                <div class="swatch-meta ff-mono">
+                  <span class="swatch-hex">{s.hex}</span>
+                  <span class="swatch-name">{s.name}</span>
+                  <span class="swatch-role">{s.role}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Type -->
+      <section>
+        <div class="rule ff-mono"><span>type / specimen</span></div>
+        <div class="type-stack">
+          {
+            faces.map((f) => (
+              <div class="face">
+                <span class="ff-mono face-role">
+                  [ {f.role} ] {f.name}
+                </span>
+                <p class={`${f.cls} face-sample`}>{f.sample}</p>
+                <p class="face-usage">{f.usage}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Mark + hatched card -->
+      <section>
+        <div class="rule ff-mono"><span>system / motifs</span></div>
+        <div class="motif-grid">
+          <figure class="mark-plate">
+            <img
+              src="/img/brand/marks/v-contour-white.svg"
+              alt="Lorenz mark on the blueprint plate"
+              width="220"
+              height="220"
+              loading="lazy"
+            />
+            <figcaption class="ff-mono">v-contour-white &middot; primary mark</figcaption>
+          </figure>
+
+          {
+            motifs.map((m) => (
+              <div class="hatched-card">
+                <span class="ff-mono card-tag">{m.tag}</span>
+                <strong class="ff-display card-title">{m.title}</strong>
+                <p class="card-body">{m.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <style>
+    /* ============ cyanotype / dark blueprint prototype ============ */
+    .cyano {
+      --abyss: #081726;
+      --deep: #0b1f3a;
+      --navy: #003b7e;
+      --cyan: #4ab3f4;
+      --chalk: #ffffff;
+      --line: rgba(255, 255, 255, 0.16);
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --hatch: rgba(255, 255, 255, 0.05);
+      background:
+        radial-gradient(120% 90% at 50% 0%, #0e2b4d 0%, transparent 55%),
+        linear-gradient(180deg, var(--deep) 0%, var(--abyss) 65%);
+      background-color: var(--abyss);
+      color: var(--chalk);
+    }
+    .ff-display {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+    .ff-mono {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
+    .proto-banner {
+      background: #000;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 0.55rem 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .proto-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.85rem 3.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    .proto-switch span {
+      opacity: 0.5;
+    }
+    .proto-switch a {
+      color: var(--cyan);
+      text-decoration: none;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid var(--line-soft);
+    }
+    .proto-switch a[aria-current='page'] {
+      background: var(--cyan);
+      color: var(--abyss);
+      border-color: var(--cyan);
+    }
+
+    /* The exposed sheet: hairline frame + corner ticks in translucent white */
+    .sheet {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto 4rem;
+      padding: 5rem 3.5rem 5rem;
+    }
+    .sheet::before {
+      content: '';
+      position: absolute;
+      inset: 1.5rem;
+      border: 1px solid var(--line);
+      pointer-events: none;
+    }
+    /* corner ticks */
+    .sheet::after {
+      content: '';
+      position: absolute;
+      inset: 1.5rem;
+      pointer-events: none;
+      --t: rgba(255, 255, 255, 0.55);
+      background:
+        linear-gradient(var(--t), var(--t)) left top / 16px 1px no-repeat,
+        linear-gradient(var(--t), var(--t)) left top / 1px 16px no-repeat,
+        linear-gradient(var(--t), var(--t)) right top / 16px 1px no-repeat,
+        linear-gradient(var(--t), var(--t)) right top / 1px 16px no-repeat,
+        linear-gradient(var(--t), var(--t)) left bottom / 16px 1px no-repeat,
+        linear-gradient(var(--t), var(--t)) left bottom / 1px 16px no-repeat,
+        linear-gradient(var(--t), var(--t)) right bottom / 16px 1px no-repeat,
+        linear-gradient(var(--t), var(--t)) right bottom / 1px 16px no-repeat;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding-top: 1.5rem;
+      margin-bottom: 4.5rem;
+    }
+    .corner-coords {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      opacity: 0.75;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line);
+      padding: 0.28rem 0.7rem;
+    }
+
+    /* Mark centerpiece with a subtle grid panel and glow */
+    .mark-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2.25rem auto 2.5rem;
+      padding: 2.5rem;
+      max-width: 480px;
+      background-image:
+        linear-gradient(var(--line-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-position: center;
+      border: 1px solid var(--line);
+    }
+    .mark-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 60% at 50% 50%, rgba(74, 179, 244, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mark-glow {
+      position: relative;
+      width: min(360px, 70%);
+      height: auto;
+      filter: drop-shadow(0 0 24px rgba(74, 179, 244, 0.35));
+    }
+
+    .wordmark {
+      font-size: clamp(3rem, 9vw, 6rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .tagline {
+      font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+      font-weight: 500;
+      margin-top: 0.75rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .system {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 1.75rem;
+      margin-top: 2.5rem;
+      padding: 0.9rem 1.4rem;
+      border: 1px solid var(--line);
+      font-size: 0.82rem;
+      color: var(--cyan);
+    }
+    .system-tag {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Annotated rule (section header) */
+    .rule {
+      position: relative;
+      border-top: 1px solid var(--line);
+      margin: 3.5rem 0 1.75rem;
+    }
+    .rule span {
+      position: absolute;
+      top: -0.72rem;
+      left: 0;
+      background: var(--abyss);
+      padding-right: 0.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Colour */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+    .swatch {
+      border: 1px solid var(--line);
+      background: var(--deep);
+    }
+    .chip {
+      height: 96px;
+    }
+    .swatch-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.7rem 0.8rem 0.85rem;
+      border-top: 1px solid var(--line);
+    }
+    .swatch-hex {
+      font-size: 0.75rem;
+      color: var(--cyan);
+    }
+    .swatch-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .swatch-role {
+      font-size: 0.75rem;
+      opacity: 0.55;
+      line-height: 1.35;
+    }
+
+    /* Type */
+    .type-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .face {
+      border-left: 1px solid var(--cyan);
+      padding-left: 1.25rem;
+    }
+    .face-role {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      opacity: 0.8;
+    }
+    .face-sample {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.1;
+      margin: 0.35rem 0 0.5rem;
+    }
+    .face-usage {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      opacity: 0.7;
+      max-width: 60ch;
+    }
+
+    /* Mark plate + hatched cards */
+    .motif-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .mark-plate {
+      grid-row: span 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px solid var(--line);
+      background: var(--abyss);
+      background-image:
+        linear-gradient(var(--line-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding: 1.75rem;
+    }
+    .mark-plate img {
+      width: 68%;
+      height: auto;
+      filter: drop-shadow(0 0 16px rgba(74, 179, 244, 0.3));
+    }
+    .mark-plate figcaption {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .hatched-card {
+      position: relative;
+      border: 1px solid var(--line);
+      padding: 1.6rem 1.5rem;
+      background-color: var(--deep);
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--hatch) 0,
+        var(--hatch) 1px,
+        transparent 1px,
+        transparent 9px
+      );
+    }
+    .card-tag {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--cyan);
+      opacity: 0.7;
+      margin-bottom: 0.85rem;
+    }
+    .card-title {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .card-body {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 40ch;
+    }
+
+    @media (max-width: 820px) {
+      .proto-switch,
+      .sheet {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .sheet {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+      }
+      .swatch-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .motif-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>
