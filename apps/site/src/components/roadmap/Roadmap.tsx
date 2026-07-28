@@ -4,6 +4,9 @@ import { roadmapPhases } from '@content/roadmap';
 import RoadmapHero from './RoadmapHero';
 import PhaseList from './PhaseList';
 import PhaseOverview from './PhaseOverview';
+// Rendered block is commented out below; kept pending the roadmap detailed-view
+// decision (docs/tasks/task-0001-pristine-baseline.md). Remove with that decision.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import PhaseBody from './PhaseBody';
 import ResearchGraph from '../research/ResearchGraph';
 import styles from './Roadmap.module.css';

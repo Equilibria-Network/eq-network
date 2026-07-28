@@ -7,7 +7,6 @@ import {
   calculateNext,
   preCalculatePoints,
   projectPoint,
-  getCssColor,
   type Point3D,
   type SystemParams,
 } from './lorenzUtils';

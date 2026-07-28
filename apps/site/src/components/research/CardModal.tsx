@@ -2,7 +2,7 @@
 // Full-screen overlay showing card details when clicked.
 
 import React from 'react';
-import { CARDS, type CardDef } from './graphData';
+import { CARDS } from './graphData';
 import styles from './CardModal.module.css';
 
 interface Props {

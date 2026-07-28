@@ -160,17 +160,14 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
         const c = CLUSTERS[ci];
         const clusterNodes = nodes.filter((n) => n.cluster === ci);
         // Average position of cluster nodes
-        let avgX = 0,
-          avgY = 0;
+        let avgX = 0;
         for (const n of clusterNodes) {
           const pos = positions.get(n.id);
           if (pos) {
             avgX += pos.x;
-            avgY += pos.y;
           }
         }
         avgX /= clusterNodes.length;
-        avgY /= clusterNodes.length;
 
         // Find the topmost node in the cluster to place label above it
         let minY = Infinity;

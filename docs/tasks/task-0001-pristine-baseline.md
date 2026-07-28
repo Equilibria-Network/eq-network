@@ -52,11 +52,11 @@ Visual-identity alignment is tracked separately in
 
 ## Phase 2 — Tooling guardrails (cheap; stops debt re-accumulating)
 
-- [ ] **ESLint** (`eslint` + `@typescript-eslint` + `eslint-plugin-astro`), minimal calibrated ruleset.
-      Would have caught the dead code, unused `currentPath`, unused import, and the `any`. _Needs a
-      Proposed ADR._
-- [ ] **Prettier** config + **`.editorconfig`** — end the formatting drift.
-- [ ] **CI lint/format-check step** in `deploy.yml` once the above exist.
+- [x] **ESLint** — flat config (`@eslint/js` + `typescript-eslint` + `eslint-plugin-astro`,
+      Prettier-compatible); fixed all 7 findings (unused symbols, an `any`); generated `env.d.ts` ignored.
+- [x] **Prettier** config + **`.editorconfig`** — added; one-time `prettier --write` applied.
+- [x] **CI lint/format-check step** — added `.github/workflows/ci.yml` (format:check + lint + build on
+      pushes and PRs).
 - [x] **CI reproducibility (C1 + F2) — done:** root `package.json` pins `packageManager: pnpm@11.17.0`;
       CI uses `pnpm/action-setup@v4` (reads that pin) and `pnpm install --frozen-lockfile`; lockfile
       regenerated for the workspace. Landed with the workspace migration (task-0005).

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import rough from 'roughjs';
-import { SOCIETY_NODES, SOCIETY_EDGES, COLORS } from './societyLayout';
+import { SOCIETY_NODES, SOCIETY_EDGES } from './societyLayout';
 
 interface Props {
   width: number;

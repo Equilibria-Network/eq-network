@@ -1,0 +1,38 @@
+# .github/workflows/ci.yml
+# Checks that gate changes on pull requests and pushes. Deployment lives in deploy.yml.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prettier (format check)
+        run: pnpm format:check
+
+      - name: ESLint
+        run: pnpm lint
+
+      - name: Build
+        env:
+          PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
+        run: pnpm --filter @eq-network/site build

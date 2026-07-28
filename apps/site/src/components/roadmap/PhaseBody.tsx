@@ -2,7 +2,7 @@
 // The detailed research areas and publications for a phase.
 
 import React from 'react';
-import type { RoadmapPhase, PublicationLinks } from '@content/roadmap/types';
+import type { RoadmapPhase, PublicationLinks, Publication } from '@content/roadmap/types';
 import styles from './PhaseDetails.module.css';
 
 interface Props {
@@ -28,7 +28,7 @@ function getOrderedPlatformLinks(links: PublicationLinks) {
     }));
 }
 
-function PublicationCard({ pub }: { pub: any }) {
+function PublicationCard({ pub }: { pub: Publication }) {
   const orderedLinks = pub.links ? getOrderedPlatformLinks(pub.links) : [];
   const hasLinks = orderedLinks.length > 0;
 
