@@ -130,11 +130,14 @@ study (`/brand/graph`). Owner reactions:
 
 ### Iteration 2b (2026-07-28, latest)
 
-- **Mark reshaped** after the cardioid pair overlapped ("cut in the middle"): now a mirror-symmetric
-  pair of Bezier **leaf wings** meeting only at base + apex (each wing kept in its own half-plane, so no
-  crossing), a butterfly (owner rejected the flat/infinity tilt). `scripts/gen-lorenz-mark.mjs`; assets
-  `sym-{concentric,duo,outline,noise,concentric-white,concentric-accent}.svg`. **View at `/brand/marks`**
-  (gallery, light + dark, with a size test). Owner still to pick a treatment + confirm the shape.
+- **Mark — FINAL shape chosen.** Iteration trail (each got worse until the owner supplied a reference):
+  open trajectory (closest early) -> asymmetric envelope -> cardioid pair (middle "cut") -> leaf/"square".
+  Owner reference `../../context/reference/mark-reference-lorenz.png` = the Lorenz attractor as two
+  **tilted, nested elliptical lobes** splaying at the top and crossing at the bottom centre. Current mark
+  matches it: symmetric tilted nested ellipses (left = mirror of right), treatment **01 / concentric**
+  (thick outer + nested thin). `scripts/gen-lorenz-mark.mjs` (tune `LOBE`/`SCALES`); assets
+  `sym-{concentric,duo,outline,noise,concentric-white,concentric-accent}.svg`. **View at `/brand/marks`.**
+  Owner to sign off on exact proportions, then wire into the site logo + favicon.
 - **Graph prototype shipped** at `/brand/graph`: a `d3-force` society network (blueprint-styled, sharp
   nodes cooperate=filled/defect=hollow, hairline+dashed edges, graph-paper ground) with run / propagate
   (BFS equilibrium spread) / reset transforms + drag, honouring reduced-motion, plus static style studies
