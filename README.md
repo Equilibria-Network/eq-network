@@ -16,6 +16,11 @@ docs/           Project documentation (see docs/README.md)
 Each app builds and deploys independently; shared code lives in `packages/`. The topology and its
 rationale are recorded in [`docs/adr/0005-repo-topology.md`](docs/adr/0005-repo-topology.md).
 
+## Status
+
+Maintained. The site is the organisation's public front door, deployed continuously to
+[eq-network.org](https://eq-network.org). The `playground/` app is in progress.
+
 ## Develop
 
 ```bash
@@ -61,3 +66,7 @@ audits, and decision records live in [`docs/`](docs/README.md).
 
 `AGENTS.md` and `CLAUDE.md` are two **identical** files on purpose (a symlink does not survive a Windows
 checkout). Edit one and copy it to the other; CI fails if they drift.
+
+## License
+
+[MIT](LICENSE) — Copyright (c) 2024-2026 Equilibria Network.
