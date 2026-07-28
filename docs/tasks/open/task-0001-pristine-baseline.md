@@ -103,8 +103,8 @@ Visual-identity alignment is tracked separately in
 - [x] **P4 — dead assets removed in the final dead-code commit — DONE (~37 MB; `public/img` 42 MB → 5.2 MB).**
       Removed via a CSS-inclusive zero-reference scan (58 image files: the WebP-conversion originals and their
       twins, plus social icons only used by the deleted `SocialBar`) plus an inverse check that every image path
-      still referenced in `src/` resolves. **Kept deliberately:** all logo variants (brand kit for task-0008) and
-      `public/img/useful-image-stash/` (a deliberately named parking spot — flagged for the owner to decide).
+      still referenced in `src/` resolves. **Kept deliberately:** all logo variants (brand kit for task-0008).
+      (`public/img/useful-image-stash/` was flagged for the owner and then removed 2026-07-28 on owner direction.)
 
 ## Phase 5 — Accessibility (public site; real users) — DONE
 
@@ -149,7 +149,7 @@ Visual-identity alignment is tracked separately in
       `research.ts`, `products.ts`, and `roadmap/overview.ts`. Components render content; no user-facing string
       literal lives in code. Strings moved verbatim (rendered output unchanged). This is the cheap prerequisite
       that makes an eventual i18n pass a locale layer over an already-clean content tree rather than a
-      codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Proposed) and
+      codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Accepted) and
       [`../deferred/task-0007-i18n.md`](../deferred/task-0007-i18n.md). The i18n _runtime_ (locale routing,
       catalogs, switcher) is explicitly NOT built now — only the externalization discipline.
       **Follow-up (enforcement):** an ESLint `react/jsx-no-literals`-style rule would mechanically prevent new

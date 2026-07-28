@@ -1,6 +1,6 @@
 # ADR-0006: i18n readiness now, i18n runtime deferred
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-07-28
 
 ## Context
