@@ -1,0 +1,566 @@
+---
+// src/pages/brand.astro
+// The public brand page. Layout/scaffolding uses Tailwind utilities (ADR-0006);
+// the signature motifs are the bespoke layer in the scoped <style> below, driven
+// by the same tokens. Copy/data lives in src/content/brand.ts (ADR-0004).
+import Layout from '@/layouts/Layout.astro';
+import { brandContent } from '@content/brand';
+
+const b = brandContent;
+---
+
+<Layout
+  title="Brand - Equilibria Network"
+  description="The Equilibria Network brand: logo, colour, typography, and the hand-drawn motifs, rendered from the design tokens."
+>
+  <div class="mx-auto max-w-[1100px] px-8 py-24 max-md:px-6 max-md:py-16">
+    <!-- Hero -->
+    <header class="mb-24 max-md:mb-16">
+      <span class="hedge">Brand kit</span>
+      <h1
+        class="mt-4 font-serif text-6xl leading-none font-bold text-primary uppercase max-md:text-4xl"
+      >
+        {b.title}
+      </h1>
+      <p class="tagline mt-4 font-serif text-2xl max-md:text-xl">{b.tagline}</p>
+      <p class="lead mt-6 max-w-[62ch] text-lg leading-relaxed">{b.intro}</p>
+      <figure class="mt-10">
+        <img
+          class="hero-img"
+          src={b.hero.src}
+          alt={b.hero.alt}
+          width="1536"
+          height="1024"
+          decoding="async"
+        />
+        <figcaption class="hedge mt-3 inline-block">{b.hero.caption}</figcaption>
+      </figure>
+    </header>
+
+    <!-- Logo -->
+    <section class="mb-24 max-md:mb-16">
+      <h2 class="section-title">{b.sections.logo}</h2>
+      <div class="mt-8 grid grid-cols-2 gap-6 max-md:grid-cols-1">
+        {
+          b.logos.map((l) => (
+            <figure class="logo-card">
+              <div class="logo-frame">
+                <img
+                  src={l.file}
+                  alt={`Equilibria ${l.name} logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                <strong>{l.name}</strong>
+                <span>{l.note}</span>
+                <a href={l.file} download>
+                  Download SVG
+                </a>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <p class="note">{b.logoNote}</p>
+    </section>
+
+    <!-- Colour -->
+    <section class="mb-24 max-md:mb-16">
+      <h2 class="section-title">{b.sections.colour}</h2>
+      <div class="mt-8 grid grid-cols-3 gap-4 max-md:grid-cols-2">
+        {
+          b.swatches.map((s) => (
+            <div class="swatch">
+              <div class="chip" style={`background:${s.hex};color:${s.onDark ? '#fff' : '#000'}`}>
+                {s.hex}
+              </div>
+              <div class="swatch-meta">
+                <strong>{s.name}</strong>
+                <code>{s.token}</code>
+                <code>{s.utility}</code>
+                {s.note && <span>{s.note}</span>}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note">{b.colourNote}</p>
+    </section>
+
+    <!-- Typography -->
+    <section class="mb-24 max-md:mb-16">
+      <h2 class="section-title">{b.sections.type}</h2>
+      <div class="mt-8 flex flex-col gap-8">
+        {
+          b.typeSpecimens.map((t) => (
+            <div class="specimen">
+              <p class="specimen-label">{t.label}</p>
+              <p class={`${t.fontClass} specimen-sample`}>{t.sample}</p>
+              <p class="specimen-usage">{t.usage}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="scale mt-10">
+        {
+          b.typeScale.map((s) => (
+            <div class="scale-row">
+              <span class="scale-aa font-serif" style={`font-size:${s.size}`}>
+                Aa
+              </span>
+              <code>{s.token}</code>
+              <span class="scale-size">{s.size}</span>
+              <span class="scale-use">{s.use}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note">{b.weightsNote}</p>
+    </section>
+
+    <!-- Signature motifs -->
+    <section class="mb-24 max-md:mb-16">
+      <h2 class="section-title">{b.sections.motifs}</h2>
+      <div class="motif-live mt-8">
+        <div class="motif-live-item">
+          <canvas id="rough-sample" width="520" height="220" aria-hidden="true"></canvas>
+          <span class="motif-caption">Hand-drawn roughjs, drawn live</span>
+        </div>
+        <div class="motif-live-item">
+          <div class="tilt-card">Textured card<br />with a tilting shadow</div>
+          <span class="motif-caption">Hover the card</span>
+        </div>
+        <div class="motif-live-item">
+          <span class="hedge">Illustrative</span>
+          <span class="motif-caption">The dashed hedge badge</span>
+        </div>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-x-10 gap-y-6 max-md:grid-cols-1">
+        {
+          b.motifs.map((m) => (
+            <div class="motif">
+              <strong>{m.title}</strong>
+              <p>{m.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section class="mb-24 max-md:mb-16">
+      <h2 class="section-title">{b.sections.usage}</h2>
+      <div class="mt-8 flex flex-col gap-3">
+        {
+          b.usage.map((u) => (
+            <div class="usage-row">
+              <p class="usage-do">
+                <span>Do</span>
+                {u.do}
+              </p>
+              <p class="usage-dont">
+                <span>Don't</span>
+                {u.dont}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <h2 class="section-title">{b.contact.heading}</h2>
+      <p class="mt-6 text-lg">
+        {b.contact.body}<a class="contact-link" href={`mailto:${b.contact.email}`}
+          >{b.contact.email}</a
+        >.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    import rough from 'roughjs';
+    const canvas = document.getElementById('rough-sample') as HTMLCanvasElement | null;
+    if (canvas) {
+      const rc = rough.canvas(canvas);
+      const navy = '#003B7E';
+      const accent = '#4AB3F4';
+      const nodes: [number, number][] = [
+        [70, 120],
+        [180, 55],
+        [200, 185],
+        [320, 115],
+        [440, 60],
+        [455, 175],
+      ];
+      const edges: [number, number][] = [
+        [0, 1],
+        [0, 2],
+        [1, 3],
+        [2, 3],
+        [3, 4],
+        [3, 5],
+        [4, 5],
+      ];
+      for (const [a, c] of edges) {
+        rc.line(nodes[a][0], nodes[a][1], nodes[c][0], nodes[c][1], {
+          stroke: navy,
+          roughness: 1.1,
+          strokeWidth: 1.4,
+        });
+      }
+      nodes.forEach((n, i) => {
+        rc.circle(n[0], n[1], 22, {
+          stroke: navy,
+          fill: i % 2 ? accent : navy,
+          fillStyle: 'solid',
+          roughness: 0.8,
+        });
+      });
+    }
+  </script>
+
+  <style>
+    /* --- Bespoke motif layer (driven by the brand tokens) --- */
+
+    /* Section-title underline signature */
+    .section-title {
+      position: relative;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      padding-bottom: 0.75rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 80px;
+      height: 3px;
+      background: var(--color-primary);
+    }
+
+    .tagline {
+      color: var(--text-color);
+      opacity: 0.9;
+      max-width: 42ch;
+    }
+    .lead {
+      color: var(--text-color);
+      opacity: 0.85;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 59, 126, 0.12);
+    }
+
+    /* Dashed "honest hedge" badge */
+    .hedge {
+      display: inline-block;
+      border: 1px dashed rgba(0, 59, 126, 0.55);
+      border-radius: 3px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-color);
+      opacity: 0.65;
+    }
+
+    .note {
+      margin-top: 1.75rem;
+      max-width: 70ch;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    /* Logo cards */
+    .logo-card {
+      border: 1px solid rgba(0, 59, 126, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .logo-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      padding: 2rem;
+      background: #fdfdfc url('/img/parallax/white-paper-texture.jpg') center / cover;
+    }
+    .logo-frame img {
+      max-height: 130px;
+      max-width: 80%;
+      height: auto;
+    }
+    .logo-card figcaption {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem 1.25rem 1.25rem;
+      border-top: 1px solid rgba(0, 59, 126, 0.1);
+    }
+    .logo-card figcaption strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    .logo-card figcaption span {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+    .logo-card figcaption a {
+      margin-top: 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .logo-card figcaption a:hover {
+      text-decoration: underline;
+    }
+
+    /* Colour swatches */
+    .swatch {
+      border: 1px solid rgba(0, 59, 126, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .chip {
+      display: flex;
+      align-items: flex-end;
+      min-height: 96px;
+      padding: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    }
+    .swatch-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.75rem 0.85rem 0.95rem;
+    }
+    .swatch-meta strong {
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .swatch-meta code {
+      font-size: 0.78rem;
+      color: var(--text-color);
+      opacity: 0.75;
+    }
+    .swatch-meta span {
+      margin-top: 0.15rem;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--text-color);
+      opacity: 0.6;
+    }
+
+    /* Type specimens */
+    .specimen {
+      border-left: 3px solid var(--color-primary);
+      padding-left: 1.25rem;
+    }
+    .specimen-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      opacity: 0.8;
+    }
+    .specimen-sample {
+      margin-top: 0.4rem;
+      font-size: 2rem;
+      line-height: 1.25;
+      color: var(--text-color);
+    }
+    .specimen-usage {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+    .scale {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      border-top: 1px solid rgba(0, 59, 126, 0.12);
+      padding-top: 1.25rem;
+    }
+    .scale-row {
+      display: grid;
+      grid-template-columns: 4.5rem 8rem 4rem 1fr;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .scale-aa {
+      color: var(--color-primary);
+      line-height: 1;
+      overflow: hidden;
+    }
+    .scale-row code {
+      font-size: 0.82rem;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+    .scale-size,
+    .scale-use {
+      font-size: 0.85rem;
+      color: var(--text-color);
+      opacity: 0.6;
+    }
+
+    /* Live motifs */
+    .motif-live {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+      padding: 2rem;
+      border-radius: 12px;
+      background: #fdfdfc url('/img/parallax/white-paper-texture.jpg') center / cover;
+      border: 1px solid rgba(0, 59, 126, 0.12);
+    }
+    .motif-live-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .motif-caption {
+      font-size: 0.8rem;
+      color: var(--text-color);
+      opacity: 0.6;
+    }
+    #rough-sample {
+      max-width: 100%;
+      height: auto;
+    }
+    .tilt-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 220px;
+      height: 120px;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      color: var(--color-primary);
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 59, 126, 0.1);
+      transition:
+        transform var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow var(--transition-speed) ease;
+    }
+    .tilt-card:hover {
+      transform: rotate(-1.5deg) translateY(-5px);
+      box-shadow: 0 12px 26px rgba(0, 59, 126, 0.18);
+    }
+
+    /* Motif descriptions */
+    .motif strong {
+      display: block;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .motif p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      opacity: 0.78;
+    }
+
+    /* Usage do / don't */
+    .usage-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .usage-do,
+    .usage-dont {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-color);
+    }
+    .usage-do {
+      background: rgba(0, 59, 126, 0.05);
+      border-left: 3px solid var(--color-primary);
+    }
+    .usage-dont {
+      background: rgba(0, 0, 0, 0.03);
+      border-left: 3px solid rgba(0, 0, 0, 0.2);
+    }
+    .usage-do span,
+    .usage-dont span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .usage-do span {
+      color: var(--color-primary);
+    }
+    .usage-dont span {
+      color: var(--text-color);
+      opacity: 0.55;
+    }
+
+    .contact-link {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      .specimen-sample {
+        font-size: 1.5rem;
+      }
+      .scale-row {
+        grid-template-columns: 3.5rem 1fr;
+        row-gap: 0.15rem;
+      }
+      .scale-size,
+      .scale-use {
+        grid-column: 2;
+      }
+      .usage-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tilt-card {
+        transition: none;
+      }
+    }
+  </style>
+</Layout>

@@ -86,6 +86,7 @@ export const siteContent: SiteContent = {
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Roadmap', href: '/roadmap' },
+      { label: 'Brand', href: '/brand' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
     ],
