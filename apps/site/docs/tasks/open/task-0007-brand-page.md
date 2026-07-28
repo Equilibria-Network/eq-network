@@ -128,6 +128,23 @@ study (`/brand/graph`). Owner reactions:
   (roughjs island fails to fetch after a dep change) — a dev-only artifact fixed by restarting the dev
   server; the production build is clean. Restart `astro dev` after any dependency change.
 
+### Iteration 2b (2026-07-28, latest)
+
+- **Mark reshaped** after the cardioid pair overlapped ("cut in the middle"): now a mirror-symmetric
+  pair of Bezier **leaf wings** meeting only at base + apex (each wing kept in its own half-plane, so no
+  crossing), a butterfly (owner rejected the flat/infinity tilt). `scripts/gen-lorenz-mark.mjs`; assets
+  `sym-{concentric,duo,outline,noise,concentric-white,concentric-accent}.svg`. **View at `/brand/marks`**
+  (gallery, light + dark, with a size test). Owner still to pick a treatment + confirm the shape.
+- **Graph prototype shipped** at `/brand/graph`: a `d3-force` society network (blueprint-styled, sharp
+  nodes cooperate=filled/defect=hollow, hairline+dashed edges, graph-paper ground) with run / propagate
+  (BFS equilibrium spread) / reset transforms + drag, honouring reduced-motion, plus static style studies
+  (force / lattice / DAG). Component `src/components/brand/GraphDemo.tsx`. Decision: **d3** is the graph
+  tool; not locked to static JS (framework freedom confirmed by owner).
+- Live prototype routes: `/brand` (A), `/brand/b`, `/brand/c`, `/brand/d`, `/brand/elements`,
+  `/brand/graph`, `/brand/marks`.
+- Recurring gotcha: after any dependency add, restart `astro dev` (Vite dep-cache 504 breaks islands in
+  dev only; prod build is clean).
+
 ## Next steps (build the trunk once the mark is picked)
 
 1. Owner picks a symmetric mark option (+ any tweak to weight / inner topology).
