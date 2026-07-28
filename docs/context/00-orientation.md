@@ -6,38 +6,39 @@ Genre: explanation (Diátaxis). The one-page mental model of what this repositor
 
 The public website for the Equilibria Network, served at `eq-network.org`. It is a static site: every
 page is pre-rendered to HTML at build time. There is no backend, no database, and no server-side runtime.
+The site lives in `apps/site/` of a pnpm workspace (see [ADR-0005](../adr/0005-repo-topology.md)).
 
 ## Stack
 
-- **Astro 4** with `output: 'static'` — the site generator and router. One file per route under `src/pages/`.
+- **Astro 4** with `output: 'static'` — the site generator and router. One file per route under `apps/site/src/pages/`.
 - **React 18** islands via `@astrojs/react` — used only for interactive pieces (the lab simulations, the
   research graph, the roadmap, the contact form). Most of the page is static HTML.
-- **CSS Modules + global CSS** under `src/styles/` for styling. No CSS framework.
+- **CSS Modules + global CSS** under `apps/site/src/styles/` for styling. No CSS framework.
 - **roughjs** for the hand-drawn visual style; **lucide-react** for icons.
 - **@formspree/react** for the contact form.
 - **pnpm** for packages; **TypeScript** in strict mode.
 
 ## How content is organised
 
-Page copy and data live as typed TypeScript under `src/content/` (for example `home.ts`, `about.ts`,
-`roadmap/`). Components in `src/components/` render that data. To change words on a page, edit the content
+Page copy and data live as typed TypeScript under `apps/site/src/content/` (for example `home.ts`, `about.ts`,
+`roadmap/`). Components in `apps/site/src/components/` render that data. To change words on a page, edit the content
 file, not the component.
 
 ## Routes
 
-`src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`, `roadmap`,
-`explainer`, `lab`, `lab/playground`, and a `404`. The lab and its playground are unlisted (absent from
+`apps/site/src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`, `roadmap`,
+`explainer`, `privacy`, `lab`, `lab/playground`, and a `404`. The lab and its playground are unlisted (absent from
 the navbar).
 
 ## The playground
 
-`/lab/playground` renders `prototypes/playground.html` imported raw at build time. That HTML file is the
+`/lab/playground` renders `apps/site/prototypes/playground.html` imported raw at build time. That HTML file is the
 single source of truth for the prototype and is deliberately not wrapped in the site layout.
 
 ## How it ships
 
 Push to `main` triggers `.github/workflows/deploy.yml`: install, `pnpm build` (which runs `astro check`
-then `astro build`), and publish `dist/` to GitHub Pages. The custom domain is set by `public/CNAME`.
+then `astro build`), and publish `apps/site/dist` to GitHub Pages. The custom domain is set by `apps/site/public/CNAME`.
 
 ## Visual language
 

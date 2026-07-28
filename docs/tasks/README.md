@@ -6,21 +6,21 @@ encodes provenance: `adr-NNNN-*` (from a decision), `audit-NNNN-*` (from an audi
 
 ## Umbrella tasks (start here)
 
-| Task                                                                               | Summary                                                                                                                                                                     |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [task-0005-repo-structure](done/task-0005-repo-structure.md)                       | **First structural step (gated on ADR-0005):** reorganise into an app-scale workspace so site + playground are independent. Everything else lands inside this layout.       |
-| [task-0001-pristine-baseline](open/task-0001-pristine-baseline.md)                 | The single "clean up before big dev" checklist — every housekeeping/bug/perf/a11y/maintainability sub-item, grouped into phases. Subsumes the `audit-*` detail tasks below. |
-| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Improve the UI/UX on a shared, enforceable design system: a mechanical foundation stage, then per-page redesign sub-tasks.                                                  |
+| Task                                                                               | Summary                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [task-0005-repo-structure](done/task-0005-repo-structure.md)                       | **First structural step (gated on ADR-0005):** reorganise into an app-scale workspace so site + playground are independent. Everything else lands inside this layout.                                                                                          |
+| [task-0001-pristine-baseline](open/task-0001-pristine-baseline.md)                 | The single "clean up before big dev" checklist — every housekeeping/bug/perf/a11y/maintainability sub-item, grouped into phases. Subsumes the `audit-*` detail tasks below. (baseline shipped 2026-07-28; residual polish is deferred or folds into task-0002) |
+| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Improve the UI/UX on a shared, enforceable design system: a mechanical foundation stage, then per-page redesign sub-tasks.                                                                                                                                     |
 
 The `audit-*` files below are the granular details for individual sub-items of task-0001.
 
 ## Open
 
-| Task                                                                               | From          | Summary                                                                                   |
-| ---------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
-| [task-0001-pristine-baseline](open/task-0001-pristine-baseline.md)                 | Cleanup gate  | The clean-up-before-big-dev checklist (see umbrella above)                                |
-| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Design system | UI/UX on a shared, enforceable design system (see umbrella above)                         |
-| [task-0008-brand-page](open/task-0008-brand-page.md)                               | Owner request | Public `/brand` page: logo, palette, type, motifs, usage (renders from the design tokens) |
+| Task                                                                               | From          | Summary                                                                                                                                       |
+| ---------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [task-0001-pristine-baseline](open/task-0001-pristine-baseline.md)                 | Cleanup gate  | The clean-up-before-big-dev checklist (see umbrella above) (baseline shipped 2026-07-28; residual polish is deferred or folds into task-0002) |
+| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Design system | UI/UX on a shared, enforceable design system (see umbrella above)                                                                             |
+| [task-0008-brand-page](open/task-0008-brand-page.md)                               | Owner request | Public `/brand` page: logo, palette, type, motifs, usage (renders from the design tokens)                                                     |
 
 ## Deferred (feature work — not part of the current cleanup phase)
 

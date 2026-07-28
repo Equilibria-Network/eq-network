@@ -67,7 +67,7 @@ tasks/` — exactly as described) while **sharing the design system** with the s
   the playground into the site becomes a release-versioning problem. Two of everything (CI, deploy, docs
   roots) for a small team.
 
-## Decision (proposed)
+## Decision
 
 Adopt **Option B — a pnpm-workspace monorepo** with `apps/site`, `apps/playground`, and
 `packages/design-system`. Deploy each app independently (site → GitHub Pages; playground → a header-capable
@@ -107,4 +107,4 @@ the team's actual size.
 
 [ADR-0001](0001-astro-static-github-pages.md) (static hosting + the `SharedArrayBuffer`/header constraint and
 the client-side-ABM amendment); [ADR-0003](0003-visual-language-system.md) (the shared design system that
-both apps consume); current `prototypes/playground.html` + `src/pages/lab/playground.astro`.
+both apps consume); current `prototypes/playground.html` + `apps/site/src/pages/lab/playground.astro`.

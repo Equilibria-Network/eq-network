@@ -29,7 +29,7 @@ No accounts, no behavioural tracking, no location data, no special-category data
   is the current, endorsed handler) and the EU-migration enhancement
   [`../tasks/deferred/task-0003-eu-form-handler.md`](../tasks/deferred/task-0003-eu-form-handler.md).
 - Visitors are told what happens to a contact submission: a short notice under the form links to the
-  `/privacy` page (`src/pages/privacy.astro`, copy in `src/content/privacy.ts`), which discloses the
+  `/privacy` page (`apps/site/src/pages/privacy.astro`, copy in `apps/site/src/content/privacy.ts`), which discloses the
   processors and rights. The `/privacy` draft should get an owner legal review, and the privacy contact
   inbox (`contact@eq-network.org`) must be confirmed to exist and route.
 - Confirm whether GitHub Pages access logs are retained or accessible to the project; if not accessible,

@@ -62,7 +62,7 @@ Pull requests run `.github/workflows/ci.yml` (format, lint, build). See
 ## Contributing
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and, for agents, [`AGENTS.md`](AGENTS.md). Project docs,
-audits, and decision records live in [`docs/`](docs/README.md).
+audits, and decision records live in [`docs/`](docs/README.md). Release history is in [`CHANGELOG.md`](CHANGELOG.md).
 
 `AGENTS.md` and `CLAUDE.md` are two **identical** files on purpose (a symlink does not survive a Windows
 checkout). Edit one and copy it to the other; CI fails if they drift.

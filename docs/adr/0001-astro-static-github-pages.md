@@ -69,6 +69,6 @@ portable.
 ## Sources
 
 - Repository `README.md` ("Migrated from Docusaurus to Astro").
-- `astro.config.mjs` (`output: 'static'`, `site: 'https://eq-network.org'`).
+- `apps/site/astro.config.mjs` (`output: 'static'`, `site: 'https://eq-network.org'`).
 - `.github/workflows/deploy.yml` (build and `upload-pages-artifact` / `deploy-pages`).
-- `public/CNAME`.
+- `apps/site/public/CNAME`.

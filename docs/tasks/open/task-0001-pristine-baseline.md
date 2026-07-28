@@ -3,7 +3,7 @@
 - Provenance: task-0001 (umbrella)
 - Sources: [`../../audits/2026-07-28-audit-0001-inherited-recon.md`](../../audits/2026-07-28-audit-0001-inherited-recon.md),
   [`../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
-- Status: in-progress (cleanup started); most sub-items todo
+- Status: DONE — baseline shipped to production 2026-07-28. Residual items below are deferred (C5, P3) or optional polish that overlaps task-0002 (M1/M4/M5/M7/M8/M9/M10) or is trivial (F7).
 - Owner: unassigned
 - Priority: now — this is the gate before "big dev"
 
@@ -27,7 +27,7 @@ Visual-identity alignment is tracked separately in
 
 - [x] Untrack and gitignore `.claude/settings.local.json`; harden `.gitignore` (incl. Windows entries).
 - [x] Add `AGENTS.md` + `CLAUDE.md` agent guardrails; add root `CONTRIBUTING.md`; set up `docs/`.
-- [x] Back-fill ADR-0001 (Astro static) — **Proposed, awaiting owner sign-off**. (An ADR-0002 for Formspree
+- [x] Back-fill ADR-0001 (Astro static) — **Accepted**. (An ADR-0002 for Formspree
       was drafted then removed: the form handler is an operative default recorded in `CONTRIBUTING.md`, not an ADR.)
 - [x] Two audits recorded (recon + deep-dive).
 
@@ -170,7 +170,7 @@ Visual-identity alignment is tracked separately in
       [`audit-0001-privacy-notice.md`](../done/audit-0001-privacy-notice.md) and
       [`task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md). **Draft** — needs owner
       legal review + confirmation of the `contact@eq-network.org` inbox.
-- [ ] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch.
+- [x] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch. (resolved: root README and CONTRIBUTING now use `apps/site/env.example`; the stale `apps/site/README.md` was rewritten.)
 - [ ] **F7** (optional) Add `@astrojs/sitemap`.
 
 ---

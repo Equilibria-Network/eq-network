@@ -12,7 +12,8 @@ docs/
   tasks/       actionable open work, decomposed from ADRs and audits
   lessons/     dated learnings and standing thematic notes
   audits/      point-in-time deep-analysis / audit bundles
-  templates/   templates for ADRs, tasks, and lessons
+  handoffs/    session handoff notes
+  templates/   templates for ADRs, tasks, lessons, and handoffs
   runbooks/    operational response procedures (build, deploy, rollback)
   privacy/     data map and third-party processor inventory
   README.md    this index
@@ -29,7 +30,7 @@ Project-wide calibration (scope, principles in force, principles skipped) lives 
 - The audits: [`audits/2026-07-28-audit-0001-inherited-recon.md`](audits/2026-07-28-audit-0001-inherited-recon.md)
   (recon) and [`audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
   (code-hygiene deep dive).
-- The cleanup gate before feature work: [`tasks/open/task-0001-pristine-baseline.md`](tasks/open/task-0001-pristine-baseline.md).
+- The cleanup gate before feature work: [`tasks/open/task-0001-pristine-baseline.md`](tasks/open/task-0001-pristine-baseline.md) (baseline shipped 2026-07-28).
 
 ## Conventions
 

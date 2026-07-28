@@ -1,51 +1,9 @@
-# Equilibria Network - Astro
+# @eq-network/site
 
-Migrated from Docusaurus to Astro for better performance and simpler architecture.
+The public Equilibria Network website (Astro static), deployed to eq-network.org.
 
-## Development
+This is one workspace of a pnpm monorepo. Run commands from the repo root, not from here: see the
+root [`README.md`](../../README.md) for setup, scripts, and deploy, and
+[`CONTRIBUTING.md`](../../CONTRIBUTING.md) for project calibration.
 
-```bash
-# Install dependencies
-pnpm install
-
-# Start dev server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
-```
-
-## Environment Variables
-
-Copy `.env.example` to `.env` and configure:
-
-- `PUBLIC_FORMSPREE_ENDPOINT`: Formspree contact form endpoint
-
-## Project Structure
-
-```
-/
-├── public/           # Static assets (images, patterns, etc.)
-├── src/
-│   ├── components/   # React components
-│   │   ├── layout/   # Navbar, Footer
-│   │   ├── home/     # Home page components
-│   │   ├── about/    # About page components
-│   │   └── roadmap/  # Roadmap page components
-│   ├── content/      # TypeScript data files
-│   ├── pages/        # Astro pages (routes)
-│   ├── styles/       # Global CSS
-│   └── utils/        # Helper functions
-└── astro.config.mjs
-```
-
-## Tech Stack
-
-- **Framework**: Astro 4.x
-- **UI Library**: React (for interactive islands)
-- **Styling**: CSS Modules + Global CSS
-- **Package Manager**: pnpm
-- **TypeScript**: Strict mode
+Environment: copy `env.example` to `.env` and set `PUBLIC_FORMSPREE_ENDPOINT` for the contact form.

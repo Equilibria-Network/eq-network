@@ -11,7 +11,7 @@ factors are jurisdictional and contractual (where data is stored, who the subpro
 says, what rights and retention apply). Those live in the provider's privacy policy, DPA, and imprint, not
 its marketing page.
 
-## Decision (proposed)
+## Decision
 
 Before integrating **any** third-party service that stores, processes, or transmits visitor personal data
 (form handlers, analytics, embeds, CDNs that see submissions, email delivery, etc.), produce a written

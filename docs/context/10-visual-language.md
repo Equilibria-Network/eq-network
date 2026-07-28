@@ -10,7 +10,7 @@ with this doc, the page is drifting — fix the page.
 Status note: the tokens and primitives below are the **target** system. Much of it currently lives as
 copy-pasted CSS values rather than tokens; see [ADR-0003](../adr/0003-visual-language-system.md) (proposed)
 and [`../tasks/open/task-0002-visual-language-alignment.md`](../tasks/open/task-0002-visual-language-alignment.md)
-for the migration. Where a token name below does not yet exist in `src/styles/variables.css`, it is
+for the migration. Where a token name below does not yet exist in `apps/site/src/styles/variables.css`, it is
 proposed, not current.
 
 ## Colour

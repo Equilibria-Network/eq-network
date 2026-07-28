@@ -52,7 +52,7 @@ Two finalists to run that deep dive on:
 A privacy deep-dive report exists for the finalists (attached here), the owner picks one, and the contact
 form is migrated: endpoint swapped, [`../../privacy/data-map.md`](../../privacy/data-map.md) and `env.example`
 updated, the Formspree secret retired, and the choice linked from the privacy policy page
-([`task-0004-privacy-policy-page.md`](task-0004-privacy-policy-page.md)).
+([`../done/task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md)).
 
 ## Next step
 

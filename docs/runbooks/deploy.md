@@ -5,8 +5,8 @@ Genre: how-to (Diátaxis). The operational procedures for shipping the site.
 ## Normal deploy
 
 1. Merge or push to `main`.
-2. `.github/workflows/deploy.yml` runs: install → `pnpm build` (`astro check` + `astro build`) → upload
-   `dist/` → publish to GitHub Pages.
+2. `.github/workflows/deploy.yml` runs: install → `pnpm build` (`astro check` + `astro build`, i.e.
+   `pnpm --filter @eq-network/site build`) → upload `apps/site/dist` → publish to GitHub Pages.
 3. Confirm the run succeeded in the repository's Actions tab and load `https://eq-network.org`.
 
 A failed build does not publish. The previously published site stays live.
@@ -31,6 +31,6 @@ prior deployments in the environment history if an immediate re-publish is neede
 
 ## Custom domain
 
-The domain `eq-network.org` is bound by `public/CNAME`. If the domain stops resolving to the site,
-confirm `public/CNAME` still contains `eq-network.org` and that the DNS record still points at GitHub
+The domain `eq-network.org` is bound by `apps/site/public/CNAME`. If the domain stops resolving to the site,
+confirm `apps/site/public/CNAME` still contains `eq-network.org` and that the DNS record still points at GitHub
 Pages.
