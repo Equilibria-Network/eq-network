@@ -94,7 +94,9 @@
   border: 1px solid var(--color-primary);
   border-radius: 3px;
   padding: 0.75rem 1.5rem;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  transition:
+    background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
 }
 
 .playCta:hover {
@@ -115,7 +117,9 @@
   border: 1px solid var(--color-primary);
   border-radius: 3px;
   padding: 0.75rem 1.5rem;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  transition:
+    background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
 }
 
 .scrollCta:hover {

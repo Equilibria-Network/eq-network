@@ -12,11 +12,7 @@ export default function ProductsExploration() {
         <div className={styles.content}>
           {/* Left: Image */}
           <div className={styles.imageColumn}>
-            <img 
-              src={exploration.image} 
-              alt={exploration.title}
-              className={styles.productImage}
-            />
+            <img src={exploration.image} alt={exploration.title} className={styles.productImage} />
           </div>
 
           {/* Right: Text Content */}

@@ -8,6 +8,6 @@ export default defineConfig({
   base: '/',
   output: 'static',
   build: {
-    assets: 'assets'
-  }
+    assets: 'assets',
+  },
 });

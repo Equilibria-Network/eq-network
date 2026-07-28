@@ -18,8 +18,8 @@ export default function Publications() {
         {/* Publications Grid */}
         <div className={styles.publicationsGrid}>
           {publications.publications.map((pub) => (
-            <a 
-              key={pub.id} 
+            <a
+              key={pub.id}
               href={pub.primaryLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -28,11 +28,7 @@ export default function Publications() {
               <div className={styles.cardContent}>
                 {pub.image && (
                   <div className={styles.imageContainer}>
-                    <img 
-                      src={pub.image} 
-                      alt={pub.title}
-                      className={styles.cardImage}
-                    />
+                    <img src={pub.image} alt={pub.title} className={styles.cardImage} />
                   </div>
                 )}
                 <div className={styles.textContent}>

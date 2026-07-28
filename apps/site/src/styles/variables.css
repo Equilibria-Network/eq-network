@@ -4,20 +4,20 @@
 /* Base theme colors using the Equilibria blue palette */
 :root {
   /* Primary blue from the Equilibria logo text */
-  --color-primary: #003B7E;  /* Deep navy blue */
+  --color-primary: #003b7e; /* Deep navy blue */
   --color-primary-dark: #003571;
-  --color-primary-darker: #002F64;
+  --color-primary-darker: #002f64;
   --color-primary-darkest: #002855;
-  --color-primary-light: #0047A1;
-  --color-primary-lighter: #0055C4;
-  --color-primary-lightest: #0063E7;
-  
+  --color-primary-light: #0047a1;
+  --color-primary-lighter: #0055c4;
+  --color-primary-lightest: #0063e7;
+
   /* Additional brand colors */
-  --color-blue-light: #89CFF0;
-  --color-blue-accent: #4AB3F4;
-  
+  --color-blue-light: #89cff0;
+  --color-blue-accent: #4ab3f4;
+
   /* Secondary color for second trajectory */
-  --color-secondary: #4AB3F4;  /* Light blue accent */
+  --color-secondary: #4ab3f4; /* Light blue accent */
 
   /* Navbar height */
   --navbar-height: 60px;
@@ -29,13 +29,13 @@
   --bg-color: #ffffff;
   --bg-surface: #ffffff;
   --text-color: #000000;
-  
+
   /* Transitions */
   --transition-speed: 0.3s;
 }
 
 /* SVG filter transitions - prevent green flashing */
-img[src$=".svg"], 
+img[src$='.svg'],
 svg {
   transition: transform var(--transition-speed) ease !important;
 }
@@ -43,5 +43,6 @@ svg {
 /* Audience images - specific styling */
 .audienceImage {
   transition: transform var(--transition-speed) ease !important;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%) !important;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%) !important;
 }

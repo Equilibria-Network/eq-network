@@ -11,7 +11,7 @@ import styles from './Roadmap.module.css';
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState<number | null>(1);
 
-  const currentPhase = roadmapPhases.find(p => p.id === selectedPhase);
+  const currentPhase = roadmapPhases.find((p) => p.id === selectedPhase);
 
   return (
     <div className={styles.roadmapWrapper}>
@@ -21,10 +21,7 @@ export default function Roadmap() {
       <section className={styles.mainContentSection}>
         <div className={styles.container}>
           <div className={styles.splitLayout}>
-            <PhaseList
-              selectedPhase={selectedPhase}
-              onPhaseSelect={setSelectedPhase}
-            />
+            <PhaseList selectedPhase={selectedPhase} onPhaseSelect={setSelectedPhase} />
             <main className={styles.detailsPanel}>
               {currentPhase && <PhaseOverview phase={currentPhase} />}
             </main>

@@ -45,15 +45,15 @@
   .socialBar {
     padding: 1.5rem 0;
   }
-  
+
   .container {
     padding: 0 1rem;
   }
-  
+
   .socialIcons {
     gap: 1.25rem;
   }
-  
+
   .socialIcon {
     width: 22px;
     height: 22px;
@@ -64,7 +64,7 @@
   .socialIcons {
     gap: 1rem;
   }
-  
+
   .socialIcon {
     width: 20px;
     height: 20px;

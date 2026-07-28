@@ -1,10 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import rough from 'roughjs';
-import {
-  SOCIETY_NODES,
-  SOCIETY_EDGES,
-  COLORS,
-} from './societyLayout';
+import { SOCIETY_NODES, SOCIETY_EDGES, COLORS } from './societyLayout';
 
 interface Props {
   width: number;
@@ -32,16 +28,12 @@ export default function StepSocietyNetwork({ width, height }: Props) {
       if (!sn || !tn) continue;
 
       svg.appendChild(
-        rc.line(
-          pad + sn.nx * w, pad + sn.ny * h,
-          pad + tn.nx * w, pad + tn.ny * h,
-          {
-            seed: edge.seed,
-            roughness: 0.8,
-            stroke: COLORS.edgeNeutral,
-            strokeWidth: 1,
-          }
-        )
+        rc.line(pad + sn.nx * w, pad + sn.ny * h, pad + tn.nx * w, pad + tn.ny * h, {
+          seed: edge.seed,
+          roughness: 0.8,
+          stroke: COLORS.edgeNeutral,
+          strokeWidth: 1,
+        })
       );
     }
 
@@ -77,12 +69,5 @@ export default function StepSocietyNetwork({ width, height }: Props) {
     }
   }, [width, height]);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }

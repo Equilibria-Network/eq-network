@@ -156,7 +156,6 @@
   border-color: var(--color-primary);
 }
 
-
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 600;
@@ -202,7 +201,7 @@
   .card {
     flex: 0 1 calc(50% - 1rem); /* 2 per row */
   }
-  
+
   .publicationsGrid {
     gap: 2rem;
   }
@@ -294,7 +293,7 @@
   .card {
     flex: 0 1 100%;
   }
-  
+
   .publicationsGrid {
     gap: 0.75rem;
   }

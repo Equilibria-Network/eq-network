@@ -4,7 +4,6 @@ import React from 'react';
 import type { RoadmapPhase, PublicationLinks } from '@content/roadmap/types';
 import styles from './PhaseDetails.module.css';
 
-
 interface PhaseDetailsProps {
   phase: RoadmapPhase;
 }
@@ -15,37 +14,35 @@ export default function PhaseDetails({ phase }: PhaseDetailsProps) {
 
   // Define platform order and icon paths
   const platformOrder = ['substack', 'lesswrong', 'arxiv', 'youtube'] as const;
-  
+
   const platformIcons: Record<string, string> = {
     substack: '/img/socials/substack.svg',
     lesswrong: '/img/socials/lesswrong.svg',
     arxiv: '/img/socials/arxiv.svg',
-    youtube: '/img/socials/youtube.svg'
+    youtube: '/img/socials/youtube.svg',
   };
 
   // Helper function to get ordered platform links
-const getOrderedPlatformLinks = (links: PublicationLinks) => {
-  return platformOrder
-    .filter(platform => links[platform])
-    .map(platform => ({
-      platform,
-      url: links[platform]!,  // Add non-null assertion
-      icon: platformIcons[platform]
-    }));
-};
+  const getOrderedPlatformLinks = (links: PublicationLinks) => {
+    return platformOrder
+      .filter((platform) => links[platform])
+      .map((platform) => ({
+        platform,
+        url: links[platform]!, // Add non-null assertion
+        icon: platformIcons[platform],
+      }));
+  };
 
   return (
     <div className={styles.detailsContent}>
       {/* Image Section */}
       <div className={styles.imageSection}>
-        <img 
-          src={phase.researcher.image} 
+        <img
+          src={phase.researcher.image}
           alt={phase.researcher.fullName}
           className={styles.largeImage}
         />
-        <p className={styles.researcherBio}>
-          {phase.researcher.bio}
-        </p>
+        <p className={styles.researcherBio}>{phase.researcher.bio}</p>
       </div>
 
       {/* Text Content */}
@@ -54,10 +51,8 @@ const getOrderedPlatformLinks = (links: PublicationLinks) => {
           Phase {phase.id}: {phase.researcher.lastName}
         </h2>
 
-
-
         <p className={styles.phaseTagline}>{phase.details.tagline}</p>
-        
+
         {/* Multiple paragraphs for description */}
         {descriptionParagraphs.map((paragraph, index) => (
           <p key={index} className={styles.phaseDescription}>
@@ -79,7 +74,7 @@ const getOrderedPlatformLinks = (links: PublicationLinks) => {
                     {area.publications.map((pub) => {
                       const orderedLinks = pub.links ? getOrderedPlatformLinks(pub.links) : [];
                       const hasLinks = orderedLinks.length > 0;
-                      
+
                       return (
                         <div key={pub.id} className={styles.publicationCard}>
                           <div className={styles.cardContent}>
@@ -134,7 +129,7 @@ const getOrderedPlatformLinks = (links: PublicationLinks) => {
                 {phase.publications.map((pub) => {
                   const orderedLinks = pub.links ? getOrderedPlatformLinks(pub.links) : [];
                   const hasLinks = orderedLinks.length > 0;
-                  
+
                   return (
                     <div key={pub.id} className={styles.publicationCard}>
                       <div className={styles.cardContent}>
@@ -158,11 +153,7 @@ const getOrderedPlatformLinks = (links: PublicationLinks) => {
                                 className={styles.platformLink}
                                 onClick={(e) => e.stopPropagation()}
                               >
-                                <img
-                                  src={icon}
-                                  alt={platform}
-                                  className={styles.platformIcon}
-                                />
+                                <img src={icon} alt={platform} className={styles.platformIcon} />
                               </a>
                             ))}
                           </div>

@@ -86,11 +86,21 @@ function drawCommons(ctx: DrawContext): void {
     const opacity = starved ? 0.4 : 1;
 
     // Household → its delegate (static, quiet).
-    addNode(svg, rc.line(humanX + 9, y, delegateX - 8, y, edgeOpts(seed + 10 + i, inDesign)), 0.55 * opacity);
+    addNode(
+      svg,
+      rc.line(humanX + 9, y, delegateX - 8, y, edgeOpts(seed + 10 + i, inDesign)),
+      0.55 * opacity
+    );
     // Delegate → stock (the harvest), with one packet flowing back out.
     addNode(
       svg,
-      rc.line(delegateX + 8, y, stockX - stockRadius - 3, stockY, edgeOpts(seed + 30 + i, inDesign)),
+      rc.line(
+        delegateX + 8,
+        y,
+        stockX - stockRadius - 3,
+        stockY,
+        edgeOpts(seed + 30 + i, inDesign)
+      ),
       lerp(0.7, 0.25, t) * opacity
     );
     if (!starved && t > 0.05) {
@@ -146,7 +156,11 @@ function drawEconomic(ctx: DrawContext): void {
     humans.forEach((a, i) => {
       const b = humans[(i + 1) % humans.length];
       if (!b || i % 2 !== 0) return;
-      addNode(svg, rc.line(a.x, a.y, b.x, b.y, edgeOpts(seed + 100 + i, inDesign)), internalOpacity);
+      addNode(
+        svg,
+        rc.line(a.x, a.y, b.x, b.y, edgeOpts(seed + 100 + i, inDesign)),
+        internalOpacity
+      );
     });
   }
 
@@ -158,12 +172,20 @@ function drawEconomic(ctx: DrawContext): void {
       if ((i + k) % 3 !== 0) return;
       addNode(
         svg,
-        rc.line(human.x, human.y, ai.x, ai.y, edgeOpts(seed + 200 + k * 20 + i, inDesign, 0.8 + 1.4 * t)),
+        rc.line(
+          human.x,
+          human.y,
+          ai.x,
+          ai.y,
+          edgeOpts(seed + 200 + k * 20 + i, inDesign, 0.8 + 1.4 * t)
+        ),
         presence * 0.6
       );
     });
     // The AI producer grows: size = economic power.
-    drawSquare(ctx, ai.x, ai.y, lerp(11, 30, presence * t), 300 + k, 1, { filled: presence * t > 0.5 });
+    drawSquare(ctx, ai.x, ai.y, lerp(11, 30, presence * t), 300 + k, 1, {
+      filled: presence * t > 0.5,
+    });
   });
 
   humans.forEach((human, i) => {
@@ -232,7 +254,9 @@ function drawCultural(ctx: DrawContext): void {
   const infectedAt = (i: number) =>
     aiIndices.includes(i)
       ? 0
-      : 0.08 + ((depth[i] ?? maxDepth) / (maxDepth + 1)) * 0.82 + (mulberry32(seed + i)() - 0.5) * 0.06;
+      : 0.08 +
+        ((depth[i] ?? maxDepth) / (maxDepth + 1)) * 0.82 +
+        (mulberry32(seed + i)() - 0.5) * 0.06;
 
   // Edges, with red packets carrying the values across the frontier.
   edges.forEach(([a, b], e) => {
@@ -303,7 +327,13 @@ function drawPolitical(ctx: DrawContext): void {
     if (!hub) return;
     addNode(
       svg,
-      rc.line(citizen.x, citizen.y, hub.x, hub.y, edgeOpts(seed + 200 + i, inDesign, 0.7 + 1.6 * t)),
+      rc.line(
+        citizen.x,
+        citizen.y,
+        hub.x,
+        hub.y,
+        edgeOpts(seed + 200 + i, inDesign, 0.7 + 1.6 * t)
+      ),
       funnelOpacity
     );
   });
@@ -380,7 +410,11 @@ function drawCombined(ctx: DrawContext): void {
     const from = allMembers[0]?.[1];
     const to = allMembers[2]?.[0];
     if (from && to) {
-      addNode(svg, rc.line(from.x, from.y, to.x, to.y, edgeOpts(seed + 710, inDesign, 0.9 + 2 * t)), couplingOpacity * 0.8);
+      addNode(
+        svg,
+        rc.line(from.x, from.y, to.x, to.y, edgeOpts(seed + 710, inDesign, 0.9 + 2 * t)),
+        couplingOpacity * 0.8
+      );
     }
   }
 
@@ -388,7 +422,17 @@ function drawCombined(ctx: DrawContext): void {
   const econMembers = allMembers[0] ?? [];
   const econAI = { x: (0.5 / 3) * width, y: bandY(ctx, 0.1) };
   econMembers.forEach((member, i) => {
-    addNode(svg, rc.line(member.x, member.y, econAI.x, econAI.y, edgeOpts(seed + 800 + i, inDesign, 0.7 + 1.2 * t)), 0.2 + 0.5 * t);
+    addNode(
+      svg,
+      rc.line(
+        member.x,
+        member.y,
+        econAI.x,
+        econAI.y,
+        edgeOpts(seed + 800 + i, inDesign, 0.7 + 1.2 * t)
+      ),
+      0.2 + 0.5 * t
+    );
     drawAgent(ctx, member.x, member.y, 6.5, 810 + i, lerp(1, 0.6, t));
   });
   drawSquare(ctx, econAI.x, econAI.y, lerp(9, 22, t), 830, 1, { filled: t > 0.55 });
@@ -399,13 +443,20 @@ function drawCombined(ctx: DrawContext): void {
     const infected = t >= 0.2 + (i / memberCount) * 0.6;
     drawAgent(ctx, member.x, member.y, 6.5, 850 + i, 1, infected ? SPREAD_RED : undefined);
   });
-  drawSquare(ctx, (1.5 / 3) * width, bandY(ctx, 0.1), 11, 870, 1, { color: SPREAD_RED, filled: true });
+  drawSquare(ctx, (1.5 / 3) * width, bandY(ctx, 0.1), 11, 870, 1, {
+    color: SPREAD_RED,
+    filled: true,
+  });
 
   // STATE: members funnel into one growing hub.
   const stateMembers = allMembers[2] ?? [];
   const hub = { x: (2.5 / 3) * width, y: bandY(ctx, 0.16) };
   stateMembers.forEach((member, i) => {
-    addNode(svg, rc.line(member.x, member.y, hub.x, hub.y, edgeOpts(seed + 880 + i, inDesign, 0.7 + 1.4 * t)), 0.2 + 0.55 * t);
+    addNode(
+      svg,
+      rc.line(member.x, member.y, hub.x, hub.y, edgeOpts(seed + 880 + i, inDesign, 0.7 + 1.4 * t)),
+      0.2 + 0.55 * t
+    );
     drawAgent(ctx, member.x, member.y, 6.5, 890 + i, lerp(1, 0.55, t));
   });
   drawAgent(ctx, hub.x, hub.y, lerp(7, 13, t), 900, 1);

@@ -21,6 +21,7 @@ pnpm preview
 ## Environment Variables
 
 Copy `.env.example` to `.env` and configure:
+
 - `PUBLIC_FORMSPREE_ENDPOINT`: Formspree contact form endpoint
 
 ## Project Structure

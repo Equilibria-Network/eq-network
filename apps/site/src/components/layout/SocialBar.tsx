@@ -33,7 +33,7 @@ const buildSocialUrl = (platform: string, handle: string): string => {
     email: (email) => `mailto:${email}`,
     website: (url) => url,
   };
-  
+
   return urlBuilders[platform] ? urlBuilders[platform](handle) : handle;
 };
 
@@ -48,7 +48,7 @@ export default function SocialBar({ socials = {} }: SocialBarProps) {
       name: platform.charAt(0).toUpperCase() + platform.slice(1),
       platform,
       href: buildSocialUrl(platform, value),
-      icon: socialIcons[platform]
+      icon: socialIcons[platform],
     }));
 
   const fallbackSocials: Social[] = [
@@ -56,20 +56,20 @@ export default function SocialBar({ socials = {} }: SocialBarProps) {
       name: 'GitHub',
       platform: 'github',
       href: 'https://github.com/Equilibria-Network',
-      icon: '/img/socials/github.svg'
+      icon: '/img/socials/github.svg',
     },
     {
       name: 'LinkedIn',
       platform: 'linkedin',
       href: 'https://www.linkedin.com/company/equilibria-network',
-      icon: '/img/socials/linkedin.svg'
+      icon: '/img/socials/linkedin.svg',
     },
     {
       name: 'Substack',
       platform: 'substack',
       href: 'https://substack.com/@equilibria1',
-      icon: '/img/socials/substack.svg'
-    }
+      icon: '/img/socials/substack.svg',
+    },
   ];
 
   const socialsToRender = activeSocials.length > 0 ? activeSocials : fallbackSocials;
@@ -91,11 +91,7 @@ export default function SocialBar({ socials = {} }: SocialBarProps) {
               rel="noopener noreferrer"
               aria-label={social.name}
             >
-              <img 
-                src={social.icon} 
-                alt={social.name}
-                className={styles.socialIcon}
-              />
+              <img src={social.icon} alt={social.name} className={styles.socialIcon} />
             </a>
           ))}
         </div>

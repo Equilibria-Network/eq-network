@@ -12,8 +12,8 @@ export default function ProductsCoordination() {
         <div className={styles.content}>
           {/* Left: Image */}
           <div className={styles.imageColumn}>
-            <img 
-              src={coordination.image} 
+            <img
+              src={coordination.image}
               alt={coordination.title}
               className={styles.productImage}
             />

@@ -66,20 +66,20 @@
   .headerSection {
     padding: 6rem 0 3rem;
   }
-  
+
   .heroContent {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  
+
   .mainTitle {
     font-size: 3.5rem;
   }
-  
+
   .tagline {
     font-size: 1.25rem;
   }
-  
+
   .description {
     font-size: 1rem;
   }
@@ -90,23 +90,23 @@
   .container {
     padding: 0 1.5rem;
   }
-  
+
   .headerSection {
     padding: 5rem 0 2.5rem;
   }
-  
+
   .heroContent {
     gap: 2rem;
   }
-  
+
   .mainTitle {
     font-size: 2.75rem;
   }
-  
+
   .tagline {
     font-size: 1.125rem;
   }
-  
+
   .description {
     font-size: 0.9375rem;
   }
@@ -117,23 +117,23 @@
   .container {
     padding: 0 1rem;
   }
-  
+
   .headerSection {
     padding: 4rem 0 2rem;
   }
-  
+
   .heroContent {
     gap: 1.5rem;
   }
-  
+
   .mainTitle {
     font-size: 2.25rem;
   }
-  
+
   .tagline {
     font-size: 1rem;
   }
-  
+
   .description {
     font-size: 0.875rem;
   }

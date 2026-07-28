@@ -26,10 +26,13 @@ export default function ResearchGraph() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Map<string, HTMLElement>>(new Map());
 
-  const registerCard = useCallback((id: string) => (el: HTMLElement | null) => {
-    if (el) cardRefs.current.set(id, el);
-    else cardRefs.current.delete(id);
-  }, []);
+  const registerCard = useCallback(
+    (id: string) => (el: HTMLElement | null) => {
+      if (el) cardRefs.current.set(id, el);
+      else cardRefs.current.delete(id);
+    },
+    []
+  );
 
   // Compute arrow positions from DOM
   useLayoutEffect(() => {
@@ -87,10 +90,7 @@ export default function ResearchGraph() {
           <div className={styles.pipeline}>
             {HEADERS.map((header, i) => (
               <React.Fragment key={i}>
-                <button
-                  className={styles.phaseBox}
-                  onClick={() => setView('detail')}
-                >
+                <button className={styles.phaseBox} onClick={() => setView('detail')}>
                   <div className={styles.phaseBoxInner}>
                     <span className={styles.phaseNum}>{i + 1}</span>
                     <h3 className={styles.phaseTitle}>{header}</h3>
@@ -128,7 +128,9 @@ export default function ResearchGraph() {
             {/* Column headers */}
             <div className={styles.colHeaders}>
               {HEADERS.map((h, i) => (
-                <div key={i} className={styles.colHeader}>{h}</div>
+                <div key={i} className={styles.colHeader}>
+                  {h}
+                </div>
               ))}
             </div>
 
@@ -168,7 +170,12 @@ export default function ResearchGraph() {
                   refY="3"
                   orient="auto"
                 >
-                  <path d="M0,0 L8,3 L0,6" fill="none" stroke="var(--color-primary, #003B7E)" strokeWidth="1.5" />
+                  <path
+                    d="M0,0 L8,3 L0,6"
+                    fill="none"
+                    stroke="var(--color-primary, #003B7E)"
+                    strokeWidth="1.5"
+                  />
                 </marker>
                 <marker
                   id="arrowhead-bright"
@@ -178,7 +185,12 @@ export default function ResearchGraph() {
                   refY="3"
                   orient="auto"
                 >
-                  <path d="M0,0 L8,3 L0,6" fill="none" stroke="var(--color-primary, #003B7E)" strokeWidth="2" />
+                  <path
+                    d="M0,0 L8,3 L0,6"
+                    fill="none"
+                    stroke="var(--color-primary, #003B7E)"
+                    strokeWidth="2"
+                  />
                 </marker>
               </defs>
               {arrowPaths.map((a) => {
@@ -219,9 +231,7 @@ export default function ResearchGraph() {
         </div>
       )}
 
-      {selectedCard && (
-        <CardModal cardId={selectedCard} onClose={() => setSelectedCard(null)} />
-      )}
+      {selectedCard && <CardModal cardId={selectedCard} onClose={() => setSelectedCard(null)} />}
     </div>
   );
 }

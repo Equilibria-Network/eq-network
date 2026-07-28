@@ -1,7 +1,7 @@
 // src/components/home/Hero.tsx
-import { homeContent } from "@content/home";
-import LorenzAttractor from "./LorenzAttractor";
-import styles from "./Hero.module.css";
+import { homeContent } from '@content/home';
+import LorenzAttractor from './LorenzAttractor';
+import styles from './Hero.module.css';
 
 export default function Hero() {
   const { hero } = homeContent;
@@ -9,20 +9,16 @@ export default function Hero() {
   // Helper to wrap highlighted terms in spans
   const renderTextWithHighlights = (
     text: string,
-    highlights: string[] = [],
+    highlights: string[] = []
   ): { __html: string } => {
     if (!highlights.length) return { __html: text };
 
     // Escape regex metacharacters so a highlight term is matched literally.
-    const escapeRegExp = (s: string) =>
-      s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     let result = text;
     highlights.forEach((highlight) => {
-      const regex = new RegExp(`\\b${escapeRegExp(highlight)}\\b`, "gi");
-      result = result.replace(
-        regex,
-        `<span class="${styles.highlight}">${highlight}</span>`,
-      );
+      const regex = new RegExp(`\\b${escapeRegExp(highlight)}\\b`, 'gi');
+      result = result.replace(regex, `<span class="${styles.highlight}">${highlight}</span>`);
     });
 
     return { __html: result };
@@ -54,7 +50,7 @@ export default function Hero() {
                 className={styles.description}
                 dangerouslySetInnerHTML={renderTextWithHighlights(
                   hero.description,
-                  hero.highlights,
+                  hero.highlights
                 )}
               />
             </div>
@@ -91,7 +87,7 @@ export default function Hero() {
                 className={styles.description}
                 dangerouslySetInnerHTML={renderTextWithHighlights(
                   hero.description,
-                  hero.highlights,
+                  hero.highlights
                 )}
               />
             </div>

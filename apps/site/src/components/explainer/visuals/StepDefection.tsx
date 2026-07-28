@@ -37,17 +37,13 @@ export default function StepDefection({ width, height }: Props) {
       const isBroken = BROKEN_EDGES.has(edgeKey(edge.source, edge.target));
 
       svg.appendChild(
-        rc.line(
-          pad + sn.nx * w, pad + sn.ny * h,
-          pad + tn.nx * w, pad + tn.ny * h,
-          {
-            seed: edge.seed,
-            roughness: 0.8,
-            stroke: isBroken ? COLORS.edgeBroken : COLORS.edgeNeutral,
-            strokeWidth: isBroken ? 1.5 : 1,
-            strokeLineDash: isBroken ? [6, 4] : undefined,
-          }
-        )
+        rc.line(pad + sn.nx * w, pad + sn.ny * h, pad + tn.nx * w, pad + tn.ny * h, {
+          seed: edge.seed,
+          roughness: 0.8,
+          stroke: isBroken ? COLORS.edgeBroken : COLORS.edgeNeutral,
+          strokeWidth: isBroken ? 1.5 : 1,
+          strokeLineDash: isBroken ? [6, 4] : undefined,
+        })
       );
     }
 
@@ -82,7 +78,8 @@ export default function StepDefection({ width, height }: Props) {
       const tipY = y + ay;
       svg.appendChild(
         rc.line(
-          tipX, tipY,
+          tipX,
+          tipY,
           tipX - Math.cos(angle - 0.5) * headLen,
           tipY - Math.sin(angle - 0.5) * headLen,
           { seed: node.seed + 501, roughness: 0.5, stroke: COLORS.defecting, strokeWidth: 1.5 }
@@ -90,7 +87,8 @@ export default function StepDefection({ width, height }: Props) {
       );
       svg.appendChild(
         rc.line(
-          tipX, tipY,
+          tipX,
+          tipY,
           tipX - Math.cos(angle + 0.5) * headLen,
           tipY - Math.sin(angle + 0.5) * headLen,
           { seed: node.seed + 502, roughness: 0.5, stroke: COLORS.defecting, strokeWidth: 1.5 }
@@ -132,12 +130,5 @@ export default function StepDefection({ width, height }: Props) {
     }
   }, [width, height]);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }

@@ -76,7 +76,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
 }
 
 /* Text Content */
@@ -109,12 +110,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 4rem 2.5rem;
   }
-  
+
   .iconContainer {
     width: 180px;
     height: 180px;
   }
-  
+
   .principleTitle {
     font-size: 1.375rem;
   }
@@ -124,29 +125,29 @@
   .section {
     padding: 5rem 0;
   }
-  
+
   .header {
     margin-bottom: 4rem;
   }
-  
+
   .sectionTitle {
     font-size: 2.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.125rem;
   }
-  
+
   .principlesGrid {
     gap: 3.5rem 2rem;
   }
-  
+
   .iconContainer {
     width: 160px;
     height: 160px;
     margin-bottom: 1.5rem;
   }
-  
+
   .principleTitle {
     font-size: 1.25rem;
   }

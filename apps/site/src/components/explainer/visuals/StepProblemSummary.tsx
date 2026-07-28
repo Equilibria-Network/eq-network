@@ -1,11 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import rough from 'roughjs';
-import {
-  SOCIETY_NODES,
-  SOCIETY_EDGES,
-  COOPERATIVE_REGION,
-  COLORS,
-} from './societyLayout';
+import { SOCIETY_NODES, SOCIETY_EDGES, COOPERATIVE_REGION, COLORS } from './societyLayout';
 
 interface Props {
   width: number;
@@ -34,16 +29,12 @@ export default function StepProblemSummary({ width, height }: Props) {
       if (!sn || !tn) continue;
 
       svg.appendChild(
-        rc.line(
-          pad + sn.nx * w, pad + sn.ny * h,
-          pad + tn.nx * w, pad + tn.ny * h,
-          {
-            seed: edge.seed,
-            roughness: 0.8,
-            stroke: '#00000018',
-            strokeWidth: 0.8,
-          }
-        )
+        rc.line(pad + sn.nx * w, pad + sn.ny * h, pad + tn.nx * w, pad + tn.ny * h, {
+          seed: edge.seed,
+          roughness: 0.8,
+          stroke: '#00000018',
+          strokeWidth: 0.8,
+        })
       );
     }
 
@@ -80,8 +71,14 @@ export default function StepProblemSummary({ width, height }: Props) {
       }
 
       // Question mark labels on a subset of nodes
-      if (node.id === 'inst-2' || node.id === 'ag-5' || node.id === 'ag-10' ||
-          node.id === 'inst-4' || node.id === 'ag-9' || node.id === 'ag-3') {
+      if (
+        node.id === 'inst-2' ||
+        node.id === 'ag-5' ||
+        node.id === 'ag-10' ||
+        node.id === 'inst-4' ||
+        node.id === 'ag-9' ||
+        node.id === 'ag-3'
+      ) {
         const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         label.setAttribute('x', String(x));
         label.setAttribute('y', String(y - node.radius - 5));
@@ -96,12 +93,5 @@ export default function StepProblemSummary({ width, height }: Props) {
     }
   }, [width, height]);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }

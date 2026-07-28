@@ -78,7 +78,8 @@
   max-height: 120px;
   object-fit: contain;
   /* Convert to monochrome using CSS filter to match --color-primary */
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
 }
 
 /* Partner Content */

@@ -18,19 +18,19 @@ export default function AboutPartners() {
 
         <div className={styles.partnersGrid}>
           {partners.map((partner) => (
-            <div 
-              key={partner.id} 
+            <div
+              key={partner.id}
               className={styles.partnerCard}
               onClick={() => handlePartnerClick(partner.website)}
             >
               <div className={styles.logoContainer}>
-                <img 
-                  src={partner.logo} 
+                <img
+                  src={partner.logo}
                   alt={`${partner.name} logo`}
                   className={styles.partnerLogo}
                 />
               </div>
-              
+
               <div className={styles.partnerContent}>
                 <h3 className={styles.partnerName}>{partner.name}</h3>
                 <p className={styles.partnerDescription}>{partner.description}</p>

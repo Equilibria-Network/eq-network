@@ -15,7 +15,7 @@ export default function AboutHero() {
             <h1 className={styles.title}>{hero.title}</h1>
             <p className={styles.subtitle}>{hero.leftText}</p>
           </div>
-          
+
           <div className={styles.rightColumn}>
             <p className={styles.description}>{hero.rightText}</p>
           </div>

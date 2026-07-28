@@ -77,7 +77,9 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
                   {scenario.assumptions.map((a) => (
                     <li key={a.text} className={styles.assumptionsItem}>
                       {a.text}
-                      {a.omits && <span className={styles.assumptionsOmits}> — leaves out: {a.omits}</span>}
+                      {a.omits && (
+                        <span className={styles.assumptionsOmits}> — leaves out: {a.omits}</span>
+                      )}
                     </li>
                   ))}
                 </ul>

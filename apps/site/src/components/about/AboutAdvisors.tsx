@@ -20,26 +20,20 @@ export default function AboutAdvisors() {
 
         <div className={styles.advisorsGrid}>
           {advisors.map((advisor) => (
-            <div 
-              key={advisor.id} 
+            <div
+              key={advisor.id}
               className={`${styles.cardWrapper} ${advisor.website && advisor.website !== 'TBD' ? styles.clickable : ''}`}
               onClick={() => handleCardClick(advisor.website)}
             >
               <div className={styles.card}>
                 <div className={styles.imageContainer}>
-                  <img 
-                    src={advisor.image} 
-                    alt={advisor.name}
-                    className={styles.advisorImage}
-                  />
+                  <img src={advisor.image} alt={advisor.name} className={styles.advisorImage} />
                 </div>
-                
+
                 <div className={styles.content}>
                   <h3 className={styles.advisorName}>{advisor.name}</h3>
                   <p className={styles.advisorAffiliation}>{advisor.affiliation}</p>
-                  {advisor.bio && (
-                    <p className={styles.advisorBio}>{advisor.bio}</p>
-                  )}
+                  {advisor.bio && <p className={styles.advisorBio}>{advisor.bio}</p>}
                   {advisor.website && advisor.website !== 'TBD' && (
                     <p className={styles.clickHint}>Click to visit profile</p>
                   )}

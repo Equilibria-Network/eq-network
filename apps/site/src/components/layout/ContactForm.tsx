@@ -1,12 +1,12 @@
 // src/components/layout/ContactForm.tsx
-import React from "react";
-import { useForm, ValidationError } from "@formspree/react";
-import styles from "./ContactForm.module.css";
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
+import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
   const isConfigured = Boolean(formspreeEndpoint);
-  const [state, handleSubmit] = useForm(formspreeEndpoint || "placeholder");
+  const [state, handleSubmit] = useForm(formspreeEndpoint || 'placeholder');
 
   // Without a configured endpoint the form would post to a dead placeholder and
   // fail silently. Show a clear notice instead of a broken-looking form.
@@ -15,8 +15,8 @@ export default function ContactForm() {
       <div className={styles.contactForm}>
         <h2 className={styles.title}>Contact Us</h2>
         <p>
-          The contact form is not configured yet. Please reach out via one of
-          the links in the footer.
+          The contact form is not configured yet. Please reach out via one of the links in the
+          footer.
         </p>
       </div>
     );
@@ -94,19 +94,14 @@ export default function ContactForm() {
         <button
           type="submit"
           className={`${styles.submitButton} ${
-            state.submitting
-              ? styles.submitButtonDisabled
-              : styles.submitButtonActive
+            state.submitting ? styles.submitButtonDisabled : styles.submitButtonActive
           }`}
           disabled={state.submitting}
         >
-          {state.submitting ? "Sending..." : "Send Message"}
+          {state.submitting ? 'Sending...' : 'Send Message'}
         </button>
 
-        <ValidationError
-          errors={state.errors}
-          className={styles.validationError}
-        />
+        <ValidationError errors={state.errors} className={styles.validationError} />
       </form>
     </div>
   );

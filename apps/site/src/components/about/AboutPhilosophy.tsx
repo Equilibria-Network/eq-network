@@ -19,13 +19,9 @@ export default function AboutPhilosophy() {
             <div key={index} className={styles.principleItem}>
               {/* Large Icon */}
               <div className={styles.iconContainer}>
-                <img 
-                  src={principle.icon} 
-                  alt="" 
-                  className={styles.icon}
-                />
+                <img src={principle.icon} alt="" className={styles.icon} />
               </div>
-              
+
               {/* Text Content */}
               <div className={styles.textContent}>
                 <h3 className={styles.principleTitle}>{principle.title}</h3>

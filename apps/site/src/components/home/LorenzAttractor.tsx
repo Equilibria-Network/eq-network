@@ -9,16 +9,16 @@ import {
   projectPoint,
   getCssColor,
   type Point3D,
-  type SystemParams
+  type SystemParams,
 } from './lorenzUtils';
 import styles from './LorenzAttractor.module.css';
 
 export default function LorenzAttractor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
-  
+
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
-  
+
   // Simulation state
   const pointsRef = useRef<Point3D[]>([]);
   const secondaryPointsRef = useRef<Point3D[]>([]);
@@ -34,7 +34,7 @@ export default function LorenzAttractor() {
         if (container) {
           setDimensions({
             width: container.clientWidth,
-            height: container.clientHeight
+            height: container.clientHeight,
           });
         }
       }
@@ -49,10 +49,7 @@ export default function LorenzAttractor() {
   useEffect(() => {
     // Create initial seed and perturbed version
     const initialSeed = createInitialSeed();
-    const perturbedSeed = createPerturbedSeed(
-      initialSeed, 
-      LORENZ_CONFIG.butterfly.perturbation
-    );
+    const perturbedSeed = createPerturbedSeed(initialSeed, LORENZ_CONFIG.butterfly.perturbation);
 
     // Pre-calculate initial points for both trajectories
     const initialPoints = preCalculatePoints(
@@ -61,7 +58,7 @@ export default function LorenzAttractor() {
       LORENZ_CONFIG.animation.initialPoints,
       LORENZ_CONFIG.animation.initialSpeed
     );
-    
+
     const secondaryInitialPoints = preCalculatePoints(
       perturbedSeed,
       systemRef.current,
@@ -92,10 +89,7 @@ export default function LorenzAttractor() {
         currentPointRef.current = nextPoint;
 
         // Secondary trajectory (perturbed)
-        const nextSecondaryPoint = calculateNext(
-          secondaryPointRef.current, 
-          systemRef.current
-        );
+        const nextSecondaryPoint = calculateNext(secondaryPointRef.current, systemRef.current);
         secondaryPointsRef.current.push(nextSecondaryPoint);
         secondaryPointRef.current = nextSecondaryPoint;
 
@@ -137,7 +131,7 @@ export default function LorenzAttractor() {
     if (points.length < 2) return;
 
     const canvas = { width: dimensions.width, height: dimensions.height };
-    
+
     for (let i = 1; i < points.length; i++) {
       const prevPoint = projectPoint(
         points[i - 1],
@@ -145,7 +139,7 @@ export default function LorenzAttractor() {
         LORENZ_CONFIG.display.bounds,
         LORENZ_CONFIG.animation.padding
       );
-      
+
       const currPoint = projectPoint(
         points[i],
         canvas,
@@ -164,7 +158,7 @@ export default function LorenzAttractor() {
       ctx.lineWidth = 2;
       ctx.stroke();
     }
-    
+
     // Draw indicator circle at the tip (current point)
     if (drawIndicator && points.length > 0) {
       const tipPoint = projectPoint(
@@ -173,7 +167,7 @@ export default function LorenzAttractor() {
         LORENZ_CONFIG.display.bounds,
         LORENZ_CONFIG.animation.padding
       );
-      
+
       ctx.beginPath();
       ctx.arc(tipPoint.x, tipPoint.y, 4, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${baseOpacity})`;

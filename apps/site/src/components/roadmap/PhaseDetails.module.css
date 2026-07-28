@@ -31,7 +31,8 @@
 .largeImage {
   width: 100%;
   height: auto;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
 }
 
 .researcherBio {
@@ -265,7 +266,8 @@
   width: 24px;
   height: 24px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
 }
 
 /* Responsive */
@@ -274,21 +276,21 @@
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  
+
   .imageSection {
     position: static;
     max-width: 300px;
     margin: 0 auto;
   }
-  
+
   .phaseTitle {
     font-size: 2rem;
   }
-  
+
   .phaseTagline {
     font-size: 1.125rem;
   }
-  
+
   .phaseDescription {
     font-size: 1rem;
   }
@@ -298,44 +300,44 @@
   .detailsContent {
     gap: 2rem;
   }
-  
+
   .imageSection {
     max-width: 250px;
   }
-  
+
   .phaseTitle {
     font-size: 1.75rem;
   }
-  
+
   .phaseTagline {
     font-size: 1rem;
   }
-  
+
   .phaseDescription {
     font-size: 0.9375rem;
   }
-  
+
   .researcherBio {
     font-size: 0.875rem;
   }
-  
+
   .areaTitle {
     font-size: 1.5rem;
   }
-  
+
   .areaDescription {
     font-size: 0.9375rem;
   }
-  
+
   .cardContent {
     padding: 1.25rem 1.5rem;
     gap: 1.5rem;
   }
-  
+
   .publicationTitle {
     font-size: 1rem;
   }
-  
+
   .platformIcon {
     width: 20px;
     height: 20px;
@@ -346,51 +348,51 @@
   .detailsContent {
     gap: 1.5rem;
   }
-  
+
   .imageSection {
     max-width: 200px;
   }
-  
+
   .phaseTitle {
     font-size: 1.5rem;
   }
-  
+
   .phaseTagline {
     font-size: 0.9375rem;
   }
-  
+
   .phaseDescription {
     font-size: 0.875rem;
   }
-  
+
   .researcherBio {
     font-size: 0.8125rem;
   }
-  
+
   .areaTitle {
     font-size: 1.25rem;
   }
-  
+
   .areaDescription {
     font-size: 0.875rem;
   }
-  
+
   .cardContent {
     padding: 1rem 1.25rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .platformLinks {
     width: 100%;
     justify-content: flex-start;
   }
-  
+
   .publicationMeta {
     font-size: 0.8125rem;
   }
-  
+
   .researchAreasSection {
     gap: 2.5rem;
   }

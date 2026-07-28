@@ -75,7 +75,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--color-primary, #003B7E);
+  background: var(--color-primary, #003b7e);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
@@ -87,7 +87,7 @@
   z-index: 1;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-primary, #003B7E);
+  color: var(--color-primary, #003b7e);
   margin: 0 0 8px 0;
   line-height: 1.2;
 }
@@ -122,14 +122,14 @@
 .pipelineArrowLine {
   width: 60px;
   height: 1.5px;
-  background: var(--color-primary, #003B7E);
+  background: var(--color-primary, #003b7e);
   opacity: 0.3;
 }
 
 .pipelineArrowHead {
   width: 0;
   height: 0;
-  border-left: 6px solid var(--color-primary, #003B7E);
+  border-left: 6px solid var(--color-primary, #003b7e);
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   opacity: 0.3;
@@ -137,7 +137,7 @@
 
 .pipelineArrowLabel {
   font-size: 0.62rem;
-  color: var(--color-primary, #003B7E);
+  color: var(--color-primary, #003b7e);
   opacity: 0.45;
   font-style: italic;
   text-align: center;
@@ -163,9 +163,9 @@
 .backBtn {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-primary, #003B7E);
+  color: var(--color-primary, #003b7e);
   background: none;
-  border: 1px solid var(--color-primary, #003B7E);
+  border: 1px solid var(--color-primary, #003b7e);
   border-radius: 6px;
   padding: 5px 14px;
   cursor: pointer;
@@ -193,9 +193,9 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-primary, #003B7E);
+  color: var(--color-primary, #003b7e);
   padding-bottom: 6px;
-  border-bottom: 2px solid var(--color-primary, #003B7E);
+  border-bottom: 2px solid var(--color-primary, #003b7e);
 }
 
 .cardsGrid {
@@ -272,7 +272,7 @@
   z-index: 1;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--color-primary, #003B7E);
+  color: var(--color-primary, #003b7e);
   margin: 0 0 4px 0;
   line-height: 1.25;
 }
@@ -302,8 +302,14 @@
    ═══════════════════════════════════════════════ */
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -386,9 +392,9 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-primary, #003B7E);
+    color: var(--color-primary, #003b7e);
     padding-bottom: 4px;
-    border-bottom: 2px solid var(--color-primary, #003B7E);
+    border-bottom: 2px solid var(--color-primary, #003b7e);
     margin-top: 12px;
   }
 

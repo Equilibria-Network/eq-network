@@ -137,8 +137,7 @@ export const labContent: LabContent = {
 
   scenariosIntro: {
     title: 'The scenarios',
-    body:
-      'Each scenario is a named way people lose influence over their future, drawn from the research literature. Each gets a minimal simulated environment where that failure unfolds by default — and where coordination mechanisms can be composed, run, and measured on how much influence they preserve.',
+    body: 'Each scenario is a named way people lose influence over their future, drawn from the research literature. Each gets a minimal simulated environment where that failure unfolds by default — and where coordination mechanisms can be composed, run, and measured on how much influence they preserve.',
   },
 
   readingKey: {
@@ -285,7 +284,8 @@ export const labContent: LabContent = {
       assumptions: [
         {
           text: 'Culture is tracked by origin only — human- vs AI-originated — as a two-sided contagion.',
-          omits: 'what the ideas actually say (content and dissonance belong to a planned sibling model)',
+          omits:
+            'what the ideas actually say (content and dissonance belong to a planned sibling model)',
         },
         {
           text: 'The persuasive advantage rides on the variant, not the carrier: a converted human spreads AI-origin culture at full strength.',
@@ -453,8 +453,7 @@ export const labContent: LabContent = {
     title: 'What the leaderboard will measure',
     caption:
       'Illustrative data. Only the Governed Commons has produced real runs so far; real benchmark results land here as scenarios go live.',
-    note:
-      'Read the last column: defenses that score well in a single domain tend to score worse when domains couple. That gap is the finding the Lab is built to measure.',
+    note: 'Read the last column: defenses that score well in a single domain tend to score worse when domains couple. That gap is the finding the Lab is built to measure.',
     columns: ['commons', 'economic', 'cultural', 'political', 'combined'],
     rows: [
       { mechanism: 'Quota voting', scores: { commons: 0.81, combined: 0.44 } },
@@ -470,8 +469,7 @@ export const labContent: LabContent = {
 
   closing: {
     headline: 'Build a defense',
-    body:
-      'The Lab is open source: preset environments, composable mechanisms, shared metrics. Design a mechanism, run it against a scenario, and see how much influence it preserves. If you have an idea about how groups should decide, this is the wind tunnel.',
+    body: 'The Lab is open source: preset environments, composable mechanisms, shared metrics. Design a mechanism, run it against a scenario, and see how much influence it preserves. If you have an idea about how groups should decide, this is the wind tunnel.',
     links: [
       {
         href: '/lab/playground',
@@ -488,8 +486,7 @@ export const labContent: LabContent = {
       {
         href: '/products',
         label: 'The Lab in context',
-        description:
-          'How the Democratic Resilience Lab fits Equilibria’s open-source products.',
+        description: 'How the Democratic Resilience Lab fits Equilibria’s open-source products.',
       },
       {
         href: 'https://equilibria1.substack.com/p/stories-of-the-future-are-undermined',
@@ -500,8 +497,7 @@ export const labContent: LabContent = {
       {
         href: '#contact',
         label: 'Work with us',
-        description:
-          'Researchers, mechanism designers, funders: tell us what you would test.',
+        description: 'Researchers, mechanism designers, funders: tell us what you would test.',
       },
     ],
   },

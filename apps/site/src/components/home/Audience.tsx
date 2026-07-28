@@ -22,11 +22,11 @@ export default function Audience() {
               <div key={audienceItem.id} className={styles.audienceColumn}>
                 {/* Title First */}
                 <h3 className={styles.cardTitle}>{audienceItem.title}</h3>
-                
+
                 {/* Image Second */}
                 <div className={styles.imageContainer}>
-                  <img 
-                    src={audienceItem.image} 
+                  <img
+                    src={audienceItem.image}
                     alt={audienceItem.title}
                     className={styles.audienceImage}
                   />
@@ -34,7 +34,7 @@ export default function Audience() {
 
                 {/* Claim Third */}
                 <p className={styles.cardClaim}>{audienceItem.claim}</p>
-                
+
                 {/* Example Fourth */}
                 <div className={styles.cardExample}>
                   <h4 className={styles.exampleTitle}>Example</h4>

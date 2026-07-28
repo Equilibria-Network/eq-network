@@ -9,13 +9,13 @@ interface Props {
   description?: string;
 }
 
-const { 
+const {
   title = 'Equilibria Network',
-  description = 'Exploring the design space of collective intelligence through simulations and mathematical foundations.'
+  description = 'Exploring the design space of collective intelligence through simulations and mathematical foundations.',
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -28,15 +28,15 @@ const {
   <body>
     <!-- Parallax Background Pattern -->
     <div class="parallax-background"></div>
-    
+
     <!-- Navbar -->
     <Navbar client:load currentPath={Astro.url.pathname} />
-    
+
     <!-- Main Content -->
     <main>
       <slot />
     </main>
-    
+
     <!-- Footer -->
     <Footer client:load />
   </body>

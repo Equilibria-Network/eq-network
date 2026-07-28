@@ -1,7 +1,7 @@
 // src/components/about/AboutTeam.tsx
-import React, { useState, useEffect, useRef } from "react";
-import { teamMembers } from "@content/team";
-import styles from "./AboutTeam.module.css";
+import React, { useState, useEffect, useRef } from 'react';
+import { teamMembers } from '@content/team';
+import styles from './AboutTeam.module.css';
 
 export default function AboutTeam() {
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
@@ -24,8 +24,8 @@ export default function AboutTeam() {
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, [flippedCard]);
 
   return (
@@ -33,9 +33,7 @@ export default function AboutTeam() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.sectionTitle}>Team</h2>
-          <p className={styles.subtitle}>
-            The people building Equilibria Network
-          </p>
+          <p className={styles.subtitle}>The people building Equilibria Network</p>
         </div>
 
         <div className={styles.teamGrid}>
@@ -45,17 +43,11 @@ export default function AboutTeam() {
               className={styles.cardWrapper}
               onClick={(e) => handleCardClick(e, member.id)}
             >
-              <div
-                className={`${styles.card} ${flippedCard === member.id ? styles.flipped : ""}`}
-              >
+              <div className={`${styles.card} ${flippedCard === member.id ? styles.flipped : ''}`}>
                 {/* Front Side */}
                 <div className={styles.cardFront}>
                   <div className={styles.imageContainer}>
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className={styles.memberImage}
-                    />
+                    <img src={member.image} alt={member.name} className={styles.memberImage} />
                   </div>
 
                   <div className={styles.frontContent}>
@@ -71,7 +63,7 @@ export default function AboutTeam() {
                   <div className={styles.backContent}>
                     <h3 className={styles.backName}>{member.name}</h3>
                     <div className={styles.detailsText}>
-                      {member.details.split("\n\n").map((paragraph, idx) => (
+                      {member.details.split('\n\n').map((paragraph, idx) => (
                         <p key={idx} className={styles.detailParagraph}>
                           {paragraph}
                         </p>

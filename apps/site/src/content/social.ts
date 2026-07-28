@@ -10,21 +10,21 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'Twitter',
     url: 'https://twitter.com/equilibrianet',
-    icon: 'Twitter'
+    icon: 'Twitter',
   },
   {
     name: 'GitHub',
     url: 'https://github.com/equilibria-xyz',
-    icon: 'Github'
+    icon: 'Github',
   },
   {
     name: 'LinkedIn',
     url: 'https://linkedin.com/company/equilibria-network',
-    icon: 'Linkedin'
+    icon: 'Linkedin',
   },
   {
     name: 'Substack',
     url: 'https://equilibria.substack.com',
-    icon: 'Mail'
-  }
+    icon: 'Mail',
+  },
 ];

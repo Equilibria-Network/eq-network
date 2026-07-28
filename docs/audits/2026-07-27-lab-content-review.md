@@ -9,7 +9,7 @@ plus a collapse audit of the coupled model
 Ostrom-tradition ABM scholar (fresh-careful), a 17-year-old who played the
 sliders first (the register's own bar; distracted), a JASSS-editor-like ABM
 standards reader (90 seconds, hostile), a Gradual-Disempowerment-co-author-like
-ally (substantive). All four are simulations of readers *like* those people,
+ally (substantive). All four are simulations of readers _like_ those people,
 not the people themselves.
 
 ---
@@ -20,18 +20,18 @@ not the people themselves.
 model's non-collapse is partly manufactured, and the cards don't say so.**
 The high-schooler's exit: "still don't know if there's a hidden floor they're
 not telling me about — probably go back and try to make the pond hit exactly
-zero myself." The cards' candor currently works as *disclaimer* ("this is a
-knob") when readers need it to work as *explanation* ("here is the floor, here
+zero myself." The cards' candor currently works as _disclaimer_ ("this is a
+knob") when readers need it to work as _explanation_ ("here is the floor, here
 is what sets it, here is what removing it does — we checked").
 
 ### The audited floors (keep these numbers current if dynamics change)
 
-| Domain | Floor at defaults | Verdict | The floor-setter |
-|---|---|---|---|
-| Culture | share ≈ 0.54–0.59 coupled-undefended | **Manufactured** — recovery 0 ⇒ share 0.008 (total collapse) | constant native `recovery` (0.15/tick), never scaled by whether a human-culture community remains to revert into |
-| Politics | human share ≈ 0.45–0.50 | **Structural, undocumented** — insensitive to self_weight (0.15→0.01), update_rate, amplification 8 | AI listening rows are frozen *pointing at citizens*: AI actors never stop attending to humans, perpetually returning eigenvector mass to the demos |
-| Economy | income share 0.07 (T=500) → 0.018 (T=1500, all-out) | **No floor** — genuinely still sliding | — (honest collapse) |
-| Consensus | error bounded below `ai_bias` | Structural by design | Friedkin–Johnsen anchor (documented on the card — the one floor that is) |
+| Domain    | Floor at defaults                                   | Verdict                                                                                             | The floor-setter                                                                                                                                   |
+| --------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Culture   | share ≈ 0.54–0.59 coupled-undefended                | **Manufactured** — recovery 0 ⇒ share 0.008 (total collapse)                                        | constant native `recovery` (0.15/tick), never scaled by whether a human-culture community remains to revert into                                   |
+| Politics  | human share ≈ 0.45–0.50                             | **Structural, undocumented** — insensitive to self_weight (0.15→0.01), update_rate, amplification 8 | AI listening rows are frozen _pointing at citizens_: AI actors never stop attending to humans, perpetually returning eigenvector mass to the demos |
+| Economy   | income share 0.07 (T=500) → 0.018 (T=1500, all-out) | **No floor** — genuinely still sliding                                                              | — (honest collapse)                                                                                                                                |
+| Consensus | error bounded below `ai_bias`                       | Structural by design                                                                                | Friedkin–Johnsen anchor (documented on the card — the one floor that is)                                                                           |
 
 Two structural facts no card mentions: **opinions feed back into nothing**
 (consensus is a pure readout), and **undefended politics is a sink** (without a
@@ -46,8 +46,8 @@ tax to erode, influence loss has zero downstream consequence).
   the calibrated-knob admission is "the sentence that never appears in the
   papers I reject."
 - **Bullets phrased in the language of things the visitor just touched.** The
-  high-schooler understood alignment/sanctions/coin-flip bullets *because they
-  matched sliders she had dragged*; the κ=0 sentence ("money buys reach,
+  high-schooler understood alignment/sanctions/coin-flip bullets _because they
+  matched sliders she had dragged_; the κ=0 sentence ("money buys reach,
   culture directs attention, influence writes the rules — all exactly neutral
   at κ=0") was her favorite on the page.
 - **The causal-twin instrument** (same-seed pairs, differenced) — the experts'
@@ -78,7 +78,7 @@ tax to erode, influence loss has zero downstream consequence).
    noun), "paired same-seed runs, differenced" (three re-reads, skipped),
    "principal" (school principal collision). Confirmed passes: "coin-flip,"
    "logistic" (recognized from biology), the three-arrows κ sentence.
-5. **The omissions inventory must include the *known-strongest* omissions,
+5. **The omissions inventory must include the _known-strongest_ omissions,
    not just the convenient ones.** Missing today, flagged by the panel:
    - **Communication / cheap talk** (commons) — the single strongest treatment
      effect in the CPR experimental literature (Ostrom–Walker–Gardner 1992);
@@ -87,8 +87,8 @@ tax to erode, influence loss has zero downstream consequence).
    - **Irreversibility / basins** (everywhere) — GD's actual endpoint; nothing
      in the build is a basin, everything is a rate or level. Say so.
    - **§2's consumption channel** (economic) — the card says "no demand side"
-     but not that this makes *half of GD §2 unrepresentable* in the substrate.
-   - **§4's state dependence** (political) — the card measures *voice*; the
+     but not that this makes _half of GD §2 unrepresentable_ in the substrate.
+   - **§4's state dependence** (political) — the card measures _voice_; the
      paper's claim is about tax base / coercive capacity / legitimacy. The only
      trace is the words "tax enforcement" inside a coupling label. Flag it.
    - **Additional couplings** (combined) — the ring is the minimum viable loop,

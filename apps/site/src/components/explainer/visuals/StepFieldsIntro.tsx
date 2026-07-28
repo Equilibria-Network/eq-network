@@ -64,11 +64,12 @@ export default function StepFieldsIntro({ width, height }: Props) {
       const tn = SOCIETY_NODES.find((n) => n.id === edge.target);
       if (!sn || !tn) continue;
       svg.appendChild(
-        rc.line(
-          pad + sn.nx * w, pad + sn.ny * h,
-          pad + tn.nx * w, pad + tn.ny * h,
-          { seed: edge.seed, roughness: 0.8, stroke: '#00000008', strokeWidth: 0.5 }
-        )
+        rc.line(pad + sn.nx * w, pad + sn.ny * h, pad + tn.nx * w, pad + tn.ny * h, {
+          seed: edge.seed,
+          roughness: 0.8,
+          stroke: '#00000008',
+          strokeWidth: 0.5,
+        })
       );
     }
     for (const node of SOCIETY_NODES) {
@@ -179,12 +180,5 @@ export default function StepFieldsIntro({ width, height }: Props) {
     }
   }, [width, height]);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }

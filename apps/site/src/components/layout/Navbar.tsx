@@ -29,7 +29,7 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
     { href: '/explainer', label: 'Thesis' },
     { href: '/roadmap', label: 'Roadmap' },
     { href: '/products', label: 'Products' },
-    { href: '/about', label: 'About' }
+    { href: '/about', label: 'About' },
   ];
 
   // On home page: show logo only when scrolled
@@ -41,12 +41,12 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
     <nav className={`${styles.navbar} ${shouldShowBackground ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         {/* Logo - visibility depends on page and scroll */}
-        <a 
-          href="/" 
+        <a
+          href="/"
           className={`${styles.logo} ${shouldShowLogo ? styles.logoVisible : styles.logoHidden}`}
         >
-          <img 
-            src="/img/logo/logo_icon_text_big.svg" 
+          <img
+            src="/img/logo/logo_icon_text_big.svg"
             alt="Equilibria Network"
             className={styles.logoImage}
           />
@@ -54,19 +54,15 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
 
         {/* Desktop Navigation */}
         <div className={styles.desktopNav}>
-          {navLinks.map(link => (
-            <a 
-              key={link.href}
-              href={link.href} 
-              className={styles.navLink}
-            >
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className={styles.navLink}>
               {link.label}
             </a>
           ))}
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className={styles.menuButton}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
@@ -78,10 +74,10 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
-          {navLinks.map(link => (
-            <a 
+          {navLinks.map((link) => (
+            <a
               key={link.href}
-              href={link.href} 
+              href={link.href}
               className={styles.mobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >

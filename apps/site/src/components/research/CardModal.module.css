@@ -12,8 +12,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal {
@@ -30,8 +34,14 @@
 }
 
 @keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .close {
@@ -64,7 +74,7 @@
   letter-spacing: 0.08em;
   padding: 3px 8px;
   border-radius: 3px;
-  background: #003B7E;
+  background: #003b7e;
   color: #fff;
 }
 
@@ -78,13 +88,13 @@
 }
 
 .statusBadge.active {
-  background: #003B7E12;
-  color: #003B7E;
+  background: #003b7e12;
+  color: #003b7e;
 }
 
 .statusBadge.early {
-  background: #4AB3F412;
-  color: #0055C4;
+  background: #4ab3f412;
+  color: #0055c4;
 }
 
 .statusBadge.planned {
@@ -179,7 +189,7 @@
 }
 
 .paperTitle a {
-  color: #003B7E;
+  color: #003b7e;
   text-decoration: none;
 }
 

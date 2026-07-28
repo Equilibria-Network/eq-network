@@ -24,7 +24,12 @@ function drawKeyGlyph(svg: SVGSVGElement, glyph: ReadingKeyGlyph): void {
       break;
     case 'ai':
       svg.appendChild(
-        rc.rectangle(cx - 6, cy - 6, 12, 12, { stroke: INK, strokeWidth: 1.4, roughness: 0.8, seed: 12 })
+        rc.rectangle(cx - 6, cy - 6, 12, 12, {
+          stroke: INK,
+          strokeWidth: 1.4,
+          roughness: 0.8,
+          seed: 12,
+        })
       );
       break;
     case 'edge': {

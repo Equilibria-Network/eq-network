@@ -31,7 +31,8 @@
   width: 100%;
   max-width: 300px;
   height: auto;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg) brightness(95%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
 }
 
 .textColumn {

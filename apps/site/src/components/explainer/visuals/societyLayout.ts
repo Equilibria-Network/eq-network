@@ -25,25 +25,25 @@ export const SOCIETY_NODES: SocietyNode[] = [
   // Institutions (rectangles) — larger, more central
   { id: 'inst-0', nx: 0.28, ny: 0.22, kind: 'institution', radius: 18, seed: 1001 },
   { id: 'inst-1', nx: 0.72, ny: 0.18, kind: 'institution', radius: 16, seed: 1002 },
-  { id: 'inst-2', nx: 0.50, ny: 0.48, kind: 'institution', radius: 20, seed: 1003 },
-  { id: 'inst-3', nx: 0.20, ny: 0.65, kind: 'institution', radius: 16, seed: 1004 },
-  { id: 'inst-4', nx: 0.78, ny: 0.70, kind: 'institution', radius: 17, seed: 1005 },
+  { id: 'inst-2', nx: 0.5, ny: 0.48, kind: 'institution', radius: 20, seed: 1003 },
+  { id: 'inst-3', nx: 0.2, ny: 0.65, kind: 'institution', radius: 16, seed: 1004 },
+  { id: 'inst-4', nx: 0.78, ny: 0.7, kind: 'institution', radius: 17, seed: 1005 },
   { id: 'inst-5', nx: 0.48, ny: 0.82, kind: 'institution', radius: 15, seed: 1006 },
 
   // Agents (circles) — smaller, distributed around institutions
   { id: 'ag-0', nx: 0.15, ny: 0.15, kind: 'agent', radius: 8, seed: 2001 },
   { id: 'ag-1', nx: 0.38, ny: 0.12, kind: 'agent', radius: 9, seed: 2002 },
-  { id: 'ag-2', nx: 0.58, ny: 0.10, kind: 'agent', radius: 7, seed: 2003 },
+  { id: 'ag-2', nx: 0.58, ny: 0.1, kind: 'agent', radius: 7, seed: 2003 },
   { id: 'ag-3', nx: 0.85, ny: 0.28, kind: 'agent', radius: 8, seed: 2004 },
-  { id: 'ag-4', nx: 0.12, ny: 0.40, kind: 'agent', radius: 9, seed: 2005 },
+  { id: 'ag-4', nx: 0.12, ny: 0.4, kind: 'agent', radius: 9, seed: 2005 },
   { id: 'ag-5', nx: 0.38, ny: 0.35, kind: 'agent', radius: 7, seed: 2006 },
   { id: 'ag-6', nx: 0.65, ny: 0.35, kind: 'agent', radius: 8, seed: 2007 },
-  { id: 'ag-7', nx: 0.88, ny: 0.50, kind: 'agent', radius: 7, seed: 2008 },
+  { id: 'ag-7', nx: 0.88, ny: 0.5, kind: 'agent', radius: 7, seed: 2008 },
   { id: 'ag-8', nx: 0.08, ny: 0.58, kind: 'agent', radius: 8, seed: 2009 },
-  { id: 'ag-9', nx: 0.35, ny: 0.60, kind: 'agent', radius: 9, seed: 2010 },
+  { id: 'ag-9', nx: 0.35, ny: 0.6, kind: 'agent', radius: 9, seed: 2010 },
   { id: 'ag-10', nx: 0.62, ny: 0.58, kind: 'agent', radius: 7, seed: 2011 },
-  { id: 'ag-11', nx: 0.90, ny: 0.78, kind: 'agent', radius: 8, seed: 2012 },
-  { id: 'ag-12', nx: 0.30, ny: 0.80, kind: 'agent', radius: 7, seed: 2013 },
+  { id: 'ag-11', nx: 0.9, ny: 0.78, kind: 'agent', radius: 8, seed: 2012 },
+  { id: 'ag-12', nx: 0.3, ny: 0.8, kind: 'agent', radius: 7, seed: 2013 },
   { id: 'ag-13', nx: 0.68, ny: 0.85, kind: 'agent', radius: 8, seed: 2014 },
 ];
 
@@ -91,7 +91,13 @@ export const SOCIETY_EDGES: SocietyEdge[] = [
 
 /** Node IDs that "defect" in steps 2+ */
 export const DEFECTING_NODES = new Set([
-  'ag-3', 'ag-7', 'inst-4', 'ag-11', 'ag-6', 'ag-13', 'inst-1',
+  'ag-3',
+  'ag-7',
+  'inst-4',
+  'ag-11',
+  'ag-6',
+  'ag-13',
+  'inst-1',
 ]);
 
 /** Edges that break (become dashed) in steps 2+ */
@@ -114,14 +120,30 @@ export function edgeKey(source: string, target: string): string {
 
 /** Nodes in the "cooperative" region (left/center cluster) */
 export const COOPERATIVE_REGION = new Set([
-  'inst-0', 'inst-2', 'inst-3', 'inst-5',
-  'ag-0', 'ag-1', 'ag-4', 'ag-5', 'ag-8', 'ag-9', 'ag-12',
+  'inst-0',
+  'inst-2',
+  'inst-3',
+  'inst-5',
+  'ag-0',
+  'ag-1',
+  'ag-4',
+  'ag-5',
+  'ag-8',
+  'ag-9',
+  'ag-12',
 ]);
 
 /** Nodes in the "non-cooperative" region (right cluster) */
 export const NON_COOPERATIVE_REGION = new Set([
-  'inst-1', 'inst-4',
-  'ag-2', 'ag-3', 'ag-6', 'ag-7', 'ag-10', 'ag-11', 'ag-13',
+  'inst-1',
+  'inst-4',
+  'ag-2',
+  'ag-3',
+  'ag-6',
+  'ag-7',
+  'ag-10',
+  'ag-11',
+  'ag-13',
 ]);
 
 // ── Colors ─────────────────────────────────────────────

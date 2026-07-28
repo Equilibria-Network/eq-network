@@ -30,11 +30,11 @@ export default function StepBadEquilibria({ width, height }: Props) {
     // Slight horizontal separation: cooperative nodes shift left, non-cooperative shift right
     const separation = 0.04;
 
-    function nodeX(node: typeof SOCIETY_NODES[0]): number {
+    function nodeX(node: (typeof SOCIETY_NODES)[0]): number {
       const shift = COOPERATIVE_REGION.has(node.id) ? -separation : separation;
       return pad + (node.nx + shift) * w;
     }
-    function nodeY(node: typeof SOCIETY_NODES[0]): number {
+    function nodeY(node: (typeof SOCIETY_NODES)[0]): number {
       return pad + node.ny * h;
     }
 
@@ -44,7 +44,10 @@ export default function StepBadEquilibria({ width, height }: Props) {
     const nonCoopNodes = SOCIETY_NODES.filter((n) => NON_COOPERATIVE_REGION.has(n.id));
 
     function regionBounds(nodes: typeof SOCIETY_NODES) {
-      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      let minX = Infinity,
+        maxX = -Infinity,
+        minY = Infinity,
+        maxY = -Infinity;
       for (const n of nodes) {
         const x = nodeX(n);
         const y = nodeY(n);
@@ -168,12 +171,5 @@ export default function StepBadEquilibria({ width, height }: Props) {
     }
   }, [width, height]);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }

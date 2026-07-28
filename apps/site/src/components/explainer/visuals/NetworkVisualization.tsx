@@ -221,8 +221,10 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
         // Colored top accent line (like a journal header)
         svg.appendChild(
           rc.line(
-            pos.x - rectW / 2 + 1, pos.y - rectH / 2,
-            pos.x + rectW / 2 - 1, pos.y - rectH / 2,
+            pos.x - rectW / 2 + 1,
+            pos.y - rectH / 2,
+            pos.x + rectW / 2 - 1,
+            pos.y - rectH / 2,
             {
               seed: node.seed + 1,
               roughness: 0.6,
@@ -234,16 +236,12 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
 
         // Faint content lines inside
         svg.appendChild(
-          rc.line(
-            pos.x - rectW / 2 + 3, pos.y,
-            pos.x + rectW / 2 - 3, pos.y,
-            {
-              seed: node.seed + 2,
-              roughness: 0.4,
-              stroke: color + '44',
-              strokeWidth: 0.5,
-            }
-          )
+          rc.line(pos.x - rectW / 2 + 3, pos.y, pos.x + rectW / 2 - 3, pos.y, {
+            seed: node.seed + 2,
+            roughness: 0.4,
+            stroke: color + '44',
+            strokeWidth: 0.5,
+          })
         );
       }
 
@@ -279,14 +277,7 @@ export default function NetworkVisualization({ activeStep, width, height }: Prop
     [nodes]
   );
 
-  return (
-    <svg
-      ref={svgRef}
-      width={width}
-      height={height}
-      style={{ display: 'block' }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }} />;
 }
 
 // Simple string hash for deterministic seeds

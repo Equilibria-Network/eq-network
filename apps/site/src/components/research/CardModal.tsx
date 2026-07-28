@@ -57,7 +57,9 @@ export default function CardModal({ cardId, onClose }: Props) {
 
         <div className={styles.body}>
           {card.fullDescription.split('\n\n').map((paragraph, i) => (
-            <p key={i} className={styles.paragraph}>{paragraph}</p>
+            <p key={i} className={styles.paragraph}>
+              {paragraph}
+            </p>
           ))}
         </div>
 

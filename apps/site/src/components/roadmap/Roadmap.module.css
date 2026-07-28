@@ -41,7 +41,7 @@
   .mainContentSection {
     padding: 2rem 0 4rem;
   }
-  
+
   .splitLayout {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -52,7 +52,7 @@
   .container {
     padding: 0 1.5rem;
   }
-  
+
   .mainContentSection {
     padding: 1.5rem 0 3rem;
   }
@@ -62,11 +62,11 @@
   .container {
     padding: 0 1rem;
   }
-  
+
   .mainContentSection {
     padding: 1rem 0 2.5rem;
   }
-  
+
   .splitLayout {
     gap: 2rem;
   }

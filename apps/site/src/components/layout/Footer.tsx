@@ -8,13 +8,25 @@ export default function Footer() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Roadmap', href: '/roadmap' },
-    { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true }
+    { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
   ];
 
   const socials = [
-    { name: 'GitHub', icon: '/img/socials/github.svg', href: 'https://github.com/Equilibria-Network' },
-    { name: 'LinkedIn', icon: '/img/socials/linkedin.svg', href: 'https://www.linkedin.com/company/equilibria-network' },
-    { name: 'Substack', icon: '/img/socials/substack.svg', href: 'https://substack.com/@equilibria1' }
+    {
+      name: 'GitHub',
+      icon: '/img/socials/github.svg',
+      href: 'https://github.com/Equilibria-Network',
+    },
+    {
+      name: 'LinkedIn',
+      icon: '/img/socials/linkedin.svg',
+      href: 'https://www.linkedin.com/company/equilibria-network',
+    },
+    {
+      name: 'Substack',
+      icon: '/img/socials/substack.svg',
+      href: 'https://substack.com/@equilibria1',
+    },
   ];
 
   return (
@@ -23,13 +35,14 @@ export default function Footer() {
         <div className={styles.content}>
           {/* Logo Section */}
           <div className={styles.logoSection}>
-            <img 
-              src="/img/logo/logo_text_only.svg" 
+            <img
+              src="/img/logo/logo_text_only.svg"
               alt="Equilibria Network"
               className={styles.logo}
             />
             <p className={styles.description}>
-              Exploring the design space of collective intelligence through simulations and mathematical foundations.
+              Exploring the design space of collective intelligence through simulations and
+              mathematical foundations.
             </p>
             <div className={styles.logoSocials}>
               {socials.map((social) => (
@@ -41,11 +54,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.name}
                 >
-                  <img 
-                    src={social.icon} 
-                    alt={social.name}
-                    className={styles.logoSocialIcon}
-                  />
+                  <img src={social.icon} alt={social.name} className={styles.logoSocialIcon} />
                 </a>
               ))}
             </div>
@@ -62,8 +71,8 @@ export default function Footer() {
             <ul className={styles.linksList}>
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className={styles.link}
                     {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
                   >
