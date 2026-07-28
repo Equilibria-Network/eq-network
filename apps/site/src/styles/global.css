@@ -2,6 +2,7 @@
 /* Global styles, resets, and base layout */
 
 @import './variables.css';
+@import './tailwind.css';
 
 * {
   margin: 0;

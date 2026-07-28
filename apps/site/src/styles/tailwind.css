@@ -1,0 +1,26 @@
+/* src/styles/tailwind.css */
+/* Tailwind v4 as a token + utility layer only. Preflight (Tailwind's reset) is
+   deliberately NOT imported: the site keeps its own reset/base in global.css, so
+   utilities coexist with the existing CSS Modules without changing the current look.
+   The brand tokens below are the canonical source for utilities (bg-primary,
+   text-accent, font-serif, ...) and mirror src/styles/variables.css. */
+
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  /* Equilibria brand palette */
+  --color-primary: #003b7e; /* deep navy (logo text) */
+  --color-primary-light: #0047a1;
+  --color-accent: #4ab3f4; /* light blue accent */
+  --color-sky: #89cff0;
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+
+  /* Type: system sans for UI/body, serif for editorial */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+}
