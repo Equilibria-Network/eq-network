@@ -2,9 +2,15 @@
 
 - Provenance: audit-0001
 - Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F1), `../../privacy/data-map.md`
-- Status: todo
+- Status: done — 2026-07-28
 - Owner: unassigned
 - Priority: now
+
+## Outcome
+
+Done. A short notice under the contact form (`ContactForm.tsx`, copy in `content/site.ts`) states that the
+name, email, and message are sent to the form processor to answer the enquiry, and links to the `/privacy`
+page (see [`task-0004-privacy-policy-page.md`](task-0004-privacy-policy-page.md)).
 
 ## Problem
 

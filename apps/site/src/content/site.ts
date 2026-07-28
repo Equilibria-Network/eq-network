@@ -48,6 +48,10 @@ export interface SiteContent {
     };
     submit: string;
     submitting: string;
+    privacyNotice: {
+      text: string;
+      linkLabel: string;
+    };
   };
   notFound: {
     code: string;
@@ -83,6 +87,7 @@ export const siteContent: SiteContent = {
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Roadmap', href: '/roadmap' },
+      { label: 'Privacy', href: '/privacy' },
       { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
     ],
     socials: [
@@ -117,6 +122,10 @@ export const siteContent: SiteContent = {
     },
     submit: 'Send Message',
     submitting: 'Sending...',
+    privacyNotice: {
+      text: 'Your name, email, and message are sent to our form processor to answer your enquiry. See our',
+      linkLabel: 'Privacy Policy',
+    },
   },
   notFound: {
     code: '404',

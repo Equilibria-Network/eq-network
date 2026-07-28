@@ -6,6 +6,19 @@
   margin: 0 auto;
 }
 
+.privacyNotice {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.privacyNotice a {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .title {
   font-size: 1.1rem;
   font-weight: 500;

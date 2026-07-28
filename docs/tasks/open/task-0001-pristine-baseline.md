@@ -163,8 +163,11 @@ Visual-identity alignment is tracked separately in
 
 ## Phase 7 — Privacy / governance (from audit-0001)
 
-- [ ] **F1** Add a privacy notice to the contact form. Detail:
-      [`audit-0001-privacy-notice.md`](../deferred/audit-0001-privacy-notice.md).
+- [x] **F1 — done.** Added a privacy notice under the contact form linking to a new `/privacy` page
+      (`pages/privacy.astro` + `content/privacy.ts`), also linked from the footer. Detail:
+      [`audit-0001-privacy-notice.md`](../done/audit-0001-privacy-notice.md) and
+      [`task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md). **Draft** — needs owner
+      legal review + confirmation of the `privacy@eq-network.org` inbox.
 - [ ] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch.
 - [ ] **F7** (optional) Add `@astrojs/sitemap`.
 

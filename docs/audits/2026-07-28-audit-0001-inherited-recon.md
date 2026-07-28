@@ -43,7 +43,7 @@ statement to the visitor about what happens to their data. For an organisation w
 in the EU, a one-line notice next to the form (or a short privacy page linked from it) is the cheap,
 correct fix. The processor choice itself is an accepted trade-off, recorded in `CONTRIBUTING.md` §1 and
 [`../privacy/data-map.md`](../privacy/data-map.md); the missing _notice_ is the gap.
-Tracked: [`../tasks/deferred/audit-0001-privacy-notice.md`](../tasks/deferred/audit-0001-privacy-notice.md).
+Tracked: [`../tasks/done/audit-0001-privacy-notice.md`](../tasks/done/audit-0001-privacy-notice.md).
 
 ### F2 — CI installs without a frozen lockfile (build reproducibility) — low
 

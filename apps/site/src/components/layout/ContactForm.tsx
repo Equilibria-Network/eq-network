@@ -110,6 +110,9 @@ export default function ContactForm() {
 
         <ValidationError errors={state.errors} className={styles.validationError} />
       </form>
+      <p className={styles.privacyNotice}>
+        {c.privacyNotice.text} <a href="/privacy">{c.privacyNotice.linkLabel}</a>.
+      </p>
     </div>
   );
 }
