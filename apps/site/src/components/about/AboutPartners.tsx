@@ -1,13 +1,8 @@
 // src/components/about/AboutPartners.tsx
-import React from 'react';
 import { partners } from '@content/about';
 import styles from './AboutPartners.module.css';
 
 export default function AboutPartners() {
-  const handlePartnerClick = (website: string) => {
-    window.open(website, '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -18,10 +13,12 @@ export default function AboutPartners() {
 
         <div className={styles.partnersGrid}>
           {partners.map((partner) => (
-            <div
+            <a
               key={partner.id}
               className={styles.partnerCard}
-              onClick={() => handlePartnerClick(partner.website)}
+              href={partner.website}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <div className={styles.logoContainer}>
                 <img
@@ -38,7 +35,7 @@ export default function AboutPartners() {
                 <p className={styles.partnerDescription}>{partner.description}</p>
                 <p className={styles.visitLink}>Visit website →</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

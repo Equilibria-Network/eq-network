@@ -1,5 +1,4 @@
 // src/components/layout/ContactForm.tsx
-import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './ContactForm.module.css';
 
@@ -40,6 +39,9 @@ export default function ContactForm() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputRow}>
           <div className={styles.inputGroup}>
+            <label htmlFor="name" className="sr-only">
+              Your name
+            </label>
             <input
               type="text"
               id="name"
@@ -57,6 +59,9 @@ export default function ContactForm() {
           </div>
 
           <div className={styles.inputGroup}>
+            <label htmlFor="email" className="sr-only">
+              Your email
+            </label>
             <input
               type="email"
               id="email"
@@ -75,6 +80,9 @@ export default function ContactForm() {
         </div>
 
         <div className={styles.inputGroup}>
+          <label htmlFor="message" className="sr-only">
+            Your message
+          </label>
           <textarea
             id="message"
             name="message"

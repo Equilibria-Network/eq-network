@@ -40,7 +40,8 @@
   margin: 0 auto;
 }
 
-/* Flat Horizontal Partner Card - no background, no texture */
+/* Flat Horizontal Partner Card - no background, no texture.
+   Rendered as an <a>; keep it grid-level and unstyled as a link. */
 .partnerCard {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -51,6 +52,8 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  color: inherit;
+  text-decoration: none;
 }
 
 .partnerCard:hover {

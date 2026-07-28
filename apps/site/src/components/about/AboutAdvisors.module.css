@@ -40,12 +40,16 @@
   margin: 0 auto;
 }
 
-/* Card Wrapper - for positioning shadow card */
+/* Card Wrapper - for positioning shadow card.
+   A clickable advisor card is an <a>; keep it block-level and unstyled as a link. */
 .cardWrapper {
   position: relative;
+  display: block;
   width: 100%;
   aspect-ratio: 3.5/5;
   perspective: 1000px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .cardWrapper.clickable {

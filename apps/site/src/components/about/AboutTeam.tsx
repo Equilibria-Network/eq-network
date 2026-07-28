@@ -38,10 +38,12 @@ export default function AboutTeam() {
 
         <div className={styles.teamGrid}>
           {teamMembers.map((member) => (
-            <div
+            <button
+              type="button"
               key={member.id}
               className={styles.cardWrapper}
               onClick={(e) => handleCardClick(e, member.id)}
+              aria-pressed={flippedCard === member.id}
             >
               <div className={`${styles.card} ${flippedCard === member.id ? styles.flipped : ''}`}>
                 {/* Front Side */}
@@ -79,7 +81,7 @@ export default function AboutTeam() {
                   </div>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

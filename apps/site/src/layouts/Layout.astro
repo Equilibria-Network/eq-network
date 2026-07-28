@@ -13,6 +13,8 @@ const {
   title = 'Equilibria Network',
   description = 'Exploring the design space of collective intelligence through simulations and mathematical foundations.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -23,17 +25,35 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph (a raster og:image is a follow-up; no social card asset exists yet) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Equilibria Network" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <title>{title}</title>
   </head>
   <body>
     <!-- Parallax Background Pattern -->
     <div class="parallax-background"></div>
 
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
     <!-- Navbar -->
-    <Navbar client:load currentPath={Astro.url.pathname} />
+    <header>
+      <Navbar client:load currentPath={Astro.url.pathname} />
+    </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
 

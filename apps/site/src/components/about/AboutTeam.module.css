@@ -40,13 +40,22 @@
   margin: 0 auto;
 }
 
-/* Card Wrapper - for positioning shadow card */
+/* Card Wrapper - for positioning shadow card.
+   Rendered as a <button>, so reset the native button appearance. */
 .cardWrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 3.5/5;
   perspective: 1000px;
   cursor: pointer;
+  display: block;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  appearance: none;
 }
 
 /* Shadow Card - appears behind with hatched pattern */
