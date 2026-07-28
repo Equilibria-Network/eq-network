@@ -30,7 +30,7 @@ const {
     <div class="parallax-background"></div>
     
     <!-- Navbar -->
-    <Navbar client:load />
+    <Navbar client:load currentPath={Astro.url.pathname} />
     
     <!-- Main Content -->
     <main>

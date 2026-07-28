@@ -1,11 +1,26 @@
 // src/components/layout/ContactForm.tsx
-import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
-import styles from './ContactForm.module.css';
+import React from "react";
+import { useForm, ValidationError } from "@formspree/react";
+import styles from "./ContactForm.module.css";
 
 export default function ContactForm() {
   const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
-  const [state, handleSubmit] = useForm(formspreeEndpoint || 'placeholder');
+  const isConfigured = Boolean(formspreeEndpoint);
+  const [state, handleSubmit] = useForm(formspreeEndpoint || "placeholder");
+
+  // Without a configured endpoint the form would post to a dead placeholder and
+  // fail silently. Show a clear notice instead of a broken-looking form.
+  if (!isConfigured) {
+    return (
+      <div className={styles.contactForm}>
+        <h2 className={styles.title}>Contact Us</h2>
+        <p>
+          The contact form is not configured yet. Please reach out via one of
+          the links in the footer.
+        </p>
+      </div>
+    );
+  }
 
   if (state.succeeded) {
     return (
@@ -33,8 +48,8 @@ export default function ContactForm() {
               placeholder="Your name"
               required
             />
-            <ValidationError 
-              prefix="Name" 
+            <ValidationError
+              prefix="Name"
               field="name"
               errors={state.errors}
               className={styles.validationError}
@@ -50,8 +65,8 @@ export default function ContactForm() {
               placeholder="Your email"
               required
             />
-            <ValidationError 
-              prefix="Email" 
+            <ValidationError
+              prefix="Email"
               field="email"
               errors={state.errors}
               className={styles.validationError}
@@ -68,25 +83,27 @@ export default function ContactForm() {
             rows={5}
             required
           />
-          <ValidationError 
-            prefix="Message" 
+          <ValidationError
+            prefix="Message"
             field="message"
             errors={state.errors}
             className={styles.validationError}
           />
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className={`${styles.submitButton} ${
-            state.submitting ? styles.submitButtonDisabled : styles.submitButtonActive
+            state.submitting
+              ? styles.submitButtonDisabled
+              : styles.submitButtonActive
           }`}
           disabled={state.submitting}
         >
-          {state.submitting ? 'Sending...' : 'Send Message'}
+          {state.submitting ? "Sending..." : "Send Message"}
         </button>
-        
-        <ValidationError 
+
+        <ValidationError
           errors={state.errors}
           className={styles.validationError}
         />

@@ -22,7 +22,7 @@
   justify-content: center;
   padding: 2rem;
   z-index: 2;
-  background: var(--color-bg, #ffffff);
+  background: var(--bg-color, #ffffff);
 }
 
 .visualContainer {
@@ -59,7 +59,7 @@
     height: 45vh;
     padding: 1.5rem;
     z-index: 2;
-    background: var(--color-bg, #ffffff);
+    background: var(--bg-color, #ffffff);
     /* subtle bottom edge so text doesn't bleed into visual */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
@@ -70,7 +70,7 @@
     padding: 2rem;
     padding-top: 2rem;
     padding-bottom: 60vh;
-    background: var(--color-bg, #ffffff);
+    background: var(--bg-color, #ffffff);
   }
 }
 

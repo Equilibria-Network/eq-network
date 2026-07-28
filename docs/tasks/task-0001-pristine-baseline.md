@@ -60,8 +60,8 @@ Visual-identity alignment is tracked separately in
 - [x] **CI reproducibility (C1 + F2) — done:** root `package.json` pins `packageManager: pnpm@11.17.0`;
       CI uses `pnpm/action-setup@v4` (reads that pin) and `pnpm install --frozen-lockfile`; lockfile
       regenerated for the workspace. Landed with the workspace migration (task-0005).
-- [ ] **C3** Remove the stale `@utils/*` tsconfig alias (and the README `utils/` mention) — no `src/utils/`.
-- [ ] **C4** Move `@astrojs/check` from `dependencies` to `devDependencies`.
+- [x] **C3** Removed the stale `@utils/*` tsconfig alias.
+- [x] **C4** Moved `@astrojs/check` to `devDependencies`.
 - [ ] **C5** Schedule an isolated dependency-upgrade pass (Astro 4→7, React 18→19, `@astrojs/react` 3→6,
       `lucide-react` 0→1) — **after** CI reproducibility (C1) lands. Its own careful effort; likely a
       Proposed ADR given the Astro/React major jumps.
@@ -70,18 +70,15 @@ Visual-identity alignment is tracked separately in
 
 ## Phase 3 — Confirmed bugs
 
-- [ ] **B1** Pass `currentPath={Astro.url.pathname}` to `<Navbar>` in `Layout.astro:33` — fixes the
-      logo/background being wrong on all six non-home pages.
-- [ ] **B2** Fix the Footer Newsletter URL (Phase 1 confirms the target).
-- [ ] **B3** Fix `/favicon.ico` 404 (move icon to `public/favicon.ico` or fix the href).
-- [ ] **B4** Fix `/favicon.svg` 404 on `/lab/playground`. Detail:
-      [`audit-0004-playground-favicon.md`](audit-0004-playground-favicon.md).
-- [ ] **B8** Fix `var(--color-bg …)` → `var(--bg-color)` in `Explainer.module.css` (typo hits fallback).
-- [ ] **B6** Disable submit / show a notice when `PUBLIC_FORMSPREE_ENDPOINT` is unset (no silent dead post).
-- [ ] **B7** Fix `AboutTeam` inverted click-outside so outside clicks dismiss the flipped card.
-- [ ] **B9** Make the footer year build-time constant (or accept the hydration warning) — low.
-- [ ] **B10** Escape the highlight term (or match without a regex) in `Hero.tsx`'s
-      `renderTextWithHighlights` before `dangerouslySetInnerHTML` — low, trusted content today.
+- [x] **B1** `Layout.astro` now passes `currentPath={Astro.url.pathname}` to `<Navbar>`.
+- [x] **B2** No change needed — retracted (the newsletter link is correct; see audit-0002).
+- [x] **B3** `/favicon.ico` now exists at `public/favicon.ico` (copied from `img/logo/`).
+- [x] **B4** Playground favicon points to `/favicon.ico` (avoids shipping the 518 KB logo SVG).
+- [x] **B8** `var(--color-bg …)` → `var(--bg-color …)` in `Explainer.module.css` (3 refs).
+- [x] **B6** `ContactForm` shows a notice instead of a silently-broken form when the endpoint is unset.
+- [x] **B7** `AboutTeam` click-outside now dismisses the flipped card on any non-card click.
+- [ ] **B9** Footer year hydration nuance — left as-is (low; documented).
+- [x] **B10** `Hero.renderTextWithHighlights` now escapes regex metacharacters in the highlight term.
 - [ ] **C2** Reduce over-hydration: render static sections as Astro/static; hydrate only genuinely
       interactive islands (perf; overlaps Phase 4).
 
