@@ -140,14 +140,21 @@ Visual-identity alignment is tracked separately in
       23 redeclarations). _Overlaps task-0002._
 - [ ] **M9** Consolidate the ~20 one-off breakpoints into 3–4 named ones. _Overlaps task-0002._
 - [ ] **M5** Converge on one content-injection convention (orchestrator prop-drilling, as `Lab.tsx` does).
-- [ ] **M6 — expanded to a "zero hardcoded strings" sweep (i18n-readiness hygiene).** Move ALL user-facing
-      copy into `src/content/` — not just the known stragglers (section headings, footer tagline, `404.astro`),
-      but every hardcoded heading/label/CTA/nav/alt/placeholder in components, pages, and the layout.
-      Components render content; no user-facing string literal lives in code. This is good hygiene now AND the
-      cheap prerequisite that makes an eventual i18n pass a locale layer over an already-clean content tree
-      rather than a codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Proposed) and
+- [x] **M6 — "zero hardcoded strings" sweep (i18n-readiness hygiene) — DONE.** Moved ALL user-facing copy
+      into `src/content/`: new `content/site.ts` for chrome (nav, footer, contact, 404, skip-link, per-page
+      screen-reader titles), plus new typed UI fields in `about.ts`, `home.ts`, `lab.ts`, `explainer.ts`,
+      `research.ts`, `products.ts`, and `roadmap/overview.ts`. Components render content; no user-facing string
+      literal lives in code. Strings moved verbatim (rendered output unchanged). This is the cheap prerequisite
+      that makes an eventual i18n pass a locale layer over an already-clean content tree rather than a
+      codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Proposed) and
       [`../deferred/task-0007-i18n.md`](../deferred/task-0007-i18n.md). The i18n _runtime_ (locale routing,
       catalogs, switcher) is explicitly NOT built now — only the externalization discipline.
+      **Follow-up (enforcement):** an ESLint `react/jsx-no-literals`-style rule would mechanically prevent new
+      hardcoded strings from creeping back. Not enabled yet (needs tuning to avoid false positives on
+      punctuation/whitespace); worth adding when the design-system lint config lands (task-0002 / ADR-0003).
+      Note: this supersedes the link-data half of **M2/M3** for nav/footer/socials, which now live in
+      `content/site.ts`; the remaining M2/M3 work is only deleting the dead `social.ts`/`SocialBar` (final
+      dead-code commit).
 - [ ] **M7** Convert `404.astro` inline styles to a CSS module.
 - [ ] **M10** Split `content/lab.ts` (508 lines) per scenario, mirroring the roadmap content split.
 - [ ] **M11** Type `pub: any` in `PhaseBody.tsx` using the existing `Publication` type.
