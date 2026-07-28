@@ -1,7 +1,7 @@
 // src/components/research/CardModal.tsx
 // Full-screen overlay showing card details when clicked.
 
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { CARDS } from './graphData';
 import styles from './CardModal.module.css';
 
@@ -24,7 +24,7 @@ const PAPER_STATUS_COLORS: Record<string, string> = {
   active: '#0055C4',
   wip: '#4AB3F4',
   draft: '#4AB3F4',
-  concept: '#999',
+  concept: '#595959',
 };
 
 const PAPER_STATUS_LABELS: Record<string, string> = {
@@ -37,11 +37,59 @@ const PAPER_STATUS_LABELS: Record<string, string> = {
 
 export default function CardModal({ cardId, onClose }: Props) {
   const card = CARDS.find((c) => c.id === cardId);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const titleId = `card-modal-title-${cardId}`;
+
+  // Dialog behaviour: close on Escape, trap focus inside the modal while open,
+  // move focus in on open, and restore it to the trigger on close.
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const modal = modalRef.current;
+      if (!modal) return;
+      const focusable = modal.querySelectorAll<HTMLElement>(
+        'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    modalRef.current?.focus();
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
+
   if (!card) return null;
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        ref={modalRef}
+      >
         <button className={styles.close} onClick={onClose} aria-label="Close">
           &times;
         </button>
@@ -53,7 +101,9 @@ export default function CardModal({ cardId, onClose }: Props) {
           </span>
         </div>
 
-        <h2 className={styles.title}>{card.label}</h2>
+        <h2 id={titleId} className={styles.title}>
+          {card.label}
+        </h2>
 
         <div className={styles.body}>
           {card.fullDescription.split('\n\n').map((paragraph, i) => (
@@ -90,7 +140,7 @@ export default function CardModal({ cardId, onClose }: Props) {
                 {paper.status && (
                   <span
                     className={styles.paperStatus}
-                    style={{ color: PAPER_STATUS_COLORS[paper.status] || '#999' }}
+                    style={{ color: PAPER_STATUS_COLORS[paper.status] || '#595959' }}
                   >
                     {PAPER_STATUS_LABELS[paper.status] || paper.status}
                   </span>

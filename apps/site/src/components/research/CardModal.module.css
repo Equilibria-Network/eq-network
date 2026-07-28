@@ -51,7 +51,7 @@
   background: none;
   border: none;
   font-size: 1.6rem;
-  color: #999;
+  color: #595959;
   cursor: pointer;
   line-height: 1;
   padding: 4px 8px;
@@ -99,12 +99,12 @@
 
 .statusBadge.planned {
   background: #99999912;
-  color: #999;
+  color: #595959;
 }
 
 .statusBadge.future {
   background: #bbbbbb10;
-  color: #bbb;
+  color: #6e6e6e;
 }
 
 .title {
@@ -159,7 +159,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #999;
+  color: #595959;
   margin: 0 0 10px 0;
 }
 
@@ -214,5 +214,12 @@
 
   .title {
     font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modal {
+    animation: none;
   }
 }
