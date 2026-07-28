@@ -47,7 +47,7 @@ of audit.
 **Data residency / jurisdiction:** Static assets are served from GitHub Pages (US-headquartered, global
 CDN). Contact-form submissions are processed by Formspree (US). See [`docs/privacy/data-map.md`](docs/privacy/data-map.md).
 The house preference is self-hosted or EU-resident processing; Formspree (US) is a stopgap and the contact
-form is slated to migrate to an EU-resident handler — tracked as [`docs/tasks/task-0003-eu-form-handler.md`](docs/tasks/task-0003-eu-form-handler.md).
+form is slated to migrate to an EU-resident handler — tracked as [`docs/tasks/deferred/task-0003-eu-form-handler.md`](docs/tasks/deferred/task-0003-eu-form-handler.md).
 
 **Third-party data processors:** GitHub Pages (hosting, US); Formspree (contact-form processing, US).
 Full inventory in [`docs/privacy/data-map.md`](docs/privacy/data-map.md).

@@ -1,7 +1,7 @@
 # Add a privacy notice to the contact form
 
 - Provenance: audit-0001
-- Links back to: `../audits/2026-07-28-audit-0001-inherited-recon.md` (F1), `../adr/0002-formspree-contact-form.md`
+- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F1), `../../adr/0002-formspree-contact-form.md`
 - Status: todo
 - Owner: unassigned
 - Priority: now
@@ -20,4 +20,4 @@ a third-party form service and used only to respond to the enquiry.
 ## Notes
 
 Minimal version: one line under the form. Fuller version: a `/privacy` page the note links to. Keep it
-consistent with [`../privacy/data-map.md`](../privacy/data-map.md).
+consistent with [`../../privacy/data-map.md`](../../privacy/data-map.md).

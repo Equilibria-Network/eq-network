@@ -29,6 +29,6 @@ No accounts, no behavioural tracking, no location data, no special-category data
   [`../adr/0002-formspree-contact-form.md`](../adr/0002-formspree-contact-form.md).
 - The site does not yet tell a visitor what happens to a contact submission. A short privacy note next to
   the form (or a linked privacy page) would close that gap. Tracked as
-  [`../tasks/audit-0001-privacy-notice.md`](../tasks/audit-0001-privacy-notice.md).
+  [`../tasks/deferred/audit-0001-privacy-notice.md`](../tasks/deferred/audit-0001-privacy-notice.md).
 - Confirm whether GitHub Pages access logs are retained or accessible to the project; if not accessible,
   say so here.

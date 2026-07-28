@@ -43,14 +43,14 @@ statement to the visitor about what happens to their data. For an organisation w
 in the EU, a one-line notice next to the form (or a short privacy page linked from it) is the cheap,
 correct fix. The processor choice itself is an accepted trade-off, recorded in
 [ADR-0002](../adr/0002-formspree-contact-form.md); the missing _notice_ is the gap.
-Tracked: [`../tasks/audit-0001-privacy-notice.md`](../tasks/audit-0001-privacy-notice.md).
+Tracked: [`../tasks/deferred/audit-0001-privacy-notice.md`](../tasks/deferred/audit-0001-privacy-notice.md).
 
 ### F2 — CI installs without a frozen lockfile (build reproducibility) — low
 
 `.github/workflows/deploy.yml` runs `pnpm install`, not `pnpm install --frozen-lockfile`. In CI this
 means a drifted or out-of-date `pnpm-lock.yaml` can be silently rewritten and a different dependency tree
 shipped than the one committed. The fix is one flag and makes every production build reproducible from the
-lockfile. Tracked: [`../tasks/audit-0002-frozen-lockfile.md`](../tasks/audit-0002-frozen-lockfile.md).
+lockfile. Tracked: [`../tasks/done/audit-0002-frozen-lockfile.md`](../tasks/done/audit-0002-frozen-lockfile.md).
 
 ### F3 — `target="_blank"` links without `rel="noopener"` (security) — RETRACTED (false positive)
 
@@ -65,13 +65,13 @@ corresponding task has been removed. Cross-checked by an independent review pass
 `src/pages/lab/playground.astro` links `rel="icon" href="/favicon.svg"`, but the repository ships
 `favicon.ico` and `logo_icon.svg`, not `favicon.svg` at the web root. That page requests a 404 favicon.
 Cosmetic; fix by pointing at an asset that exists or adding the file.
-Tracked: [`../tasks/audit-0004-playground-favicon.md`](../tasks/audit-0004-playground-favicon.md).
+Tracked: [`../tasks/done/audit-0004-playground-favicon.md`](../tasks/done/audit-0004-playground-favicon.md).
 
 ### F5 — No LICENSE file (governance) — low
 
 A public repository with no license is, by default, all-rights-reserved: others may not reuse the content
 or code. If that is intended, state it; if not, add a license. This is a decision for the owners, not a
-defect. Tracked: [`../tasks/audit-0005-license.md`](../tasks/audit-0005-license.md).
+defect. Tracked: [`../tasks/done/audit-0005-license.md`](../tasks/done/audit-0005-license.md).
 
 ### F6 — `env.example` naming and README drift (docs) — low
 

@@ -1,7 +1,7 @@
 # Fix the missing favicon on /lab/playground
 
 - Provenance: audit-0004
-- Links back to: `../audits/2026-07-28-audit-0001-inherited-recon.md` (F4)
+- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F4)
 - Status: todo
 - Owner: unassigned
 - Priority: soon

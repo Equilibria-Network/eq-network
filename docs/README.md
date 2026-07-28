@@ -29,7 +29,7 @@ Project-wide calibration (scope, principles in force, principles skipped) lives 
 - The audits: [`audits/2026-07-28-audit-0001-inherited-recon.md`](audits/2026-07-28-audit-0001-inherited-recon.md)
   (recon) and [`audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
   (code-hygiene deep dive).
-- The cleanup gate before feature work: [`tasks/task-0001-pristine-baseline.md`](tasks/task-0001-pristine-baseline.md).
+- The cleanup gate before feature work: [`tasks/open/task-0001-pristine-baseline.md`](tasks/open/task-0001-pristine-baseline.md).
 
 ## Conventions
 

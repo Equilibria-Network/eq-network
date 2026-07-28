@@ -1,7 +1,7 @@
 # Decide and add a LICENSE
 
 - Provenance: audit-0005
-- Links back to: `../audits/2026-07-28-audit-0001-inherited-recon.md` (F5)
+- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F5)
 - Status: done — MIT chosen; `LICENSE` added (`Copyright (c) 2024-2026 Equilibria Network`)
 - Owner: unassigned
 - Priority: —

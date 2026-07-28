@@ -39,7 +39,7 @@ change with a visual change, or you cannot tell which one caused a regression):
   (a pixel-identical, low-risk, reversible refactor). This is pure plumbing.
 - **Stage 2 (per-page redesign):** with the foundation in place, actually upgrade the look and feel,
   **one page at a time**, each as its own sub-task with its own before/after. See
-  [`../tasks/task-0002-visual-language-alignment.md`](../tasks/task-0002-visual-language-alignment.md).
+  [`../tasks/open/task-0002-visual-language-alignment.md`](../tasks/open/task-0002-visual-language-alignment.md).
 
 The token/component contract is documented in [`../context/10-visual-language.md`](../context/10-visual-language.md).
 

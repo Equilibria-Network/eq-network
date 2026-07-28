@@ -1,7 +1,7 @@
 # Migrate the contact form to an EU-resident handler
 
 - Provenance: task-0003 (reclassified from the withdrawn ADR-0002)
-- Links back to: [`../adr/0002-formspree-contact-form.md`](../adr/0002-formspree-contact-form.md), [`../privacy/data-map.md`](../privacy/data-map.md)
+- Links back to: [`../../adr/0002-formspree-contact-form.md`](../../adr/0002-formspree-contact-form.md), [`../../privacy/data-map.md`](../../privacy/data-map.md)
 - Status: deferred (feature work) — owner will pick a handler later; not part of the current cleanup phase
 - Owner: unassigned
 - Priority: later (feature)
@@ -36,7 +36,7 @@ rejected on jurisdiction):
 ## Not yet a recommendation — the choice needs a privacy deep dive
 
 The table above is a feature/jurisdiction shortlist, not a decision. Per
-[ADR-0004](../adr/0004-privacy-review-before-integration.md), the choice must rest on a proper privacy
+[ADR-0004](../../adr/0004-privacy-review-before-integration.md), the choice must rest on a proper privacy
 deep-dive (legal entity, exact data location, full subprocessor chain, DPA terms, retention, transfer
 mechanism) — not a marketing-page comparison.
 
@@ -48,7 +48,7 @@ Two finalists to run that deep dive on:
 ## Done when (updated)
 
 A privacy deep-dive report exists for the finalists (attached here), the owner picks one, and the contact
-form is migrated: endpoint swapped, [`../privacy/data-map.md`](../privacy/data-map.md) and `env.example`
+form is migrated: endpoint swapped, [`../../privacy/data-map.md`](../../privacy/data-map.md) and `env.example`
 updated, the Formspree secret retired, and the choice linked from the privacy policy page
 ([`task-0004-privacy-policy-page.md`](task-0004-privacy-policy-page.md)).
 

@@ -1,7 +1,7 @@
 # Repository reorganisation into an app-scale workspace
 
 - Provenance: task-0005
-- Links back to: [`../adr/0005-repo-topology.md`](../adr/0005-repo-topology.md)
+- Links back to: [`../../adr/0005-repo-topology.md`](../../adr/0005-repo-topology.md)
 - Status: done (2026-07-28) — workspace established; site builds from `apps/site`
 - Owner: unassigned
 - Priority: —

@@ -10,7 +10,7 @@
   Where the two overlap, audit-0001 is corrected here (see the SocialBar note under Dead code).
 
 This document is the record of what was found. The work it surfaces is tracked as one umbrella task,
-[`../tasks/task-0001-pristine-baseline.md`](../tasks/task-0001-pristine-baseline.md).
+[`../tasks/open/task-0001-pristine-baseline.md`](../tasks/open/task-0001-pristine-baseline.md).
 
 ## Headline
 
@@ -151,4 +151,4 @@ An independent second-opinion review surfaced these; each verified directly agai
    (M8), extract the `<Section>` primitive (M4).
 
 All of the above is decomposed into checkable sub-items in
-[`../tasks/task-0001-pristine-baseline.md`](../tasks/task-0001-pristine-baseline.md).
+[`../tasks/open/task-0001-pristine-baseline.md`](../tasks/open/task-0001-pristine-baseline.md).

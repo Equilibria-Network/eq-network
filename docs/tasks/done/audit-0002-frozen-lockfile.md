@@ -1,7 +1,7 @@
 # Use --frozen-lockfile in the deploy workflow
 
 - Provenance: audit-0002
-- Links back to: `../audits/2026-07-28-audit-0001-inherited-recon.md` (F2)
+- Links back to: `../../audits/2026-07-28-audit-0001-inherited-recon.md` (F2)
 - Status: todo
 - Owner: unassigned
 - Priority: now

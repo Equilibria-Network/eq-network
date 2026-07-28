@@ -1,8 +1,8 @@
 # Write a privacy policy page
 
 - Provenance: task-0004
-- Links back to: [`../privacy/data-map.md`](../privacy/data-map.md),
-  [`../adr/0004-privacy-review-before-integration.md`](../adr/0004-privacy-review-before-integration.md)
+- Links back to: [`../../privacy/data-map.md`](../../privacy/data-map.md),
+  [`../../adr/0004-privacy-review-before-integration.md`](../../adr/0004-privacy-review-before-integration.md)
 - Status: todo
 - Owner: unassigned
 - Priority: soon
@@ -18,7 +18,7 @@ what happens to their data, who processes it, how long it is kept, and how to ex
 A `/privacy` page exists, linked from the footer and referenced by the contact form, stating at least: what
 data is collected and why, the lawful basis, the processor(s) and where data is stored, retention, data-
 subject rights, and a contact for privacy requests. It stays consistent with
-[`../privacy/data-map.md`](../privacy/data-map.md).
+[`../../privacy/data-map.md`](../../privacy/data-map.md).
 
 ## Notes
 

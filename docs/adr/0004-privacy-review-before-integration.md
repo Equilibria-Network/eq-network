@@ -43,4 +43,4 @@ explicitly to services that touch personal data (as worded above).
 ## Sources
 
 House privacy preference (self-host > EU > US); [`../privacy/data-map.md`](../privacy/data-map.md);
-[`../tasks/task-0003-eu-form-handler.md`](../tasks/task-0003-eu-form-handler.md).
+[`../tasks/deferred/task-0003-eu-form-handler.md`](../tasks/deferred/task-0003-eu-form-handler.md).

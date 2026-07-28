@@ -1,8 +1,8 @@
 # Pristine baseline — clear cleanup/housekeeping before feature work
 
 - Provenance: task-0001 (umbrella)
-- Sources: [`../audits/2026-07-28-audit-0001-inherited-recon.md`](../audits/2026-07-28-audit-0001-inherited-recon.md),
-  [`../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
+- Sources: [`../../audits/2026-07-28-audit-0001-inherited-recon.md`](../../audits/2026-07-28-audit-0001-inherited-recon.md),
+  [`../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
 - Status: in-progress (cleanup started); most sub-items todo
 - Owner: unassigned
 - Priority: now — this is the gate before "big dev"
@@ -133,7 +133,7 @@ Visual-identity alignment is tracked separately in
 ## Phase 7 — Privacy / governance (from audit-0001)
 
 - [ ] **F1** Add a privacy notice to the contact form. Detail:
-      [`audit-0001-privacy-notice.md`](audit-0001-privacy-notice.md).
+      [`audit-0001-privacy-notice.md`](../deferred/audit-0001-privacy-notice.md).
 - [ ] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch.
 - [ ] **F7** (optional) Add `@astrojs/sitemap`.
 
