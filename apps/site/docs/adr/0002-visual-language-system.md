@@ -1,4 +1,4 @@
-# ADR-0003: A shared design system (tokens + reusable components + a checker)
+# ADR-0002: A shared design system (tokens + reusable components + a checker)
 
 - Status: Accepted (2026-07-28)
 - Date: 2026-07-28

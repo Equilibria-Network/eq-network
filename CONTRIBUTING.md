@@ -45,15 +45,15 @@ to a third-party form processor. No accounts, no cookies set by the site, no ana
 of audit.
 
 **Data residency / jurisdiction:** Static assets are served from GitHub Pages (US-headquartered, global
-CDN). Contact-form submissions are processed by Formspree (US). See [`docs/privacy/data-map.md`](docs/privacy/data-map.md).
+CDN). Contact-form submissions are processed by Formspree (US). See [`apps/site/docs/privacy/data-map.md`](apps/site/docs/privacy/data-map.md).
 Formspree (US) is the current, endorsed contact-form handler and ships to production. The house preference
 is self-hosted or EU-resident processing, so an EU-resident alternative is a preferred **future enhancement**
-(not a pending removal) — tracked as [`docs/tasks/deferred/task-0003-eu-form-handler.md`](docs/tasks/deferred/task-0003-eu-form-handler.md).
+(not a pending removal) — tracked as [`apps/site/docs/tasks/deferred/task-0003-eu-form-handler.md`](apps/site/docs/tasks/deferred/task-0003-eu-form-handler.md).
 (Choosing a form handler is an operative default, not an ADR-level decision, so it is recorded here and in
 the data map rather than as an ADR.)
 
 **Third-party data processors:** GitHub Pages (hosting, US); Formspree (contact-form processing, US).
-Full inventory in [`docs/privacy/data-map.md`](docs/privacy/data-map.md).
+Full inventory in [`apps/site/docs/privacy/data-map.md`](apps/site/docs/privacy/data-map.md).
 
 **Core user outcome:** A visitor can load any page and read the organisation's content, and the site
 builds and deploys cleanly from `main`. The contact form reaching a human is important but secondary.
@@ -120,13 +120,14 @@ the ADR is the record.
 agent or contributor may draft an ADR, but does not accept it on the owner's behalf. Back-filled ADRs that
 document an already-shipped choice still start `Proposed` until the owner ratifies the write-up.
 
-| Date           | Decision                                                    | ADR                                                            | Status   |
-| -------------- | ----------------------------------------------------------- | -------------------------------------------------------------- | -------- |
-| 2025 (approx.) | Migrate from Docusaurus to Astro static output              | [ADR-0001](docs/adr/0001-astro-static-github-pages.md)         | Accepted |
-| 2026-07-28     | Shared design system (tokens + components + lint)           | [ADR-0003](docs/adr/0003-visual-language-system.md)            | Accepted |
-| 2026-07-28     | Privacy deep dive before integrating a data service         | [ADR-0004](docs/adr/0004-privacy-review-before-integration.md) | Accepted |
-| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/) | [ADR-0005](docs/adr/0005-repo-topology.md)                     | Accepted |
-| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred  | [ADR-0006](docs/adr/0006-i18n-readiness.md)                    | Proposed |
+| Date           | Decision                                                      | ADR                                                                      | Status   |
+| -------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------ | -------- |
+| 2025 (approx.) | Migrate from Docusaurus to Astro static output                | [ADR-0001](apps/site/docs/adr/0001-astro-static-github-pages.md)         | Accepted |
+| 2026-07-28     | Shared design system (tokens + components + lint)             | [ADR-0002](apps/site/docs/adr/0002-visual-language-system.md)            | Accepted |
+| 2026-07-28     | Privacy deep dive before integrating a data service           | [ADR-0003](apps/site/docs/adr/0003-privacy-review-before-integration.md) | Accepted |
+| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/)   | [ADR-0001](docs/adr/0001-monorepo-topology.md)                           | Accepted |
+| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                    | Accepted |
+| 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)        | Accepted |
 
 Dates are approximate and back-filled from repository history; the ADRs record what is known.
 

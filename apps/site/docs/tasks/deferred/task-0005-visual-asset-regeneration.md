@@ -1,7 +1,7 @@
 # Regenerate site imagery for a consistent visual identity
 
-- Provenance: task-0006
-- Links back to: [`../../adr/0003-visual-language-system.md`](../../adr/0003-visual-language-system.md),
+- Provenance: task-0005
+- Links back to: [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md),
   [`task-0002-visual-language-alignment.md`](../open/task-0002-visual-language-alignment.md),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md)
 - Status: proposed (future) — blocked on defining the visual identity first
@@ -18,7 +18,7 @@ diagrams, textures, and hero art all under the same aesthetic umbrella, matching
 
 1. **Define the visual identity first.** This can't start until the aesthetic is decided (palette, line
    style — e.g. the hand-drawn roughjs motif — illustration style, iconography rules). That definition is
-   part of the design-language work in [ADR-0003](../../adr/0003-visual-language-system.md) /
+   part of the design-language work in [ADR-0002](../../adr/0002-visual-language-system.md) /
    [`../../context/10-visual-language.md`](../../context/10-visual-language.md).
 2. **Pairs with the per-page CSS/UX redesign** (task-0002 Stage 2) — regenerate a page's imagery as its
    look-and-feel is reworked, so assets and layout land together.

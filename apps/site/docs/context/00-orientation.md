@@ -6,7 +6,7 @@ Genre: explanation (Diátaxis). The one-page mental model of what this repositor
 
 The public website for the Equilibria Network, served at `eq-network.org`. It is a static site: every
 page is pre-rendered to HTML at build time. There is no backend, no database, and no server-side runtime.
-The site lives in `apps/site/` of a pnpm workspace (see [ADR-0005](../adr/0005-repo-topology.md)).
+The site lives in `apps/site/` of a pnpm workspace (see [ADR-0001](../../../../docs/adr/0001-monorepo-topology.md)).
 
 ## Stack
 

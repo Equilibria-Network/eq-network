@@ -50,8 +50,8 @@ Desktop.ini
 
 # ── Agent handoffs — local working notes, not version-controlled ─
 # The reusable template lives in docs/templates/handoff.md (committed);
-# individual handoffs under docs/handoffs/ are per-session and stay local.
-docs/handoffs/
+# individual handoffs under apps/site/docs/handoffs/ are per-session and stay local.
+apps/site/docs/handoffs/
 
 # ── Claude Code — personal, machine-specific settings ────────
 # Shared team settings belong in .claude/settings.json (committed).

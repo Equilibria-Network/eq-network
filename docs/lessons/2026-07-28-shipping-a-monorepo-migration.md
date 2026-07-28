@@ -1,7 +1,7 @@
 # Shipping a monorepo-migration branch, and auditing for dead assets
 
 - Date: 2026-07-28
-- Related: [`../adr/0005-repo-topology.md`](../adr/0005-repo-topology.md)
+- Related: [`../adr/0001-monorepo-topology.md`](../adr/0001-monorepo-topology.md)
 
 ## What happened
 

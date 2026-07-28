@@ -1,4 +1,4 @@
-# ADR-0007: dependency and toolchain upgrade (2026-07)
+# ADR-0005: dependency and toolchain upgrade (2026-07)
 
 - Status: Accepted
 - Date: 2026-07-28

@@ -88,7 +88,7 @@ required; logged for the owners to decide.
 ## 4. Consciously accepted (not findings)
 
 These look like omissions but are the right call at this scale. They are recorded so their absence is
-traceable, not mistaken for oversight. See [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md) Section 3.
+traceable, not mistaken for oversight. See [`../../../../CONTRIBUTING.md`](../../../../CONTRIBUTING.md) Section 3.
 
 - **No test suite.** A static content site. `astro check` (type-check, run inside `pnpm build`) is the
   automated floor; content and visuals are verified by human preview. Revisit if the interactive lab

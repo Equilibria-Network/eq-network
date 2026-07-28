@@ -8,7 +8,7 @@ When it and the running site disagree, the site wins and this doc gets fixed. Wh
 with this doc, the page is drifting — fix the page.
 
 Status note: the tokens and primitives below are the **target** system. Much of it currently lives as
-copy-pasted CSS values rather than tokens; see [ADR-0003](../adr/0003-visual-language-system.md) (proposed)
+copy-pasted CSS values rather than tokens; see [ADR-0002](../adr/0002-visual-language-system.md) (proposed)
 and [`../tasks/open/task-0002-visual-language-alignment.md`](../tasks/open/task-0002-visual-language-alignment.md)
 for the migration. Where a token name below does not yet exist in `apps/site/src/styles/variables.css`, it is
 proposed, not current.
@@ -23,7 +23,7 @@ proposed, not current.
 - **Muted text is opacity on `--text-color`, not a grey hex.** The canonical idiom is `opacity: 0.85`
   (muted), `0.65` (quiet), `0.5` (faint). Do **not** introduce `#999`/`#666`/etc. for quieter text.
 - **Semantic status colours** (problem/solution/uncertain reds, greens, oranges) exist only in the
-  explainer/lab visuals and are **not yet ratified** — see ADR-0003 / task-0002 P6. Until ratified, do not
+  explainer/lab visuals and are **not yet ratified** — see ADR-0002 / task-0002 P6. Until ratified, do not
   add new off-palette status colours.
 
 ## Type
@@ -42,7 +42,7 @@ proposed, not current.
   (`--space-section-dense`); interior hero `8rem 0 4rem`.
 - **Named breakpoints (target):** `--bp-sm 480`, `--bp-md 768`, `--bp-lg 992`, `--bp-xl 1400`. Use these,
   not one-off widths. (Note: CSS `var()` does not work inside `@media`; breakpoints are shared via
-  PostCSS `@custom-media`, which is why they must be centralized — see ADR-0003.)
+  PostCSS `@custom-media`, which is why they must be centralized — see ADR-0002.)
 - **Radius:** `--radius-sm 3px` (chips/badges/CTAs), `--radius-md 8px` (frames/link cards), `--radius-lg
 12px` (feature cards). **Shadow:** `--shadow-card` (`0 4px 12px rgba(0,59,126,.1)`).
 
@@ -72,4 +72,4 @@ proposed, not current.
 - [ ] New interactive/animated visuals honour `prefers-reduced-motion`.
 
 Enforcement (stylelint rules that will fail CI on violation) is described in
-[ADR-0003](../adr/0003-visual-language-system.md).
+[ADR-0002](../adr/0002-visual-language-system.md).

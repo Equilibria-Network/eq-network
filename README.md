@@ -14,7 +14,7 @@ docs/           Project documentation (see docs/README.md)
 ```
 
 Each app builds and deploys independently; shared code lives in `packages/`. The topology and its
-rationale are recorded in [`docs/adr/0005-repo-topology.md`](docs/adr/0005-repo-topology.md).
+rationale are recorded in [`docs/adr/0001-monorepo-topology.md`](docs/adr/0001-monorepo-topology.md).
 
 ## Status
 
@@ -57,7 +57,7 @@ not a confidential secret). Locally it comes from `apps/site/.env`; in CI it is 
 There is no local deploy command. Merging to `main` triggers `.github/workflows/deploy.yml`, which builds
 `apps/site` and publishes it to GitHub Pages at `eq-network.org` (custom domain via `apps/site/public/CNAME`).
 Pull requests run `.github/workflows/ci.yml` (format, lint, build). See
-[`docs/runbooks/deploy.md`](docs/runbooks/deploy.md).
+[`apps/site/docs/runbooks/deploy.md`](apps/site/docs/runbooks/deploy.md).
 
 ## Contributing
 

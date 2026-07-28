@@ -62,7 +62,7 @@ Visual-identity alignment is tracked separately in
       pushes and PRs).
 - [x] **CI reproducibility (C1 + F2) — done:** root `package.json` pins `packageManager: pnpm@11.17.0`;
       CI uses `pnpm/action-setup@v4` (reads that pin) and `pnpm install --frozen-lockfile`; lockfile
-      regenerated for the workspace. Landed with the workspace migration (task-0005).
+      regenerated for the workspace. Landed with the workspace migration ([task-0001-repo-structure](../../../../../docs/tasks/done/task-0001-repo-structure.md)).
 - [x] **C3** Removed the stale `@utils/*` tsconfig alias.
 - [x] **C4** Moved `@astrojs/check` to `devDependencies`.
 - [x] **C5 — done 2026-07-28.** Board-wide dependency + toolchain upgrade: Astro 4→7, React 18→19,
@@ -70,7 +70,7 @@ Visual-identity alignment is tracked separately in
       root lint/format stack), and the five GitHub Actions to their latest majors. Verified green
       (`pnpm check` + a browser smoke test of the hydrated islands). TypeScript **7** deferred (the native
       compiler is not yet supported by `@astrojs/check`/`typescript-eslint`). Recorded in
-      [ADR-0007](../../adr/0007-dependency-upgrade-2026-07.md).
+      [ADR-0005](../../adr/0005-dependency-upgrade-2026-07.md).
 - [ ] Do NOT add husky / lint-staged / commitlint — wrong altitude for this project (recorded in
       CONTRIBUTING §3).
 
@@ -106,7 +106,7 @@ Visual-identity alignment is tracked separately in
 - [x] **P4 — dead assets removed in the final dead-code commit — DONE (~37 MB; `public/img` 42 MB → 5.2 MB).**
       Removed via a CSS-inclusive zero-reference scan (58 image files: the WebP-conversion originals and their
       twins, plus social icons only used by the deleted `SocialBar`) plus an inverse check that every image path
-      still referenced in `src/` resolves. **Kept deliberately:** all logo variants (brand kit for task-0008).
+      still referenced in `src/` resolves. **Kept deliberately:** all logo variants (brand kit for task-0007).
       (`public/img/useful-image-stash/` was flagged for the owner and then removed 2026-07-28 on owner direction.)
 
 ## Phase 5 — Accessibility (public site; real users) — DONE
@@ -132,7 +132,7 @@ Visual-identity alignment is tracked separately in
       (decorative). All remaining greys are hex pending the token migration (task-0002 M8).
 - [x] **A8** Added canonical + Open Graph + Twitter meta, a skip-to-content link, and wrapped the nav in
       `<header>` with `<main id="main-content" tabindex="-1">`. **Follow-up:** a raster `og:image`
-      (1200x630) social card — no asset exists yet; pairs with task-0006 visual assets.
+      (1200x630) social card — no asset exists yet; pairs with task-0005 visual assets.
 - [x] **B5** Associated visually-hidden `<label>`s with the contact-form fields (placeholder is not a label).
 
 ## Phase 6 — Maintainability refactors
@@ -152,12 +152,12 @@ Visual-identity alignment is tracked separately in
       `research.ts`, `products.ts`, and `roadmap/overview.ts`. Components render content; no user-facing string
       literal lives in code. Strings moved verbatim (rendered output unchanged). This is the cheap prerequisite
       that makes an eventual i18n pass a locale layer over an already-clean content tree rather than a
-      codebase-wide string hunt. See [ADR-0006](../../adr/0006-i18n-readiness.md) (Accepted) and
-      [`../deferred/task-0007-i18n.md`](../deferred/task-0007-i18n.md). The i18n _runtime_ (locale routing,
+      codebase-wide string hunt. See [ADR-0004](../../adr/0004-i18n-readiness.md) (Accepted) and
+      [`../deferred/task-0006-i18n.md`](../deferred/task-0006-i18n.md). The i18n _runtime_ (locale routing,
       catalogs, switcher) is explicitly NOT built now — only the externalization discipline.
       **Follow-up (enforcement):** an ESLint `react/jsx-no-literals`-style rule would mechanically prevent new
       hardcoded strings from creeping back. Not enabled yet (needs tuning to avoid false positives on
-      punctuation/whitespace); worth adding when the design-system lint config lands (task-0002 / ADR-0003).
+      punctuation/whitespace); worth adding when the design-system lint config lands (task-0002 / ADR-0002).
       Note: this supersedes the link-data half of **M2/M3** for nav/footer/socials, which now live in
       `content/site.ts`; the remaining M2/M3 work is only deleting the dead `social.ts`/`SocialBar` (final
       dead-code commit).

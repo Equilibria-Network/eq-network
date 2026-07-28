@@ -30,7 +30,7 @@ A board-wide version bump off the inherited majors, in verified layers.
 ### Notes
 
 - TypeScript **7** (the native compiler) is deferred: `@astrojs/check` and `typescript-eslint` do not
-  support it yet. See [ADR-0007](docs/adr/0007-dependency-upgrade-2026-07.md); ADR-0006 (i18n-readiness)
+  support it yet. See [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md); ADR-0004 (i18n-readiness)
   is now Accepted.
 
 ## [2026-07-28] — Engineering baseline

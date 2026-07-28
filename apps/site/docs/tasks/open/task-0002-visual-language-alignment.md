@@ -1,10 +1,10 @@
 # Improve and align the site's UI/UX on a shared, enforceable design system
 
 - Provenance: task-0002 (umbrella)
-- Links back to: [`../../adr/0003-visual-language-system.md`](../../adr/0003-visual-language-system.md) (proposed),
+- Links back to: [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md) (proposed),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
   [`../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
-- Status: proposed — awaiting owner sign-off on ADR-0003 and the per-page approach
+- Status: proposed — awaiting owner sign-off on ADR-0002 and the per-page approach
 - Owner: unassigned
 - Priority: soon (large)
 

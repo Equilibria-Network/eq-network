@@ -1,5 +1,5 @@
 // src/content/privacy.ts
-// Copy for the /privacy page. Kept consistent with docs/privacy/data-map.md.
+// Copy for the /privacy page. Kept consistent with apps/site/docs/privacy/data-map.md.
 // DRAFT: owner should legal-review before relying on it, and confirm the
 // privacy contact inbox below exists and routes.
 

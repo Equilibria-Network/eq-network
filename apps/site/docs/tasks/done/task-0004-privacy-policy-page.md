@@ -2,7 +2,7 @@
 
 - Provenance: task-0004
 - Links back to: [`../../privacy/data-map.md`](../../privacy/data-map.md),
-  [`../../adr/0004-privacy-review-before-integration.md`](../../adr/0004-privacy-review-before-integration.md)
+  [`../../adr/0003-privacy-review-before-integration.md`](../../adr/0003-privacy-review-before-integration.md)
 - Status: done (draft) — 2026-07-28
 - Owner: unassigned
 - Priority: soon

@@ -1,4 +1,4 @@
-# ADR-0006: i18n readiness now, i18n runtime deferred
+# ADR-0004: i18n readiness now, i18n runtime deferred
 
 - Status: Accepted
 - Date: 2026-07-28
@@ -34,7 +34,7 @@ Split the two concerns and act on only the cheap half now:
   [`../tasks/open/task-0001-pristine-baseline.md`](../tasks/open/task-0001-pristine-baseline.md)).
 - **Defer the i18n runtime.** Do not add locale routing, message catalogs, a locale switcher, or restructure
   `src/content/*.ts` into a locale-keyed shape until there is a real second locale. The eventual runtime is
-  tracked as [`../tasks/deferred/task-0007-i18n.md`](../tasks/deferred/task-0007-i18n.md) and will get its
+  tracked as [`../tasks/deferred/task-0006-i18n.md`](../tasks/deferred/task-0006-i18n.md) and will get its
   own decision (this ADR, updated, or a successor) when that day comes.
 
 The distinguishing principle: **preserve optionality cheaply (never hardcode a string) without building

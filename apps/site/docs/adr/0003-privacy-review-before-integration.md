@@ -1,4 +1,4 @@
-# ADR-0004: Privacy-policy deep dive before integrating any data-touching service
+# ADR-0003: Privacy-policy deep dive before integrating any data-touching service
 
 - Status: Accepted (2026-07-28)
 - Date: 2026-07-28

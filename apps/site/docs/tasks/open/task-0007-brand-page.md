@@ -1,10 +1,10 @@
 # Build a public brand page (/brand)
 
-- Provenance: task-0008 (owner request)
+- Provenance: task-0007 (owner request)
 - Links back to: [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
-  [`../../adr/0003-visual-language-system.md`](../../adr/0003-visual-language-system.md),
+  [`../../adr/0002-visual-language-system.md`](../../adr/0002-visual-language-system.md),
   [`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md),
-  [`../deferred/task-0006-visual-asset-regeneration.md`](../deferred/task-0006-visual-asset-regeneration.md)
+  [`../deferred/task-0005-visual-asset-regeneration.md`](../deferred/task-0005-visual-asset-regeneration.md)
 - Status: todo
 - Owner: unassigned
 - Priority: soon
@@ -41,8 +41,8 @@ presenting at least:
   [`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md) so swatches and type
   samples render from the real tokens/primitives rather than hardcoded values (dogfooding). A first version
   can be built from the documented values if the owner wants it sooner.
-- **Assets:** pairs with [`../deferred/task-0006-visual-asset-regeneration.md`](../deferred/task-0006-visual-asset-regeneration.md)
+- **Assets:** pairs with [`../deferred/task-0005-visual-asset-regeneration.md`](../deferred/task-0005-visual-asset-regeneration.md)
   (one consistent visual identity across imagery) — the brand page is the natural place to showcase the
   result once that identity is defined.
-- Follows the same content-in-`src/content/` discipline as the rest of the site (ADR-0006 / M6).
+- Follows the same content-in-`src/content/` discipline as the rest of the site (ADR-0004 / M6).
 - The site domain is `eq-network.org`, so the page is `eq-network.org/brand`.

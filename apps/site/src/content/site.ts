@@ -2,7 +2,7 @@
 // Site chrome: copy and link data for the shared header, footer, contact form,
 // error page, and per-page screen-reader titles. Kept out of components so all
 // user-facing copy lives in one place and the site stays i18n-ready
-// (see docs/adr/0006-i18n-readiness.md).
+// (see apps/site/docs/adr/0004-i18n-readiness.md).
 
 export interface NavLink {
   href: string;

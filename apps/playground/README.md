@@ -9,5 +9,5 @@ Not yet implemented. The current prototype is served by the site from `apps/site
 app with its own build, its own `docs/adr/tasks/`, and its own deploy target (a header-capable static host,
 since multi-threaded WebAssembly needs `SharedArrayBuffer` / COOP+COEP headers that GitHub Pages cannot set).
 
-See [`../../docs/adr/0005-repo-topology.md`](../../docs/adr/0005-repo-topology.md) and
-[`../../docs/adr/0001-astro-static-github-pages.md`](../../docs/adr/0001-astro-static-github-pages.md).
+See [`../../docs/adr/0001-monorepo-topology.md`](../../docs/adr/0001-monorepo-topology.md) and
+[`../../apps/site/docs/adr/0001-astro-static-github-pages.md`](../../apps/site/docs/adr/0001-astro-static-github-pages.md).

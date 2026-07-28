@@ -38,7 +38,7 @@ rejected on jurisdiction):
 ## Not yet a recommendation — the choice needs a privacy deep dive
 
 The table above is a feature/jurisdiction shortlist, not a decision. Per
-[ADR-0004](../../adr/0004-privacy-review-before-integration.md), the choice must rest on a proper privacy
+[ADR-0003](../../adr/0003-privacy-review-before-integration.md), the choice must rest on a proper privacy
 deep-dive (legal entity, exact data location, full subprocessor chain, DPA terms, retention, transfer
 mechanism) — not a marketing-page comparison.
 
@@ -56,5 +56,5 @@ updated, the Formspree secret retired, and the choice linked from the privacy po
 
 ## Next step
 
-Produce the ADR-0004 privacy deep-dive on Form.taxi and self-hosted Formlite, then bring the two to the
+Produce the ADR-0003 privacy deep-dive on Form.taxi and self-hosted Formlite, then bring the two to the
 owner to choose. (Offer standing: this can be run now on request.)

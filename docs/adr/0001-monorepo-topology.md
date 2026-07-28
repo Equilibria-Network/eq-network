@@ -1,4 +1,4 @@
-# ADR-0005: Repository topology and decomposition (site + playground)
+# ADR-0001: Repository topology and decomposition (site + playground)
 
 - Status: Accepted (2026-07-28) — Option B, pnpm-workspace monorepo
 - Date: 2026-07-28
@@ -10,7 +10,7 @@ Two things will live in this project's world, with very different shapes:
 - **The marketing/research site** — static, content-first, light dependencies, stable, deploys to GitHub
   Pages. What exists today.
 - **The playground** — becoming a substantial **client-side agent-based-model** with tweakable parameters
-  (ADR-0001 amendment). It will have heavy, divergent tooling (likely Web Workers and WASM), its own
+  ([ADR-0001](../../apps/site/docs/adr/0001-astro-static-github-pages.md) amendment). It will have heavy, divergent tooling (likely Web Workers and WASM), its own
   build, its own docs / ADRs / tasks, and possibly its own hosting needs (multi-threaded WASM needs
   `SharedArrayBuffer`, which needs COOP/COEP response headers GitHub Pages cannot send). The full
   high-powered engine is already a **separate download/repo**; the web playground is the accessible tier.
@@ -42,7 +42,7 @@ eq-network/
     site/         Astro marketing site  → GitHub Pages
     playground/   ABM app (own build, deps, deploy) → its own docs/ adr/ tasks/
   packages/
-    design-system/  shared tokens + components (ADR-0003), used by both
+    design-system/  shared tokens + components (ADR-0002), used by both
   docs/           cross-cutting repo docs (this docs/ tree)
   pnpm-workspace.yaml
 ```
@@ -63,7 +63,7 @@ tasks/` — exactly as described) while **sharing the design system** with the s
 - **Pros:** hardest isolation; fully independent history, cadence, and contributors; ideal **if** the web
   playground shares more code with the separate high-powered engine than with the site.
 - **Cons:** the design system must be published and version-bumped across repos to keep the two aligned (or
-  duplicated — which is the exact drift ADR-0003 is fighting); cross-repo coordination overhead; embedding
+  duplicated — which is the exact drift ADR-0002 is fighting); cross-repo coordination overhead; embedding
   the playground into the site becomes a release-versioning problem. Two of everything (CI, deploy, docs
   roots) for a small team.
 
@@ -105,6 +105,6 @@ the team's actual size.
 
 ## Sources
 
-[ADR-0001](0001-astro-static-github-pages.md) (static hosting + the `SharedArrayBuffer`/header constraint and
-the client-side-ABM amendment); [ADR-0003](0003-visual-language-system.md) (the shared design system that
+[ADR-0001](../../apps/site/docs/adr/0001-astro-static-github-pages.md) (static hosting + the `SharedArrayBuffer`/header constraint and
+the client-side-ABM amendment); [ADR-0002](../../apps/site/docs/adr/0002-visual-language-system.md) (the shared design system that
 both apps consume); current `prototypes/playground.html` + `apps/site/src/pages/lab/playground.astro`.
