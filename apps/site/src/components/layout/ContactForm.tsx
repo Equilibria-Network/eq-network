@@ -1,8 +1,10 @@
 // src/components/layout/ContactForm.tsx
 import { useForm, ValidationError } from '@formspree/react';
+import { siteContent } from '@content/site';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
+  const c = siteContent.contact;
   const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
   const isConfigured = Boolean(formspreeEndpoint);
   const [state, handleSubmit] = useForm(formspreeEndpoint || 'placeholder');
@@ -12,11 +14,8 @@ export default function ContactForm() {
   if (!isConfigured) {
     return (
       <div className={styles.contactForm}>
-        <h2 className={styles.title}>Contact Us</h2>
-        <p>
-          The contact form is not configured yet. Please reach out via one of the links in the
-          footer.
-        </p>
+        <h2 className={styles.title}>{c.heading}</h2>
+        <p>{c.notConfigured}</p>
       </div>
     );
   }
@@ -24,10 +23,10 @@ export default function ContactForm() {
   if (state.succeeded) {
     return (
       <div className={styles.contactForm}>
-        <h2 className={styles.title}>Contact Us</h2>
+        <h2 className={styles.title}>{c.heading}</h2>
         <div className={styles.successMessage}>
-          <p className={styles.successTitle}>Thank you for your message!</p>
-          <p className={styles.successText}>We'll get back to you soon.</p>
+          <p className={styles.successTitle}>{c.successTitle}</p>
+          <p className={styles.successText}>{c.successText}</p>
         </div>
       </div>
     );
@@ -35,19 +34,19 @@ export default function ContactForm() {
 
   return (
     <div className={styles.contactForm}>
-      <h2 className={styles.title}>Contact Us</h2>
+      <h2 className={styles.title}>{c.heading}</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputRow}>
           <div className={styles.inputGroup}>
             <label htmlFor="name" className="sr-only">
-              Your name
+              {c.fields.name.label}
             </label>
             <input
               type="text"
               id="name"
               name="name"
               className={styles.input}
-              placeholder="Your name"
+              placeholder={c.fields.name.placeholder}
               required
             />
             <ValidationError
@@ -60,14 +59,14 @@ export default function ContactForm() {
 
           <div className={styles.inputGroup}>
             <label htmlFor="email" className="sr-only">
-              Your email
+              {c.fields.email.label}
             </label>
             <input
               type="email"
               id="email"
               name="email"
               className={styles.input}
-              placeholder="Your email"
+              placeholder={c.fields.email.placeholder}
               required
             />
             <ValidationError
@@ -81,13 +80,13 @@ export default function ContactForm() {
 
         <div className={styles.inputGroup}>
           <label htmlFor="message" className="sr-only">
-            Your message
+            {c.fields.message.label}
           </label>
           <textarea
             id="message"
             name="message"
             className={styles.textarea}
-            placeholder="Your message"
+            placeholder={c.fields.message.placeholder}
             rows={5}
             required
           />
@@ -106,7 +105,7 @@ export default function ContactForm() {
           }`}
           disabled={state.submitting}
         >
-          {state.submitting ? 'Sending...' : 'Send Message'}
+          {state.submitting ? c.submitting : c.submit}
         </button>
 
         <ValidationError errors={state.errors} className={styles.validationError} />

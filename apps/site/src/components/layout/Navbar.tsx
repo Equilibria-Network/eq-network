@@ -1,6 +1,7 @@
 // src/components/layout/Navbar.tsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { siteContent } from '@content/site';
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
@@ -24,13 +25,7 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/explainer', label: 'Thesis' },
-    { href: '/roadmap', label: 'Roadmap' },
-    { href: '/products', label: 'Products' },
-    { href: '/about', label: 'About' },
-  ];
+  const { links: navLinks, toggleMenuLabel } = siteContent.nav;
 
   // On home page: show logo only when scrolled
   // On other pages: always show logo
@@ -47,7 +42,7 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
         >
           <img
             src="/img/logo/logo_icon_text_big.svg"
-            alt="Equilibria Network"
+            alt={siteContent.brand}
             className={styles.logoImage}
           />
         </a>
@@ -65,7 +60,7 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
         <button
           className={styles.menuButton}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={toggleMenuLabel}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

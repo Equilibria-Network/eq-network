@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import Navbar from '@components/layout/Navbar';
 import Footer from '@components/layout/Footer';
+import { siteContent } from '@content/site';
 import '@styles/global.css';
 
 interface Props {
@@ -45,7 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Parallax Background Pattern -->
     <div class="parallax-background"></div>
 
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">{siteContent.skipToContent}</a>
 
     <!-- Navbar -->
     <header>

@@ -1,33 +1,11 @@
 // src/components/layout/Footer.tsx
-import React from 'react';
 import ContactForm from './ContactForm';
+import { siteContent } from '@content/site';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const footerLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Roadmap', href: '/roadmap' },
-    { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
-  ];
-
-  const socials = [
-    {
-      name: 'GitHub',
-      icon: '/img/socials/github.svg',
-      href: 'https://github.com/Equilibria-Network',
-    },
-    {
-      name: 'LinkedIn',
-      icon: '/img/socials/linkedin.svg',
-      href: 'https://www.linkedin.com/company/equilibria-network',
-    },
-    {
-      name: 'Substack',
-      icon: '/img/socials/substack.svg',
-      href: 'https://substack.com/@equilibria1',
-    },
-  ];
+  const { brand, footer } = siteContent;
+  const { links: footerLinks, socials, tagline, quickLinksHeading, copyrightName } = footer;
 
   return (
     <footer className={styles.footer}>
@@ -37,15 +15,12 @@ export default function Footer() {
           <div className={styles.logoSection}>
             <img
               src="/img/logo/logo_text_only.svg"
-              alt="Equilibria Network"
+              alt={brand}
               className={styles.logo}
               loading="lazy"
               decoding="async"
             />
-            <p className={styles.description}>
-              Exploring the design space of collective intelligence through simulations and
-              mathematical foundations.
-            </p>
+            <p className={styles.description}>{tagline}</p>
             <div className={styles.logoSocials}>
               {socials.map((social) => (
                 <a
@@ -75,7 +50,7 @@ export default function Footer() {
 
           {/* Quick Links Section */}
           <div className={styles.linksSection}>
-            <h3 className={styles.linksTitle}>Quick Links</h3>
+            <h3 className={styles.linksTitle}>{quickLinksHeading}</h3>
             <ul className={styles.linksList}>
               {footerLinks.map((link) => (
                 <li key={link.href}>
@@ -97,7 +72,7 @@ export default function Footer() {
         <div className={styles.copyright}>
           <div className={styles.copyrightContent}>
             <span className={styles.copyrightYear}>{new Date().getFullYear()}</span>
-            <span className={styles.copyrightName}>Equilibria Network</span>
+            <span className={styles.copyrightName}>{copyrightName}</span>
           </div>
         </div>
       </div>
