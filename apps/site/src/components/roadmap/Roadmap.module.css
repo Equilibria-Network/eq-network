@@ -1,0 +1,73 @@
+/* src/components/roadmap/Roadmap.module.css */
+
+.roadmapWrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Main Content Section - Side by Side Layout */
+.mainContentSection {
+  padding: 2rem 0 6rem;
+  background: transparent;
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Right Panel - Details */
+.detailsPanel {
+  min-height: 60vh;
+}
+
+/* Body Panel - Research Areas below tech tree */
+.bodyPanel {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .mainContentSection {
+    padding: 2rem 0 4rem;
+  }
+
+  .splitLayout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .mainContentSection {
+    padding: 1.5rem 0 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .mainContentSection {
+    padding: 1rem 0 2.5rem;
+  }
+
+  .splitLayout {
+    gap: 2rem;
+  }
+}

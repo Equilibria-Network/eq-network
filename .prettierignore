@@ -1,0 +1,13 @@
+# Build output and deps
+**/dist/
+**/.astro/
+**/node_modules/
+
+# Lockfile and generated
+pnpm-lock.yaml
+
+# Large self-contained prototype (owns its own formatting)
+apps/site/prototypes/playground.html
+
+# Static assets
+apps/site/public/

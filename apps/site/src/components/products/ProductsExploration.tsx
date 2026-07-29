@@ -1,0 +1,53 @@
+// src/components/products/ProductsExploration.tsx
+import React from 'react';
+import { productsContent } from '@content/products';
+import styles from './ProductsExploration.module.css';
+
+export default function ProductsExploration() {
+  const { exploration, sectionTitles } = productsContent;
+
+  return (
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {/* Left: Image */}
+          <div className={styles.imageColumn}>
+            <img
+              loading="lazy"
+              decoding="async"
+              src={exploration.image}
+              alt={exploration.title}
+              className={styles.productImage}
+            />
+          </div>
+
+          {/* Right: Text Content */}
+          <div className={styles.textColumn}>
+            <h2 className={styles.title}>{exploration.title}</h2>
+            <p className={styles.tagline}>{exploration.tagline}</p>
+
+            <div className={styles.subsection}>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.problem}</h3>
+              <p className={styles.subsectionText}>{exploration.sections.problem}</p>
+            </div>
+
+            <div className={styles.subsection}>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.building}</h3>
+              <p className={styles.subsectionText}>{exploration.sections.building}</p>
+            </div>
+
+            <div className={styles.subsection}>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.unlocks}</h3>
+              <p className={styles.subsectionText}>{exploration.sections.unlocks}</p>
+            </div>
+
+            <div className={styles.subsection}>
+              <h3 className={styles.subsectionTitle}>{sectionTitles.status}</h3>
+              <p className={styles.subsectionText}>{exploration.sections.status}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

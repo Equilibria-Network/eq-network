@@ -1,0 +1,356 @@
+/* src/components/about/AboutTeam.module.css */
+
+.section {
+  padding: 6rem 0;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.8;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Wrapper - for positioning shadow card.
+   Rendered as a <button>, so reset the native button appearance. */
+.cardWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3.5/5;
+  perspective: 1000px;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  appearance: none;
+}
+
+/* Shadow Card - appears behind with hatched pattern */
+.cardWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    var(--color-primary-darkest) 2px,
+    var(--color-primary-darkest) 4px
+  );
+  border: 2px solid var(--color-primary-darkest);
+  border-radius: 12px;
+  z-index: 1;
+  opacity: 0;
+  transform: rotate(0deg) translate(0, 0);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cardWrapper:hover::before {
+  opacity: 1;
+  transform: rotate(-5deg) translate(-8px, 8px);
+}
+
+/* Main Card Container */
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front and Back Faces */
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease;
+}
+
+.cardFront {
+  background: url('/img/parallax/white-paper-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 0px solid rgba(0, 59, 126, 0.15);
+  transform: rotateY(0deg);
+}
+
+.cardBack {
+  background-color: var(--color-primary);
+  border: 0px solid var(--color-primary);
+  transform: rotateY(180deg);
+}
+
+/* White overlay to brighten texture on front only */
+.cardFront::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.cardWrapper:hover .cardFront {
+  border-color: var(--color-primary);
+}
+
+/* Front Side Content */
+.imageContainer {
+  width: 100%;
+  padding: 2rem 2rem 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.memberImage {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.cardWrapper:hover .memberImage {
+  transform: scale(1.05);
+}
+
+.frontContent {
+  padding: 1rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.memberName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.memberRole {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.memberBio {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+  flex: 1;
+}
+
+.clickHint {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  margin: 0;
+  opacity: 0.6;
+  font-style: italic;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Back Side Content */
+.backContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.backName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.detailsText {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* Webkit scrollbar styling for sketch aesthetic */
+.detailsText::-webkit-scrollbar {
+  width: 6px;
+}
+
+.detailsText::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.detailsText::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.detailsText::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.detailParagraph {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: white;
+  margin: 0 0 1rem 0;
+  opacity: 0.95;
+}
+
+.detailParagraph:last-child {
+  margin-bottom: 0;
+}
+
+.cardBack .clickHint {
+  color: white;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 400px;
+  }
+
+  .imageContainer {
+    padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+  }
+
+  .memberImage {
+    max-width: 160px;
+  }
+
+  .frontContent,
+  .backContent {
+    padding: 1.5rem;
+  }
+
+  .memberName,
+  .backName {
+    font-size: 1.375rem;
+  }
+
+  .memberBio {
+    font-size: 0.85rem;
+  }
+
+  .detailParagraph {
+    font-size: 0.825rem;
+  }
+}

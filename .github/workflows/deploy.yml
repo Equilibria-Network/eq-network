@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,32 +15,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout
         uses: actions/checkout@v4
-      
+
+      # Uses the pnpm version pinned in the root package.json "packageManager" field.
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-      
+        uses: pnpm/action-setup@v4
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
-      
+
       - name: Install dependencies
-        run: pnpm install
-      
-      - name: Build with Astro
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the site
         env:
           PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
-        run: pnpm run build
-      
+        run: pnpm --filter @eq-network/site build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./apps/site/dist
 
   deploy:
     needs: build

@@ -1,0 +1,164 @@
+---
+// src/pages/privacy.astro
+import Layout from '@/layouts/Layout.astro';
+import { privacyContent } from '@content/privacy';
+
+const { title, lastUpdated, intro, sections, contact } = privacyContent;
+---
+
+<Layout
+  title="Privacy Policy - Equilibria Network"
+  description="What personal data the Equilibria Network site handles, why, and who processes it."
+>
+  <section class="privacy">
+    <div class="container">
+      <h1 class="pageTitle">{title}</h1>
+      <p class="updated">Last updated: {lastUpdated}</p>
+
+      {intro.map((p) => <p class="lead">{p}</p>)}
+
+      {
+        sections.map((section) => (
+          <div class="section">
+            <h2>{section.heading}</h2>
+            {section.paragraphs?.map((p) => (
+              <p>{p}</p>
+            ))}
+            {section.processors && (
+              <table class="processors">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th>Role</th>
+                    <th>Location</th>
+                    <th>Data it sees</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.processors.map((proc) => (
+                    <tr>
+                      <td>{proc.name}</td>
+                      <td>{proc.role}</td>
+                      <td>{proc.location}</td>
+                      <td>{proc.data}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        ))
+      }
+
+      <div class="section">
+        <h2>{contact.heading}</h2>
+        <p>
+          {contact.body}
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .privacy {
+    padding: 8rem 0 6rem;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .pageTitle {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .updated {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.65;
+    margin: 0 0 2.5rem 0;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .section {
+    margin-top: 2.5rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.75rem 0;
+  }
+
+  .section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin: 0 0 1rem 0;
+  }
+
+  .section a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .processors {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .processors th,
+  .processors td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid rgba(0, 59, 126, 0.15);
+    line-height: 1.5;
+  }
+
+  .processors th {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .privacy {
+      padding: 6rem 0 4rem;
+    }
+
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .pageTitle {
+      font-size: 2.25rem;
+    }
+
+    .processors {
+      font-size: 0.85rem;
+    }
+
+    .processors th,
+    .processors td {
+      padding: 0.5rem;
+    }
+  }
+</style>

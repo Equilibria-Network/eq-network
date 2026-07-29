@@ -1,0 +1,11 @@
+---
+// src/pages/research.astro
+import Layout from '@/layouts/Layout.astro';
+import ResearchGraph from '@components/research/ResearchGraph';
+import { siteContent } from '@content/site';
+---
+
+<Layout title="Research - Equilibria Network">
+  <h1 class="sr-only">{siteContent.pageTitles.research}</h1>
+  <ResearchGraph client:load />
+</Layout>

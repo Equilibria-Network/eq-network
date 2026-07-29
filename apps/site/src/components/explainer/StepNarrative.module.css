@@ -1,0 +1,96 @@
+/* Step narrative text blocks */
+.step {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+  opacity: 0.2;
+  transition: opacity 0.5s ease;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.headline {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary, #003b7e);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  max-width: 480px;
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.sectionLabel.problem {
+  color: #e74c3c;
+  background: #e74c3c10;
+  border: 1px solid #e74c3c30;
+}
+
+.sectionLabel.solution {
+  color: #2ecc71;
+  background: #2ecc7110;
+  border: 1px solid #2ecc7130;
+}
+
+.stepNumber {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary, #4ab3f4);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .step {
+    min-height: 40vh;
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 1.4rem;
+  }
+
+  .body {
+    font-size: 1rem;
+  }
+
+  .step {
+    min-height: 35vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 1.2rem;
+  }
+
+  .body {
+    font-size: 0.95rem;
+  }
+
+  .step {
+    min-height: 30vh;
+  }
+}

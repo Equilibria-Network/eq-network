@@ -1,0 +1,196 @@
+/* src/components/about/AboutPartners.module.css */
+
+.section {
+  padding: 6rem 0;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.8;
+}
+
+.partnersGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Flat Horizontal Partner Card - no background, no texture.
+   Rendered as an <a>; keep it grid-level and unstyled as a link. */
+.partnerCard {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  color: inherit;
+  text-decoration: none;
+}
+
+.partnerCard:hover {
+  opacity: 0.85;
+}
+
+/* Logo Container - flat on page, no background */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.partnerCard:hover .logoContainer {
+  transform: scale(1.05);
+}
+
+.partnerLogo {
+  width: 100%;
+  height: auto;
+  max-height: 120px;
+  object-fit: contain;
+  /* Convert to monochrome using CSS filter to match --color-primary */
+  filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(5478%) hue-rotate(216deg)
+    brightness(95%) contrast(101%);
+}
+
+/* Partner Content */
+.partnerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.partnerName {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.partnerDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 0;
+  opacity: 0.85;
+}
+
+.visitLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.partnerCard:hover .visitLink {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .partnersGrid {
+    max-width: 100%;
+  }
+
+  .partnerCard {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .logoContainer {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .partnerName {
+    font-size: 1.5rem;
+  }
+
+  .partnerDescription {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoContainer {
+    max-width: 160px;
+  }
+
+  .partnerName {
+    font-size: 1.375rem;
+  }
+
+  .partnerDescription {
+    font-size: 0.875rem;
+  }
+}

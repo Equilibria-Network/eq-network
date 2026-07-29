@@ -1,0 +1,48 @@
+# .github/workflows/ci.yml
+# Checks that gate changes on pull requests and pushes. Deployment lives in deploy.yml.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # AGENTS.md and CLAUDE.md are kept as two identical real files (a symlink does
+      # not survive a Windows checkout). This guards against them drifting apart.
+      - name: AGENTS.md and CLAUDE.md are identical
+        run: |
+          if ! diff -q AGENTS.md CLAUDE.md >/dev/null; then
+            echo "::error::AGENTS.md and CLAUDE.md differ. Keep them identical (edit one, copy to the other)."
+            diff AGENTS.md CLAUDE.md || true
+            exit 1
+          fi
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prettier (format check)
+        run: pnpm format:check
+
+      - name: ESLint
+        run: pnpm lint
+
+      - name: Build
+        env:
+          PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
+        run: pnpm --filter @eq-network/site build

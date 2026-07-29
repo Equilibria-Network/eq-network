@@ -1,0 +1,13 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ExplainerPage from '@components/explainer/Explainer';
+import { siteContent } from '@content/site';
+---
+
+<Layout
+  title="Thesis — Equilibria Network"
+  description="Why compositional bridging between research fields matters for safe AI coordination."
+>
+  <h1 class="sr-only">{siteContent.pageTitles.thesis}</h1>
+  <ExplainerPage client:load />
+</Layout>
