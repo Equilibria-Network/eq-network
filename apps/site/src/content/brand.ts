@@ -1,10 +1,5 @@
 // src/content/brand.ts
-// Data for the /brand page. NOTE: this page is currently a PROTOTYPE exploration,
-// not the settled brand. It proposes one direction ("blueprint / measured") built
-// on the two cornerstones the owner endorsed: the Lorenz attractor and the hatched
-// card. We iterate on prototypes here, then settle; the settled version becomes the
-// real brand page that informs the rest of the site. Copy stays out of components
-// (ADR-0004).
+// Canonical data for the /brand visual-identity reference.
 
 export interface Mark {
   label: string; // mono annotation
@@ -36,7 +31,6 @@ export interface Motif {
 }
 
 export interface BrandContent {
-  prototypeNote: string;
   eyebrow: string;
   wordmark: string;
   tagline: string;
@@ -45,23 +39,52 @@ export interface BrandContent {
   sections: { mark: string; colour: string; type: string; motifs: string };
   markIntro: string;
   marks: Mark[];
+  assets: Array<{ label: string; href: string; downloadName: string }>;
+  usage: {
+    title: string;
+    intro: string;
+    dos: string[];
+    donts: string[];
+  };
   swatches: Swatch[];
   colourNote: string;
   faces: TypeFace[];
   motifs: Motif[];
+  drawing: {
+    sheetLabel: string;
+    revision: string;
+    figureLabel: string;
+    markMeasurement: string;
+    titleBlock: Array<{ label: string; value: string; accent?: boolean }>;
+  };
+  components: {
+    sectionTitle: string;
+    intro: string;
+    card: {
+      phase: string;
+      reference: string;
+      title: string;
+      abstract: string;
+      status: string;
+      caption: string;
+    };
+    tooltips: {
+      title: string;
+      intro: string;
+      examples: Array<{ before: string; term: string; definition: string; after: string }>;
+    };
+  };
   closing: { title: string; body: string; email: string };
 }
 
 export const brandContent: BrandContent = {
-  prototypeNote:
-    'Prototype — a direction, not the brand. We are exploring, not locking in. Everything here is up for iteration.',
-  eyebrow: 'Identity / exploration',
+  eyebrow: 'Visual identity system',
   wordmark: 'Equilibria',
   tagline: 'Designing new forms of collective intelligence.',
   intro:
-    'One direction for the Equilibria identity: measured and minimal, drawn like a blueprint — clear ' +
-    'lines, sharp edges, honest structure — around the two things worth keeping: the Lorenz attractor and ' +
-    'the hatched card.',
+    'The Equilibria identity is measured and minimal, drawing on mathematical notation and architectural ' +
+    'working drawings. Clear lines, sharp edges, honest structure, and restrained technical texture give ' +
+    'complex-systems research a legible visual form.',
   system: {
     tag: 'the mark is the math',
     equations: ['dx/dt = σ (y − x)', 'dy/dt = x (ρ − z) − y', 'dz/dt = x y − β z'],
@@ -74,32 +97,65 @@ export const brandContent: BrandContent = {
     motifs: 'System',
   },
   markIntro:
-    'The mark is the Lorenz attractor, taken as closed contours — a thick outer loop with a few nested ' +
-    'inner rings for fill. Clean vector paths regenerated from the equations, a fraction of the old 518 KB ' +
-    'hand-traced logo.',
+    'The mark uses one heavy, closed figure-eight contour with three fine concentric lines inside each ' +
+    'wing. The outer silhouette stays uninterrupted while the nested geometry recalls the Lorenz orbit.',
   marks: [
     {
       label: '01 / mark · navy',
-      src: '/img/brand/marks/v-contour.svg',
-      note: 'Primary. Bold enough to hold at small sizes.',
+      src: '/img/brand/marks/sym-concentric.svg',
+      note: 'Primary. Heavy outline with three fine contours per wing.',
     },
     {
       label: '02 / mark · reversed',
-      src: '/img/brand/marks/v-contour-white.svg',
+      src: '/img/brand/marks/sym-concentric-white.svg',
       dark: true,
       note: 'On ink / dark sections.',
     },
     {
       label: '03 / mark · line',
-      src: '/img/brand/marks/v-duo.svg',
-      note: 'Lighter weight for large or quiet uses.',
+      src: '/img/brand/marks/sym-outline.svg',
+      note: 'Heavier treatment for smaller uses.',
     },
     {
       label: '04 / mark · accent',
-      src: '/img/brand/marks/v-contour-accent.svg',
+      src: '/img/brand/marks/sym-concentric-accent.svg',
       note: 'Accent, used sparingly.',
     },
   ],
+  assets: [
+    {
+      label: 'Download primary SVG',
+      href: '/img/brand/marks/sym-concentric.svg',
+      downloadName: 'equilibria-mark-primary.svg',
+    },
+    {
+      label: 'Download reversed SVG',
+      href: '/img/brand/marks/sym-concentric-white.svg',
+      downloadName: 'equilibria-mark-reversed.svg',
+    },
+    {
+      label: 'Download accent SVG',
+      href: '/img/brand/marks/sym-concentric-accent.svg',
+      downloadName: 'equilibria-mark-accent.svg',
+    },
+  ],
+  usage: {
+    title: 'Mark usage',
+    intro:
+      'Use the mark as a precise mathematical symbol. Consistency matters more than decorative variation.',
+    dos: [
+      'Use navy on white as the default.',
+      'Use the reversed mark on the dark navy ground.',
+      'Keep clear space of at least one inner-contour width around the mark.',
+      'Use the outline-only asset when internal contours cannot reproduce cleanly.',
+    ],
+    donts: [
+      'Do not stretch, skew, rotate, or redraw the mark.',
+      'Do not add gradients, shadows, glow, or extra colours.',
+      'Do not place the mark over a busy image or dense grid.',
+      'Do not reduce the internal-line version below a legible size.',
+    ],
+  },
   swatches: [
     {
       name: 'Ink',
@@ -154,9 +210,56 @@ export const brandContent: BrandContent = {
       body: 'Section breaks are a full hairline with a mono label riding on it — the drawing-callout motif.',
     },
   ],
+  drawing: {
+    sheetLabel: 'Equilibria Network / identity system',
+    revision: 'Version 1.0',
+    figureLabel: 'Figure 01 / primary mark',
+    markMeasurement: 'Nominal width 160',
+    titleBlock: [
+      { label: 'Project', value: 'Equilibria Network identity' },
+      { label: 'Drawing', value: 'Visual identity guidelines' },
+      { label: 'Scale', value: '1 : 1' },
+      { label: 'Grid', value: '8 units' },
+      { label: 'Status', value: 'Active', accent: true },
+      { label: 'Revision', value: '1.0' },
+    ],
+  },
+  components: {
+    sectionTitle: 'Components',
+    intro:
+      'The identity applied to interface elements: a hatched information strip, sharp white body, and an offset hatched shadow on hover.',
+    card: {
+      phase: 'Phase 02',
+      reference: 'EQ-014',
+      title: 'Bounded-influence objectives',
+      abstract:
+        'Reward shaping that keeps a policy’s causal footprint inside a measured envelope under distribution shift.',
+      status: 'Status: active',
+      caption: 'Research card / hatched header + offset hatch hover',
+    },
+    tooltips: {
+      title: 'Tooltip',
+      intro:
+        'A solid ink annotation appears above technical terms on hover or keyboard focus. The dashed underline signals that an explanation is available.',
+      examples: [
+        {
+          before: 'Constrained by a',
+          term: 'Lyapunov envelope',
+          definition: 'A bound that provably contracts over time.',
+          after: 'during training.',
+        },
+        {
+          before: 'Measured against the',
+          term: 'influence budget',
+          definition: 'The maximum causal effect a policy may exert.',
+          after: 'per rollout.',
+        },
+      ],
+    },
+  },
   closing: {
-    title: 'This is a draft',
-    body: 'React to it — keep, cut, or push further — and it becomes the next prototype. Reach us at ',
+    title: 'Questions',
+    body: 'For brand assets, applications, or partnership materials, contact ',
     email: 'contact@eq-network.org',
   },
 };

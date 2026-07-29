@@ -1,9 +1,8 @@
 ---
 // src/pages/brand.astro
-// PROTOTYPE brand exploration — the "blueprint / measured" direction. Not the
-// settled brand. Layout via Tailwind utilities; the blueprint motifs (hairline
-// frame, corner ticks, diagonal hatch, hatched card, annotated rule) are the
-// bespoke scoped-CSS layer. Copy/data in src/content/brand.ts.
+// Canonical Equilibria visual-identity page. Editorial white space is combined
+// with restrained engineering-drawing structure, dimensions, and localized
+// technical texture. Copy/data lives in src/content/brand.ts.
 import Layout from '@/layouts/Layout.astro';
 import { brandContent } from '@content/brand';
 import '@fontsource/space-grotesk/400.css';
@@ -16,133 +15,222 @@ const b = brandContent;
 ---
 
 <Layout
-  title="Brand (prototype) - Equilibria Network"
-  description="A prototype exploration of the Equilibria Network identity: a measured, blueprint direction built on the Lorenz attractor and the hatched card."
+  title="Brand - Equilibria Network"
+  description="The Equilibria Network visual identity: mark, colour, typography, components, and usage guidance."
 >
   <div class="bp">
-    <!-- prototype banner -->
-    <div class="proto-banner ff-mono">{b.prototypeNote}</div>
-    <nav class="proto-switch ff-mono">
-      <span>proto /</span>
-      <a href="/brand" aria-current="page">A · blueprint</a>
-      <a href="/brand/b">B · engineering</a>
-      <a href="/brand/c">C · cyanotype</a>
-      <a href="/brand/d">D · minimal</a>
-      <a href="/brand/elements">elements</a>
-    </nav>
+    <div class="drawing">
+      <span class="reg reg-tl" aria-hidden="true"></span>
+      <span class="reg reg-tr" aria-hidden="true"></span>
+      <span class="reg reg-bl" aria-hidden="true"></span>
+      <span class="reg reg-br" aria-hidden="true"></span>
 
-    <div class="sheet">
-      <!-- Hero -->
-      <header class="hero">
-        <span class="tag ff-mono">{b.eyebrow}</span>
-        <div class="hero-grid">
-          <div class="hero-mark">
-            <img
-              src="/img/brand/marks/v-contour.svg"
-              alt="Equilibria Lorenz mark"
-              width="200"
-              height="200"
-            />
-          </div>
-          <div class="hero-lead">
-            <h1 class="ff-display wordmark">{b.wordmark}</h1>
-            <p class="ff-display tagline">{b.tagline}</p>
-            <p class="intro">{b.intro}</p>
-          </div>
-        </div>
-        <div class="system ff-mono">
-          <span class="system-tag">// {b.system.tag}</span>
-          <div class="system-eq">
-            {b.system.equations.map((e) => <span>{e}</span>)}
-          </div>
-          <span class="system-params">{b.system.params}</span>
-        </div>
-      </header>
+      <div class="drawing-head ff-mono">
+        <span>{b.drawing.sheetLabel}</span>
+        <span>{b.drawing.revision}</span>
+      </div>
 
-      <!-- Mark -->
-      <section>
-        <div class="rule ff-mono"><span>{b.sections.mark}</span></div>
-        <p class="section-intro">{b.markIntro}</p>
-        <div class="mark-grid">
-          {
-            b.marks.map((m) => (
-              <figure class={`mark-cell ${m.dark ? 'is-dark' : 'is-hatch'}`}>
-                <img src={m.src} alt={m.label} width="120" height="120" loading="lazy" />
-                <figcaption>
-                  <span class="ff-mono mark-label">{m.label}</span>
-                  <span class="mark-note">{m.note}</span>
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </section>
-
-      <!-- Colour -->
-      <section>
-        <div class="rule ff-mono"><span>{b.sections.colour}</span></div>
-        <div class="swatch-grid">
-          {
-            b.swatches.map((s) => (
-              <div class="swatch">
-                <div
-                  class="chip"
-                  style={`background:${s.hex.length > 7 ? '#003B7E' : s.hex};${s.hex.length > 7 ? 'opacity:.15;' : ''}`}
+      <div class="sheet">
+        <!-- Hero -->
+        <header class="hero">
+          <span class="tag ff-mono">{b.eyebrow}</span>
+          <div class="hero-grid">
+            <div class="mark-drawing">
+              <span class="figure-label ff-mono">{b.drawing.figureLabel}</span>
+              <div class="dim-v ff-mono" aria-hidden="true"><span>160</span></div>
+              <div class="hero-mark">
+                <span class="crosshair" aria-hidden="true"></span>
+                <img
+                  src="/img/brand/marks/sym-concentric.svg"
+                  alt="Equilibria Lorenz mark"
+                  width="200"
+                  height="200"
                 />
-                <div class="swatch-meta ff-mono">
-                  <span class="swatch-hex">{s.hex}</span>
-                  <span class="swatch-name">{s.name}</span>
-                  <span class="swatch-role">{s.role}</span>
+              </div>
+              <div class="dim-h ff-mono"><span>{b.drawing.markMeasurement}</span></div>
+            </div>
+            <div class="hero-lead">
+              <h1 class="ff-display wordmark">{b.wordmark}</h1>
+              <p class="ff-display tagline">{b.tagline}</p>
+              <p class="intro">{b.intro}</p>
+            </div>
+          </div>
+          <div class="system ff-mono">
+            <span class="system-tag">// {b.system.tag}</span>
+            <div class="system-eq">
+              {b.system.equations.map((e) => <span>{e}</span>)}
+            </div>
+            <span class="system-params">{b.system.params}</span>
+          </div>
+        </header>
+
+        <!-- Mark -->
+        <section>
+          <div class="rule ff-mono"><span>{b.sections.mark}</span></div>
+          <p class="section-intro">{b.markIntro}</p>
+          <div class="mark-grid">
+            {
+              b.marks.map((m) => (
+                <figure class={`mark-cell ${m.dark ? 'is-dark' : 'is-hatch'}`}>
+                  <img src={m.src} alt={m.label} width="120" height="120" loading="lazy" />
+                  <figcaption>
+                    <span class="ff-mono mark-label">{m.label}</span>
+                    <span class="mark-note">{m.note}</span>
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+          <div class="mark-actions ff-mono">
+            {
+              b.assets.map((asset) => (
+                <a href={asset.href} download={asset.downloadName}>
+                  {asset.label}
+                </a>
+              ))
+            }
+          </div>
+          <div class="usage-grid">
+            <div class="usage-intro">
+              <span class="ff-mono usage-label">{b.usage.title}</span>
+              <p>{b.usage.intro}</p>
+            </div>
+            <div class="usage-column">
+              <span class="ff-mono usage-label">Do</span>
+              <ul>
+                {b.usage.dos.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div class="usage-column">
+              <span class="ff-mono usage-label">Do not</span>
+              <ul>
+                {b.usage.donts.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colour -->
+        <section>
+          <div class="rule ff-mono"><span>{b.sections.colour}</span></div>
+          <div class="swatch-grid">
+            {
+              b.swatches.map((s) => (
+                <div class="swatch">
+                  <div
+                    class="chip"
+                    style={`background:${s.hex.length > 7 ? '#003B7E' : s.hex};${s.hex.length > 7 ? 'opacity:.15;' : ''}`}
+                  />
+                  <div class="swatch-meta ff-mono">
+                    <span class="swatch-hex">{s.hex}</span>
+                    <span class="swatch-name">{s.name}</span>
+                    <span class="swatch-role">{s.role}</span>
+                  </div>
                 </div>
-              </div>
-            ))
-          }
-        </div>
-        <p class="section-intro">{b.colourNote}</p>
-      </section>
+              ))
+            }
+          </div>
+          <p class="section-intro">{b.colourNote}</p>
+        </section>
 
-      <!-- Type -->
-      <section>
-        <div class="rule ff-mono"><span>{b.sections.type}</span></div>
-        <div class="type-stack">
-          {
-            b.faces.map((f) => (
-              <div class="face">
-                <span class="ff-mono face-role">
-                  [ {f.role} ] {f.name}
-                </span>
-                <p class={`${f.fontClass} face-sample`}>{f.sample}</p>
-                <p class="face-usage">{f.usage}</p>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+        <!-- Type -->
+        <section>
+          <div class="rule ff-mono"><span>{b.sections.type}</span></div>
+          <div class="type-stack">
+            {
+              b.faces.map((f) => (
+                <div class="face">
+                  <span class="ff-mono face-role">
+                    [ {f.role} ] {f.name}
+                  </span>
+                  <p class={`${f.fontClass} face-sample`}>{f.sample}</p>
+                  <p class="face-usage">{f.usage}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
 
-      <!-- System / motifs -->
-      <section>
-        <div class="rule ff-mono"><span>{b.sections.motifs}</span></div>
-        <div class="motif-grid">
-          {
-            b.motifs.map((m) => (
-              <div class="hatched-card">
-                <span class="ff-mono card-tag">{m.tag}</span>
-                <strong class="ff-display card-title">{m.title}</strong>
-                <p class="card-body">{m.body}</p>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+        <!-- System / motifs -->
+        <section>
+          <div class="rule ff-mono"><span>{b.sections.motifs}</span></div>
+          <div class="motif-grid">
+            {
+              b.motifs.map((m) => (
+                <div class="hatched-card">
+                  <span class="ff-mono card-tag">{m.tag}</span>
+                  <strong class="ff-display card-title">{m.title}</strong>
+                  <p class="card-body">{m.body}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
 
-      <!-- Closing -->
-      <section class="closing">
-        <div class="rule ff-mono"><span>{b.closing.title}</span></div>
-        <p class="closing-body">
-          {b.closing.body}<a class="ff-mono" href={`mailto:${b.closing.email}`}>{b.closing.email}</a
-          >.
-        </p>
-      </section>
+        <!-- Applied components -->
+        <section>
+          <div class="rule ff-mono"><span>{b.components.sectionTitle}</span></div>
+          <p class="section-intro">{b.components.intro}</p>
+          <div class="component-grid">
+            <figure class="component-specimen">
+              <article class="research-card">
+                <div class="research-head ff-mono">
+                  <span>{b.components.card.phase}</span>
+                  <span>{b.components.card.reference}</span>
+                </div>
+                <div class="research-body">
+                  <h3 class="ff-display research-title">{b.components.card.title}</h3>
+                  <p>{b.components.card.abstract}</p>
+                  <span class="ff-mono research-status">{b.components.card.status}</span>
+                </div>
+              </article>
+              <figcaption class="ff-mono specimen-caption">{b.components.card.caption}</figcaption>
+            </figure>
+
+            <div class="tooltip-specimen">
+              <span class="ff-mono specimen-label">{b.components.tooltips.title}</span>
+              <p>{b.components.tooltips.intro}</p>
+              <div class="tooltip-examples">
+                {
+                  b.components.tooltips.examples.map((example) => (
+                    <p class="tooltip-line">
+                      {example.before}{' '}
+                      <span class="tooltip-term" tabindex="0">
+                        {example.term}
+                        <span class="tooltip-box ff-mono" role="tooltip">
+                          {example.definition}
+                        </span>
+                      </span>{' '}
+                      {example.after}
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Closing -->
+        <section class="closing">
+          <div class="rule ff-mono"><span>{b.closing.title}</span></div>
+          <p class="closing-body">
+            {b.closing.body}<a class="ff-mono" href={`mailto:${b.closing.email}`}
+              >{b.closing.email}</a
+            >.
+          </p>
+        </section>
+      </div>
+
+      <footer class="title-block ff-mono">
+        {
+          b.drawing.titleBlock.map((cell, index) => (
+            <div class:list={['tb-cell', index < 2 && 'tb-wide', cell.accent && 'is-accent']}>
+              <span class="tb-key">{cell.label}</span>
+              <span class="tb-value">{cell.value}</span>
+            </div>
+          ))
+        }
+      </footer>
     </div>
   </div>
 
@@ -155,8 +243,11 @@ const b = brandContent;
       --paper: #ffffff;
       --line: rgba(0, 59, 126, 0.16);
       --hatch: rgba(0, 59, 126, 0.06);
+      --grid-fine: rgba(0, 59, 126, 0.025);
+      --grid-major: rgba(0, 59, 126, 0.055);
       background: var(--paper);
       color: var(--ink);
+      padding-bottom: 2rem;
     }
     .ff-display {
       font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -165,72 +256,71 @@ const b = brandContent;
       font-family: 'IBM Plex Mono', ui-monospace, monospace;
     }
 
-    .proto-banner {
-      background: var(--void);
-      color: #fff;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      text-align: center;
-      padding: 0.55rem 1rem;
+    /* Engineering drawing frame */
+    .drawing {
+      position: relative;
+      max-width: 1180px;
+      margin: 2rem auto 0;
+      background-color: var(--paper);
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--hatch) 0,
+        var(--hatch) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      border: 1px solid var(--line);
     }
-    .proto-switch {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      align-items: center;
-      justify-content: center;
-      padding: 0.6rem 1rem;
+    .drawing-head {
+      min-height: 38px;
+      padding: 0.7rem 1.5rem;
       border-bottom: 1px solid var(--line);
-      font-size: 0.72rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       background: #fff;
     }
-    .proto-switch span {
-      opacity: 0.5;
-    }
-    .proto-switch a {
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.7;
-    }
-    .proto-switch a:hover {
-      opacity: 1;
-    }
-    .proto-switch a[aria-current='page'] {
-      opacity: 1;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 2px;
-    }
-
-    /* The drawn sheet: hatched ground + hairline frame with corner ticks */
     .sheet {
       position: relative;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 4.5rem 3.5rem 5rem;
-      background: var(--paper);
+      margin-inline: 18px;
+      padding: 4.5rem 4rem 5rem;
+      background: #fff;
     }
-    .sheet::before {
-      content: '';
+    .reg {
       position: absolute;
-      inset: 1.5rem;
-      border: 1px solid var(--line);
-      pointer-events: none;
-    }
-    /* corner ticks */
-    .sheet::after {
-      content: '';
-      position: absolute;
-      inset: 1.5rem;
-      pointer-events: none;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
       background:
-        linear-gradient(var(--ink), var(--ink)) left top / 14px 1px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) left top / 1px 14px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) right top / 14px 1px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) right top / 1px 14px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) left bottom / 14px 1px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) left bottom / 1px 14px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) right bottom / 14px 1px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) right bottom / 1px 14px no-repeat;
+        linear-gradient(var(--ink), var(--ink)) center / 100% 1px no-repeat,
+        linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat;
+      opacity: 0.75;
+    }
+    .reg::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+    }
+    .reg-tl {
+      top: -11px;
+      left: -11px;
+    }
+    .reg-tr {
+      top: -11px;
+      right: -11px;
+    }
+    .reg-bl {
+      bottom: -11px;
+      left: -11px;
+    }
+    .reg-br {
+      right: -11px;
+      bottom: -11px;
     }
 
     .tag {
@@ -250,22 +340,115 @@ const b = brandContent;
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 2.5rem;
+      grid-template-columns: 260px 1fr;
+      gap: 3.5rem;
       align-items: center;
       margin-top: 1.75rem;
     }
+    .mark-drawing {
+      position: relative;
+      padding: 1.6rem 1.4rem 2rem 2rem;
+    }
+    .figure-label {
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.58;
+    }
     .hero-mark {
+      position: relative;
       border: 1px solid var(--line);
-      background: #fff;
+      background-color: #fff;
+      background-image:
+        linear-gradient(var(--grid-major) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+        linear-gradient(var(--grid-fine) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-fine) 1px, transparent 1px);
+      background-size:
+        40px 40px,
+        40px 40px,
+        8px 8px,
+        8px 8px;
       aspect-ratio: 1;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .hero-mark img {
-      width: 74%;
+      position: relative;
+      z-index: 1;
+      width: 76%;
       height: auto;
+    }
+    .crosshair {
+      position: absolute;
+      inset: 12px;
+      background:
+        linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat,
+        linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat;
+    }
+    .dim-v {
+      position: absolute;
+      top: 1.6rem;
+      bottom: 2rem;
+      left: 0;
+      width: 1px;
+      border-left: 1px solid var(--ink);
+    }
+    .dim-v::before,
+    .dim-v::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      width: 8px;
+      border-top: 1px solid var(--ink);
+    }
+    .dim-v::before {
+      top: 0;
+    }
+    .dim-v::after {
+      bottom: 0;
+    }
+    .dim-v span {
+      position: absolute;
+      top: 50%;
+      left: -0.7rem;
+      padding: 0.2rem 0;
+      background: #fff;
+      font-size: 0.62rem;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+    .dim-h {
+      position: absolute;
+      right: 1.4rem;
+      bottom: 0.45rem;
+      left: 2rem;
+      border-top: 1px solid var(--ink);
+      text-align: center;
+    }
+    .dim-h::before,
+    .dim-h::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      height: 8px;
+      border-left: 1px solid var(--ink);
+    }
+    .dim-h::before {
+      left: 0;
+    }
+    .dim-h::after {
+      right: 0;
+    }
+    .dim-h span {
+      position: relative;
+      top: -0.65rem;
+      padding: 0 0.45rem;
+      background: #fff;
+      font-size: 0.62rem;
     }
     .wordmark {
       font-size: clamp(3rem, 8vw, 5.5rem);
@@ -383,6 +566,59 @@ const b = brandContent;
       line-height: 1.4;
       opacity: 0.65;
     }
+    .mark-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .mark-actions a {
+      border: 1px solid var(--ink);
+      padding: 0.55rem 0.75rem;
+      color: var(--ink);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition:
+        background 150ms ease,
+        color 150ms ease;
+    }
+    .mark-actions a:hover,
+    .mark-actions a:focus-visible {
+      background: var(--ink);
+      color: #fff;
+    }
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 1px;
+      margin-top: 2rem;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .usage-grid > div {
+      padding: 1.2rem;
+      background: #fff;
+    }
+    .usage-label {
+      display: block;
+      margin-bottom: 0.55rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .usage-intro p,
+    .usage-column li {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--void);
+      opacity: 0.78;
+    }
+    .usage-column ul {
+      display: grid;
+      gap: 0.45rem;
+      padding-left: 1rem;
+    }
 
     /* Colour */
     .swatch-grid {
@@ -454,8 +690,18 @@ const b = brandContent;
     .hatched-card {
       position: relative;
       border: 1px solid var(--line);
-      padding: 1.5rem 1.5rem 1.6rem;
-      background-color: #fff;
+      padding: 4.2rem 1.5rem 1.6rem;
+      background: #fff;
+      transition:
+        transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 180ms ease;
+    }
+    .hatched-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2.8rem;
+      border-bottom: 1px solid var(--line);
       background-image: repeating-linear-gradient(
         45deg,
         var(--hatch) 0,
@@ -464,9 +710,13 @@ const b = brandContent;
         transparent 8px
       );
     }
+    .hatched-card:hover {
+      transform: rotate(2deg) translate(4px, -4px);
+      box-shadow: -8px 8px 0 var(--hatch);
+    }
     .card-tag {
       position: absolute;
-      top: 0.8rem;
+      top: 0.9rem;
       right: 0.9rem;
       font-size: 0.72rem;
       opacity: 0.5;
@@ -485,6 +735,174 @@ const b = brandContent;
       max-width: 46ch;
     }
 
+    /* Applied component specimens */
+    .component-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+    .component-specimen {
+      position: relative;
+      padding: 0.75rem 0.75rem 0;
+    }
+    .component-specimen::before {
+      content: '';
+      position: absolute;
+      inset: 0.75rem 0.75rem 2rem;
+      z-index: 0;
+      border: 2px solid var(--ink);
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        var(--ink) 2px,
+        var(--ink) 4px
+      );
+      /* Only the exposed left and bottom strips may render. Keeping the hatch
+         out of the card footprint makes the shadow robust across stacking
+         contexts and browser compositing. */
+      clip-path: polygon(
+        calc(100% - 8px) 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        0 calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px)
+      );
+      opacity: 0;
+      transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .research-card {
+      position: relative;
+      z-index: 1;
+      border: 1px solid var(--line);
+      background: #fff;
+      transition: border-color 240ms ease;
+    }
+    .component-specimen:hover::before {
+      opacity: 1;
+      transform: translate(9px, 9px);
+    }
+    .component-specimen:hover .research-card {
+      border-color: var(--ink);
+    }
+    .research-head {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--hatch) 0,
+        var(--hatch) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .research-body {
+      padding: 1.35rem 1.25rem 1.2rem;
+    }
+    .research-title {
+      margin-bottom: 0.55rem;
+      font-size: 1.25rem;
+      line-height: 1.25;
+    }
+    .research-body p {
+      max-width: 48ch;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--void);
+      opacity: 0.78;
+    }
+    .research-status {
+      display: block;
+      margin-top: 1rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .specimen-caption,
+    .specimen-label {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+    .tooltip-specimen {
+      border-left: 1px solid var(--line);
+      padding: 0.2rem 0 0.5rem 1.5rem;
+    }
+    .tooltip-specimen > p {
+      max-width: 48ch;
+      margin-top: 0.55rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      opacity: 0.72;
+    }
+    .tooltip-examples {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+    .tooltip-line {
+      border: 1px solid var(--line);
+      padding: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--void);
+    }
+    .tooltip-term {
+      position: relative;
+      color: var(--ink);
+      border-bottom: 1px dashed var(--ink);
+      cursor: help;
+      outline: none;
+    }
+    .tooltip-box {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      z-index: 5;
+      width: max-content;
+      max-width: 220px;
+      padding: 0.5rem 0.65rem;
+      background: var(--ink);
+      color: #fff;
+      font-size: 0.68rem;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(4px);
+      transition:
+        opacity 150ms ease,
+        transform 150ms ease;
+    }
+    .tooltip-box::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      border: 5px solid transparent;
+      border-top-color: var(--ink);
+      transform: translateX(-50%);
+    }
+    .tooltip-term:hover .tooltip-box,
+    .tooltip-term:focus .tooltip-box {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* Closing */
     .closing-body {
       font-size: 1.05rem;
@@ -496,7 +914,65 @@ const b = brandContent;
       text-underline-offset: 3px;
     }
 
+    /* Engineering title block */
+    .title-block {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr repeat(4, 0.7fr);
+      border-top: 1px solid var(--ink);
+      background: #fff;
+    }
+    .tb-cell {
+      min-width: 0;
+      padding: 0.65rem 0.75rem 0.75rem;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 0.22rem;
+    }
+    .tb-cell:last-child {
+      border-right: 0;
+    }
+    .tb-key {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .tb-value {
+      font-size: 0.68rem;
+      line-height: 1.35;
+    }
+    .tb-cell.is-accent {
+      background: var(--accent);
+      color: var(--void);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hatched-card {
+        transition: none;
+      }
+      .hatched-card:hover {
+        transform: none;
+      }
+      .component-specimen::before {
+        transition: none;
+      }
+      .component-specimen:hover::before {
+        opacity: 0;
+        transform: none;
+      }
+      .component-specimen:hover .research-card {
+        border-color: var(--line);
+      }
+    }
+
     @media (max-width: 820px) {
+      .bp {
+        padding: 0 0.75rem 1rem;
+      }
+      .drawing {
+        margin-top: 1rem;
+      }
       .sheet {
         padding: 3rem 1.5rem 3.5rem;
       }
@@ -505,10 +981,13 @@ const b = brandContent;
         gap: 1.5rem;
       }
       .hero-mark {
-        width: 140px;
+        width: 180px;
       }
       .mark-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .usage-grid {
+        grid-template-columns: 1fr;
       }
       .swatch-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -516,8 +995,38 @@ const b = brandContent;
       .motif-grid {
         grid-template-columns: 1fr;
       }
+      .component-grid {
+        grid-template-columns: 1fr;
+      }
+      .tooltip-specimen {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+        padding: 1.5rem 0 0;
+      }
       .system-params {
         margin-left: 0;
+      }
+      .title-block {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tb-cell:nth-child(2n) {
+        border-right: 0;
+      }
+      .tb-cell:nth-child(-n + 4) {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+    @media (max-width: 480px) {
+      .sheet {
+        margin-inline: 8px;
+        padding-inline: 1rem;
+      }
+      .mark-drawing {
+        max-width: 240px;
+      }
+      .mark-grid,
+      .swatch-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>

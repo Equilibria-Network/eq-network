@@ -1,11 +1,11 @@
 # Visual language (the design contract)
 
-Genre: reference (Diátaxis). This is the canonical description of the site's visual language, inferred from
-the home page and the consistent about/products treatments. **The home page is the spec;** this doc turns
-that tribal knowledge into a written contract so humans and agents build new pages that match.
+Genre: reference (Diátaxis). This is the canonical description of the site's visual identity. The integrated
+[`/brand`](../../src/pages/brand.astro) page is the rendered source of truth; this document records the
+system so future page redesigns can apply it consistently.
 
-When it and the running site disagree, the site wins and this doc gets fixed. When a _new page_ disagrees
-with this doc, the page is drifting — fix the page.
+Existing public pages still carry parts of the inherited identity. When they disagree with `/brand`, treat
+that as migration work, not evidence that the identity is unsettled.
 
 Status note: the tokens and primitives below are the **target** system. Much of it currently lives as
 copy-pasted CSS values rather than tokens; the foundation is now Tailwind v4
@@ -31,8 +31,8 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 
 ## Type
 
-- **Two families, on purpose:** system sans for body and UI; **Georgia/Times serif** (`--ff-serif`) for
-  interior-page hero titles and long-form descriptions. Serif = editorial gravitas; sans = product/UI.
+- **Two families, on purpose:** **Space Grotesk** for display/headings and **IBM Plex Mono** for labels,
+  annotations, coordinates, dimensions, and data. Body copy remains a legible system sans.
 - **Scale (target tokens):** `--fs-hero 4.5rem`, `--fs-h1 3rem`, `--fs-h2 2.5rem`, `--fs-h3 1.75rem`,
   `--fs-lg 1.25rem`, `--fs-body 1.125rem`, `--fs-sm 0.95rem`, `--fs-xs 0.8rem`. Use a token, not a raw rem.
 - **Weights:** 700 headings/tagline, 600 subheads/labels/CTAs, 500 rare. **Body:** `1.125rem / 1.7`.
@@ -49,30 +49,32 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 - **Radius:** `--radius-sm 3px` (chips/badges/CTAs), `--radius-md 8px` (frames/link cards), `--radius-lg
 12px` (feature cards). **Shadow:** `--shadow-card` (`0 4px 12px rgba(0,59,126,.1)`).
 
-## Signature motifs (the actual brand)
+## Signature motifs
 
-1. **Hand-drawn roughjs visuals** — the differentiator (hero, explainer network/society, lab scenarios).
-   Sketchy strokes, `roughness` ~0.4–1.2, navy + accent palette.
-2. **Parallax paper texture** — a fixed full-viewport texture at `opacity: 0.03` behind transparent content.
-3. **Textured-paper card with a tilting shadow-card hover** — publications and roadmap phase cards.
-4. **Section-title underline accent** — a left-aligned `2.5rem` heading with an `80px × 3px`
-   `--color-primary` underline (`title::after`). This is the section-header signature.
+1. **Measured drawing structure** — hairline frames, registration marks, dimensions, mono annotations,
+   and title blocks. Use these to organize a page, not decorate every surface.
+2. **Localized graph paper and hatch** — true white is the dominant ground. Grid belongs inside technical
+   figures; hatch belongs in narrow margins, information strips, or offset shadows.
+3. **Sharp hatched-header card** — a fine hatched information strip above a white body. Horizontal cards
+   use an offset hatched shadow without rotation.
+4. **Annotated rule** — section breaks use a full hairline with a mono label riding on it.
 5. **Dashed "honest hedge" badge** — `1px dashed` border, muted uppercase micro-label, for
    "in design / illustrative / assumptions." A genuine lab idiom.
-6. **Two-column serif interior hero** — `4.5rem` uppercase Georgia title + serif description, `1fr 1.2fr`.
-7. **Animation:** `transition … var(--transition-speed) ease`; card hovers use the overshoot easing
+6. **Lorenz butterfly mark** — a heavy closed outer contour with three fine concentric lines in each wing.
+7. **Animation:** `transition … var(--transition-speed) ease`; portrait card hovers may use the overshoot easing
    `cubic-bezier(0.34,1.56,0.64,1)`. All rAF loops must honour `prefers-reduced-motion` (see audit-0002 A4).
 
 ## When you add or edit a page — checklist
 
 - [ ] Wrap sections with the shared container/section utilities, not a new `.container` block.
-- [ ] Use a `<SectionHeader>` (title + underline) — do not hand-roll the heading + `::after`.
-- [ ] Interior hero: use `<PageHero>` (serif, two-column) unless there is a ratified reason to vary.
+- [ ] Use the annotated-rule section treatment from `/brand`.
+- [ ] Use Space Grotesk for display and IBM Plex Mono only for technical annotation.
 - [ ] Colours and font sizes come from tokens. **No raw hex** outside `variables.css`; **no raw rem** for
       type — use `--fs-*`.
 - [ ] Quieter text = opacity on `--text-color`, never a grey hex.
 - [ ] Breakpoints come from the named set.
 - [ ] New interactive/animated visuals honour `prefers-reduced-motion`.
+- [ ] Grid and hatch are localized; the page remains predominantly white.
 
 Enforcement (a lint gate that fails CI when a raw value is used instead of a token) is planned as part
 of the Tailwind migration in [ADR-0006](../adr/0006-tailwind-design-system.md) and task-0002 Stage 1.
