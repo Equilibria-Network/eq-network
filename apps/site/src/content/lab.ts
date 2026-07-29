@@ -298,8 +298,9 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-text: 'Culture is tracked by origin only — human- vs AI-originated — as a two-sided contagion on a network drawn once and frozen.',
-          omits: 'what the ideas actually say (content and dissonance belong to a planned sibling model), rewiring, media structure, population turnover',
+          text: 'Culture is tracked by origin only — human- vs AI-originated — as a two-sided contagion on a network drawn once and frozen.',
+          omits:
+            'what the ideas actually say (content and dissonance belong to a planned sibling model), rewiring, media structure, population turnover',
         },
         {
           text: 'The non-collapse floor is one slider: native reversion, a constant that keeps firing however small the native community gets. Zero it in the playground and displacement runs to completion — we checked (share 0.59 → 0.008).',
@@ -395,7 +396,8 @@ text: 'Culture is tracked by origin only — human- vs AI-originated — as a tw
         },
         {
           text: 'Five couplings, one dial κ — money buys reach, culture directs attention, influence writes the rules, captured rules pay rents to AI capital, converted humans buy AI services — all exactly neutral at κ = 0, so every run has a sealed same-seed twin.',
-          omits: 'measured coupling strengths — gains are hand-set; only sign and ordering claims are robust',
+          omits:
+            'measured coupling strengths — gains are hand-set; only sign and ordering claims are robust',
         },
         {
           text: 'A loop plus two rent channels, not the paper’s full mesh — and nothing here is a basin: everything is a rate or a level, so irreversibility itself is not yet modeled. The spectral lock-in conjecture stays an unverified research thread, not a finding.',
@@ -449,7 +451,7 @@ text: 'Culture is tracked by origin only — human- vs AI-originated — as a tw
   leaderboard: {
     title: 'What the leaderboard will measure',
     caption:
-'Illustrative data. Only the Governed Commons has produced real runs so far; real benchmark results land here as scenarios go live.',
+      'Illustrative data. Only the Governed Commons has produced real runs so far; real benchmark results land here as scenarios go live.',
     note: 'Read the last column: defenses that score well in a single domain tend to score worse when domains couple. That gap is the finding the Lab is built to measure.',
     columns: ['commons', 'economic', 'cultural', 'political', 'combined'],
     rows: [
