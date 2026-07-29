@@ -5,7 +5,14 @@ import styles from './Footer.module.css';
 
 export default function Footer() {
   const { brand, footer } = siteContent;
-  const { links: footerLinks, socials, tagline, quickLinksHeading, copyrightName } = footer;
+  const {
+    links: footerLinks,
+    institutionalLinks,
+    socials,
+    tagline,
+    quickLinksHeading,
+    copyrightName,
+  } = footer;
 
   return (
     <footer className={styles.footer}>
@@ -67,13 +74,26 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className={styles.divider} />
-        <div className={styles.copyright}>
+        <div className={styles.footerBase}>
           <div className={styles.copyrightContent}>
             <span className={styles.copyrightYear}>{new Date().getFullYear()}</span>
             <span className={styles.copyrightName}>{copyrightName}</span>
           </div>
+          <nav className={styles.institutionalNav} aria-label="Institutional information">
+            <ul className={styles.institutionalLinks}>
+              {institutionalLinks.map((link) => (
+                <li key={link.label}>
+                  {link.href ? (
+                    <a href={link.href}>{link.label}</a>
+                  ) : (
+                    <span aria-label={link.unavailableLabel} title={link.unavailableLabel}>
+                      {link.label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

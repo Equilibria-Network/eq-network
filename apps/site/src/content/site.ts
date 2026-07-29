@@ -16,6 +16,12 @@ export interface SocialLink {
   href: string;
 }
 
+export interface InstitutionalLink {
+  label: string;
+  href?: string;
+  unavailableLabel?: string;
+}
+
 export interface SiteContent {
   brand: string;
   skipToContent: string;
@@ -33,6 +39,7 @@ export interface SiteContent {
     tagline: string;
     quickLinksHeading: string;
     links: NavLink[];
+    institutionalLinks: InstitutionalLink[];
     socials: SocialLink[];
     copyrightName: string;
   };
@@ -86,9 +93,15 @@ export const siteContent: SiteContent = {
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Roadmap', href: '/roadmap' },
+      { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
+    ],
+    institutionalLinks: [
       { label: 'Brand', href: '/brand' },
       { label: 'Privacy', href: '/privacy' },
-      { label: 'Newsletter', href: 'https://wizardryweekly.substack.com/', external: true },
+      {
+        label: 'Legal',
+        unavailableLabel: 'Legal information page in preparation',
+      },
     ],
     socials: [
       {
