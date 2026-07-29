@@ -1,0 +1,497 @@
+.root {
+  --ink: var(--color-primary);
+  --accent: var(--color-blue-accent);
+  --paper: var(--bg-color);
+  --line: color-mix(in srgb, var(--ink) 20%, transparent);
+  --line-strong: color-mix(in srgb, var(--ink) 48%, transparent);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: min(750px, calc(100svh - var(--navbar-height) - 10.5rem));
+  min-height: 530px;
+}
+
+.scene {
+  animation: sceneIn 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.gridSmall,
+.gridMajor,
+.hatchLine {
+  fill: none;
+  stroke: var(--ink);
+}
+
+.gridSmall {
+  stroke-width: 1;
+  stroke-opacity: 0.025;
+}
+.gridMajor {
+  stroke-width: 1;
+  stroke-opacity: 0.06;
+}
+.hatchLine {
+  stroke-width: 1;
+  stroke-opacity: 0.09;
+}
+
+.sceneTitle,
+.microLabel,
+.matrixLabel,
+.axisCaption,
+.annotation,
+.annotationStrong,
+.equation,
+.flowLabels,
+.key,
+.futureIndex,
+.futureLabel,
+.lensTitle,
+.lensSubtitle,
+.matrixCode,
+.siloNotes,
+.inputCode,
+.inputLabel,
+.operator,
+.operatorSteps,
+.outputTitle,
+.caption {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sceneTitle {
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.networkEdges line,
+.miniEdge,
+.outputEdge {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.34;
+  vector-effect: non-scaling-stroke;
+}
+
+.entity {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+}
+
+.entity path {
+  fill: none;
+}
+
+.entity path:first-child {
+  fill: var(--paper);
+}
+
+.hollow {
+  fill: var(--paper);
+  stroke-dasharray: 3 2;
+}
+
+.flowLabels {
+  font-size: 9px;
+  text-anchor: middle;
+  opacity: 0.48;
+}
+
+.key {
+  font-size: 9px;
+}
+
+.matrixLabel,
+.microLabel,
+.axisCaption {
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.microLabel {
+  opacity: 0.55;
+}
+
+.matrixGood,
+.matrixTemptation,
+.matrixRisk,
+.matrixBad {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.matrixGood {
+  fill: color-mix(in srgb, var(--accent) 16%, var(--paper));
+}
+.matrixTemptation,
+.matrixRisk {
+  fill: url(#story-hatch);
+}
+.matrixBad {
+  fill: color-mix(in srgb, var(--ink) 7%, var(--paper));
+}
+
+.payoff {
+  fill: var(--ink);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.choiceArrow,
+.transferArrow,
+.blockedMove,
+.inputLine,
+.outputLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  marker-end: url(#story-arrow);
+  vector-effect: non-scaling-stroke;
+}
+
+.arrowHead {
+  fill: var(--accent);
+}
+
+.brokenEdge {
+  stroke: var(--accent) !important;
+  stroke-dasharray: 5 5;
+  stroke-opacity: 0.5 !important;
+}
+
+.cascadeRing {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: cascade 1.8s ease-out infinite;
+}
+
+.axisCaption {
+  opacity: 0.55;
+}
+
+.contourLight,
+.contour,
+.contourStrong {
+  fill: none;
+  stroke: var(--ink);
+  vector-effect: non-scaling-stroke;
+}
+
+.contourLight {
+  stroke-width: 1;
+  stroke-opacity: 0.18;
+}
+.contour {
+  stroke-width: 1.5;
+  stroke-opacity: 0.38;
+}
+.contourStrong {
+  stroke-width: 2;
+  stroke-opacity: 0.72;
+}
+.hatchBasin {
+  fill: url(#story-hatch);
+  stroke: var(--line);
+}
+.goodBall {
+  fill: var(--accent);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.badBall {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 4;
+}
+.blockedMove {
+  stroke-dasharray: 7 5;
+}
+.blockMark {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.annotation,
+.annotationStrong {
+  font-size: 10px;
+  text-anchor: middle;
+}
+.annotation {
+  opacity: 0.62;
+}
+.annotationStrong {
+  font-weight: 500;
+}
+.equation {
+  font-size: 12px;
+  opacity: 0.58;
+}
+
+.futureFrame,
+.lensFrame,
+.inputCard {
+  fill: color-mix(in srgb, var(--paper) 96%, var(--ink));
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.futureIndex,
+.matrixCode,
+.inputCode {
+  font-size: 9px;
+}
+
+.futureLabel {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.miniNode {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+
+.miniHollow {
+  fill: var(--paper);
+  stroke-dasharray: 2 2;
+}
+
+.miniBroken {
+  stroke-dasharray: 4 4;
+  stroke-opacity: 0.16;
+}
+
+.unknownBadge circle {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 4 5;
+}
+
+.unknownBadge text {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.unknownBadge text:first-of-type {
+  fill: var(--accent);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 34px;
+}
+
+.lensGlyph {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.lensGlyph text {
+  fill: var(--ink);
+  stroke: none;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.lensTitle,
+.lensSubtitle {
+  text-anchor: middle;
+}
+
+.lensTitle {
+  font-size: 10px;
+  font-weight: 500;
+}
+.lensSubtitle {
+  font-size: 8px;
+  opacity: 0.52;
+}
+.lensRay {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
+}
+
+.sharedQuestion circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.sharedQuestion circle:nth-child(2) {
+  stroke: var(--accent);
+  stroke-dasharray: 4 4;
+}
+
+.sharedQuestion text {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 8px;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.citationDense {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 5;
+}
+
+.citationEmpty {
+  fill: url(#story-hatch);
+  stroke: var(--line);
+}
+
+.matrixDiagonal {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+
+.matrixCode {
+  text-anchor: middle;
+}
+
+.siloNotes {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.siloNotes line {
+  stroke: var(--line-strong);
+}
+
+.inputCode {
+  opacity: 0.5;
+}
+.inputLabel {
+  font-size: 10px;
+}
+
+.operator circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.operator circle:nth-child(2) {
+  stroke: var(--accent);
+  stroke-dasharray: 5 5;
+}
+
+.operator text {
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.operatorSteps {
+  font-size: 8px;
+  text-anchor: middle;
+}
+
+.operatorSteps text {
+  animation: operatorPulse 2.4s ease-in-out infinite;
+}
+
+.operatorSteps text:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.operatorSteps text:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.outputEdge {
+  stroke: var(--accent);
+  stroke-opacity: 0.42;
+}
+.outputTitle {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line-strong);
+  padding: 0.65rem 0.75rem;
+  color: var(--ink);
+  font-size: 0.62rem;
+}
+
+.caption strong {
+  font-weight: 500;
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cascade {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.7);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+    transform-origin: center;
+  }
+}
+
+@keyframes operatorPulse {
+  0%,
+  100% {
+    opacity: 0.32;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 992px) {
+  .svg {
+    height: 42vh;
+    min-height: 0;
+  }
+
+  .caption {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .svg {
+    height: 35vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene,
+  .cascadeRing,
+  .operatorSteps text {
+    animation: none;
+  }
+}

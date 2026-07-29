@@ -1,0 +1,342 @@
+.root {
+  --ink: var(--color-primary);
+  --accent: var(--color-blue-accent);
+  --paper: var(--bg-color);
+  --line: color-mix(in srgb, var(--ink) 20%, transparent);
+  --line-strong: color-mix(in srgb, var(--ink) 46%, transparent);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: min(750px, calc(100svh - var(--navbar-height) - 10.5rem));
+  min-height: 530px;
+}
+
+.gridSmall,
+.gridMajor,
+.hatchLine {
+  fill: none;
+  stroke: var(--ink);
+}
+
+.gridSmall {
+  stroke-width: 1;
+  stroke-opacity: 0.025;
+}
+.gridMajor {
+  stroke-width: 1;
+  stroke-opacity: 0.06;
+}
+.hatchLine {
+  stroke-width: 1;
+  stroke-opacity: 0.09;
+}
+
+.sceneTitle,
+.basins text,
+.possibleWorlds text,
+.field,
+.translationGap,
+.bridgeHub,
+.governanceLabel,
+.incentive,
+.entityKey,
+.caption {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sceneTitle {
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.edges line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.34;
+  vector-effect: non-scaling-stroke;
+  transition:
+    x1 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    y1 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    x2 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    y2 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 400ms ease,
+    stroke-opacity 400ms ease;
+}
+
+.weakEdge {
+  stroke-dasharray: 5 5;
+}
+
+.disruptedEdge {
+  stroke: var(--accent) !important;
+  stroke-dasharray: 5 6;
+  stroke-opacity: 0.18 !important;
+}
+
+.restoredEdge {
+  stroke: var(--accent) !important;
+  stroke-opacity: 0.58 !important;
+  stroke-dasharray: 8 4;
+  animation: flow 1.4s linear infinite;
+}
+
+.node {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  cursor: pointer;
+  outline: none;
+  transition:
+    transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    fill 350ms ease,
+    stroke 350ms ease,
+    opacity 250ms ease;
+}
+
+.node path {
+  fill: none;
+}
+
+.node path:first-of-type {
+  fill: var(--paper);
+}
+
+.node:focus-visible .selectionRing,
+.selected .selectionRing {
+  opacity: 1;
+}
+
+.defecting {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-dasharray: 3 2;
+}
+
+.recovered {
+  fill: var(--accent);
+  stroke: var(--ink);
+}
+
+.selectionRing {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  opacity: 0;
+}
+
+.dimmed {
+  opacity: 0.12;
+}
+
+.basins ellipse {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 7 5;
+  opacity: 0.34;
+}
+
+.basins .badBasin {
+  fill: url(#world-hatch);
+}
+
+.basins text {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.possibleWorlds ellipse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 2 8;
+  transform-origin: center;
+  animation: orbit 18s linear infinite;
+}
+
+.possibleWorlds ellipse:nth-child(2) {
+  animation-direction: reverse;
+  animation-duration: 22s;
+}
+.possibleWorlds ellipse:nth-child(3) {
+  animation-duration: 26s;
+}
+.possibleWorlds text {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.observationRay {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
+  opacity: 0.6;
+}
+
+.field rect {
+  fill: color-mix(in srgb, var(--paper) 95%, var(--ink));
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.field text {
+  font-size: 9px;
+}
+
+.fieldCode {
+  opacity: 0.48;
+}
+
+.field circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+}
+
+.field path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+.fieldConnected circle {
+  stroke: var(--accent);
+}
+
+.translationGap circle {
+  fill: url(#world-hatch);
+  stroke: var(--line-strong);
+  stroke-dasharray: 6 5;
+}
+
+.translationGap text {
+  font-size: 9px;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 7px;
+}
+
+.bridgeInput,
+.governanceArrow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  stroke-dasharray: 7 5;
+  animation: flow 1.4s linear infinite;
+}
+
+.governanceArrow {
+  marker-end: url(#world-arrow);
+}
+
+.arrowHead {
+  fill: var(--accent);
+}
+
+.bridgeHub circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.bridgeHub circle:nth-child(2) {
+  stroke: var(--accent);
+  stroke-dasharray: 5 5;
+}
+
+.bridgeHub text,
+.governanceLabel {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.incentive path {
+  fill: none;
+  stroke: var(--line-strong);
+  marker-end: url(#world-arrow);
+}
+
+.incentive text {
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.entityKey {
+  font-size: 8px;
+}
+
+.entityKey circle,
+.entityKey path,
+.entityKey rect {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+
+.caption {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0.65rem 0.75rem;
+  color: var(--ink);
+  font-size: 0.6rem;
+}
+
+.caption strong {
+  text-align: center;
+  font-weight: 500;
+}
+
+.caption span:last-child {
+  opacity: 0.55;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 992px) {
+  .svg {
+    height: 42vh;
+    min-height: 0;
+  }
+
+  .caption {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .svg {
+    height: 35vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edges line,
+  .node {
+    transition: none;
+  }
+
+  .possibleWorlds ellipse,
+  .bridgeInput,
+  .governanceArrow,
+  .restoredEdge {
+    animation: none;
+  }
+}

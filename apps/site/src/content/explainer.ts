@@ -41,6 +41,85 @@ export interface ExplainerContent {
     };
     bridgeLabel: string;
   };
+  prototype: {
+    eyebrow: string;
+    title: string;
+    dek: string;
+    figureLabel: string;
+    figureTitle: string;
+    scrollPrompt: string;
+    statusLabel: string;
+    nodeCountLabel: string;
+    edgeCountLabel: string;
+    legend: {
+      active: string;
+      defecting: string;
+      institution: string;
+      weakTie: string;
+    };
+    stageLabels: string[];
+    fieldCodes: string[];
+    bridgeAnnotation: string;
+    closingLabel: string;
+    annotations: {
+      cooperativeBasin: string;
+      localOptimum: string;
+      relationalDistance: string;
+      institutionalAlignment: string;
+      citationGap: string;
+      possibleTies: string;
+      coordinationProblem: string;
+      fieldModels: string[];
+    };
+    storyLabels: {
+      society: {
+        human: string;
+        aiAgent: string;
+        institution: string;
+        socialFabric: string;
+        flows: string[];
+      };
+      defection: {
+        collectiveWelfare: string;
+        localPayoff: string;
+        cooperate: string;
+        defect: string;
+        cascade: string;
+      };
+      equilibria: {
+        landscape: string;
+        betterForAll: string;
+        stableButWorse: string;
+        unilateralMove: string;
+      };
+      uncertainty: {
+        ensemble: string;
+        outcomes: string[];
+        unknown: string;
+      };
+      knowledge: {
+        sharedQuestion: string;
+        lenses: string;
+      };
+      silos: {
+        citationMatrix: string;
+        differentVenues: string;
+        differentFormalisms: string;
+        missingSynthesis: string;
+      };
+      bridge: {
+        translate: string;
+        compose: string;
+        test: string;
+        coherentGovernance: string;
+        newConnections: string;
+      };
+      interaction: {
+        selectNode: string;
+        selectedNeighborhood: string;
+      };
+    };
+  };
 }
 
 export const explainerContent: ExplainerContent = {
@@ -131,5 +210,97 @@ export const explainerContent: ExplainerContent = {
       agentFoundations: 'theoretical groundwork',
     },
     bridgeLabel: 'Equilibria',
+  },
+  prototype: {
+    eyebrow: 'Thesis / working model',
+    title: 'Cooperation is a property of the network.',
+    dek: 'A seven-state model of the Equilibria thesis. Scroll through the argument to watch one system reorganize, fragment, and reconnect.',
+    figureLabel: 'Fig. 01 / visual thesis model',
+    figureTitle: 'Network state',
+    scrollPrompt: 'Scroll to evolve the model',
+    statusLabel: 'State',
+    nodeCountLabel: 'Nodes',
+    edgeCountLabel: 'Ties',
+    legend: {
+      active: 'cooperative / active',
+      defecting: 'defecting / isolated',
+      institution: 'institution',
+      weakTie: 'weak or broken tie',
+    },
+    stageLabels: [
+      'Integrated society',
+      'Local defection',
+      'Fragmented equilibria',
+      'Uncertain cooperation',
+      'Research landscape',
+      'Disconnected fields',
+      'Compositional bridge',
+    ],
+    fieldCodes: ['CAI', 'CSS', 'AF', 'CS'],
+    bridgeAnnotation: 'translation layer',
+    closingLabel: 'Continue the inquiry',
+    annotations: {
+      cooperativeBasin: 'E₁ / cooperative basin',
+      localOptimum: 'E₂ / local optimum',
+      relationalDistance: 'y / relational distance',
+      institutionalAlignment: 'x / institutional alignment',
+      citationGap: 'translation gap',
+      possibleTies: 'possible futures / unobserved ties',
+      coordinationProblem: 'shared governance problem',
+      fieldModels: ['joint utility', 'norm diffusion', 'agent models', 'network dynamics'],
+    },
+    storyLabels: {
+      society: {
+        human: 'human',
+        aiAgent: 'AI agent',
+        institution: 'institution',
+        socialFabric: 'one interdependent social fabric',
+        flows: ['resources', 'decisions', 'information'],
+      },
+      defection: {
+        collectiveWelfare: 'collective welfare',
+        localPayoff: 'local payoff',
+        cooperate: 'cooperate',
+        defect: 'defect',
+        cascade: 'one local choice changes neighboring incentives',
+      },
+      equilibria: {
+        landscape: 'coordination landscape',
+        betterForAll: 'better for all',
+        stableButWorse: 'stable but worse',
+        unilateralMove: 'no agent can move first',
+      },
+      uncertainty: {
+        ensemble: 'same network / different plausible futures',
+        outcomes: [
+          'cooperation holds',
+          'partial fragmentation',
+          'regional defection',
+          'systemic unraveling',
+        ],
+        unknown: 'Which future becomes stable?',
+      },
+      knowledge: {
+        sharedQuestion: 'How do networks of agents cooperate?',
+        lenses: 'four mature lenses on one problem',
+      },
+      silos: {
+        citationMatrix: 'cross-field citation density',
+        differentVenues: 'different venues',
+        differentFormalisms: 'different formalisms',
+        missingSynthesis: 'the missing object is synthesis',
+      },
+      bridge: {
+        translate: 'translate',
+        compose: 'compose',
+        test: 'test',
+        coherentGovernance: 'coherent governance',
+        newConnections: 'connections no field finds alone',
+      },
+      interaction: {
+        selectNode: 'select a node to inspect its neighborhood',
+        selectedNeighborhood: 'neighborhood selected',
+      },
+    },
   },
 };
