@@ -129,6 +129,16 @@ tax to erode, influence loss has zero downstream consequence).
   demote consensus to an explicitly-decorative readout.
 - **Sensitivity note**: publish the sweeps that already exist (defense grids,
   cadence scan, collapse audit) wherever the cards claim robustness.
+- **An agent that optimises against the defense it is under.** All five
+  scenarios close their game boundary with fixed policies (`agents/delegate`,
+  `labor_supply`, `broadcast`); `agents/learnable.LinearPolicy` exists and no
+  scenario uses it. This is the single largest gap between the build and GD's
+  claim — the disempowering systems are active optimisers, and every audited
+  floor in §1 is a limit _we_ imposed that a fixed-rule agent never probes. It
+  biases every tab the same way (defenses flatter themselves), which is why it
+  is now stated once at page level (playground preamble, 2026-07-29) rather
+  than per card. Deterrence-vs-confiscation on the commons card is the same
+  point, scoped to one tab.
 
 ---
 
@@ -140,6 +150,10 @@ Before shipping copy that describes the models:
 - [ ] Does every "knob" admission say swept-or-not and what the sweep showed?
 - [ ] Can a smart high schooler who just played the sliders parse every bullet
       (≤1 untranslated term of art per card)?
+- [ ] Does the page-level preamble still hold — toy-model scope, and the
+      no-agent-pushes-back limit with what it does to the reading (a failed
+      defense is the strong result; a defense that holds passed only the easy
+      test)? Retire it the day a scenario ships an adapting agent.
 - [ ] Do the "leaves out" lines include the strongest known omission, not just
       the comfortable ones?
 - [ ] Do chips match what's actually playable?

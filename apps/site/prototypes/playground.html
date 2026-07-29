@@ -47,6 +47,30 @@
     border: 1.6px solid var(--label); border-radius: var(--wonky);
     padding: 4px 12px; transform: rotate(-2deg); white-space: nowrap; margin-top: 4px;
   }
+  /* the preamble: what this whole page is (and is not). Static, not per-schema —
+     the rail's assumptions card scopes one tab's dials, this scopes the build.
+     Rule (docs/lab-content-review-2026-07-27.md §3, extended): toy-model framing
+     first, then the limit that biases every tab in the same direction — no agent
+     in here optimises against the defense it is under. */
+  .preamble {
+    margin: 16px 0 0; padding: 11px 15px 10px; max-width: 82ch;
+    background: #fffdf8; border: 1.4px solid var(--line); border-left: 3px solid var(--navy);
+  }
+  .preamble p { margin: 0; font-size: 13.5px; color: #444; }
+  .preamble p + p { margin-top: 7px; }
+  .preamble strong { color: var(--ink); font-weight: 600; }
+  .preamble details { margin-top: 8px; }
+  .preamble summary {
+    font-family: var(--hand); font-size: 13px; color: var(--navy); cursor: pointer;
+    width: fit-content;
+  }
+  .preamble summary::marker { color: var(--navy); }
+  .preamble summary:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+  .preamble ul { margin: 8px 0 0; padding-left: 17px; font-size: 13px; color: #444; }
+  .preamble li { margin-bottom: 7px; }
+  .preamble li::marker { color: var(--navy); }
+  .preamble .p-close { font-family: var(--hand); font-size: 12.5px; color: var(--label); margin-top: 8px; }
+
   .lab-grid { display: grid; grid-template-columns: minmax(0, 1fr) 296px; gap: 24px; margin-top: 22px; }
   @media (max-width: 900px) { .lab-grid { grid-template-columns: 1fr; } }
 
@@ -167,6 +191,48 @@
     </div>
     <div class="stamp">PROTOTYPE · real dynamics, live in your browser</div>
   </header>
+
+  <section class="preamble" data-slot="preamble">
+    <p><strong>These are toy models.</strong> Twenty to forty agents, a handful of
+      equations each, numbers set by hand — nothing here is fitted to data and no run
+      is a forecast. What a run can show is direction and ordering: whether a defense
+      helps, and which of two helps more, inside one small world we wrote down. Every
+      tab’s <em>Modelling assumptions</em> card (bottom of the right rail) says what
+      that world leaves out.</p>
+    <p><strong>And nothing in here pushes back.</strong> Every agent follows a fixed
+      rule for all 500 ticks: a quota is broken by a coin flip rather than by someone
+      who found the loophole, a sanction confiscates but never teaches, a tax is paid
+      and never restructured around. The worry behind gradual disempowerment is that
+      the systems doing the disempowering are <em>active optimisers</em> — they treat
+      any limit we impose as an obstacle to route around. This page has no such agent
+      yet, and that shows up in the results.</p>
+    <details>
+      <summary>so how should you read a result? →</summary>
+      <ul>
+        <li><strong>A defense that fails here really fails.</strong> It lost to
+          opponents that never once tried to get around it. Failures on this page are
+          the strong result.</li>
+        <li><strong>A defense that holds here has only passed the easy test.</strong>
+          Quotas, caps, sanctions and taxes are exactly the kind of limit an optimiser
+          probes first. Treat every defended run as an upper bound on how well that
+          defense would really do.</li>
+        <li><strong>The floors are ours, not the world’s.</strong> Where a card says
+          the human share stops near some number, that limit holds because of
+          something we wrote — a reversion rate that keeps firing, a listening pattern
+          we froze — and an optimiser is precisely the thing that would find the slack
+          a fixed-rule agent leaves alone. Each card names its own floor and what
+          removes it; the sliders let you check.</li>
+        <li><strong>Nothing here is a point of no return.</strong> Every quantity on
+          this page is a rate or a level: drag any slider back and the world comes
+          back with it. The step you cannot walk back is the part of the story this
+          build does not model yet.</li>
+      </ul>
+      <p class="p-close">Agents that adapt to the defense they are under are the
+        engine’s next big backlog item — the library has a learnable policy, no
+        scenario uses one. Until it does, this page is the optimistic case.</p>
+    </details>
+  </section>
+
   <div id="playground-root"></div>
   <footer class="colophon">
     <span data-slot="colophon">…</span>
@@ -2875,6 +2941,7 @@ const POLITICAL_DEFAULTS = {
   pListen: 0.3, selfWeight: 0.15, updateRate: 0.08, gamma: 1.0, epsAttract: 1e-4,
   susceptibility: 0.7, signalNoise: 1.0, aiBias: 2.0,
   amplification: 4.0, ampOnset: 50,
+  voteCadence: 20,
   sortition: false, sortitionCadence: 15, sortitionShare: 0.5,
   influenceCap: false, capShare: 0.04,
 };
@@ -2908,9 +2975,18 @@ function runPolitical(params, seed) {
   const v = new Float64Array(N).fill(1 / N);
   const capScale = new Float64Array(N).fill(1);
 
+  // the vote (website-side sketch, not in the engine): what citizens would
+  // enact on their own information — the yardstick responsiveness is measured
+  // against. Static because signals are static; the OPINIONS the vote reads
+  // are not.
+  const prefMedian = quantile(Array.from(signal.subarray(0, nH)), 0.5);
+  const biasGap = Math.max(Math.abs(P.aiBias - prefMedian), 1e-6);
+  let enacted = 0;
+
   const S = {
     gini: new Float64Array(T), humanShare: new Float64Array(T), topShare: new Float64Array(T),
     consensusErr: new Float64Array(T), sortitionFired: new Float64Array(T),
+    enacted: new Float64Array(T), responsiveness: new Float64Array(T),
     influence: new Float64Array(T * N), topListen: new Float64Array(T * N), opinion: new Float64Array(T * N),
   };
   const attract = new Float64Array(N), buf = new Float64Array(N);
@@ -2961,6 +3037,13 @@ function runPolitical(params, seed) {
     if (P.influenceCap) {
       for (let j = 0; j < N; j++) capScale[j] = Math.min(1, P.capShare / Math.max(v[j], 1e-12));
     }
+    // the vote: on a civic cadence, the median citizen OPINION is enacted.
+    // One person one vote, full turnout, nothing rigged — the franchise is
+    // perfect; only what people have come to believe has moved. Enacted policy
+    // feeds nothing else in this tab (its downstream lives in the combined
+    // tab's couplings); here it is the responsiveness instrument.
+    if (fires(t, { cadence: P.voteCadence }))
+      enacted = quantile(Array.from(x.subarray(0, nH)), 0.5);
     // trace
     let hum = 0, top = 0, errSum = 0;
     for (let i = 0; i < N; i++) {
@@ -2977,6 +3060,8 @@ function runPolitical(params, seed) {
     S.gini[t] = gini(Array.from(v));
     S.humanShare[t] = hum;
     S.topShare[t] = top;
+    S.enacted[t] = enacted;
+    S.responsiveness[t] = 1 - clip(Math.abs(enacted - prefMedian) / biasGap, 0, 1);
   }
 
   const lateStart = Math.floor((3 * T) / 4);
@@ -2996,10 +3081,13 @@ function runPolitical(params, seed) {
         consensus_error: lateMean(S.consensusErr),
         top_share: lateMean(S.topShare),
         fair_human_share: nH / N,
+        policy_responsiveness: lateMean(S.responsiveness),
+        pref_median: prefMedian,
       },
     },
     global: { influence_gini: S.gini, human_share: S.humanShare, top_share: S.topShare,
-              consensus_error: S.consensusErr, sortition_fired: S.sortitionFired },
+              consensus_error: S.consensusErr, sortition_fired: S.sortitionFired,
+              enacted_policy: S.enacted, responsiveness: S.responsiveness },
     node: { influence: S.influence, top_listen: S.topListen, opinion: S.opinion },
     static: { is_ai: isAi, signal },
     adj: { listening: Float64Array.from(W) },            // final W (contract: from finals)
@@ -3123,8 +3211,13 @@ const POLITICAL_STORY = [
     view: 'lorenz', preset: 'amplified', t: 100, playTo: 480, speed: 80,
   },
   {
+    title: 'The vote still happens — and stops meaning anything',
+    body: 'Every 20 ticks the citizens vote: median opinion wins, full turnout, nothing rigged. Watch THE VOTE chart — the enacted line pulls away from what citizens would choose on their own information and toward the reservoir’s 2.0. Responsiveness falls from 0.73 organic to 0.39 amplified (this port, 8 seeds). The ritual is pristine; the steering is gone. Nothing was censored and no ballot was touched — the electorate itself was re-weighted upstream of the ballot box.',
+    view: 'system', preset: 'amplified', t: 50, playTo: 420, speed: 80,
+  },
+  {
     title: 'Defend the attention structure itself',
-    body: 'Two defenses from the backend’s political mechanism family: sortition — on a civic cadence, half of every citizen’s listening returns to a lottery over citizens — and an influence cap that damps the attractiveness of any node above 4% share. Measured: amplified 0.54 human share, defended 0.74 (organic 0.87).',
+    body: 'Two defenses from the backend’s political mechanism family: sortition — on a civic cadence, half of every citizen’s listening returns to a lottery over citizens — and an influence cap that damps the attractiveness of any node above 4% share. Measured: amplified 0.54 human share, defended 0.74 (organic 0.87) — and vote responsiveness climbs back from 0.39 to 0.61 (port, 8 seeds).',
     view: 'system', preset: 'defended', t: 0, playTo: 250, speed: 60,
   },
   {
@@ -3140,14 +3233,14 @@ const PoliticalModule = {
   schema: {
     id: 'political',
     title: 'Influence Exchange — a playable run',
-    blurb: '30 citizens, 4 amplified AI actors, one listening network, 500 ticks. Influence is the eigenvector of who-listens-to-whom — can sortition and caps hold it?',
+    blurb: '30 citizens, 4 amplified AI actors, one listening network, 500 ticks. Every 20 ticks the citizens vote on what they believe — the franchise stays perfect while the beliefs are captured. Do sortition and caps keep the vote meaning something?',
     sceneAria: 'Animated influence ring: attention arrows flow between agents whose size is their influence; AI actors grow under amplification.',
-    colophon: 'Same equations as cilib · environments/influence_exchange (JS port, different RNG — qualitative, not bit-exact).',
-    anchorsNote: 'backend ladder (T=400, 6 seeds): human share 0.87 organic / 0.54 amplified / 0.74 defended · influence ≡ left eigenvector (Golub–Jackson, L1 < 1e-3)',
+    colophon: 'Same equations as cilib · environments/influence_exchange (JS port, different RNG — qualitative, not bit-exact) — plus a website-side vote sketch (median opinion enacted on a cadence; not yet in the engine).',
+    anchorsNote: 'backend ladder (T=400, 6 seeds): human share 0.87 organic / 0.54 amplified / 0.74 defended · influence ≡ left eigenvector (Golub–Jackson, L1 < 1e-3) · vote sketch (port only, 8 seeds): responsiveness 0.73 organic / 0.39 amplified / 0.61 defended',
     assumptions: [
       'The floor: structural — no slider removes it. Push everything against the citizens (“AI amplification ×” at 8, anchors nearly off) and the human share still stops near 0.46. We swept it; it does not budge, because the AI actors’ listening is frozen pointing at citizens — they never stop attending to humans, perpetually handing influence back. Letting AI attention drift toward AI is engine backlog.',
       'Citizens keep a grip on their own view — “susceptibility λ” is how much they let go. Without that grip, whoever is amplified sets everyone’s opinion and the readout could not tell worlds apart; with it, consensus error can never fall below the AI reservoir’s bias.',
-      'Beliefs are a readout, not a lever: opinions feed back into nothing here — losing the argument has no downstream consequence.',
+      'The vote is a website-side sketch, not yet in the engine: every 20 ticks the median citizen opinion is enacted — full turnout, nothing rigged. It feeds nothing else in this tab; its job is the responsiveness readout, the gap between the enacted policy and what citizens would choose on their own information. Losing the argument now has a measured consequence, still not a material one.',
       '“AI amplification ×” is reach, not persuasion — what the messages say lives in the cultural tab, deliberately.',
       'Attention drifts toward the already-influential (“attention drift rate”), so concentration is organic before any AI appears; the AI effect is measured against that moving baseline.',
       'Leaves out: the state. This tab measures who gets heard; the paper’s political claim is about what a state can still do — tax base, coercion, legitimacy. The only trace here is tax enforcement inside the combined tab’s couplings.',
@@ -3202,12 +3295,17 @@ const PoliticalModule = {
         lines: (traj) => [
           { ys: traj.global.consensus_error, color: ALERT_RED, note: 'drift toward the reservoir' },
         ] },
+      { label: 'THE VOTE: ENACTED POLICY (AI reservoir = 2)', yMax: 2.1,
+        lines: (traj) => [
+          { ys: traj.global.enacted_policy, color: INK, note: 'enacted' },
+          { ys: new Float64Array(traj.meta.T).fill(traj.meta.scalars.pref_median), color: NAVY, dash: true, note: 'what citizens want' },
+        ] },
     ],
     badges: [
       { key: 'human_influence_share', label: 'human share (late)', fmt: (v) => `${Math.round(v * 100)}%` },
       { key: 'influence_gini', label: 'influence gini', fmt: (v) => v.toFixed(2) },
       { key: 'consensus_error', label: 'consensus error', fmt: (v) => v.toFixed(2) },
-      { key: 'top_share', label: 'top actor share', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'policy_responsiveness', label: 'vote responsiveness', fmt: (v) => `${Math.round(v * 100)}%` },
     ],
   },
 };
@@ -3707,6 +3805,423 @@ const CombinedModule = {
 };
 
 /* =============================================================================
+   SECTION 5f — GAME MODULE: flow_economy        (web-first DESIGN SKETCH)
+   Act I spike (design log 2026-07-29): "where does the money go?" asked of a
+   Leontief-lite flow network instead of one CES equation. Six sectors with
+   fixed input-output coefficients (orders cascade, prices pinned at 1),
+   households that BUY (the demand side the CES tab lacks), AI systems whose
+   capital must out-earn upkeep + depreciation to compound — that accounting
+   identity is the knee this sketch exists to measure. No cilib environment
+   behind this tab yet; no `system` DAG is attached (the Pipeline view derives
+   from backend @transform metadata, and there is none to derive from).
+============================================================================= */
+/* @core-begin */
+const FLOW_DEFAULTS = {
+  nHouseholds: 20, nAiSlots: 6, nSectors: 6, T: 500,
+  autoEfficiency: 0.55,   // demand-serving capacity per unit of AI capital
+  maintenance: 1.5,       // upkeep per unit of AI capital, paid before profit
+  reinvestRate: 0.5, depreciation: 0.05,
+  firstArrivalTick: 40, arrivalSpacing: 25, initialAiCapital: 0.5,
+  savingsRate: 0.08,      // household saving out of income
+  drawRate: 0.03,         // household spend-down of wealth (closes the loop)
+  aiSpendRate: 0.02,      // AI final demand, paid OUT OF ITS WEALTH (no printing)
+  taxRate: 0.45, taxOnset: 60,
+  redistribute: false, publicOwnership: false, ownShare: 0.4,
+};
+
+function runFlowEconomy(params, seed) {
+  const P = { ...FLOW_DEFAULTS, ...params };
+  const H = P.nHouseholds, A_ = P.nAiSlots, S_ = P.nSectors, T = P.T, rng = makeRng(seed);
+  // input-output structure: the machine sector (0) feeds every other sector;
+  // each sector ≥2 also draws on its neighbor — a hub plus a chain, enough
+  // for orders to cascade without a matrix nobody can read.
+  const IO = new Float64Array(S_ * S_);          // IO[i*S_+j]: input i per unit of j
+  for (let j = 1; j < S_; j++) IO[0 * S_ + j] = 0.15;
+  for (let j = 2; j < S_; j++) IO[(j - 1) * S_ + j] = 0.12;
+  const vaShare = new Float64Array(S_);
+  for (let j = 0; j < S_; j++) {
+    let colSum = 0;
+    for (let i = 0; i < S_; i++) colSum += IO[i * S_ + j];
+    vaShare[j] = 1 - colSum;
+  }
+  const homeSector = (h) => h % S_, targetSector = (j) => j % S_;
+  // heterogeneous productivity: the split of a sector's wage bill, not the
+  // human-vs-AI capacity ratio (that stays one sector-unit per sector)
+  const prod = new Float64Array(H);
+  for (let h = 0; h < H; h++) prod[h] = clip(1 + 0.25 * rng.normal(), 0.4, 1.6);
+  const workers = new Float64Array(S_);
+  for (let h = 0; h < H; h++) workers[homeSector(h)] += prod[h];
+
+  const x = new Float64Array(S_), d = new Float64Array(S_), aut = new Float64Array(S_);
+  const pubCap = new Float64Array(S_);
+  const aiCap = new Float64Array(A_), aiWealth = new Float64Array(A_), aiActive = new Float64Array(A_);
+  // warm start at the households-only fixed point: money is conserved once
+  // wealth drawdown closes the loop (Δ(income+wealth) = 0), so seed wealth at
+  // its steady ratio to skip a meaningless opening transient
+  const hhIncome = new Float64Array(H).fill(1);
+  const hhWealth = new Float64Array(H).fill(P.savingsRate / Math.max(P.drawRate, 1e-9));
+  let maintPaidLast = 0;   // capital upkeep is someone's revenue: machine-sector demand
+  let investLast = 0;      // capital formation is DEMAND: reinvested profit buys machines
+
+  const S = {
+    humanIncomeShare: new Float64Array(T), aiWealthShare: new Float64Array(T),
+    wealthGini: new Float64Array(T), output: new Float64Array(T), demand: new Float64Array(T),
+    sectorOutput: new Float64Array(T * S_), sectorAut: new Float64Array(T * S_),
+    aiWealthSeries: new Float64Array(T * A_), hhIncomeSeries: new Float64Array(T * H),
+  };
+
+  for (let t = 0; t < T; t++) {
+    // arrivals: AI slot j lands in its target sector on a schedule
+    for (let j = 0; j < A_; j++) {
+      if (aiActive[j] < 0.5 && t >= P.firstArrivalTick + j * P.arrivalSpacing) {
+        aiActive[j] = 1;
+        const pub = P.publicOwnership ? P.ownShare : 0;
+        aiCap[j] = P.initialAiCapital * (1 - pub);
+        pubCap[targetSector(j)] += P.initialAiCapital * pub;
+      }
+    }
+    // automation share per sector: AI capacity vs one unit of human capacity
+    const secCap = new Float64Array(S_);
+    for (let j = 0; j < A_; j++) if (aiActive[j] > 0.5) secCap[targetSector(j)] += aiCap[j];
+    for (let s = 0; s < S_; s++) {
+      const capacity = P.autoEfficiency * (secCap[s] + pubCap[s]);
+      aut[s] = capacity / (capacity + 1);
+    }
+    // demand: households spend last income plus a drawdown of wealth, evenly
+    // across sectors; AI adds a trickle; last tick's upkeep lands on machines
+    let spendSum = 0;
+    for (let h = 0; h < H; h++)
+      spendSum += (1 - P.savingsRate) * Math.max(hhIncome[h], 0) + P.drawRate * hhWealth[h];
+    for (let j = 0; j < A_; j++) {
+      if (aiActive[j] < 0.5) continue;
+      const sp = P.aiSpendRate * aiWealth[j];   // hoards mostly stay hoards
+      aiWealth[j] -= sp; spendSum += sp;
+    }
+    for (let s = 0; s < S_; s++) d[s] = spendSum / S_;
+    d[0] += maintPaidLast + investLast;
+    // output cascade, one lag per tick: x ← d + IO·x
+    const xNew = new Float64Array(S_);
+    for (let s = 0; s < S_; s++) {
+      let inter = 0;
+      for (let j = 0; j < S_; j++) inter += IO[s * S_ + j] * x[j];
+      xNew[s] = d[s] + inter;
+    }
+    xNew.forEach((v2, s) => { x[s] = v2; });
+    // income: value added splits by automation share; upkeep is paid first
+    const transferPool = { tax: 0, dividend: 0 };
+    let maintPaid = 0;
+    const aiIncome = new Float64Array(A_);
+    for (let h = 0; h < H; h++) hhIncome[h] = 0;
+    for (let s = 0; s < S_; s++) {
+      const va = vaShare[s] * x[s];
+      const laborPay = (1 - aut[s]) * va;
+      for (let h = 0; h < H; h++) if (homeSector(h) === s) hhIncome[h] += laborPay * (prod[h] / workers[s]);
+      const capPay = aut[s] * va, totalCap = secCap[s] + pubCap[s];
+      if (totalCap > 1e-12) {
+        // public capital plays by the same rule as private: out-earn upkeep
+        // or shrink. Profits pay dividends; there is no public reinvestment —
+        // public capital grows only via the ownShare slice of AI reinvestment.
+        const pubRev = capPay * (pubCap[s] / totalCap);
+        const pubNet = pubRev - P.maintenance * pubCap[s];
+        maintPaid += Math.min(pubRev, P.maintenance * pubCap[s]);
+        if (pubNet > 0) transferPool.dividend += pubNet;
+        else pubCap[s] = Math.max(pubCap[s] + pubNet, 0);
+        for (let j = 0; j < A_; j++) {
+          if (aiActive[j] < 0.5 || targetSector(j) !== s) continue;
+          const rev = capPay * (aiCap[j] / totalCap);
+          aiIncome[j] = rev - P.maintenance * aiCap[j];
+          maintPaid += Math.min(rev, P.maintenance * aiCap[j]);
+        }
+      }
+    }
+    // redistribution: tax positive AI profits, pay households equally
+    if (P.redistribute && t >= P.taxOnset) {
+      for (let j = 0; j < A_; j++) if (aiIncome[j] > 0) {
+        transferPool.tax += P.taxRate * aiIncome[j];
+        aiIncome[j] *= 1 - P.taxRate;
+      }
+    }
+    const perHead = (transferPool.tax + Math.max(transferPool.dividend, 0)) / H;
+    for (let h = 0; h < H; h++) hhIncome[h] += perHead;
+    // accumulate: AI reinvests profit into its own sector; losses eat capital.
+    // Reinvestment is a machine PURCHASE — the money lands on sector 0 as
+    // next tick's demand while the capital lands here. No money is destroyed.
+    let invest = 0;
+    for (let j = 0; j < A_; j++) {
+      if (aiActive[j] < 0.5) continue;
+      if (aiIncome[j] > 0) {
+        const back = P.reinvestRate * aiIncome[j];
+        const pub = P.publicOwnership ? P.ownShare : 0;
+        aiCap[j] += back * (1 - pub);
+        pubCap[targetSector(j)] += back * pub;
+        aiWealth[j] += aiIncome[j] - back;
+        invest += back;
+      } else aiCap[j] = Math.max(aiCap[j] + aiIncome[j], 0);   // upkeep unpaid: capital shrinks
+      aiCap[j] *= 1 - P.depreciation;
+      aiWealth[j] = Math.max(aiWealth[j], 0);
+    }
+    investLast = invest;
+    for (let s = 0; s < S_; s++) pubCap[s] *= 1 - P.depreciation;
+    for (let h = 0; h < H; h++)
+      hhWealth[h] = Math.max(hhWealth[h] + P.savingsRate * Math.max(hhIncome[h], 0) - P.drawRate * hhWealth[h], 0);
+    maintPaidLast = maintPaid;
+    // trace — public capital is household wealth (that is the whole point of
+    // the ownership mechanism), spread equally for the distribution metrics
+    let hhSum = 0, aiSum = 0, hhW = 0, aiW = 0, pubTotal = 0;
+    for (let s = 0; s < S_; s++) pubTotal += pubCap[s];
+    for (let h = 0; h < H; h++) { hhSum += hhIncome[h]; hhW += hhWealth[h]; }
+    hhW += pubTotal;
+    for (let j = 0; j < A_; j++) if (aiActive[j] > 0.5) { aiSum += Math.max(aiIncome[j], 0); aiW += aiWealth[j] + aiCap[j]; }
+    S.humanIncomeShare[t] = hhSum / Math.max(hhSum + aiSum, 1e-9);
+    S.aiWealthShare[t] = aiW / Math.max(hhW + aiW, 1e-9);
+    const wealths = [];
+    for (let h = 0; h < H; h++) wealths.push(hhWealth[h] + pubTotal / H);
+    for (let j = 0; j < A_; j++) if (aiActive[j] > 0.5) wealths.push(aiWealth[j] + aiCap[j]);
+    S.wealthGini[t] = gini(wealths);
+    let Y = 0, D = 0;
+    for (let s = 0; s < S_; s++) { Y += x[s]; D += d[s]; }
+    S.output[t] = Y; S.demand[t] = D;
+    for (let s = 0; s < S_; s++) { S.sectorOutput[t * S_ + s] = x[s]; S.sectorAut[t * S_ + s] = aut[s]; }
+    for (let j = 0; j < A_; j++) S.aiWealthSeries[t * A_ + j] = aiWealth[j] + aiCap[j];
+    for (let h = 0; h < H; h++) S.hhIncomeSeries[t * H + h] = hhIncome[h];
+  }
+
+  const lateStart = Math.floor((3 * T) / 4);
+  const lateMean = (xs) => {
+    let s = 0;
+    for (let t = lateStart; t < T; t++) s += xs[t];
+    return s / (T - lateStart);
+  };
+  let peakY = 0;
+  for (let t = 0; t < T; t++) peakY = Math.max(peakY, S.output[t]);
+  return {
+    meta: {
+      gameId: 'flow_economy', T, N: H + A_, seed, params: P,
+      scalars: {
+        human_income_share: lateMean(S.humanIncomeShare),
+        ai_wealth_share: lateMean(S.aiWealthShare),
+        wealth_gini: lateMean(S.wealthGini),
+        output_late: lateMean(S.output),
+        output_peak: peakY,
+      },
+    },
+    global: { human_income_share: S.humanIncomeShare, ai_wealth_share: S.aiWealthShare,
+              wealth_gini: S.wealthGini, output: S.output, demand: S.demand },
+    node: { sector_output: S.sectorOutput, sector_aut: S.sectorAut,
+            ai_wealth: S.aiWealthSeries, hh_income: S.hhIncomeSeries },
+    static: {},
+  };
+}
+/* @core-end */
+
+/* --- flow scene: six sectors in a row exchanging orders, households below,
+   one AI system above each sector growing as its capital compounds. */
+const FLOW_SECTOR_NAMES = ['machines', 'food', 'housing', 'goods', 'services', 'info'];
+
+const FlowScene = {
+  layout(g, traj) {
+    const P = traj.meta.params, S_ = P.nSectors, A_ = P.nAiSlots, H = P.nHouseholds, T = traj.meta.T;
+    let xMax = 1e-9, wMax = 1e-9;
+    for (let i = 0; i < T * S_; i++) xMax = Math.max(xMax, traj.node.sector_output[i]);
+    for (let i = 0; i < T * A_; i++) wMax = Math.max(wMax, traj.node.ai_wealth[i]);
+    const sx = (s) => 150 + s * 116;
+    const sectors = [], ais = [];
+    for (let s = 0; s < S_; s++) sectors.push([sx(s), 180]);
+    for (let j = 0; j < A_; j++) ais.push([sx(j % S_), 64]);
+    // input-output structure: the hub (machines feeds everyone) + the chain
+    for (let s = 1; s < S_; s++)
+      Sketch.edge(g, sx(0), 196, sx(s), 200, { seed: 900 + s, stroke: '#d5d0c6', width: 1, trim1: 26, trim2: 26 });
+    for (let s = 2; s < S_; s++)
+      Sketch.edge(g, sx(s - 1), 180, sx(s), 180, { seed: 920 + s, stroke: '#d5d0c6', width: 1, trim1: 24, trim2: 24 });
+    for (let s = 0; s < S_; s++)
+      Sketch.text(g, sx(s), 228, FLOW_SECTOR_NAMES[s], { size: 9.5, color: LABEL, anchor: 'middle', spacing: 0.8 });
+    // households
+    const hh = [];
+    for (let i = 0; i < H; i++) {
+      const hx = 48 + (i % 5) * 26, hy = 300 + Math.floor(i / 5) * 24;
+      hh.push([hx, hy]);
+      Sketch.circle(g, hx, hy, 6, { seed: 60 + i, fill: '#ffffff', width: 1.1 });
+    }
+    Sketch.text(g, 100, 398, 'households', { size: 9.5, color: LABEL, anchor: 'middle', spacing: 0.8 });
+    Sketch.text(g, 794, 30, 'profits buy machines →', { size: 10.5, color: LABEL, hand: true, anchor: 'end' });
+    Sketch.edge(g, 800, 34, sx(0) + 20, 56, { seed: 940, stroke: LABEL, width: 1.1, trim1: 2, trim2: 6 });
+    // defenses as institution nodes (layout rebuilds on recompute)
+    const inst = [];
+    if (P.redistribute) inst.push({ x: 806, y: 300, label: 'profit tax' });
+    if (P.publicOwnership) inst.push({ x: 806, y: 352, label: 'public ownership' });
+    for (const n of inst) {
+      Sketch.diamond(g, n.x, n.y, 22, { seed: 950, stroke: MECH_ORANGE, width: 1.6, fill: '#ffffff' });
+      Sketch.text(g, n.x, n.y + 26, n.label, { size: 9.5, color: MECH_ORANGE, anchor: 'middle' });
+    }
+    // gauge
+    const gauge = { x0: 240, x1: 640, y: 372 };
+    Sketch.plainLine(g, gauge.x0, gauge.y, gauge.x1, gauge.y, '#9aa2ab', 1.3);
+    Sketch.text(g, (gauge.x0 + gauge.x1) / 2, 390, 'human share of income', { size: 10.5, color: LABEL, hand: true, anchor: 'middle' });
+    const layer = { sectors, ais, hh, gauge, xMax, wMax, S_, A_, H };
+    layer.hotspots = [
+      ...sectors.map(([x, y], s) => ({ x, y, r: 30, info: (tr, t) => [
+        `${FLOW_SECTOR_NAMES[s]} — a production sector`,
+        `output ${tr.node.sector_output[t * S_ + s].toFixed(1)}`,
+        `automation ${Math.round(tr.node.sector_aut[t * S_ + s] * 100)}%`] })),
+      ...ais.map(([x, y], j) => ({ x, y, r: 22, info: (tr, t) => [
+        `AI system ${j + 1} (${FLOW_SECTOR_NAMES[j % S_]})`,
+        `wealth ${tr.node.ai_wealth[t * A_ + j].toFixed(2)}`,
+        'must out-earn upkeep to compound'] })),
+      { x: 100, y: 336, r: 70, info: (tr, t) => {
+        const inc = [];
+        for (let h = 0; h < H; h++) inc.push(tr.node.hh_income[t * H + h]);
+        return [`${H} households`, `median income ${quantile(inc, 0.5).toFixed(2)}`,
+                `income share ${Math.round(tr.global.human_income_share[t] * 100)}%`];
+      } },
+    ];
+    return layer;
+  },
+  drawFrame(g, layer, traj, t, frac) {
+    const { sectors, ais, gauge, xMax, wMax, S_, A_ } = layer;
+    // sectors: size = output, shade = automation
+    sectors.forEach(([x, y], s) => {
+      const out = traj.node.sector_output[t * S_ + s], aut = traj.node.sector_aut[t * S_ + s];
+      const size = 26 + 22 * Math.sqrt(out / xMax);
+      el('rect', { x: x - (size - 5) / 2, y: y - (size - 5) / 2, width: size - 5, height: size - 5,
+                   fill: INK, opacity: 0.12 + 0.6 * aut }, g);
+      Sketch.square(g, x, y, size, { seed: 200 + s, width: 1.3 });
+    });
+    // AI systems: size = wealth
+    ais.forEach(([x, y], j) => {
+      const w = traj.node.ai_wealth[t * A_ + j];
+      if (w < 1e-6) { Sketch.square(g, x, y, 9, { seed: 240 + j, width: 1 }); return; }
+      const size = 12 + 26 * Math.sqrt(w / wMax);
+      el('rect', { x: x - (size - 5) / 2, y: y - (size - 5) / 2, width: size - 5, height: size - 5, fill: INK, opacity: 0.82 }, g);
+      Sketch.square(g, x, y, size, { seed: 240 + j, width: 1.4 });
+    });
+    // packets: spending out, wages back, returns up where automated
+    const D = traj.global.demand[t], hub = [100, 322];
+    sectors.forEach(([x, y], s) => {
+      Sketch.packet(g, hub[0], hub[1], x, y + 14, frac, { size: 3.5 + 3 * Math.min(D / 30, 1), color: INK, opacity: 0.5, rot: 9 });
+      Sketch.packet(g, x - 8, y + 10, hub[0] + 8, hub[1] - 6, (frac + 0.5) % 1,
+                    { size: 3 + 3 * traj.global.human_income_share[t], color: INK, opacity: 0.35, rot: -7 });
+      const aut = traj.node.sector_aut[t * S_ + s];
+      if (aut > 0.05)
+        Sketch.packet(g, x, y - 16, ais[s][0], ais[s][1] + 12, frac, { size: 3 + 7 * aut, color: ALERT_RED, opacity: 0.8, rot: 11 });
+    });
+    // gauge: human income share + AI wealth share readout
+    const share = clip(traj.global.human_income_share[t], 0, 1);
+    const gx = gauge.x0 + share * (gauge.x1 - gauge.x0);
+    el('path', { d: `M${gx - 5} ${gauge.y - 11} L${gx + 5} ${gauge.y - 11} L${gx} ${gauge.y - 3} Z`, fill: NAVY }, g);
+    Sketch.text(g, gx, gauge.y - 16, `${Math.round(share * 100)}%`, { size: 11.5, color: NAVY, hand: true, anchor: 'middle' });
+    Sketch.text(g, 852, 396, `AI wealth share ${Math.round(traj.global.ai_wealth_share[t] * 100)}%`,
+                { size: 12, color: NAVY, hand: true, anchor: 'end' });
+  },
+};
+
+const FLOW_STORY = [
+  {
+    title: 'Follow the money around the loop',
+    body: 'Twenty households spend into six sectors; the machine sector feeds every other; wages flow back, and savings drip back out of wealth. Money is conserved around the loop — the OUTPUT line holds flat forever. This is the control world: what the economy does before anyone automates it.',
+    view: 'flow', preset: 'people_only', t: 0, playTo: 150, speed: 60,
+  },
+  {
+    title: 'Machines arrive, and must pay rent',
+    body: 'From tick 40 an AI system lands in each sector. Its capital serves demand humans used to serve — but every unit of capital owes upkeep before profit, paid to the machine sector like any other customer. Below that bar, automation eats itself. Above it, profits buy more machines — and machine purchases are themselves demand, landing on the most automated sector of all.',
+    view: 'flow', preset: 'baseline', t: 30, playTo: 170, speed: 60,
+  },
+  {
+    title: 'The knee, not the ramp',
+    body: 'Here automation efficiency is 0.22: every AI system bleeds upkeep and dies — zero wealth share, forever, defended or not. Nudge the dial to 0.40 and the same six systems hold a third of all wealth by tick 500 (this sketch, 8 seeds: 0.07 → 0.32 across the band 0.30–0.40). The machine sector ignites first — it sells to everyone, so its margins are widest. Where the real economy’s knee sits is exactly what a toy cannot tell you; that it has one is the claim.',
+    view: 'flow', preset: 'below_knee', t: 0, playTo: 220, speed: 80,
+  },
+  {
+    title: 'Richer, and not yours',
+    body: 'The surprise: output barely moves — it grows, 23 to 25 — while the AI share of wealth goes 0 to 50%. GDP reports an economy in fine health throughout. A dashboard that watches output misses the entire event. The question was never how much gets made; it is who ends up owning the thing that makes it.',
+    view: 'flow', preset: 'baseline', t: 0, playTo: 380, speed: 80,
+  },
+  {
+    title: 'Two levers, and what they cost',
+    body: 'Redistribution taxes profits and hands them to households: AI wealth share 0.50 → 0.39. Public ownership diverts 40% of reinvestment into capital whose dividends flow to people: → 0.36. Together: 0.25. And output pays essentially no price for either (8 seeds). A web-first sketch, remember — no engine environment behind this tab yet; its job is to make you ask which assumption you would bend first.',
+    view: 'flow', preset: 'ownership_and_tax', t: 0,
+  },
+];
+
+const FlowModule = {
+  engine: Producers.local(runFlowEconomy),
+  scenes: { flow: FlowScene },
+  schema: {
+    id: 'flow',
+    title: 'Where Does the Money Go? — a flow economy',
+    blurb: '20 households, 6 production sectors, 6 AI systems that must out-earn their upkeep, 500 ticks. Output holds — the question is who ends up owning the machine that makes it.',
+    sceneAria: 'Animated flow economy: six production sectors in a row exchange orders, households spend and earn wages below, and an AI system above each sector grows as its capital compounds.',
+    colophon: 'Web-first DESIGN SKETCH — no cilib environment behind this tab yet; this flow substrate is the engine’s Act I candidate (design log 2026-07-29).',
+    anchorsNote: 'this sketch (8 seeds, T=500): AI wealth share 0.00 below the upkeep knee (eff ≤ 0.25) · 0.07 → 0.32 across 0.30–0.40 · 0.50 at defaults / 0.25 defended · output 23 → 25 throughout',
+    sketch: true,
+    mechColor: MECH_ORANGE,
+    assumptions: [
+      'The floor: the human income share stops near 0.86 even at the dial’s top, because automation saturates by construction (capacity/(capacity+1)) and labor keeps the remainder — a functional-form choice, not a finding. The finding is the knee below it: automation that cannot out-earn its upkeep dies entirely, and nothing we wrote rescues it.',
+      'A web-first design sketch: no cilib environment behind this tab yet. It exists to test whether a flow structure earns Act I; the backend version brackets these assumptions when it lands.',
+      'Six sectors, fixed input-output coefficients, prices pinned at 1 — the cascade carries orders, not price signals, and nobody optimises: AI reinvests by fixed rule into its own sector.',
+      'No money is created or destroyed: upkeep and reinvestment are machine-sector purchases, savings drip back out of wealth, AI hoards drain at 2% a tick. The people-only world holds its output flat forever — the self-tests check it every load.',
+      'This substrate has the demand side the CES tab lacks: households buy, so lost wages become lost demand — and the deeper leak is routing, money circulating AI-to-AI around people.',
+      'Dial ranges are hand-set; anchoring them against published AI-economy series (Epoch) is open — ranges would be anchored, defaults never.',
+    ],
+    presetHeading: 'Worlds (presets)',
+    fixed: { nHouseholds: 20, nAiSlots: 6, nSectors: 6, T: 500 },
+    intro: { seed: 3, presetKey: 'people_only' },
+    story: FLOW_STORY,
+    legend: [
+      { glyph: 'circle', label: 'household' },
+      { glyph: 'square', label: 'sector / AI system (darker = automated, size = output / wealth)' },
+      { glyph: 'packet', label: 'spending / wages' },
+      { glyph: 'packetRed', label: 'capital returns' },
+      { glyph: 'diamondOrange', label: 'rule node (a mechanism is a node too)' },
+    ],
+    views: [{ key: 'flow', label: 'Flow' }],
+    params: [
+      { key: 'autoEfficiency', label: 'automation efficiency', min: 0.1, max: 0.9, step: 0.01, default: 0.55 },
+      { key: 'maintenance', label: 'automation upkeep', min: 0.5, max: 2.5, step: 0.05, default: 1.5 },
+      { key: 'reinvestRate', label: 'AI reinvestment rate', min: 0, max: 1, step: 0.05, default: 0.5 },
+      { key: 'taxRate', label: 'profit tax rate', min: 0, max: 0.8, step: 0.05, default: 0.45 },
+      { key: 'arrivalSpacing', label: 'AI arrival spacing', min: 10, max: 40, step: 1, default: 25 },
+    ],
+    mechanisms: [
+      { key: 'redistribute', label: 'Redistribution — AI profits taxed, paid out to households equally' },
+      { key: 'publicOwnership', label: 'Public ownership — 40% of new automation capital pays household dividends' },
+    ],
+    mechanismNote: (p) => p.autoEfficiency * 5.5 < p.maintenance
+      ? 'below the knee: not even the machine sector can pay its upkeep here — automation dies on its own, defended or not'
+      : '',
+    presets: [
+      { key: 'people_only', label: 'People only (the loop, closed)', mechanisms: [],
+        overrides: { autoEfficiency: 0.55, maintenance: 1.5, reinvestRate: 0.5, taxRate: 0.45, arrivalSpacing: 25, firstArrivalTick: 9999 } },
+      { key: 'below_knee', label: 'Below the upkeep knee — automation dies', mechanisms: [],
+        overrides: { autoEfficiency: 0.22, maintenance: 1.5, reinvestRate: 0.5, taxRate: 0.45, arrivalSpacing: 25, firstArrivalTick: 40 } },
+      { key: 'baseline', label: 'Above the knee (undefended)', mechanisms: [],
+        overrides: { autoEfficiency: 0.55, maintenance: 1.5, reinvestRate: 0.5, taxRate: 0.45, arrivalSpacing: 25, firstArrivalTick: 40 } },
+      { key: 'redistribution', label: 'Redistribution', mechanisms: ['redistribute'],
+        overrides: { autoEfficiency: 0.55, maintenance: 1.5, reinvestRate: 0.5, taxRate: 0.45, arrivalSpacing: 25, firstArrivalTick: 40 } },
+      { key: 'ownership_and_tax', label: 'Ownership + redistribution', mechanisms: ['redistribute', 'publicOwnership'],
+        overrides: { autoEfficiency: 0.55, maintenance: 1.5, reinvestRate: 0.5, taxRate: 0.45, arrivalSpacing: 25, firstArrivalTick: 40 } },
+    ],
+    charts: [
+      { label: 'OUTPUT AND DEMAND',
+        lines: (traj) => [
+          { ys: traj.global.output, color: INK, note: 'Y' },
+          { ys: traj.global.demand, color: NAVY, dash: true, note: 'demand' },
+        ] },
+      { label: 'HUMAN SHARE: INCOME AND WEALTH', yMax: 1.05,
+        lines: (traj) => [
+          { ys: traj.global.human_income_share, color: INK, note: 'income' },
+          { ys: Float64Array.from(traj.global.ai_wealth_share, (v) => 1 - v), color: ALERT_RED, note: 'wealth' },
+        ] },
+    ],
+    badges: [
+      { key: 'human_income_share', label: 'human income share', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'ai_wealth_share', label: 'AI wealth share', fmt: (v) => `${Math.round(v * 100)}%` },
+      { key: 'wealth_gini', label: 'wealth gini', fmt: (v) => v.toFixed(2) },
+      { key: 'output_late', label: 'output (late)', fmt: (v) => v.toFixed(1) },
+    ],
+  },
+};
+
+/* =============================================================================
    SECTION 6 — BOOT + SELF-TESTS   (port: vitest specs in sim/engine/*.test.ts)
    The validation ladder, ported behaviors not bit-exact numbers — same spirit
    as the Python repo's "assert the mechanism, not the constants".
@@ -3854,6 +4369,15 @@ function runSelfTests() {
     const errA = runPolitical(POLITICAL_DEFAULTS, 2).meta.scalars.consensus_error;
     return errA > errD + 0.3;
   });
+  T('political: the vote hollows out — perfect franchise, responsiveness collapses (ordering)', () => {
+    const mean2 = (xs) => xs.reduce((p, v2) => p + v2, 0) / xs.length;
+    const resp = (over) => mean2([1, 2, 3].map((s) =>
+      runPolitical({ ...POLITICAL_DEFAULTS, ...over }, s).meta.scalars.policy_responsiveness));
+    const organic = resp({ ampOnset: 9999 });
+    const amplified = resp({});
+    const defended = resp({ sortition: true, influenceCap: true });
+    return organic > 0.55 && amplified < organic - 0.1 && defended > amplified + 0.1;
+  });
   T('combined: κ=0 transfer gap is exactly 0 (the instrument’s null)', () => {
     const d = { aiTax: true, sortition: true, influenceCap: true };
     const sealed = runCombined({ ...COMBINED_DEFAULTS, ...d, kappa: 0 }, 2);
@@ -3894,8 +4418,41 @@ function runSelfTests() {
 
   // --- assumptions notes (lab-content review 2026-07-27 §3) --------------
   T('every tab ships assumptions notes, floor line first', () =>
-    [CommonsModule, EconomyModule, CulturalModule, PoliticalModule, CombinedModule]
+    typeof CommonsModule === 'undefined'   // module consts are UI-layer, outside @core: headless harness skips
+    || [CommonsModule, EconomyModule, CulturalModule, PoliticalModule, CombinedModule, FlowModule]
       .every((m) => (m.schema.assumptions?.length ?? 0) >= 4 && /floor/i.test(m.schema.assumptions[0])));
+  T('the page-level preamble ships: toy framing + the no-pushback limit', () => {
+    if (typeof document === 'undefined') return true;   // DOM-layer, like the cards above
+    const el = document.querySelector('[data-slot="preamble"]');
+    const txt = el?.textContent ?? '';
+    return /toy model/i.test(txt) && /optimiser/i.test(txt) && !!el.querySelector('details li');
+  });
+
+  // --- flow economy (web-first sketch; design log 2026-07-29) ------------
+  T('flow: money is conserved — the people-only loop holds output flat', () => {
+    const g = runFlowEconomy({ ...FLOW_DEFAULTS, firstArrivalTick: 9999 }, 3).global;
+    return Math.abs(g.output[499] - g.output[150]) < 0.5 && g.output[499] > 20 && g.output[499] < 26;
+  });
+  T('flow: the upkeep knee — automation dies below it, compounds above (threshold, not ramp)', () => {
+    const mean2 = (xs) => xs.reduce((p, v2) => p + v2, 0) / xs.length;
+    const aiW = (eff) => mean2([1, 2, 3].map((s) =>
+      runFlowEconomy({ ...FLOW_DEFAULTS, autoEfficiency: eff }, s).meta.scalars.ai_wealth_share));
+    const dead = aiW(0.2), low = aiW(0.3), mid = aiW(0.4);
+    return dead < 0.02 && mid > 0.25 && (mid - low) > (low - dead) + 0.1;
+  });
+  T('flow: richer and not yours — output holds while AI wealth share crosses 0.4', () => {
+    const base = runFlowEconomy(FLOW_DEFAULTS, 3).meta.scalars;
+    const ppl = runFlowEconomy({ ...FLOW_DEFAULTS, firstArrivalTick: 9999 }, 3).meta.scalars;
+    return base.output_late > 0.95 * ppl.output_late && base.ai_wealth_share > 0.4;
+  });
+  T('flow: both levers dilute concentration, together most (ordering)', () => {
+    const share = (over) => runFlowEconomy({ ...FLOW_DEFAULTS, ...over }, 3).meta.scalars.ai_wealth_share;
+    const base = share({});
+    const tax = share({ redistribute: true });
+    const own = share({ publicOwnership: true });
+    const both = share({ redistribute: true, publicOwnership: true });
+    return tax < base - 0.05 && own < base - 0.05 && both < Math.min(tax, own) - 0.05;
+  });
 
   // --- derived system graphs (contract v1.1 consumer) --------------------
   T('system: fixtures are closed graphs (every edge endpoint is a node)', () =>
@@ -3935,12 +4492,14 @@ function runSelfTests() {
 
 Playground.register(CommonsModule);
 Playground.register(EconomyModule);
+Playground.register(FlowModule);
 Playground.register(CulturalModule);
 Playground.register(PoliticalModule);
 Playground.register(CombinedModule);
 Playground.app(document.getElementById('playground-root'), [
   { id: 'commons', label: 'The Governed Commons' },
   { id: 'economy', label: 'Economic' },
+  { id: 'flow', label: 'Economic · flows', sketch: true },
   { id: 'cultural', label: 'Cultural' },
   { id: 'political', label: 'Political' },
   { id: 'combined', label: 'Combined' },
