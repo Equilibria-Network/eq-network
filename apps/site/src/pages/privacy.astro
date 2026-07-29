@@ -1,61 +1,112 @@
 ---
-// src/pages/privacy.astro
 import Layout from '@/layouts/Layout.astro';
 import { privacyContent } from '@content/privacy';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
 
 const { title, lastUpdated, intro, sections, contact } = privacyContent;
+const sectionId = (heading: string) =>
+  heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 ---
 
 <Layout
-  title="Privacy Policy - Equilibria Network"
-  description="What personal data the Equilibria Network site handles, why, and who processes it."
+  title="Privacy policy — Equilibria Network"
+  description="How Equilibria Network handles contact-form data, third-party processing, retention, cookies, and privacy rights."
 >
   <section class="privacy">
-    <div class="container">
-      <h1 class="pageTitle">{title}</h1>
-      <p class="updated">Last updated: {lastUpdated}</p>
+    <div class="pageFrame">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">POLICY / DATA PRACTICE</p>
+          <h1>{title}</h1>
+        </div>
+        <div class="revision">
+          <span>STATUS</span><strong>Current</strong>
+          <span>UPDATED</span><strong>{lastUpdated}</strong>
+        </div>
+      </header>
 
-      {intro.map((p) => <p class="lead">{p}</p>)}
+      <div class="documentGrid">
+        <aside class="policyToc" aria-label="Policy contents">
+          <p>Contents</p>
+          <ol>
+            {
+              sections.map((section, index) => (
+                <li>
+                  <a href={`#${sectionId(section.heading)}`}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    {section.heading}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a href="#contact">
+                <span>{String(sections.length + 1).padStart(2, '0')}</span>
+                {contact.heading}
+              </a>
+            </li>
+          </ol>
+        </aside>
 
-      {
-        sections.map((section) => (
-          <div class="section">
-            <h2>{section.heading}</h2>
-            {section.paragraphs?.map((p) => (
-              <p>{p}</p>
-            ))}
-            {section.processors && (
-              <table class="processors">
-                <thead>
-                  <tr>
-                    <th>Service</th>
-                    <th>Role</th>
-                    <th>Location</th>
-                    <th>Data it sees</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {section.processors.map((proc) => (
-                    <tr>
-                      <td>{proc.name}</td>
-                      <td>{proc.role}</td>
-                      <td>{proc.location}</td>
-                      <td>{proc.data}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+        <article class="policy">
+          <div class="summary">
+            {intro.map((paragraph) => <p>{paragraph}</p>)}
           </div>
-        ))
-      }
 
-      <div class="section">
-        <h2>{contact.heading}</h2>
-        <p>
-          {contact.body}
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>.
-        </p>
+          {
+            sections.map((section, index) => (
+              <section class="policySection" id={sectionId(section.heading)}>
+                <div class="sectionHeading">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h2>{section.heading}</h2>
+                </div>
+                {section.paragraphs?.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+                {section.processors && (
+                  <div class="tableWrap" tabindex="0" aria-label="Data processors">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Service</th>
+                          <th>Role</th>
+                          <th>Location</th>
+                          <th>Data it sees</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.processors.map((processor) => (
+                          <tr>
+                            <td>{processor.name}</td>
+                            <td>{processor.role}</td>
+                            <td>{processor.location}</td>
+                            <td>{processor.data}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
+            ))
+          }
+
+          <section class="policySection contact" id="contact">
+            <div class="sectionHeading">
+              <span>{String(sections.length + 1).padStart(2, '0')}</span>
+              <h2>{contact.heading}</h2>
+            </div>
+            <p>
+              {contact.body}
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+            </p>
+          </section>
+        </article>
       </div>
     </div>
   </section>
@@ -63,102 +114,236 @@ const { title, lastUpdated, intro, sections, contact } = privacyContent;
 
 <style>
   .privacy {
-    padding: 8rem 0 6rem;
+    --ink: #003b7e;
+    --line: rgba(0, 59, 126, 0.17);
+    padding: clamp(6rem, 10vw, 9rem) 1.5rem 5rem;
+    color: #0b1f3a;
   }
 
-  .container {
-    max-width: 760px;
+  .pageFrame {
+    width: min(1160px, 100%);
     margin: 0 auto;
-    padding: 0 2rem;
+    border: 1px solid var(--line);
+    background: #fff;
   }
 
-  .pageTitle {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    line-height: 1.1;
-    margin: 0 0 0.5rem 0;
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+    padding: clamp(2rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--line);
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(0, 59, 126, 0.045) 0,
+        rgba(0, 59, 126, 0.045) 1px,
+        transparent 1px,
+        transparent 9px
+      ),
+      #fff;
   }
 
-  .updated {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    opacity: 0.65;
-    margin: 0 0 2.5rem 0;
+  .eyebrow,
+  .revision,
+  .policyToc,
+  .sectionHeading > span {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
   }
 
-  .lead {
+  .eyebrow {
+    margin-bottom: 1rem;
+    color: #4ab3f4;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  h1,
+  h2 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    color: var(--ink);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3.2rem, 8vw, 6.8rem);
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+  }
+
+  .revision {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.35rem 1.5rem;
+    min-width: 210px;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .revision span {
+    opacity: 0.58;
+  }
+
+  .documentGrid {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+
+  .policyToc {
+    position: sticky;
+    top: calc(var(--navbar-height) + 2rem);
+    align-self: start;
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--line);
+    font-size: 0.72rem;
+  }
+
+  .policyToc > p {
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .policyToc ol {
+    list-style: none;
+  }
+
+  .policyToc li + li {
+    margin-top: 0.75rem;
+  }
+
+  .policyToc a {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    color: rgba(0, 31, 69, 0.72);
+    line-height: 1.4;
+  }
+
+  .policyToc a:hover {
+    color: var(--ink);
+  }
+
+  .policyToc a span {
+    color: #4ab3f4;
+  }
+
+  .policy {
+    min-width: 0;
+    padding: clamp(2rem, 6vw, 5rem);
+  }
+
+  .summary {
+    margin-bottom: 4rem;
+    padding: 1.5rem;
+    border-left: 4px solid var(--ink);
+    background: rgba(0, 59, 126, 0.035);
+  }
+
+  .summary p {
     font-size: 1.15rem;
-    line-height: 1.7;
-    color: var(--text-color);
-    margin: 0 0 1.25rem 0;
   }
 
-  .section {
-    margin-top: 2.5rem;
+  .summary p + p,
+  .policySection p + p {
+    margin-top: 1rem;
   }
 
-  .section h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 0 0 0.75rem 0;
+  .policy p {
+    max-width: 720px;
+    font-size: 1.02rem;
+    line-height: 1.75;
   }
 
-  .section p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text-color);
-    margin: 0 0 1rem 0;
+  .policySection {
+    scroll-margin-top: calc(var(--navbar-height) + 2rem);
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
   }
 
-  .section a {
-    color: var(--color-primary);
-    text-decoration: underline;
+  .sectionHeading {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
   }
 
-  .processors {
+  .sectionHeading > span {
+    color: #4ab3f4;
+    font-size: 0.72rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    letter-spacing: -0.025em;
+  }
+
+  .tableWrap {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+  }
+
+  table {
     width: 100%;
+    min-width: 620px;
     border-collapse: collapse;
-    margin: 1rem 0 0.5rem;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 
-  .processors th,
-  .processors td {
+  th,
+  td {
+    padding: 0.85rem;
+    border: 1px solid var(--line);
     text-align: left;
     vertical-align: top;
-    padding: 0.6rem 0.75rem;
-    border-bottom: 1px solid rgba(0, 59, 126, 0.15);
     line-height: 1.5;
   }
 
-  .processors th {
-    color: var(--color-primary);
-    font-weight: 600;
+  th {
+    color: var(--ink);
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(0, 59, 126, 0.05) 0,
+        rgba(0, 59, 126, 0.05) 1px,
+        transparent 1px,
+        transparent 8px
+      ),
+      #fff;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  @media (max-width: 768px) {
-    .privacy {
-      padding: 6rem 0 4rem;
+  .contact a {
+    border-bottom: 1px solid currentColor;
+    font-weight: 700;
+  }
+
+  @media (max-width: 820px) {
+    .hero {
+      grid-template-columns: 1fr;
+      align-items: start;
     }
 
-    .container {
-      padding: 0 1.5rem;
+    .revision {
+      width: min(100%, 360px);
     }
 
-    .pageTitle {
-      font-size: 2.25rem;
+    .documentGrid {
+      grid-template-columns: 1fr;
     }
 
-    .processors {
-      font-size: 0.85rem;
-    }
-
-    .processors th,
-    .processors td {
-      padding: 0.5rem;
+    .policyToc {
+      position: static;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
     }
   }
 </style>

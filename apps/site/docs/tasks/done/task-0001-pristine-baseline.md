@@ -161,7 +161,7 @@ Visual-identity alignment is tracked separately in
       Note: this supersedes the link-data half of **M2/M3** for nav/footer/socials, which now live in
       `content/site.ts`; the remaining M2/M3 work is only deleting the dead `social.ts`/`SocialBar` (final
       dead-code commit).
-- [ ] **M7** Convert `404.astro` inline styles to a CSS module.
+- [x] **M7** Rebuilt `404.astro` with scoped, responsive visual-identity styling and no inline event handlers.
 - [ ] **M10** Split `content/lab.ts` (508 lines) per scenario, mirroring the roadmap content split.
 - [x] **M11 — moot.** `PhaseBody.tsx` was deleted in the dead-code commit (owner decision), so its `pub: any`
       no longer exists.
@@ -174,7 +174,7 @@ Visual-identity alignment is tracked separately in
       [`task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md). **Draft** — needs owner
       legal review + confirmation of the `contact@eq-network.org` inbox.
 - [x] **F6** Fix the `env.example` vs `.env.example` naming/README mismatch. (resolved: root README and CONTRIBUTING now use `apps/site/env.example`; the stale `apps/site/README.md` was rewritten.)
-- [ ] **F7** (optional) Add `@astrojs/sitemap`.
+- [x] **F7** Added `@astrojs/sitemap`, a public `robots.txt`, and a sitemap filter for unlisted prototypes.
 
 ---
 

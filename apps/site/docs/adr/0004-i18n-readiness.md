@@ -31,7 +31,7 @@ Split the two concerns and act on only the cheap half now:
 - **Adopt string externalisation as an enforceable invariant now:** no user-facing string literal in a
   component, page, or layout; all copy lives in `src/content/`. This is folded into the current pristine
   baseline as the expanded M6 sweep (see
-  [`../tasks/open/task-0001-pristine-baseline.md`](../tasks/open/task-0001-pristine-baseline.md)).
+  [`../tasks/done/task-0001-pristine-baseline.md`](../tasks/done/task-0001-pristine-baseline.md)).
 - **Defer the i18n runtime.** Do not add locale routing, message catalogs, a locale switcher, or restructure
   `src/content/*.ts` into a locale-keyed shape until there is a real second locale. The eventual runtime is
   tracked as [`../tasks/deferred/task-0006-i18n.md`](../tasks/deferred/task-0006-i18n.md) and will get its

@@ -1,78 +1,264 @@
 ---
-// src/pages/404.astro
 import Layout from '@/layouts/Layout.astro';
 import { siteContent } from '@content/site';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
 
 const { notFound } = siteContent;
 ---
 
-<Layout title="404 - Page Not Found">
-  <section
-    style="
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  "
-  >
-    <div style="
-      text-align: center;
-      max-width: 600px;
-    ">
-      <h1
-        style="
-        font-size: 6rem;
-        font-weight: 700;
-        color: var(--color-primary);
-        margin: 0 0 1rem 0;
-        line-height: 1;
-      "
-      >
-        {notFound.code}
-      </h1>
+<Layout
+  title="Page not found — Equilibria Network"
+  description="The requested page could not be found."
+  noindex={true}
+>
+  <section class="not-found">
+    <div class="frame">
+      <span class="registration registrationTop" aria-hidden="true"></span>
+      <span class="registration registrationBottom" aria-hidden="true"></span>
 
-      <h2
-        style="
-        font-size: 2rem;
-        font-weight: 600;
-        color: var(--text-color);
-        margin: 0 0 1.5rem 0;
-        line-height: 1.2;
-      "
-      >
-        {notFound.title}
-      </h2>
+      <div class="annotation">
+        <span>ERR / 404</span>
+        <span>NODE NOT RESOLVED</span>
+      </div>
 
-      <p
-        style="
-        font-size: 1.125rem;
-        line-height: 1.6;
-        color: var(--text-color);
-        opacity: 0.8;
-        margin: 0 0 2rem 0;
-      "
-      >
-        {notFound.description}
-      </p>
+      <div class="content">
+        <div class="diagram" aria-hidden="true">
+          <svg viewBox="0 0 420 310" role="presentation">
+            <g class="edges">
+              <path d="M65 70 168 106 274 55 355 128"></path>
+              <path d="M168 106 128 224 246 245 355 128"></path>
+              <path d="M168 106 246 245"></path>
+            </g>
+            <g class="nodes">
+              <circle cx="65" cy="70" r="8"></circle>
+              <circle cx="168" cy="106" r="8"></circle>
+              <circle cx="274" cy="55" r="8"></circle>
+              <circle cx="355" cy="128" r="8"></circle>
+              <circle cx="128" cy="224" r="8"></circle>
+              <circle cx="246" cy="245" r="8"></circle>
+            </g>
+            <g class="missing">
+              <circle cx="274" cy="155" r="32"></circle>
+              <path d="M252 133 296 177M296 133l-44 44"></path>
+            </g>
+            <path class="measure" d="M40 284h340M40 278v12M380 278v12"></path>
+            <text x="168" y="303">UNREACHABLE STATE</text>
+          </svg>
+        </div>
 
-      <a
-        href="/"
-        style="
-          display: inline-block;
-          padding: 1rem 2rem;
-          background: var(--color-primary);
-          color: white;
-          text-decoration: none;
-          border-radius: 6px;
-          font-weight: 600;
-          transition: all 0.3s ease;
-        "
-        onmouseover="this.style.background='var(--color-primary-light)'"
-        onmouseout="this.style.background='var(--color-primary)'"
-      >
-        {notFound.homeCta}
-      </a>
+        <div class="copy">
+          <p class="code">{notFound.code}</p>
+          <h1>{notFound.title}</h1>
+          <p class="description">{notFound.description}</p>
+          <div class="actions">
+            <a class="primaryAction" href="/">{notFound.homeCta}</a>
+            <a class="secondaryAction" href="/research">Explore our research</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="titleBlock">
+        <span>EQ / SYSTEM MAP</span>
+        <span>STATUS: DISCONNECTED</span>
+        <span>REV 01</span>
+      </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .not-found {
+    --ink: #003b7e;
+    --line: rgba(0, 59, 126, 0.18);
+    min-height: calc(100vh - var(--navbar-height));
+    display: grid;
+    place-items: center;
+    padding: clamp(5rem, 10vw, 8rem) 1.5rem 4rem;
+    color: var(--ink);
+  }
+
+  .frame {
+    position: relative;
+    width: min(1080px, 100%);
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(rgba(0, 59, 126, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 59, 126, 0.035) 1px, transparent 1px), #fff;
+    background-size: 24px 24px;
+  }
+
+  .annotation,
+  .titleBlock,
+  .code,
+  .diagram text {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  .annotation,
+  .titleBlock {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+  }
+
+  .annotation {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .titleBlock {
+    border-top: 1px solid var(--line);
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+    padding: clamp(2rem, 6vw, 5rem);
+  }
+
+  .diagram svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .edges path,
+  .measure {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1;
+    opacity: 0.45;
+  }
+
+  .edges path {
+    stroke-dasharray: 5 5;
+  }
+
+  .nodes circle {
+    fill: #fff;
+    stroke: var(--ink);
+    stroke-width: 2;
+  }
+
+  .missing circle {
+    fill: #fff;
+    stroke: #4ab3f4;
+    stroke-width: 2;
+    stroke-dasharray: 4 4;
+  }
+
+  .missing path {
+    stroke: var(--ink);
+    stroke-width: 3;
+  }
+
+  .diagram text {
+    fill: var(--ink);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  .code {
+    margin-bottom: 1rem;
+    color: #4ab3f4;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    max-width: 9ch;
+    margin: 0;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(3rem, 7vw, 5.75rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .description {
+    max-width: 33rem;
+    margin: 1.5rem 0 2rem;
+    color: rgba(0, 31, 69, 0.75);
+    font-size: 1.08rem;
+    line-height: 1.65;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--ink);
+    font-weight: 650;
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      background 160ms ease;
+  }
+
+  .primaryAction {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .secondaryAction {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover {
+    color: inherit;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(0, 59, 126, 0.14);
+  }
+
+  .primaryAction:hover {
+    color: #fff;
+  }
+
+  .registration {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    translate: -50% -50%;
+    background:
+      linear-gradient(var(--ink), var(--ink)) center / 100% 1px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat;
+  }
+
+  .registrationTop {
+    top: 0;
+  }
+
+  .registrationBottom {
+    top: 100%;
+  }
+
+  @media (max-width: 760px) {
+    .content {
+      grid-template-columns: 1fr;
+    }
+
+    .diagram {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .titleBlock span:nth-child(2) {
+      display: none;
+    }
+  }
+</style>
