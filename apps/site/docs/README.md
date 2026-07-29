@@ -31,7 +31,8 @@ The shared authoring templates (ADR, task, lesson, handoff) live once at the rep
 - The audits: [`audits/2026-07-28-audit-0001-inherited-recon.md`](audits/2026-07-28-audit-0001-inherited-recon.md)
   (recon) and [`audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
   (code-hygiene deep dive).
-- The cleanup gate before feature work: [`tasks/open/task-0001-pristine-baseline.md`](tasks/open/task-0001-pristine-baseline.md) (baseline shipped 2026-07-28).
+- The completed cleanup baseline:
+  [`tasks/done/task-0001-pristine-baseline.md`](tasks/done/task-0001-pristine-baseline.md).
 
 ## Decision records (ADRs)
 
@@ -43,6 +44,7 @@ The shared authoring templates (ADR, task, lesson, handoff) live once at the rep
 | [0004](adr/0004-i18n-readiness.md)                    | i18n readiness now, i18n runtime deferred                  |
 | [0005](adr/0005-dependency-upgrade-2026-07.md)        | Dependency and toolchain upgrade (2026-07)                 |
 | [0006](adr/0006-tailwind-design-system.md)            | Tailwind v4 as the design-system foundation                |
+| [0007](adr/0007-visual-essay-system.md)               | Shared visual-essay shell with page-specific models        |
 
 The monorepo-topology decision that produced `apps/site` is repo-wide:
 [`../../../docs/adr/0001-monorepo-topology.md`](../../../docs/adr/0001-monorepo-topology.md).

@@ -15,7 +15,8 @@
 > CSS-Modules-plus-stylelint plan described in the Stage-1 bullets below. Read those bullets for _what_
 > Stage 1 delivers (tokens defined once, shared `.u-container`/`.u-section` and `SectionHeader`/`PageHero`/
 > `Card` primitives, a lint gate); the _how_ is now Tailwind `@theme` + `@utility` + components, per
-> ADR-0006. The `/brand` page (task-0007) already dogfoods the token layer.
+> ADR-0006. The completed `/brand` page
+> ([task-0007](../done/task-0007-brand-page.md)) is the rendered identity reference.
 
 ## Goal
 
@@ -56,14 +57,22 @@ then builds it from the shared tokens/components (extending them where the redes
 Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands and we start each):
 
 - [ ] **Explainer redesign** — the hardest drift (off-palette red/green, hard-coded greys, non-standard
-      headings). Decide its visual treatment and rebuild on the system.
+      headings). Decide its visual treatment and rebuild on the system. - Prototype added at `/explainer/prototype` on 2026-07-28. It preserves `/explainer`, applies the
+      measured identity, and evolves one persistent D3-solved world network through all seven thesis
+      states. Incentive, equilibrium, uncertainty, and research-field layers enter around the same agents
+      rather than replacing them. Two earlier renderers remain parked as unlinked drafts.
+      The reusable shell and page-specific renderer boundary are proposed in
+      [ADR-0007](../../adr/0007-visual-essay-system.md). Owner review is required before any migration to
+      the canonical route.
 - [ ] **Roadmap redesign** — 90% aligned; decide whether it adopts the section-header underline motif and the
       canonical hero, and polish.
 - [ ] **Lab redesign** — decide whether `LabHero` conforms to or intentionally varies the interior hero; align
       the badge/leaderboard/scenario styling.
 - [ ] **Home / about / products** — currently the reference; a lighter pass to confirm they _are_ the standard
       (and fold any improvements back into the tokens/components).
-- [ ] **Research, 404** — bring onto the system.
+- [ ] **Research** — bring onto the system.
+- [x] **404** — rebuilt on the measured visual identity with graph notation, sharp actions, and responsive
+      scoped styling (2026-07-29).
 
 Open cross-cutting design decisions that Stage 2 will need to settle (per page or globally):
 

@@ -31,8 +31,9 @@ docs/
 - **ADR:** [`adr/0001-monorepo-topology.md`](adr/0001-monorepo-topology.md) — the pnpm-workspace
   decomposition into `apps/site`, `apps/playground`, and `packages/`; and
   [`adr/0002-per-app-docs-layout.md`](adr/0002-per-app-docs-layout.md) — why docs are scoped per app.
-- **Task:** [`tasks/done/task-0001-repo-structure.md`](tasks/done/task-0001-repo-structure.md) — the
-  one-time migration into the workspace layout.
+- **Tasks:** [`tasks/done/task-0001-repo-structure.md`](tasks/done/task-0001-repo-structure.md) records
+  the workspace migration; [`tasks/open/task-0002-standalone-lorenz-app.md`](tasks/open/task-0002-standalone-lorenz-app.md)
+  scopes the standalone interactive-visual workbench.
 - **Lessons:** [`lessons/`](lessons/README.md) — e.g.
   [`lessons/2026-07-28-shipping-a-monorepo-migration.md`](lessons/2026-07-28-shipping-a-monorepo-migration.md).
 - **Templates:** [`templates/`](templates/) — [`adr.md`](templates/adr.md), [`task.md`](templates/task.md),

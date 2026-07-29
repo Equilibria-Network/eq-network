@@ -32,7 +32,7 @@ placeholder), the deploy workflow is path-aware, and `pnpm build` works from the
 
 ## Relationship to the other cleanup
 
-- [task-0001](../../../apps/site/docs/tasks/open/task-0001-pristine-baseline.md) (bugs, hygiene, dead code) and [task-0002](../../../apps/site/docs/tasks/open/task-0002-visual-language-alignment.md) (design system + per-page redesign) execute **inside**
+- [task-0001](../../../apps/site/docs/tasks/done/task-0001-pristine-baseline.md) (bugs, hygiene, dead code) and [task-0002](../../../apps/site/docs/tasks/open/task-0002-visual-language-alignment.md) (design system + per-page redesign) execute **inside**
   this layout. Sequence: this reorg → then those.
 - Do the structural moves and any interpretive edits (dead-code deletion, decomposition) as **separate
   commits**, so the low-risk moves are banked even if an interpretive pass needs rework.
