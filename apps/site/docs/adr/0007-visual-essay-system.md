@@ -1,6 +1,6 @@
 # ADR-0007: Build visual essays from a shared shell and page-specific models
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-07-28
 
 ## Context
@@ -14,7 +14,7 @@ closing links, and responsive behavior were coupled to one page. Copying that co
 essay expensive to maintain. Making one universal visualization API would create the opposite problem:
 graphs, agent simulations, and interactive proofs do not share a useful domain model.
 
-## Proposed decision
+## Decision
 
 Use a two-part visual-essay architecture:
 

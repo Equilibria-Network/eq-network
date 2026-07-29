@@ -23,6 +23,7 @@ The `audit-*` files below are the granular details for individual sub-items of t
 | ---------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------- |
 | [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Design system | UI/UX on a shared, enforceable design system (see umbrella above) |
 | [task-0008-legal-and-about](open/task-0008-legal-and-about.md)                     | Owner request | Publish verified legal identity and strengthen the About page     |
+| [task-0009-page-prototype-programme](open/task-0009-page-prototype-programme.md)   | Owner request | Prototype and migrate every public page onto shared contracts     |
 
 ## Deferred (feature work — not part of the current cleanup phase)
 

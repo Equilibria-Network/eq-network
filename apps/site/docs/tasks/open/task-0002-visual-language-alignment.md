@@ -6,8 +6,9 @@
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
   [`../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](../../audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
 - Status: in progress — foundation is **Tailwind v4** ([ADR-0006](../../adr/0006-tailwind-design-system.md),
-  wired 2026-07-28); Stage 1 (migrate tokens/primitives onto it) not yet started. Per-page approach still
-  needs owner sign-off.
+  wired 2026-07-28); `PageHeader`, `PageSidebar`, and `VisualEssay` now establish initial contracts.
+  Prototype-first per-page migration was owner-approved 2026-07-29 and is sequenced in
+  [`task-0009`](task-0009-page-prototype-programme.md).
 - Owner: unassigned
 - Priority: soon (large)
 
@@ -62,8 +63,8 @@ Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands
       states. Incentive, equilibrium, uncertainty, and research-field layers enter around the same agents
       rather than replacing them. Two earlier renderers remain parked as unlinked drafts.
       The reusable shell and page-specific renderer boundary are proposed in
-      [ADR-0007](../../adr/0007-visual-essay-system.md). Owner review is required before any migration to
-      the canonical route.
+      [ADR-0007](../../adr/0007-visual-essay-system.md). Owner approved it and the prototype was promoted to
+      `/explainer` on 2026-07-29.
 - [ ] **Roadmap redesign** — 90% aligned; decide whether it adopts the section-header underline motif and the
       canonical hero, and polish.
 - [ ] **Lab redesign** — decide whether `LabHero` conforms to or intentionally varies the interior hero; align

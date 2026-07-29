@@ -9,8 +9,9 @@ project docs are in [`docs/`](docs/README.md).
 
 ## What this repo is
 
-A **static** Astro 4 + React website (no backend, no database) published to GitHub Pages at
-`eq-network.org`. Page copy and data live as typed files in `src/content/`; components render them.
+A **static** Astro 7 + React website (no backend, no database) published to GitHub Pages at
+`eq-network.org`. Page copy and data live as typed files in `apps/site/src/content/`; components render
+them.
 
 ## Do not commit these (they are gitignored — do not force-add them)
 
@@ -39,3 +40,15 @@ The site is public. The only runtime secret is the Formspree endpoint, injected 
 - Do not add a backend, analytics, a new third-party script/CDN, or a new data-collection surface without
   raising it — these are privacy/architecture decisions recorded in `docs/adr/`.
 - Do not hand-edit `dist/`; change the source and rebuild.
+
+## Page redesigns
+
+- Build redesigns at `/<page>/prototype` (`/prototype` for Home), set them `noindex`, and keep the
+  canonical route unchanged until owner approval.
+- Canonical and prototype routes must consume the same typed content. Do not fork page copy to make a
+  prototype.
+- Standard editorial pages reuse `PageHeader` and, when useful, `PageSidebar`. Scrollytelling pages reuse
+  `VisualEssay`; their renderer and domain model stay page-specific.
+- Keep local media paths in typed content or an explicit asset manifest, not scattered through components.
+- Follow [`apps/site/docs/tasks/open/task-0009-page-prototype-programme.md`](apps/site/docs/tasks/open/task-0009-page-prototype-programme.md)
+  for promotion gates and sequence.
