@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   forceCenter,
   forceCollide,
@@ -132,52 +132,6 @@ function layoutFor(state: ThesisState) {
   return GOVERNED;
 }
 
-function easeOutCubic(value: number) {
-  return 1 - Math.pow(1 - value, 3);
-}
-
-function useAnimatedLayout(target: Map<number, Point>) {
-  const [current, setCurrent] = useState(target);
-  const currentRef = useRef(target);
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
-      currentRef.current = target;
-      setCurrent(target);
-      return;
-    }
-
-    const start = new Map(currentRef.current);
-    const startedAt = performance.now();
-    const duration = 850;
-    let frame = 0;
-
-    const animate = (now: number) => {
-      const progress = Math.min((now - startedAt) / duration, 1);
-      const eased = easeOutCubic(progress);
-      const next = new Map<number, Point>();
-
-      for (const [id, destination] of target) {
-        const origin = start.get(id) ?? destination;
-        next.set(id, {
-          x: origin.x + (destination.x - origin.x) * eased,
-          y: origin.y + (destination.y - origin.y) * eased,
-        });
-      }
-
-      currentRef.current = next;
-      setCurrent(next);
-      if (progress < 1) frame = window.requestAnimationFrame(animate);
-    };
-
-    frame = window.requestAnimationFrame(animate);
-    return () => window.cancelAnimationFrame(frame);
-  }, [target]);
-
-  return current;
-}
-
 function WorldMark({
   node,
   point,
@@ -289,20 +243,19 @@ export default function ThesisWorldModel({
 }: VisualEssayRendererProps<ThesisState>) {
   const [phase, setPhase] = useState(0);
   const [selectedNode, setSelectedNode] = useState<number | null>(null);
-  const targetPositions = useMemo(() => layoutFor(activeState), [activeState]);
-  const positions = useAnimatedLayout(targetPositions);
+  const positions = layoutFor(activeState);
   const isResearch = activeState === 'knowledge' || activeState === 'silos';
   const isBridge = activeState === 'bridge';
   const isPolarized = activeState === 'equilibria' || activeState === 'uncertainty';
   const labels = explainerContent.prototype.storyLabels;
 
   useEffect(() => {
-    setPhase(0);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced || (activeState !== 'defection' && activeState !== 'bridge')) {
       setPhase(5);
       return;
     }
+    setPhase(1);
     const timer = window.setInterval(() => {
       setPhase((current) => {
         if (current >= 5) {
@@ -311,7 +264,7 @@ export default function ThesisWorldModel({
         }
         return current + 1;
       });
-    }, 380);
+    }, 120);
     return () => window.clearInterval(timer);
   }, [activeState]);
 

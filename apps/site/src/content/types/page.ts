@@ -16,8 +16,8 @@ export interface PageSeo {
 export interface PageHeaderContent {
   eyebrow: string;
   title: string;
-  /** The page's concise "in short" claim. */
-  claim?: string;
+  /** A concise subtitle beneath the visible page title. */
+  subtitle?: string;
   /** One or two sentences that summarize the page's argument or takeaway. */
   summary?: string;
   prompt?: string;

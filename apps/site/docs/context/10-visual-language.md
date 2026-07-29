@@ -67,7 +67,7 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 ## When you add or edit a page — checklist
 
 - [ ] Standard editorial pages start with `PageHeader.astro`; use `PageHeaderContent` (eyebrow, title,
-      concise claim, one- or two-sentence summary, and optional prompt) instead of creating another
+      subtitle, one- or two-sentence summary, and optional prompt) instead of creating another
       page-specific hero.
 - [ ] Full-viewport introductions use `PageHeader` with `variant="landing"`. The route composes that static
       header before an interactive island; visual essays do not copy their own version of the same chrome.

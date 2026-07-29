@@ -60,12 +60,12 @@
   stroke-opacity: 0.34;
   vector-effect: non-scaling-stroke;
   transition:
-    x1 850ms cubic-bezier(0.22, 1, 0.36, 1),
-    y1 850ms cubic-bezier(0.22, 1, 0.36, 1),
-    x2 850ms cubic-bezier(0.22, 1, 0.36, 1),
-    y2 850ms cubic-bezier(0.22, 1, 0.36, 1),
-    stroke 400ms ease,
-    stroke-opacity 400ms ease;
+    x1 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    y1 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    x2 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    y2 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 220ms ease,
+    stroke-opacity 220ms ease;
 }
 
 .weakEdge {
@@ -92,10 +92,10 @@
   cursor: pointer;
   outline: none;
   transition:
-    transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
-    fill 350ms ease,
-    stroke 350ms ease,
-    opacity 250ms ease;
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    fill 220ms ease,
+    stroke 220ms ease,
+    opacity 180ms ease;
 }
 
 .node path {

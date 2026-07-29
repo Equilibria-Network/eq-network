@@ -22,7 +22,7 @@ full-viewport landing header. Content below the header remains free to vary.
 - `landing` fills the viewport below the navigation bar and presents the title beside supporting copy,
   prompt, optional visual, and metadata.
 
-Both variants consume the same `PageHeaderContent` properties: eyebrow, title, concise claim, short
+Both variants consume the same `PageHeaderContent` properties: eyebrow, title, subtitle, short
 summary, and optional prompt. Visual essays no longer have to render their own hero; `VisualEssay`
 accepts `showHeader={false}` when its route composes the shared landing header.
 

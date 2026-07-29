@@ -17,33 +17,30 @@ const {
   eyebrow,
   title,
   variant = 'editorial',
-  claim,
+  subtitle,
   summary,
   prompt,
   image,
   imageAlt = '',
   meta = [],
 } = Astro.props;
+
+const hasAside = Boolean(image || meta.length > 0 || Astro.slots.has('visual'));
 ---
 
 <header class:list={['pageHeader', variant]}>
-  <div class="inner">
+  <div class:list={['inner', { hasAside }]}>
     <div class="copy">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
-      {claim && <p class="claim">{claim}</p>}
-      {variant === 'editorial' && summary && <p class="summary">{summary}</p>}
-      {variant === 'editorial' && prompt && <p class="prompt">{prompt} ↓</p>}
+      {subtitle && <p class="subtitle">{subtitle}</p>}
+      {summary && <p class="summary">{summary}</p>}
+      {prompt && <p class="prompt">{prompt} ↓</p>}
     </div>
 
     {
-      (image ||
-        meta.length > 0 ||
-        Astro.slots.has('visual') ||
-        (variant === 'landing' && (summary || prompt))) && (
+      hasAside && (
         <div class="aside">
-          {variant === 'landing' && summary && <p class="summary">{summary}</p>}
-          {variant === 'landing' && prompt && <p class="prompt">{prompt} ↓</p>}
           {Astro.slots.has('visual') ? (
             <slot name="visual" />
           ) : (
@@ -104,6 +101,10 @@ const {
     padding-block: clamp(3rem, 7vh, 6rem);
   }
 
+  .inner:not(.hasAside) .copy {
+    grid-column: 1 / -1;
+  }
+
   .copy {
     max-width: 820px;
   }
@@ -140,16 +141,6 @@ const {
     max-width: 1000px;
   }
 
-  .landing .aside {
-    justify-items: stretch;
-    border-left: 1px solid var(--header-line);
-    padding-left: 1.5rem;
-  }
-
-  .landing .summary {
-    margin-top: 0;
-  }
-
   .prompt {
     margin-top: 2rem;
     color: var(--header-ink);
@@ -159,7 +150,7 @@ const {
     text-transform: uppercase;
   }
 
-  .claim {
+  .subtitle {
     margin-top: 1.25rem;
     color: var(--header-ink);
     font-family: 'Space Grotesk', system-ui, sans-serif;

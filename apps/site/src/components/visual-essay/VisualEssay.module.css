@@ -6,7 +6,7 @@
   --essay-line-strong: color-mix(in srgb, var(--essay-ink) 42%, transparent);
   --essay-hatch: color-mix(in srgb, var(--essay-ink) 7%, transparent);
   position: relative;
-  overflow: clip;
+  overflow-x: clip;
   background: var(--essay-paper) !important;
   color: var(--essay-ink);
   font-family: system-ui, sans-serif;
@@ -218,9 +218,19 @@
 
 .stickyHeading {
   position: sticky;
-  top: calc(var(--navbar-height) + 1rem);
+  top: var(--navbar-height);
   z-index: 2;
-  padding: 1rem 0 1.5rem;
+  padding: 0.75rem 0 1.25rem;
+  background: var(--essay-paper);
+}
+
+.stickyHeading::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: var(--navbar-height);
   background: var(--essay-paper);
 }
 
@@ -241,7 +251,7 @@
 .stepMeta {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.25rem;
   font-size: 0.63rem;
   opacity: 0.65;
 }

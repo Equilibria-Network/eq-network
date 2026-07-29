@@ -20,21 +20,28 @@ export default function VisualEssay<State extends string>({
       setActiveIndex(Math.max(0, Math.min(document.steps.length - 1, requested)));
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        const index = Number(visible.target.getAttribute('data-step-index'));
-        if (Number.isFinite(index)) setActiveIndex(index);
-      },
-      { rootMargin: '-28% 0px -52% 0px', threshold: [0, 0.2, 0.55] }
-    );
+    let frame = 0;
+    const updateFromScroll = () => {
+      frame = 0;
+      const activationLine = window.innerHeight * 0.38;
+      let nextIndex = 0;
+      stepRefs.current.forEach((node, index) => {
+        if (node && node.getBoundingClientRect().top <= activationLine) nextIndex = index;
+      });
+      setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateFromScroll);
+    };
 
-    const refs = stepRefs.current;
-    refs.forEach((node) => node && observer.observe(node));
-    return () => refs.forEach((node) => node && observer.unobserve(node));
+    updateFromScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [document.steps.length]);
 
   const setStepRef = useCallback(

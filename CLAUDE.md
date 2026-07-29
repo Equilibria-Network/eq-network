@@ -51,7 +51,7 @@ The site is public. The only runtime secret is the Formspree endpoint, injected 
   page, extract a typed contract and shared component instead of copying markup; customize instances
   through bounded props, content, or slots. This reuse is what keeps the visual identity coherent.
 - Every redesigned page separates search/social metadata (`PageSeo`) from its human-facing header
-  (`PageHeaderContent`: eyebrow, title, concise claim, and one- or two-sentence summary).
+  (`PageHeaderContent`: eyebrow, title, subtitle, and one- or two-sentence summary).
 - Standard editorial pages reuse `PageHeader` and, when useful, `PageSidebar`. Full-viewport introductions
   use the `landing` header variant. Scrollytelling pages reuse `VisualEssay`; their renderer and domain
   model stay page-specific.

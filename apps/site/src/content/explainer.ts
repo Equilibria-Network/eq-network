@@ -129,8 +129,8 @@ export const explainerContent: ExplainerContent = {
   },
   header: {
     eyebrow: 'Thesis / working model',
-    title: 'Cooperation is a property of the network.',
-    claim: 'In short: capable agents do not produce cooperation on their own.',
+    title: 'Our thesis.',
+    subtitle: 'Cooperation is a property of the network.',
     summary:
       'Cooperation depends on the incentives, institutions, and connections around them. Scroll through one network as it integrates, fragments, and reconnects.',
     prompt: 'Scroll to evolve the model',
