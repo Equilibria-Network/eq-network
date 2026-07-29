@@ -42,4 +42,5 @@ export interface VisualEssayRendererProps<State extends string> {
 export interface VisualEssayProps<State extends string> {
   document: VisualEssayDocument<State>;
   Visual: ComponentType<VisualEssayRendererProps<State>>;
+  showHeader?: boolean;
 }

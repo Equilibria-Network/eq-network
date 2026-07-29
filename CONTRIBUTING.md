@@ -129,6 +129,9 @@ document an already-shipped choice still start `Proposed` until the owner ratifi
 | 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                    | Accepted   |
 | 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)        | Accepted   |
 | 2026-07-28     | Tailwind v4 as the design-system foundation                   | [ADR-0006](apps/site/docs/adr/0006-tailwind-design-system.md)            | Accepted   |
+| 2026-07-29     | Visual essays use a shared shell and page-specific renderer   | [ADR-0007](apps/site/docs/adr/0007-visual-essay-system.md)               | Accepted   |
+| 2026-07-29     | Shared editorial and full-viewport page-header variants       | [ADR-0008](apps/site/docs/adr/0008-shared-page-header-variants.md)       | Accepted   |
+| 2026-07-29     | Separate page SEO metadata from human-facing header content   | [ADR-0009](apps/site/docs/adr/0009-page-content-and-seo-contracts.md)    | Accepted   |
 
 Dates are approximate and back-filled from repository history; the ADRs record what is known.
 

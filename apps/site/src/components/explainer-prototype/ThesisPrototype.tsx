@@ -19,11 +19,11 @@ const STATES: ThesisState[] = [
 const p = explainerContent.prototype;
 
 const thesisDocument: VisualEssayDocument<ThesisState> = {
-  eyebrow: p.eyebrow,
+  eyebrow: explainerContent.header.eyebrow,
   reference: 'EQ / TH–01',
-  title: p.title,
-  dek: p.dek,
-  scrollPrompt: p.scrollPrompt,
+  title: explainerContent.header.title,
+  dek: explainerContent.header.summary ?? '',
+  scrollPrompt: explainerContent.header.prompt ?? '',
   figureLabel: p.figureLabel,
   statusLabel: p.statusLabel,
   closingLabel: p.closingLabel,
@@ -36,6 +36,12 @@ const thesisDocument: VisualEssayDocument<ThesisState> = {
   closing: explainerContent.closing,
 };
 
-export default function ThesisPrototype() {
-  return <VisualEssay document={thesisDocument} Visual={ThesisWorldModel} />;
+interface ThesisPrototypeProps {
+  showHeader?: boolean;
+}
+
+export default function ThesisPrototype({ showHeader = true }: ThesisPrototypeProps) {
+  return (
+    <VisualEssay document={thesisDocument} Visual={ThesisWorldModel} showHeader={showHeader} />
+  );
 }

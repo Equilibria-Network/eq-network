@@ -1,34 +1,49 @@
 ---
+import type { PageHeaderContent } from '@content/types/page';
+
 export interface PageHeaderMeta {
   label: string;
   value: string;
 }
 
-interface Props {
-  eyebrow: string;
-  title: string;
-  subtitle?: string;
-  description?: string;
+interface Props extends PageHeaderContent {
+  variant?: 'editorial' | 'landing';
   image?: string;
   imageAlt?: string;
   meta?: PageHeaderMeta[];
 }
 
-const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] } = Astro.props;
+const {
+  eyebrow,
+  title,
+  variant = 'editorial',
+  claim,
+  summary,
+  prompt,
+  image,
+  imageAlt = '',
+  meta = [],
+} = Astro.props;
 ---
 
-<header class="pageHeader">
+<header class:list={['pageHeader', variant]}>
   <div class="inner">
     <div class="copy">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
-      {subtitle && <p class="subtitle">{subtitle}</p>}
-      {description && <p class="description">{description}</p>}
+      {claim && <p class="claim">{claim}</p>}
+      {variant === 'editorial' && summary && <p class="summary">{summary}</p>}
+      {variant === 'editorial' && prompt && <p class="prompt">{prompt} ↓</p>}
     </div>
 
     {
-      (image || meta.length > 0 || Astro.slots.has('visual')) && (
+      (image ||
+        meta.length > 0 ||
+        Astro.slots.has('visual') ||
+        (variant === 'landing' && (summary || prompt))) && (
         <div class="aside">
+          {variant === 'landing' && summary && <p class="summary">{summary}</p>}
+          {variant === 'landing' && prompt && <p class="prompt">{prompt} ↓</p>}
           {Astro.slots.has('visual') ? (
             <slot name="visual" />
           ) : (
@@ -67,6 +82,10 @@ const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] }
       #fff;
   }
 
+  .pageHeader.landing {
+    min-height: calc(100svh - var(--navbar-height));
+  }
+
   .inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr);
@@ -75,6 +94,14 @@ const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] }
     width: min(1180px, 100%);
     margin-inline: auto;
     padding: clamp(2.5rem, 6vw, 5.5rem) 1.5rem;
+  }
+
+  .landing .inner {
+    min-height: calc(100svh - var(--navbar-height));
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.5fr);
+    align-items: center;
+    width: min(1500px, calc(100% - clamp(3rem, 6vw, 6rem)));
+    padding-block: clamp(3rem, 7vh, 6rem);
   }
 
   .copy {
@@ -103,7 +130,36 @@ const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] }
     letter-spacing: -0.06em;
   }
 
-  .subtitle {
+  .landing h1 {
+    max-width: 980px;
+    font-size: clamp(3.2rem, 7.3vw, 7.2rem);
+    font-weight: 500;
+  }
+
+  .landing .copy {
+    max-width: 1000px;
+  }
+
+  .landing .aside {
+    justify-items: stretch;
+    border-left: 1px solid var(--header-line);
+    padding-left: 1.5rem;
+  }
+
+  .landing .summary {
+    margin-top: 0;
+  }
+
+  .prompt {
+    margin-top: 2rem;
+    color: var(--header-ink);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .claim {
     margin-top: 1.25rem;
     color: var(--header-ink);
     font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -112,7 +168,7 @@ const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] }
     line-height: 1.35;
   }
 
-  .description {
+  .summary {
     max-width: 720px;
     margin-top: 1rem;
     font-size: 1.05rem;
@@ -165,6 +221,20 @@ const { eyebrow, title, subtitle, description, image, imageAlt = '', meta = [] }
     .inner {
       grid-template-columns: 1fr;
       align-items: start;
+    }
+
+    .landing .inner {
+      grid-template-columns: 1fr;
+      width: 100%;
+      padding-inline: 1.5rem;
+    }
+
+    .landing .aside {
+      display: grid;
+      border-top: 1px solid var(--header-line);
+      border-left: 0;
+      padding-top: 1.5rem;
+      padding-left: 0;
     }
 
     .aside {

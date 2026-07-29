@@ -47,8 +47,14 @@ The site is public. The only runtime secret is the Formspree endpoint, injected 
   canonical route unchanged until owner approval.
 - Canonical and prototype routes must consume the same typed content. Do not fork page copy to make a
   prototype.
-- Standard editorial pages reuse `PageHeader` and, when useful, `PageSidebar`. Scrollytelling pages reuse
-  `VisualEssay`; their renderer and domain model stay page-specific.
+- Reuse the shared data contracts and components already established. When a pattern gains a second real
+  page, extract a typed contract and shared component instead of copying markup; customize instances
+  through bounded props, content, or slots. This reuse is what keeps the visual identity coherent.
+- Every redesigned page separates search/social metadata (`PageSeo`) from its human-facing header
+  (`PageHeaderContent`: eyebrow, title, concise claim, and one- or two-sentence summary).
+- Standard editorial pages reuse `PageHeader` and, when useful, `PageSidebar`. Full-viewport introductions
+  use the `landing` header variant. Scrollytelling pages reuse `VisualEssay`; their renderer and domain
+  model stay page-specific.
 - Keep local media paths in typed content or an explicit asset manifest, not scattered through components.
 - Follow [`apps/site/docs/tasks/open/task-0009-page-prototype-programme.md`](apps/site/docs/tasks/open/task-0009-page-prototype-programme.md)
   for promotion gates and sequence.

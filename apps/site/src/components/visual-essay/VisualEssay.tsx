@@ -5,12 +5,15 @@ import styles from './VisualEssay.module.css';
 export default function VisualEssay<State extends string>({
   document,
   Visual,
+  showHeader = true,
 }: VisualEssayProps<State>) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHydrated, setIsHydrated] = useState(false);
   const stepRefs = useRef<(HTMLElement | null)[]>([]);
   const activeStep = document.steps[activeIndex];
 
   useEffect(() => {
+    setIsHydrated(true);
     const match = window.location.hash.match(/^#step-(\d+)$/);
     if (match) {
       const requested = Number(match[1]) - 1;
@@ -42,22 +45,24 @@ export default function VisualEssay<State extends string>({
   );
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${isHydrated ? styles.hydrated : ''}`}>
       <div className={styles.sideHatch} aria-hidden="true" />
 
-      <header className={styles.hero}>
-        <div className={styles.heroRule}>
-          <span>{document.eyebrow}</span>
-          <span>{document.reference}</span>
-        </div>
-        <div className={styles.heroGrid}>
-          <h1>{document.title}</h1>
-          <div className={styles.heroAside}>
-            <p>{document.dek}</p>
-            <span>{document.scrollPrompt} ↓</span>
+      {showHeader && (
+        <header className={styles.hero}>
+          <div className={styles.heroRule}>
+            <span>{document.eyebrow}</span>
+            <span>{document.reference}</span>
           </div>
-        </div>
-      </header>
+          <div className={styles.heroGrid}>
+            <h1>{document.title}</h1>
+            <div className={styles.heroAside}>
+              <p>{document.dek}</p>
+              <span>{document.scrollPrompt} ↓</span>
+            </div>
+          </div>
+        </header>
+      )}
 
       <div className={styles.story}>
         <div className={styles.figureColumn}>

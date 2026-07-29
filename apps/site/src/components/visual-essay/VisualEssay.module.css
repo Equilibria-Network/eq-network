@@ -204,11 +204,15 @@
 
 .step {
   min-height: 92vh;
-  opacity: 0.25;
+  opacity: 1;
   transition: opacity 360ms ease;
 }
 
-.stepActive {
+.hydrated .step {
+  opacity: 0.68;
+}
+
+.hydrated .stepActive {
   opacity: 1;
 }
 

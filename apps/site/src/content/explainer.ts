@@ -1,4 +1,5 @@
 // src/content/explainer.ts
+import type { PageHeaderContent, PageSeo } from './types/page';
 
 export interface ExplainerStep {
   id: number;
@@ -14,8 +15,8 @@ export interface ExplainerClosingLink {
 }
 
 export interface ExplainerContent {
-  pageTitle: string;
-  pageDescription: string;
+  seo: PageSeo;
+  header: PageHeaderContent;
   steps: ExplainerStep[];
   closing: {
     headline: string;
@@ -42,12 +43,8 @@ export interface ExplainerContent {
     bridgeLabel: string;
   };
   prototype: {
-    eyebrow: string;
-    title: string;
-    dek: string;
     figureLabel: string;
     figureTitle: string;
-    scrollPrompt: string;
     statusLabel: string;
     nodeCountLabel: string;
     edgeCountLabel: string;
@@ -123,9 +120,21 @@ export interface ExplainerContent {
 }
 
 export const explainerContent: ExplainerContent = {
-  pageTitle: 'Thesis — Equilibria Network',
-  pageDescription:
-    'Why compositional bridging between research fields matters for safe AI coordination.',
+  seo: {
+    title: 'Cooperation in AI Agent Networks | Equilibria Network',
+    description:
+      'See how incentives, institutions, and research connections shape cooperation in AI agent networks through a seven-state interactive model.',
+    type: 'website',
+    keywords: ['AI agent networks', 'collective intelligence', 'cooperative AI', 'AI governance'],
+  },
+  header: {
+    eyebrow: 'Thesis / working model',
+    title: 'Cooperation is a property of the network.',
+    claim: 'In short: capable agents do not produce cooperation on their own.',
+    summary:
+      'Cooperation depends on the incentives, institutions, and connections around them. Scroll through one network as it integrates, fragments, and reconnects.',
+    prompt: 'Scroll to evolve the model',
+  },
   steps: [
     {
       id: 1,
@@ -212,12 +221,8 @@ export const explainerContent: ExplainerContent = {
     bridgeLabel: 'Equilibria',
   },
   prototype: {
-    eyebrow: 'Thesis / working model',
-    title: 'Cooperation is a property of the network.',
-    dek: 'A seven-state model of the Equilibria thesis. Scroll through the argument to watch one system reorganize, fragment, and reconnect.',
     figureLabel: 'Fig. 01 / visual thesis model',
     figureTitle: 'Network state',
-    scrollPrompt: 'Scroll to evolve the model',
     statusLabel: 'State',
     nodeCountLabel: 'Nodes',
     edgeCountLabel: 'Ties',

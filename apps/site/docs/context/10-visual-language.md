@@ -66,8 +66,13 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 
 ## When you add or edit a page — checklist
 
-- [ ] Standard editorial pages start with `PageHeader.astro`; use its eyebrow, title, subtitle,
-      description, visual, and metadata contract instead of creating another page-specific hero.
+- [ ] Standard editorial pages start with `PageHeader.astro`; use `PageHeaderContent` (eyebrow, title,
+      concise claim, one- or two-sentence summary, and optional prompt) instead of creating another
+      page-specific hero.
+- [ ] Full-viewport introductions use `PageHeader` with `variant="landing"`. The route composes that static
+      header before an interactive island; visual essays do not copy their own version of the same chrome.
+- [ ] Keep `PageSeo` search/social copy separate from the visible header copy. Repeated page patterns use
+      a typed shared contract and component once there is a second real consumer.
 - [ ] Long editorial/reference pages use `PageSidebar.astro` for contents navigation. Immersive landing,
       simulation, and visual-story pages may deliberately omit it.
 - [ ] Wrap sections with the shared container/section utilities, not a new `.container` block.
