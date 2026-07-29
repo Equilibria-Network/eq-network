@@ -8,14 +8,33 @@ import '@styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
   title = 'Equilibria Network',
   description = 'Exploring the design space of collective intelligence through simulations and mathematical foundations.',
+  image = '/img/social-card.png',
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.site);
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Equilibria Network',
+  url: Astro.site?.toString(),
+  logo: new URL('/img/brand/marks/sym-concentric.svg', Astro.site).toString(),
+  description:
+    'A research organization designing new forms of collective intelligence and coordination.',
+  sameAs: [
+    'https://github.com/Equilibria-Network',
+    'https://www.linkedin.com/company/equilibria-network',
+    'https://substack.com/@equilibria1',
+  ],
+};
 ---
 
 <!doctype html>
@@ -25,20 +44,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#003B7E" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph (a raster og:image is a follow-up; no social card asset exists yet) -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="Equilibria Network" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Equilibria Network — designing new forms of collective intelligence"
+    />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
     <title>{title}</title>
   </head>
