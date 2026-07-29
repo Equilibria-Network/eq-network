@@ -20,6 +20,24 @@ recordings, never code. The backend white paper is a separate, decoupled track.
 
 ---
 
+## 2026-07-29 (evening) — Pivot: paper-first models; flow tab withdrawn
+
+Jonas's verdict on the shipped flow tab: unclear provenance, unjustified dials,
+illegible scene, apparent duplicate of the Economic tab. Root causes owned in
+the session log: visuals authored blind (never rendered before production), the
+second structure shipped as a sibling tab instead of behind the robustness
+switcher, dials without provenance notes.
+
+**Decision:** models get built **paper-first** from now on — a small rigorous
+working paper per model (assumptions enforced, pointable reference), starting
+with economics at Farmer-school rigor. WP1 plan approved: LaTeX from the start;
+implementation via the cilib register (`capital_economy`, a §7 fork of
+`io_economy` with an owned AI-capital stock and upkeep-before-profit) plus an
+`experiments/wp1_economy/` study; real literature sweep before drafting. The
+playground's Economic tab gets rebuilt against the paper later (robustness
+switcher); the flow tab is hidden from the scenario bar until then (module,
+engine, and ladder rungs stay in the page — ladder still green).
+
 ## 2026-07-29 (later) — Act I lands: the flow economy; the monorepo arrives
 
 **Act I spike** (`apps/site/prototypes/playground.html`, new sixth tab

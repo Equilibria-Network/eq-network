@@ -9,6 +9,12 @@ entries are dated rather than semver-tagged.
 First feature work on the model suite after the forest-walk session (see `DESIGN-LOG.md` for the
 design record and decisions).
 
+### Changed (same day, evening)
+
+- **"Economic · flows" tab withdrawn from the scenario bar** pending WP1 — the economics working
+  paper that will properly back the rebuilt Economic tab (paper-first pivot; see `DESIGN-LOG.md`).
+  The module, engine, and its validation rungs remain in the page.
+
 ### Added
 
 - **The vote (political tab):** every 20 ticks the median citizen opinion is enacted — full

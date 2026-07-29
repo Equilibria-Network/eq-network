@@ -4499,7 +4499,10 @@ Playground.register(CombinedModule);
 Playground.app(document.getElementById('playground-root'), [
   { id: 'commons', label: 'The Governed Commons' },
   { id: 'economy', label: 'Economic' },
-  { id: 'flow', label: 'Economic · flows', sketch: true },
+  // flow (the Leontief-lite sketch) is hidden pending WP1 — the economics
+  // working paper that will back the rebuilt Economic tab. Module, engine,
+  // and its ladder rungs stay live in the page; only the bar entry (and with
+  // it the #flow deep link) is withdrawn.
   { id: 'cultural', label: 'Cultural' },
   { id: 'political', label: 'Political' },
   { id: 'combined', label: 'Combined' },
