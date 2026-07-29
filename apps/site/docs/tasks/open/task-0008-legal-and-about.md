@@ -3,7 +3,8 @@
 - Provenance: task-0008 (owner request)
 - Links back to: [public company record](https://www.allabolag.se/foretag/equilibria-network/uppsala/f%C3%B6reningar/3OQ7T3KI63IGG),
   [`../done/task-0004-privacy-policy-page.md`](../done/task-0004-privacy-policy-page.md)
-- Status: in progress — `/legal` shipped 2026-07-29; About-page work remains
+- Status: in progress — `/legal` shipped and registration details added 2026-07-29; broader About-page
+  work remains
 - Owner: unassigned
 - Priority: soon
 
@@ -23,14 +24,15 @@ the organisation clearly, and the footer exposes both routes without duplicating
 
 ## Notes
 
-- `/legal` deliberately omits the organisation number because the supplied registry page presents an
-  automated browser challenge and the number could not be independently verified. Add it once the owner
-  confirms the exact value.
+- The owner supplied organisation number `802556-9552`, registration date, legal form, status,
+  registered municipality, and postal address on 2026-07-29. These now appear on `/legal` and in the
+  organisation structured data.
 - The Swedish E-commerce Act requires a service provider's name, establishment address, and email to be
   easily and permanently available where the Act applies, plus organisation number, VAT number, and
   supervisory-authority details where applicable. Before treating the notice as owner-approved, confirm
-  the organisation number, a publishable establishment/postal address, whether the association is
-  VAT-registered, and whether any activity requires supervisory authorisation.
+  whether the association is VAT-registered and whether any activity requires supervisory
+  authorisation. The pasted registry text listed VAT, F-tax, and employer registration as headings but
+  did not unambiguously show which registrations are active, so the site does not claim them.
 - Swedish nonprofit associations do not generally have to explain their internal governance structure
   on a website. Publish board/officer details only when there is a concrete transparency reason and the
   affected people have approved the disclosure.

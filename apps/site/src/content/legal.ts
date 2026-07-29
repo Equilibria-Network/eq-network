@@ -31,9 +31,16 @@ export const legalContent: LegalContent = {
   intro:
     'This page identifies the organisation responsible for eq-network.org and provides a durable contact point for formal enquiries.',
   details: [
-    { label: 'Legal name', value: 'Equilibria Network' },
+    { label: 'Legal name', value: 'EQUILIBRIA NETWORK' },
+    { label: 'Organisation number', value: '802556-9552' },
     { label: 'Legal form', value: 'Swedish nonprofit association' },
-    { label: 'Established in', value: 'Uppsala, Sweden' },
+    { label: 'Registration date', value: '12 June 2026' },
+    { label: 'Registered municipality', value: 'Uppsala' },
+    { label: 'Status', value: 'Registered' },
+    {
+      label: 'Postal address',
+      value: 'c/o Jonas Hallgren, Vildrosgatan 15, 753 24 Uppsala, Sweden',
+    },
     { label: 'Website', value: 'eq-network.org' },
   ],
   sections: [

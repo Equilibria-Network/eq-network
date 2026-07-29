@@ -25,10 +25,20 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Equilibria Network',
+  legalName: 'EQUILIBRIA NETWORK',
+  identifier: '802556-9552',
+  foundingDate: '2026-06-12',
   url: Astro.site?.toString(),
   logo: new URL('/img/brand/marks/sym-concentric.svg', Astro.site).toString(),
   description:
     'A research organization designing new forms of collective intelligence and coordination.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'c/o Jonas Hallgren, Vildrosgatan 15',
+    postalCode: '753 24',
+    addressLocality: 'Uppsala',
+    addressCountry: 'SE',
+  },
   sameAs: [
     'https://github.com/Equilibria-Network',
     'https://www.linkedin.com/company/equilibria-network',

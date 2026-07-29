@@ -57,26 +57,26 @@ export const privacyContent: PrivacyContent = {
   title: 'Privacy Policy',
   lastUpdated: '29 July 2026',
   intro: [
-    'Equilibria Network operates eq-network.org and is the controller for personal data submitted through this site. This policy explains what data travels where, why it is processed, and what you can do to reduce what you reveal.',
-    'The site is static. We set no first-party cookies, run no analytics or advertising, and load no third-party tracking scripts. Hosting still exposes ordinary request metadata to GitHub Pages, and the contact form sends the details you choose to provide to Formspree.',
+    'We built this site to learn from, not to learn about you. There are no accounts, analytics, ad trackers, or cookies.',
+    'Two outside services still handle some information: GitHub serves the pages, and Formspree delivers messages from the contact form. The useful version is below; open the details only if you want them.',
   ],
   commitment: {
-    title: 'Our minimisation commitment',
-    body: 'Privacy is not delegated to a policy document. We try to remove collection at the system level before asking visitors to manage it themselves.',
+    title: 'What we do—and do not do',
+    body: 'Our first privacy control is simply not collecting the data. That is much more useful than asking you to click through a banner.',
     principles: [
       'No analytics, advertising pixels, behavioural profiles, or cross-site tracking.',
       'No account system and no database of website visitors.',
       'Only three contact fields: name, email address, and message.',
       'No sale, rental, or advertising use of contact data.',
-      'A planned move from Formspree to an EU-resident form handler.',
+      'We plan to replace Formspree with an EU-resident form handler.',
     ],
   },
   sections: [
     {
-      heading: 'What reaches our service providers',
+      heading: 'The only services involved',
       paragraphs: [
-        'A normal web request necessarily reveals some technical metadata to the host. Submitting the contact form reveals additional information to the form processor. The table separates what we control, what a processor receives, and practical steps you can take.',
-        'A VPN or privacy tool changes which intermediary you trust; it does not guarantee anonymity. Do not include sensitive or unnecessary personal information in a contact message.',
+        'Opening a website always tells its host something about the connection. Sending us a message also gives the form service whatever you type. Those are the only two data paths on this site.',
+        'Select a service to see exactly what it may receive, what we do about it, and what you can do if you want to reveal less.',
       ],
       processors: [
         {
@@ -153,39 +153,39 @@ export const privacyContent: PrivacyContent = {
       ],
     },
     {
-      heading: 'Purpose and lawful basis',
+      heading: 'Why we use it',
       paragraphs: [
-        'We use contact-form details only to receive, assess, and respond to your enquiry. Our lawful basis is legitimate interests: operating an organisational contact channel and replying to people who choose to contact us. We balance that interest by collecting few fields, using the data only for correspondence, and honouring objections and deletion requests where the law allows.',
-        'We do not use contact submissions for automated decisions, profiling, advertising, or an unrelated mailing list.',
+        'If you write to us, we use your message and reply address to read it and respond. That is it. We rely on legitimate interests to run this basic contact channel.',
+        'Your message does not put you on a mailing list. We do not profile you, advertise to you, or make automated decisions about you.',
       ],
     },
     {
-      heading: 'International transfers',
+      heading: 'Where it goes',
       paragraphs: [
-        'GitHub and Formspree are US-based providers, so personal data may be processed outside the European Economic Area. Their published safeguards include European Commission Standard Contractual Clauses; GitHub also publishes participation in the EU–US Data Privacy Framework.',
-        'These safeguards reduce legal risk but do not make a US transfer identical to EU-only processing. Moving contact-form delivery to an EU-resident provider is planned.',
+        'GitHub and Formspree are US-based, so some data may be processed outside the European Economic Area. Both publish contractual safeguards for European data transfers, and GitHub also publishes participation in the EU–US Data Privacy Framework.',
+        'Paperwork is not the same thing as EU-only processing. We therefore keep collection small and plan to move the contact form to an EU-resident provider.',
       ],
     },
     {
-      heading: 'Retention and deletion',
+      heading: 'How long we keep it',
       paragraphs: [
-        'We keep correspondence only while it remains useful for handling the enquiry, maintaining the relationship, or meeting a legal obligation. We periodically remove messages that no longer serve those purposes.',
+        'We keep correspondence while it is useful for the conversation, an ongoing relationship, or a legal obligation. We remove messages that no longer have a reason to be there.',
         'Formspree may retain submissions in its dashboard and backups under its own service controls. Until a precise account-level deletion schedule has been confirmed, we do not promise a fixed number of days. You may ask us to delete your submission and we will remove the copies under our control and initiate any processor-side deletion available to us.',
         'GitHub controls retention of its security logs. GitHub states that retention depends on the collection purpose and legal obligations.',
       ],
     },
     {
-      heading: 'Cookies, local storage, and tracking',
+      heading: 'Cookies and tracking',
       paragraphs: [
-        'Equilibria Network sets no cookies or local-storage identifiers and runs no analytics, advertising, session replay, or fingerprinting code.',
+        'There is no cookie banner because we do not set cookies. We also do not use local-storage identifiers, analytics, advertising, session replay, or fingerprinting code.',
         'Links to external websites are separate services with their own privacy practices. Our no-referrer policy is intended to avoid sending those sites the address of the Equilibria page you came from.',
       ],
     },
     {
       heading: 'Your rights',
       paragraphs: [
-        'Depending on the circumstances, GDPR gives you rights to information, access, correction, deletion, restriction, objection, and data portability. You may also withdraw consent where a processing activity actually relies on consent. Some rights have legal limits.',
-        'Contact us using the details below. We may need enough information to verify that the request concerns you. You can also complain to Sweden’s data-protection authority, Integritetsskyddsmyndigheten (IMY).',
+        'You can ask what we hold about you, ask us to correct or delete it, restrict how we use it, or object. GDPR rights depend on the circumstances and sometimes have legal limits.',
+        'Email us below. We may need enough information to confirm the request is really yours. You can also complain to Sweden’s data-protection authority, IMY.',
       ],
       links: [
         {
@@ -195,9 +195,9 @@ export const privacyContent: PrivacyContent = {
       ],
     },
     {
-      heading: 'Changes to this policy',
+      heading: 'If this changes',
       paragraphs: [
-        'We update this page when processors, collection, purposes, or legal responsibilities change. The date at the top identifies the current version.',
+        'If we add a service, collect something new, or change why data is used, we will update this page. The date at the top tells you which version you are reading.',
       ],
     },
   ],
