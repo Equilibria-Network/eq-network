@@ -45,4 +45,6 @@ the organisation clearly, and the footer exposes both routes without duplicating
   page. Apply data minimisation; a company directory listing is not automatic permission to republish every
   personal detail.
 - Reconcile the controller identity in the privacy policy once the legal wording is owner-approved.
+- The broader About visual redesign and prototype are scoped in
+  [`../deferred/task-0010-about-products-roadmap-redesigns.md`](../deferred/task-0010-about-products-roadmap-redesigns.md).
 - This is an informational page, not a substitute for legal review.

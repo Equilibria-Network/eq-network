@@ -56,11 +56,15 @@ unverified string paths or client-only rendering.
 
 These can proceed independently after P0:
 
+Implementation detail and acceptance criteria for this batch are tracked in
+[`../deferred/task-0010-about-products-roadmap-redesigns.md`](../deferred/task-0010-about-products-roadmap-redesigns.md).
+
 1. **About** — `/about/prototype`; finish task-0008, clarify the organisation, and prove content sections,
    people, partners, and legal facts can share contracts.
 2. **Products** — `/products/prototype`; extract repeated product-section/card structure and media fields.
 3. **Roadmap** — `/roadmap/prototype`; reconcile phase data, sticky navigation, status chips, and shared
-   sidebar/header behavior.
+   sidebar/header behavior. Preserve the existing bottom `ResearchGraph` unchanged; redesigning it is a
+   separate future task.
 
 Promote the best shared primitives from these three before starting the complex pages.
 

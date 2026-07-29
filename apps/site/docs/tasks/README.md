@@ -27,11 +27,12 @@ The `audit-*` files below are the granular details for individual sub-items of t
 
 ## Deferred (feature work — not part of the current cleanup phase)
 
-| Task                                                                                   | From           | Summary                                                                                               |
-| -------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                     | Privacy stance | EU-resident contact-form handler — a future enhancement (Formspree ships today; not a removal)        |
-| [task-0005-visual-asset-regeneration](deferred/task-0005-visual-asset-regeneration.md) | Owner idea     | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
-| [task-0006-i18n](deferred/task-0006-i18n.md)                                           | ADR-0004       | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
+| Task                                                                                                 | From           | Summary                                                                                               |
+| ---------------------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
+| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                                   | Privacy stance | EU-resident contact-form handler — a future enhancement (Formspree ships today; not a removal)        |
+| [task-0005-visual-asset-regeneration](deferred/task-0005-visual-asset-regeneration.md)               | Owner idea     | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
+| [task-0006-i18n](deferred/task-0006-i18n.md)                                                         | ADR-0004       | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
+| [task-0010-about-products-roadmap-redesigns](deferred/task-0010-about-products-roadmap-redesigns.md) | Owner request  | Prototype the About, Products, and Roadmap redesigns; preserve Roadmap's existing bottom graph        |
 
 ## Done
 
