@@ -5,12 +5,20 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import '@fontsource/ibm-plex-mono/400.css';
 
-const { title, lastUpdated, intro, sections, contact } = privacyContent;
+const { title, lastUpdated, intro, commitment, sections, privacyTools, contact } = privacyContent;
 const sectionId = (heading: string) =>
   heading
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
+const numberedSections = [
+  ...sections.map((section) => ({
+    heading: section.heading,
+    href: `#${sectionId(section.heading)}`,
+  })),
+  { heading: 'Privacy tools', href: '#privacy-tools' },
+  { heading: contact.heading, href: '#contact' },
+];
 ---
 
 <Layout
@@ -35,21 +43,15 @@ const sectionId = (heading: string) =>
           <p>Contents</p>
           <ol>
             {
-              sections.map((section, index) => (
+              numberedSections.map((section, index) => (
                 <li>
-                  <a href={`#${sectionId(section.heading)}`}>
+                  <a href={section.href}>
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     {section.heading}
                   </a>
                 </li>
               ))
             }
-            <li>
-              <a href="#contact">
-                <span>{String(sections.length + 1).padStart(2, '0')}</span>
-                {contact.heading}
-              </a>
-            </li>
           </ol>
         </aside>
 
@@ -57,6 +59,15 @@ const sectionId = (heading: string) =>
           <div class="summary">
             {intro.map((paragraph) => <p>{paragraph}</p>)}
           </div>
+
+          <section class="commitment" aria-labelledby="commitment-heading">
+            <p class="microLabel">SYSTEM-LEVEL PRIVACY</p>
+            <h2 id="commitment-heading">{commitment.title}</h2>
+            <p>{commitment.body}</p>
+            <ul>
+              {commitment.principles.map((principle) => <li>{principle}</li>)}
+            </ul>
+          </section>
 
           {
             sections.map((section, index) => (
@@ -69,41 +80,106 @@ const sectionId = (heading: string) =>
                   <p>{paragraph}</p>
                 ))}
                 {section.processors && (
-                  <div class="tableWrap" tabindex="0" aria-label="Data processors">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Service</th>
-                          <th>Role</th>
-                          <th>Location</th>
-                          <th>Data it sees</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {section.processors.map((processor) => (
-                          <tr>
-                            <td>{processor.name}</td>
-                            <td>{processor.role}</td>
-                            <td>{processor.location}</td>
-                            <td>{processor.data}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  <div class="processors" aria-label="Data processors">
+                    {section.processors.map((processor, processorIndex) => (
+                      <article class="processor">
+                        <header>
+                          <span>{String(processorIndex + 1).padStart(2, '0')}</span>
+                          <div>
+                            <h3>{processor.name}</h3>
+                            <p>
+                              {processor.role} · {processor.location}
+                            </p>
+                          </div>
+                        </header>
+                        <dl>
+                          <div>
+                            <dt>What may reach it</dt>
+                            <dd>{processor.data}</dd>
+                          </div>
+                          <div>
+                            <dt>What we do</dt>
+                            <dd>{processor.safeguards}</dd>
+                          </div>
+                          <div class="mitigation">
+                            <dt>What you can do</dt>
+                            <dd>{processor.visitorMitigation}</dd>
+                          </div>
+                        </dl>
+                        <div class="assurance">
+                          <p class="microLabel">PROVIDER-PUBLISHED ASSURANCE</p>
+                          <ul>
+                            {processor.assurance.map((item) => (
+                              <li>
+                                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                                  <strong>{item.framework}</strong>
+                                  <span>{item.statement}</span>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                          <div class="sourceLinks">
+                            {processor.policyLinks.map((link) => (
+                              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                {link.label} ↗
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                )}
+                {section.links && (
+                  <div class="sourceLinks">
+                    {section.links.map((link) => (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer">
+                        {link.label} ↗
+                      </a>
+                    ))}
                   </div>
                 )}
               </section>
             ))
           }
 
-          <section class="policySection contact" id="contact">
+          <section class="policySection" id="privacy-tools">
             <div class="sectionHeading">
               <span>{String(sections.length + 1).padStart(2, '0')}</span>
+              <h2>Privacy tools</h2>
+            </div>
+            <p>
+              These independent tools can make normally invisible browser and network disclosures
+              easier to understand. They are external services, so review their own policies before
+              using them.
+            </p>
+            <div class="toolGrid">
+              {
+                privacyTools.map((tool) => (
+                  <a href={tool.href} target="_blank" rel="noopener noreferrer">
+                    <h3>{tool.title}</h3>
+                    <p>{tool.body}</p>
+                    <span>{tool.cta} ↗</span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="policySection contact" id="contact">
+            <div class="sectionHeading">
+              <span>{String(sections.length + 2).padStart(2, '0')}</span>
               <h2>{contact.heading}</h2>
             </div>
             <p>
               {contact.body}
               <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+            </p>
+            <p>
+              You may also complain to the
+              <a href={contact.authorityHref} target="_blank" rel="noopener noreferrer">
+                {contact.authorityLabel}
+              </a>.
             </p>
           </section>
         </article>
@@ -116,14 +192,12 @@ const sectionId = (heading: string) =>
   .privacy {
     --ink: #003b7e;
     --line: rgba(0, 59, 126, 0.17);
-    padding: clamp(6rem, 10vw, 9rem) 1.5rem 5rem;
+    padding: clamp(4rem, 7vw, 7rem) 0 5rem;
     color: #0b1f3a;
   }
 
   .pageFrame {
-    width: min(1160px, 100%);
-    margin: 0 auto;
-    border: 1px solid var(--line);
+    width: 100%;
     background: #fff;
   }
 
@@ -148,7 +222,10 @@ const sectionId = (heading: string) =>
   .eyebrow,
   .revision,
   .policyToc,
-  .sectionHeading > span {
+  .sectionHeading > span,
+  .microLabel,
+  dt,
+  .processor header > span {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
   }
 
@@ -191,6 +268,9 @@ const sectionId = (heading: string) =>
   .documentGrid {
     display: grid;
     grid-template-columns: 250px minmax(0, 1fr);
+    width: min(1160px, 100%);
+    margin-inline: auto;
+    border-inline: 1px solid var(--line);
   }
 
   .policyToc {
@@ -258,6 +338,42 @@ const sectionId = (heading: string) =>
     line-height: 1.75;
   }
 
+  .commitment {
+    margin-bottom: 4rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .commitment h2,
+  .commitment p {
+    color: inherit;
+  }
+
+  .microLabel {
+    margin-bottom: 0.75rem;
+    color: #4ab3f4;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  .commitment ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 1.5rem;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.23);
+    border-left: 1px solid rgba(255, 255, 255, 0.23);
+  }
+
+  .commitment li {
+    padding: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.23);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.23);
+    line-height: 1.45;
+  }
+
   .policySection {
     scroll-margin-top: calc(var(--navbar-height) + 2rem);
     padding: 2.5rem 0;
@@ -283,42 +399,144 @@ const sectionId = (heading: string) =>
     letter-spacing: -0.025em;
   }
 
-  .tableWrap {
-    margin-top: 1.5rem;
-    overflow-x: auto;
+  .processors {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
   }
 
-  table {
-    width: 100%;
-    min-width: 620px;
-    border-collapse: collapse;
-    font-size: 0.88rem;
-  }
-
-  th,
-  td {
-    padding: 0.85rem;
+  .processor {
     border: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
-    line-height: 1.5;
   }
 
-  th {
-    color: var(--ink);
+  .processor header {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .processor header > span {
+    color: #4ab3f4;
+    font-size: 0.7rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  .processor header p {
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.78rem;
+  }
+
+  .processor dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .processor dl > div {
+    padding: 1.25rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .processor dl > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .processor dl .mitigation {
+    grid-column: 1 / -1;
+    border-right: 0;
     background:
       repeating-linear-gradient(
         45deg,
-        rgba(0, 59, 126, 0.05) 0,
-        rgba(0, 59, 126, 0.05) 1px,
+        rgba(0, 59, 126, 0.045) 0,
+        rgba(0, 59, 126, 0.045) 1px,
         transparent 1px,
-        transparent 8px
+        transparent 9px
       ),
       #fff;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  dt {
+    margin-bottom: 0.75rem;
+    color: rgba(0, 31, 69, 0.56);
     font-size: 0.68rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .assurance {
+    padding: 1.25rem;
+  }
+
+  .assurance ul {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+  }
+
+  .assurance li a {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.3fr) 1fr;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+    color: inherit;
+    line-height: 1.5;
+  }
+
+  .assurance li strong {
+    color: var(--ink);
+  }
+
+  .sourceLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .sourceLinks a,
+  .toolGrid > a > span {
+    border-bottom: 1px solid currentColor;
+    font-weight: 650;
+  }
+
+  .toolGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .toolGrid > a {
+    min-height: 250px;
+    padding: 1.25rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: inherit;
+  }
+
+  .toolGrid h3 {
+    color: var(--ink);
+  }
+
+  .toolGrid p {
+    margin-block: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .contact a {
@@ -344,6 +562,26 @@ const sectionId = (heading: string) =>
       position: static;
       border-right: 0;
       border-bottom: 1px solid var(--line);
+    }
+
+    .toolGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .commitment ul,
+    .processor dl {
+      grid-template-columns: 1fr;
+    }
+
+    .processor dl > div {
+      border-right: 0;
+    }
+
+    .assurance li a {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
     }
   }
 </style>
