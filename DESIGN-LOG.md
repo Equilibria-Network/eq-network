@@ -5,6 +5,7 @@ what stays invariant, what's open. Anyone working in this repo (Jonas, Markov,
 agents) appends here instead of carrying decisions in chat threads.
 
 **Standing invariants** (Jonas):
+
 - A visual graph-based view of the approximate dynamics, per scenario.
 - The stats-over-time line charts.
 - Every coupling arrow in the combined model is exactly neutral at κ = 0
@@ -18,6 +19,48 @@ sample of how the interface might look. What crosses the seam is contracts and
 recordings, never code. The backend white paper is a separate, decoupled track.
 
 ---
+
+## 2026-07-29 (later) — Act I lands: the flow economy; the monorepo arrives
+
+**Act I spike** (`apps/site/prototypes/playground.html`, new sixth tab
+"Economic · flows", orange sketch dot): a Leontief-lite flow economy — six
+sectors with fixed IO coefficients (hub: machines feed everyone, plus a chain),
+households that BUY, AI systems whose capital must out-earn upkeep before
+profit. Money is strictly conserved: upkeep and reinvestment are machine-sector
+purchases, savings drip back via wealth drawdown, AI hoards drain at 2%/tick.
+
+- **The knee is real (threshold, not ramp):** below eff ≈ 0.3, automation
+  cannot pay upkeep and dies — AI wealth share 0.00 forever. Across 0.30→0.40
+  it jumps 0.07 → 0.32, saturating toward 0.67 (8 seeds). The machine sector
+  ignites first (widest margins — it sells to everyone).
+- **The better surprise: "richer, and not yours."** Output _grows_ 23 → 25
+  while the AI wealth share goes 0 → 50%. GDP looks healthy through the whole
+  event; concentration and collapse decouple.
+- **Two levers separate:** AI wealth share 0.50 baseline → 0.39 redistribution
+  → 0.36 ownership → 0.25 both; output pays no price for either.
+- **The spike earned its keep by failing twice first:** v1's circular flow
+  leaked (savings exited and never returned — income decayed 8%/tick, everyone
+  died before the AI arrived); v2's `aiSpend` was unbacked money printing
+  (dead AI kept spending 0.3/tick from nowhere). Both caught by probes, both
+  fixed structurally. Verdict for the robustness switcher: the flow structure
+  **earns Act I**.
+- Ladder now **37/37** (4 flow rungs: conservation, knee, richer-not-yours,
+  levers ordering).
+
+**The repo restructured underneath the session** (~13:10–13:14): Markov's
+engineering baseline merged from origin — pnpm monorepo (`apps/site`,
+`apps/playground` placeholder, `packages/design-system`), CI, CHANGELOG,
+CONTRIBUTING, MIT license. GitHub Desktop stashed the uncommitted working tree
+to do it, and the dance **silently dropped**: (1) the morning's vote + flow
+work, (2) the guard commit's (4f5f076) playground hunk during rebase, (3) the
+_uncommitted_ page preamble ("these are toy models / nothing here pushes
+back") and preamble self-test. All recovered from the unreachable stash object
+(`bf25267`) and re-applied at the new path; content-diff vs the stash is now
+empty except intentional additions. Lesson recorded: **uncommitted work in
+this repo now gets stash-danced by syncs — commit early, and check
+`git fsck --unreachable` before assuming loss.** The prototype's home is
+`apps/site/prototypes/playground.html` per ADR-0005 (it migrates to
+`apps/playground/` only when real playground development starts).
 
 ## 2026-07-29 — Act II lands: the vote (hollow democracy)
 
@@ -56,21 +99,21 @@ the session transcript; the load-bearing conclusions:
 
 - **The bug is the taxonomy:** the suite is organized by backend mechanism
   family, not by visitor question. Target shape — four acts + a tutorial:
-  - ACT I *Where does the money go?* (wealth concentration; flow economy)
-  - ACT II *Who still gets a say?* (power concentration + the vote) ✅ started
-  - ACT III *What do we end up believing?* (contagion, ~as today, retitled)
-  - ACT IV *Does it spiral?* (backlash arrow → stable/oscillate/collapse map)
+  - ACT I _Where does the money go?_ (wealth concentration; flow economy)
+  - ACT II _Who still gets a say?_ (power concentration + the vote) ✅ started
+  - ACT III _What do we end up believing?_ (contagion, ~as today, retitled)
+  - ACT IV _Does it spiral?_ (backlash arrow → stable/oscillate/collapse map)
   - Tutorial: the commons, reassigned ("can rules we vote on actually hold?")
 - **Every act needs a named surprise** a smart visitor would predict wrong
   (threshold-not-ramp; hollow democracy; two-dials-required; defenses-cause-
-  the-cycle). Suite rule: every act's card ends with *what would change this
-  answer*.
+  the-cycle). Suite rule: every act's card ends with _what would change this
+  answer_.
 - **The robustness switcher** (strongest idea): one question, N structurally
-  different worlds behind a switcher, with a visible verdict — *does the
-  defense ranking survive changing the world?* Structural robustness as a
+  different worlds behind a switcher, with a visible verdict — _does the
+  defense ranking survive changing the world?_ Structural robustness as a
   button, not a doc.
 - **Two contracts** keep it cheap: (1) boundary — whatever crosses between
-  domains is a signal `{value, bias, fidelity}`; info-flow as *interface*,
+  domains is a signal `{value, bias, fidelity}`; info-flow as _interface_,
   never as ontology; (2) readout — every model emits the same small typed
   headline series (human share of wealth / voice / belief + a concentration
   index) so one renderer draws every act.
@@ -101,7 +144,7 @@ the JS ports (never port JAX to the browser).
 - The combined view's flicker is a rendering issue, not a dynamics bug —
   cadenced series rendered raw at 80 ticks/sec.
 - Audience: researchers/scenario-builders first; lay readers get stories told
-  *by* people who ran the sims. Growing channel: agents reading for people —
+  _by_ people who ran the sims. Growing channel: agents reading for people —
   pages must be legible to a plain fetch.
 - Credibility: pair the playground with worked papers ("built with this") —
-  the Conway posture: browser toy *and* research instrument, visibly both.
+  the Conway posture: browser toy _and_ research instrument, visibly both.
