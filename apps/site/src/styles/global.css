@@ -21,7 +21,7 @@ html {
 
 body {
   overflow-x: hidden;
-  background: transparent !important;
+  background: var(--bg-color);
   color: var(--text-color);
   transition: color var(--transition-speed) ease;
   min-height: 100vh;
@@ -31,36 +31,6 @@ body {
 
 main {
   flex: 1;
-}
-
-/* Ensure transparent backgrounds for pattern visibility */
-body,
-html,
-main,
-article {
-  background: transparent !important;
-}
-
-/* Parallax background pattern container */
-.parallax-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background-image: var(--bg-pattern-image);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.03;
-  pointer-events: none;
-  transition: opacity var(--transition-speed) ease;
-  filter: invert(0);
-}
-
-/* Ensure content sections are transparent */
-section {
-  background: transparent !important;
 }
 
 /* Links */

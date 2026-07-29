@@ -16,12 +16,6 @@ export interface SocialLink {
   href: string;
 }
 
-export interface InstitutionalLink {
-  label: string;
-  href?: string;
-  unavailableLabel?: string;
-}
-
 export interface SiteContent {
   brand: string;
   skipToContent: string;
@@ -39,7 +33,7 @@ export interface SiteContent {
     tagline: string;
     quickLinksHeading: string;
     links: NavLink[];
-    institutionalLinks: InstitutionalLink[];
+    institutionalLinks: NavLink[];
     socials: SocialLink[];
     copyrightName: string;
   };
@@ -98,10 +92,7 @@ export const siteContent: SiteContent = {
     institutionalLinks: [
       { label: 'Brand', href: '/brand' },
       { label: 'Privacy', href: '/privacy' },
-      {
-        label: 'Legal',
-        unavailableLabel: 'Legal information page in preparation',
-      },
+      { label: 'Legal', href: '/legal' },
     ],
     socials: [
       {

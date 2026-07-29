@@ -45,6 +45,7 @@ const organizationSchema = {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#003B7E" />
+    <meta name="referrer" content="no-referrer" />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
@@ -73,9 +74,6 @@ const organizationSchema = {
     <title>{title}</title>
   </head>
   <body>
-    <!-- Parallax Background Pattern -->
-    <div class="parallax-background"></div>
-
     <a class="skip-link" href="#main-content">{siteContent.skipToContent}</a>
 
     <!-- Navbar -->

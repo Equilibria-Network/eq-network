@@ -211,22 +211,14 @@
   font-size: 0.78rem;
 }
 
-.institutionalLinks a,
-.institutionalLinks span {
+.institutionalLinks a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-}
-
-.institutionalLinks a {
   transition: color 0.2s ease;
 }
 
 .institutionalLinks a:hover {
   color: rgba(255, 255, 255, 0.9);
-}
-
-.institutionalLinks span {
-  cursor: default;
 }
 
 /* Responsive adjustments */

@@ -1,0 +1,280 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { legalContent } from '@content/legal';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+
+const { title, eyebrow, intro, details, sections, contact, registry } = legalContent;
+---
+
+<Layout
+  title="Legal information — Equilibria Network"
+  description="Legal identity, website operator, contact details, and public registration information for Equilibria Network."
+>
+  <section class="legal">
+    <header class="hero">
+      <div class="heroCopy">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p class="intro">{intro}</p>
+      </div>
+      <img
+        src="/img/brand/marks/sym-concentric.svg"
+        alt=""
+        width="240"
+        height="240"
+        aria-hidden="true"
+      />
+    </header>
+
+    <div class="legalBody">
+      <section class="identity" aria-labelledby="identity-heading">
+        <div class="sectionRule">
+          <span>01</span>
+          <h2 id="identity-heading">Registered identity</h2>
+        </div>
+        <dl>
+          {
+            details.map((detail) => (
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>{detail.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="registry">
+          <a href={registry.href} target="_blank" rel="noopener noreferrer">{registry.label} ↗</a>
+          <p>{registry.note}</p>
+        </div>
+      </section>
+
+      {
+        sections.map((section, index) => (
+          <section class="textSection">
+            <div class="sectionRule">
+              <span>{String(index + 2).padStart(2, '0')}</span>
+              <h2>{section.heading}</h2>
+            </div>
+            <div class="paragraphs">
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.heading === 'Privacy' && <a href="/privacy">Read the Privacy Policy →</a>}
+              {section.links?.map((link) => (
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      <section class="contact">
+        <div class="sectionRule">
+          <span>{String(sections.length + 2).padStart(2, '0')}</span>
+          <h2>{contact.heading}</h2>
+        </div>
+        <p>
+          {contact.body}
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+        </p>
+      </section>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    --ink: #003b7e;
+    --line: rgba(0, 59, 126, 0.17);
+    color: #0b1f3a;
+    padding: clamp(4rem, 7vw, 7rem) 0 5rem;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 280px);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: center;
+    padding: clamp(3rem, 7vw, 6rem) max(1.5rem, calc((100vw - 1080px) / 2));
+    border-block: 1px solid var(--line);
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(0, 59, 126, 0.045) 0,
+        rgba(0, 59, 126, 0.045) 1px,
+        transparent 1px,
+        transparent 9px
+      ),
+      #fff;
+  }
+
+  .heroCopy {
+    max-width: 780px;
+  }
+
+  .eyebrow,
+  .sectionRule span,
+  dt {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  .eyebrow {
+    margin-bottom: 1rem;
+    color: #4ab3f4;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  h1,
+  h2 {
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3.2rem, 7vw, 6.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .intro {
+    max-width: 680px;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  .hero img {
+    width: 100%;
+    height: auto;
+  }
+
+  .legalBody {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding-inline: 1.5rem;
+  }
+
+  .identity,
+  .textSection,
+  .contact {
+    padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sectionRule {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 2rem;
+  }
+
+  .sectionRule span {
+    color: #4ab3f4;
+    font-size: 0.72rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    letter-spacing: -0.03em;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  dl div {
+    min-height: 130px;
+    padding: 1.25rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    margin-bottom: 1.5rem;
+    color: rgba(0, 31, 69, 0.58);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+  }
+
+  .registry {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .registry p {
+    max-width: 430px;
+    color: rgba(0, 31, 69, 0.62);
+    text-align: right;
+  }
+
+  .textSection {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(2rem, 7vw, 7rem);
+  }
+
+  .paragraphs p,
+  .contact p {
+    font-size: 1.03rem;
+    line-height: 1.75;
+  }
+
+  .paragraphs p + p {
+    margin-top: 1rem;
+  }
+
+  .paragraphs a,
+  .contact a,
+  .registry a {
+    display: inline-block;
+    margin-top: 1rem;
+    border-bottom: 1px solid currentColor;
+    font-weight: 650;
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero img {
+      width: 150px;
+    }
+
+    dl {
+      grid-template-columns: 1fr;
+    }
+
+    .registry,
+    .textSection {
+      display: block;
+    }
+
+    .registry p {
+      margin-top: 1rem;
+      text-align: left;
+    }
+  }
+</style>

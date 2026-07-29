@@ -82,14 +82,8 @@ export default function Footer() {
           <nav className={styles.institutionalNav} aria-label="Institutional information">
             <ul className={styles.institutionalLinks}>
               {institutionalLinks.map((link) => (
-                <li key={link.label}>
-                  {link.href ? (
-                    <a href={link.href}>{link.label}</a>
-                  ) : (
-                    <span aria-label={link.unavailableLabel} title={link.unavailableLabel}>
-                      {link.label}
-                    </span>
-                  )}
+                <li key={link.href}>
+                  <a href={link.href}>{link.label}</a>
                 </li>
               ))}
             </ul>
