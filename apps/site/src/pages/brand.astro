@@ -247,7 +247,6 @@ const b = brandContent;
       --grid-major: rgba(0, 59, 126, 0.055);
       background: var(--paper);
       color: var(--ink);
-      padding-bottom: 2rem;
     }
     .ff-display {
       font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -259,17 +258,9 @@ const b = brandContent;
     /* Engineering drawing frame */
     .drawing {
       position: relative;
-      max-width: 1180px;
-      margin: 2rem auto 0;
-      background-color: var(--paper);
-      background-image: repeating-linear-gradient(
-        45deg,
-        var(--hatch) 0,
-        var(--hatch) 1px,
-        transparent 1px,
-        transparent 8px
-      );
-      border: 1px solid var(--line);
+      width: 100%;
+      background: var(--paper);
+      border-block: 1px solid var(--line);
     }
     .drawing-head {
       min-height: 38px;
@@ -285,7 +276,8 @@ const b = brandContent;
     }
     .sheet {
       position: relative;
-      margin-inline: 18px;
+      width: min(1180px, 100%);
+      margin-inline: auto;
       padding: 4.5rem 4rem 5rem;
       background: #fff;
     }

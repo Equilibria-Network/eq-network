@@ -73,11 +73,7 @@ mkdirSync(outDir, { recursive: true });
 
 const variants = {
   'sym-concentric.svg': svg('#003B7E', 1.15, 8),
-  'sym-outline.svg': svg('#003B7E', 0, 8, 1, false),
-  'sym-outline-white.svg': svg('#FFFFFF', 0, 8, 1, false),
-  'sym-outline-accent.svg': svg('#4AB3F4', 0, 8, 1, false),
   'sym-concentric-white.svg': svg('#FFFFFF', 1.15, 8),
-  'sym-concentric-accent.svg': svg('#4AB3F4', 1.15, 8),
 };
 
 for (const [name, contents] of Object.entries(variants)) {

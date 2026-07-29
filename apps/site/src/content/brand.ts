@@ -111,16 +111,6 @@ export const brandContent: BrandContent = {
       dark: true,
       note: 'On ink / dark sections.',
     },
-    {
-      label: '03 / mark · line',
-      src: '/img/brand/marks/sym-outline.svg',
-      note: 'Heavier treatment for smaller uses.',
-    },
-    {
-      label: '04 / mark · accent',
-      src: '/img/brand/marks/sym-concentric-accent.svg',
-      note: 'Accent, used sparingly.',
-    },
   ],
   assets: [
     {
@@ -133,11 +123,6 @@ export const brandContent: BrandContent = {
       href: '/img/brand/marks/sym-concentric-white.svg',
       downloadName: 'equilibria-mark-reversed.svg',
     },
-    {
-      label: 'Download accent SVG',
-      href: '/img/brand/marks/sym-concentric-accent.svg',
-      downloadName: 'equilibria-mark-accent.svg',
-    },
   ],
   usage: {
     title: 'Mark usage',
@@ -147,13 +132,13 @@ export const brandContent: BrandContent = {
       'Use navy on white as the default.',
       'Use the reversed mark on the dark navy ground.',
       'Keep clear space of at least one inner-contour width around the mark.',
-      'Use the outline-only asset when internal contours cannot reproduce cleanly.',
+      'Use the navy or reversed mark at a size where the internal contours remain legible.',
     ],
     donts: [
       'Do not stretch, skew, rotate, or redraw the mark.',
-      'Do not add gradients, shadows, glow, or extra colours.',
+      'Do not recolour the mark or add gradients, shadows, or glow.',
       'Do not place the mark over a busy image or dense grid.',
-      'Do not reduce the internal-line version below a legible size.',
+      'Do not substitute an outline-only or simplified redraw at small sizes.',
     ],
   },
   swatches: [
