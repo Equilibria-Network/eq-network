@@ -1,18 +1,26 @@
 ---
 // src/pages/about.astro
 import Layout from '@/layouts/Layout.astro';
-import AboutHero from '@components/about/AboutHero';
+import PageHeader from '@components/layout/PageHeader.astro';
 import AboutPhilosophy from '@components/about/AboutPhilosophy';
 import AboutTeam from '@components/about/AboutTeam';
 import AboutAdvisors from '@components/about/AboutAdvisors';
 import AboutPartners from '@components/about/AboutPartners';
+import { aboutContent } from '@content/about';
 ---
 
 <Layout
   title="About - Equilibria Network"
   description="Learn about Equilibria Network's mission, team, and approach to collective intelligence research."
 >
-  <AboutHero client:load />
+  <PageHeader
+    eyebrow="ORGANISATION / ABOUT"
+    title={aboutContent.hero.title}
+    subtitle={aboutContent.hero.leftText}
+    description={aboutContent.hero.rightText}
+    image="/img/brand/marks/sym-concentric.svg"
+    imageAlt=""
+  />
   <AboutPhilosophy client:load />
   <AboutTeam client:load />
   <AboutAdvisors client:load />

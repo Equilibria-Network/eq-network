@@ -66,6 +66,10 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 
 ## When you add or edit a page — checklist
 
+- [ ] Standard editorial pages start with `PageHeader.astro`; use its eyebrow, title, subtitle,
+      description, visual, and metadata contract instead of creating another page-specific hero.
+- [ ] Long editorial/reference pages use `PageSidebar.astro` for contents navigation. Immersive landing,
+      simulation, and visual-story pages may deliberately omit it.
 - [ ] Wrap sections with the shared container/section utilities, not a new `.container` block.
 - [ ] Use the annotated-rule section treatment from `/brand`.
 - [ ] Use Space Grotesk for display and IBM Plex Mono only for technical annotation.
@@ -75,6 +79,13 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 - [ ] Breakpoints come from the named set.
 - [ ] New interactive/animated visuals honour `prefers-reduced-motion`.
 - [ ] Grid and hatch are localized; the page remains predominantly white.
+
+### Astro prose boundaries
+
+When prose and an inline element meet across an Astro expression boundary, write the intended space
+explicitly: `{sentence}{' '}<a ...>link</a>`. Source indentation is formatting, not a dependable content
+space, and omitting the explicit node can render words such as `emailcontact@…`. Inline links inside a
+sentence must also remain `display: inline`; reserve `inline-block` and top margins for standalone links.
 
 Enforcement (a lint gate that fails CI when a raw value is used instead of a token) is planned as part
 of the Tailwind migration in [ADR-0006](../adr/0006-tailwind-design-system.md) and task-0002 Stage 1.

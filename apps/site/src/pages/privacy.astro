@@ -1,5 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import PageSidebar from '@components/layout/PageSidebar.astro';
 import { privacyContent } from '@content/privacy';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
@@ -26,72 +28,64 @@ const numberedSections = [
   description="How Equilibria Network handles contact-form data, third-party processing, retention, cookies, and privacy rights."
 >
   <section class="privacy">
-    <div class="pageFrame">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">POLICY / DATA PRACTICE</p>
-          <h1>{title}</h1>
+    <PageHeader
+      eyebrow="POLICY / DATA PRACTICE"
+      {title}
+      subtitle="The short version: we collect almost nothing."
+      description="We are a small research organisation, not an ad company. We do not track you, profile you, or sell your information. This page explains the few pieces of data our host and contact form still need to handle."
+      meta={[
+        { label: 'Status', value: 'Current' },
+        { label: 'Updated', value: lastUpdated },
+      ]}
+    />
+
+    <div class="documentGrid">
+      <PageSidebar
+        items={numberedSections.map((section) => ({
+          label: section.heading,
+          href: section.href,
+        }))}
+      />
+
+      <article class="policy">
+        <div class="summary">
+          {intro.map((paragraph) => <p>{paragraph}</p>)}
         </div>
-        <div class="revision">
-          <span>STATUS</span><strong>Current</strong>
-          <span>UPDATED</span><strong>{lastUpdated}</strong>
-        </div>
-      </header>
 
-      <div class="documentGrid">
-        <aside class="policyToc" aria-label="Policy contents">
-          <p>Contents</p>
-          <ol>
-            {
-              numberedSections.map((section, index) => (
-                <li>
-                  <a href={section.href}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    {section.heading}
-                  </a>
-                </li>
-              ))
-            }
-          </ol>
-        </aside>
+        <section class="commitment" aria-labelledby="commitment-heading">
+          <p class="microLabel">SYSTEM-LEVEL PRIVACY</p>
+          <h2 id="commitment-heading">{commitment.title}</h2>
+          <p>{commitment.body}</p>
+          <ul>
+            {commitment.principles.map((principle) => <li>{principle}</li>)}
+          </ul>
+        </section>
 
-        <article class="policy">
-          <div class="summary">
-            {intro.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-
-          <section class="commitment" aria-labelledby="commitment-heading">
-            <p class="microLabel">SYSTEM-LEVEL PRIVACY</p>
-            <h2 id="commitment-heading">{commitment.title}</h2>
-            <p>{commitment.body}</p>
-            <ul>
-              {commitment.principles.map((principle) => <li>{principle}</li>)}
-            </ul>
-          </section>
-
-          {
-            sections.map((section, index) => (
-              <section class="policySection" id={sectionId(section.heading)}>
-                <div class="sectionHeading">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <h2>{section.heading}</h2>
-                </div>
-                {section.paragraphs?.map((paragraph) => (
-                  <p>{paragraph}</p>
-                ))}
-                {section.processors && (
-                  <div class="processors" aria-label="Data processors">
-                    {section.processors.map((processor, processorIndex) => (
-                      <article class="processor">
-                        <header>
-                          <span>{String(processorIndex + 1).padStart(2, '0')}</span>
-                          <div>
-                            <h3>{processor.name}</h3>
-                            <p>
-                              {processor.role} · {processor.location}
-                            </p>
-                          </div>
-                        </header>
+        {
+          sections.map((section, index) => (
+            <section class="policySection" id={sectionId(section.heading)}>
+              <div class="sectionHeading">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h2>{section.heading}</h2>
+              </div>
+              {section.paragraphs?.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.processors && (
+                <div class="processors" aria-label="Data processors">
+                  {section.processors.map((processor, processorIndex) => (
+                    <details class="processor">
+                      <summary>
+                        <span>{String(processorIndex + 1).padStart(2, '0')}</span>
+                        <div>
+                          <h3>{processor.name}</h3>
+                          <p>{processor.role} · Select for the details</p>
+                        </div>
+                        <span class="disclosure" aria-hidden="true">
+                          +
+                        </span>
+                      </summary>
+                      <div class="processorDetail">
                         <dl>
                           <div>
                             <dt>What may reach it</dt>
@@ -126,64 +120,64 @@ const numberedSections = [
                             ))}
                           </div>
                         </div>
-                      </article>
-                    ))}
-                  </div>
-                )}
-                {section.links && (
-                  <div class="sourceLinks">
-                    {section.links.map((link) => (
-                      <a href={link.href} target="_blank" rel="noopener noreferrer">
-                        {link.label} ↗
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </section>
-            ))
-          }
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              )}
+              {section.links && (
+                <div class="sourceLinks">
+                  {section.links.map((link) => (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
+            </section>
+          ))
+        }
 
-          <section class="policySection" id="privacy-tools">
-            <div class="sectionHeading">
-              <span>{String(sections.length + 1).padStart(2, '0')}</span>
-              <h2>Privacy tools</h2>
-            </div>
-            <p>
-              These independent tools can make normally invisible browser and network disclosures
-              easier to understand. They are external services, so review their own policies before
-              using them.
-            </p>
-            <div class="toolGrid">
-              {
-                privacyTools.map((tool) => (
-                  <a href={tool.href} target="_blank" rel="noopener noreferrer">
-                    <h3>{tool.title}</h3>
-                    <p>{tool.body}</p>
-                    <span>{tool.cta} ↗</span>
-                  </a>
-                ))
-              }
-            </div>
-          </section>
+        <section class="policySection" id="privacy-tools">
+          <div class="sectionHeading">
+            <span>{String(sections.length + 1).padStart(2, '0')}</span>
+            <h2>Privacy tools</h2>
+          </div>
+          <p>
+            These independent tools can make normally invisible browser and network disclosures
+            easier to understand. They are external services, so review their own policies before
+            using them.
+          </p>
+          <div class="toolGrid">
+            {
+              privacyTools.map((tool) => (
+                <a href={tool.href} target="_blank" rel="noopener noreferrer">
+                  <h3>{tool.title}</h3>
+                  <p>{tool.body}</p>
+                  <span>{tool.cta} ↗</span>
+                </a>
+              ))
+            }
+          </div>
+        </section>
 
-          <section class="policySection contact" id="contact">
-            <div class="sectionHeading">
-              <span>{String(sections.length + 2).padStart(2, '0')}</span>
-              <h2>{contact.heading}</h2>
-            </div>
-            <p>
-              {contact.body}
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>.
-            </p>
-            <p>
-              You may also complain to the
-              <a href={contact.authorityHref} target="_blank" rel="noopener noreferrer">
-                {contact.authorityLabel}
-              </a>.
-            </p>
-          </section>
-        </article>
-      </div>
+        <section class="policySection contact" id="contact">
+          <div class="sectionHeading">
+            <span>{String(sections.length + 2).padStart(2, '0')}</span>
+            <h2>{contact.heading}</h2>
+          </div>
+          <p>
+            {contact.body}{' '}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+          </p>
+          <p>
+            You may also complain to the{' '}
+            <a href={contact.authorityHref} target="_blank" rel="noopener noreferrer">
+              {contact.authorityLabel}
+            </a>.
+          </p>
+        </section>
+      </article>
     </div>
   </section>
 </Layout>
@@ -192,36 +186,10 @@ const numberedSections = [
   .privacy {
     --ink: #003b7e;
     --line: rgba(0, 59, 126, 0.17);
-    padding: clamp(4rem, 7vw, 7rem) 0 5rem;
+    padding: 0 0 5rem;
     color: #0b1f3a;
   }
 
-  .pageFrame {
-    width: 100%;
-    background: #fff;
-  }
-
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 3rem;
-    align-items: end;
-    padding: clamp(2rem, 6vw, 5rem);
-    border-bottom: 1px solid var(--line);
-    background:
-      repeating-linear-gradient(
-        45deg,
-        rgba(0, 59, 126, 0.045) 0,
-        rgba(0, 59, 126, 0.045) 1px,
-        transparent 1px,
-        transparent 9px
-      ),
-      #fff;
-  }
-
-  .eyebrow,
-  .revision,
-  .policyToc,
   .sectionHeading > span,
   .microLabel,
   dt,
@@ -229,40 +197,9 @@ const numberedSections = [
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
   }
 
-  .eyebrow {
-    margin-bottom: 1rem;
-    color: #4ab3f4;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-  }
-
-  h1,
   h2 {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     color: var(--ink);
-  }
-
-  h1 {
-    margin: 0;
-    font-size: clamp(3.2rem, 8vw, 6.8rem);
-    line-height: 0.92;
-    letter-spacing: -0.06em;
-  }
-
-  .revision {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 0.35rem 1.5rem;
-    min-width: 210px;
-    padding: 1rem;
-    border: 1px solid var(--line);
-    background: #fff;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-  }
-
-  .revision span {
-    opacity: 0.58;
   }
 
   .documentGrid {
@@ -271,44 +208,6 @@ const numberedSections = [
     width: min(1160px, 100%);
     margin-inline: auto;
     border-inline: 1px solid var(--line);
-  }
-
-  .policyToc {
-    position: sticky;
-    top: calc(var(--navbar-height) + 2rem);
-    align-self: start;
-    padding: 2.5rem 2rem;
-    border-right: 1px solid var(--line);
-    font-size: 0.72rem;
-  }
-
-  .policyToc > p {
-    margin-bottom: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  .policyToc ol {
-    list-style: none;
-  }
-
-  .policyToc li + li {
-    margin-top: 0.75rem;
-  }
-
-  .policyToc a {
-    display: grid;
-    grid-template-columns: 2rem 1fr;
-    color: rgba(0, 31, 69, 0.72);
-    line-height: 1.4;
-  }
-
-  .policyToc a:hover {
-    color: var(--ink);
-  }
-
-  .policyToc a span {
-    color: #4ab3f4;
   }
 
   .policy {
@@ -409,18 +308,35 @@ const numberedSections = [
     border: 1px solid var(--line);
   }
 
-  .processor header {
+  .processor summary {
     display: grid;
-    grid-template-columns: 2.5rem 1fr;
+    grid-template-columns: 2.5rem 1fr auto;
     gap: 1rem;
+    align-items: center;
     padding: 1.25rem;
     color: #fff;
     background: var(--ink);
+    cursor: pointer;
+    list-style: none;
   }
 
-  .processor header > span {
+  .processor summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .processor summary > span:first-child {
     color: #4ab3f4;
     font-size: 0.7rem;
+  }
+
+  .disclosure {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 1.5rem;
+    transition: transform 160ms ease;
+  }
+
+  .processor[open] .disclosure {
+    transform: rotate(45deg);
   }
 
   h3 {
@@ -428,7 +344,7 @@ const numberedSections = [
     font-family: 'Space Grotesk', system-ui, sans-serif;
   }
 
-  .processor header p {
+  .processor summary p {
     margin-top: 0.25rem;
     color: rgba(255, 255, 255, 0.72);
     font-size: 0.78rem;
@@ -545,23 +461,8 @@ const numberedSections = [
   }
 
   @media (max-width: 820px) {
-    .hero {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-
-    .revision {
-      width: min(100%, 360px);
-    }
-
     .documentGrid {
       grid-template-columns: 1fr;
-    }
-
-    .policyToc {
-      position: static;
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
     }
 
     .toolGrid {

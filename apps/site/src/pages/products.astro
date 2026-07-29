@@ -1,17 +1,25 @@
 ---
 // src/pages/products.astro
 import Layout from '@/layouts/Layout.astro';
-import ProductsHero from '@components/products/ProductsHero';
+import PageHeader from '@components/layout/PageHeader.astro';
 import ProductsExploration from '@components/products/ProductsExploration';
 import ProductsCoordination from '@components/products/ProductsCoordination';
 import ProductsConnection from '@components/products/ProductsConnection';
+import { productsContent } from '@content/products';
 ---
 
 <Layout
   title="Products — Equilibria Network"
   description="Open-source tools for simulating, testing, and designing research and governance coordination mechanisms."
 >
-  <ProductsHero client:load />
+  <PageHeader
+    eyebrow="TOOLS / EXPERIMENTS"
+    title={productsContent.hero.title}
+    subtitle={productsContent.hero.leftText}
+    description={productsContent.hero.rightText}
+    image="/img/brand/marks/sym-concentric.svg"
+    imageAlt=""
+  />
   <ProductsExploration client:load />
   <ProductsCoordination client:load />
   <ProductsConnection client:load />

@@ -1,0 +1,88 @@
+---
+export interface PageSidebarItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  label?: string;
+  items: PageSidebarItem[];
+}
+
+const { label = 'Contents', items } = Astro.props;
+---
+
+<aside class="sidebar" aria-label={label}>
+  <p>{label}</p>
+  <ol>
+    {
+      items.map((item, index) => (
+        <li>
+          <a href={item.href}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: calc(var(--navbar-height) + 1.5rem);
+    align-self: start;
+    padding: 2.5rem 2rem;
+    border-right: 1px solid rgba(0, 59, 126, 0.17);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+  }
+
+  .sidebar > p {
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  ol {
+    list-style: none;
+  }
+
+  li + li {
+    margin-top: 0.75rem;
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    color: rgba(0, 31, 69, 0.72);
+    line-height: 1.4;
+  }
+
+  a:hover {
+    color: #003b7e;
+  }
+
+  a span {
+    color: #4ab3f4;
+  }
+
+  @media (max-width: 820px) {
+    .sidebar {
+      position: static;
+      border-right: 0;
+      border-bottom: 1px solid rgba(0, 59, 126, 0.17);
+    }
+
+    ol {
+      columns: 2;
+    }
+  }
+
+  @media (max-width: 520px) {
+    ol {
+      columns: 1;
+    }
+  }
+</style>
