@@ -1,13 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import ExplainerPage from '@components/explainer/Explainer';
-import { siteContent } from '@content/site';
+import ThesisPrototype from '@components/explainer-prototype/ThesisPrototype';
+import { explainerContent } from '@content/explainer';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 ---
 
-<Layout
-  title="Thesis — Equilibria Network"
-  description="Why compositional bridging between research fields matters for safe AI coordination."
->
-  <h1 class="sr-only">{siteContent.pageTitles.thesis}</h1>
-  <ExplainerPage client:load />
+<Layout title={explainerContent.pageTitle} description={explainerContent.pageDescription}>
+  <ThesisPrototype client:load />
 </Layout>

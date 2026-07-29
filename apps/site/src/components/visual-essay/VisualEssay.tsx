@@ -42,7 +42,7 @@ export default function VisualEssay<State extends string>({
   );
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <div className={styles.sideHatch} aria-hidden="true" />
 
       <header className={styles.hero}>
@@ -159,6 +159,6 @@ export default function VisualEssay<State extends string>({
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
