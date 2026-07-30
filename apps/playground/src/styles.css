@@ -1424,14 +1424,8 @@ html {
 }
 
 .scenario-story li > button:hover,
-.scenario-story li > button:focus-visible,
-.scenario-story li.active > button {
+.scenario-story li > button:focus-visible {
   background: var(--pg-pale);
-}
-
-.scenario-story li.active > button span,
-.scenario-story li.active > button strong {
-  color: var(--pg-navy);
 }
 
 .scenario-story li > p {
@@ -2962,28 +2956,25 @@ body.is-resizing-rail {
 }
 
 .view-tabs button.active,
-.condition-options button.active,
-.scenario-story li.active > button {
+.condition-options button.active {
   color: var(--pg-white) !important;
   background-color: var(--pg-navy);
 }
 
-.scenario-story li.active > button span,
-.scenario-story li.active > button strong {
-  color: var(--pg-white);
-}
-
-.scenario-list > li.active > .scenario-toggle {
+.scenario-list > li.active > .scenario-toggle,
+.scenario-story li.active > button {
   color: var(--pg-navy) !important;
   background-color: transparent;
 }
 
-.scenario-list > li.active > .scenario-toggle span {
+.scenario-list > li.active > .scenario-toggle span,
+.scenario-story li.active > button span {
   color: var(--pg-blue);
   font-weight: 700;
 }
 
-.scenario-list > li.active > .scenario-toggle strong {
+.scenario-list > li.active > .scenario-toggle strong,
+.scenario-story li.active > button strong {
   color: var(--pg-navy);
   font-weight: 700;
   text-decoration: underline;

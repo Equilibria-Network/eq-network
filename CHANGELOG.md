@@ -66,8 +66,8 @@ entries are dated rather than semver-tagged.
 - Set the scenario/story rail to open at its 480 px maximum, increased navigation type to 14–16 px, hid
   its scrollbar, and gave the entire rail a very light gray ground. Mobile story prose retains a 14 px
   minimum.
-- Simplified selected scenarios, story steps, views, and presets to navy backgrounds with white text,
-  removing every hatched control underline.
+- Simplified selected scenarios and numbered story steps to bold navy type with a plain blue underline;
+  views and presets retain navy backgrounds with white text. All hatched control underlines are removed.
 - Added a shared accessible rail-resizer for both the story and Settings panels, with pointer capture,
   keyboard bounds, double-click reset, responsive removal, and browser regression coverage.
 - Reduced reader structure to three rules: one below the sticky title and one full-height draggable
@@ -86,7 +86,8 @@ entries are dated rather than semver-tagged.
 - `/lab/playground` now uses the shared Astro layout, navbar, page header, and footer instead of injecting
   the inherited standalone HTML document.
 - The primary navigation now links to **Playground** instead of **Products**. The legacy `/products` route
-  remains unlinked until its retirement behavior is decided.
+  remains unlinked until its retirement behavior is decided. Opening that clean `/playground/` link
+  resolves to Commons instead of retaining or defaulting to the fifth scenario.
 - The original co-author showcase geometry and simulation transformations are preserved behind an SVG
   rendering layer; metrics and time-series charts update with the live playhead.
 - Scenario presets are first-class player controls. Granular settings replace the story in the same

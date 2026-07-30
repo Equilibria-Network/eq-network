@@ -28,9 +28,11 @@ one viewport. Repeated borders made the two selector rows feel like an undiffere
 - The desktop story rail starts at its 480 px maximum, uses larger 14–16 px navigation type, graphite
   prose, and a very light gray ground. Its scrollbar is visually hidden while the content remains
   scrollable. Mobile narrative copy is at least 14 px.
-- The rail is titled “Scenario Guide”. Its selected scenario stays on the light rail ground and uses
-  bold navy type with a plain blue underline; the more granular active story step, view, and preset use
-  navy ground and white text. All hatched control underlines were removed.
+- The rail is titled “Scenario Guide”. Its selected scenario and active numbered subsection stay on the
+  light rail ground and use bold navy type with a plain blue underline; views and presets use navy ground
+  and white text. All hatched control underlines were removed.
+- The shared `/playground/` navigation link has no scenario-specific URL. An absent or removed hash
+  resolves to Commons, including when the top-bar link is used from another active scenario.
 - The scenario and Settings rails use one reusable resizable separator. It supports pointer dragging,
   keyboard sizing, bounded widths, and reset without entering scenario or simulation state.
 - The reader has only three structural divider rules: beneath the sticky title, between the scenario rail
@@ -46,6 +48,7 @@ Completed on 2026-07-30:
   evidence and assumptions, rail closure, stage-width recovery, 52 px title geometry, chart fit, and
   shadow-free square reader/settings surfaces;
 - the same journey enforces the maximum initial rail width, narrative type floor, gray rail ground,
-  hidden scrollbar, the hatch-free underlined scenario state, navy/white control-tab states, pointer and
-  keyboard rail resizing, and 14 px mobile story copy;
+  hidden scrollbar, hatch-free underlined scenario and subsection states, navy/white control-tab states,
+  pointer and keyboard rail resizing, and 14 px mobile story copy;
+- an actual top-bar navigation resets an active non-default scenario to Commons;
 - desktop and 390 px journeys have no horizontal overflow, and reduced-motion behavior remains intact.

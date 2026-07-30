@@ -31,10 +31,10 @@ function PlayerIcon({ name }: { name: string }) {
 }
 
 function scenarioFromLocation(): ScenarioId {
-  if (typeof window === 'undefined') return 'combined';
+  if (typeof window === 'undefined') return 'commons';
   const queryId = new URLSearchParams(window.location.search).get('scenario');
   const id = (queryId ?? window.location.hash.replace('#', '')) as ScenarioId;
-  return id in scenarioById ? id : 'combined';
+  return id in scenarioById ? id : 'commons';
 }
 
 function initialParameters(): Record<ScenarioId, NumericParams> {
@@ -81,7 +81,7 @@ function metricDelta(value: number, baseline: number, metric: MetricDefinition):
 }
 
 export default function App() {
-  const [scenarioId, setScenarioId] = useState<ScenarioId>('combined');
+  const [scenarioId, setScenarioId] = useState<ScenarioId>('commons');
   const definition = scenarioById[scenarioId];
   const [paramsByScenario, setParamsByScenario] =
     useState<Record<ScenarioId, NumericParams>>(initialParameters);
@@ -121,7 +121,9 @@ export default function App() {
   useEffect(() => {
     const client = new SimulationClient();
     clientRef.current = client;
-    setScenarioId(scenarioFromLocation());
+    const syncScenarioFromLocation = () => setScenarioId(scenarioFromLocation());
+    syncScenarioFromLocation();
+    window.addEventListener('hashchange', syncScenarioFromLocation);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const respectMotionPreference = (event: MediaQueryListEvent | MediaQueryList) => {
       if (event.matches) setPlaying(false);
@@ -129,6 +131,7 @@ export default function App() {
     respectMotionPreference(reducedMotion);
     reducedMotion.addEventListener('change', respectMotionPreference);
     return () => {
+      window.removeEventListener('hashchange', syncScenarioFromLocation);
       reducedMotion.removeEventListener('change', respectMotionPreference);
       client.dispose();
     };

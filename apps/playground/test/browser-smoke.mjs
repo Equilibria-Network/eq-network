@@ -182,7 +182,7 @@ try {
     }),
     selectedControlTabs: [
       ...document.querySelectorAll(
-        '.scenario-story li.active > button, .view-tabs button.active, .condition-options button.active'
+        '.view-tabs button.active, .condition-options button.active'
       )
     ].every((node) => {
       const style = getComputedStyle(node);
@@ -190,6 +190,19 @@ try {
     }),
     selectedScenario: (() => {
       const node = document.querySelector('.scenario-list > li.active > .scenario-toggle');
+      const label = node.querySelector('strong');
+      const style = getComputedStyle(node);
+      const labelStyle = getComputedStyle(label);
+      return {
+        background: style.backgroundColor,
+        color: style.color,
+        weight: Number.parseInt(labelStyle.fontWeight, 10),
+        decoration: labelStyle.textDecorationLine,
+        decorationColor: labelStyle.textDecorationColor
+      };
+    })(),
+    selectedStory: (() => {
+      const node = document.querySelector('.scenario-story li.active > button');
       const label = node.querySelector('strong');
       const style = getComputedStyle(node);
       const labelStyle = getComputedStyle(label);
@@ -259,6 +272,11 @@ try {
   assert.ok(initial.selectedScenario.weight >= 700);
   assert.equal(initial.selectedScenario.decoration, 'underline');
   assert.equal(initial.selectedScenario.decorationColor, 'rgb(74, 179, 244)');
+  assert.equal(initial.selectedStory.background, 'rgba(0, 0, 0, 0)');
+  assert.equal(initial.selectedStory.color, 'rgb(0, 59, 126)');
+  assert.ok(initial.selectedStory.weight >= 700);
+  assert.equal(initial.selectedStory.decoration, 'underline');
+  assert.equal(initial.selectedStory.decorationColor, 'rgb(74, 179, 244)');
   assert.equal(initial.hatchedTabCues, false);
   assert.equal(initial.leftDividerImage, 'none');
   assert.equal(initial.leftResizer, true);
@@ -592,6 +610,16 @@ try {
     });
     await writeFile(process.env.PLAYGROUND_MOBILE_SCREENSHOT, Buffer.from(capture.data, 'base64'));
   }
+
+  await evaluate(`[
+    ...document.querySelectorAll('body > header nav a')
+  ].find((link) => link.textContent.trim() === 'Playground').click()`);
+  await waitFor(
+    `location.pathname === '/playground/' &&
+      location.hash === '#commons' &&
+      document.querySelector('.scenario-list > li.active > .scenario-toggle strong')?.textContent.trim() === 'Commons'`,
+    'The top-bar Playground link did not return the app to Commons.'
+  );
 
   console.log(
     JSON.stringify(
