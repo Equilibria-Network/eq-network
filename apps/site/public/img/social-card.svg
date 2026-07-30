@@ -1,27 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#fff"/>
-  <rect x="40" y="40" width="1120" height="550" fill="#fff" stroke="#B8CDE2"/>
-  <g stroke="#E9F0F7">
-    <path d="M72 82v508M104 82v508M136 82v508M168 82v508M200 82v508M232 82v508M264 82v508M296 82v508M328 82v508M360 82v508M392 82v508M424 82v508M456 82v508M488 82v508M520 82v508M552 82v508M584 82v508M616 82v508M648 82v508M680 82v508M712 82v508M744 82v508M776 82v508M808 82v508M840 82v508M872 82v508M904 82v508M936 82v508M968 82v508M1000 82v508M1032 82v508M1064 82v508M1096 82v508M1128 82v508"/>
-    <path d="M40 114h1120M40 146h1120M40 178h1120M40 210h1120M40 242h1120M40 274h1120M40 306h1120M40 338h1120M40 370h1120M40 402h1120M40 434h1120M40 466h1120M40 498h1120M40 530h1120M40 562h1120"/>
-  </g>
-  <rect x="40" y="40" width="1120" height="42" fill="#fff" stroke="#B8CDE2"/>
-  <text x="64" y="67" fill="#003B7E" font-family="monospace" font-size="13" letter-spacing="2">EQUILIBRIA NETWORK / SYSTEM MAP</text>
-  <text x="1080" y="67" fill="#003B7E" font-family="monospace" font-size="13" letter-spacing="2">01</text>
-  <rect x="64" y="106" width="360" height="434" fill="#F7FAFD" stroke="#B8CDE2"/>
-  <g transform="translate(112 137) scale(1.1)" fill="none" stroke="#003B7E" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M120 119C94 79 53 25 27 18C2 11 10 124 65 205C88 239 108 226 110 190C111 157 112 135 120 119C128 135 129 157 130 190C132 226 152 239 175 205C230 124 238 11 213 18C187 25 146 79 120 119Z" stroke-width="8"/>
-    <path d="M120 119C94 79 53 25 27 18C2 11 10 124 65 205C88 239 108 226 110 190C111 157 112 135 120 119Z" transform="translate(68 120) scale(.78) translate(-68 -120)" stroke-width="1.15"/>
-    <path d="M120 119C128 135 129 157 130 190C132 226 152 239 175 205C230 124 238 11 213 18C187 25 146 79 120 119Z" transform="translate(172 120) scale(.78) translate(-172 -120)" stroke-width="1.15"/>
-    <path d="M120 119C94 79 53 25 27 18C2 11 10 124 65 205C88 239 108 226 110 190C111 157 112 135 120 119Z" transform="translate(68 120) scale(.57) translate(-68 -120)" stroke-width="1.15"/>
-    <path d="M120 119C128 135 129 157 130 190C132 226 152 239 175 205C230 124 238 11 213 18C187 25 146 79 120 119Z" transform="translate(172 120) scale(.57) translate(-172 -120)" stroke-width="1.15"/>
-    <path d="M120 119C94 79 53 25 27 18C2 11 10 124 65 205C88 239 108 226 110 190C111 157 112 135 120 119Z" transform="translate(68 120) scale(.38) translate(-68 -120)" stroke-width="1.15"/>
-    <path d="M120 119C128 135 129 157 130 190C132 226 152 239 175 205C230 124 238 11 213 18C187 25 146 79 120 119Z" transform="translate(172 120) scale(.38) translate(-172 -120)" stroke-width="1.15"/>
-  </g>
-  <text x="492" y="220" fill="#003B7E" font-family="DejaVu Sans, sans-serif" font-size="82" font-weight="700">Equilibria</text>
-  <text x="496" y="277" fill="#0B1F3A" font-family="DejaVu Sans, sans-serif" font-size="29">Designing new forms of</text>
-  <text x="496" y="318" fill="#0B1F3A" font-family="DejaVu Sans, sans-serif" font-size="29">collective intelligence.</text>
-  <line x1="496" y1="375" x2="1080" y2="375" stroke="#B8CDE2"/>
-  <text x="496" y="410" fill="#4AB3F4" font-family="monospace" font-size="16" letter-spacing="2">SIMULATIONS / MATHEMATICS / COORDINATION</text>
-  <text x="496" y="500" fill="#003B7E" font-family="monospace" font-size="18" letter-spacing="1">eq-network.org</text>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">Equilibria Network social card</title>
+  <desc id="description">
+    The Equilibria Network logo in white on a deep blue field.
+  </desc>
+
+  <defs>
+    <pattern id="hatch" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M-4 4L4-4M0 18L18 0M14 22L22 14" fill="none" stroke="#FFFFFF" stroke-width="1" />
+    </pattern>
+
+    <filter id="white-mark" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 1 0"
+      />
+    </filter>
+
+  </defs>
+
+  <rect width="1200" height="630" fill="#003B7E" />
+  <rect width="1200" height="630" fill="url(#hatch)" opacity=".055" />
+
+  <image
+    href="logo/logo_icon_text_big.svg"
+    x="70"
+    y="58"
+    width="430"
+    height="81"
+    preserveAspectRatio="xMinYMid meet"
+    filter="url(#white-mark)"
+  />
+
+  <text
+    x="72"
+    y="563"
+    fill="#FFFFFF"
+    opacity=".88"
+    font-family="IBM Plex Mono, DejaVu Sans Mono, monospace"
+    font-size="22"
+    font-weight="500"
+    letter-spacing="1.2"
+  >
+    eq-network.org
+  </text>
 </svg>
