@@ -127,6 +127,7 @@ A board-wide version bump off the inherited majors, in verified layers.
 - TypeScript **7** (the native compiler) is deferred: `@astrojs/check` and `typescript-eslint` do not
   support it yet. See [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md); ADR-0004 (i18n-readiness)
   is now Accepted.
+
 ## [2026-07-29] — Playground: two acts of the question-first redesign
 
 First feature work on the model suite after the forest-walk session (see `DESIGN-LOG.md` for the
@@ -157,6 +158,7 @@ design record and decisions).
 - Restored work dropped by the 2026-07-29 stash dance during the monorepo pull: the page preamble
   ("these are toy models / nothing here pushes back") and its self-test, the headless-harness guard
   on the assumptions rung, and the optimiser-gap notes in the lab-content-review audit.
+
 ## [2026-07-28] — Engineering baseline
 
 The first tracked entry. A cleanup pass to bring the inherited site to a clean, enforceable baseline
