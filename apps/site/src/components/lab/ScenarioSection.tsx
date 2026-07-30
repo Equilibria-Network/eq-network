@@ -92,6 +92,11 @@ export default function ScenarioSection({ scenario }: ScenarioSectionProps) {
                     </li>
                   ))}
                 </ul>
+                {scenario.playgroundHref && (
+                  <a className={styles.assumptionsPlayground} href={scenario.playgroundHref}>
+                    Full modelling notes sit beside the sliders in the playground →
+                  </a>
+                )}
               </details>
             )}
 

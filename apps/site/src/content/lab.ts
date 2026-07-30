@@ -47,6 +47,10 @@ export interface Scenario {
   status: ScenarioStatus;
   /** Extra status context, e.g. which engine experiments back a live scenario. */
   engineNote?: string;
+  /** Deep link to this scenario's playground tab — where the full modelling
+   *  notes now live, beside the sliders they describe. NOTE: playground game
+   *  ids differ from ScenarioId in one case (economic → #economy). */
+  playgroundHref?: string;
   visual: ScenarioVisualSpec;
 }
 
@@ -198,27 +202,21 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-          text: 'One aggregate, non-spatial resource pool with logistic regrowth — the closed-form Ostrom anchor.',
+          text: 'One shared pool with logistic regrowth, harvested through fixed-behavior AI delegates. The key dial — delegate alignment — is a knob calibrated so the undefended baseline collapses, not a measured quantity.',
           omits: 'space, heterogeneous access rights, prices and trade',
-        },
-        {
-          text: 'Households act only through fixed-behavior AI delegates, each blending its principal’s sustainable ask with a fixed greedy target. The blend (alignment) is a knob calibrated so the undefended baseline collapses — not a measured quantity.',
         },
         {
           text: 'Delegates never learn, so sanctions can confiscate but not deter.',
           omits: 'deterrence — that needs a learning delegate, tracked in the engine backlog',
         },
         {
-          text: 'Governance is deliberately v0-simple: the median vote becomes next tick’s quota; over-quota defection is a fixed coin-flip.',
-          omits: 'delegated, strategic, or repeated voting',
-        },
-        {
-          text: 'Uniquely among the scenarios, influence is measured causally here: paired same-seed runs with shifted preferences, differenced.',
+          text: 'Nobody talks: communication — the strongest measured fix in real commons experiments (Ostrom–Walker–Gardner 1992) — has no channel here.',
         },
       ],
       status: 'live',
       engineNote:
-        'Running today in the Collective Intelligence Library engine (fishing commons and governed harvest experiments).',
+        'Running today in the Collective Intelligence Library engine (fishing commons and governed harvest experiments); the only scenario with published benchmark scores so far.',
+      playgroundHref: '/lab/playground#commons',
       visual: {
         seed: 1100,
         beats: 6,
@@ -253,24 +251,19 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-          text: 'The playable model is one CES production function over total labor and total compute; the substitutability dial ρ decides everything (σ = 2 by default; ρ = 0 recovers the textbook constant labor share exactly).',
+          text: 'The whole economy is one CES production function; the substitutability dial decides everything, and with substitution high and reinvestment fixed, the collapse is assumed, not discovered. Successor substrates bracket that assumption instead of hard-coding it.',
           omits: 'any trade network — the economy is one equation',
         },
         {
-          text: 'AI compute compounds by a fixed reinvestment rule — not a decision anyone in the model makes.',
-          omits: 'strategic investment or competition between AI actors',
+          text: 'There is no floor: the human income share is still sliding at tick 1500. The one scenario that collapses honestly.',
         },
         {
-          text: 'AI arrives on an exogenous schedule; adoption is not returns-driven.',
-        },
-        {
-          text: 'Households only supply labor, mildly wage-adjusted; there is no demand side, no state actor, and the only human channel is labor.',
-        },
-        {
-          text: 'The engine’s model register demoted this substrate to a pedagogical rung: with σ > 1 and fixed reinvestment, labor-share decline is what CES means — the collapse is assumed, not discovered. Successor substrates (a zero-substitution recipe economy and a task-frontier model) bracket that assumption instead of hard-coding it.',
+          text: 'No buying: households only supply labor, so the consumption half of Gradual Disempowerment §2 cannot happen in this substrate.',
+          omits: 'demand side, state actor',
         },
       ],
-      status: 'in-design',
+      status: 'live',
+      playgroundHref: '/lab/playground#economy',
       visual: {
         seed: 2200,
         beats: 6,
@@ -305,25 +298,19 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-          text: 'Culture is tracked by origin only — human- vs AI-originated — as a two-sided contagion.',
+          text: 'Culture is tracked by origin only — human- vs AI-originated — as a two-sided contagion on a network drawn once and frozen.',
           omits:
-            'what the ideas actually say (content and dissonance belong to a planned sibling model)',
+            'what the ideas actually say (content and dissonance belong to a planned sibling model), rewiring, media structure, population turnover',
         },
         {
-          text: 'The persuasive advantage rides on the variant, not the carrier: a converted human spreads AI-origin culture at full strength.',
+          text: 'The non-collapse floor is one slider: native reversion, a constant that keeps firing however small the native community gets. Zero it in the playground and displacement runs to completion — we checked (share 0.59 → 0.008).',
         },
         {
-          text: 'AI nodes are a frozen reservoir and humans revert natively at a fixed rate. Reversion is load-bearing — without it, universal AI culture is the only fixed point and pluralism cannot exist.',
-        },
-        {
-          text: 'The friendship network is drawn once per run (degree-corrected homophily) and never rewires.',
-          omits: 'network adaptation, media structure, population turnover',
-        },
-        {
-          text: 'The deliverable is a 2×2 phase table (separation × catchiness), never one number: a low AI cultural share means two different worlds depending on whether the communities have separated.',
+          text: 'Reversion is load-bearing: without it, universal AI culture is the only fixed point and pluralism cannot exist.',
         },
       ],
-      status: 'in-design',
+      status: 'live',
+      playgroundHref: '/lab/playground#cultural',
       visual: {
         seed: 3300,
         beats: 10,
@@ -358,26 +345,20 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-          text: 'A polity is an attention structure: one row-stochastic listening matrix. Influence is its left eigenvector — which, for DeGroot opinion pooling, is exactly each node’s weight in the eventual consensus (Golub–Jackson).',
+          text: 'A polity is one listening matrix; influence is its leading eigenvector (Golub–Jackson), and citizens stay partially anchored to their own signal (Friedkin–Johnsen) — the anchor keeps amplified worlds distinguishable.',
           omits: 'parties, elections, representation, a state actor',
         },
         {
-          text: 'Citizens stay partially anchored to their own initial signal (Friedkin–Johnsen). The anchor is load-bearing: pure DeGroot with a pinned AI reservoir converges to the reservoir however dispersed influence is, and the wisdom-of-crowds readout could not discriminate.',
+          text: 'The floor is baked in: AI actors never stop listening to citizens, so the human share stops near 0.46 however hard the sliders push — swept and insensitive; no dial removes it.',
         },
         {
-          text: 'AI actors differ only by scheduled amplification of attractiveness — algorithmic reach, not persuasive content (content lives in the cultural scenario, deliberately).',
-        },
-        {
-          text: 'Attention drifts by preferential attachment, so concentration is organic before any AI appears — the AI effect is measured against that baseline.',
-        },
-        {
-          text: 'Hierarchy is not modeled: concentration emerges on a flat network.',
-          omits: 'organisations and multi-level structure',
+          text: 'This scenario measures who gets heard — voice, not the state. Gradual Disempowerment §4 is about tax base, coercion, and legitimacy; that substrate does not exist here yet.',
         },
       ],
-      status: 'in-design',
+      status: 'live',
       engineNote:
-        'Backend v0 landed 2026-07-27 (influence_exchange, 8-rung validation ladder incl. the Golub–Jackson eigenvector anchor); playable in the playground. Not yet in the published benchmark, so the chip stays honest.',
+        'Backend landed 2026-07-27 (influence_exchange, 8-rung validation ladder incl. the Golub–Jackson eigenvector anchor); benchmark scores land on the leaderboard below.',
+      playgroundHref: '/lab/playground#political',
       visual: {
         seed: 4400,
         beats: 6,
@@ -398,7 +379,7 @@ export const labContent: LabContent = {
       dynamic:
         'Domains that are each recoverable alone can lock in jointly — and a defense that wins in one domain can lose once the domains are coupled.',
       example:
-        'All three environments — the compute economy, the value epidemic, the influence network — running simultaneously, coupled: economic power buys persuasion, persuasion shifts politics, politics rewrites market rules. Mechanisms that pass each domain’s benchmark run again here, together.',
+        'All three environments — the compute economy, the value epidemic, the influence network — running simultaneously, coupled: economic power buys persuasion, persuasion shifts politics, politics rewrites market rules, and the flywheel closes as captured rules pay rents to AI capital and converted humans buy AI services. Mechanisms that pass each domain’s benchmark run again here, together.',
       measures: [
         'Cross-domain coupling strength',
         'Correlated-decline index across domains',
@@ -411,25 +392,21 @@ export const labContent: LabContent = {
       ],
       assumptions: [
         {
-          text: 'Composition, not a new model: the three substrates’ own equations run interleaved in one state over one shared population. Whatever each domain’s card assumes, this scenario inherits verbatim.',
+          text: 'Composition, not a new model: the three substrates’ own equations run interleaved in one state over one shared population — every sibling card’s assumptions are inherited verbatim, floors included.',
         },
         {
-          text: 'Three couplings, one dial κ — money buys reach, culture directs attention, influence writes the rules (tax enforcement) — all exactly neutral at κ = 0, so every run has a sealed same-seed twin. That sealing is the transfer-gap instrument’s built-in null.',
+          text: 'Five couplings, one dial κ — money buys reach, culture directs attention, influence writes the rules, captured rules pay rents to AI capital, converted humans buy AI services — all exactly neutral at κ = 0, so every run has a sealed same-seed twin.',
+          omits:
+            'measured coupling strengths — gains are hand-set; only sign and ordering claims are robust',
         },
         {
-          text: 'Coupling functional forms are linear with hand-set gains, chosen for legibility. The gains’ magnitudes ARE the scale of the result; only sign and ordering claims are robust.',
-          omits: 'measured coupling strengths',
-        },
-        {
-          text: 'Per-domain dials default mild, so any joint decline is attributable to the coupling rather than to stacking three separately lethal baselines.',
-        },
-        {
-          text: 'The spectral lock-in conjecture (each domain stable alone, the coupled system unstable) is an unverified research thread — nothing currently tests it, and it is not presented as a finding.',
+          text: 'A loop plus two rent channels, not the paper’s full mesh — and nothing here is a basin: everything is a rate or a level, so irreversibility itself is not yet modeled. The spectral lock-in conjecture stays an unverified research thread, not a finding.',
         },
       ],
-      status: 'in-design',
+      status: 'live',
       engineNote:
-        'Backend v0 landed 2026-07-27 (coupled_society): defense transfer gap 0.075 defended / 0.094 undefended at defaults; playable in the playground. Not yet in the published benchmark, so the chip stays honest.',
+        'Backend landed 2026-07-27 (coupled_society, five κ-gated couplings): transfer gap 0.128 defended / 0.109 undefended at defaults — the defended gap is larger, the sharpest form of the paper’s claim. Benchmark scores land on the leaderboard below.',
+      playgroundHref: '/lab/playground#combined',
       visual: {
         seed: 5500,
         beats: 6,
