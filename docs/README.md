@@ -11,7 +11,8 @@ given app lives under that app's own `docs/`:
 
 - **Site docs:** [`../apps/site/docs/`](../apps/site/docs/README.md) — the public Astro website
   (ADRs, tasks, audits, context, runbooks, privacy, handoffs).
-- **Playground docs:** `apps/playground/docs/` — created when that app's work begins.
+- **Playground docs:** [`../apps/playground/docs/`](../apps/playground/docs/README.md) — the integrated
+  browser simulation package (architecture, tasks, audits, context, performance, privacy, and runbooks).
 
 If a decision or task concerns one app only, it belongs in that app's `docs/`, not here.
 
@@ -30,7 +31,9 @@ docs/
 
 - **ADR:** [`adr/0001-monorepo-topology.md`](adr/0001-monorepo-topology.md) — the pnpm-workspace
   decomposition into `apps/site`, `apps/playground`, and `packages/`; and
-  [`adr/0002-per-app-docs-layout.md`](adr/0002-per-app-docs-layout.md) — why docs are scoped per app.
+  [`adr/0002-per-app-docs-layout.md`](adr/0002-per-app-docs-layout.md) — why docs are scoped per app; and
+  [`adr/0003-integrated-playground-deployment.md`](adr/0003-integrated-playground-deployment.md) — the
+  implemented site/package boundary that replaces the original iframe/subdomain assumption.
 - **Tasks:** [`tasks/done/task-0001-repo-structure.md`](tasks/done/task-0001-repo-structure.md) records
   the workspace migration; [`tasks/open/task-0002-standalone-lorenz-app.md`](tasks/open/task-0002-standalone-lorenz-app.md)
   scopes the standalone interactive-visual workbench.

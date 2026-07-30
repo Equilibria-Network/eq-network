@@ -4,6 +4,33 @@ All notable changes to this site are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/). This is a continuously-deployed static site, so
 entries are dated rather than semver-tagged.
 
+## [2026-07-30] — Integrated collective-intelligence playground
+
+### Added
+
+- A typed React playground package with five deterministic browser simulations, worker-owned numerical
+  execution, live metrics, scenario presets, playback controls, A/B comparison, and shareable state.
+- Scientific golden tests, scenario-contract tests, a validation ladder, and a dependency-free desktop
+  and mobile browser smoke journey.
+- App-scoped architecture, task, performance, privacy, audit, and development documentation.
+
+### Changed
+
+- `/lab/playground` now uses the shared Astro layout, navbar, page header, and footer instead of injecting
+  the inherited standalone HTML document.
+- The primary navigation now links to **Playground** instead of **Products**. The legacy `/products` route
+  remains unlinked until its retirement behavior is decided.
+- The original co-author showcase geometry and simulation transformations are preserved behind an SVG
+  rendering layer; metrics and time-series charts update with the live playhead.
+- Scenario presets are first-class player controls. Granular settings replace the story in the same
+  right-hand details rail instead of opening a modal.
+
+### Performance
+
+- Numerical work runs in a cancellable module worker and transfers typed arrays.
+- Adopted local budgets and preserved dated Lighthouse evidence; later development-server measurements
+  are explicitly separated from the production-build baseline.
+
 ## [2026-07-28] — Dependency and toolchain upgrade
 
 A board-wide version bump off the inherited majors, in verified layers.

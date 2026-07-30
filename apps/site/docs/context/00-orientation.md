@@ -10,10 +10,11 @@ The site lives in `apps/site/` of a pnpm workspace (see [ADR-0001](../../../../d
 
 ## Stack
 
-- **Astro 4** with `output: 'static'` — the site generator and router. One file per route under `apps/site/src/pages/`.
-- **React 18** islands via `@astrojs/react` — used only for interactive pieces (the lab simulations, the
+- **Astro 7** with `output: 'static'` — the site generator and router. One file per route under `apps/site/src/pages/`.
+- **React 19** islands via `@astrojs/react` — used only for interactive pieces (the lab simulations, the
   research graph, the roadmap, the contact form). Most of the page is static HTML.
-- **CSS Modules + global CSS** under `apps/site/src/styles/` for styling. No CSS framework.
+- **Tailwind 4 + CSS Modules + global CSS** provide the shared styling foundation and page-specific
+  composition.
 - **roughjs** for the hand-drawn visual style; **lucide-react** for icons.
 - **@formspree/react** for the contact form.
 - **pnpm** for packages; **TypeScript** in strict mode.
@@ -26,14 +27,23 @@ file, not the component.
 
 ## Routes
 
-`apps/site/src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`, `roadmap`,
-`explainer`, `privacy`, `lab`, `lab/playground`, and a `404`. The lab and its playground are unlisted (absent from
-the navbar).
+`apps/site/src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`,
+`roadmap`, `explainer`, `privacy`, `legal`, `brand`, `lab`, `lab/playground`, prototypes, and a `404`.
+The primary navigation links to the playground. The legacy Products route still builds but is unlinked
+pending the retirement decision in
+[`task-0012`](../tasks/deferred/task-0012-retire-products-route.md).
 
 ## The playground
 
-`/lab/playground` renders `apps/site/prototypes/playground.html` imported raw at build time. That HTML file is the
-single source of truth for the prototype and is deliberately not wrapped in the site layout.
+`/lab/playground` mounts `@eq-network/playground/embed` inside the canonical Astro `Layout` and
+`PageHeader`. The workspace package owns the scenario registry, numerical worker, live metrics, SVG
+showcases, controls, tests, and app-scoped docs. The old `apps/site/prototypes/playground.html` remains
+comparison material only and is not imported by production.
+
+The package has a standalone Vite harness for focused development, but production ships in
+`apps/site/dist` with the same navbar and footer as every other site page. See
+[`playground architecture`](../../../playground/docs/architecture/scenario-platform.md) and the
+repo-wide [`integration ADR`](../../../../docs/adr/0003-integrated-playground-deployment.md).
 
 ## How it ships
 
@@ -48,5 +58,5 @@ before building or editing a page so new work matches instead of drifting.
 
 ## The one thing that must work
 
-Any page loads and reads correctly, and the site builds and deploys from `main`. Everything else is
-secondary.
+Any page loads and reads correctly, the playground retains its characterized scientific behavior, and the
+site builds and deploys from `main`.

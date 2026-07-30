@@ -1,13 +1,72 @@
-# @eq-network/playground
+# Collective Intelligence Playground
 
-Placeholder for the interactive agent-based-model playground — a browser-run simulation with tweakable
-parameters (agent count, iteration settings, etc.), serving the accessible tier of the modelling tools.
-The full high-powered engine lives in a separate repository.
+A static, browser-run laboratory for exploring how economic, cultural, political, and commons
+institutions change when humans and AI systems share the same networks. It is developed as a workspace
+package and mounted at `/lab/playground` inside the Equilibria website's canonical layout.
 
-Not yet implemented. The current prototype is served by the site from `apps/site/prototypes/playground.html`
-(imported raw at build time). When playground development starts, that prototype migrates here into a real
-app with its own build, its own `docs/adr/tasks/`, and its own deploy target (a header-capable static host,
-since multi-threaded WebAssembly needs `SharedArrayBuffer` / COOP+COEP headers that GitHub Pages cannot set).
+The app contains five deterministic toy-model scenarios:
 
-See [`../../docs/adr/0001-monorepo-topology.md`](../../docs/adr/0001-monorepo-topology.md) and
-[`../../apps/site/docs/adr/0001-astro-static-github-pages.md`](../../apps/site/docs/adr/0001-astro-static-github-pages.md).
+1. Governed commons
+2. Economic displacement
+3. Cultural contagion
+4. Political influence exchange
+5. A coupled society
+
+Every scenario provides a guided story, reproducible presets and seeds, optional model settings,
+animated graph views, time-series readouts, and a derived pipeline view. The models are
+qualitative browser ports of the Collective Intelligence Library examples; they are teaching and
+exploration instruments, not forecasts.
+
+## Develop
+
+From the repository root:
+
+```bash
+pnpm install
+pnpm --filter @eq-network/site dev --host 0.0.0.0 --port 4321
+```
+
+Open `http://localhost:4321/lab/playground/` locally or the printed network URL from another machine.
+This canonical site server includes the real navbar, page header, footer, and Astro integration. Use
+`pnpm dev:playground` only for package-isolated work; it is not a separate production website.
+
+```bash
+pnpm --filter @eq-network/playground test
+pnpm --filter @eq-network/playground build
+pnpm --filter @eq-network/site build
+pnpm --filter @eq-network/playground smoke:browser
+```
+
+The Vite build is a development harness. Production is the statically generated site route at
+`apps/site/dist/lab/playground/`. The route is currently `noindex`. No backend, API key, analytics, cookie,
+or personal-data store is used.
+
+## Structure
+
+```text
+apps/playground/
+├── docs/               App-scoped decisions, tasks, context, operations, and privacy
+├── public/             Working paper and local brand reference assets
+├── src/
+│   ├── components/     SVG showcase, live chart, and pipeline views
+│   ├── engine/         Pure kernel, typed contracts, worker, and latest-wins client
+│   ├── metrics/        Playhead-derived live metric projections
+│   ├── rendering/      Scenario-specific SVG geometry and drawing primitives
+│   ├── scenarios/      Typed stories, parameters, presets, metrics, and views
+│   ├── App.tsx         Scenario reader and experiment workbench
+│   ├── embed.ts        Stable production export consumed by Astro
+│   ├── main.tsx        Standalone development harness
+│   └── styles.css      Equilibria-scoped workbench visual system
+├── test/               Scientific tests, validation, benchmarks, and browser smoke
+├── index.html          Accessible document shell and application mount point
+└── package.json        Independent app commands and dependencies
+```
+
+The numerical kernel is a characterized port of the paper examples. React never runs it directly: all
+trajectories are produced in a cancellable module worker and transferred as typed arrays. The scenario
+registry drives navigation, narrative, parameters, presets, metrics, and view selection. The restored
+co-author showcase geometry is rendered as SVG, while live metric cards and time-series charts read the
+same trajectory and playhead.
+
+Architecture, scaling thresholds, decisions, and task status are indexed in
+[`docs/README.md`](docs/README.md).

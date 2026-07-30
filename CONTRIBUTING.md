@@ -25,11 +25,13 @@
 
 ## 1. Project Scope & Calibration
 
-**Project type:** Public marketing and research website (static site).
+**Project type:** Public marketing and research website with an integrated browser simulation package
+(static deployment).
 
 **Users:** External visitors. Policymakers, AI-lab researchers, and academic readers are the stated audiences.
 
-**Scale expectation:** Single static bundle served from a CDN (GitHub Pages). No backend, no database, no server-side runtime.
+**Scale expectation:** One static deployment served from a CDN (GitHub Pages). Numerical simulation runs
+in a browser worker. There is no backend, database, or server-side runtime.
 
 **Longevity:** Maintained. The site is the organisation's public front door at `eq-network.org`.
 
@@ -55,11 +57,12 @@ the data map rather than as an ADR.)
 **Third-party data processors:** GitHub Pages (hosting, US); Formspree (contact-form processing, US).
 Full inventory in [`apps/site/docs/privacy/data-map.md`](apps/site/docs/privacy/data-map.md).
 
-**Core user outcome:** A visitor can load any page and read the organisation's content, and the site
-builds and deploys cleanly from `main`. The contact form reaching a human is important but secondary.
+**Core user outcome:** A visitor can read the organisation's content and explore the five explanatory
+playground scenarios without leaving the website. The site builds and deploys cleanly from `main`. The
+contact form reaching a human is important but secondary.
 
 **Current non-goals:** Server-side rendering, a backend or database, user accounts or auth, a public API,
-analytics, internationalisation, and automated end-to-end browser tests. See Section 3.
+analytics, internationalisation, remote simulation, and production telemetry. See Section 3.
 
 **Cost of failure:** Low. A broken deploy leaves the previous published build live. There is no data to
 lose beyond in-flight contact messages.
@@ -80,14 +83,16 @@ the reason is recorded in Section 3.
 
 ## 2. Principles In Force
 
-| Principle                            | Why It Applies Here                                                                                                                                                                    |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Content is data, not markup**      | Page copy lives in typed files under `apps/site/src/content/`. Components render data. This keeps content edits away from layout code and is the pattern the codebase already follows. |
-| **Reproducible builds**              | The published site must be rebuildable from a tagged commit. The lockfile is authoritative; CI installs from it.                                                                       |
-| **Type-check gates the build**       | `astro check` runs inside `pnpm build`. A type error fails the build rather than shipping. This is the project's automated safety floor in the absence of a test suite.                |
-| **No secrets in the repository**     | The site is public and read-only. The only secret is the Formspree endpoint, injected from a repository secret at build time.                                                          |
-| **Explicit over implicit**           | Content, routes, and component boundaries are readable cold. No hidden magic.                                                                                                          |
-| **One source of truth per artifact** | The playground page renders `apps/site/prototypes/playground.html` imported raw; the prototype is edited in one place, not copied.                                                     |
+| Principle                                   | Why It Applies Here                                                                                                                                                                                                  |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Content is data, not markup**             | Site copy lives in typed files under `apps/site/src/content/`; playground narrative, parameters, presets, and metric definitions live in its typed scenario registry. Components render those contracts.             |
+| **Reproducible builds**                     | The published site must be rebuildable from a tagged commit. The lockfile is authoritative; CI installs from it.                                                                                                     |
+| **Type-check gates the build**              | `pnpm build` type-checks both the Astro site and the playground package before producing static artifacts.                                                                                                           |
+| **Scientific behavior is characterized**    | Applied 2026-07-30. Golden trajectories and validation checks protect the inherited numerical transformations while UI and renderer work continues.                                                                  |
+| **Interactive journeys get browser checks** | Applied 2026-07-30. A dependency-free Chrome journey covers worker recomputation, live metrics, SVG validity, settings/story replacement, sticky-title paint order, deep links, reduced motion, and mobile overflow. |
+| **No secrets in the repository**            | The site is public and read-only. The only secret is the Formspree endpoint, injected from a repository secret at build time.                                                                                        |
+| **Explicit over implicit**                  | Content, routes, scenario contracts, and worker boundaries are readable cold. No hidden runtime service or global state store.                                                                                       |
+| **One source of truth per artifact**        | `apps/playground` owns the production simulation. The old raw HTML prototype is comparison material only; it is not imported by the live route.                                                                      |
 
 ---
 
@@ -96,13 +101,13 @@ the reason is recorded in Section 3.
 > This section is as important as Section 2. These are practices that general engineering guidance
 > recommends but that this project has decided not to apply, at this scale, for these reasons.
 
-| Principle                                     | Status   | Reason                                                                                                                                                  | Revisit When                                                                                                                                 |
-| --------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Automated test suite (unit / component / E2E) | Skipped  | Static content site. `astro check` (type-check in the build) is the safety floor. The cost of a visual or copy regression is low and caught by preview. | Interactive components (the lab simulations, the research graph) grow logic whose breakage would be silent, or a regression ships unnoticed. |
-| Server-side rendering / backend               | Skipped  | No dynamic data, no per-user state, no need. Static output is simpler, cheaper, and safer.                                                              | The site needs authenticated content, server-side data, or per-request logic.                                                                |
-| Analytics / telemetry                         | Skipped  | Privacy-first default. No visitor data collected beyond the contact form.                                                                               | The team decides it needs audience metrics; then choose a privacy-respecting, EU-resident option and record the processor.                   |
-| Content Security Policy / security headers    | Deferred | GitHub Pages cannot set response headers. The static site loads no third-party scripts, which removes most of the risk a CSP would mitigate.            | The site moves to a host that can set headers, or begins loading third-party scripts.                                                        |
-| Dependency-injection / layered architecture   | Skipped  | A component-and-content site does not need it. It would add indirection without a testability or changeability benefit.                                 | Never, for a site of this shape.                                                                                                             |
+| Principle                                     | Status                                | Reason                                                                                                                                                                | Revisit When                                                                                                               |
+| --------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Automated test suite (unit / component / E2E) | Applied 2026-07-30 for the playground | The simulation now has deterministic scientific, validation, contract, and browser-journey checks. Static editorial pages still rely on type-check/build plus review. | Extend coverage when another interactive surface gains behavior whose failure would be silent.                             |
+| Server-side rendering / backend               | Skipped                               | No dynamic data, no per-user state, no need. Static output is simpler, cheaper, and safer.                                                                            | The site needs authenticated content, server-side data, or per-request logic.                                              |
+| Analytics / telemetry                         | Skipped                               | Privacy-first default. No visitor data collected beyond the contact form.                                                                                             | The team decides it needs audience metrics; then choose a privacy-respecting, EU-resident option and record the processor. |
+| Content Security Policy / security headers    | Deferred                              | GitHub Pages cannot set response headers. The static site loads no third-party scripts, which removes most of the risk a CSP would mitigate.                          | The site moves to a host that can set headers, or begins loading third-party scripts.                                      |
+| Dependency-injection / layered architecture   | Skipped                               | A component-and-content site does not need it. It would add indirection without a testability or changeability benefit.                                               | Never, for a site of this shape.                                                                                           |
 
 ### How to update this table
 
@@ -120,18 +125,20 @@ the ADR is the record.
 agent or contributor may draft an ADR, but does not accept it on the owner's behalf. Back-filled ADRs that
 document an already-shipped choice still start `Proposed` until the owner ratifies the write-up.
 
-| Date           | Decision                                                      | ADR                                                                      | Status     |
-| -------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------- |
-| 2025 (approx.) | Migrate from Docusaurus to Astro static output                | [ADR-0001](apps/site/docs/adr/0001-astro-static-github-pages.md)         | Accepted   |
-| 2026-07-28     | Shared design system (concept)                                | [ADR-0002](apps/site/docs/adr/0002-visual-language-system.md)            | Superseded |
-| 2026-07-28     | Privacy deep dive before integrating a data service           | [ADR-0003](apps/site/docs/adr/0003-privacy-review-before-integration.md) | Accepted   |
-| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/)   | [ADR-0001](docs/adr/0001-monorepo-topology.md)                           | Accepted   |
-| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                    | Accepted   |
-| 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)        | Accepted   |
-| 2026-07-28     | Tailwind v4 as the design-system foundation                   | [ADR-0006](apps/site/docs/adr/0006-tailwind-design-system.md)            | Accepted   |
-| 2026-07-29     | Visual essays use a shared shell and page-specific renderer   | [ADR-0007](apps/site/docs/adr/0007-visual-essay-system.md)               | Accepted   |
-| 2026-07-29     | Shared editorial and full-viewport page-header variants       | [ADR-0008](apps/site/docs/adr/0008-shared-page-header-variants.md)       | Accepted   |
-| 2026-07-29     | Separate page SEO metadata from human-facing header content   | [ADR-0009](apps/site/docs/adr/0009-page-content-and-seo-contracts.md)    | Accepted   |
+| Date           | Decision                                                      | ADR                                                                                       | Status     |
+| -------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------- |
+| 2025 (approx.) | Migrate from Docusaurus to Astro static output                | [ADR-0001](apps/site/docs/adr/0001-astro-static-github-pages.md)                          | Accepted   |
+| 2026-07-28     | Shared design system (concept)                                | [ADR-0002](apps/site/docs/adr/0002-visual-language-system.md)                             | Superseded |
+| 2026-07-28     | Privacy deep dive before integrating a data service           | [ADR-0003](apps/site/docs/adr/0003-privacy-review-before-integration.md)                  | Accepted   |
+| 2026-07-28     | Monorepo workspaces (apps/site, apps/playground, packages/)   | [ADR-0001](docs/adr/0001-monorepo-topology.md)                                            | Accepted   |
+| 2026-07-28     | i18n readiness now (externalise strings), runtime deferred    | [ADR-0004](apps/site/docs/adr/0004-i18n-readiness.md)                                     | Accepted   |
+| 2026-07-28     | Board-wide dependency + toolchain upgrade (Astro 7, React 19) | [ADR-0005](apps/site/docs/adr/0005-dependency-upgrade-2026-07.md)                         | Accepted   |
+| 2026-07-28     | Tailwind v4 as the design-system foundation                   | [ADR-0006](apps/site/docs/adr/0006-tailwind-design-system.md)                             | Accepted   |
+| 2026-07-29     | Visual essays use a shared shell and page-specific renderer   | [ADR-0007](apps/site/docs/adr/0007-visual-essay-system.md)                                | Accepted   |
+| 2026-07-29     | Shared editorial and full-viewport page-header variants       | [ADR-0008](apps/site/docs/adr/0008-shared-page-header-variants.md)                        | Accepted   |
+| 2026-07-29     | Separate page SEO metadata from human-facing header content   | [ADR-0009](apps/site/docs/adr/0009-page-content-and-seo-contracts.md)                     | Accepted   |
+| 2026-07-30     | Mount the playground package inside the site deployment       | [ADR-0003](docs/adr/0003-integrated-playground-deployment.md)                             | Proposed   |
+| 2026-07-30     | React workbench with worker-owned simulation                  | [Playground ADR-0001](apps/playground/docs/adr/0001-integrated-react-worker-workbench.md) | Proposed   |
 
 Dates are approximate and back-filled from repository history; the ADRs record what is known.
 
@@ -172,9 +179,9 @@ All config lives in `.env`. The template is `env.example`.
 ```
 .
 ├── apps/
-│   └── site/              The public website (Astro static) -> eq-network.org
+│   ├── site/              The public website (Astro static) -> eq-network.org
 │       ├── public/        Static assets served as-is (images, PDFs, CNAME, favicon)
-│       ├── prototypes/    Self-contained HTML prototypes (playground.html) imported raw
+│       ├── prototypes/    Legacy/reference prototypes; not production sources
 │       ├── src/
 │       │   ├── components/  React islands, grouped by page area
 │       │   ├── content/     Typed page content and data (no markup)
@@ -183,6 +190,12 @@ All config lives in `.env`. The template is `env.example`.
 │       │   └── styles/      Global CSS and custom-property variables
 │       ├── astro.config.mjs
 │       └── env.example
+│   └── playground/        Browser simulation package consumed by apps/site
+│       ├── src/engine/    Pure kernel, common trajectory contract, and worker boundary
+│       ├── src/rendering/ SVG scene definitions and drawing primitives
+│       ├── src/scenarios/ Typed story, parameter, preset, and metric registry
+│       ├── test/          Scientific, validation, contract, and browser checks
+│       └── docs/          App-scoped ADRs, tasks, architecture, audits, privacy, and runbook
 ├── packages/
 │   └── design-system/     Shared design tokens and components (skeleton)
 ├── docs/                  Project documentation (see docs/README.md)
@@ -196,18 +209,23 @@ All config lives in `.env`. The template is `env.example`.
 pages/       compose layouts + components; own the routes
 components/   render content; may import from content/ and styles/
 content/      pure data and types; imports nothing from components/ or pages/
+playground scenario registry -> React orchestration -> worker client -> pure numerical kernel
+playground rendering reads Trajectory; the numerical kernel never imports React or SVG code
 ```
 
 > If a boundary is not documented here, there isn't one. Do not create one speculatively.
 
 ### Enforced architecture
 
-| Invariant                    | Check / command                   | Runs when                                                    |
-| ---------------------------- | --------------------------------- | ------------------------------------------------------------ |
-| No type errors reach a build | `pnpm build` (runs `astro check`) | Every CI build on push to `main`; run locally before pushing |
+| Invariant                                      | Check / command                                      | Runs when                                                    |
+| ---------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| No type errors reach a build                   | `pnpm build`                                         | Every CI build on push to `main`; run locally before pushing |
+| Inherited numerical transformations stay fixed | `pnpm --filter @eq-network/playground test`          | Every root `pnpm test` / `pnpm check`                        |
+| Integrated browser journey stays functional    | `pnpm --filter @eq-network/playground smoke:browser` | Locally against the running site before playground changes   |
+| Full repository gate remains clean             | `pnpm check`                                         | Before pushing                                               |
 
-There is no test suite. Type-checking is the only automated gate. Content and visual correctness are
-verified by human preview.
+Browser smoke is intentionally separate from `pnpm check` because it requires an already running site.
+Static copy and visual judgment still require human preview.
 
 ---
 
@@ -222,13 +240,15 @@ verified by human preview.
 
 ### Verification matrix
 
-| Change type        | Required check                           | Additional evidence                                    |
-| ------------------ | ---------------------------------------- | ------------------------------------------------------ |
-| Content or copy    | `pnpm build`                             | Preview the page; read the rendered text               |
-| Component logic    | `pnpm build`                             | Exercise the interaction in `pnpm preview`             |
-| Styling            | `pnpm build`                             | Visual check at mobile and desktop widths              |
-| Dependency bump    | `pnpm build`                             | Confirm the site still renders; keep the bump isolated |
-| Deploy / CI config | Trigger a build (or `workflow_dispatch`) | Confirm the published site is unchanged in content     |
+| Change type                | Required check                               | Additional evidence                                              |
+| -------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| Content or copy            | `pnpm build`                                 | Preview the page; read the rendered text                         |
+| Site component logic       | `pnpm build`                                 | Exercise the interaction in `pnpm preview`                       |
+| Playground UI or rendering | playground tests + builds + `smoke:browser`  | Desktop/mobile visual review; keyboard and reduced-motion review |
+| Playground numerical model | playground validation and scientific goldens | Document intentional golden changes and compare same seeds       |
+| Styling                    | `pnpm build`                                 | Visual check at mobile and desktop widths                        |
+| Dependency bump            | `pnpm build`                                 | Confirm the site still renders; keep the bump isolated           |
+| Deploy / CI config         | Trigger a build (or `workflow_dispatch`)     | Confirm the published site is unchanged in content               |
 
 ---
 
@@ -267,4 +287,4 @@ verified by human preview.
 | A significant decision is made       | Write an ADR; add a row to Section 4 |
 | Setup or structure changes           | Update Sections 5 and 6              |
 
-_Last updated: 2026-07-28._
+_Last updated: 2026-07-30._

@@ -1,7 +1,7 @@
 # Spin the Lorenz visual out into a standalone app
 
 - Provenance: task-0002 (owner request)
-- Links back to: [`../../docs/adr/0001-monorepo-topology.md`](../../docs/adr/0001-monorepo-topology.md),
+- Links back to: [`../../adr/0001-monorepo-topology.md`](../../adr/0001-monorepo-topology.md),
   [`../../../apps/site/docs/adr/0007-visual-essay-system.md`](../../../apps/site/docs/adr/0007-visual-essay-system.md)
 - Status: todo
 - Owner: unassigned

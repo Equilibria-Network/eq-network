@@ -19,20 +19,21 @@ The `audit-*` files below are the granular details for individual sub-items of t
 
 ## Open
 
-| Task                                                                               | From          | Summary                                                           |
-| ---------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------- |
-| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md) | Design system | UI/UX on a shared, enforceable design system (see umbrella above) |
-| [task-0008-legal-and-about](open/task-0008-legal-and-about.md)                     | Owner request | Publish verified legal identity and strengthen the About page     |
-| [task-0009-page-prototype-programme](open/task-0009-page-prototype-programme.md)   | Owner request | Prototype and migrate every public page onto shared contracts     |
+| Task                                                                                   | From            | Summary                                                           |
+| -------------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------- |
+| [task-0002-visual-language-alignment](open/task-0002-visual-language-alignment.md)     | Design system   | UI/UX on a shared, enforceable design system (see umbrella above) |
+| [task-0008-legal-and-about](open/task-0008-legal-and-about.md)                         | Owner request   | Publish verified legal identity and strengthen the About page     |
+| [task-0009-page-prototype-programme](open/task-0009-page-prototype-programme.md)       | Owner request   | Prototype and migrate every public page onto shared contracts     |
 
 ## Deferred (feature work — not part of the current cleanup phase)
 
-| Task                                                                                                 | From           | Summary                                                                                               |
-| ---------------------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                                   | Privacy stance | EU-resident contact-form handler — a future enhancement (Formspree ships today; not a removal)        |
-| [task-0005-visual-asset-regeneration](deferred/task-0005-visual-asset-regeneration.md)               | Owner idea     | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
-| [task-0006-i18n](deferred/task-0006-i18n.md)                                                         | ADR-0004       | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
-| [task-0010-about-products-roadmap-redesigns](deferred/task-0010-about-products-roadmap-redesigns.md) | Owner request  | Prototype the About, Products, and Roadmap redesigns; preserve Roadmap's existing bottom graph        |
+| Task                                                                                                 | From            | Summary                                                                                               |
+| ---------------------------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| [task-0003-eu-form-handler](deferred/task-0003-eu-form-handler.md)                                   | Privacy stance  | EU-resident contact-form handler — a future enhancement (Formspree ships today; not a removal)        |
+| [task-0005-visual-asset-regeneration](deferred/task-0005-visual-asset-regeneration.md)               | Owner idea      | Regenerate all imagery to one visual identity (blocked on defining it; pairs with task-0002 redesign) |
+| [task-0006-i18n](deferred/task-0006-i18n.md)                                                         | ADR-0004        | i18n runtime (locale routing/catalogs/switcher); readiness sweep done now via M6, machinery deferred  |
+| [task-0010-about-products-roadmap-redesigns](deferred/task-0010-about-products-roadmap-redesigns.md) | Owner request   | Prototype the About and Roadmap redesigns; Products is now a retirement decision                      |
+| [task-0012-retire-products-route](deferred/task-0012-retire-products-route.md)                       | Owner direction | Choose and execute the redirect/archive/removal policy for the now-unlinked Products route            |
 
 ## Done
 
@@ -50,6 +51,7 @@ _(Audit 0001 F3 "add rel=noopener" and B2 "wrong newsletter link" were both retr
 
 ## Not tracked here (decided against, or accepted as-is)
 
-- A test suite, a CSP, analytics, and a backend are consciously not applied at this scale. See
-  [`../../../../CONTRIBUTING.md`](../../../../CONTRIBUTING.md) Section 3.
+- Site-wide component tests, a CSP, analytics, and a backend are consciously not applied at this scale.
+  The integrated playground has its own scientific and browser checks. See
+  [`../../../../CONTRIBUTING.md`](../../../../CONTRIBUTING.md) Sections 2 and 3.
 - Sitemap generation is now part of the build; `robots.txt` points crawlers to its index.

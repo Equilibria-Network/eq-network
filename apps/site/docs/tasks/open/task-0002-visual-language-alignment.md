@@ -41,7 +41,7 @@ and it is only pixel-identical because it is pure plumbing — it is _not_ the r
 - [ ] Replace hand-typed literals with tokens (23× `#003B7E`, grey ramp, navy filter string, redundant
       fallbacks).
 - [ ] Add shared `.u-container` / `.u-section` utilities; migrate modules via `composes`.
-- [ ] Extract the shared components (`SectionHeader`, `PageHero`, `Card`, `ClosingCTA`, `ProductSection`)
+- [ ] Extract the shared components (`SectionHeader`, `PageHero`, `Card`, `ClosingCTA`)
       at **current appearance**.
 - [ ] Stand up stylelint + `@custom-media` + Prettier + a CI lint gate (do this last, so it does not fight
       the in-flight refactor).
@@ -69,8 +69,9 @@ Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands
       canonical hero, and polish.
 - [ ] **Lab redesign** — decide whether `LabHero` conforms to or intentionally varies the interior hero; align
       the badge/leaderboard/scenario styling.
-- [ ] **Home / about / products** — currently the reference; a lighter pass to confirm they _are_ the standard
-      (and fold any improvements back into the tokens/components).
+- [ ] **Home / about** — currently the reference; a lighter pass to confirm they _are_ the standard
+      (and fold any improvements back into the tokens/components). Products is excluded pending
+      [`task-0012`](../deferred/task-0012-retire-products-route.md).
 - [ ] **Research** — bring onto the system.
 - [x] **404** — rebuilt on the measured visual identity with graph notation, sharp actions, and responsive
       scoped styling (2026-07-29).

@@ -61,12 +61,15 @@ Implementation detail and acceptance criteria for this batch are tracked in
 
 1. **About** — `/about/prototype`; finish task-0008, clarify the organisation, and prove content sections,
    people, partners, and legal facts can share contracts.
-2. **Products** — `/products/prototype`; extract repeated product-section/card structure and media fields.
-3. **Roadmap** — `/roadmap/prototype`; reconcile phase data, sticky navigation, status chips, and shared
+2. **Roadmap** — `/roadmap/prototype`; reconcile phase data, sticky navigation, status chips, and shared
    sidebar/header behavior. Preserve the existing bottom `ResearchGraph` unchanged; redesigning it is a
    separate future task.
 
-Promote the best shared primitives from these three before starting the complex pages.
+Products is no longer a prototype target. Playground replaced it in primary navigation; the legacy route
+is tracked separately in
+[`../deferred/task-0012-retire-products-route.md`](../deferred/task-0012-retire-products-route.md).
+
+Promote the best shared primitives from these two pages before starting the complex pages.
 
 ### P2 — Data-rich and interactive pages
 
@@ -74,8 +77,6 @@ Promote the best shared primitives from these three before starting the complex 
    and selection/detail contract.
 5. **Lab** — `/lab/prototype`; keep scenarios and simulation models page-specific while reusing page chrome,
    reading keys, status semantics, and figure frames.
-6. **Lab playground** — `/lab/playground/prototype`; first decide whether it remains an embedded standalone
-   document or becomes an app under `apps/*`, then prototype the chosen boundary.
 
 Research should precede Lab because its smaller graph interaction is the safer place to establish shared
 graph accessibility and asset-loading conventions.
@@ -95,16 +96,21 @@ graph accessibility and asset-loading conventions.
 
 - [x] **Explainer / Thesis** — `/explainer/prototype` uses the typed `VisualEssay` contract and the persistent
       world-model renderer. Owner approved promotion to `/explainer` on 2026-07-29.
+- [x] **Lab playground** — the owner selected an integrated app rather than a duplicate prototype route.
+      `apps/playground` supplies a stable React package export mounted at canonical, no-index
+      `/lab/playground` inside site chrome. See the
+      [repo integration ADR](../../../../../docs/adr/0003-integrated-playground-deployment.md) and
+      [completed playground task](../../../../playground/docs/tasks/done/task-0001-integrated-playground-app.md).
 
 ## Dependency graph
 
 ```text
 tokens + page contracts + asset validator + prototype convention
                     │
-          ┌─────────┼─────────┐
-          ▼         ▼         ▼
-        About    Products   Roadmap
-          └─────────┼─────────┘
+               ┌────┴────┐
+               ▼         ▼
+             About    Roadmap
+               └────┬────┘
                     ▼
          proven editorial primitives
                     │

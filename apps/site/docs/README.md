@@ -45,9 +45,12 @@ The shared authoring templates (ADR, task, lesson, handoff) live once at the rep
 | [0005](adr/0005-dependency-upgrade-2026-07.md)        | Dependency and toolchain upgrade (2026-07)                 |
 | [0006](adr/0006-tailwind-design-system.md)            | Tailwind v4 as the design-system foundation                |
 | [0007](adr/0007-visual-essay-system.md)               | Shared visual-essay shell with page-specific models        |
+| [0008](adr/0008-shared-page-header-variants.md)       | Shared editorial and full-viewport page-header variants    |
+| [0009](adr/0009-page-content-and-seo-contracts.md)    | Separate search metadata from human-facing page headers    |
 
-The monorepo-topology decision that produced `apps/site` is repo-wide:
-[`../../../docs/adr/0001-monorepo-topology.md`](../../../docs/adr/0001-monorepo-topology.md).
+The monorepo topology and site/playground deployment boundary are repo-wide:
+[`ADR-0001`](../../../docs/adr/0001-monorepo-topology.md) and
+[`ADR-0003`](../../../docs/adr/0003-integrated-playground-deployment.md).
 
 ## Conventions
 

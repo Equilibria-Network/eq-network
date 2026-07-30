@@ -19,7 +19,7 @@ All sub-items below are checked or explicitly deferred with a reason; ESLint + P
 are running; the image payload is materially reduced; and the confirmed bugs (B1–B4) are fixed.
 
 Visual-identity alignment is tracked separately in
-[`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md) (a larger design effort).
+[`../open/task-0002-visual-language-alignment.md`](../open/task-0002-visual-language-alignment.md) (a larger design effort).
 
 ---
 
@@ -183,7 +183,7 @@ Visual-identity alignment is tracked separately in
 - Items marked _Needs/Proposed ADR_ must be drafted as `Proposed` and signed off before implementation,
   per `CONTRIBUTING.md` Decision Log.
 - Phases 4–6 overlap the visual-language work; coordinate with
-  [`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md) so tokens/primitives
+  [`../open/task-0002-visual-language-alignment.md`](../open/task-0002-visual-language-alignment.md) so tokens/primitives
   are defined once.
 - Suggested execution order: Phase 1 (unblocks) → Phase 2 (guardrails) → Phase 3 (bugs) → Phase 4 (payload)
   → Phase 5 (a11y) → Phase 6 (refactors) → Phase 7.

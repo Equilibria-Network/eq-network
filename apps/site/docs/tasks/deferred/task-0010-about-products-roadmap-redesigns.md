@@ -1,4 +1,4 @@
-# Prototype the About, Products, and Roadmap visual-language redesigns
+# Prototype the About and Roadmap visual-language redesigns
 
 - Provenance: task-0010 (owner request)
 - Links back to:
@@ -10,16 +10,21 @@
 - Owner: unassigned
 - Priority: next design batch
 
+## Scope change
+
+Products left the primary navigation when Playground became the product surface on 2026-07-30. Do not
+create a new Products prototype. The existing route is governed by
+[`task-0012-retire-products-route.md`](task-0012-retire-products-route.md).
+
 ## Goal
 
-Create owner-reviewable prototypes for About, Products, and Roadmap that apply the established Equilibria
+Create owner-reviewable prototypes for About and Roadmap that apply the established Equilibria
 visual language without making the pages identical. Each page should use shared typed contracts and
 components for repeated structure while retaining page-specific content and interactions.
 
 Prototype routes:
 
 - `/about/prototype`
-- `/products/prototype`
 - `/roadmap/prototype`
 
 Canonical routes remain unchanged until each prototype is approved. Canonical and prototype routes must
@@ -49,13 +54,6 @@ Before page-specific styling:
 - Redesign philosophy, team, advisors, and partners around reusable editorial/card contracts.
 - Preserve privacy and data minimisation when deciding which personal or governance details to publish.
 
-### Products
-
-- Establish a typed product/project card contract for title, status, summary, media, actions, and evidence.
-- Distinguish shipped work, active experiments, and future directions without overstating maturity.
-- Recompose Exploration, Coordination, and Connection into a coherent visual narrative using the shared
-  visual language and responsive, accessible interactions.
-
 ### Roadmap
 
 - Replace the bespoke `RoadmapHero` with the common page header contract.
@@ -66,11 +64,10 @@ Before page-specific styling:
 
 ## Sequence and dependencies
 
-1. Reconcile shared header, SEO, organisation, product-card, and phase-navigation contracts.
+1. Reconcile shared header, SEO, organisation, and phase-navigation contracts.
 2. Prototype About first to complete the ordinary editorial/organisation pattern.
-3. Prototype Products next and extract any reusable card/status patterns proven by About.
-4. Prototype Roadmap last, reusing the established chrome and preserving `ResearchGraph`.
-5. Review all three together for visual coherence, then promote individually after owner approval.
+3. Prototype Roadmap next, reusing the established chrome and preserving `ResearchGraph`.
+4. Review both together for visual coherence, then promote individually after owner approval.
 
 ## Verification
 
@@ -85,5 +82,5 @@ Before page-specific styling:
 
 ## Done when
 
-All three prototypes are available for review, use the shared data/component contracts, match the visual
+Both prototypes are available for review, use the shared data/component contracts, match the visual
 identity, pass the verification gates, and leave canonical promotion as an explicit owner decision.

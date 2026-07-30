@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "budgets": [
+    {
+      "id": "desktop-tbt-blocking",
+      "metric_id": "web.performance.tbt",
+      "level": "blocking",
+      "operator": "lte",
+      "threshold": 200
+    },
+    {
+      "id": "desktop-lcp-warning",
+      "metric_id": "web.performance.lcp",
+      "level": "warning",
+      "operator": "lte",
+      "threshold": 1500
+    },
+    {
+      "id": "layout-shift-blocking",
+      "metric_id": "web.performance.cls",
+      "level": "blocking",
+      "operator": "lte",
+      "threshold": 0.01
+    },
+    {
+      "id": "performance-score-warning",
+      "metric_id": "web.category.performance.score",
+      "level": "warning",
+      "operator": "gte",
+      "threshold": 95
+    },
+    {
+      "id": "accessibility-score-warning",
+      "metric_id": "web.category.accessibility.score",
+      "level": "warning",
+      "operator": "gte",
+      "threshold": 95
+    }
+  ]
+}
