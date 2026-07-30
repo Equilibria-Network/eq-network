@@ -4,7 +4,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const targetUrl = process.env.PLAYGROUND_URL || 'http://127.0.0.1:4321/lab/playground/';
+const targetUrl = process.env.PLAYGROUND_URL || 'http://127.0.0.1:4321/playground/';
 const initialScenario = process.env.PLAYGROUND_SCENARIO || 'commons';
 const chromeBin = process.env.CHROME_BIN || '/usr/bin/google-chrome';
 const debugPort = 9333;
@@ -124,37 +124,202 @@ try {
 
   const initial = await evaluate(`({
     hash: location.hash,
-    scenarios: document.querySelectorAll('.scenario-tabs button').length,
+    heroMeta: Boolean(document.querySelector('.pageHeader .aside')),
+    heroTitleLines: (() => {
+      const node = document.querySelector('.pageHeader h1');
+      const style = getComputedStyle(node);
+      return Math.round(node.getBoundingClientRect().height / Number.parseFloat(style.lineHeight));
+    })(),
+    heroSummary: document.querySelector('.pageHeader .summary')?.textContent.trim(),
+    scenarios: document.querySelectorAll('.scenario-toggle').length,
     scene: Boolean(document.querySelector('.showcase-scene')),
     sceneViewBox: document.querySelector('.showcase-scene')?.getAttribute('viewBox'),
     charts: Boolean(document.querySelector('.scenario-charts')),
     metrics: document.querySelectorAll('.metric-card').length,
     conditions: document.querySelectorAll('.condition-options button').length,
     stickyTitle: getComputedStyle(document.querySelector('.simulation-reader > .scenario-header')).position,
+    headerMatchesReaderChild: document.querySelector('.scenario-header').matches(
+      '.simulation-reader > .scenario-header'
+    ),
+    headerParentClass: document.querySelector('.scenario-header').parentElement.className,
     titleWidth: document.querySelector('.simulation-reader > .scenario-header').getBoundingClientRect().width,
     readerWidth: document.querySelector('.simulation-reader').getBoundingClientRect().width,
-    storyText: document.querySelector('.details-panel').textContent,
+    storyText: document.querySelector('.scenario-tabs').textContent,
+    settingsHidden: !document.querySelector('.details-panel'),
+    railWidth: document.querySelector('.scenario-tabs').getBoundingClientRect().width,
+    railBackground: getComputedStyle(document.querySelector('.scenario-tabs')).backgroundColor,
+    railHatch: getComputedStyle(document.querySelector('.scenario-tabs'), '::before').backgroundImage,
+    railScrollbar: getComputedStyle(document.querySelector('.scenario-tabs')).scrollbarWidth,
+    headerDivider: getComputedStyle(
+      document.querySelector('.simulation-reader > .scenario-header')
+    ).borderBottomWidth,
+    railHeadingSize: Number.parseFloat(
+      getComputedStyle(document.querySelector('.rail-heading strong')).fontSize
+    ),
+    railHeading: document.querySelector('.rail-heading strong').textContent.trim(),
+    storyDescriptionSize: Number.parseFloat(
+      getComputedStyle(document.querySelector('.scenario-story > p')).fontSize
+    ),
+    storyStepSize: Number.parseFloat(
+      getComputedStyle(document.querySelector('.scenario-story button strong')).fontSize
+    ),
     navbar: Boolean(document.querySelector('body > header nav')),
     playgroundNav: [...document.querySelectorAll('body > header nav a')].some(
-      (link) => link.textContent.trim() === 'Playground' && link.getAttribute('href') === '/lab/playground/'
+      (link) => link.textContent.trim() === 'Playground' && link.getAttribute('href') === '/playground/'
     ),
     footer: Boolean(document.querySelector('footer')),
-    status: document.querySelector('.engine-status').textContent.trim()
+    status: document.querySelector('.engine-status').textContent.trim(),
+    headerShadow: getComputedStyle(
+      document.querySelector('.simulation-reader > .scenario-header')
+    ).boxShadow,
+    flatControls: [
+      ...document.querySelectorAll(
+        '.scenario-toggle, .scenario-story button, .view-tabs button, .condition-options button, .metric-card'
+      )
+    ].every((node) => {
+      const style = getComputedStyle(node);
+      return style.boxShadow === 'none' && style.borderRadius === '0px';
+    }),
+    selectedControlTabs: [
+      ...document.querySelectorAll(
+        '.scenario-story li.active > button, .view-tabs button.active, .condition-options button.active'
+      )
+    ].every((node) => {
+      const style = getComputedStyle(node);
+      return style.backgroundColor === 'rgb(0, 59, 126)' && style.color === 'rgb(255, 255, 255)';
+    }),
+    selectedScenario: (() => {
+      const node = document.querySelector('.scenario-list > li.active > .scenario-toggle');
+      const label = node.querySelector('strong');
+      const style = getComputedStyle(node);
+      const labelStyle = getComputedStyle(label);
+      return {
+        background: style.backgroundColor,
+        color: style.color,
+        weight: Number.parseInt(labelStyle.fontWeight, 10),
+        decoration: labelStyle.textDecorationLine,
+        decorationColor: labelStyle.textDecorationColor
+      };
+    })(),
+    hatchedTabCues: [
+      ...document.querySelectorAll(
+        '.scenario-toggle, .scenario-story button, .view-tabs button, .condition-options button, .settings-trigger, .toggle-control'
+      )
+    ].some((node) => {
+      const style = getComputedStyle(node);
+      const after = getComputedStyle(node, '::after');
+      return style.backgroundImage.includes('gradient') || after.backgroundImage.includes('gradient');
+    }),
+    leftDividerImage: getComputedStyle(
+      document.querySelector('.rail-resizer-left'),
+      '::after'
+    ).backgroundImage,
+    leftResizer: Boolean(document.querySelector('.rail-resizer-left[role="separator"]')),
+    leftResizeValue: document.querySelector('.rail-resizer-left')?.getAttribute('aria-valuenow')
   })`);
 
   assert.equal(initial.hash, `#${initialScenario}`);
+  assert.equal(initial.heroMeta, false);
+  assert.ok(initial.heroTitleLines <= 2);
+  assert.match(initial.heroSummary, /^Usually coordination systems are tested in the real world/);
   assert.equal(initial.scenarios, 5);
   assert.equal(initial.scene, true);
   assert.equal(initial.sceneViewBox, '0 0 880 400');
   assert.equal(initial.charts, true);
   assert.equal(initial.metrics, 4);
   assert.ok(initial.conditions >= 3);
-  assert.equal(initial.stickyTitle, 'sticky');
+  assert.equal(
+    initial.stickyTitle,
+    'sticky',
+    `The scenario title must use the sticky reader header rule: ${JSON.stringify({
+      matches: initial.headerMatchesReaderChild,
+      parent: initial.headerParentClass,
+    })}`
+  );
   assert.ok(Math.abs(initial.titleWidth - initial.readerWidth) < 1);
   assert.doesNotMatch(initial.storyText, /MODEL HEALTH|MODEL NOTE/);
   assert.equal(initial.navbar, true);
   assert.equal(initial.playgroundNav, true);
   assert.equal(initial.footer, true);
+  assert.equal(initial.settingsHidden, true);
+  assert.equal(initial.railWidth, 480);
+  assert.equal(initial.railBackground, 'rgb(247, 248, 250)');
+  assert.equal(initial.railHatch, 'none');
+  assert.equal(initial.railScrollbar, 'none');
+  assert.equal(initial.headerDivider, '1px');
+  assert.ok(initial.railHeadingSize >= 20);
+  assert.equal(initial.railHeading, 'Scenario Guide');
+  assert.ok(initial.storyDescriptionSize >= 13);
+  assert.ok(initial.storyStepSize >= 14);
+  assert.equal(initial.headerShadow, 'none');
+  assert.equal(initial.flatControls, true);
+  assert.equal(initial.selectedControlTabs, true);
+  assert.equal(initial.selectedScenario.background, 'rgba(0, 0, 0, 0)');
+  assert.equal(initial.selectedScenario.color, 'rgb(0, 59, 126)');
+  assert.ok(initial.selectedScenario.weight >= 700);
+  assert.equal(initial.selectedScenario.decoration, 'underline');
+  assert.equal(initial.selectedScenario.decorationColor, 'rgb(74, 179, 244)');
+  assert.equal(initial.hatchedTabCues, false);
+  assert.equal(initial.leftDividerImage, 'none');
+  assert.equal(initial.leftResizer, true);
+  assert.equal(initial.leftResizeValue, '480');
+
+  await evaluate(`document.querySelector('.rail-resizer-left').focus()`);
+  await evaluate(
+    `document.querySelector('.rail-resizer-left').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }))`
+  );
+  await waitFor(
+    `Number(document.querySelector('.rail-resizer-left').getAttribute('aria-valuenow')) === 464`,
+    'The scenario rail did not respond to keyboard resizing.'
+  );
+  await evaluate(
+    `document.querySelector('.simulation-reader').scrollIntoView({ block: 'start', behavior: 'instant' })`
+  );
+  await sleep(100);
+  const leftHandle = await evaluate(`(() => {
+    const rect = document.querySelector('.rail-resizer-left').getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  })()`);
+  await command('Input.dispatchMouseEvent', {
+    type: 'mousePressed',
+    x: leftHandle.x,
+    y: leftHandle.y,
+    button: 'left',
+    clickCount: 1,
+  });
+  await command('Input.dispatchMouseEvent', {
+    type: 'mouseMoved',
+    x: leftHandle.x + 24,
+    y: leftHandle.y,
+    button: 'left',
+    buttons: 1,
+  });
+  await command('Input.dispatchMouseEvent', {
+    type: 'mouseReleased',
+    x: leftHandle.x + 24,
+    y: leftHandle.y,
+    button: 'left',
+    clickCount: 1,
+  });
+  await waitFor(
+    `Number(document.querySelector('.rail-resizer-left').getAttribute('aria-valuenow')) === 480`,
+    'The scenario rail did not respond to pointer dragging.'
+  );
+
+  await evaluate(`document.querySelector('.scenario-story ol li:nth-child(4) > button').click()`);
+  await waitFor(
+    `document.querySelector('.scenario-story ol li:nth-child(4) > button').getAttribute('aria-current') === 'step' &&
+      document.querySelector('.view-tabs button[aria-selected="true"]').textContent.trim() === 'Messages' &&
+      Number(document.querySelector('.transport input[type="range"]').value) > 0`,
+    'The commons story did not drive its view and playback.'
+  );
+  assert.equal(
+    await evaluate(
+      `[...document.querySelectorAll('.condition-options button')].find((button) => button.textContent.trim() === 'Slow tragedy').getAttribute('aria-pressed')`
+    ),
+    'true',
+    'A story step must activate its authored scenario condition.'
+  );
 
   await evaluate(`(() => {
     const header = document.querySelector('.simulation-reader > .scenario-header');
@@ -179,6 +344,19 @@ try {
     true,
     'The sticky scenario title must paint above scrolling simulation content.'
   );
+  const fittedReader = await evaluate(`({
+    viewportBottom: innerHeight,
+    chartsBottom: document.querySelector('.scenario-charts').getBoundingClientRect().bottom,
+    headerHeight: document.querySelector('.simulation-reader > .scenario-header').getBoundingClientRect().height
+  })`);
+  assert.ok(
+    fittedReader.headerHeight <= 54,
+    `The compact sticky title must stay at or below 54 px: ${JSON.stringify(fittedReader)}`
+  );
+  assert.ok(
+    fittedReader.chartsBottom <= fittedReader.viewportBottom + 2,
+    `The simulation and charts must fit in one snapped viewport: ${JSON.stringify(fittedReader)}`
+  );
   await evaluate('window.scrollTo(0, 0)');
 
   if (process.env.PLAYGROUND_SCREENSHOT) {
@@ -192,7 +370,7 @@ try {
     if (scrollTop > 0) await evaluate('window.scrollTo(0, 0)');
   }
 
-  await evaluate(`document.querySelectorAll('.scenario-tabs button')[3].click()`);
+  await evaluate(`document.querySelectorAll('.scenario-toggle')[3].click()`);
   await waitFor(
     `location.hash === '#political' && Boolean(document.querySelector('.engine-status.ready'))`,
     'The political scenario did not become ready.'
@@ -224,7 +402,7 @@ try {
     `Political metrics must be playhead-driven. t0=${politicalAtStart} t150=${politicalAt150}`
   );
 
-  await evaluate(`document.querySelectorAll('.scenario-tabs button')[4].click()`);
+  await evaluate(`document.querySelectorAll('.scenario-toggle')[4].click()`);
   await waitFor(
     `location.hash === '#combined' && Boolean(document.querySelector('.engine-status.ready'))`,
     'The combined scenario did not become ready.'
@@ -239,32 +417,86 @@ try {
     'The combined SVG must not emit invalid numeric geometry.'
   );
 
-  await evaluate(`document.querySelector('.settings-trigger').click()`);
+  await evaluate(
+    `document.querySelector('.settings-trigger[aria-label="Open model settings"]').click()`
+  );
   await waitFor(
     `Boolean(document.querySelector('.run-tools input'))`,
     'The settings panel did not open.'
   );
   const detailsMode = await evaluate(`({
     settingsInDetails: Boolean(document.querySelector('.details-panel > .details-settings')),
-    storyVisible: Boolean(document.querySelector('.details-panel .story-beats')),
+    storyInLeftRail: Boolean(document.querySelector('.scenario-story')),
     modalBackdrop: Boolean(document.querySelector('.settings-backdrop')),
-    scopeVisible: Boolean(document.querySelector('.details-panel .settings-scope')),
-    playerToggle: document.querySelector('.settings-trigger').textContent.trim(),
-    playerToggleLabel: document.querySelector('.settings-trigger').getAttribute('aria-label')
+    evidenceVisible: document.querySelector('.details-panel').textContent.includes('Backend ladder'),
+    assumptionsVisible: document.querySelector('.details-panel').textContent.includes('The floor is itemized'),
+    shareRun: document.querySelector('.details-panel').textContent.includes('Share run'),
+    settingsPressed: document.querySelector('.settings-trigger[aria-label="Open model settings"]').getAttribute('aria-pressed'),
+    panelShadow: getComputedStyle(document.querySelector('.details-panel')).boxShadow,
+    flatSettings: [
+      ...document.querySelectorAll(
+        '.details-settings .parameter-group, .details-settings .comparison-tools, .configuration-notes section, .details-settings button, .details-settings input'
+      )
+    ].every((node) => {
+      const style = getComputedStyle(node);
+      return style.boxShadow === 'none' && style.borderRadius === '0px';
+    }),
+    whiteSettings: [
+      ...document.querySelectorAll(
+        '.details-panel, .details-settings, .details-settings .control-heading, .details-settings .parameter-group, .details-settings .parameter-group legend, .details-settings .parameter, .details-settings .run-tools, .details-settings .comparison-tools, .configuration-notes, .configuration-notes section'
+      )
+    ].every((node) => getComputedStyle(node).backgroundColor === 'rgb(255, 255, 255)'),
+    rightResizer: Boolean(document.querySelector('.rail-resizer-right[role="separator"]')),
+    rightResizeValue: document.querySelector('.rail-resizer-right')?.getAttribute('aria-valuenow'),
+    viewportWidth: innerWidth,
+    documentWidth: document.documentElement.scrollWidth,
+    scrollX
   })`);
   assert.equal(detailsMode.settingsInDetails, true);
-  assert.equal(detailsMode.storyVisible, false);
+  assert.equal(detailsMode.storyInLeftRail, true);
   assert.equal(detailsMode.modalBackdrop, false);
-  assert.equal(detailsMode.scopeVisible, true);
-  assert.equal(detailsMode.playerToggle, 'Story');
-  assert.equal(detailsMode.playerToggleLabel, 'Return to scenario story');
-  await evaluate(`document.querySelector('.settings-trigger').click()`);
-  await waitFor(
-    `Boolean(document.querySelector('.details-panel .story-beats')) &&
-      document.querySelector('.settings-trigger').textContent.trim() === 'Settings'`,
-    'The player toggle did not return the details rail to the scenario story.'
+  assert.equal(detailsMode.evidenceVisible, true);
+  assert.equal(detailsMode.assumptionsVisible, true);
+  assert.equal(detailsMode.shareRun, false);
+  assert.equal(detailsMode.settingsPressed, 'true');
+  assert.equal(detailsMode.panelShadow, 'none');
+  assert.equal(detailsMode.flatSettings, true);
+  assert.equal(detailsMode.whiteSettings, true);
+  assert.equal(detailsMode.rightResizer, true);
+  assert.equal(detailsMode.rightResizeValue, '340');
+  assert.ok(detailsMode.documentWidth <= detailsMode.viewportWidth);
+  assert.equal(detailsMode.scrollX, 0);
+  await evaluate(`document.querySelector('.rail-resizer-right').focus()`);
+  await evaluate(
+    `document.querySelector('.rail-resizer-right').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }))`
   );
-  await evaluate(`document.querySelector('.settings-trigger').click()`);
+  await waitFor(
+    `Number(document.querySelector('.rail-resizer-right').getAttribute('aria-valuenow')) === 356`,
+    'The settings rail did not respond to keyboard resizing.'
+  );
+  const resizedLayout = await evaluate(`({
+    viewportWidth: innerWidth,
+    documentWidth: document.documentElement.scrollWidth,
+    scrollX
+  })`);
+  assert.ok(resizedLayout.documentWidth <= resizedLayout.viewportWidth);
+  assert.equal(resizedLayout.scrollX, 0);
+  if (process.env.PLAYGROUND_SETTINGS_SCREENSHOT) {
+    const capture = await command('Page.captureScreenshot', { format: 'png' });
+    await writeFile(
+      process.env.PLAYGROUND_SETTINGS_SCREENSHOT,
+      Buffer.from(capture.data, 'base64')
+    );
+  }
+  await evaluate(`document.querySelector('.details-panel .panel-close').click()`);
+  await waitFor(
+    `!document.querySelector('.details-panel') &&
+      document.querySelector('.settings-trigger[aria-label="Open model settings"]').getAttribute('aria-pressed') === 'false'`,
+    'The settings panel did not close.'
+  );
+  await evaluate(
+    `document.querySelector('.settings-trigger[aria-label="Open model settings"]').click()`
+  );
   await waitFor(
     `Boolean(document.querySelector('.run-tools input'))`,
     'The player toggle did not reopen model settings.'
@@ -305,6 +537,19 @@ try {
     'Pinning A should annotate all four metrics.'
   );
 
+  await evaluate(`document.querySelector('.details-panel .panel-close').click()`);
+  await waitFor(
+    `!document.querySelector('.details-panel') && document.querySelector('.simulation-reader').classList.contains('details-closed')`,
+    'The details rail did not close.'
+  );
+  assert.equal(
+    await evaluate(
+      `getComputedStyle(document.querySelector('.simulation-reader > .stage-panel')).gridColumnEnd`
+    ),
+    '-1',
+    'Closing the details rail should give its width back to the visualization.'
+  );
+
   await command('Emulation.setDeviceMetricsOverride', {
     width: 390,
     height: 844,
@@ -314,7 +559,7 @@ try {
   await command('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
-  await evaluate(`document.querySelectorAll('.scenario-tabs button')[1].click()`);
+  await evaluate(`document.querySelectorAll('.scenario-toggle')[1].click()`);
   await waitFor(
     `location.hash === '#economy' && Boolean(document.querySelector('.engine-status.ready'))`
   );
@@ -323,7 +568,10 @@ try {
     viewport: innerWidth,
     documentWidth: document.documentElement.scrollWidth,
     playLabel: document.querySelector('.transport-button').getAttribute('aria-label'),
-    activeScenario: document.querySelector('.scenario-tabs button.active').textContent.trim(),
+    activeScenario: document.querySelector('.scenario-list > li.active > .scenario-toggle').textContent.trim(),
+    storyDescriptionSize: Number.parseFloat(
+      getComputedStyle(document.querySelector('.scenario-story > p')).fontSize
+    ),
     ready: Boolean(document.querySelector('.engine-status.ready'))
   })`);
 
@@ -334,7 +582,16 @@ try {
   );
   assert.equal(mobile.playLabel, 'Play simulation');
   assert.match(mobile.activeScenario, /Economy/);
+  assert.ok(mobile.storyDescriptionSize >= 14);
   assert.equal(mobile.ready, true);
+
+  if (process.env.PLAYGROUND_MOBILE_SCREENSHOT) {
+    const capture = await command('Page.captureScreenshot', {
+      format: 'png',
+      captureBeyondViewport: false,
+    });
+    await writeFile(process.env.PLAYGROUND_MOBILE_SCREENSHOT, Buffer.from(capture.data, 'base64'));
+  }
 
   console.log(
     JSON.stringify(

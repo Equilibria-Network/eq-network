@@ -57,14 +57,18 @@ then builds it from the shared tokens/components (extending them where the redes
 
 Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands and we start each):
 
-- [ ] **Explainer redesign** — the hardest drift (off-palette red/green, hard-coded greys, non-standard
-      headings). Decide its visual treatment and rebuild on the system. - Prototype added at `/explainer/prototype` on 2026-07-28. It preserves `/explainer`, applies the
+- [x] **Explainer redesign** — the hardest drift (off-palette red/green, hard-coded greys, non-standard
+      headings). Prototype added at `/explainer/prototype` on 2026-07-28. It preserves `/explainer`, applies the
       measured identity, and evolves one persistent D3-solved world network through all seven thesis
       states. Incentive, equilibrium, uncertainty, and research-field layers enter around the same agents
       rather than replacing them. Two earlier renderers remain parked as unlinked drafts.
       The reusable shell and page-specific renderer boundary are proposed in
       [ADR-0007](../../adr/0007-visual-essay-system.md). Owner approved it and the prototype was promoted to
-      `/explainer` on 2026-07-29.
+      `/explainer` on 2026-07-29. The owner then selected the clean scientific-notebook direction and
+      promoted it on 2026-07-30 with narrative parity against the deployed seven-diagram sequence. The
+      follow-up refinement uses the document scroll as the sole state selector, expands the flat drawing
+      field, simplifies the persistent network, and treats Equilibria as one bridging node in a
+      distributed translation mesh.
 - [ ] **Roadmap redesign** — 90% aligned; decide whether it adopts the section-header underline motif and the
       canonical hero, and polish.
 - [ ] **Lab redesign** — decide whether `LabHero` conforms to or intentionally varies the interior hero; align
@@ -78,9 +82,15 @@ Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands
 
 Open cross-cutting design decisions that Stage 2 will need to settle (per page or globally):
 
-- The semantic status palette (problem/solution/uncertain reds/greens/oranges): confirm intent and pick
-  canonical values — today red is `#e74c3c` and `#e03131`; orange is `#e67e22`/`#f08c00`/`#f59f00`.
-- Card radius (8px vs 12px) and shadow style (hatched vs solid).
+- Restore the earlier hand-drawn, pencil-sketch, and Excalidraw-adjacent character without sacrificing
+  legibility or reusable structure. Explore and select this through
+  [`task-0011-hand-drawn-brand-prototypes.md`](task-0011-hand-drawn-brand-prototypes.md)
+  before scaling the next editorial-page batch.
+- The scientific-diagram semantic palette is now bounded by shared `--diagram-*` tokens. General interface
+  status colors remain a separate decision.
+- Flat surfaces are settled globally: square cards and controls, no simulated elevation or tonal
+  gradients, and borders only where they communicate a functional, diagrammatic, or editorial boundary.
+  CSS-generated hatch and graph-paper patterns remain part of the brand when localized.
 - Whether the two-column serif hero is the universal interior-hero, or pages may vary it.
 
 ## Relationship to task-0001

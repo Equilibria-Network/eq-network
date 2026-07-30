@@ -89,16 +89,21 @@ graph accessibility and asset-loading conventions.
 9. **Privacy** — `/privacy/prototype`; current page is already on shared editorial chrome, so prototype only
    when the next substantive iteration exists.
 10. **Legal** — `/legal/prototype`; same rule as Privacy.
-11. **Brand** — `/brand` is the rendered source of truth, not a migration target. If the identity itself is
-    revised, use `/brand/prototype` and promote it before dependent page work.
+11. **Brand** — `/brand` is the rendered source of truth, not a migration target. The hand-drawn identity
+    exploration in
+    [`task-0011-hand-drawn-brand-prototypes.md`](task-0011-hand-drawn-brand-prototypes.md)
+    uses `/brand/prototype/*`; select and promote its reusable primitives before dependent page work.
 
 ### Already proved
 
 - [x] **Explainer / Thesis** — `/explainer/prototype` uses the typed `VisualEssay` contract and the persistent
-      world-model renderer. Owner approved promotion to `/explainer` on 2026-07-29.
+      world-model renderer. Owner approved promotion to `/explainer` on 2026-07-29, then promoted the clean
+      scientific-notebook renderer with seven-state narrative parity on 2026-07-30.
+  - `/explainer/notebook-prototype` reuses the same essay document, shell, and persistent 20-node D3 model
+    as the no-index comparison route. Canonical and prototype now share the clean narrative renderer.
 - [x] **Lab playground** — the owner selected an integrated app rather than a duplicate prototype route.
-      `apps/playground` supplies a stable React package export mounted at canonical, no-index
-      `/lab/playground` inside site chrome. See the
+      `apps/playground` supplies a stable React package export mounted at canonical, indexable
+      `/playground` inside site chrome; the former Lab route redirects. See the
       [repo integration ADR](../../../../../docs/adr/0003-integrated-playground-deployment.md) and
       [completed playground task](../../../../playground/docs/tasks/done/task-0001-integrated-playground-app.md).
 

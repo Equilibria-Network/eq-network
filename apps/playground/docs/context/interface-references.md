@@ -20,7 +20,8 @@ Application here:
 
 - Keep parameters adjacent to the animated system and make presets the primary interaction.
 - Keep live results and charts visible with the simulation rather than behind output tabs.
-- Put interpretation guidance and granular settings in alternate states of the same details rail.
+- Nest interpretation guidance beneath each scenario in the chapter rail; reserve the optional right rail
+  for granular settings, evidence anchors, and modelling assumptions.
 - Keep model scope in Settings so validation and forecast caveats do not interrupt the scenario story.
 - Use guided scenario stories and same-seed counterfactuals instead of copying GATE's Simulation A/B
   layout. The five-domain composition is the distinctive product requirement here.

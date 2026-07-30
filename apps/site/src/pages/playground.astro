@@ -1,0 +1,11 @@
+---
+import PlaygroundApp from '@eq-network/playground/embed';
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import { playgroundPageContent } from '@content/playground';
+---
+
+<Layout seo={playgroundPageContent.seo}>
+  <PageHeader {...playgroundPageContent.header} wide />
+  <PlaygroundApp client:load />
+</Layout>

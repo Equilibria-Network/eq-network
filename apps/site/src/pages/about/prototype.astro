@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import AboutPrototype from '@components/about/AboutPrototype.astro';
+import { aboutPage } from '@content/about';
+---
+
+<Layout
+  seo={{
+    ...aboutPage.seo,
+    title: 'About prototype | Equilibria Network',
+    canonicalPath: '/about/prototype',
+    noindex: true,
+  }}
+>
+  <AboutPrototype />
+</Layout>

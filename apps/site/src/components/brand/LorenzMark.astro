@@ -1,0 +1,29 @@
+---
+interface Props {
+  strokes: Array<{ d: string; width: number; opacity: number }>;
+}
+
+const { strokes } = Astro.props;
+---
+
+<g class="lorenzMark">
+  {
+    strokes.map((stroke) => (
+      <path
+        d={stroke.d}
+        style={`--segment-width:${stroke.width};--segment-opacity:${stroke.opacity}`}
+      />
+    ))
+  }
+</g>
+
+<style>
+  path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: calc(var(--mark-width, 4.5) * var(--segment-width));
+    opacity: var(--segment-opacity);
+  }
+</style>

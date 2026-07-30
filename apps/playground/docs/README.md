@@ -20,9 +20,10 @@ when prose drifts.
 
 ## Current status
 
-- Canonical route: `/lab/playground/` inside the shared site layout.
+- Canonical route: `/playground/` inside the shared site layout; `/lab/playground/` redirects to it.
 - Production boundary: `@eq-network/playground/embed`, consumed at Astro build time.
 - Scientific boundary: deterministic worker-owned trajectories protected by golden and validation tests.
 - Rendering boundary: scenario-specific SVG showcases plus DOM metrics and SVG time-series charts.
+- Narrative boundary: typed story steps orchestrate existing presets, views, ticks, and playback targets.
 - Open work: scientific module extraction and retirement of unused pre-restoration Canvas prototypes; see
   [`tasks/README.md`](tasks/README.md).

@@ -56,13 +56,12 @@
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.65);
-  border-radius: 12px;
+  border-radius: 0;
   pointer-events: none;
   z-index: 0;
 }
 
 .phaseBox:hover .phaseBoxInner {
-  box-shadow: 0 4px 16px rgba(0, 59, 126, 0.12);
   border: 1.5px solid rgba(0, 59, 126, 0.15);
 }
 
@@ -238,13 +237,12 @@
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.65);
-  border-radius: 12px;
+  border-radius: 0;
   pointer-events: none;
   z-index: 0;
 }
 
 .card:hover .cardInner {
-  box-shadow: 0 4px 16px rgba(0, 59, 126, 0.12);
   border: 1.5px solid rgba(0, 59, 126, 0.15);
 }
 
@@ -368,7 +366,6 @@
 
   .phaseBox:hover .phaseBoxInner,
   .card:hover .cardInner {
-    box-shadow: none;
     border: none;
   }
 

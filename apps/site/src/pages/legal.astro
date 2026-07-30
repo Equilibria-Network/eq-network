@@ -7,7 +7,7 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import '@fontsource/ibm-plex-mono/400.css';
 
-const { title, eyebrow, intro, details, sections, contact, registry } = legalContent;
+const { title, eyebrow, intro, details, sections, contact } = legalContent;
 const sidebarItems = [
   { label: 'Registered identity', href: '#registered-identity' },
   ...sections.map((section) => ({
@@ -53,10 +53,6 @@ const sidebarItems = [
               ))
             }
           </dl>
-          <div class="registry">
-            <a href={registry.href} target="_blank" rel="noopener noreferrer">{registry.label} ↗</a>
-            <p>{registry.note}</p>
-          </div>
         </section>
 
         {

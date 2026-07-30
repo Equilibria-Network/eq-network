@@ -1,0 +1,561 @@
+---
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
+import '@fontsource/space-grotesk/500.css';
+---
+
+<section class="notebookLab">
+  <div class="sectionRule"><span>03 / WORKING ELEMENTS</span></div>
+  <header class="sectionIntro">
+    <div>
+      <p class="kicker">ONE LANGUAGE, THREE USES</p>
+      <h2>The page stays precise. The thinking is allowed to move.</h2>
+    </div>
+    <p>
+      Kalam is reserved for equations, hypotheses, arrows, and marginal thought. Graphite lines
+      belong to explanatory figures. The interface beneath them remains calm, measured, and
+      reusable.
+    </p>
+  </header>
+
+  <div class="elementGrid">
+    <article class="marginalCard">
+      <div class="hatchedStrip">FIELD NOTE / 03.1</div>
+      <div class="cardBody">
+        <p class="meta">OBSERVATION / NETWORK RESILIENCE</p>
+        <h3>Redundancy is not the same as resilience.</h3>
+        <p>
+          A dense network can still depend on a few structurally important relationships. Remove the
+          wrong bridge and apparently abundant connection becomes fragmentation.
+        </p>
+        <dl>
+          <div><dt>Nodes</dt><dd>28</dd></div>
+          <div><dt>Edges</dt><dd>47</dd></div>
+          <div><dt>Bridges</dt><dd>03</dd></div>
+        </dl>
+      </div>
+      <aside class="marginNote">
+        <span>working thought</span>
+        <p>test the bridge first—<br />not the average degree</p>
+        <svg viewBox="0 0 120 70" aria-hidden="true">
+          <path d="M112 12C83 7 67 17 56 33C45 49 31 55 9 52"></path>
+          <path d="M17 44L8 52L19 57"></path>
+        </svg>
+      </aside>
+    </article>
+
+    <article class="notationCard">
+      <p class="meta">WORKING MATH / 03.2</p>
+      <div class="equation">
+        <span>λ₂(L) &gt; 0</span>
+        <span class="therefore">⇒</span>
+        <span>one connected component</span>
+      </div>
+      <p class="annotation">but how quickly does cooperation recover after the cut?</p>
+      <svg class="annotationArrow" viewBox="0 0 180 72" aria-hidden="true">
+        <path d="M170 10C130 14 102 29 82 49C66 65 44 64 13 55"></path>
+        <path d="M22 48L12 55L22 62"></path>
+      </svg>
+    </article>
+  </div>
+
+  <figure class="networkFigure">
+    <div class="figureHeading">
+      <div>
+        <span>FIG. 02 / PENCIL NETWORK</span>
+        <h2>Structure seen while it is still being understood.</h2>
+      </div>
+      <p>
+        Curved, repeated strokes make the model feel investigated rather than exported. Crisp labels
+        and a measured frame keep the result legible enough for real explanatory work.
+      </p>
+    </div>
+
+    <div class="networkCanvas">
+      <svg viewBox="0 0 920 520" role="img" aria-labelledby="network-title network-desc">
+        <title id="network-title">Pencil-drawn network with two communities and a bridge</title>
+        <desc id="network-desc">
+          Two clusters of nodes are joined by one highlighted bridge. Curved, slightly offset
+          strokes resemble graphite construction lines and handwritten notes identify the structural
+          risk.
+        </desc>
+        <defs>
+          <filter id="graphite-wander" x="-3%" y="-4%" width="106%" height="108%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.009 0.035"
+              numOctaves="2"
+              seed="17"
+              result="noise"></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.35"></feDisplacementMap>
+          </filter>
+          <pattern
+            id="node-hatch"
+            width="5"
+            height="5"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(22)"
+          >
+            <path d="M0 0V5"></path>
+          </pattern>
+          <marker
+            id="note-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto"
+          >
+            <path d="M0 0L10 5L0 10"></path>
+          </marker>
+        </defs>
+
+        <g class="constructionLines">
+          <ellipse cx="261" cy="278" rx="194" ry="172"></ellipse>
+          <ellipse cx="674" cy="260" rx="180" ry="160"></ellipse>
+          <path d="M57 439C206 478 354 467 461 426"></path>
+          <path d="M482 424C610 470 759 453 863 407"></path>
+        </g>
+
+        <g class="edgeGhosts" aria-hidden="true">
+          <path d="M139 222Q198 135 281 173M142 225Q202 139 283 176"></path>
+          <path d="M281 173Q360 198 369 290M283 176Q357 203 365 291"></path>
+          <path d="M369 290Q322 378 225 386M365 291Q319 374 225 382"></path>
+          <path d="M225 386Q126 350 139 222M225 382Q132 347 142 225"></path>
+          <path d="M139 222Q248 248 369 290M142 225Q250 251 365 291"></path>
+          <path d="M281 173Q270 280 225 386M283 176Q274 278 225 382"></path>
+          <path d="M563 206Q658 128 746 190M566 209Q659 133 744 194"></path>
+          <path d="M746 190Q811 275 753 355M744 194Q807 274 750 351"></path>
+          <path d="M753 355Q654 405 570 335M750 351Q655 401 573 333"></path>
+          <path d="M570 335Q532 273 563 206M573 333Q537 275 566 209"></path>
+          <path d="M563 206Q663 246 753 355M566 209Q665 247 750 351"></path>
+          <path d="M746 190Q633 245 570 335M744 194Q636 247 573 333"></path>
+          <path class="bridgeGhost" d="M369 290Q468 222 563 206M366 294Q469 227 566 209"></path>
+        </g>
+
+        <g class="nodes">
+          <g transform="translate(139 222)"
+            ><circle r="18"></circle><circle class="hatch" r="13"></circle></g
+          >
+          <g transform="translate(281 173)"
+            ><circle r="23"></circle><circle class="hatch" r="17"></circle></g
+          >
+          <g transform="translate(369 290)"
+            ><circle class="bridgeNode" r="27"></circle><circle class="hatch" r="20"></circle></g
+          >
+          <g transform="translate(225 386)"
+            ><circle r="20"></circle><circle class="hatch" r="15"></circle></g
+          >
+          <g transform="translate(563 206)"
+            ><circle class="bridgeNode" r="27"></circle><circle class="hatch" r="20"></circle></g
+          >
+          <g transform="translate(746 190)"
+            ><circle r="21"></circle><circle class="hatch" r="16"></circle></g
+          >
+          <g transform="translate(753 355)"
+            ><circle r="18"></circle><circle class="hatch" r="13"></circle></g
+          >
+          <g transform="translate(570 335)"
+            ><circle r="22"></circle><circle class="hatch" r="16"></circle></g
+          >
+        </g>
+
+        <g class="graphNotes">
+          <text x="70" y="84">community A</text>
+          <text x="696" y="82">community B</text>
+          <text x="393" y="121">single point of failure?</text>
+          <path d="M538 125C504 143 490 171 487 207C484 235 459 252 407 273"></path>
+          <text x="35" y="488">G = (V, E)</text>
+          <text x="687" y="477">λ₂ ↓ when this tie weakens</text>
+        </g>
+      </svg>
+      <p class="edgeLabel">the bridge carries more<br />than its share</p>
+    </div>
+
+    <figcaption>
+      <span>Graphite is a semantic layer: it marks exploration, causality, and uncertainty.</span>
+      <span>Interface geometry remains exact.</span>
+    </figcaption>
+  </figure>
+</section>
+
+<style>
+  .notebookLab {
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
+
+  .sectionRule {
+    border-top: 1px solid color-mix(in srgb, #003b7e 24%, transparent);
+    font:
+      0.68rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .sectionRule span {
+    display: inline-block;
+    border-right: 1px solid color-mix(in srgb, #003b7e 24%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, #003b7e 24%, transparent);
+    padding: 0.75rem 1rem 0.7rem 0;
+  }
+
+  .sectionIntro,
+  .figureHeading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.65fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+
+  .kicker,
+  .meta,
+  .figureHeading span,
+  figcaption {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .kicker,
+  .meta,
+  .figureHeading span {
+    margin: 0 0 1rem;
+    color: #318fcb;
+    font-size: 0.65rem;
+  }
+
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h2 {
+    max-width: 17ch;
+    margin-bottom: 0;
+    font:
+      500 clamp(2rem, 4vw, 4.25rem)/0.98 'Space Grotesk',
+      sans-serif;
+    letter-spacing: -0.055em;
+  }
+
+  .sectionIntro > p,
+  .figureHeading > p {
+    max-width: 58ch;
+    align-self: end;
+    margin-bottom: 0;
+    color: #46505a;
+    line-height: 1.7;
+  }
+
+  .elementGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: stretch;
+    margin-bottom: clamp(5rem, 10vw, 9rem);
+  }
+
+  .marginalCard,
+  .notationCard {
+    position: relative;
+    background: #fff;
+  }
+
+  .marginalCard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(11rem, 0.38fr);
+    border: 1px solid #003b7e;
+  }
+
+  .hatchedStrip {
+    position: absolute;
+    inset: 0 0 auto;
+    border-bottom: 1px solid #003b7e;
+    padding: 0.55rem 0.8rem;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 5px,
+      rgba(0, 59, 126, 0.14) 5px 6px
+    );
+    font:
+      0.62rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .cardBody {
+    padding: 4.25rem clamp(1.5rem, 4vw, 3.5rem) 2.5rem;
+  }
+
+  .cardBody h3 {
+    max-width: 18ch;
+    font:
+      500 clamp(1.65rem, 3vw, 2.7rem)/1.02 'Space Grotesk',
+      sans-serif;
+    letter-spacing: -0.04em;
+  }
+
+  .cardBody > p {
+    max-width: 60ch;
+    color: #46505a;
+    line-height: 1.65;
+  }
+
+  dl {
+    display: flex;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    margin: 2.5rem 0 0;
+  }
+
+  dt {
+    font:
+      0.6rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0.45rem 0 0;
+    font:
+      500 1.35rem/1 'Space Grotesk',
+      sans-serif;
+  }
+
+  .marginNote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px dashed color-mix(in srgb, #003b7e 45%, transparent);
+    padding: 4rem 1.2rem 2rem;
+    color: #303942;
+    transform: rotate(-1deg);
+  }
+
+  .marginNote span {
+    font:
+      0.6rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .marginNote p,
+  .annotation,
+  .equation {
+    font-family: 'Kalam', cursive;
+  }
+
+  .marginNote p {
+    margin: 1rem 0 0;
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    line-height: 1.25;
+  }
+
+  .marginNote svg {
+    width: 100%;
+    margin-top: 0.6rem;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+
+  .notationCard {
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, #003b7e 32%, transparent);
+    padding: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .notationCard::after {
+    content: '';
+    position: absolute;
+    inset: auto -2rem -3rem auto;
+    width: 9rem;
+    height: 9rem;
+    border: 1px dashed color-mix(in srgb, #003b7e 25%, transparent);
+    border-radius: 50%;
+  }
+
+  .equation {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2.45rem);
+    line-height: 1.12;
+  }
+
+  .therefore {
+    color: #318fcb;
+  }
+
+  .annotation {
+    max-width: 18ch;
+    margin: 2.5rem 0 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.25;
+    transform: rotate(-2deg);
+  }
+
+  .annotationArrow {
+    width: 60%;
+    margin: -0.3rem 0 0 12%;
+    fill: none;
+    stroke: #46505a;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+  }
+
+  .networkFigure {
+    margin: 0;
+    border-top: 1px solid color-mix(in srgb, #003b7e 24%, transparent);
+  }
+
+  .networkCanvas {
+    position: relative;
+    min-height: 30rem;
+    border: 1px solid color-mix(in srgb, #003b7e 28%, transparent);
+    background-image:
+      linear-gradient(rgba(0, 59, 126, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 59, 126, 0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .networkCanvas svg {
+    display: block;
+    width: 100%;
+    min-height: 30rem;
+  }
+
+  .constructionLines,
+  .edgeGhosts {
+    fill: none;
+    stroke: #46505a;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: url(#graphite-wander);
+  }
+
+  .constructionLines {
+    opacity: 0.2;
+    stroke-width: 1;
+    stroke-dasharray: 5 8;
+  }
+
+  .edgeGhosts {
+    opacity: 0.72;
+    stroke-width: 1.15;
+  }
+
+  .edgeGhosts .bridgeGhost {
+    stroke: #003b7e;
+    stroke-width: 2;
+  }
+
+  .nodes {
+    fill: #fff;
+    stroke: #46505a;
+    stroke-width: 1.5;
+    filter: url(#graphite-wander);
+  }
+
+  .nodes .bridgeNode {
+    stroke: #003b7e;
+    stroke-width: 2.2;
+  }
+
+  .nodes .hatch {
+    fill: url(#node-hatch);
+    stroke-width: 0.8;
+    opacity: 0.55;
+  }
+
+  #node-hatch path {
+    stroke: #46505a;
+    stroke-width: 0.65;
+  }
+
+  .graphNotes {
+    fill: #303942;
+    font:
+      400 22px 'Kalam',
+      cursive;
+  }
+
+  .graphNotes path {
+    fill: none;
+    stroke: #303942;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    marker-end: url(#note-arrow);
+  }
+
+  #note-arrow path {
+    fill: #303942;
+  }
+
+  .edgeLabel {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    margin: 0;
+    font:
+      400 1.1rem/1.2 'Kalam',
+      cursive;
+    transform: translate(-50%, -50%) rotate(-4deg);
+  }
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    border-right: 1px solid color-mix(in srgb, #003b7e 28%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, #003b7e 28%, transparent);
+    border-left: 1px solid color-mix(in srgb, #003b7e 28%, transparent);
+    padding: 0.8rem 1rem;
+    font-size: 0.58rem;
+  }
+
+  @media (max-width: 800px) {
+    .sectionIntro,
+    .figureHeading,
+    .elementGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .marginalCard {
+      grid-template-columns: 1fr;
+    }
+
+    .marginNote {
+      border-top: 1px dashed color-mix(in srgb, #003b7e 45%, transparent);
+      border-left: 0;
+      padding: 1.5rem;
+      transform: none;
+    }
+
+    .marginNote svg {
+      max-width: 10rem;
+    }
+
+    .networkCanvas,
+    .networkCanvas svg {
+      min-height: 21rem;
+    }
+
+    figcaption {
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marginalCard {
+      transition: none;
+    }
+  }
+</style>

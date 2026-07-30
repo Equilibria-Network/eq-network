@@ -16,11 +16,12 @@ The five scenarios form one argument:
 
 ## Interaction grammar
 
-- A scenario is selected by a stable URL hash and presented before its configuration.
-- Four narrative beats explain the set-up, pressure, intervention, and correct reading.
+- A scenario is selected by a stable URL hash and expands in the left navigation.
+- Five or six typed story scenes appear as numbered subsections beneath it. Selecting a scene applies its
+  authored preset and view, moves the shared playhead, and optionally plays to a defined tick.
 - Presets are named, reproducible experimental conditions promoted beside the player.
-- The Settings/Story toggle replaces the right details rail in place. Granular controls and model scope
-  live in Settings; opening them recomputes the whole deterministic trajectory.
+- Settings is the only right rail and is hidden by default. Granular controls, evidence anchors, and
+  modelling assumptions live there; Close gives its width back to the visualization.
 - A seed changes the sampled world.
 - Playback and scrubbing inspect the path, not only the endpoint.
 - Rewind/forward, speed, and scrubbing use the same live playhead as metric cards and charts.
@@ -29,18 +30,20 @@ The five scenarios form one argument:
 
 ## Reading layout
 
-The canonical site header introduces the tool. Inside the reader, the scenario title spans the full width
-and sticks to the viewport top. Chapters stay left, the live system stays central, and the story/settings
-details rail scrolls independently on the right. On narrow screens those regions become one vertical
-reading order without horizontal overflow.
+The canonical site header introduces the tool. Inside the reader, a compact scenario title spans the full
+width and sticks to the viewport top. Scenario and story hierarchy stay left, the live system and measures
+stay central, and the optional Settings rail scrolls independently on the right. The desktop reader fits
+the active simulation and both measure charts in one snapped viewport. On narrow screens those regions
+become one vertical reading order without horizontal overflow.
 
 ## Epistemic boundary
 
 These are toy models and qualitative JavaScript ports. They make assumptions inspectable and help compare
-mechanisms; they do not forecast real societies. The model scope appears in Settings rather than
-interrupting the story. A single trajectory or score is not a finding. The working paper's standard is
-stronger: map regimes, validate against known anchors, compare paired seeds, and test claims across
-structurally different models.
+mechanisms; they do not forecast real societies. Each Settings rail ends with its evidence anchor and
+itemized modelling assumptions; the full reading guide explains why fixed-rule defenses are optimistic
+upper bounds. A single trajectory or score is not a finding. The working paper's standard is stronger:
+map regimes, validate against known anchors, compare paired seeds, and test claims across structurally
+different models.
 
 ## Source material
 

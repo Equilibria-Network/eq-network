@@ -61,6 +61,17 @@ export interface SeriesDefinition {
   max?: number;
 }
 
+export interface StoryStep {
+  id: string;
+  title: string;
+  body: string;
+  view: string;
+  tick: number;
+  playTo?: number;
+  speed?: number;
+  preset?: string;
+}
+
 export interface ScenarioDefinition {
   id: ScenarioId;
   index: string;
@@ -69,12 +80,9 @@ export interface ScenarioDefinition {
   question: string;
   description: string;
   assumption: string;
-  story: {
-    setup: string;
-    pressure: string;
-    intervention: string;
-    reading: string;
-  };
+  evidence: string;
+  modellingNotes: string[];
+  story: StoryStep[];
   engine: 'runCommons' | 'runEconomy' | 'runCultural' | 'runPolitical' | 'runCombined';
   seed: number;
   defaults: NumericParams;

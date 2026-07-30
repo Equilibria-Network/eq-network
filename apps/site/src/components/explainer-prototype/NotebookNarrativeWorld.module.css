@@ -1,0 +1,570 @@
+.root {
+  --ink: var(--color-primary);
+  --paper: var(--bg-color);
+  --graphite: var(--diagram-graphite);
+  --cooperate: var(--diagram-cooperate);
+  --defect: var(--diagram-defect);
+  --uncertain: var(--diagram-uncertain);
+  --field-0: var(--diagram-field-cai);
+  --field-1: var(--diagram-field-css);
+  --field-2: var(--diagram-field-af);
+  --field-3: var(--diagram-field-cs);
+  background: var(--paper);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: min(790px, calc(100svh - var(--navbar-height) - 4.6rem));
+  min-height: 500px;
+}
+
+.hatchLine {
+  fill: none;
+  stroke: var(--defect);
+  stroke-width: 0.75;
+  stroke-opacity: 0.24;
+}
+
+.basins,
+.possibleWorlds {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.basins {
+  stroke-width: 1.1;
+  stroke-dasharray: 5 7;
+  opacity: 0.48;
+}
+
+.basins path:first-child {
+  stroke: var(--cooperate);
+}
+
+.basins .badBasin {
+  fill: url('#narrative-basin-hatch');
+  stroke: var(--defect);
+}
+
+.nodeHatchLine {
+  fill: none;
+  stroke-width: 0.78;
+  stroke-opacity: 0.34;
+}
+
+.institutionHatchLine {
+  fill: none;
+  stroke-width: 0.7;
+  stroke-opacity: 0.28;
+}
+
+.neutralHatch .nodeHatchLine,
+.neutralHatch .institutionHatchLine {
+  stroke: var(--graphite);
+}
+
+.cooperativeHatch .nodeHatchLine,
+.cooperativeHatch .institutionHatchLine {
+  stroke: var(--cooperate);
+}
+
+.defectingHatch .nodeHatchLine,
+.defectingHatch .institutionHatchLine {
+  stroke: var(--defect);
+}
+
+.uncertainHatch .nodeHatchLine,
+.uncertainHatch .institutionHatchLine {
+  stroke: var(--uncertain);
+}
+
+.field0Hatch .nodeHatchLine,
+.field0Hatch .institutionHatchLine {
+  stroke: var(--field-0);
+}
+
+.field1Hatch .nodeHatchLine,
+.field1Hatch .institutionHatchLine {
+  stroke: var(--field-1);
+}
+
+.field2Hatch .nodeHatchLine,
+.field2Hatch .institutionHatchLine {
+  stroke: var(--field-2);
+}
+
+.field3Hatch .nodeHatchLine,
+.field3Hatch .institutionHatchLine {
+  stroke: var(--field-3);
+}
+
+.possibleWorlds {
+  stroke: var(--uncertain);
+  stroke-width: 1;
+  stroke-dasharray: 3 9;
+  opacity: 0.5;
+}
+
+.possibleWorlds path:first-child {
+  animation: breathe 7s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.fieldFrames {
+  fill: none;
+  stroke-width: 0.86;
+  stroke-dasharray: 5 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fieldFrames > g {
+  opacity: 0.72;
+}
+
+.fieldFrames .field0,
+.bridgeEdges .field0 {
+  stroke: var(--field-0);
+}
+
+.fieldFrames .field1,
+.bridgeEdges .field1 {
+  stroke: var(--field-1);
+}
+
+.fieldFrames .field2,
+.bridgeEdges .field2 {
+  stroke: var(--field-2);
+}
+
+.fieldFrames .field3,
+.bridgeEdges .field3 {
+  stroke: var(--field-3);
+}
+
+.fieldCode,
+.fieldLabel,
+.fieldSubtitle {
+  stroke: none;
+  font-family: 'Kalam', cursive;
+}
+
+.fieldCode {
+  fill: currentColor;
+  font-size: 12px;
+}
+
+.fieldLabel {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.fieldSubtitle {
+  fill: var(--graphite);
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.edges {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 0.72;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.75;
+}
+
+.edges path {
+  transition:
+    opacity 280ms ease,
+    stroke 280ms ease;
+  vector-effect: non-scaling-stroke;
+}
+
+.hiddenEdge {
+  opacity: 0 !important;
+}
+
+.disruptedEdge {
+  stroke: var(--defect);
+  stroke-dasharray: 5 6;
+  opacity: 0.34;
+}
+
+.possibleEdge {
+  stroke: var(--uncertain);
+  stroke-dasharray: 2 7;
+  opacity: 0.42;
+}
+
+.bridgeEdges {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.05;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  animation: flow 1.5s linear infinite;
+}
+
+.bridgeEdges .crossFieldDiscovery {
+  stroke: color-mix(in srgb, var(--ink) 72%, transparent);
+  stroke-width: 1.1;
+  stroke-dasharray: 5 6;
+}
+
+.bridgeEdges .equilibriaConnection {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  stroke-dasharray: 7 4;
+}
+
+.arrowHead {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.nodes {
+  fill: var(--paper);
+  stroke: var(--graphite);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.node {
+  cursor: pointer;
+  outline: none;
+  transition: opacity 240ms ease;
+}
+
+.nodeShape {
+  fill: var(--paper);
+  stroke: currentColor;
+  stroke-width: 0.95;
+  vector-effect: non-scaling-stroke;
+}
+
+.nodeMark {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.62;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.cooperative {
+  color: var(--cooperate);
+}
+
+.defecting {
+  color: var(--defect);
+}
+
+.uncertain {
+  color: var(--uncertain);
+}
+
+.root[data-scene='knowledge'] .node,
+.root[data-scene='silos'] .node,
+.root[data-scene='bridge'] .node {
+  color: var(--field-color);
+}
+
+.node.field0 {
+  --field-color: var(--field-0);
+}
+
+.node.field1 {
+  --field-color: var(--field-1);
+}
+
+.node.field2 {
+  --field-color: var(--field-2);
+}
+
+.node.field3 {
+  --field-color: var(--field-3);
+}
+
+.preCascade {
+  color: var(--graphite);
+}
+
+.selectionCircle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.75;
+  stroke-dasharray: 2 3;
+  opacity: 0;
+}
+
+.node:hover .selectionCircle,
+.node:focus-visible .selectionCircle,
+.node[aria-pressed='true'] .selectionCircle {
+  opacity: 1;
+}
+
+.dimmed {
+  opacity: 0.12;
+}
+
+.annotations {
+  pointer-events: none;
+}
+
+.sceneTitle,
+.flowLabels,
+.nodeKey,
+.strategicLegend,
+.payoffNote,
+.welfareNote,
+.cooperativeLabel,
+.defectingLabel,
+.blockedMove,
+.questionMark,
+.unknownLabel,
+.sharedQuestion,
+.translationGap,
+.siloNote,
+.bridgeHub,
+.bridgeActions {
+  font-family: 'Kalam', cursive;
+}
+
+.sceneTitle {
+  fill: var(--ink);
+  font-size: 19px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.flowLabels {
+  fill: var(--graphite);
+  font-size: 13px;
+  text-anchor: middle;
+}
+
+.flowLabels text::before {
+  content: '→';
+}
+
+.nodeKey {
+  fill: var(--graphite);
+  stroke: var(--graphite);
+  font-size: 12px;
+}
+
+.nodeKey text {
+  stroke: none;
+}
+
+.nodeKey circle,
+.nodeKey path {
+  fill: var(--paper);
+}
+
+.strategicLegend {
+  font-size: 12px;
+}
+
+.strategicLegend line {
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.strategicLegend text {
+  fill: currentColor;
+}
+
+.strategicLegendTitle {
+  fill: var(--graphite) !important;
+}
+
+.payoffNote,
+.welfareNote {
+  fill: var(--defect);
+  font-size: 16px;
+}
+
+.payoffNote path,
+.blockedMove path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  marker-end: url('#narrative-arrow');
+}
+
+.welfareNote,
+.cooperativeLabel,
+.defectingLabel,
+.unknownLabel,
+.siloNote,
+.bridgeActions {
+  text-anchor: middle;
+}
+
+.cooperativeLabel {
+  fill: var(--cooperate);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.defectingLabel {
+  fill: var(--defect);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.blockedMove {
+  color: var(--graphite);
+  fill: var(--graphite);
+  font-size: 14px;
+  text-anchor: middle;
+}
+
+.blockedMove path:nth-child(2) {
+  marker-end: none;
+  stroke: var(--defect);
+  stroke-width: 1.2;
+}
+
+.questionMark {
+  fill: var(--uncertain);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.unknownLabel {
+  fill: var(--uncertain);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sharedQuestion,
+.translationGap,
+.bridgeHub {
+  text-anchor: middle;
+}
+
+.sharedQuestion circle,
+.translationGap circle,
+.bridgeHub path {
+  fill: color-mix(in srgb, var(--paper) 92%, transparent);
+  stroke: var(--ink);
+  stroke-width: 0.9;
+}
+
+.sharedQuestion circle:nth-child(2),
+.bridgeHub path {
+  stroke: var(--field-1);
+}
+
+.sharedQuestion text:first-of-type {
+  fill: var(--field-1);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sharedQuestion text:last-of-type {
+  fill: var(--ink);
+  font-size: 10px;
+}
+
+.translationGap circle {
+  stroke: var(--uncertain);
+  stroke-dasharray: 4 7;
+}
+
+.translationGap text:first-of-type {
+  fill: var(--uncertain);
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.translationGap text:last-of-type {
+  fill: var(--graphite);
+  font-size: 12px;
+}
+
+.siloNote {
+  fill: var(--graphite);
+  font-size: 14px;
+}
+
+.bridgeHub text {
+  fill: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bridgeActions {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.mathLayer,
+.selectionNote {
+  fill: var(--graphite);
+  font-family: 'Kalam', cursive;
+}
+
+.mathLayer {
+  font-size: 18px;
+}
+
+.mathLayer .marginNote {
+  font-size: 14px;
+}
+
+.selectionNote {
+  font-size: 14px;
+}
+
+.selectionNote text:nth-child(2) {
+  font-size: 11px;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -26;
+  }
+}
+
+@keyframes breathe {
+  to {
+    transform: scale(1.018);
+  }
+}
+
+@media (max-width: 992px) {
+  .svg {
+    height: 42vh;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .svg {
+    height: clamp(230px, 30svh, 285px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node,
+  .edges path {
+    transition: none;
+  }
+
+  .bridgeEdges,
+  .possibleWorlds path:first-child {
+    animation: none;
+  }
+}

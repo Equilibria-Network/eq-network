@@ -2,7 +2,7 @@
 
 A static, browser-run laboratory for exploring how economic, cultural, political, and commons
 institutions change when humans and AI systems share the same networks. It is developed as a workspace
-package and mounted at `/lab/playground` inside the Equilibria website's canonical layout.
+package and mounted at `/playground` inside the Equilibria website's canonical layout.
 
 The app contains five deterministic toy-model scenarios:
 
@@ -26,7 +26,7 @@ pnpm install
 pnpm --filter @eq-network/site dev --host 0.0.0.0 --port 4321
 ```
 
-Open `http://localhost:4321/lab/playground/` locally or the printed network URL from another machine.
+Open `http://localhost:4321/playground/` locally or the printed network URL from another machine.
 This canonical site server includes the real navbar, page header, footer, and Astro integration. Use
 `pnpm dev:playground` only for package-isolated work; it is not a separate production website.
 
@@ -37,9 +37,9 @@ pnpm --filter @eq-network/site build
 pnpm --filter @eq-network/playground smoke:browser
 ```
 
-The Vite build is a development harness. Production is the statically generated site route at
-`apps/site/dist/lab/playground/`. The route is currently `noindex`. No backend, API key, analytics, cookie,
-or personal-data store is used.
+The Vite build is a development harness. Production is the statically generated, indexable site route at
+`apps/site/dist/playground/`; `/lab/playground` is a static compatibility redirect. No backend, API key,
+analytics, cookie, or personal-data store is used.
 
 ## Structure
 

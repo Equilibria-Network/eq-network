@@ -1,0 +1,462 @@
+---
+import {
+  draftedEdge,
+  draftedNode,
+  edgeFinish,
+  type EdgeGesture,
+  type NotebookNodeShape,
+} from '@components/explainer-prototype/notebookDrawing';
+
+const nodes: Array<{
+  id: number;
+  x: number;
+  y: number;
+  shape: NotebookNodeShape;
+  mark: string;
+}> = [
+  { id: 0, x: 115, y: 205, shape: 'circle', mark: '1' },
+  { id: 1, x: 245, y: 128, shape: 'triangle', mark: 'A' },
+  { id: 2, x: 344, y: 246, shape: 'circle', mark: '2' },
+  { id: 3, x: 205, y: 362, shape: 'rounded-square', mark: 'I' },
+  { id: 4, x: 480, y: 155, shape: 'circle', mark: '3' },
+  { id: 5, x: 608, y: 245, shape: 'capsule', mark: 'Φ' },
+  { id: 6, x: 500, y: 375, shape: 'circle', mark: '4' },
+  { id: 7, x: 754, y: 172, shape: 'triangle', mark: 'B' },
+  { id: 8, x: 788, y: 356, shape: 'circle', mark: '5' },
+];
+
+const edges: Array<[number, number, EdgeGesture]> = [
+  [0, 1, 'steady'],
+  [0, 3, 'quick'],
+  [1, 2, 'sweeping'],
+  [1, 4, 'steady'],
+  [2, 3, 'steady'],
+  [2, 4, 'quick'],
+  [2, 5, 'sweeping'],
+  [3, 6, 'steady'],
+  [4, 5, 'steady'],
+  [4, 7, 'sweeping'],
+  [5, 6, 'quick'],
+  [5, 7, 'steady'],
+  [5, 8, 'sweeping'],
+  [6, 8, 'steady'],
+  [7, 8, 'quick'],
+];
+
+const drawings = new Map(nodes.map((node) => [node.id, draftedNode(node.id, node.shape)]));
+---
+
+<section class="drawingSystem" id="drawing-system">
+  <div class="rule"><span>04 / DRAWING SYSTEM</span></div>
+  <header>
+    <div>
+      <p class="eyebrow">DISCIPLINED HAND DRAFTING</p>
+      <h2>Precise enough to explain. Human enough to think with.</h2>
+    </div>
+    <div class="principles">
+      <p>
+        The interface remains exact. Hand-drawn geometry appears where the work is exploratory:
+        models, equations, hypotheses, causal arrows, and marginal notes.
+      </p>
+      <ul>
+        <li>variation is local, never global noise;</li>
+        <li>most strokes are confident and smooth;</li>
+        <li>corrections and open contours are rare;</li>
+        <li>the same model can animate without changing its visual identity.</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="specimenGrid">
+    <article class="fieldCard">
+      <div class="hatchedStrip">FIELD NOTE / RESILIENCE</div>
+      <div class="cardBody">
+        <span>OBSERVATION / 04.1</span>
+        <h3>Redundancy is not the same as resilience.</h3>
+        <p>
+          A network may have many connections and still depend on a small number of structural
+          bridges.
+        </p>
+        <dl>
+          <div><dt>Nodes</dt><dd>09</dd></div>
+          <div><dt>Edges</dt><dd>15</dd></div>
+          <div><dt>Bridges</dt><dd>02</dd></div>
+        </dl>
+      </div>
+      <aside>
+        test the bridge first—
+        <svg viewBox="0 0 120 55" aria-hidden="true">
+          <path d="M112 9C78 7 63 17 51 31C40 44 26 47 8 44"></path>
+          <path d="M17 37L8 44L18 49"></path>
+        </svg>
+      </aside>
+    </article>
+
+    <article class="mathCard">
+      <span>WORKING MATH / 04.2</span>
+      <p>λ₂(L) &gt; 0</p>
+      <strong>⇒</strong>
+      <p>one connected component</p>
+      <small>but how quickly does cooperation recover after the cut?</small>
+    </article>
+  </div>
+
+  <figure>
+    <div class="figureHeader">
+      <span>FIG. 02 / REUSABLE GRAPH GRAMMAR</span>
+      <span>STATIC INSTANCE / ANIMATION-READY</span>
+    </div>
+    <svg viewBox="0 0 900 500" role="img" aria-labelledby="brand-graph-title brand-graph-desc">
+      <title id="brand-graph-title">Hand-drafted network grammar</title>
+      <desc id="brand-graph-desc">
+        A network combines controlled straight and curved edges with circles, triangles, rounded
+        squares, capsules, handwritten labels, and occasional pen-lift marks.
+      </desc>
+
+      <g class="edges">
+        {
+          edges.map(([sourceId, targetId, gesture], index) => {
+            const source = nodes[sourceId];
+            const target = nodes[targetId];
+            const sourceDrawing = drawings.get(sourceId)!;
+            const targetDrawing = drawings.get(targetId)!;
+            const finish = edgeFinish(source, target, targetDrawing.radius, index);
+            return (
+              <g>
+                <path
+                  d={draftedEdge(
+                    source,
+                    target,
+                    sourceDrawing.radius,
+                    targetDrawing.radius,
+                    index,
+                    gesture
+                  )}
+                />
+                {finish && <path class="finish" d={finish} />}
+              </g>
+            );
+          })
+        }
+      </g>
+
+      <g class="nodes">
+        {
+          nodes.map((node) => {
+            const drawing = drawings.get(node.id)!;
+            const open = node.id === 2 || node.id === 7;
+            return (
+              <g transform={`translate(${node.x} ${node.y})`}>
+                <path
+                  class:list={['outline', { open }]}
+                  d={drawing.outline}
+                  pathLength="100"
+                  transform={open ? `rotate(${node.id * 23})` : undefined}
+                />
+                {node.id === 4 && (
+                  <path
+                    class="pressure"
+                    d={drawing.outline}
+                    pathLength="100"
+                    transform="rotate(68)"
+                  />
+                )}
+                <text y="4">{node.mark}</text>
+              </g>
+            );
+          })
+        }
+      </g>
+
+      <g class="notes">
+        <text x="38" y="65">G = (V, E)</text>
+        <text x="615" y="72">mixed edge gestures</text>
+        <path d="M740 79C706 100 687 126 674 158"></path>
+        <text x="58" y="464">Φ : local interactions → collective outcome</text>
+        <path d="M401 449C463 422 541 424 593 454"></path>
+      </g>
+    </svg>
+    <figcaption>
+      <span>One visual grammar; circles, symbols, alternate contours, curves, and annotations.</span
+      >
+      <span>Generated from deterministic SVG primitives—not a raster effect.</span>
+    </figcaption>
+  </figure>
+</section>
+
+<style>
+  .drawingSystem {
+    padding-block: clamp(5rem, 9vw, 9rem);
+  }
+
+  .rule {
+    border-top: 1px solid var(--ink);
+    margin-bottom: 3rem;
+    font-size: 0.63rem;
+  }
+
+  .rule span {
+    position: relative;
+    top: -0.65em;
+    padding-right: 1rem;
+    background: var(--paper);
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    margin-bottom: clamp(3rem, 6vw, 6rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--accent);
+    font-size: 0.66rem;
+  }
+
+  h2 {
+    max-width: 14ch;
+    margin: 0;
+    font:
+      500 clamp(2.4rem, 5vw, 5.2rem)/0.95 'Space Grotesk',
+      sans-serif;
+    letter-spacing: -0.06em;
+  }
+
+  .principles {
+    align-self: end;
+    color: var(--graphite);
+    line-height: 1.65;
+  }
+
+  .principles ul {
+    padding-left: 1.2rem;
+  }
+
+  .specimenGrid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 2rem;
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+  }
+
+  .fieldCard {
+    position: relative;
+    border: 1px solid var(--ink);
+  }
+
+  .hatchedStrip {
+    border-bottom: 1px solid var(--ink);
+    padding: 0.7rem;
+    background: repeating-linear-gradient(135deg, transparent 0 7px, var(--line) 7px 8px);
+    font-size: 0.6rem;
+  }
+
+  .cardBody {
+    padding: 1.4rem;
+  }
+
+  .cardBody > span,
+  .mathCard > span {
+    font:
+      0.58rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.07em;
+  }
+
+  h3 {
+    max-width: 20ch;
+    margin: 0.8rem 0;
+    font:
+      500 clamp(1.5rem, 3vw, 2.6rem)/1 'Space Grotesk',
+      sans-serif;
+    letter-spacing: -0.04em;
+  }
+
+  .cardBody > p {
+    max-width: 55ch;
+    color: var(--graphite);
+    line-height: 1.6;
+  }
+
+  dl {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0 0;
+  }
+
+  dt {
+    font-size: 0.7rem;
+  }
+
+  dd {
+    margin: 0;
+    font:
+      1.2rem 'Kalam',
+      cursive;
+  }
+
+  aside {
+    position: absolute;
+    right: 1.4rem;
+    bottom: 1.2rem;
+    width: 175px;
+    color: var(--graphite);
+    font:
+      1rem 'Kalam',
+      cursive;
+    transform: rotate(-1deg);
+  }
+
+  aside svg {
+    display: block;
+    width: 100%;
+  }
+
+  aside path,
+  .notes path {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-width: 0.8;
+    stroke-linecap: round;
+  }
+
+  .mathCard {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-content: center;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 2rem;
+  }
+
+  .mathCard > span,
+  .mathCard small {
+    grid-column: 1 / -1;
+  }
+
+  .mathCard p,
+  .mathCard strong,
+  .mathCard small {
+    font-family: 'Kalam', cursive;
+  }
+
+  .mathCard p {
+    align-self: center;
+    margin: 1.5rem 0;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+  }
+
+  .mathCard strong {
+    align-self: center;
+    font-size: 2rem;
+  }
+
+  .mathCard small {
+    color: var(--graphite);
+    font-size: 1rem;
+    transform: rotate(-1deg);
+  }
+
+  figure {
+    margin: 0;
+    border: 1px solid var(--ink);
+  }
+
+  .figureHeader,
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0.8rem;
+    font:
+      0.58rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.07em;
+  }
+
+  .figureHeader {
+    border-bottom: 1px solid var(--line);
+  }
+
+  figure > svg {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+  }
+
+  .edges path,
+  .nodes path {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .edges > g > path:first-child {
+    stroke-width: 0.8;
+  }
+
+  .edges .finish {
+    stroke-width: 0.4;
+    opacity: 0.28;
+  }
+
+  .nodes .outline {
+    stroke-width: 0.78;
+  }
+
+  .nodes .open {
+    stroke-dasharray: 92 8;
+  }
+
+  .nodes .pressure {
+    stroke-width: 1.65;
+    stroke-dasharray: 14 86;
+  }
+
+  .nodes text,
+  .notes text {
+    fill: var(--graphite);
+    font-family: 'Kalam', cursive;
+  }
+
+  .nodes text {
+    font-size: 10px;
+    text-anchor: middle;
+  }
+
+  .notes {
+    fill: var(--graphite);
+    font-size: 17px;
+  }
+
+  figcaption {
+    border-top: 1px solid var(--ink);
+  }
+
+  @media (max-width: 820px) {
+    header,
+    .specimenGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    aside {
+      position: static;
+      margin: 0 1.4rem 1.2rem auto;
+    }
+
+    .mathCard {
+      padding: 1.25rem;
+    }
+
+    .figureHeader,
+    figcaption {
+      display: grid;
+    }
+  }
+</style>

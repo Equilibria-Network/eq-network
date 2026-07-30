@@ -18,7 +18,7 @@ const STATES: ThesisState[] = [
 
 const p = explainerContent.prototype;
 
-const thesisDocument: VisualEssayDocument<ThesisState> = {
+export const thesisDocument: VisualEssayDocument<ThesisState> = {
   eyebrow: explainerContent.header.eyebrow,
   reference: 'EQ / TH–01',
   title: explainerContent.header.title,

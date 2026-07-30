@@ -23,8 +23,9 @@ pnpm --filter @eq-network/site build
 ```
 
 With the canonical server running on 4321, the dependency-free Chrome smoke check exercises mounting,
-scenario switching, parameter recomputation, live metrics, restored SVG geometry, the derived pipeline
-view, story/settings replacement, sticky-title paint order, mobile overflow, and reduced motion:
+scenario switching, story-driven presets/views/playback, parameter recomputation, live metrics, restored
+SVG geometry, the derived pipeline view, the settings-only rail, one-viewport desktop geometry,
+sticky-title paint order, mobile overflow, and reduced motion:
 
 ```bash
 pnpm --filter @eq-network/playground smoke:browser
@@ -47,7 +48,10 @@ During visual review, check at least:
 - changing a preset, slider, seed, and timeline position;
 - live metric and chart changes while scrubbing;
 - the full-width title remaining opaque and topmost after the introductory header scrolls away;
-- Settings replacing the story in the right rail and the player button toggling back to Story;
+- story scenes changing presets, views, ticks, and playback as authored;
+- the selected scenario expanding into numbered story sections in the left rail;
+- Settings hidden initially, evidence and assumptions at its bottom, and Close returning width to the stage;
+- the sticky title, simulation, and both measure charts fitting within one 1000 px desktop viewport;
 - the site navbar and footer around the app.
 
 ## Full repository gate

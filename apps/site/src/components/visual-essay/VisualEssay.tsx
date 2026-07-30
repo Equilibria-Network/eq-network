@@ -10,6 +10,7 @@ export default function VisualEssay<State extends string>({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHydrated, setIsHydrated] = useState(false);
   const stepRefs = useRef<(HTMLElement | null)[]>([]);
+  const figureRef = useRef<HTMLDivElement | null>(null);
   const activeStep = document.steps[activeIndex];
 
   useEffect(() => {
@@ -23,7 +24,11 @@ export default function VisualEssay<State extends string>({
     let frame = 0;
     const updateFromScroll = () => {
       frame = 0;
-      const activationLine = window.innerHeight * 0.38;
+      const figureBottom = figureRef.current?.getBoundingClientRect().bottom ?? 0;
+      const activationLine =
+        window.innerWidth <= 992
+          ? Math.min(window.innerHeight * 0.72, figureBottom + 32)
+          : window.innerHeight * 0.38;
       let nextIndex = 0;
       stepRefs.current.forEach((node, index) => {
         if (node && node.getBoundingClientRect().top <= activationLine) nextIndex = index;
@@ -72,7 +77,7 @@ export default function VisualEssay<State extends string>({
       )}
 
       <div className={styles.story}>
-        <div className={styles.figureColumn}>
+        <div className={styles.figureColumn} ref={figureRef}>
           <div className={styles.figureFrame}>
             <span className={`${styles.registration} ${styles.regTl}`} aria-hidden="true" />
             <span className={`${styles.registration} ${styles.regTr}`} aria-hidden="true" />
@@ -87,31 +92,6 @@ export default function VisualEssay<State extends string>({
             </div>
             <Visual activeState={activeStep.state} activeStep={activeStep.id} step={activeStep} />
           </div>
-
-          <nav
-            className={styles.timeline}
-            aria-label="Visual essay states"
-            style={{ gridTemplateColumns: `repeat(${document.steps.length}, minmax(0, 1fr))` }}
-          >
-            {document.steps.map((step, index) => (
-              <button
-                key={step.id}
-                className={activeIndex === index ? styles.timelineActive : ''}
-                type="button"
-                aria-label={`Show ${step.stageLabel}`}
-                aria-current={activeIndex === index ? 'step' : undefined}
-                onClick={() => {
-                  window.history.replaceState(null, '', `#step-${index + 1}`);
-                  stepRefs.current[index]?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                  });
-                }}
-              >
-                <span>{String(index + 1).padStart(2, '0')}</span>
-              </button>
-            ))}
-          </nav>
         </div>
 
         <div className={styles.narrative}>
@@ -124,6 +104,7 @@ export default function VisualEssay<State extends string>({
                 id={`step-${index + 1}`}
                 ref={setStepRef(index)}
                 data-step-index={index}
+                aria-current={activeIndex === index ? 'step' : undefined}
                 className={`${styles.step} ${activeIndex === index ? styles.stepActive : ''}`}
               >
                 <div className={styles.stickyHeading}>

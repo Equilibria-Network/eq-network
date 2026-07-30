@@ -1,7 +1,7 @@
 # Playground performance budget
 
 - Adopted: 2026-07-30
-- Measurement route: `/lab/playground/#combined`
+- Measurement route: `/playground/#combined`
 - Profile: local static production build, desktop Lighthouse plus browser interaction checks
 
 ## Budgets

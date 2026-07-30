@@ -4,6 +4,41 @@ All notable changes to this site are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/). This is a continuously-deployed static site, so
 entries are dated rather than semver-tagged.
 
+## [2026-07-30] — Scientific-notebook explainer
+
+### Changed
+
+- Promoted the clean scientific-notebook renderer to canonical `/explainer` while retaining the shared
+  typed seven-step thesis document and `VisualEssay` reading shell.
+- Restored the deployed explainer's full visual progression: integrated society, cascading defection, bad
+  equilibria, uncertain cooperation, four research lenses, disconnected disciplinary subnetworks, and a
+  compositional bridge.
+- Flattened shared visual-essay figures into the page by removing the visible frame, registration marks,
+  and figure/status strip while preserving an invisible sticky layout boundary.
+- Removed the redundant numeric state rail so the document scroll is the sole scene selector, expanded the
+  drawing column, and reduced the persistent model from 28 to 20 actors with selectively pruned links.
+- Replaced geometric triangle and institutional marks with straight-edged drafted forms, added restrained
+  semantic hatching, and kept a persistent shape key across all seven scenes. The key now states the
+  redundant fill contract: humans are open, AI agents use a light hatch, and institutions use a dense
+  cross-hatch.
+- Added explicit strategic-state keys where color changes meaning: green/cooperate and red/defect in the
+  defection and equilibrium scenes, plus amber/unresolved in the uncertainty scene.
+- Routed defection, equilibrium, and bridge annotations from live node geometry. The final state now shows
+  Equilibria as one participant in a distributed cross-field mesh rather than as a central information hub.
+- Moved the local-payoff label beside its initiating actor and routed its short arrow as a two-control-point
+  cubic S gesture.
+- Reconciled the corner notation with each scene: siloing is expressed as sparse between-field edges and
+  bridging as added peer-to-peer edges, avoiding claims of informational independence or central
+  aggregation.
+- Replaced the explainer's Products closing link with the integrated Simulation Playground.
+
+### Added
+
+- Shared scientific-diagram color tokens for cooperation, defection, uncertainty, and the four research
+  fields, with shape, line, and text cues retained for non-color interpretation.
+- A dependency-free seven-state desktop/mobile browser regression for the explainer's narrative meanings,
+  hydration, accessibility text, and horizontal overflow.
+
 ## [2026-07-30] — Integrated collective-intelligence playground
 
 ### Added
@@ -16,6 +51,38 @@ entries are dated rather than semver-tagged.
 
 ### Changed
 
+- Merged the five-scenario chapter rail and scenario guide into one left-hand hierarchy, with numbered
+  sections such as `1 Commons`, `1.1`, and `1.2` that operate the live story.
+- Reserved the right rail for Settings, hid it by default, and moved each scenario’s evidence anchor and
+  modelling assumptions to the bottom of that configuration.
+- Reduced the sticky title to 52 px, compacted the time-series drawings, and added browser geometry
+  coverage requiring the simulation and both measures to fit in one snapped desktop viewport.
+- Flattened the reader by removing decorative borders, distributing view and condition selectors evenly,
+  and normalizing the local SVG controls to the monochrome brand palette.
+- Preserved the brand prototype's solid fills and localized hatches while removing shadows, decorative
+  rounding, and lift-on-hover treatments. The canonical visual-language contract now prohibits simulated
+  elevation and tonal gradients, permits CSS gradients only for discrete hatch/grid/rule patterns, and
+  makes borders purposeful exceptions.
+- Set the scenario/story rail to open at its 480 px maximum, increased navigation type to 14–16 px, hid
+  its scrollbar, and gave the entire rail a very light gray ground. Mobile story prose retains a 14 px
+  minimum.
+- Simplified selected scenarios, story steps, views, and presets to navy backgrounds with white text,
+  removing every hatched control underline.
+- Added a shared accessible rail-resizer for both the story and Settings panels, with pointer capture,
+  keyboard bounds, double-click reset, responsive removal, and browser regression coverage.
+- Reduced reader structure to three rules: one below the sticky title and one full-height draggable
+  divider for each visible side rail. The full edge is draggable, with no central grip.
+- Promoted the playground from `/lab/playground` to the indexable `/playground` product route, retaining a
+  static redirect for old links and updating navigation, calls to action, sitemap, tests, and docs.
+- Replaced passive scenario copy with typed story scenes that actively select the authored preset, view,
+  playhead, playback endpoint, and speed across all five models.
+- Compacted the sticky scenario header and live metrics and replaced text transport controls with the
+  local SVG icon set.
+- Removed the unavailable Share action and restored the model-reading guide, per-scenario assumptions, and
+  fixed-rule/optimizer caveats from the inherited prototype.
+- Reframed the hero around a laboratory for stress-testing coordination systems and the CI Lib “wind
+  tunnel for institutions” product purpose, removed the runtime/status card, and widened the title and
+  explanatory copy across the available header.
 - `/lab/playground` now uses the shared Astro layout, navbar, page header, and footer instead of injecting
   the inherited standalone HTML document.
 - The primary navigation now links to **Playground** instead of **Products**. The legacy `/products` route

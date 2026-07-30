@@ -11,8 +11,8 @@ The site lives in `apps/site/` of a pnpm workspace (see [ADR-0001](../../../../d
 ## Stack
 
 - **Astro 7** with `output: 'static'` — the site generator and router. One file per route under `apps/site/src/pages/`.
-- **React 19** islands via `@astrojs/react` — used only for interactive pieces (the lab simulations, the
-  research graph, the roadmap, the contact form). Most of the page is static HTML.
+- **React 19** islands via `@astrojs/react` — used only for interactive pieces (the explainer, lab
+  simulations, research graph, roadmap, and contact form). Most of the page is static HTML.
 - **Tailwind 4 + CSS Modules + global CSS** provide the shared styling foundation and page-specific
   composition.
 - **roughjs** for the hand-drawn visual style; **lucide-react** for icons.
@@ -28,14 +28,14 @@ file, not the component.
 ## Routes
 
 `apps/site/src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`,
-`roadmap`, `explainer`, `privacy`, `legal`, `brand`, `lab`, `lab/playground`, prototypes, and a `404`.
+`roadmap`, `explainer`, `privacy`, `legal`, `brand`, `lab`, `playground`, prototypes, and a `404`.
 The primary navigation links to the playground. The legacy Products route still builds but is unlinked
 pending the retirement decision in
 [`task-0012`](../tasks/deferred/task-0012-retire-products-route.md).
 
 ## The playground
 
-`/lab/playground` mounts `@eq-network/playground/embed` inside the canonical Astro `Layout` and
+`/playground` mounts `@eq-network/playground/embed` inside the canonical Astro `Layout` and
 `PageHeader`. The workspace package owns the scenario registry, numerical worker, live metrics, SVG
 showcases, controls, tests, and app-scoped docs. The old `apps/site/prototypes/playground.html` remains
 comparison material only and is not imported by production.
@@ -44,6 +44,14 @@ The package has a standalone Vite harness for focused development, but productio
 `apps/site/dist` with the same navbar and footer as every other site page. See
 [`playground architecture`](../../../playground/docs/architecture/scenario-platform.md) and the
 repo-wide [`integration ADR`](../../../../docs/adr/0003-integrated-playground-deployment.md).
+
+## The explainer
+
+`/explainer` composes the shared `VisualEssay` shell with the clean scientific-notebook D3 renderer. The
+shell owns scroll activation, the flat sticky drawing region, narrative column, and mobile
+behavior. The renderer owns seven thesis-specific visual states and their transitions. Canonical and
+no-index notebook routes consume the same typed content and renderer; the deployed 2026-07-30 public page
+was used as the narrative-parity reference.
 
 ## How it ships
 

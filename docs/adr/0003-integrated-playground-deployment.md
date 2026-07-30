@@ -20,12 +20,13 @@ boundary so scenarios can grow without becoming site-page code.
 
 Keep `apps/playground` as an independent workspace package and development harness. Export one stable React
 entry from `@eq-network/playground/embed`. The Astro site imports that entry at build time and mounts it at
-`/lab/playground` inside the canonical `Layout`, `PageHeader`, navbar, and footer.
+`/playground` inside the canonical `Layout`, `PageHeader`, navbar, and footer. The former
+`/lab/playground` route is a static compatibility redirect.
 
 Production is one static GitHub Pages artifact under `apps/site/dist`. The standalone Vite build is a
 package-development harness, not a second public website. A module worker provides numerical isolation
-without changing the deployment model. The route remains `noindex` while the explanatory and scientific
-contracts are still under active review.
+without changing the deployment model. The canonical product route is included in the sitemap; its hero
+and reading guide explicitly bound the models as explanatory rather than predictive.
 
 ## Alternatives considered
 
@@ -57,7 +58,8 @@ site's page component tree.
 
 ## Compliance
 
-- `apps/site/src/pages/lab/playground.astro` imports only the package export and shared site chrome.
+- `apps/site/src/pages/playground.astro` imports only the package export, typed page content, and shared
+  site chrome.
 - `pnpm --filter @eq-network/playground check` verifies the package.
 - `pnpm --filter @eq-network/site build` verifies static integration.
 - `pnpm --filter @eq-network/playground smoke:browser` verifies the shared navbar/footer, route, worker,

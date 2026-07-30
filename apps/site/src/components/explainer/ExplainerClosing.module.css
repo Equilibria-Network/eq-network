@@ -30,16 +30,13 @@
   display: block;
   padding: 1.5rem;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 0;
   text-decoration: none;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 .linkCard:hover {
   border-color: var(--color-primary, #003b7e);
-  box-shadow: 0 4px 12px rgba(0, 59, 126, 0.1);
 }
 
 .linkLabel {

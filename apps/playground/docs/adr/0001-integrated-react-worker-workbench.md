@@ -14,12 +14,14 @@ integrated release.
 ## Decision
 
 Use Astro's existing `Layout` for production chrome and mount a stable React package export at
-`/lab/playground`. React owns orchestration and accessible controls, not numerical work. A module Web
+`/playground`. React owns orchestration and accessible controls, not numerical work. A module Web
 Worker owns simulation; its public request/result contract returns transferable typed-array trajectories.
 Scenario-specific SVG renderers own the animated scientific figures and time-series drawings, while the
 DOM owns prose, controls, metrics, and accessibility. A full-width sticky scenario header owns the current
-chapter. Named presets are first-class player controls. The right details rail swaps between story and
-granular settings instead of opening a modal.
+chapter. Named presets are first-class player controls. Typed story steps coordinate those same presets,
+views, ticks, and playback targets. The left scenario rail expands into those numbered story sections.
+The right details rail is settings-only, closed by default, and ends with evidence anchors and assumptions.
+It closes to return its width to the figure instead of opening a modal.
 
 Keep the verified JavaScript kernel pure and renderer-independent. Define scenarios through typed metadata
 for narrative beats, controls, presets, metrics, and series. Preserve a Vite standalone entry as a fast

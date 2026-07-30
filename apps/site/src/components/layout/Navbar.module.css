@@ -7,7 +7,6 @@
   background: transparent;
   height: var(--navbar-height);
   border: none;
-  box-shadow: none;
   transition: background 0.3s ease;
 }
 

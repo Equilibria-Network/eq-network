@@ -7,7 +7,7 @@ Monorepo for the Equilibria Network website and its interactive tools.
 ```
 apps/
   site/         The public website (Astro static) -> eq-network.org (GitHub Pages)
-  playground/   Browser simulation package mounted by the site at /lab/playground
+  playground/   Browser simulation package mounted by the site at /playground
 packages/
   design-system/  Shared design tokens and components used across apps
 docs/           Project documentation (see docs/README.md)
@@ -22,8 +22,8 @@ boundary is documented in
 ## Status
 
 Maintained. The site is the organisation's public front door, deployed continuously to
-[eq-network.org](https://eq-network.org). The playground is an explanatory-model preview and remains
-`noindex` while its scientific and editorial contracts mature.
+[eq-network.org](https://eq-network.org). The playground is an indexable explanatory-model product at
+`/playground`; it remains explicitly framed as a laboratory rather than a forecast.
 
 ## Develop
 

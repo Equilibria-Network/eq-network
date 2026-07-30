@@ -5,13 +5,13 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  redirects: {
+    '/lab/playground': '/playground',
+  },
   integrations: [
     react(),
     sitemap({
-      filter: (page) =>
-        !page.endsWith('/404/') &&
-        !page.includes('/explainer/prototype/') &&
-        !page.includes('/lab/playground/'),
+      filter: (page) => !page.endsWith('/404/') && !page.includes('/explainer/prototype/'),
     }),
   ],
   site: 'https://eq-network.org',

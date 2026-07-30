@@ -197,15 +197,15 @@ export default function ScenarioCharts({
   const dynamicRef = useRef<SVGGElement>(null);
   const geometryRef = useRef<ChartGeometry[]>([]);
   const charts = useMemo(() => definitions(scenario, trajectory), [scenario, trajectory]);
-  const height = charts.length * 118 + 12;
+  const chartHeight = 82;
+  const height = charts.length * chartHeight + 8;
 
   useLayoutEffect(() => {
     const group = staticRef.current;
     if (!group) return;
     group.replaceChildren();
     const width = 880;
-    const chartHeight = 118;
-    const padding = { left: 46, right: 14, top: 18, bottom: 6 };
+    const padding = { left: 46, right: 14, top: 16, bottom: 4 };
     geometryRef.current = charts.map((chart, chartIndex) => {
       const top = chartIndex * chartHeight + padding.top;
       const bottom = top + chartHeight - padding.top - padding.bottom;

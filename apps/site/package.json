@@ -7,13 +7,15 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "smoke:explainer": "node ./test/explainer-browser-smoke.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
     "@astrojs/sitemap": "^3.7.3",
     "@eq-network/playground": "workspace:*",
     "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/kalam": "^5.3.0",
     "@fontsource/space-grotesk": "^5.3.0",
     "@formspree/react": "^3.0.0",
     "@tailwindcss/vite": "^4.3.3",

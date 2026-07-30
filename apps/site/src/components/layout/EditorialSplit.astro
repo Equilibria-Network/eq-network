@@ -1,0 +1,71 @@
+---
+interface Props {
+  ratio?: 'equal' | 'left' | 'right';
+  gap?: string;
+  reverse?: boolean;
+  align?: 'start' | 'center' | 'end';
+}
+
+const {
+  ratio = 'equal',
+  gap = 'clamp(2rem, 6vw, 6rem)',
+  reverse = false,
+  align = 'start',
+} = Astro.props;
+const ratioClass = ratio === 'equal' ? 'equal' : ratio === 'left' ? 'biasLeft' : 'biasRight';
+---
+
+<div
+  class:list={['editorialSplit', ratioClass, { reverse }]}
+  style={`--editorial-split-gap: ${gap}; --editorial-split-align: ${align}`}
+>
+  <div class="left"><slot name="left" /></div>
+  <div class="right"><slot name="right" /></div>
+</div>
+
+<style>
+  .editorialSplit {
+    display: grid;
+    gap: var(--editorial-split-gap);
+    align-items: var(--editorial-split-align);
+  }
+
+  .left,
+  .right {
+    min-width: 0;
+  }
+
+  .equal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .biasLeft {
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+  }
+
+  .biasRight {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  }
+
+  .reverse > .left {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .reverse > .right {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  @media (max-width: 680px) {
+    .editorialSplit {
+      grid-template-columns: 1fr;
+    }
+
+    .reverse > .left,
+    .reverse > .right {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
+</style>

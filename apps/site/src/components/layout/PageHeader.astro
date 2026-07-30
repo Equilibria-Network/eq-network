@@ -11,6 +11,7 @@ interface Props extends PageHeaderContent {
   image?: string;
   imageAlt?: string;
   meta?: PageHeaderMeta[];
+  wide?: boolean;
 }
 
 const {
@@ -23,13 +24,14 @@ const {
   image,
   imageAlt = '',
   meta = [],
+  wide = false,
 } = Astro.props;
 
 const hasAside = Boolean(image || meta.length > 0 || Astro.slots.has('visual'));
 ---
 
 <header class:list={['pageHeader', variant]}>
-  <div class:list={['inner', { hasAside }]}>
+  <div class:list={['inner', { hasAside, wide }]}>
     <div class="copy">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
@@ -103,6 +105,18 @@ const hasAside = Boolean(image || meta.length > 0 || Astro.slots.has('visual'));
 
   .inner:not(.hasAside) .copy {
     grid-column: 1 / -1;
+  }
+
+  .inner.wide {
+    width: min(1400px, calc(100% - clamp(3rem, 6vw, 6rem)));
+  }
+
+  .inner.wide .copy {
+    max-width: 1250px;
+  }
+
+  .inner.wide h1 {
+    font-size: clamp(3.2rem, 6.5vw, 6.5rem);
   }
 
   .copy {

@@ -73,7 +73,12 @@ export interface ExplainerContent {
         human: string;
         aiAgent: string;
         institution: string;
+        humanKey: string;
+        aiAgentKey: string;
+        institutionKey: string;
+        nodeTypes: string;
         socialFabric: string;
+        relationsCarry: string;
         flows: string[];
       };
       defection: {
@@ -114,6 +119,12 @@ export interface ExplainerContent {
       interaction: {
         selectNode: string;
         selectedNeighborhood: string;
+      };
+      strategicState: {
+        label: string;
+        cooperate: string;
+        defect: string;
+        unresolved: string;
       };
     };
   };
@@ -176,7 +187,7 @@ export const explainerContent: ExplainerContent = {
       id: 7,
       section: 'solution',
       headline: "We're building the connective tissue",
-      body: 'A compositional bridging node — an organization that reads across all four fields and translates between them — can surface connections no single field would find alone. Mechanism design meets network science. Game theory meets organizational behavior. This is what Equilibria is building: the infrastructure for coherent multi-agent governance.',
+      body: 'A compositional bridging node — one participant in a growing translation mesh, not a central clearinghouse — can help surface connections no single field would find alone. Mechanism design meets network science. Game theory meets organizational behavior. This is what Equilibria is building: infrastructure for coherent multi-agent governance.',
     },
   ],
   closing: {
@@ -189,9 +200,9 @@ export const explainerContent: ExplainerContent = {
         description: "Where we're headed and what we're building",
       },
       {
-        href: '/products',
-        label: 'Products & Publications',
-        description: "What we've shipped so far",
+        href: '/playground/',
+        label: 'Simulation Playground',
+        description: 'Explore the scenarios and models in your browser',
       },
       {
         href: '/about',
@@ -259,7 +270,12 @@ export const explainerContent: ExplainerContent = {
         human: 'human',
         aiAgent: 'AI agent',
         institution: 'institution',
+        humanKey: 'human / open',
+        aiAgentKey: 'AI agent / light hatch',
+        institutionKey: 'institution / cross-hatch',
+        nodeTypes: 'actor type and fill',
         socialFabric: 'one interdependent social fabric',
+        relationsCarry: 'relations carry',
         flows: ['resources', 'decisions', 'information'],
       },
       defection: {
@@ -305,6 +321,12 @@ export const explainerContent: ExplainerContent = {
       interaction: {
         selectNode: 'select a node to inspect its neighborhood',
         selectedNeighborhood: 'neighborhood selected',
+      },
+      strategicState: {
+        label: 'strategic state',
+        cooperate: 'green / cooperate',
+        defect: 'red / defect',
+        unresolved: 'amber / unresolved',
       },
     },
   },

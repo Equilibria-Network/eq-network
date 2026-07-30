@@ -1,0 +1,45 @@
+---
+import PageSidebar, { type PageSidebarItem } from './PageSidebar.astro';
+
+interface Props {
+  sidebarLabel?: string;
+  sidebarItems?: PageSidebarItem[];
+  maxWidth?: string;
+}
+
+const { sidebarLabel = 'Contents', sidebarItems = [], maxWidth = '100%' } = Astro.props;
+const hasSidebar = sidebarItems.length > 0;
+---
+
+<div
+  class:list={['editorialDocument', { hasSidebar }]}
+  style={`--editorial-document-width: ${maxWidth}`}
+>
+  {hasSidebar && <PageSidebar label={sidebarLabel} items={sidebarItems} />}
+  <div class="editorialBody">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .editorialDocument {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    width: min(var(--editorial-document-width), 100%);
+    margin-inline: auto;
+  }
+
+  .editorialDocument:not(.hasSidebar) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .editorialBody {
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .editorialDocument {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

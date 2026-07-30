@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import TechnicalNotebookThesis from '@components/explainer-prototype/TechnicalNotebookThesis';
+import { explainerContent } from '@content/explainer';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
+---
+
+<Layout
+  seo={{
+    ...explainerContent.seo,
+    title: `Technical Notebook Prototype — ${explainerContent.seo.title}`,
+    canonicalPath: '/explainer/notebook-prototype',
+    noindex: true,
+  }}
+>
+  <PageHeader variant="landing" {...explainerContent.header} />
+  <TechnicalNotebookThesis showHeader={false} client:load />
+</Layout>

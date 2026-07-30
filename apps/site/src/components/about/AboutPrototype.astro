@@ -1,0 +1,822 @@
+---
+import PageHeader from '@components/layout/PageHeader.astro';
+import EditorialDocument from '@components/layout/EditorialDocument.astro';
+import EditorialSection from '@components/layout/EditorialSection.astro';
+import { aboutContent, aboutPage, aboutUi, advisors, partners } from '@content/about';
+import { legalContent } from '@content/legal';
+import { teamMembers } from '@content/team';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+
+const { header, orientation, participation } = aboutPage;
+const { philosophy } = aboutContent;
+
+const legalDetails = ['Legal name', 'Legal form']
+  .map((label) => legalContent.details.find((detail) => detail.label === label))
+  .filter((detail): detail is (typeof legalContent.details)[number] => Boolean(detail));
+---
+
+<article class="aboutPrototype">
+  <PageHeader {...header} variant="landing" prompt="Meet the network">
+    <figure class="heroVisual" slot="visual">
+      <div class="figureLabel">
+        <span>FIG. 01 / A WORKING NETWORK</span>
+        <span>OPEN SYSTEM / REV. 01</span>
+      </div>
+      <svg
+        viewBox="0 0 520 500"
+        role="img"
+        aria-labelledby="about-network-title about-network-desc"
+      >
+        <title id="about-network-title">Equilibria as one participant in a research network</title>
+        <desc id="about-network-desc">
+          A hand-drafted network links theory, practice, institutions, and tools around the
+          Equilibria mark without placing it at the centre.
+        </desc>
+        <defs>
+          <pattern
+            id="about-hatch"
+            width="7"
+            height="7"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(28)"
+          >
+            <line x1="0" y1="0" x2="0" y2="7"></line>
+          </pattern>
+          <marker
+            id="about-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto"
+          >
+            <path d="M0 0L10 5L0 10"></path>
+          </marker>
+        </defs>
+
+        <g class="construction" aria-hidden="true">
+          <circle cx="260" cy="250" r="190"></circle>
+          <path d="M45 250H477M260 38V466"></path>
+        </g>
+        <g class="edges" aria-hidden="true">
+          <path d="M105 146C154 132 178 149 213 187"></path>
+          <path d="M105 146C94 217 116 284 166 332"></path>
+          <path d="M213 187C284 143 345 132 408 164"></path>
+          <path d="M213 187C232 246 273 282 327 308"></path>
+          <path d="M166 332C221 366 273 364 327 308"></path>
+          <path d="M327 308C364 279 389 232 408 164"></path>
+          <path d="M327 308C365 343 396 362 433 367"></path>
+          <path d="M166 332C149 359 143 382 148 412"></path>
+        </g>
+        <g class="nodes">
+          <g transform="translate(105 146)">
+            <circle r="31"></circle>
+            <text y="4">theory</text>
+          </g>
+          <g transform="translate(213 187)">
+            <path d="M0-35L34 25L-34 25Z"></path>
+            <text y="6">practice</text>
+          </g>
+          <g transform="translate(408 164)">
+            <rect x="-37" y="-31" width="74" height="62" rx="8"></rect>
+            <text y="5">institutions</text>
+          </g>
+          <g transform="translate(166 332)">
+            <circle r="35" fill="url(#about-hatch)"></circle>
+            <text y="5">people</text>
+          </g>
+          <g transform="translate(433 367)">
+            <path d="M-43-25H43V25H-43Z"></path>
+            <text y="5">tools</text>
+          </g>
+          <g class="equilibriaNode" transform="translate(327 308)">
+            <circle r="46"></circle>
+            <image
+              href="/img/brand/marks/sym-concentric.svg"
+              x="-28"
+              y="-28"
+              width="56"
+              height="56"
+            />
+          </g>
+        </g>
+        <g class="notes" aria-hidden="true">
+          <text x="25" y="74">G = (V, E)</text>
+          <text x="312" y="72">knowledge moves both ways</text>
+          <path d="M394 81C365 103 347 126 335 155"></path>
+          <text x="225" y="458">the network stays larger than the organisation</text>
+          <path class="noteArrow" d="M226 433C254 399 287 383 314 361"></path>
+        </g>
+      </svg>
+      <figcaption>
+        <span>ONE PARTICIPANT / MANY RELATIONSHIPS</span>
+        <span>Graphite grammar, crisp structure.</span>
+      </figcaption>
+    </figure>
+  </PageHeader>
+
+  <EditorialDocument>
+    <EditorialSection
+      id="network-and-association"
+      eyebrow={orientation.eyebrow}
+      title={orientation.title}
+      summary={orientation.summary}
+    >
+      <div class="associationOverview">
+        <p class="hatchedLabel">{orientation.association.label}</p>
+        <p>{orientation.association.body}</p>
+        <dl class="legalFacts">
+          {
+            legalDetails.map((detail) => (
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>{detail.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <a class="textLink" href="/legal">{orientation.association.legalLinkLabel} →</a>
+      </div>
+    </EditorialSection>
+
+    <EditorialSection
+      id="philosophy-and-culture"
+      eyebrow="FIELD NOTES / HOW WE WORK"
+      title={philosophy.sectionTitle}
+      summary={philosophy.intro}
+    >
+      <div class="principlesGrid">
+        {
+          philosophy.principles.map((principle, index) => (
+            <article class="principle">
+              <div class="principleNumber">{String(index + 1).padStart(2, '0')}</div>
+              <img
+                src={principle.icon}
+                alt=""
+                width="160"
+                height="140"
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <h3>{principle.title}</h3>
+                <p>{principle.text}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </EditorialSection>
+
+    <EditorialSection
+      id="team"
+      eyebrow="CORE TEAM / ACTIVE PRACTICE"
+      title={aboutUi.team.title}
+      summary={`${aboutUi.team.subtitle}.`}
+    >
+      <div class="teamGrid">
+        {
+          teamMembers.map((member, index) => (
+            <article class="teamProfile">
+              <div class="portraitField">
+                <span>PLATE {String(index + 1).padStart(2, '0')}</span>
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  width="360"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="personCopy">
+                <p class="personLabel">TEAM / {member.role}</p>
+                <h3>{member.name}</h3>
+                <p class="leadBio">{member.summary}</p>
+                {member.website && (
+                  <a
+                    class="textLink personLink"
+                    href={member.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit website <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </EditorialSection>
+
+    <EditorialSection
+      id="advisors"
+      eyebrow="ADVISORY CIRCLE / CROSS-DISCIPLINARY"
+      title={aboutUi.advisors.title}
+      summary={`${aboutUi.advisors.subtitle}.`}
+    >
+      <div class="advisorGrid">
+        {
+          advisors.map((advisor, index) => (
+            <article class="advisorProfile">
+              <div class="advisorImage">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <img
+                  src={advisor.image}
+                  alt={advisor.name}
+                  width="360"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="personCopy">
+                <p class="personLabel">{advisor.affiliation}</p>
+                <h3>{advisor.name}</h3>
+                <p>{advisor.bio}</p>
+                {advisor.website && (
+                  <a
+                    class="textLink personLink"
+                    href={advisor.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit profile <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </EditorialSection>
+
+    <EditorialSection
+      id="partners"
+      eyebrow="COLLABORATION / LIVE SYSTEMS"
+      title={aboutUi.partners.title}
+      summary={`${aboutUi.partners.subtitle}.`}
+    >
+      <div class="partnerList">
+        {
+          partners.map((partner) => (
+            <a class="partnerCard" href={partner.website} target="_blank" rel="noopener noreferrer">
+              <div class="partnerLogo">
+                <img
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="partnerCopy">
+                <p class="personLabel">PARTNER / ACTIVE COLLABORATION</p>
+                <h3>{partner.name}</h3>
+                <p>{partner.description}</p>
+                <span>{aboutUi.partners.visitLabel}</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </EditorialSection>
+
+    <div class="participation">
+      <EditorialSection
+        id="work-with-us"
+        eyebrow={participation.eyebrow}
+        title={participation.title}
+        summary={participation.summary}
+      >
+        <div class="participationGrid">
+          {
+            participation.paths.map((path, index) => (
+              <a
+                class="participationCard"
+                href={path.href}
+                target={path.external ? '_blank' : undefined}
+                rel={path.external ? 'noopener noreferrer' : undefined}
+              >
+                <span class="pathIndex">{String(index + 1).padStart(2, '0')}</span>
+                <p>{path.label}</p>
+                <h3>{path.title}</h3>
+                <div class="pathBody">{path.body}</div>
+                <strong>
+                  {path.linkLabel} {path.external ? '↗' : '→'}
+                </strong>
+              </a>
+            ))
+          }
+        </div>
+      </EditorialSection>
+    </div>
+  </EditorialDocument>
+</article>
+
+<style>
+  .aboutPrototype {
+    --ink: #003b7e;
+    --accent: #4ab3f4;
+    --paper: #fff;
+    --graphite: #46505a;
+    --line: color-mix(in srgb, var(--ink) 18%, transparent);
+    --editorial-ink: var(--ink);
+    --editorial-accent: var(--accent);
+    --editorial-muted: var(--graphite);
+    --editorial-line: var(--line);
+    overflow-x: clip;
+    background: var(--paper);
+    color: #0b1f3a;
+  }
+
+  .heroVisual {
+    width: min(100%, 560px);
+    margin: 0;
+    background: var(--paper);
+  }
+
+  .figureLabel,
+  .heroVisual figcaption,
+  .hatchedLabel,
+  .principleNumber,
+  .personLabel,
+  .portraitField > span,
+  .advisorImage > span,
+  .pathIndex,
+  .participationCard > p {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .figureLabel,
+  .heroVisual figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    font-size: 0.55rem;
+  }
+
+  .heroVisual figcaption {
+    color: color-mix(in srgb, var(--ink) 68%, transparent);
+  }
+
+  .heroVisual svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--graphite);
+  }
+
+  .construction {
+    fill: none;
+    stroke: var(--line);
+    stroke-dasharray: 3 8;
+    stroke-width: 1;
+  }
+
+  .edges {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-linecap: round;
+    stroke-width: 2.2;
+  }
+
+  .edges path:nth-child(2n) {
+    stroke-width: 1.5;
+  }
+
+  .nodes circle,
+  .nodes path,
+  .nodes rect {
+    fill: var(--paper);
+    stroke: var(--graphite);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .nodes text {
+    fill: var(--graphite);
+    font:
+      14px 'Kalam',
+      cursive;
+    text-anchor: middle;
+  }
+
+  .nodes .equilibriaNode circle {
+    stroke: var(--ink);
+    stroke-width: 2.5;
+  }
+
+  .notes text {
+    fill: var(--graphite);
+    font:
+      15px 'Kalam',
+      cursive;
+  }
+
+  .notes path {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-linecap: round;
+    stroke-width: 1.7;
+  }
+
+  .notes .noteArrow {
+    marker-end: url(#about-arrow);
+  }
+
+  .principle h3,
+  .teamProfile h3,
+  .advisorProfile h3,
+  .partnerCard h3,
+  .participationCard h3 {
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  .hatchedLabel {
+    padding: 0.7rem 0;
+    color: var(--ink);
+    font-size: 0.6rem;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .associationOverview > p:not(.hatchedLabel) {
+    max-width: 62ch;
+    margin-top: 1rem;
+    color: var(--graphite);
+    line-height: 1.65;
+  }
+
+  .legalFacts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 2.5rem;
+    margin: 2rem 0 1.5rem;
+  }
+
+  .legalFacts div {
+    min-height: 72px;
+  }
+
+  .legalFacts dt {
+    margin-bottom: 0.65rem;
+    color: color-mix(in srgb, var(--ink) 56%, transparent);
+    font:
+      0.58rem 'IBM Plex Mono',
+      ui-monospace,
+      monospace;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .legalFacts dd {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .textLink {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--ink);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .principlesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .principle {
+    position: relative;
+    display: grid;
+    grid-template-columns: 105px minmax(0, 1fr);
+    gap: 1.25rem;
+    min-height: 250px;
+  }
+
+  .principleNumber {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.9rem;
+    color: var(--accent);
+    font-size: 0.62rem;
+  }
+
+  .principle img {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .principle h3 {
+    max-width: 18ch;
+    margin: 0 0 0.8rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .principle p,
+  .advisorProfile p,
+  .partnerCard p,
+  .participationCard .pathBody {
+    color: var(--graphite);
+    line-height: 1.65;
+  }
+
+  .teamGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .teamProfile {
+    display: grid;
+    grid-template-columns: 135px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    min-width: 0;
+  }
+
+  .portraitField {
+    position: relative;
+    aspect-ratio: 3 / 8;
+    overflow: hidden;
+  }
+
+  .portraitField > span {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.9rem;
+    z-index: 1;
+    color: var(--ink);
+    font-size: 0.58rem;
+  }
+
+  .portraitField img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+
+  .personLabel {
+    margin: 0 0 0.75rem;
+    color: var(--accent);
+    font-size: 0.62rem;
+    line-height: 1.5;
+  }
+
+  .teamProfile h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .leadBio {
+    max-width: 58ch;
+    color: var(--graphite);
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  .advisorGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .advisorProfile {
+    display: grid;
+    grid-template-columns: 135px minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .advisorImage {
+    position: relative;
+    aspect-ratio: 3 / 8;
+    overflow: hidden;
+  }
+
+  .advisorImage > span {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.55rem;
+    z-index: 1;
+    color: var(--accent);
+    font-size: 0.58rem;
+  }
+
+  .advisorImage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+
+  .personCopy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .personLink {
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .advisorProfile h3,
+  .partnerCard h3,
+  .participationCard h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .advisorProfile p:not(.personLabel) {
+    font-size: 0.9rem;
+  }
+
+  .partnerCard {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.3fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    min-width: 0;
+    color: inherit;
+  }
+
+  .partnerCard:hover {
+    color: inherit;
+  }
+
+  .partnerLogo {
+    padding: 1.5rem 0;
+  }
+
+  .partnerLogo img {
+    display: block;
+    width: min(100%, 220px);
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(15%) sepia(58%) saturate(2763%) hue-rotate(194deg)
+      brightness(87%) contrast(105%);
+  }
+
+  .partnerCard h3 {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    overflow-wrap: anywhere;
+  }
+
+  .partnerCopy {
+    min-width: 0;
+  }
+
+  .partnerCopy > p:not(.personLabel) {
+    max-width: 65ch;
+    overflow-wrap: anywhere;
+  }
+
+  .partnerCard span {
+    display: inline-block;
+    margin-top: 1.2rem;
+    color: var(--ink);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .participation {
+    position: relative;
+    background: var(--paper);
+  }
+
+  .participationGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .participationCard {
+    display: flex;
+    min-height: 360px;
+    flex-direction: column;
+    padding-block: 1.5rem;
+    color: inherit;
+    background: var(--paper);
+  }
+
+  .participationCard:hover {
+    color: inherit;
+  }
+
+  .pathIndex {
+    align-self: end;
+    color: var(--accent);
+    font-size: 0.62rem;
+  }
+
+  .participationCard > p {
+    margin: 3rem 0 0.8rem;
+    color: var(--accent);
+    font-size: 0.6rem;
+  }
+
+  .participationCard .pathBody {
+    font-size: 0.94rem;
+  }
+
+  .participationCard strong {
+    margin-top: auto;
+    padding-top: 2rem;
+    color: var(--ink);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 1100px) {
+    .principle {
+      grid-template-columns: 80px minmax(0, 1fr);
+    }
+
+    .teamProfile,
+    .advisorProfile {
+      grid-template-columns: 100px minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .principlesGrid,
+    .teamGrid,
+    .advisorGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .participationGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .participationCard {
+      min-height: 270px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .figureLabel,
+    .heroVisual figcaption {
+      display: grid;
+    }
+
+    .principle {
+      grid-template-columns: 82px minmax(0, 1fr);
+      min-height: 240px;
+      padding-block: 1.2rem;
+    }
+
+    .principle img {
+      height: 100px;
+    }
+
+    .teamProfile,
+    .advisorProfile {
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .partnerCard {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .legalFacts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

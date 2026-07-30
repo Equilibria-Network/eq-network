@@ -1,0 +1,700 @@
+---
+import { brandContent } from '@content/brand';
+import BrandDrawingSystem from './BrandDrawingSystem.astro';
+import LorenzMark from './LorenzMark.astro';
+import MarkExploration from './MarkExploration.astro';
+import { lorenzMarkCandidates } from './lorenzMarks';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
+
+const b = brandContent;
+const heroMark = lorenzMarkCandidates[3];
+---
+
+<div class="prototype">
+  <div class="sheetFrame">
+    <span class="registration tl" aria-hidden="true"></span>
+    <span class="registration tr" aria-hidden="true"></span>
+    <span class="registration bl" aria-hidden="true"></span>
+    <span class="registration br" aria-hidden="true"></span>
+
+    <nav class="prototypeNav" aria-label="Brand prototype navigation">
+      <span>EQUILIBRIA / IDENTITY WORKING SHEET</span>
+      <span>SYSTEM REVISION / 03</span>
+      <a href="/brand">Current brand ↗</a>
+    </nav>
+
+    <main>
+      <header class="hero">
+        <div class="heroCopy">
+          <p class="eyebrow">{b.eyebrow} / prototype</p>
+          <h1>{b.wordmark}</h1>
+          <p class="subtitle">{b.tagline}</p>
+          <p class="summary">
+            {b.intro} This revision retains the measured system and adds disciplined hand drafting: equations,
+            hypotheses, and graph structures that feel actively reasoned through without making the interface
+            itself imprecise.
+          </p>
+          <p class="marginThought">
+            what if the diagram is part of the argument—not an illustration after it?
+          </p>
+        </div>
+
+        <figure class="heroFigure">
+          <div class="figureLabel">FIG. 01 / THE MARK AS A DYNAMICAL SYSTEM</div>
+          <svg
+            viewBox="0 0 620 520"
+            role="img"
+            aria-label="An asymmetric single-line mark study for Equilibria"
+          >
+            <defs>
+              <marker
+                id="pencil-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10"></path>
+              </marker>
+            </defs>
+            <g class="construction">
+              <path d="M52 270H574M310 38V480"></path>
+              <ellipse cx="280" cy="260" rx="168" ry="185"></ellipse>
+              <path d="M104 421C214 479 414 466 529 401"></path>
+            </g>
+            <g class="pencilMark" transform="translate(48 8) scale(2.2)">
+              <LorenzMark strokes={heroMark.strokes} />
+            </g>
+            <g class="mathNotes">
+              <text x="24" y="70">dx/dt = σ(y − x)</text>
+              <text x="410" y="72">ρ = 28</text>
+              <text x="34" y="470">one line / unequal basins / open trajectory?</text>
+              <path d="M174 64C205 91 218 122 227 151"></path>
+              <path d="M439 81C420 108 408 136 398 165"></path>
+              <path class="arrowLine" d="M245 450C288 421 337 418 376 444"></path>
+            </g>
+          </svg>
+          <figcaption>
+            <span>ASYMMETRIC MARK STUDY / NOT YET SELECTED</span>
+            <span>One continuous reproducible SVG path.</span>
+          </figcaption>
+        </figure>
+      </header>
+
+      <MarkExploration />
+
+      <section>
+        <div class="rule"><span>02 / RETAINED SYSTEM</span></div>
+        <div class="retainedGrid">
+          {
+            b.motifs.map((motif) => (
+              <article class="retainedCard">
+                <div class="hatchedStrip">{motif.tag} / retained</div>
+                <h2>{motif.title}</h2>
+                <p>{motif.body}</p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="marginThought retainedNote">
+          keep the order—loosen only where thought is still moving
+        </p>
+      </section>
+
+      <section>
+        <div class="rule"><span>03 / COLOUR + TYPE</span></div>
+        <div class="systemGrid">
+          <div class="swatches">
+            {
+              b.swatches.map((swatch) => (
+                <div class="swatch">
+                  <span style={`--swatch:${swatch.hex}`} />
+                  <div>
+                    <>
+                      <strong>{swatch.name}</strong>
+                      <small>{swatch.hex}</small>
+                    </>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div class="typeSystem">
+            <div>
+              <span>DISPLAY / SPACE GROTESK</span>
+              <strong class="displaySample">Collective intelligence</strong>
+            </div>
+            <div>
+              <span>DATA / IBM PLEX MONO</span>
+              <strong class="monoSample">STATE 04 / NODES 28 / TIES 47</strong>
+            </div>
+            <div class="mathType">
+              <span>WORKING MATH + NOTES / KALAM</span>
+              <strong>∂V/∂t ≤ −αV(x) → stable under perturbation?</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <BrandDrawingSystem />
+
+      <section>
+        <div class="rule"><span>05 / REPRESENTATIONAL SKETCH</span></div>
+        <figure class="generatedPlate">
+          <div class="plateCopy">
+            <p class="eyebrow">THE HUMAN HAND / ACTIVE INQUIRY</p>
+            <h2>The network is being made, tested, and revised.</h2>
+            <p>
+              Representational sketches can carry the human side of collective intelligence: hands,
+              tools, institutions, organisms, and places. They share the graphite grammar of the
+              diagrams without turning the whole interface into a facsimile notebook.
+            </p>
+            <p class="marginThought">show the act of inquiry—not just its polished result</p>
+          </div>
+          <div class="plateImage">
+            <img
+              src="/img/brand/scientific-notebook-plate.webp"
+              alt="A graphite hand draws a network of nodes, orbital paths, arrows, and mathematical construction lines."
+              width="1330"
+              height="820"
+              loading="lazy"
+            />
+            <span>GENERATED STUDY / GRAPHITE NETWORK / 2026</span>
+          </div>
+        </figure>
+      </section>
+
+      <section>
+        <div class="rule"><span>06 / CANONICAL TOOLTIP</span></div>
+        <div class="tooltipSpecimen">
+          <div>
+            <p class="eyebrow">{b.components.tooltips.title}</p>
+            <h2>Keep the existing explanation pattern.</h2>
+            <p>{b.components.tooltips.intro}</p>
+          </div>
+          <div class="tooltipExamples">
+            {
+              b.components.tooltips.examples.map((example) => (
+                <p>
+                  {example.before}{' '}
+                  <span class="tooltipTerm" tabindex="0">
+                    {example.term}
+                    <span role="tooltip">{example.definition}</span>
+                  </span>{' '}
+                  {example.after}
+                </p>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>STATUS / WORKING IDENTITY</span>
+      <span>SELECTED BRANCH / DISCIPLINED NOTEBOOK</span>
+      <a href="/brand">CURRENT BRAND ↗</a>
+    </footer>
+  </div>
+</div>
+
+<style>
+  .prototype {
+    --ink: #003b7e;
+    --accent: #4ab3f4;
+    --paper: #fff;
+    --graphite: #46505a;
+    --line: color-mix(in srgb, var(--ink) 20%, transparent);
+    padding: 0;
+    overflow-x: clip;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .sheetFrame {
+    position: relative;
+    width: 100%;
+  }
+
+  .registration {
+    display: none;
+  }
+
+  .registration::before,
+  .registration::after {
+    content: '';
+    position: absolute;
+    background: var(--ink);
+  }
+
+  .registration::before {
+    top: 9px;
+    width: 20px;
+    height: 1px;
+  }
+
+  .registration::after {
+    left: 9px;
+    width: 1px;
+    height: 20px;
+  }
+
+  .tl {
+    top: -10px;
+    left: -10px;
+  }
+  .tr {
+    top: -10px;
+    right: -10px;
+  }
+  .bl {
+    bottom: -10px;
+    left: -10px;
+  }
+  .br {
+    right: -10px;
+    bottom: -10px;
+  }
+
+  .prototypeNav,
+  .eyebrow,
+  .rule,
+  figcaption,
+  .hatchedStrip,
+  .typeSystem > div > span,
+  footer {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .prototypeNav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    border-bottom: 1px solid var(--line);
+    padding: 0.7rem 1rem;
+    font-size: 0.62rem;
+  }
+
+  .prototypeNav a {
+    justify-self: end;
+    color: inherit;
+  }
+
+  main {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: center;
+    min-height: calc(100svh - 8rem);
+    padding-block: 4rem;
+  }
+
+  .eyebrow {
+    color: var(--accent);
+    font-size: 0.66rem;
+  }
+
+  h1,
+  h2,
+  .subtitle {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(4.2rem, 8vw, 8rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+  }
+
+  .subtitle {
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    font-weight: 600;
+  }
+
+  .summary {
+    max-width: 650px;
+    line-height: 1.75;
+  }
+
+  .marginThought,
+  .mathNotes text,
+  .mathType strong {
+    font-family: 'Kalam', cursive;
+  }
+
+  .marginThought {
+    max-width: 520px;
+    margin: 2rem 0 0 2rem;
+    color: var(--graphite);
+    font-size: 1.25rem;
+    transform: rotate(-1.5deg);
+  }
+
+  .heroFigure {
+    margin: 0;
+  }
+
+  .figureLabel {
+    border-top: 1px solid var(--ink);
+    padding-top: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .heroFigure svg {
+    width: 100%;
+    max-height: 620px;
+  }
+
+  .heroFigure path,
+  .heroFigure ellipse {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .construction path,
+  .construction ellipse {
+    stroke-width: 1;
+    stroke-dasharray: 5 8;
+    opacity: 0.28;
+  }
+
+  .pencilMark {
+    color: var(--ink);
+  }
+
+  .markGhost {
+    stroke-width: 2.2;
+    opacity: 0.28;
+  }
+
+  .markGhost.one {
+    transform: translate(-1px, 1px);
+  }
+  .markGhost.two {
+    transform: translate(1px, -1px);
+  }
+  .pencilMark {
+    color: var(--ink);
+    --mark-width: 3.5;
+  }
+
+  .mathNotes text {
+    fill: var(--graphite);
+    font-size: 19px;
+  }
+
+  .mathNotes path {
+    stroke-width: 1.4;
+  }
+
+  .mathNotes .arrowLine {
+    marker-end: url(#pencil-arrow);
+  }
+
+  #pencil-arrow path {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-width: 1.2;
+  }
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--ink);
+    padding-top: 0.6rem;
+    font-size: 0.58rem;
+  }
+
+  section {
+    padding-block: clamp(5rem, 9vw, 9rem);
+  }
+
+  .rule {
+    border-top: 1px solid var(--ink);
+    margin-bottom: 3rem;
+    font-size: 0.63rem;
+  }
+
+  .rule span {
+    position: relative;
+    top: -0.65em;
+    padding-right: 1rem;
+    background: var(--paper);
+  }
+
+  .retainedGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .retainedCard {
+    position: relative;
+    border: 1px solid var(--ink);
+    background: #fff;
+  }
+
+  .hatchedStrip {
+    border-bottom: 1px solid var(--ink);
+    padding: 0.65rem;
+    background: repeating-linear-gradient(135deg, transparent 0 7px, var(--line) 7px 8px);
+    font-size: 0.6rem;
+  }
+
+  .retainedCard h2,
+  .retainedCard p {
+    margin-inline: 1rem;
+  }
+
+  .retainedCard h2 {
+    font-size: 1.3rem;
+  }
+
+  .retainedCard p {
+    line-height: 1.6;
+  }
+
+  .retainedNote {
+    margin-left: auto;
+  }
+
+  .systemGrid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .swatch {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .swatch > span {
+    display: block;
+    aspect-ratio: 1;
+    border: 1px solid var(--line);
+    background: var(--swatch);
+  }
+
+  .swatch strong,
+  .swatch small {
+    display: block;
+  }
+
+  .typeSystem {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .typeSystem > div {
+    border-top: 1px solid var(--line);
+    padding-top: 0.7rem;
+  }
+
+  .typeSystem > div > span {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 0.6rem;
+  }
+
+  .displaySample,
+  .monoSample,
+  .mathType strong {
+    display: block;
+  }
+
+  .displaySample {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.7rem;
+  }
+
+  .monoSample {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .mathType strong {
+    color: var(--graphite);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .generatedPlate {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.6fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+    margin: 0;
+  }
+
+  .plateCopy h2 {
+    max-width: 13ch;
+    margin-block: 0 1.5rem;
+    font-size: clamp(2rem, 4vw, 4.2rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .plateCopy > p:not(.eyebrow, .marginThought) {
+    max-width: 52ch;
+    color: var(--graphite);
+    line-height: 1.7;
+  }
+
+  .plateImage {
+    position: relative;
+    min-width: 0;
+  }
+
+  .plateImage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ink);
+    filter: contrast(1.03);
+  }
+
+  .plateImage span {
+    display: block;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+    padding: 0.6rem 0.8rem;
+    background: #fff;
+    font:
+      0.58rem/1 'IBM Plex Mono',
+      monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .tooltipSpecimen {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 5rem;
+  }
+
+  .tooltipSpecimen h2 {
+    font-size: 2.4rem;
+  }
+
+  .tooltipExamples {
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+  }
+
+  .tooltipTerm {
+    position: relative;
+    border-bottom: 1px dashed currentColor;
+    cursor: help;
+  }
+
+  .tooltipTerm [role='tooltip'] {
+    position: absolute;
+    z-index: 4;
+    bottom: calc(100% + 0.7rem);
+    left: 50%;
+    width: 230px;
+    padding: 0.8rem;
+    transform: translate(-50%, 0.4rem);
+    opacity: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    pointer-events: none;
+    transition: 160ms ease;
+  }
+
+  .tooltipTerm:hover [role='tooltip'],
+  .tooltipTerm:focus [role='tooltip'] {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    border-top: 1px solid var(--line);
+    padding: 1rem;
+    font-size: 0.61rem;
+  }
+
+  footer a {
+    justify-self: end;
+    color: inherit;
+  }
+
+  @media (max-width: 900px) {
+    .hero,
+    .systemGrid,
+    .generatedPlate,
+    .tooltipSpecimen {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      min-height: auto;
+    }
+
+    .retainedGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .prototypeNav span:nth-child(2),
+    footer span:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .prototype {
+      padding: 0;
+    }
+
+    .retainedGrid,
+    .swatches {
+      grid-template-columns: 1fr;
+    }
+
+    .prototypeNav,
+    footer {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

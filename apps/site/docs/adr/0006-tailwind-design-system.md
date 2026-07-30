@@ -45,9 +45,10 @@ the redesign kept as a separate second stage.
   lean on. For accessible interactive primitives in the React islands (dialog, popover, tabs) we will
   pull in **Radix primitives** selectively (headless, unstyled) rather than adopt a whole library.
 
-The brand's signature motifs stay bespoke: the roughjs hand-drawn visuals, parallax paper texture, the
-section-title underline, the textured card with tilting shadow, and the dashed "honest hedge" badge are a
-layer _on top of_ Tailwind, not replaced by it.
+The brand's signature motifs stay bespoke: the roughjs hand-drawn visuals, parallax paper texture,
+localized hatch and graph-paper patterns, the section-title underline, and the dashed "honest hedge"
+badge are a layer _on top of_ Tailwind, not replaced by it. Surfaces remain flat and square: the visual
+language prohibits simulated elevation and tonal gradients, and treats borders as purposeful exceptions.
 
 ## Consequences
 

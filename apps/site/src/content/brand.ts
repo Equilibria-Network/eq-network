@@ -212,7 +212,7 @@ export const brandContent: BrandContent = {
   components: {
     sectionTitle: 'Components',
     intro:
-      'The identity applied to interface elements: a hatched information strip, sharp white body, and an offset hatched shadow on hover.',
+      'The identity applied to interface elements: a localized hatched information strip above a sharp, flat white body with no simulated elevation.',
     card: {
       phase: 'Phase 02',
       reference: 'EQ-014',

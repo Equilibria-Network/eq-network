@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import PipelineView from './components/PipelineView';
+import ResizableRailHandle from './components/ResizableRailHandle';
 import ScenarioCharts from './components/ScenarioCharts';
 import ShowcaseScene from './components/ShowcaseScene';
 import { SimulationClient } from './engine/simulationClient';
@@ -13,6 +15,19 @@ interface Snapshot {
   params: NumericParams;
   seed: number;
   trajectory: Trajectory;
+}
+
+type DetailsMode = 'settings' | 'closed';
+
+function PlayerIcon({ name }: { name: string }) {
+  return (
+    <img
+      alt=""
+      aria-hidden="true"
+      className="player-icon"
+      src={`/img/icons/playground/${name}.svg`}
+    />
+  );
 }
 
 function scenarioFromLocation(): ScenarioId {
@@ -84,9 +99,12 @@ export default function App() {
   const [playhead, setPlayhead] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [speed, setSpeed] = useState(1);
+  const [playTarget, setPlayTarget] = useState<number | null>(null);
   const [baseline, setBaseline] = useState<Snapshot | null>(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [shareState, setShareState] = useState<'idle' | 'copied'>('idle');
+  const [detailsMode, setDetailsMode] = useState<DetailsMode>('closed');
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
+  const [leftRailWidth, setLeftRailWidth] = useState(480);
+  const [rightRailWidth, setRightRailWidth] = useState(340);
   const clientRef = useRef<SimulationClient | null>(null);
   const settingsButtonRef = useRef<HTMLButtonElement | null>(null);
   const settingsHeadingRef = useRef<HTMLHeadingElement | null>(null);
@@ -95,6 +113,10 @@ export default function App() {
   const displayStatus = runResult?.scenario === scenarioId ? status : 'running';
   const tick = Math.min(Math.floor(playhead), Math.max(0, (trajectory?.meta.T ?? 1) - 1));
   const fraction = playhead - tick;
+  const readerStyle = {
+    '--pg-left-rail-width': `${leftRailWidth}px`,
+    '--pg-right-rail-width': `${rightRailWidth}px`,
+  } as CSSProperties;
 
   useEffect(() => {
     const client = new SimulationClient();
@@ -119,9 +141,12 @@ export default function App() {
       `${window.location.pathname}${window.location.search}#${scenarioId}`
     );
     setPlayhead(0);
-    setView(scenarioScenes[scenarioId][0].key);
+    setPlayTarget(null);
+    setPlaying(false);
+    setActiveStoryIndex(0);
+    setView(definition.story[0]?.view ?? scenarioScenes[scenarioId][0].key);
     setBaseline((current) => (current?.scenario === scenarioId ? current : null));
-  }, [scenarioId]);
+  }, [definition.story, scenarioId]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -158,8 +183,12 @@ export default function App() {
       if (now - lastDraw >= 40) {
         lastDraw = now;
         setPlayhead((current) => {
-          const next = Math.min(current + elapsed * speed * 20, trajectory.meta.T - 1);
-          if (next >= trajectory.meta.T - 1) setPlaying(false);
+          const end = Math.min(playTarget ?? trajectory.meta.T - 1, trajectory.meta.T - 1);
+          const next = Math.min(current + elapsed * speed * 20, end);
+          if (next >= end) {
+            setPlaying(false);
+            setPlayTarget(null);
+          }
           return next;
         });
       }
@@ -167,20 +196,20 @@ export default function App() {
     };
     request = window.requestAnimationFrame(animate);
     return () => window.cancelAnimationFrame(request);
-  }, [playing, speed, trajectory]);
+  }, [playTarget, playing, speed, trajectory]);
 
   useEffect(() => {
-    if (!settingsOpen) return;
-    settingsHeadingRef.current?.focus();
+    if (detailsMode === 'closed') return;
+    if (detailsMode === 'settings') settingsHeadingRef.current?.focus();
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setSettingsOpen(false);
+        setDetailsMode('closed');
         window.requestAnimationFrame(() => settingsButtonRef.current?.focus());
       }
     };
     window.addEventListener('keydown', closeOnEscape);
     return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [settingsOpen]);
+  }, [detailsMode]);
 
   const setParameter = useCallback(
     (key: string, value: number | boolean) => {
@@ -211,22 +240,29 @@ export default function App() {
     })?.id;
   }, [definition.defaults, definition.presets, params]);
 
-  const closeSettings = useCallback(() => {
-    setSettingsOpen(false);
+  const closeDetails = useCallback(() => {
+    setDetailsMode('closed');
     window.requestAnimationFrame(() => settingsButtonRef.current?.focus());
   }, []);
 
-  const share = async () => {
-    const payload = new URLSearchParams({
-      scenario: scenarioId,
-      seed: String(seed),
-      p: btoa(JSON.stringify(params)),
-    });
-    const url = `${window.location.origin}${window.location.pathname}?${payload}#${scenarioId}`;
-    await navigator.clipboard.writeText(url);
-    setShareState('copied');
-    window.setTimeout(() => setShareState('idle'), 1800);
-  };
+  const activateStoryStep = useCallback(
+    (index: number) => {
+      const nextIndex = Math.max(0, Math.min(index, definition.story.length - 1));
+      const step = definition.story[nextIndex];
+      if (!step) return;
+      const preset = definition.presets.find((candidate) => candidate.id === step.preset);
+      if (preset) applyPreset(preset.values);
+      setActiveStoryIndex(nextIndex);
+      setView(step.view);
+      setPlayhead(step.tick);
+      setPlayTarget(step.playTo ?? null);
+      if (step.speed) setSpeed(step.speed);
+      setPlaying(
+        Boolean(step.playTo) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      );
+    },
+    [applyPreset, definition.presets, definition.story]
+  );
 
   const settingsPanel = (
     <section aria-label="Model parameters" className="control-panel details-settings">
@@ -237,23 +273,15 @@ export default function App() {
             Model settings
           </h3>
         </div>
-        <div className="drawer-actions">
-          <button onClick={share} type="button">
-            {shareState === 'copied' ? 'Copied' : 'Share run'}
-          </button>
-          <button aria-label="Return to scenario story" onClick={closeSettings} type="button">
-            Story
-          </button>
-        </div>
-      </div>
-
-      <div className="settings-scope">
-        <span>Model scope</span>
-        <p>{definition.assumption}</p>
-        <p>
-          This is an explanatory simulation, not a forecast. Results are conditional on these
-          assumptions.
-        </p>
+        <button
+          aria-label="Close model settings"
+          className="panel-close"
+          onClick={closeDetails}
+          title="Close panel"
+          type="button"
+        >
+          <PlayerIcon name="close" />
+        </button>
       </div>
 
       {groups.map((group) => {
@@ -328,6 +356,7 @@ export default function App() {
           }
           type="button"
         >
+          <PlayerIcon name="reset" />
           Reroll
         </button>
       </div>
@@ -355,12 +384,36 @@ export default function App() {
           </>
         )}
       </div>
+
+      <div className="configuration-notes">
+        <section>
+          <span>Evidence anchor</span>
+          <p>{definition.evidence}</p>
+        </section>
+        <section>
+          <span>Modelling assumptions</span>
+          <p>{definition.assumption}</p>
+          <ul>
+            {definition.modellingNotes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+          <p>
+            Fixed-rule agents; hand-set parameters; no empirical fit. This is an explanatory
+            simulation, not a forecast.
+          </p>
+        </section>
+      </div>
     </section>
   );
 
   return (
     <div className="playground-shell">
-      <section className="simulation-reader" aria-label="Simulation explorer">
+      <section
+        className={`simulation-reader ${detailsMode === 'closed' ? 'details-closed' : ''}`}
+        aria-label="Simulation explorer"
+        style={readerStyle}
+      >
         <header className="scenario-header">
           <div>
             <p className="eyebrow">
@@ -371,26 +424,66 @@ export default function App() {
           </div>
         </header>
 
-        <nav className="scenario-tabs" aria-label="Scenario chapters">
+        <nav className="scenario-tabs" aria-label="Scenarios and story sections">
           <div className="rail-heading">
-            <span>Chapters</span>
-            <strong>Five pressures</strong>
+            <strong>Scenario Guide</strong>
           </div>
-          {scenarios.map((scenario) => (
-            <button
-              className={scenario.id === scenarioId ? 'active' : ''}
-              key={scenario.id}
-              onClick={() => setScenarioId(scenario.id)}
-              type="button"
-            >
-              <span>{scenario.index}</span>
-              {scenario.shortLabel}
-            </button>
-          ))}
-          <p className="rail-note">
-            Read the scenario first. Open settings when you want to inspect the model.
-          </p>
+          <ol className="scenario-list">
+            {scenarios.map((scenario, scenarioIndex) => {
+              const expanded = scenario.id === scenarioId;
+              return (
+                <li className={expanded ? 'active' : ''} key={scenario.id}>
+                  <button
+                    aria-expanded={expanded}
+                    className="scenario-toggle"
+                    onClick={() => setScenarioId(scenario.id)}
+                    type="button"
+                  >
+                    <span>{scenarioIndex + 1}</span>
+                    <strong>{scenario.shortLabel}</strong>
+                  </button>
+                  {expanded && (
+                    <div className="scenario-story">
+                      <p>{scenario.description}</p>
+                      <ol>
+                        {scenario.story.map((step, storyIndex) => {
+                          const active = storyIndex === activeStoryIndex;
+                          return (
+                            <li className={active ? 'active' : ''} key={step.id}>
+                              <button
+                                aria-expanded={active}
+                                aria-current={active ? 'step' : undefined}
+                                onClick={() => activateStoryStep(storyIndex)}
+                                type="button"
+                              >
+                                <span>
+                                  {scenarioIndex + 1}.{storyIndex + 1}
+                                </span>
+                                <strong>{step.title}</strong>
+                              </button>
+                              {active && <p aria-live="polite">{step.body}</p>}
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+          <p className="rail-note">Choose a section to stage and play that part of the model.</p>
         </nav>
+
+        <ResizableRailHandle
+          label="Resize scenario guide"
+          max={480}
+          min={320}
+          onChange={setLeftRailWidth}
+          resetValue={480}
+          side="left"
+          value={leftRailWidth}
+        />
 
         <section className="stage-panel" aria-label="Simulation output">
           <div className="view-tabs" role="tablist" aria-label="Model views">
@@ -446,50 +539,59 @@ export default function App() {
                 aria-label="Rewind 10 timesteps"
                 className="transport-skip"
                 disabled={!trajectory}
-                onClick={() => setPlayhead((current) => Math.max(0, Math.floor(current) - 10))}
+                onClick={() => {
+                  setPlayTarget(null);
+                  setPlayhead((current) => Math.max(0, Math.floor(current) - 10));
+                }}
                 title="Rewind 10 timesteps"
                 type="button"
               >
-                −10
+                <PlayerIcon name="rewind-10" />
               </button>
               <button
                 aria-label={playing ? 'Pause simulation' : 'Play simulation'}
                 className="transport-button"
                 disabled={!trajectory}
                 onClick={() => {
+                  setPlayTarget(null);
                   if (!playing && trajectory && playhead >= trajectory.meta.T - 1) setPlayhead(0);
                   setPlaying((current) => !current);
                 }}
                 type="button"
               >
-                {playing ? 'Ⅱ' : '▶'}
+                <PlayerIcon name={playing ? 'pause' : 'play'} />
               </button>
               <button
                 aria-label="Forward 10 timesteps"
                 className="transport-skip"
                 disabled={!trajectory}
-                onClick={() =>
+                onClick={() => {
+                  setPlayTarget(null);
                   setPlayhead((current) =>
                     Math.min((trajectory?.meta.T ?? 1) - 1, Math.floor(current) + 10)
-                  )
-                }
+                  );
+                }}
                 title="Forward 10 timesteps"
                 type="button"
               >
-                +10
+                <PlayerIcon name="forward-10" />
               </button>
             </div>
             <input
               aria-label="Simulation tick"
               max={Math.max(0, (trajectory?.meta.T ?? 1) - 1)}
               min="0"
-              onChange={(event) => setPlayhead(Number(event.target.value))}
+              onChange={(event) => {
+                setPlayTarget(null);
+                setPlayhead(Number(event.target.value));
+              }}
               type="range"
               value={tick}
             />
             <output className="tick-readout">t = {tick.toString().padStart(3, '0')}</output>
-            <label>
-              speed
+            <label className="speed-control">
+              <PlayerIcon name="speed" />
+              <span className="visually-hidden">Playback speed</span>
               <select onChange={(event) => setSpeed(Number(event.target.value))} value={speed}>
                 <option value="0.5">0.5×</option>
                 <option value="1">1×</option>
@@ -498,24 +600,17 @@ export default function App() {
               </select>
             </label>
             <button
-              aria-expanded={settingsOpen}
-              aria-label={settingsOpen ? 'Return to scenario story' : 'Open model settings'}
+              aria-expanded={detailsMode === 'settings'}
+              aria-pressed={detailsMode === 'settings'}
+              aria-label="Open model settings"
               className="settings-trigger player-settings"
-              onClick={() => (settingsOpen ? closeSettings() : setSettingsOpen(true))}
+              onClick={() => setDetailsMode(detailsMode === 'settings' ? 'closed' : 'settings')}
               ref={settingsButtonRef}
-              title={settingsOpen ? 'Return to scenario story' : 'Model settings'}
+              title="Model settings"
               type="button"
             >
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path
-                  d={
-                    settingsOpen
-                      ? 'M4 5h6a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H4zM20 5h-6a3 3 0 0 0-3 3v11a3 3 0 0 1 3-3h6z'
-                      : 'M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M7 14v6'
-                  }
-                />
-              </svg>
-              <span>{settingsOpen ? 'Story' : 'Settings'}</span>
+              <PlayerIcon name="settings" />
+              <span>Settings</span>
             </button>
           </div>
 
@@ -572,40 +667,83 @@ export default function App() {
           )}
         </section>
 
-        <aside
-          className="details-panel story-panel"
-          aria-label={settingsOpen ? 'Model settings' : `${definition.title} explanation`}
-        >
-          {settingsOpen ? (
-            settingsPanel
-          ) : (
-            <>
-              <header>
-                <p className="eyebrow">Scenario guide</p>
-                <h3>What is happening?</h3>
-                <p>{definition.description}</p>
-              </header>
-              <div className="story-beats" aria-label="Scenario interpretation">
-                <article>
-                  <span>01 · Set-up</span>
-                  <p>{definition.story.setup}</p>
-                </article>
-                <article>
-                  <span>02 · Pressure</span>
-                  <p>{definition.story.pressure}</p>
-                </article>
-                <article>
-                  <span>03 · Intervention</span>
-                  <p>{definition.story.intervention}</p>
-                </article>
-                <article>
-                  <span>04 · Read the result</span>
-                  <p>{definition.story.reading}</p>
-                </article>
-              </div>
-            </>
-          )}
-        </aside>
+        {detailsMode === 'settings' && (
+          <>
+            <ResizableRailHandle
+              label="Resize model settings"
+              max={420}
+              min={300}
+              onChange={setRightRailWidth}
+              resetValue={340}
+              side="right"
+              value={rightRailWidth}
+            />
+            <aside className="details-panel" aria-label="Model settings">
+              {settingsPanel}
+            </aside>
+          </>
+        )}
+      </section>
+
+      <section className="model-reading-guide" aria-labelledby="model-reading-title">
+        <div className="reading-guide-intro">
+          <p className="eyebrow">Reading the laboratory</p>
+          <h2 id="model-reading-title">These are toy models, not forecasts.</h2>
+          <p>
+            Twenty to forty agents, a handful of equations each, and numbers set by hand: nothing
+            here is fitted to data. A run can show direction and ordering inside one small world we
+            wrote down — whether a defense helps, and which of two helps more.
+          </p>
+          <p>
+            Nothing here pushes back. Every agent follows a fixed rule for all 500 ticks. A quota is
+            broken by a coin flip, not by someone who found its loophole; a sanction confiscates but
+            never teaches; a tax is paid and never restructured around. Real systems doing the
+            disempowering may actively optimize around limits. This build has no such agent yet.
+          </p>
+        </div>
+        <div className="reading-principles">
+          <article>
+            <span>01</span>
+            <h3>A defense that fails here really fails.</h3>
+            <p>
+              It lost to opponents that never once tried to route around it. Failures are the strong
+              result.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>A defense that holds has passed the easy test.</h3>
+            <p>
+              Quotas, caps, sanctions, and taxes are the first limits an optimizer would probe.
+              Treat every defended run as an upper bound on how well that defense might work.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>The floors are ours, not the world’s.</h3>
+            <p>
+              A share stops falling because of a rule we wrote — a reversion rate, a frozen
+              listening pattern, or another fixed mechanism. Each scenario names its floor; the
+              sliders let you test it.
+            </p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Nothing here is a point of no return.</h3>
+            <p>
+              Every quantity is a rate or a level. Move a slider back and the modeled world returns.
+              Irreversible change is part of the story this version does not yet model.
+            </p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Adaptive agents are the next hard test.</h3>
+            <p>
+              The library has a learnable policy, but no scenario uses it yet. Until defenses face
+              agents that adapt to them, this laboratory presents the optimistic case.
+            </p>
+          </article>
+        </div>
       </section>
     </div>
   );

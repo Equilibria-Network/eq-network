@@ -19,6 +19,16 @@
   /* Secondary color for second trajectory */
   --color-secondary: #4ab3f4; /* Light blue accent */
 
+  /* Scientific-notebook diagram semantics */
+  --diagram-graphite: #263743;
+  --diagram-cooperate: #177a57;
+  --diagram-defect: #c4433a;
+  --diagram-uncertain: #a76500;
+  --diagram-field-cai: #177a57;
+  --diagram-field-css: #246fad;
+  --diagram-field-af: #c4433a;
+  --diagram-field-cs: #b76513;
+
   /* Navbar height */
   --navbar-height: 60px;
 

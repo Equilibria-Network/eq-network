@@ -4,11 +4,20 @@
 - Links back to:
   [`../open/task-0009-page-prototype-programme.md`](../open/task-0009-page-prototype-programme.md),
   [`../open/task-0008-legal-and-about.md`](../open/task-0008-legal-and-about.md),
+  [`../open/task-0011-hand-drawn-brand-prototypes.md`](../open/task-0011-hand-drawn-brand-prototypes.md),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
   [`../../adr/0009-page-content-and-seo-contracts.md`](../../adr/0009-page-content-and-seo-contracts.md)
 - Status: deferred — current pages remain serviceable; resume as the next editorial-page redesign batch
 - Owner: unassigned
 - Priority: next design batch
+
+## Dependency
+
+Complete and select a direction from
+[`../open/task-0011-hand-drawn-brand-prototypes.md`](../open/task-0011-hand-drawn-brand-prototypes.md)
+first. The purpose
+is to avoid scaling the current overly polished interpretation before the hand-drawn visual character has
+been restored and translated into reusable primitives.
 
 ## Scope change
 
@@ -64,10 +73,11 @@ Before page-specific styling:
 
 ## Sequence and dependencies
 
-1. Reconcile shared header, SEO, organisation, and phase-navigation contracts.
-2. Prototype About first to complete the ordinary editorial/organisation pattern.
-3. Prototype Roadmap next, reusing the established chrome and preserving `ResearchGraph`.
-4. Review both together for visual coherence, then promote individually after owner approval.
+1. Select and document the hand-drawn identity direction in task-0011.
+2. Reconcile shared header, SEO, organisation, and phase-navigation contracts.
+3. Prototype About first to complete the ordinary editorial/organisation pattern.
+4. Prototype Roadmap next, reusing the established chrome and preserving `ResearchGraph`.
+5. Review both together for visual coherence, then promote individually after owner approval.
 
 ## Verification
 

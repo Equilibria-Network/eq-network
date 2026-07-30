@@ -1,0 +1,97 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  summary?: string;
+  titleWidth?: 'narrow' | 'wide';
+}
+
+const { id, eyebrow, title, summary, titleWidth = 'narrow' } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section class="editorialSection" {id} aria-labelledby={headingId}>
+  <header class:list={['editorialSectionHeader', titleWidth]}>
+    <p>{eyebrow}</p>
+    <div>
+      <h2 id={headingId}>{title}</h2>
+      {summary && <p>{summary}</p>}
+    </div>
+  </header>
+  <div class="editorialSectionContent">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .editorialSection {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.52fr) minmax(0, 1.48fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+    scroll-margin-top: calc(var(--navbar-height) + 1rem);
+  }
+
+  .editorialSectionHeader {
+    position: sticky;
+    top: calc(var(--navbar-height) + 1.5rem);
+    align-self: start;
+  }
+
+  .editorialSectionHeader,
+  .editorialSectionContent {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .editorialSectionHeader > p {
+    margin: 0 0 1.2rem;
+    color: var(--editorial-accent, #4ab3f4);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.66rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--editorial-ink, #003b7e);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5.2rem);
+    font-weight: 500;
+    line-height: 0.97;
+    letter-spacing: -0.055em;
+  }
+
+  .wide h2 {
+    max-width: 16ch;
+  }
+
+  .editorialSectionHeader div > p {
+    max-width: 650px;
+    margin-top: 1.25rem;
+    color: var(--editorial-muted, #46505a);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 680px) {
+    .editorialSection {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding-inline: 1.5rem;
+    }
+
+    .editorialSectionHeader {
+      position: static;
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+  }
+</style>

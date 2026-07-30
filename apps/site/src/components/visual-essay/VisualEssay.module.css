@@ -1,6 +1,5 @@
 .page {
   --essay-ink: var(--color-primary);
-  --essay-accent: var(--color-blue-accent);
   --essay-paper: var(--bg-color);
   --essay-line: color-mix(in srgb, var(--essay-ink) 18%, transparent);
   --essay-line-strong: color-mix(in srgb, var(--essay-ink) 42%, transparent);
@@ -39,7 +38,6 @@
 .figureHeader,
 .stepMeta,
 .sectionRule,
-.timeline,
 .closingIndex {
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
   text-transform: uppercase;
@@ -93,8 +91,8 @@
 
 .story {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(330px, 0.75fr);
-  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.8fr) minmax(330px, 0.68fr);
+  gap: clamp(2rem, 3.5vw, 3.75rem);
   align-items: start;
 }
 
@@ -106,24 +104,23 @@
 
 .figureFrame {
   position: relative;
-  border: 1px solid var(--essay-line-strong);
-  background: var(--essay-paper);
+  border: 0;
+  background: transparent;
 }
 
 .figureHeader {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--essay-line);
-  padding: 0.6rem 0.75rem;
-  font-size: 0.64rem;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .registration {
-  position: absolute;
-  z-index: 4;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
+  display: none;
 }
 
 .registration::before,
@@ -162,40 +159,6 @@
 .regBr {
   right: -9px;
   bottom: -9px;
-}
-
-.timeline {
-  display: grid;
-  margin-top: 0.75rem;
-  border-top: 1px solid var(--essay-line);
-}
-
-.timeline button {
-  position: relative;
-  border: 0;
-  border-right: 1px solid var(--essay-line);
-  padding: 0.55rem 0;
-  background: transparent;
-  color: var(--essay-ink);
-  font: inherit;
-  font-size: 0.62rem;
-  cursor: pointer;
-}
-
-.timeline button::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: var(--essay-accent);
-  transition: width 300ms ease;
-}
-
-.timeline button:hover::before,
-.timelineActive::before {
-  width: 100% !important;
 }
 
 .narrative {
@@ -373,33 +336,40 @@
     z-index: 5;
     top: var(--navbar-height);
     margin-inline: -1rem;
-    padding: 0 1rem 0.5rem;
+    padding: 0 1rem 0.65rem;
     background: var(--essay-paper);
   }
 
-  .figureFrame,
-  .timeline {
-    max-width: 760px;
-    margin-inline: auto;
+  .figureColumn::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: var(--navbar-height);
+    background: var(--essay-paper);
+    pointer-events: none;
   }
 
-  .timeline {
-    margin-top: 0.5rem;
+  .figureFrame {
+    max-width: 760px;
+    margin-inline: auto;
   }
 
   .step {
-    min-height: 78vh;
+    min-height: 68svh;
     max-width: 760px;
     margin-inline: auto;
+    scroll-margin-top: 50svh;
   }
 
   .stickyHeading {
     position: static;
-    padding-top: 4rem;
+    padding-top: clamp(2.5rem, 8vh, 4rem);
   }
 
   .step > p {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 
@@ -426,7 +396,23 @@
   }
 
   .step {
-    min-height: 70vh;
+    min-height: 62svh;
+    scroll-margin-top: 48svh;
+  }
+
+  .stepMeta {
+    margin-bottom: 0.8rem;
+  }
+
+  .step h2 {
+    font-size: clamp(1.75rem, 8.5vw, 2.35rem);
+    line-height: 1.02;
+  }
+
+  .step > p {
+    margin-top: 1.35rem;
+    font-size: 1rem;
+    line-height: 1.62;
   }
 
   .closingGrid {
@@ -435,7 +421,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .timeline button::before,
   .linkGrid a,
   .linkGrid a::after {
     transition: none;

@@ -18,11 +18,6 @@ export interface LegalContent {
     body: string;
     email: string;
   };
-  registry: {
-    label: string;
-    href: string;
-    note: string;
-  };
 }
 
 export const legalContent: LegalContent = {
@@ -37,10 +32,6 @@ export const legalContent: LegalContent = {
     { label: 'Registration date', value: '12 June 2026' },
     { label: 'Registered municipality', value: 'Uppsala' },
     { label: 'Status', value: 'Registered' },
-    {
-      label: 'Postal address',
-      value: 'c/o Jonas Hallgren, Vildrosgatan 15, 753 24 Uppsala, Sweden',
-    },
     { label: 'Website', value: 'eq-network.org' },
   ],
   sections: [
@@ -87,10 +78,5 @@ export const legalContent: LegalContent = {
     heading: 'Formal contact',
     body: 'For legal, organisational, or rights-related enquiries, contact',
     email: 'contact@eq-network.org',
-  },
-  registry: {
-    label: 'View public organisation record',
-    href: 'https://www.allabolag.se/foretag/equilibria-network/uppsala/f%C3%B6reningar/3OQ7T3KI63IGG',
-    note: 'This third-party directory is linked for reference. The authoritative registration details remain those issued by the relevant Swedish authority.',
   },
 };
