@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import StrokeLab from '@components/brand/StrokeLab';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
+---
+
+<Layout
+  seo={{
+    title: 'Diagram stroke lab | Equilibria Network',
+    description:
+      'A no-index working specimen for selecting hand-drawn connector geometry, ink variation, and open arrowheads.',
+    canonicalPath: '/brand/prototype/stroke-lab',
+    noindex: true,
+  }}
+>
+  <StrokeLab client:load />
+</Layout>

@@ -120,11 +120,49 @@ export interface ExplainerContent {
         selectNode: string;
         selectedNeighborhood: string;
       };
+      connections: {
+        label: string;
+        relation: string;
+        directionalFlow: string;
+        weakenedTie: string;
+        possibleTie: string;
+        withinField: string;
+        translation: string;
+      };
       strategicState: {
         label: string;
         cooperate: string;
         defect: string;
         unresolved: string;
+      };
+    };
+    dagStudy: {
+      eyebrow: string;
+      title: string;
+      summary: string;
+      figureLabel: string;
+      timeSliceLabel: string;
+      layerLabels: string[];
+      roleLegend: string;
+      stateLegend: string;
+      connectionLegend: string;
+      stateLabels: {
+        open: string;
+        processing: string;
+        committed: string;
+      };
+      connectionLabels: {
+        directed: string;
+        routed: string;
+        highlighted: string;
+      };
+      annotations: {
+        highlightedPath: string;
+        localContext: string;
+        institutionalConstraint: string;
+        nextSlice: string;
+        interactionHint: string;
+        clearSelection: string;
       };
     };
   };
@@ -322,11 +360,50 @@ export const explainerContent: ExplainerContent = {
         selectNode: 'select a node to inspect its neighborhood',
         selectedNeighborhood: 'neighborhood selected',
       },
+      connections: {
+        label: 'connection',
+        relation: 'observed relation',
+        directionalFlow: 'directional flow',
+        weakenedTie: 'weakened / broken tie',
+        possibleTie: 'possible / unobserved tie',
+        withinField: 'within-field relation',
+        translation: 'translation edge',
+      },
       strategicState: {
         label: 'strategic state',
         cooperate: 'green / cooperate',
         defect: 'red / defect',
         unresolved: 'amber / unresolved',
+      },
+    },
+    dagStudy: {
+      eyebrow: 'Prototype / Fig. 01',
+      title: 'One interaction episode, unfolded in time',
+      summary:
+        'The same twenty actors as the first thesis scene, redrawn as a directed acyclic slice: signals at time t pass through interpretation and collective decisions before becoming consequences at time t + 1. The wider social system still contains feedback; this plate isolates one analytical episode.',
+      figureLabel: 'Gₜ / time-unrolled social interaction',
+      timeSliceLabel: 'acyclic slice: t → t + 1',
+      layerLabels: ['signals / t', 'interpretation', 'decisions', 'consequences / t + 1'],
+      roleLegend: 'shape = role',
+      stateLegend: 'fill = state',
+      connectionLegend: 'connection + color',
+      stateLabels: {
+        open: 'open / receives',
+        processing: 'hatched / interprets',
+        committed: 'solid / commits',
+      },
+      connectionLabels: {
+        directed: 'ordinary directed relation',
+        routed: 'same relation / routed around content',
+        highlighted: 'consequential path',
+      },
+      annotations: {
+        highlightedPath: 'one consequential path',
+        localContext: 'local context changes what the signal means',
+        institutionalConstraint: 'rules narrow the available action',
+        nextSlice: 'consequences become signals in the next slice',
+        interactionHint: 'Select a node to trace its parents and downstream consequences.',
+        clearSelection: 'Select the active node again to clear the trace.',
       },
     },
   },

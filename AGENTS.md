@@ -41,6 +41,11 @@ The site is public. The only runtime secret is the Formspree endpoint, injected 
   raising it — these are privacy/architecture decisions recorded in `docs/adr/`.
 - Do not hand-edit `dist/`; change the source and rebuild.
 
+## Diagrams
+
+Before creating or modifying a diagram, read [`DIAGRAMS.md`](DIAGRAMS.md). It is the canonical contract
+for diagram aesthetics, semantic channels, connectors, legends, interaction, motion, and verification.
+
 ## Page redesigns
 
 - Build redesigns at `/<page>/prototype` (`/prototype` for Home), set them `noindex`, and keep the

@@ -1,0 +1,382 @@
+.prototype {
+  --ink: var(--text-color);
+  --accent: var(--color-primary);
+  --paper: var(--bg-color);
+  --quiet-ink: color-mix(in srgb, var(--ink) 68%, transparent);
+  --guide: color-mix(in srgb, var(--ink) 17%, transparent);
+  position: relative;
+  overflow: clip;
+  padding: var(--space-section) 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.prototype::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: clamp(12px, 2.4vw, 38px);
+  border-right: 1px solid var(--guide);
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 7px,
+    color-mix(in srgb, var(--accent) 7%, transparent) 7px 8px
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.embedded {
+  overflow: visible;
+  padding: 0;
+}
+
+.embedded::before {
+  display: none;
+}
+
+.embedded .plate {
+  width: 100%;
+}
+
+.intro,
+.plate {
+  width: min(1380px, calc(100% - clamp(3rem, 8vw, 8rem)));
+  margin-inline: auto;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: end;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.intro span,
+.plateRule,
+.caption {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.intro span {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: var(--fs-xs);
+  opacity: 0.58;
+}
+
+.intro h2 {
+  max-width: 850px;
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(2.6rem, 5vw, 5.3rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.intro p {
+  max-width: 46rem;
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  opacity: 0.8;
+}
+
+.plate {
+  background: var(--paper);
+}
+
+.plateRule {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--ink);
+  padding: 0.72rem 0.2rem;
+  font-size: var(--fs-xs);
+}
+
+.canvasScroll {
+  overflow-x: auto;
+  border-top: 1px solid var(--guide);
+  border-bottom: 1px solid var(--ink);
+  outline: none;
+  scrollbar-color: color-mix(in srgb, var(--ink) 40%, transparent) transparent;
+}
+
+.canvasScroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 920px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.layerGuides {
+  fill: var(--quiet-ink);
+  stroke: var(--guide);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 8;
+}
+
+.layerGuides text {
+  stroke: none;
+  font:
+    400 16px 'Kalam',
+    cursive;
+  text-anchor: middle;
+}
+
+.layerGuides text:nth-of-type(2) {
+  font-size: 13px;
+  opacity: 0.62;
+}
+
+.edges {
+  color: var(--quiet-ink);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.edges > g {
+  transition: opacity 220ms ease;
+}
+
+.highlightedEdge {
+  color: var(--accent);
+}
+
+.drawPath {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawEdge 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--draw-delay);
+  path-length: 1;
+}
+
+.nodes {
+  color: var(--ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.node {
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  animation: revealNode 360ms ease forwards;
+  animation-delay: var(--node-delay);
+}
+
+.nodeLabel {
+  fill: var(--ink);
+  stroke: none;
+  font:
+    400 13px 'Kalam',
+    cursive;
+  text-anchor: middle;
+  user-select: none;
+}
+
+.committed .nodeLabel {
+  fill: var(--paper);
+  font-weight: 700;
+}
+
+.focusRing {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 4;
+  opacity: 0;
+}
+
+.node:hover .focusRing,
+.node:focus-visible .focusRing,
+.node[aria-pressed='true'] .focusRing {
+  opacity: 1;
+}
+
+.dimmed {
+  opacity: 0.09 !important;
+}
+
+.annotations,
+.mathNotes,
+.legend {
+  fill: var(--ink);
+  font-family: 'Kalam', cursive;
+}
+
+.handTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.titleUnderline,
+.mathNotes path,
+.mathNotes ellipse {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.92;
+  stroke-linecap: round;
+}
+
+.pathNote,
+.annotationNote,
+.nextSliceNote {
+  font-size: 16px;
+}
+
+.pathNote line {
+  stroke: var(--accent);
+  stroke-width: 3.35;
+  stroke-linecap: round;
+}
+
+.annotationNote,
+.nextSliceNote {
+  color: var(--quiet-ink);
+}
+
+.mathNotes {
+  font-size: 21px;
+}
+
+.mathNotes .smallMath {
+  font-size: 15px;
+}
+
+.legend {
+  font-size: 13px;
+}
+
+.legendTitle {
+  font-weight: 700;
+}
+
+.legend text {
+  fill: var(--ink);
+}
+
+.legend circle,
+.legend rect,
+.legend > g:first-child path {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.legend .hatchedSwatch {
+  fill: var(--paper);
+}
+
+.legend .solidSwatch {
+  fill: var(--ink);
+}
+
+.legend > g:nth-child(2) path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.8;
+}
+
+.connectionLegend {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.legendOrdinary {
+  color: var(--quiet-ink);
+}
+
+.legendHighlighted {
+  color: var(--accent);
+}
+
+.caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  padding: 0.8rem 0.2rem 0;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+.caption strong {
+  font-weight: 500;
+  text-align: right;
+}
+
+@keyframes drawEdge {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes revealNode {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .prototype {
+    padding-block: var(--space-section-dense);
+  }
+
+  .intro,
+  .plate {
+    width: calc(100% - 3rem);
+  }
+
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .plateRule {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .plateRule span:last-child {
+    text-align: right;
+  }
+
+  .canvas {
+    min-width: 850px;
+  }
+
+  .caption {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .caption strong {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawPath,
+  .node {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+
+  .edges > g,
+  .node {
+    transition: none;
+  }
+}

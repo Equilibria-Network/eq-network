@@ -66,6 +66,20 @@ Kalam mathematical notation, diary-like marginalia, graphite arrows, and pencil-
       explainer prototype into the shared visual-essay package
 - [ ] Reconcile the selected combination into the visual-language contract and reusable primitives
 
+### Connector grammar revision — 2026-07-30
+
+- [x] Owner selected the RoughJS medium two-pass profile across three deterministic seeds.
+- [x] Direct, shallow/deep bow, and soft-S routes promoted as canonical connector geometry.
+- [x] Solid, long-dash, short-dash, open-dot, and dense-dot patterns approved visually; non-solid
+      meanings remain local to each diagram and must appear in its legend.
+- [x] Shared `notebook-connector-medium-v1` token consumed by the stroke lab and canonical DAG.
+- [x] Recompose `/explainer/prototype` as the complete seven-step thesis story using the approved
+      connector grammar and the existing typed `VisualEssay` document.
+- [x] Match the canonical DAG's desktop mark scale and consolidate shape/fill, color/state, and
+      connection keys into one lower-left legend row.
+- [ ] Use the completed thesis renderer plus one structurally different playground scene to define
+      the smallest honest tool/package contract.
+
 ## Shared specimen set
 
 The prototype must demonstrate:
@@ -114,6 +128,8 @@ Record the approved constraints in the visual-language contract before beginning
 
 - Explainer evidence is recorded in
   [`../../audits/2026-07-30-explainer-verification.md`](../../audits/2026-07-30-explainer-verification.md).
+- Connector-grammar prototype evidence is recorded in
+  [`../../audits/2026-07-30-explainer-connector-prototype-verification.md`](../../audits/2026-07-30-explainer-connector-prototype-verification.md).
 - The prototype route is `noindex, nofollow`.
 - `pnpm check` passes.
 - The selected system is visually reviewed at desktop and mobile sizes.

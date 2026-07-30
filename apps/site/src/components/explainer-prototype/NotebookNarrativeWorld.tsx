@@ -10,6 +10,15 @@ import {
   type SimulationLinkDatum,
   type SimulationNodeDatum,
 } from 'd3-force';
+import rough from 'roughjs';
+import {
+  NOTEBOOK_CONNECTION_PATTERNS,
+  NOTEBOOK_CONNECTOR_MEDIUM,
+  connectorSeed,
+  openArrowHeadPath,
+  type DiagramPoint,
+  type NotebookConnectionPattern,
+} from '@components/diagram/connectorInk';
 import type { VisualEssayRendererProps } from '@components/visual-essay/types';
 import { explainerContent } from '@content/explainer';
 import type { ThesisState } from './ThesisPrototype';
@@ -17,7 +26,9 @@ import { draftedEdge, draftedNode, type NotebookNodeShape } from './notebookDraw
 import styles from './NotebookNarrativeWorld.module.css';
 
 const W = 920;
-const H = 700;
+const LEGACY_H = 700;
+const H = 760;
+const NODE_SCALE = 1.55;
 const FIELD_CENTERS = [
   { x: 245, y: 210 },
   { x: 675, y: 210 },
@@ -52,6 +63,18 @@ interface Point {
   y: number;
 }
 
+interface ConnectorGeometry {
+  path: string;
+  end: DiagramPoint;
+  tangent: DiagramPoint;
+}
+
+type RoughDrawable = ReturnType<typeof connectorSketch.path>;
+
+interface NotebookNarrativeWorldProps extends VisualEssayRendererProps<ThesisState> {
+  connectorGrammar?: 'drafted' | 'notebook-v1';
+}
+
 type HatchTone =
   'neutral' | 'cooperative' | 'defecting' | 'uncertain' | 'field0' | 'field1' | 'field2' | 'field3';
 
@@ -65,6 +88,18 @@ const HATCH_TONES: HatchTone[] = [
   'field2',
   'field3',
 ];
+
+const connectorSketch = rough.generator({
+  options: {
+    roughness: NOTEBOOK_CONNECTOR_MEDIUM.roughness,
+    bowing: NOTEBOOK_CONNECTOR_MEDIUM.bowing,
+    maxRandomnessOffset: NOTEBOOK_CONNECTOR_MEDIUM.maxRandomnessOffset,
+    disableMultiStroke: NOTEBOOK_CONNECTOR_MEDIUM.disableMultiStroke,
+    disableMultiStrokeFill: true,
+    preserveVertices: NOTEBOOK_CONNECTOR_MEDIUM.preserveVertices,
+    fixedDecimalPlaceDigits: 2,
+  },
+});
 
 const NODES: Node[] = Array.from({ length: 20 }, (_, id) => ({
   id,
@@ -158,8 +193,10 @@ function solve(
   center: Point,
   groupCenter?: (node: Node) => Point,
   linkStrength = 0.4,
-  groupStrength = 0.28
+  groupStrength = 0.28,
+  density: 'legacy' | 'expanded' = 'legacy'
 ): Map<number, Point> {
+  const expanded = density === 'expanded';
   const nodes = NODES.map((node) => ({ ...node }));
   const links = LINKS.map((link) => ({
     ...link,
@@ -172,11 +209,11 @@ function solve(
       'link',
       forceLink<Node, Link>(links)
         .id((node) => node.id)
-        .distance(76)
+        .distance(expanded ? 96 : 76)
         .strength(linkStrength)
     )
-    .force('charge', forceManyBody().strength(-225))
-    .force('collide', forceCollide(23))
+    .force('charge', forceManyBody().strength(expanded ? -270 : -225))
+    .force('collide', forceCollide(expanded ? 34 : 23))
     .force('center', forceCenter(center.x, center.y))
     .stop();
 
@@ -217,17 +254,40 @@ const POLARIZED = solve(
 const STRESSED = interpolate(INTEGRATED, POLARIZED, 0.38);
 const FIELDS = solve({ x: 460, y: 350 }, (node) => FIELD_CENTERS[node.field], 0.1, 0.5);
 
-function layoutFor(state: ThesisState) {
-  if (state === 'society' || state === 'uncertainty') return INTEGRATED;
-  if (state === 'defection') return STRESSED;
-  if (state === 'equilibria') return POLARIZED;
-  return FIELDS;
+const INTEGRATED_NOTEBOOK = solve({ x: 460, y: 350 }, undefined, 0.4, 0.28, 'expanded');
+const POLARIZED_NOTEBOOK = solve(
+  { x: 460, y: 350 },
+  (node) => (DEFECTORS.has(node.id) ? { x: 690, y: 350 } : { x: 280, y: 350 }),
+  0.12,
+  0.78,
+  'expanded'
+);
+const STRESSED_NOTEBOOK = interpolate(INTEGRATED_NOTEBOOK, POLARIZED_NOTEBOOK, 0.38);
+const FIELDS_NOTEBOOK = solve(
+  { x: 460, y: 350 },
+  (node) => FIELD_CENTERS[node.field],
+  0.1,
+  0.5,
+  'expanded'
+);
+
+function layoutFor(state: ThesisState, expanded = false) {
+  if (state === 'society' || state === 'uncertainty') {
+    return expanded ? INTEGRATED_NOTEBOOK : INTEGRATED;
+  }
+  if (state === 'defection') return expanded ? STRESSED_NOTEBOOK : STRESSED;
+  if (state === 'equilibria') return expanded ? POLARIZED_NOTEBOOK : POLARIZED;
+  return expanded ? FIELDS_NOTEBOOK : FIELDS;
 }
 
 function shapeFor(node: Node): NotebookNodeShape {
   if (node.kind === 'institution') return 'rounded-square';
   if (node.kind === 'ai') return 'triangle';
   return 'circle';
+}
+
+function nodeRadius(drawing: ReturnType<typeof draftedNode>, expanded: boolean) {
+  return drawing.radius * (expanded ? NODE_SCALE : 1);
 }
 
 function statusFor(node: Node, state: ThesisState) {
@@ -298,6 +358,186 @@ function sigmoidConnectorPath(source: Point, target: Point, targetGap = 0) {
   )} ${stableCoordinate(end.x)} ${stableCoordinate(end.y)}`;
 }
 
+function routedConnectorGeometry(
+  source: Point,
+  target: Point,
+  sourceGap: number,
+  targetGap: number,
+  index: number
+): ConnectorGeometry {
+  const dx = target.x - source.x;
+  const dy = target.y - source.y;
+  const length = Math.hypot(dx, dy) || 1;
+  const ux = dx / length;
+  const uy = dy / length;
+  const start = { x: source.x + ux * sourceGap, y: source.y + uy * sourceGap };
+  const end = { x: target.x - ux * targetGap, y: target.y - uy * targetGap };
+
+  if (index % 6 === 0) {
+    return {
+      path: `M${stableCoordinate(start.x)} ${stableCoordinate(start.y)}L${stableCoordinate(
+        end.x
+      )} ${stableCoordinate(end.y)}`,
+      end,
+      tangent: { x: end.x - start.x, y: end.y - start.y },
+    };
+  }
+
+  const bendSign = index % 2 === 0 ? 1 : -1;
+  const bend = bendSign * (index % 9 === 4 ? 18 : 8);
+  if (index % 7 !== 2) {
+    const control = {
+      x: (start.x + end.x) / 2 - uy * bend,
+      y: (start.y + end.y) / 2 + ux * bend,
+    };
+    return {
+      path: `M${stableCoordinate(start.x)} ${stableCoordinate(start.y)}Q${stableCoordinate(
+        control.x
+      )} ${stableCoordinate(control.y)} ${stableCoordinate(end.x)} ${stableCoordinate(end.y)}`,
+      end,
+      tangent: { x: end.x - control.x, y: end.y - control.y },
+    };
+  }
+
+  const firstControl = {
+    x: start.x + (end.x - start.x) * 0.34 - uy * bend,
+    y: start.y + (end.y - start.y) * 0.34 + ux * bend,
+  };
+  const secondControl = {
+    x: start.x + (end.x - start.x) * 0.68 + uy * bend,
+    y: start.y + (end.y - start.y) * 0.68 - ux * bend,
+  };
+  return {
+    path: `M${stableCoordinate(start.x)} ${stableCoordinate(start.y)}C${stableCoordinate(
+      firstControl.x
+    )} ${stableCoordinate(firstControl.y)} ${stableCoordinate(
+      secondControl.x
+    )} ${stableCoordinate(secondControl.y)} ${stableCoordinate(end.x)} ${stableCoordinate(end.y)}`,
+    end,
+    tangent: { x: end.x - secondControl.x, y: end.y - secondControl.y },
+  };
+}
+
+function pathGeometry(
+  path: string,
+  end: DiagramPoint,
+  previousControl: DiagramPoint
+): ConnectorGeometry {
+  return {
+    path,
+    end,
+    tangent: {
+      x: end.x - previousControl.x,
+      y: end.y - previousControl.y,
+    },
+  };
+}
+
+function sigmoidConnectorGeometry(source: Point, target: Point, targetGap = 0): ConnectorGeometry {
+  const path = sigmoidConnectorPath(source, target, targetGap);
+  const dx = target.x - source.x;
+  const dy = target.y - source.y;
+  const length = Math.hypot(dx, dy) || 1;
+  const end = {
+    x: target.x - (dx / length) * targetGap,
+    y: target.y - (dy / length) * targetGap,
+  };
+  const curveDx = end.x - source.x;
+  const curveDy = end.y - source.y;
+  const perpendicular = { x: -curveDy / length, y: curveDx / length };
+  const control2 = {
+    x: source.x + curveDx * 0.66 - perpendicular.x * 12,
+    y: source.y + curveDy * 0.88 - perpendicular.y * 12,
+  };
+  return pathGeometry(path, end, control2);
+}
+
+function RoughPaths({
+  drawable,
+  dashArray,
+  className,
+  dataAnnotation,
+}: {
+  drawable: RoughDrawable;
+  dashArray?: string;
+  className?: string;
+  dataAnnotation?: string;
+}) {
+  return connectorSketch
+    .toPaths(drawable)
+    .map((path, index) => (
+      <path
+        className={className}
+        data-annotation={index === 0 ? dataAnnotation : undefined}
+        d={path.d}
+        fill={path.fill}
+        key={`${path.d}-${index}`}
+        stroke={path.stroke}
+        strokeWidth={path.strokeWidth}
+        style={{ strokeDasharray: dashArray ?? 'none' }}
+        vectorEffect="non-scaling-stroke"
+      />
+    ));
+}
+
+function RoughConnector({
+  geometry,
+  seedIndex,
+  pattern = NOTEBOOK_CONNECTION_PATTERNS.solid,
+  arrow = false,
+  className,
+  dataAnnotation,
+  strokeWidth = NOTEBOOK_CONNECTOR_MEDIUM.strokeWidth,
+}: {
+  geometry: ConnectorGeometry;
+  seedIndex: number;
+  pattern?: NotebookConnectionPattern;
+  arrow?: boolean;
+  className?: string;
+  dataAnnotation?: string;
+  strokeWidth?: number;
+}) {
+  const seed = connectorSeed(seedIndex);
+  const common = { stroke: 'currentColor', fill: 'none' };
+  const shaft = connectorSketch.path(geometry.path, {
+    ...common,
+    seed,
+    strokeWidth,
+  });
+  const head = arrow
+    ? connectorSketch.path(openArrowHeadPath(geometry.end, geometry.tangent, 12, 5.8), {
+        ...common,
+        seed: seed + 37,
+        strokeWidth: Math.min(strokeWidth, 1.8),
+      })
+    : null;
+
+  return (
+    <>
+      <RoughPaths
+        className={className}
+        dashArray={pattern.dashArray}
+        dataAnnotation={dataAnnotation}
+        drawable={shaft}
+      />
+      {head && <RoughPaths className={className} drawable={head} />}
+    </>
+  );
+}
+
+function edgePattern(
+  state: ThesisState,
+  link: Link,
+  disrupted: boolean,
+  possible: boolean
+): NotebookConnectionPattern {
+  if (possible) return NOTEBOOK_CONNECTION_PATTERNS.dotOpen;
+  if (state === 'silos' && link.crossField) return NOTEBOOK_CONNECTION_PATTERNS.dotDense;
+  if (disrupted) return NOTEBOOK_CONNECTION_PATTERNS.dashLong;
+  if (link.crossField) return NOTEBOOK_CONNECTION_PATTERNS.dashShort;
+  return NOTEBOOK_CONNECTION_PATTERNS.solid;
+}
+
 function hatchToneFor(node: Node, state: ThesisState, status: string): HatchTone {
   if (state === 'knowledge' || state === 'silos' || state === 'bridge') {
     return `field${node.field}` as HatchTone;
@@ -324,7 +564,193 @@ function closestCrossFieldPair(
   return closest;
 }
 
-function ShapeLegend() {
+function connectionEntries(state: ThesisState) {
+  const labels = explainerContent.prototype.storyLabels.connections;
+  const entries: Array<{
+    label: string;
+    pattern: NotebookConnectionPattern;
+    arrow: boolean;
+  }> =
+    state === 'society'
+      ? [
+          {
+            label: labels.relation,
+            pattern: NOTEBOOK_CONNECTION_PATTERNS.solid,
+            arrow: false,
+          },
+          {
+            label: labels.directionalFlow,
+            pattern: NOTEBOOK_CONNECTION_PATTERNS.dashShort,
+            arrow: true,
+          },
+        ]
+      : state === 'defection' || state === 'equilibria'
+        ? [
+            {
+              label: labels.relation,
+              pattern: NOTEBOOK_CONNECTION_PATTERNS.solid,
+              arrow: false,
+            },
+            {
+              label: labels.weakenedTie,
+              pattern: NOTEBOOK_CONNECTION_PATTERNS.dashLong,
+              arrow: true,
+            },
+          ]
+        : state === 'uncertainty'
+          ? [
+              {
+                label: labels.relation,
+                pattern: NOTEBOOK_CONNECTION_PATTERNS.solid,
+                arrow: false,
+              },
+              {
+                label: labels.possibleTie,
+                pattern: NOTEBOOK_CONNECTION_PATTERNS.dotOpen,
+                arrow: true,
+              },
+            ]
+          : state === 'bridge'
+            ? [
+                {
+                  label: labels.withinField,
+                  pattern: NOTEBOOK_CONNECTION_PATTERNS.solid,
+                  arrow: false,
+                },
+                {
+                  label: labels.translation,
+                  pattern: NOTEBOOK_CONNECTION_PATTERNS.dashShort,
+                  arrow: true,
+                },
+              ]
+            : [
+                {
+                  label: labels.withinField,
+                  pattern: NOTEBOOK_CONNECTION_PATTERNS.solid,
+                  arrow: false,
+                },
+                {
+                  label: labels.possibleTie,
+                  pattern:
+                    state === 'silos'
+                      ? NOTEBOOK_CONNECTION_PATTERNS.dotDense
+                      : NOTEBOOK_CONNECTION_PATTERNS.dotOpen,
+                  arrow: true,
+                },
+              ];
+  return entries;
+}
+
+function UnifiedLegend({ state }: { state: ThesisState }) {
+  const triangle = draftedNode(83, 'triangle');
+  const institution = draftedNode(97, 'rounded-square');
+  const societyLabels = explainerContent.prototype.storyLabels.society;
+  const stateLabels = explainerContent.prototype.storyLabels.strategicState;
+  const connectionLabels = explainerContent.prototype.storyLabels.connections;
+  const stateEntries =
+    state === 'defection' || state === 'equilibria' || state === 'uncertainty'
+      ? [
+          { key: 'cooperative', label: stateLabels.cooperate.replace('green / ', '') },
+          { key: 'defecting', label: stateLabels.defect.replace('red / ', '') },
+          ...(state === 'uncertainty'
+            ? [{ key: 'uncertain', label: stateLabels.unresolved.replace('amber / ', '') }]
+            : []),
+        ]
+      : [];
+  const connections = connectionEntries(state);
+  const connectionStart = stateEntries.length > 0 ? 615 : 380;
+  const compactConnectionLabel = (label: string) =>
+    label
+      .replace('observed relation', 'relation')
+      .replace('weakened / broken tie', 'weakened / broken')
+      .replace('possible / unobserved tie', 'possible / unobserved')
+      .replace('within-field relation', 'within-field')
+      .replace('translation edge', 'translation');
+
+  return (
+    <g
+      className={styles.legendRow}
+      transform="translate(42 682)"
+      role="group"
+      aria-label="diagram legend"
+    >
+      <g data-legend="actor-type" role="group" aria-label={societyLabels.nodeTypes}>
+        <text className={styles.legendLabel} x="0" y="4">
+          shape
+        </text>
+        <circle cx="36" r="7" />
+        <text x="47" y="4">
+          {societyLabels.humanKey}
+        </text>
+        <path
+          transform="translate(111) scale(.7)"
+          d={triangle.outline}
+          style={{ fill: 'url(#narrative-neutral-ai-hatch)' }}
+        />
+        <text x="122" y="4">
+          {societyLabels.aiAgentKey}
+        </text>
+        <path
+          transform="translate(232) scale(.7)"
+          d={institution.outline}
+          style={{ fill: 'url(#narrative-neutral-institution-hatch)' }}
+        />
+        <text x="243" y="4">
+          {societyLabels.institutionKey}
+        </text>
+      </g>
+      {stateEntries.length > 0 && (
+        <g
+          data-legend="strategic-state"
+          role="group"
+          aria-label={stateLabels.label}
+          transform="translate(355)"
+        >
+          <text className={styles.legendLabel} x="0" y="4">
+            state
+          </text>
+          {stateEntries.map((entry, index) => (
+            <g
+              className={styles[entry.key]}
+              key={entry.key}
+              transform={`translate(${40 + index * 78} 0)`}
+            >
+              <line x1="0" x2="14" />
+              <text x="20" y="4">
+                {entry.label}
+              </text>
+            </g>
+          ))}
+        </g>
+      )}
+      <g
+        data-legend="connection-pattern"
+        role="group"
+        aria-label={connectionLabels.label}
+        transform={`translate(${connectionStart})`}
+      >
+        <text className={styles.legendLabel} x="0" y="4">
+          edge
+        </text>
+        {connections.map((entry, index) => (
+          <g key={entry.label} transform={`translate(${37 + index * 130} 0)`}>
+            <RoughConnector
+              arrow={entry.arrow}
+              geometry={pathGeometry('M0 0L34 0', { x: 34, y: 0 }, { x: 0, y: 0 })}
+              pattern={entry.pattern}
+              seedIndex={index + 1}
+            />
+            <text x="42" y="4">
+              {compactConnectionLabel(entry.label)}
+            </text>
+          </g>
+        ))}
+      </g>
+    </g>
+  );
+}
+
+function LegacyShapeLegend() {
   const triangle = draftedNode(83, 'triangle');
   const institution = draftedNode(97, 'rounded-square');
   const labels = explainerContent.prototype.storyLabels.society;
@@ -360,7 +786,7 @@ function ShapeLegend() {
   );
 }
 
-function StrategicStateLegend({ state }: { state: ThesisState }) {
+function LegacyStrategicStateLegend({ state }: { state: ThesisState }) {
   if (state !== 'defection' && state !== 'equilibria' && state !== 'uncertainty') return null;
   const labels = explainerContent.prototype.storyLabels.strategicState;
   const entries = [
@@ -425,9 +851,11 @@ function FieldFrames({ state }: { state: ThesisState }) {
 function SceneAnnotations({
   state,
   positions,
+  roughConnectors,
 }: {
   state: ThesisState;
   positions: Map<number, Point>;
+  roughConnectors: boolean;
 }) {
   const labels = explainerContent.prototype.storyLabels;
   if (state === 'society') {
@@ -457,14 +885,29 @@ function SceneAnnotations({
           <text x={labelPoint.x} y={labelPoint.y}>
             {labels.defection.localPayoff} ↑
           </text>
-          <path
-            data-annotation="local-payoff"
-            d={sigmoidConnectorPath(
-              { x: labelPoint.x - 10, y: labelPoint.y + 11 },
-              cascadeTarget,
-              21
-            )}
-          />
+          {roughConnectors ? (
+            <RoughConnector
+              arrow
+              className={styles.roughAnnotationPath}
+              dataAnnotation="local-payoff"
+              geometry={sigmoidConnectorGeometry(
+                { x: labelPoint.x - 10, y: labelPoint.y + 11 },
+                cascadeTarget,
+                21
+              )}
+              pattern={NOTEBOOK_CONNECTION_PATTERNS.dashLong}
+              seedIndex={1}
+            />
+          ) : (
+            <path
+              data-annotation="local-payoff"
+              d={sigmoidConnectorPath(
+                { x: labelPoint.x - 10, y: labelPoint.y + 11 },
+                cascadeTarget,
+                21
+              )}
+            />
+          )}
         </g>
         <text className={styles.welfareNote} x="690" y="565">
           {labels.defection.collectiveWelfare} ↓
@@ -500,7 +943,17 @@ function SceneAnnotations({
           E₂ / {labels.equilibria.stableButWorse}
         </text>
         <g className={styles.blockedMove}>
-          <path d={connectorPath(routeStart, routeEnd, 0, 0, -18)} />
+          {roughConnectors ? (
+            <RoughConnector
+              arrow
+              className={styles.roughAnnotationPath}
+              geometry={routedConnectorGeometry(routeStart, routeEnd, 0, 0, 2)}
+              pattern={NOTEBOOK_CONNECTION_PATTERNS.dashLong}
+              seedIndex={2}
+            />
+          ) : (
+            <path d={connectorPath(routeStart, routeEnd, 0, 0, -18)} />
+          )}
           <path
             d={`M${routeMiddle - 9} ${routeY - 3}L${routeMiddle + 9} ${
               routeY + 15
@@ -587,9 +1040,14 @@ function SceneAnnotations({
 export default function NotebookNarrativeWorld({
   activeState,
   step,
-}: VisualEssayRendererProps<ThesisState>) {
-  const targetPositions = useMemo(() => layoutFor(activeState), [activeState]);
-  const [positions, setPositions] = useState(() => layoutFor(activeState));
+  connectorGrammar = 'drafted',
+}: NotebookNarrativeWorldProps) {
+  const roughConnectors = connectorGrammar === 'notebook-v1';
+  const targetPositions = useMemo(
+    () => layoutFor(activeState, roughConnectors),
+    [activeState, roughConnectors]
+  );
+  const [positions, setPositions] = useState(() => layoutFor(activeState, roughConnectors));
   const positionsRef = useRef(positions);
   const [selectedNode, setSelectedNode] = useState<number | null>(null);
   const [cascadePhase, setCascadePhase] = useState(4);
@@ -671,10 +1129,10 @@ export default function NotebookNarrativeWorld({
   }
 
   return (
-    <div className={styles.root} data-scene={activeState}>
+    <div className={styles.root} data-connector-grammar={connectorGrammar} data-scene={activeState}>
       <svg
         className={styles.svg}
-        viewBox={`0 0 ${W} ${H}`}
+        viewBox={`0 0 ${W} ${roughConnectors ? H : LEGACY_H}`}
         role="img"
         aria-label={`${step.stageLabel}: ${step.headline}`}
       >
@@ -713,17 +1171,19 @@ export default function NotebookNarrativeWorld({
           >
             <path d="M0 0V7" className={styles.hatchLine} />
           </pattern>
-          <marker
-            id="narrative-arrow"
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto"
-          >
-            <path d="M0 0L10 5L0 10" className={styles.arrowHead} />
-          </marker>
+          {!roughConnectors && (
+            <marker
+              id="narrative-arrow"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
+            >
+              <path d="M0 0L10 5L0 10" className={styles.arrowHead} />
+            </marker>
+          )}
         </defs>
 
         {activeState === 'equilibria' && (
@@ -744,7 +1204,10 @@ export default function NotebookNarrativeWorld({
 
         <FieldFrames state={activeState} />
 
-        <g className={styles.edges} aria-hidden="true">
+        <g
+          className={`${styles.edges} ${roughConnectors ? styles.roughEdges : ''}`}
+          aria-hidden="true"
+        >
           {LINKS.map((link, index) => {
             const sourceId = endpointId(link.source);
             const targetId = endpointId(link.target);
@@ -752,17 +1215,39 @@ export default function NotebookNarrativeWorld({
             const target = positions.get(targetId)!;
             const sourceDrawing = drawings.get(sourceId)!;
             const targetDrawing = drawings.get(targetId)!;
-            const visible = edgeVisible(link, activeState, index);
+            const visible =
+              edgeVisible(link, activeState, index) ||
+              (roughConnectors && activeState === 'silos' && link.crossField && index % 7 === 1);
             const disrupted =
               (activeState === 'defection' || activeState === 'equilibria') &&
               (activeDefectors.has(sourceId) || activeDefectors.has(targetId));
             const possible = activeState === 'uncertainty' && index % 4 === 1;
+            const className = `${!visible ? styles.hiddenEdge : ''} ${
+              disrupted ? styles.disruptedEdge : ''
+            } ${possible ? styles.possibleEdge : ''}`;
+            if (roughConnectors) {
+              const directed = link.crossField || disrupted || possible;
+              return (
+                <RoughConnector
+                  arrow={directed}
+                  className={className}
+                  geometry={routedConnectorGeometry(
+                    source,
+                    target,
+                    nodeRadius(sourceDrawing, true) + 2,
+                    nodeRadius(targetDrawing, true) + (directed ? 10 : 2),
+                    index
+                  )}
+                  key={`${sourceId}-${targetId}-${index}`}
+                  pattern={edgePattern(activeState, link, disrupted, possible)}
+                  seedIndex={index}
+                />
+              );
+            }
             return (
               <path
                 key={`${sourceId}-${targetId}-${index}`}
-                className={`${!visible ? styles.hiddenEdge : ''} ${
-                  disrupted ? styles.disruptedEdge : ''
-                } ${possible ? styles.possibleEdge : ''}`}
+                className={className}
                 d={draftedEdge(
                   source,
                   target,
@@ -789,8 +1274,26 @@ export default function NotebookNarrativeWorld({
               const pair = closestCrossFieldPair(positions, sourceField, targetField);
               const source = positions.get(pair.source.id)!;
               const target = positions.get(pair.target.id)!;
-              const sourceRadius = drawings.get(pair.source.id)!.radius;
-              const targetRadius = drawings.get(pair.target.id)!.radius;
+              const sourceRadius = nodeRadius(drawings.get(pair.source.id)!, roughConnectors);
+              const targetRadius = nodeRadius(drawings.get(pair.target.id)!, roughConnectors);
+              if (roughConnectors) {
+                return (
+                  <RoughConnector
+                    arrow
+                    className={styles.crossFieldDiscovery}
+                    geometry={routedConnectorGeometry(
+                      source,
+                      target,
+                      sourceRadius + 2,
+                      targetRadius + 10,
+                      80 + index
+                    )}
+                    key={`${sourceField}-${targetField}`}
+                    pattern={NOTEBOOK_CONNECTION_PATTERNS.dashShort}
+                    seedIndex={index}
+                  />
+                );
+              }
               return (
                 <path
                   key={`${sourceField}-${targetField}`}
@@ -808,6 +1311,25 @@ export default function NotebookNarrativeWorld({
             })}
             {[8, 19].map((nodeId, index) => {
               const target = positions.get(nodeId)!;
+              if (roughConnectors) {
+                return (
+                  <RoughConnector
+                    arrow
+                    className={styles.equilibriaConnection}
+                    geometry={routedConnectorGeometry(
+                      { x: 460, y: 350 },
+                      target,
+                      27,
+                      nodeRadius(drawings.get(nodeId)!, true) + 10,
+                      90 + index
+                    )}
+                    key={`eq-${nodeId}`}
+                    pattern={NOTEBOOK_CONNECTION_PATTERNS.solid}
+                    seedIndex={index + 1}
+                    strokeWidth={1.25}
+                  />
+                );
+              }
               return (
                 <path
                   key={`eq-${nodeId}`}
@@ -842,7 +1364,9 @@ export default function NotebookNarrativeWorld({
                 className={`${styles.node} ${styles[status]} ${styles[`field${node.field}`]} ${
                   cascadeHidden ? styles.preCascade : ''
                 } ${dimmed ? styles.dimmed : ''}`}
-                transform={`translate(${point.x} ${point.y})`}
+                transform={`translate(${point.x} ${point.y})${
+                  roughConnectors ? ` scale(${NODE_SCALE})` : ''
+                }`}
                 role="button"
                 tabIndex={0}
                 aria-label={`Inspect ${node.kind} node ${node.id + 1}`}
@@ -875,15 +1399,25 @@ export default function NotebookNarrativeWorld({
           })}
         </g>
 
-        <SceneAnnotations state={activeState} positions={positions} />
-        <StrategicStateLegend state={activeState} />
-        <ShapeLegend />
+        <SceneAnnotations
+          roughConnectors={roughConnectors}
+          state={activeState}
+          positions={positions}
+        />
+        {roughConnectors ? (
+          <UnifiedLegend state={activeState} />
+        ) : (
+          <>
+            <LegacyStrategicStateLegend state={activeState} />
+            <LegacyShapeLegend />
+          </>
+        )}
 
         <g className={styles.mathLayer}>
-          <text x="104" y="674">
+          <text x="104" y={roughConnectors ? 738 : 674}>
             {note.equation}
           </text>
-          <text className={styles.marginNote} x="535" y="674">
+          <text className={styles.marginNote} x="535" y={roughConnectors ? 738 : 674}>
             {note.note}
           </text>
         </g>

@@ -1,13 +1,15 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@components/layout/PageHeader.astro';
-import ThesisPrototype from '@components/explainer-prototype/ThesisPrototype';
+import DiagramGrammarThesis from '@components/explainer-prototype/DiagramGrammarThesis';
 import { explainerContent } from '@content/explainer';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
 ---
 
 <Layout
@@ -19,5 +21,5 @@ import '@fontsource/ibm-plex-mono/500.css';
   }}
 >
   <PageHeader variant="landing" {...explainerContent.header} />
-  <ThesisPrototype showHeader={false} client:load />
+  <DiagramGrammarThesis client:load />
 </Layout>

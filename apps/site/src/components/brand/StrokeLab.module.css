@@ -1,0 +1,469 @@
+.lab {
+  --lab-ink: #1d2422;
+  --lab-paper: #f3efe4;
+  --lab-blue: #164b78;
+  --lab-red: #a34836;
+  --lab-rule: color-mix(in srgb, var(--lab-ink) 22%, transparent);
+  min-height: 100vh;
+  padding: clamp(1.25rem, 3vw, 3rem);
+  color: var(--lab-ink);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 3.4rem,
+      color-mix(in srgb, var(--lab-red) 17%, transparent) 3.4rem 3.48rem,
+      transparent 3.48rem
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 31px,
+      color-mix(in srgb, var(--lab-blue) 6%, transparent) 31px 32px
+    ),
+    var(--lab-paper);
+}
+
+.header,
+.shortlist,
+.profile,
+.footer {
+  width: min(1500px, calc(100% - clamp(1rem, 4vw, 4rem)));
+  margin-inline: auto;
+}
+
+.header nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--lab-ink);
+  padding-top: 0.7rem;
+  font:
+    0.68rem/1.4 'IBM Plex Mono',
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+}
+
+.header nav a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+}
+
+.headerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+  gap: clamp(2rem, 8vw, 8rem);
+  align-items: end;
+  padding-block: clamp(3rem, 8vw, 8rem) clamp(2.5rem, 5vw, 5rem);
+}
+
+.eyebrow,
+.profileHeader > span,
+.shortlist span,
+.footer {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--lab-red);
+  font-size: 0.68rem;
+}
+
+.header h1 {
+  max-width: 13ch;
+  margin: 0;
+  font:
+    500 clamp(3rem, 7vw, 7rem)/0.9 'Space Grotesk',
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.065em;
+}
+
+.intro {
+  max-width: 42rem;
+  font-size: clamp(1rem, 1.4vw, 1.22rem);
+  line-height: 1.7;
+}
+
+.intro p {
+  margin: 0;
+}
+
+.intro p + p {
+  margin-top: 1rem;
+  font-family: 'Kalam', cursive;
+  font-size: 1.1em;
+}
+
+.shortlist {
+  position: sticky;
+  z-index: 5;
+  top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid var(--lab-ink);
+  padding: 0.85rem 1rem;
+  background: color-mix(in srgb, var(--lab-paper) 94%, transparent);
+  box-shadow: 4px 5px 0 color-mix(in srgb, var(--lab-blue) 13%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.shortlist span {
+  font-size: 0.65rem;
+}
+
+.shortlist p {
+  max-width: 78vw;
+  margin: 0.35rem 0 0;
+  overflow: hidden;
+  font:
+    0.85rem/1.35 'Kalam',
+    cursive;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortlistActions {
+  display: flex;
+  flex: none;
+  gap: 0.5rem;
+}
+
+.shortlist button {
+  border: 1px solid var(--lab-ink);
+  padding: 0.55rem 0.75rem;
+  color: inherit;
+  background: var(--lab-paper);
+  font:
+    0.65rem 'IBM Plex Mono',
+    ui-monospace,
+    monospace;
+  cursor: pointer;
+}
+
+.shortlist button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.profile {
+  padding-block: clamp(4rem, 8vw, 8rem);
+}
+
+.profile + .profile {
+  border-top: 1px solid var(--lab-ink);
+}
+
+.patternStudy {
+  padding-top: clamp(4rem, 7vw, 7rem);
+}
+
+.patternList {
+  display: grid;
+  gap: clamp(4rem, 7vw, 7rem);
+}
+
+.patternGroup > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: baseline;
+  border-top: 1px solid var(--lab-ink);
+  padding: 0.85rem 0 1.2rem;
+}
+
+.patternGroup > header h3 {
+  margin: 0;
+  font:
+    700 1.5rem/1 'Kalam',
+    cursive;
+}
+
+.patternGroup > header p {
+  margin: 0;
+  font:
+    0.62rem/1.5 'IBM Plex Mono',
+    ui-monospace,
+    monospace;
+  text-align: right;
+  opacity: 0.65;
+}
+
+.patternGroup > header span {
+  color: var(--lab-red);
+}
+
+.profileHeader {
+  display: grid;
+  grid-template-columns: 9rem minmax(14rem, 0.65fr) minmax(18rem, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+
+.profileHeader > span {
+  padding-top: 0.55rem;
+  font-size: 0.62rem;
+}
+
+.profileHeader h2 {
+  margin: 0;
+  font:
+    500 clamp(2rem, 4vw, 4.3rem)/0.94 'Space Grotesk',
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.055em;
+}
+
+.profileHeader > p {
+  max-width: 43rem;
+  margin: 0.3rem 0 0;
+  font:
+    1.12rem/1.55 'Kalam',
+    cursive;
+}
+
+.profileHeader dl {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 2rem;
+  margin: 0;
+  border-top: 1px solid var(--lab-rule);
+  padding-top: 0.8rem;
+}
+
+.profileHeader dl div {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.profileHeader dt,
+.profileHeader dd {
+  margin: 0;
+  font:
+    0.65rem 'IBM Plex Mono',
+    ui-monospace,
+    monospace;
+}
+
+.profileHeader dt {
+  opacity: 0.55;
+}
+
+.geometryList {
+  border-top: 1px solid var(--lab-ink);
+}
+
+.geometry {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  border-bottom: 1px solid var(--lab-rule);
+  padding-block: 1.1rem;
+}
+
+.geometry > header {
+  align-self: center;
+}
+
+.geometry > header span,
+.geometry > header small {
+  display: block;
+}
+
+.geometry > header span {
+  font:
+    700 1.1rem/1.1 'Kalam',
+    cursive;
+}
+
+.geometry > header small {
+  margin-top: 0.3rem;
+  font:
+    0.62rem/1.4 'IBM Plex Mono',
+    ui-monospace,
+    monospace;
+  opacity: 0.58;
+}
+
+.seedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.specimen {
+  position: relative;
+  min-width: 0;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.3rem 1.5rem;
+  color: var(--lab-ink);
+  background: color-mix(in srgb, var(--lab-paper) 82%, white);
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    transform 120ms ease;
+}
+
+.specimen:hover {
+  border-color: color-mix(in srgb, var(--lab-blue) 42%, transparent);
+  transform: translateY(-1px);
+}
+
+.specimen:focus-visible {
+  outline: 2px solid var(--lab-blue);
+  outline-offset: 2px;
+}
+
+.specimen[aria-pressed='true'] {
+  border-color: var(--lab-blue);
+  background: color-mix(in srgb, var(--lab-blue) 8%, var(--lab-paper));
+}
+
+.specimen svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.specimen svg g {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.seedLabel,
+.specimenId,
+.pickMark {
+  position: absolute;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.53rem;
+  line-height: 1;
+}
+
+.seedLabel {
+  top: 0.5rem;
+  left: 0.55rem;
+  opacity: 0.45;
+}
+
+.specimenId {
+  right: 0.5rem;
+  bottom: 0.48rem;
+  left: 0.5rem;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+.pickMark {
+  top: 0.5rem;
+  right: 0.55rem;
+  color: var(--lab-blue);
+  opacity: 0;
+}
+
+.specimen:hover .pickMark,
+.specimen:focus-visible .pickMark,
+.specimen[aria-pressed='true'] .pickMark {
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-top: 1px solid var(--lab-ink);
+  padding-block: 1rem 4rem;
+  font-size: 0.63rem;
+  line-height: 1.5;
+}
+
+.footer p {
+  max-width: 62ch;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .lab {
+    padding-inline: 0.75rem;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 31px,
+        color-mix(in srgb, var(--lab-blue) 6%, transparent) 31px 32px
+      ),
+      var(--lab-paper);
+  }
+
+  .header,
+  .shortlist,
+  .profile,
+  .footer {
+    width: calc(100% - 1rem);
+  }
+
+  .headerGrid,
+  .profileHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .profileHeader dl {
+    grid-column: auto;
+  }
+
+  .geometry {
+    grid-template-columns: 1fr;
+  }
+
+  .patternGroup > header {
+    display: block;
+  }
+
+  .patternGroup > header p {
+    margin-top: 0.45rem;
+    text-align: left;
+  }
+
+  .geometry > header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .geometry > header small {
+    margin: 0;
+    text-align: right;
+  }
+
+  .seedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .shortlist {
+    align-items: flex-start;
+  }
+
+  .shortlist p {
+    max-width: 50vw;
+  }
+
+  .shortlistActions {
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}

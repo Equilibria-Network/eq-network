@@ -29,6 +29,8 @@ docs/
 
 ## Contents
 
+- **Diagram policy:** [`../DIAGRAMS.md`](../DIAGRAMS.md) — the canonical visual, semantic, interaction,
+  motion, and verification contract for diagrams in the site and playground.
 - **ADR:** [`adr/0001-monorepo-topology.md`](adr/0001-monorepo-topology.md) — the pnpm-workspace
   decomposition into `apps/site`, `apps/playground`, and `packages/`; and
   [`adr/0002-per-app-docs-layout.md`](adr/0002-per-app-docs-layout.md) — why docs are scoped per app; and

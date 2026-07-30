@@ -115,8 +115,6 @@ const scenes = [
     anchors: [
       'local payoff ↑',
       'collective welfare ↓',
-      'green / cooperate',
-      'red / defect',
       'uᵢ(D, s₋ᵢ) > uᵢ(C, s₋ᵢ)',
       'defection pays more, given everyone else',
     ],
@@ -127,8 +125,6 @@ const scenes = [
       'E₁ / better for all',
       'E₂ / stable but worse',
       'no agent can move first',
-      'green / cooperate',
-      'red / defect',
       's* ∈ NE ∧ W(s*) < W(ŝ)',
       'stable can still be worse for everyone',
     ],
@@ -137,7 +133,6 @@ const scenes = [
     scene: 'uncertainty',
     anchors: [
       'Which future becomes stable?',
-      'amber / unresolved',
       'P(Gₜ₊₁ | Gₜ, π) = ?',
       'the next network state remains unresolved',
     ],
@@ -204,17 +199,25 @@ try {
       const fills = [...root.querySelectorAll('[role="button"] > path:first-child')]
         .map((node) => getComputedStyle(node).fill);
       const payoffPath = root.querySelector('[data-annotation="local-payoff"]');
+      const connectionLegend = svg.querySelector('[data-legend="connection-pattern"]');
+      const connectorGrammar = root.dataset.connectorGrammar;
+      const connectionPatterns = [...root.querySelectorAll('[data-legend="connection-pattern"] path')]
+        .map((path) => getComputedStyle(path).strokeDasharray);
       return {
         scene: root.dataset.scene,
+        connectorGrammar,
         text: svg.textContent.replace(/\\s+/g, ' ').trim(),
         svgLabel: svg.getAttribute('aria-label'),
         title: svg.querySelector('title')?.textContent,
         description: svg.querySelector('desc')?.textContent,
         controls: root.querySelectorAll('[role="button"]').length,
+        keyboardControls: root.querySelectorAll('[role="button"][tabindex="0"]').length,
         uniqueNodeStrokes: [...new Set(strokes)].length,
         uniqueNodeFills: [...new Set(fills)].length,
         shapeLegend: Boolean(svg.querySelector('[data-legend="actor-type"]')),
         strategicLegend: Boolean(svg.querySelector('[data-legend="strategic-state"]')),
+        connectionLegend: Boolean(connectionLegend),
+        connectionPatterns: [...new Set(connectionPatterns)],
         payoffConnectorIsCubic: payoffPath?.getAttribute('d')?.includes('C') ?? null,
         payoffConnectorLength: payoffPath?.getTotalLength() ?? null
       };
@@ -227,9 +230,19 @@ try {
     assert.ok(observation.title);
     assert.ok(observation.description);
     assert.equal(observation.controls, 20);
+    assert.equal(observation.keyboardControls, 20);
     assert.equal(observation.shapeLegend, true);
+    assert.equal(observation.connectionLegend, observation.connectorGrammar === 'notebook-v1');
+    if (observation.connectorGrammar === 'notebook-v1') {
+      assert.ok(observation.connectionPatterns.length >= 2);
+    }
     assert.ok(observation.uniqueNodeFills >= 3);
     assert.equal(observation.strategicLegend, index >= 1 && index <= 3);
+    if (observation.strategicLegend) {
+      assert.ok(observation.text.includes('cooperate'));
+      assert.ok(observation.text.includes('defect'));
+    }
+    if (scene === 'uncertainty') assert.ok(observation.text.includes('unresolved'));
     assert.ok(observation.text.includes('human / open'));
     assert.ok(observation.text.includes('AI agent / light hatch'));
     assert.ok(observation.text.includes('institution / cross-hatch'));
@@ -239,6 +252,53 @@ try {
     }
     if (index > 0) assert.ok(observation.uniqueNodeStrokes >= 2);
     observations.push(observation);
+
+    if (index === 0) {
+      const nodeCenter = await evaluate(`(() => {
+        const bounds = document
+          .querySelector('[data-scene="society"] [role="button"]')
+          .getBoundingClientRect();
+        return { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 };
+      })()`);
+      await command('Input.dispatchMouseEvent', {
+        type: 'mousePressed',
+        x: nodeCenter.x,
+        y: nodeCenter.y,
+        button: 'left',
+        clickCount: 1,
+      });
+      await command('Input.dispatchMouseEvent', {
+        type: 'mouseReleased',
+        x: nodeCenter.x,
+        y: nodeCenter.y,
+        button: 'left',
+        clickCount: 1,
+      });
+      await sleep(50);
+      const selection = await evaluate(`(() => {
+        const firstNode = document.querySelector('[data-scene="society"] [role="button"]');
+        return {
+          pressed: firstNode.getAttribute('aria-pressed'),
+          selectionText: document.querySelector('[data-scene="society"] svg').textContent
+        };
+      })()`);
+      assert.equal(selection.pressed, 'true');
+      assert.ok(selection.selectionText.includes('select again to release'));
+      await command('Input.dispatchMouseEvent', {
+        type: 'mousePressed',
+        x: nodeCenter.x,
+        y: nodeCenter.y,
+        button: 'left',
+        clickCount: 1,
+      });
+      await command('Input.dispatchMouseEvent', {
+        type: 'mouseReleased',
+        x: nodeCenter.x,
+        y: nodeCenter.y,
+        button: 'left',
+        clickCount: 1,
+      });
+    }
 
     if (screenshotDir) {
       const capture = await command('Page.captureScreenshot', { format: 'png' });
@@ -277,6 +337,13 @@ try {
   assert.equal(mobile.documentWidth, 390);
   assert.equal(mobile.scene, 'bridge');
   assert.equal(mobile.svgVisible, true);
+  if (screenshotDir) {
+    const capture = await command('Page.captureScreenshot', { format: 'png' });
+    await writeFile(
+      join(screenshotDir, 'mobile-step-7-bridge.png'),
+      Buffer.from(capture.data, 'base64')
+    );
+  }
   assert.deepEqual(browserErrors, []);
 
   process.stdout.write(
