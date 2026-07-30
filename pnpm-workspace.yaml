@@ -4,3 +4,7 @@ packages:
 allowBuilds:
   esbuild: true
   sharp: true
+overrides:
+  'js-yaml@<4.3.0': 4.3.0
+  'picomatch@<2.3.2': 2.3.2
+  'rollup@<4.59.0': 4.59.0
