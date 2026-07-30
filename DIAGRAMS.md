@@ -8,7 +8,7 @@ contract for diagram appearance, semantics, interaction, and verification.
 Brand Prototype **Fig. 02 / Canonical Graph Grammar** at `/brand/prototype` is the visual reference for
 this policy. Its shared implementation is
 [`apps/site/src/components/explainer-prototype/DagGraphPrototype.tsx`](apps/site/src/components/explainer-prototype/DagGraphPrototype.tsx).
-The complete seven-state application of the grammar lives at `/explainer/prototype` in
+The complete seven-state application of the grammar lives at `/thesis` in
 [`apps/site/src/components/explainer-prototype/DiagramGrammarThesis.tsx`](apps/site/src/components/explainer-prototype/DiagramGrammarThesis.tsx).
 The two examples share named drawing tokens and policy, not a domain-specific graph component.
 

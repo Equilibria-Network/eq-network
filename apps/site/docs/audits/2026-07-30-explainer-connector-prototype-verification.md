@@ -5,6 +5,9 @@
 - Comparison route: canonical `/explainer`
 - Evidence: seven-state browser regression, desktop screenshots, mobile overflow check, static build
 
+> Promotion note: the owner subsequently promoted this renderer to canonical `/thesis`. The two former
+> explainer URLs now redirect there; this audit retains the route names used when its evidence was gathered.
+
 ## Outcome
 
 The prototype now renders the complete thesis rather than an isolated specimen. It consumes the same

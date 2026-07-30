@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const targetUrl = process.env.EXPLAINER_URL || 'http://127.0.0.1:4321/explainer/';
+const targetUrl = process.env.EXPLAINER_URL || 'http://127.0.0.1:4321/thesis/';
 const chromeBin = process.env.CHROME_BIN || '/usr/bin/google-chrome';
 const screenshotDir = process.env.EXPLAINER_SCREENSHOT_DIR;
 const debugPort = 9341;
@@ -175,8 +175,9 @@ try {
   await command('Log.enable');
   await waitFor(
     `document.querySelectorAll('[data-step-index]').length === 7 &&
-      Boolean(document.querySelector('[data-scene="society"]'))`,
-    'The seven-state notebook explainer did not hydrate.'
+      Boolean(document.querySelector('[data-scene="society"]')) &&
+      !document.querySelector('[data-scene="society"]').closest('astro-island')?.hasAttribute('ssr')`,
+    'The seven-state notebook thesis did not hydrate.'
   );
 
   if (screenshotDir) await mkdir(screenshotDir, { recursive: true });
@@ -315,14 +316,25 @@ try {
     deviceScaleFactor: 1,
     mobile: true,
   });
+  await evaluate(`window.__thesisSmokeReloadMarker = 'pending'`);
   await command('Page.reload', { ignoreCache: true });
   await waitFor(
-    `Boolean(document.querySelector('[data-scene="society"]'))`,
-    'The mobile explainer did not hydrate.'
+    `window.__thesisSmokeReloadMarker !== 'pending' &&
+      Boolean(document.querySelector('[data-scene]')) &&
+      !document.querySelector('[data-scene]').closest('astro-island')?.hasAttribute('ssr')`,
+    'The mobile thesis did not hydrate.'
   );
   await evaluate(
-    `document.querySelector('#step-7').scrollIntoView({ behavior: 'auto', block: 'start' })`
+    `document.querySelector('#step-1').scrollIntoView({ behavior: 'auto', block: 'center' })`
   );
+  await waitFor(
+    `Boolean(document.querySelector('[data-scene="society"]'))`,
+    'The mobile society state did not become active.'
+  );
+  await evaluate(
+    `document.querySelector('#step-7').scrollIntoView({ behavior: 'auto', block: 'center' })`
+  );
+  await evaluate(`window.scrollBy({ top: 64, behavior: 'auto' })`);
   await waitFor(
     `Boolean(document.querySelector('[data-scene="bridge"]'))`,
     'The mobile bridge state did not become active.'

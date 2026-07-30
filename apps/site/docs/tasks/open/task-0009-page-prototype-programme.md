@@ -6,7 +6,7 @@
   [`../../adr/0007-visual-essay-system.md`](../../adr/0007-visual-essay-system.md),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md),
   [`task-0002-visual-language-alignment.md`](task-0002-visual-language-alignment.md)
-- Status: in progress — shared editorial header/sidebar and visual-essay shell exist; Explainer promoted
+- Status: in progress — shared editorial header/sidebar and visual-essay shell exist; Thesis promoted
 - Owner: unassigned
 - Priority: now (programme)
 
@@ -96,11 +96,9 @@ graph accessibility and asset-loading conventions.
 
 ### Already proved
 
-- [x] **Explainer / Thesis** — `/explainer/prototype` uses the typed `VisualEssay` contract and the persistent
-      world-model renderer. Owner approved promotion to `/explainer` on 2026-07-29, then promoted the clean
-      scientific-notebook renderer with seven-state narrative parity on 2026-07-30.
-  - `/explainer/notebook-prototype` reuses the same essay document, shell, and persistent 20-node D3 model
-    as the no-index comparison route. Canonical and prototype now share the clean narrative renderer.
+- [x] **Thesis** — the approved connector-grammar renderer now uses the typed `VisualEssay` contract and
+      persistent 20-node world model at canonical `/thesis`. The earlier `/explainer` comparison and
+      prototype URLs redirect to `/thesis`.
 - [x] **Lab playground** — the owner selected an integrated app rather than a duplicate prototype route.
       `apps/playground` supplies a stable React package export mounted at canonical, indexable
       `/playground` inside site chrome; the former Lab route redirects. See the

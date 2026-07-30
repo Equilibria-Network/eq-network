@@ -68,7 +68,7 @@ export const siteContent: SiteContent = {
     toggleMenuLabel: 'Toggle menu',
     links: [
       { href: '/', label: 'Home' },
-      { href: '/explainer', label: 'Thesis' },
+      { href: '/thesis', label: 'Thesis' },
       { href: '/roadmap', label: 'Roadmap' },
       { href: '/playground/', label: 'Playground' },
       { href: '/about', label: 'About' },

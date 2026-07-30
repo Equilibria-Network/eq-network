@@ -12,14 +12,7 @@ import '@fontsource/kalam/400.css';
 import '@fontsource/kalam/700.css';
 ---
 
-<Layout
-  seo={{
-    ...explainerContent.seo,
-    title: `Prototype — ${explainerContent.seo.title}`,
-    canonicalPath: '/explainer/prototype',
-    noindex: true,
-  }}
->
+<Layout seo={explainerContent.seo}>
   <PageHeader variant="landing" {...explainerContent.header} />
   <DiagramGrammarThesis client:load />
 </Layout>

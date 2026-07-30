@@ -83,7 +83,7 @@ reference. Where a token below is not yet in `apps/site/src/styles/tailwind.css`
 
 ## Scientific-notebook diagrams
 
-The canonical `/explainer` is the current executable reference for diagrams. Its grammar is:
+The canonical `/thesis` is the current executable reference for diagrams. Its grammar is:
 
 - deterministic D3 layout separated from deterministic hand-drafted SVG paths;
 - crisp Space Grotesk/IBM Plex Mono interface text, with Kalam reserved for equations, hypotheses, and

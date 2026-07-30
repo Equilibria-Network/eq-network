@@ -68,7 +68,8 @@ Proposed per-page sub-tasks (to be created as `task-0002a…` when Stage 1 lands
       promoted it on 2026-07-30 with narrative parity against the deployed seven-diagram sequence. The
       follow-up refinement uses the document scroll as the sole state selector, expands the flat drawing
       field, simplifies the persistent network, and treats Equilibria as one bridging node in a
-      distributed translation mesh.
+      distributed translation mesh. The approved connector-grammar refinement was subsequently promoted
+      at canonical `/thesis`; former explainer routes redirect there.
 - [ ] **Roadmap redesign** — 90% aligned; decide whether it adopts the section-header underline motif and the
       canonical hero, and polish.
 - [ ] **Lab redesign** — decide whether `LabHero` conforms to or intentionally varies the interior hero; align

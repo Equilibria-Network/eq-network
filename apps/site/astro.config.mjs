@@ -7,11 +7,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   redirects: {
     '/lab/playground': '/playground',
+    '/explainer': '/thesis',
+    '/explainer/prototype': '/thesis',
+    '/explainer/notebook-prototype': '/thesis',
   },
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.endsWith('/404/') && !page.includes('/explainer/prototype/'),
+      filter: (page) => !page.endsWith('/404/') && !page.includes('/explainer/'),
     }),
   ],
   site: 'https://eq-network.org',

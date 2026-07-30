@@ -4,6 +4,19 @@ All notable changes to this site are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/). This is a continuously-deployed static site, so
 entries are dated rather than semver-tagged.
 
+## [2026-07-30] — Thesis route and diagram-grammar promotion
+
+### Changed
+
+- Promoted the approved RoughJS connector-grammar renderer from its no-index comparison route to the
+  canonical public thesis page.
+- Renamed the public route from `/explainer` to `/thesis` so the URL matches the navigation and page
+  language.
+- Added static compatibility redirects from `/explainer`, `/explainer/prototype`, and
+  `/explainer/notebook-prototype` to `/thesis`.
+- Updated navigation, canonical metadata, sitemap filtering, browser-smoke defaults, and current
+  documentation to use `/thesis`.
+
 ## [2026-07-30] — Scientific-notebook explainer
 
 ### Changed

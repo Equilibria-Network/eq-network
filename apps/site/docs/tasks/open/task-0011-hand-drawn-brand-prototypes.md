@@ -6,7 +6,7 @@
   [`../open/task-0002-visual-language-alignment.md`](../open/task-0002-visual-language-alignment.md),
   [`../open/task-0009-page-prototype-programme.md`](../open/task-0009-page-prototype-programme.md),
   [`../../context/10-visual-language.md`](../../context/10-visual-language.md)
-- Status: in progress — clean scientific-notebook diagram system promoted to `/explainer` 2026-07-30;
+- Status: in progress — approved scientific-notebook diagram system promoted to `/thesis` 2026-07-30;
   broader site adoption remains staged
 - Owner: unassigned
 - Priority: before task-0010
@@ -45,6 +45,8 @@ Kalam mathematical notation, diary-like marginalia, graphite arrows, and pencil-
       and inline SVG marks
 - [x] Clean study promoted to canonical `/explainer` after restoring the seven visual meanings of the
       deployed page rather than reusing one generic network composition for every step
+- [x] Approved connector-grammar prototype promoted to canonical `/thesis`; former `/explainer` and
+      prototype URLs retain compatibility redirects
 - [x] Shared `VisualEssay` figure region flattened: the D3 boundary remains, while visible frames,
       registration marks, and figure/status chrome are removed
 - [x] Diagram semantics recorded in the visual-language contract and centralized as `--diagram-*` tokens;
@@ -73,7 +75,7 @@ Kalam mathematical notation, diary-like marginalia, graphite arrows, and pencil-
 - [x] Solid, long-dash, short-dash, open-dot, and dense-dot patterns approved visually; non-solid
       meanings remain local to each diagram and must appear in its legend.
 - [x] Shared `notebook-connector-medium-v1` token consumed by the stroke lab and canonical DAG.
-- [x] Recompose `/explainer/prototype` as the complete seven-step thesis story using the approved
+- [x] Recompose the complete seven-step thesis story using the approved
       connector grammar and the existing typed `VisualEssay` document.
 - [x] Match the canonical DAG's desktop mark scale and consolidate shape/fill, color/state, and
       connection keys into one lower-left legend row.
@@ -104,7 +106,7 @@ The prototype must demonstrate:
   headings, prose, navigation, and controls retain the standard type system.
 - Keep live text, controls, the approved mark, and accessibility-critical structure crisp.
 - Promote only owner-approved, bounded treatments. The clean diagram palette and flat figure region were
-  approved for `/explainer` on 2026-07-30; representational illustration and broader page treatments
+  approved for `/thesis` on 2026-07-30; representational illustration and broader page treatments
   remain prototype-only.
 - Treat the current drawing module as an incubating API, not a universal graph framework. Preserve the seam
   between domain state, layout, drawing grammar, and marks; promote only the primitives shared by a second
@@ -130,7 +132,7 @@ Record the approved constraints in the visual-language contract before beginning
   [`../../audits/2026-07-30-explainer-verification.md`](../../audits/2026-07-30-explainer-verification.md).
 - Connector-grammar prototype evidence is recorded in
   [`../../audits/2026-07-30-explainer-connector-prototype-verification.md`](../../audits/2026-07-30-explainer-connector-prototype-verification.md).
-- The prototype route is `noindex, nofollow`.
+- Former comparison routes redirect to the canonical `/thesis` page.
 - `pnpm check` passes.
 - The selected system is visually reviewed at desktop and mobile sizes.
 - Keyboard, contrast, motion, hydration, and performance checks are documented.

@@ -174,6 +174,7 @@ export const explainerContent: ExplainerContent = {
     description:
       'See how incentives, institutions, and research connections shape cooperation in AI agent networks through a seven-state interactive model.',
     type: 'website',
+    canonicalPath: '/thesis',
     keywords: ['AI agent networks', 'collective intelligence', 'cooperative AI', 'AI governance'],
   },
   header: {

@@ -11,7 +11,7 @@ The site lives in `apps/site/` of a pnpm workspace (see [ADR-0001](../../../../d
 ## Stack
 
 - **Astro 7** with `output: 'static'` — the site generator and router. One file per route under `apps/site/src/pages/`.
-- **React 19** islands via `@astrojs/react` — used only for interactive pieces (the explainer, lab
+- **React 19** islands via `@astrojs/react` — used only for interactive pieces (the thesis, lab
   simulations, research graph, roadmap, and contact form). Most of the page is static HTML.
 - **Tailwind 4 + CSS Modules + global CSS** provide the shared styling foundation and page-specific
   composition.
@@ -28,7 +28,7 @@ file, not the component.
 ## Routes
 
 `apps/site/src/pages/` maps directly to URLs: `index.astro` (home), `about`, `products`, `research`,
-`roadmap`, `explainer`, `privacy`, `legal`, `brand`, `lab`, `playground`, prototypes, and a `404`.
+`roadmap`, `thesis`, `privacy`, `legal`, `brand`, `lab`, `playground`, prototypes, and a `404`.
 The primary navigation links to the playground. The legacy Products route still builds but is unlinked
 pending the retirement decision in
 [`task-0012`](../tasks/deferred/task-0012-retire-products-route.md).
@@ -45,13 +45,12 @@ The package has a standalone Vite harness for focused development, but productio
 [`playground architecture`](../../../playground/docs/architecture/scenario-platform.md) and the
 repo-wide [`integration ADR`](../../../../docs/adr/0003-integrated-playground-deployment.md).
 
-## The explainer
+## The thesis
 
-`/explainer` composes the shared `VisualEssay` shell with the clean scientific-notebook D3 renderer. The
-shell owns scroll activation, the flat sticky drawing region, narrative column, and mobile
-behavior. The renderer owns seven thesis-specific visual states and their transitions. Canonical and
-no-index notebook routes consume the same typed content and renderer; the deployed 2026-07-30 public page
-was used as the narrative-parity reference.
+`/thesis` composes the shared `VisualEssay` shell with the approved scientific-notebook D3 and RoughJS
+renderer. The shell owns scroll activation, the flat sticky drawing region, narrative column, and mobile
+behavior. The renderer owns seven thesis-specific visual states and their transitions. Legacy
+`/explainer` and prototype URLs redirect to this canonical route.
 
 ## How it ships
 

@@ -30,7 +30,7 @@ The shared authoring templates (ADR, task, lesson, handoff) live once at the rep
 - What needs doing: [`tasks/README.md`](tasks/README.md).
 - The audits: [`audits/2026-07-28-audit-0001-inherited-recon.md`](audits/2026-07-28-audit-0001-inherited-recon.md)
   (recon) and [`audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md`](audits/2026-07-28-audit-0002-code-hygiene-deep-dive.md)
-  (code-hygiene deep dive). The promoted explainer has a dedicated
+  (code-hygiene deep dive). The promoted thesis has a dedicated
   [`visual, semantic, and runtime verification`](audits/2026-07-30-explainer-verification.md).
 - The completed cleanup baseline:
   [`tasks/done/task-0001-pristine-baseline.md`](tasks/done/task-0001-pristine-baseline.md).
