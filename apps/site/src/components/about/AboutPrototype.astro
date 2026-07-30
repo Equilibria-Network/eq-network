@@ -187,7 +187,7 @@ const legalDetails = ['Legal name', 'Legal form']
               <div class="portraitField">
                 <span>PLATE {String(index + 1).padStart(2, '0')}</span>
                 <img
-                  src={member.image}
+                  src={member.prototypeImage ?? member.image}
                   alt={member.name}
                   width="360"
                   height="360"
@@ -229,7 +229,7 @@ const legalDetails = ['Legal name', 'Legal form']
               <div class="advisorImage">
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <img
-                  src={advisor.image}
+                  src={advisor.prototypeImage ?? advisor.image}
                   alt={advisor.name}
                   width="360"
                   height="360"

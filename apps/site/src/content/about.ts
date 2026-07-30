@@ -75,6 +75,7 @@ export interface Advisor {
   affiliation: string;
   bio: string;
   image: string;
+  prototypeImage?: string;
   website?: string;
 }
 
@@ -218,7 +219,8 @@ export const advisors: Advisor[] = [
     name: 'Aaron Halpern',
     affiliation: 'Intelligence Rising',
     bio: 'Co-founder of Equilibria Network and Chair of the Board. Now Game Design and Research Lead at Intelligence Rising, with a PhD from University College London and a background spanning interdisciplinary research, systems design, and early-stage technical startups.',
-    image: '/img/about/team/aaron.jpeg',
+    image: '/img/about/advisors/aaron-sketch.png',
+    prototypeImage: '/img/about/team/aaron.jpeg',
     website: 'https://www.linkedin.com/in/aaron-halpern-429197195/',
   },
   {
