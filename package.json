@@ -6,12 +6,15 @@
   "packageManager": "pnpm@11.17.0",
   "scripts": {
     "dev": "pnpm --filter @eq-network/site dev",
-    "build": "pnpm --filter @eq-network/site build",
+    "dev:playground": "pnpm --filter @eq-network/playground dev",
+    "build": "pnpm -r --if-present build",
     "preview": "pnpm --filter @eq-network/site preview",
+    "preview:playground": "pnpm --filter @eq-network/playground preview",
+    "test": "pnpm -r --if-present test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "check": "pnpm format:check && pnpm lint && pnpm build"
+    "check": "pnpm format:check && pnpm lint && pnpm test && pnpm build"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
