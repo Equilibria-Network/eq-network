@@ -9,7 +9,7 @@ export const playgroundPageContent: PlaygroundPageContent = {
   seo: {
     title: 'Collective Intelligence Playground — Equilibria Network',
     description:
-      'Stress-test coordination mechanisms in five interactive, browser-based agent models.',
+      'Stress-test coordination mechanisms in four interactive, browser-based agent models.',
     canonicalPath: '/playground',
   },
   header: {

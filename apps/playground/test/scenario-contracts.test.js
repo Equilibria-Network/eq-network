@@ -5,16 +5,21 @@ import { runScenario } from '../src/engine/run.ts';
 import { scenarios } from '../src/scenarios/registry.ts';
 
 const viewsByScenario = {
-  commons: new Set(['messages', 'compliance', 'pool']),
-  economy: new Set(['messages', 'shares']),
-  cultural: new Set(['system', 'faultline']),
-  political: new Set(['system', 'lorenz']),
   combined: new Set(['system']),
+  economy: new Set(['messages', 'shares']),
+  political: new Set(['system', 'lorenz']),
+  polity: new Set(['system', 'lorenz']),
 };
 
 test('every scenario exposes a complete UI and engine contract', () => {
-  assert.equal(scenarios.length, 5);
-  assert.equal(new Set(scenarios.map(({ id }) => id)).size, 5);
+  assert.equal(scenarios.length, 4);
+  assert.equal(new Set(scenarios.map(({ id }) => id)).size, 4);
+  // the coupled model leads and the three that follow are its three panels:
+  // money (WP1), attention (WP2), votes (WP3)
+  assert.deepEqual(
+    scenarios.map(({ id }) => id),
+    ['combined', 'economy', 'political', 'polity']
+  );
 
   for (const scenario of scenarios) {
     assert.ok(scenario.parameters.length > 0, `${scenario.id} needs controls`);

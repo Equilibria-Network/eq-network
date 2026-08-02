@@ -31,10 +31,10 @@ function PlayerIcon({ name }: { name: string }) {
 }
 
 function scenarioFromLocation(): ScenarioId {
-  if (typeof window === 'undefined') return 'commons';
+  if (typeof window === 'undefined') return 'combined';
   const queryId = new URLSearchParams(window.location.search).get('scenario');
   const id = (queryId ?? window.location.hash.replace('#', '')) as ScenarioId;
-  return id in scenarioById ? id : 'commons';
+  return id in scenarioById ? id : 'combined';
 }
 
 function initialParameters(): Record<ScenarioId, NumericParams> {
@@ -65,6 +65,13 @@ function initialSeeds(): Record<ScenarioId, number> {
   return values;
 }
 
+/** The papers' own parameter discipline, shown where the dial is. */
+const PARAM_TYPE_NOTE: Record<string, string> = {
+  anchored: 'Anchored: the magnitude comes from a cited source.',
+  tuned: 'Tuned for legibility: the magnitude is conventional, only the direction is claimed.',
+  swept: 'Arbitrary but swept: the value carries no claim; the paper varies it across an axis.',
+};
+
 function formatMetric(value: number, metric: MetricDefinition): string {
   if (!Number.isFinite(value)) return '—';
   if (metric.format === 'percent') return `${Math.round(value * 100)}%`;
@@ -81,7 +88,7 @@ function metricDelta(value: number, baseline: number, metric: MetricDefinition):
 }
 
 export default function App() {
-  const [scenarioId, setScenarioId] = useState<ScenarioId>('commons');
+  const [scenarioId, setScenarioId] = useState<ScenarioId>('combined');
   const definition = scenarioById[scenarioId];
   const [paramsByScenario, setParamsByScenario] =
     useState<Record<ScenarioId, NumericParams>>(initialParameters);
@@ -296,7 +303,17 @@ export default function App() {
             {controls.map((parameter) => (
               <div className={`parameter ${parameter.kind}`} key={parameter.key}>
                 <div className="parameter-copy">
-                  <label htmlFor={`${scenarioId}-${parameter.key}`}>{parameter.label}</label>
+                  <label htmlFor={`${scenarioId}-${parameter.key}`}>
+                    {parameter.label}
+                    {parameter.type && (
+                      <em
+                        className={`param-type ${parameter.type}`}
+                        title={PARAM_TYPE_NOTE[parameter.type]}
+                      >
+                        {parameter.type}
+                      </em>
+                    )}
+                  </label>
                   <span>{parameter.description}</span>
                 </div>
                 {parameter.kind === 'toggle' ? (
@@ -389,6 +406,17 @@ export default function App() {
       </div>
 
       <div className="configuration-notes">
+        <section>
+          <span>Specified by</span>
+          <p>
+            {definition.paper ?? (
+              <em className="unbacked">
+                No paper specifies this model. It is a library demonstration — the mechanisms are
+                real and tested, but no write-up fixes its parameters or defends its claims.
+              </em>
+            )}
+          </p>
+        </section>
         <section>
           <span>Evidence anchor</span>
           <p>{definition.evidence}</p>

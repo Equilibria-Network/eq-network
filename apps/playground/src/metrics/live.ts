@@ -1,26 +1,5 @@
 import type { MetricDefinition, ScenarioId, Trajectory } from '../engine/types';
 
-function gini(values: number[]): number {
-  if (!values.length) return 0;
-  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
-  if (mean <= 1e-12) return 0;
-  let difference = 0;
-  for (const left of values) {
-    for (const right of values) difference += Math.abs(left - right);
-  }
-  return difference / (2 * values.length * values.length * mean);
-}
-
-function cumulativeNodes(series: Float64Array, tick: number, nodeCount: number): number[] {
-  const totals = new Array<number>(nodeCount).fill(0);
-  for (let time = 0; time <= tick; time += 1) {
-    for (let node = 0; node < nodeCount; node += 1) {
-      totals[node] += series[time * nodeCount + node] ?? 0;
-    }
-  }
-  return totals;
-}
-
 function correlation(left: Float64Array, right: Float64Array, tick: number): number {
   const count = tick + 1;
   if (count < 2) return 0;
@@ -53,44 +32,11 @@ export function metricValueAt(
   requestedTick: number
 ): number {
   const tick = Math.max(0, Math.min(requestedTick, trajectory.meta.T - 1));
-  const N = trajectory.meta.N;
-
-  if (scenario === 'commons') {
-    if (metric.key === 'stock_pct') {
-      return trajectory.global.resource_level[tick] / Number(trajectory.meta.params.KCap);
-    }
-    if (metric.key === 'exercised_influence') {
-      return trajectory.global.exercised_influence?.[tick] ?? trajectory.meta.scalars[metric.key];
-    }
-    if (metric.key === 'compliance_rate') return trajectory.global.compliance[tick];
-    if (metric.key === 'harvest_gini') {
-      return gini(cumulativeNodes(trajectory.node.harvest, tick, N));
-    }
-  }
 
   if (scenario === 'economy') {
-    if (metric.key === 'labor_share') return trajectory.global.labor_share[tick];
-    if (metric.key === 'influence_now') {
-      return trajectory.global.influence_now?.[tick] ?? trajectory.meta.scalars[metric.key];
-    }
-    if (metric.key === 'human_income_share' || metric.key === 'income_gini') {
-      const income = cumulativeNodes(trajectory.node.last_reward, tick, N);
-      if (metric.key === 'income_gini') return gini(income);
-      const humanCount = Number(trajectory.meta.params.nHouseholds);
-      const human = income.slice(0, humanCount).reduce((sum, value) => sum + value, 0);
-      const total = income.reduce((sum, value) => sum + value, 0);
-      return total > 1e-12 ? human / total : 1;
-    }
-  }
-
-  if (scenario === 'cultural') {
-    if (metric.key === 'human_origin_share') return trajectory.global.human_share[tick];
-    if (metric.key === 'regime_code') {
-      const separated = trajectory.meta.scalars.fault_line >= 0.5 ? 2 : 0;
-      const displaced = trajectory.global.human_share[tick] < 0.5 ? 1 : 0;
-      return separated + displaced;
-    }
-    return trajectory.meta.scalars[metric.key];
+    // every WP1 readout is already a per-tick series on the trajectory
+    const seriesKey = metric.key === 'capability_end' ? 'capability' : metric.key;
+    return trajectory.global[seriesKey]?.[tick] ?? trajectory.meta.scalars[metric.key];
   }
 
   if (scenario === 'political') {
@@ -98,22 +44,31 @@ export function metricValueAt(
     return trajectory.global[seriesKey]?.[tick] ?? trajectory.meta.scalars[metric.key];
   }
 
+  if (scenario === 'polity') {
+    // WP3's four readouts are all per-tick series on the trajectory. Without
+    // this branch every card fell through to meta.scalars — the late-window
+    // average of the whole run — and sat frozen while the playhead moved.
+    if (metric.key === 'human_power_share') return trajectory.global.human_power_share[tick];
+    return trajectory.global[metric.key]?.[tick] ?? trajectory.meta.scalars[metric.key];
+  }
+
   if (scenario === 'combined') {
-    if (metric.key === 'human_income_share') return trajectory.global.income_share[tick];
-    if (metric.key === 'transfer_gap' || metric.key === 'composite') {
-      return trajectory.global[metric.key][tick];
-    }
+    // every ledger readout is already a per-tick series on the trajectory —
+    // the engine's default_trace carries the four human shares itself, so the
+    // page never has to work out which nodes are the humans
     if (metric.key === 'correlated_decline') {
-      const income = trajectory.global.income_share;
-      const culture = trajectory.global.culture_share;
-      const influence = trajectory.global.influence_share;
+      const income = trajectory.global.human_income_share;
+      const attention = trajectory.global.human_attention_share;
+      const power = trajectory.global.human_power_share;
       return (
-        (correlation(income, culture, tick) +
-          correlation(culture, influence, tick) +
-          correlation(income, influence, tick)) /
+        (correlation(income, attention, tick) +
+          correlation(attention, power, tick) +
+          correlation(income, power, tick)) /
         3
       );
     }
+    if (metric.key === 'enforcement_level') return trajectory.global.enforcement[tick];
+    return trajectory.global[metric.key]?.[tick] ?? trajectory.meta.scalars[metric.key];
   }
 
   return trajectory.meta.scalars[metric.key];

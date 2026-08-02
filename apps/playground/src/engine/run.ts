@@ -1,12 +1,11 @@
-import { runCombined, runCommons, runCultural, runEconomy, runPolitical } from './kernel.js';
+import { runCombined, runEconomy, runPolitical, runPolity } from './kernel.js';
 import type { NumericParams, ScenarioId, Trajectory } from './types';
 
 const runners = {
-  commons: runCommons,
-  economy: runEconomy,
-  cultural: runCultural,
-  political: runPolitical,
   combined: runCombined,
+  economy: runEconomy,
+  political: runPolitical,
+  polity: runPolity,
 } satisfies Record<ScenarioId, (params: NumericParams, seed: number) => Trajectory>;
 
 export function runScenario(scenario: ScenarioId, params: NumericParams, seed: number): Trajectory {

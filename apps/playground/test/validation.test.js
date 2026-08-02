@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { COMBINED_DEFAULTS, runCombined, runCommons, runSelfTests } from '../src/engine/kernel.js';
+import { LEDGER_DEFAULTS, runCombined, runSelfTests } from '../src/engine/kernel.js';
 
 test('the complete browser validation ladder passes', () => {
   const results = runSelfTests();
@@ -12,22 +12,18 @@ test('the complete browser validation ladder passes', () => {
 });
 
 test('a scenario is deterministic for the same parameters and seed', () => {
-  const first = runCommons({}, 17);
-  const second = runCommons({}, 17);
+  const first = runCombined(LEDGER_DEFAULTS, 17);
+  const second = runCombined(LEDGER_DEFAULTS, 17);
 
   assert.deepEqual(first.meta.scalars, second.meta.scalars);
-  assert.deepEqual(first.global.resource_level, second.global.resource_level);
+  assert.deepEqual(first.global.composite, second.global.composite);
 });
 
-test('zero coupling is the transfer-gap null', () => {
+test('sealing all three channels is the coupling-cost null', () => {
+  // this model draws randomness only at init, so a run with the three
+  // cross-domain dials at zero IS its own sealed twin, tick for tick
   const trajectory = runCombined(
-    {
-      ...COMBINED_DEFAULTS,
-      aiTax: true,
-      sortition: true,
-      influenceCap: true,
-      kappa: 0,
-    },
+    { ...LEDGER_DEFAULTS, reachPerSpend: 0, attentionToBallots: 0, regimeRate: 0 },
     2
   );
 

@@ -5,14 +5,19 @@
 The playground is the accessible, browser-run tier of the Collective Intelligence Library. It lets a
 researcher or curious reader manipulate toy models without installing the full JAX engine.
 
-The five scenarios form one argument:
+The coupled model leads and the other three are its legs, taken one at a time:
 
-1. **Governed commons:** individual extraction can outrun regeneration.
-2. **Economic:** AI capital can compound while human labor loses bargaining weight.
-3. **Cultural:** reproduction advantage and network separation define different cultural regimes.
-4. **Political:** amplification can turn attention structure into concentrated influence.
-5. **Combined:** economic power buys persuasion, persuasion redirects political influence, and political
-   influence rewrites economic rules.
+1. **Combined:** one population holds three conserved stocks — money, attention, votes — and the only way
+   to reach across is to spend. Advertising buys an audience, an audience attracts votes, lobbying moves
+   how strictly the tax is collected. No channel asks whether the spender is a person or a machine.
+2. **Economy** (WP1): the money leg alone — AI capital can compound while human labor loses bargaining weight.
+3. **Politics** (WP2): the attention leg alone — amplification turns attention structure into concentrated influence.
+4. **Polity** (WP3): the votes leg alone — delegation drifts toward whoever already holds ballots.
+
+Restructured 2026-08-02. Scenarios 2–4 are the standalone versions of the coupled model's three
+panels, which is why the drill-down is exhaustive rather than a sampler. The governed commons and
+cultural contagion were removed: neither is a leg of the coupled model, so neither had anywhere to
+sit in that structure.
 
 ## Interaction grammar
 

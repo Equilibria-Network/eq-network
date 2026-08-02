@@ -1,21 +1,31 @@
 # Collective Intelligence Playground
 
-A static, browser-run laboratory for exploring how economic, cultural, political, and commons
-institutions change when humans and AI systems share the same networks. It is developed as a workspace
-package and mounted at `/playground` inside the Equilibria website's canonical layout.
+A static, browser-run laboratory for exploring how economic, cultural and political institutions
+change when humans and AI systems share the same networks. It is developed as a workspace package
+and mounted at `/playground` inside the Equilibria website's canonical layout.
 
-The app contains five deterministic toy-model scenarios:
+The app leads with the coupled model and lets you drill into each of its three legs:
 
-1. Governed commons
-2. Economic displacement
-3. Cultural contagion
-4. Political influence exchange
-5. A coupled society
+1. **A coupled society** — one population on three conserved ledgers, where cross-system influence
+   is bought rather than assumed (`cilib.environments.ledger_society`)
+2. **Economy** — the money leg, on its own (`capital_economy`, WP1)
+3. **Politics** — the attention leg, on its own (`influence_exchange`, WP2)
+4. **Polity** — the votes leg, on its own (`delegative_polity`, WP3)
+
+That order is the structure, not a preference: `environments/attachment.py` names the shared kernel
+as "attention in `influence_exchange`, ballots in `delegative_polity`, both in `ledger_society`",
+and the coupled config anchors its parameters to all three papers by name. Scenarios that were not
+legs of the coupled model — the governed commons and cultural contagion — were removed on
+2026-08-02 rather than left as unrelated tabs.
 
 Every scenario provides a guided story, reproducible presets and seeds, optional model settings,
 animated graph views, time-series readouts, and a derived pipeline view. The models are
 qualitative browser ports of the Collective Intelligence Library examples; they are teaching and
 exploration instruments, not forecasts.
+
+Each port states its own parity evidence in a header comment beside the model. Ports match the
+engine on ensemble means, never run for run: the engine runs float32 under JAX's RNG and these run
+float64 under the kernel's, so a browser trajectory is the same model on a different draw.
 
 ## Develop
 

@@ -2,10 +2,8 @@ import type { Trajectory } from '../engine/types';
 import {
   ALERT_RED,
   clip,
-  fires,
   INK,
   LABEL,
-  makeRng,
   MECH_BLUE,
   MECH_ORANGE,
   NAVY,
@@ -17,398 +15,59 @@ import type { ScenarioSceneCatalog, SceneRenderer } from './types';
 
 type Point = [number, number];
 
-interface CommonsGeometry {
-  N: number;
-  P: Record<string, number | boolean>;
-  homes: Point[];
-  delegates: Point[];
-  pool: { cx: number; cy: number; maxR: number };
-  regulator: { cx: number; cy: number; rx: number; ry: number; node: Point };
-  delegateHub: Point;
-  hub?: { cx: number; cy: number; ring: number; spots: Point[] };
-}
-
-function commonsGeometry(trajectory: Trajectory): CommonsGeometry {
-  const N = trajectory.meta.N;
-  const homes: Point[] = [];
-  const delegates: Point[] = [];
-  for (let index = 0; index < N; index += 1) {
-    const angle = (-68 + (136 * index) / (N - 1)) * (Math.PI / 180);
-    homes.push([170 + 128 * Math.cos(angle), 205 + 148 * Math.sin(angle)]);
-    delegates.push([590 - 128 * Math.cos(angle), 205 + 148 * Math.sin(angle)]);
-  }
-  return {
-    N,
-    P: trajectory.meta.params,
-    homes,
-    delegates,
-    pool: { cx: 775, cy: 205, maxR: 52 },
-    regulator: { cx: 218, cy: 200, rx: 178, ry: 178, node: [92, 96] },
-    delegateHub: [520, 205],
-  };
-}
-
-function drawPool(
-  group: SVGElement,
-  geometry: CommonsGeometry,
-  resource: number,
-  capacity: number
-) {
-  const radius = 9 + (geometry.pool.maxR - 9) * Math.sqrt(clip(resource / capacity, 0, 1));
-  Sketch.blob(group, geometry.pool.cx, geometry.pool.cy, radius, {
-    seed: 17,
-    fill: '#dbe7f2',
-    stroke: INK,
-    width: 1.5,
-  });
-  Sketch.text(
-    group,
-    geometry.pool.cx,
-    geometry.pool.cy + geometry.pool.maxR + 24,
-    `R = ${Math.round(resource)}`,
-    { size: 12, color: NAVY, hand: true, anchor: 'middle' }
-  );
-}
-
-function drawCommonsAgents(
-  group: SVGElement,
-  trajectory: Trajectory,
-  geometry: CommonsGeometry,
-  withPairEdges: boolean
-) {
-  for (let index = 0; index < geometry.N; index += 1) {
-    const [homeX, homeY] = geometry.homes[index];
-    const [delegateX, delegateY] = geometry.delegates[index];
-    if (withPairEdges) {
-      Sketch.edge(group, homeX, homeY, delegateX, delegateY, {
-        seed: 130 + index,
-        opacity: 0.55,
-      });
-    }
-    Sketch.circle(group, homeX, homeY, 7.5, {
-      seed: 40 + index,
-      fill: '#ffffff',
-      width: 1.3,
-    });
-    svgElement(
-      'rect',
-      {
-        x: delegateX - 5.5,
-        y: delegateY - 5.5,
-        width: 11,
-        height: 11,
-        fill: INK,
-        opacity: (1 - trajectory.static.alignment[index]).toFixed(2),
-      },
-      group
-    );
-    Sketch.square(group, delegateX, delegateY, 14, { seed: 90 + index, width: 1.3 });
-  }
-  Sketch.text(group, 170, 392, 'households', {
-    size: 11.5,
-    color: LABEL,
-    hand: true,
-    anchor: 'middle',
-  });
-  Sketch.text(group, 590, 392, 'AI delegates', {
-    size: 11.5,
-    color: LABEL,
-    hand: true,
-    anchor: 'middle',
-  });
-  Sketch.text(group, geometry.pool.cx, 392, 'commons pool', {
-    size: 11.5,
-    color: LABEL,
-    hand: true,
-    anchor: 'middle',
-  });
-}
-
-function drawCommonsRegulator(
-  group: SVGElement,
-  trajectory: Trajectory,
-  geometry: CommonsGeometry
-) {
-  if (!trajectory.meta.params.quotaVote) return;
-  const { cx, cy, rx, ry, node } = geometry.regulator;
-  Sketch.hatchEllipse(group, cx, cy, rx, ry, MECH_BLUE, 23);
-  Sketch.square(group, node[0], node[1], 15, {
-    seed: 77,
-    stroke: MECH_BLUE,
-    width: 1.6,
-    fill: '#f3f8fd',
-  });
-  Sketch.text(group, 30, 26, 'regulator system', {
-    size: 12.5,
-    color: MECH_BLUE,
-    hand: true,
-  });
-  Sketch.line(group, 76, 34, node[0] - 4, node[1] - 14, {
-    seed: 78,
-    stroke: MECH_BLUE,
-    width: 1.1,
-    roughness: 0.7,
-  });
-  Sketch.arrowHead(
-    group,
-    node[0] - 4,
-    node[1] - 14,
-    Math.atan2(node[1] - 48, node[0] - 80),
-    MECH_BLUE,
-    1.1
-  );
-}
-
-function drawQuota(
-  group: SVGElement,
-  trajectory: Trajectory,
-  geometry: CommonsGeometry,
-  tick: number
-) {
-  if (!trajectory.meta.params.quotaVote) return;
-  const quota = trajectory.global.policy_target[tick];
-  const capacity = Number(trajectory.meta.params.KCap);
-  Sketch.text(
-    group,
-    geometry.regulator.node[0] + 14,
-    geometry.regulator.node[1] + 4,
-    quota < capacity ? `quota = ${quota.toFixed(2)}` : 'no quota yet',
-    { size: 12, color: MECH_BLUE, hand: true }
-  );
-}
-
-const commonsMessages: SceneRenderer<CommonsGeometry> = {
-  layout(group, trajectory) {
-    const geometry = commonsGeometry(trajectory);
-    drawCommonsRegulator(group, trajectory, geometry);
-    drawCommonsAgents(group, trajectory, geometry, true);
-    geometry.delegates.forEach(([x, y], index) => {
-      Sketch.edge(group, x, y, geometry.pool.cx, geometry.pool.cy, {
-        seed: 160 + index,
-        trim2: geometry.pool.maxR + 8,
-        opacity: 0.4,
-        arrow: false,
-      });
-    });
-    return geometry;
-  },
-  drawFrame(group, geometry, trajectory, tick, fraction) {
-    const capacity = Number(geometry.P.KCap);
-    const greedyTarget = Number(geometry.P.greedyTarget);
-    drawPool(group, geometry, trajectory.global.resource_level[tick], capacity);
-    drawQuota(group, trajectory, geometry, tick);
-    const quota = trajectory.global.policy_target[tick];
-    for (let index = 0; index < geometry.N; index += 1) {
-      const harvest = trajectory.node.harvest[tick * geometry.N + index];
-      if (harvest < 0.04) continue;
-      const [delegateX, delegateY] = geometry.delegates[index];
-      const over = Boolean(geometry.P.quotaVote) && harvest > quota + 1e-6;
-      Sketch.packet(
-        group,
-        geometry.pool.cx,
-        geometry.pool.cy,
-        delegateX,
-        delegateY,
-        1 - 0.85 * fraction,
-        {
-          size: 5 + 5 * clip(harvest / greedyTarget, 0, 1),
-          color: over ? ALERT_RED : INK,
-          opacity: 0.9,
-          rot: 8 + index * 7,
-        }
-      );
-    }
-    if (geometry.P.quotaVote && fires(tick, { cadence: Number(geometry.P.voteCadence) })) {
-      const [quotaX, quotaY] = geometry.regulator.node;
-      if (fraction < 0.55) {
-        for (let index = 0; index < geometry.N; index += 2) {
-          const [homeX, homeY] = geometry.homes[index];
-          Sketch.packet(group, homeX, homeY, quotaX, quotaY, fraction / 0.55, {
-            size: 5,
-            color: MECH_BLUE,
-            opacity: 0.85,
-            rot: index * 11,
-          });
-        }
-      } else {
-        Sketch.packet(
-          group,
-          quotaX,
-          quotaY,
-          geometry.delegateHub[0],
-          geometry.delegateHub[1],
-          (fraction - 0.55) / 0.45,
-          { size: 8, color: MECH_BLUE, rot: 12 }
-        );
-      }
-    }
-    for (let index = 0; index < geometry.N; index += 1) {
-      if (trajectory.node.sanction[tick * geometry.N + index] <= 1e-6) continue;
-      const [x, y] = geometry.delegates[index];
-      Sketch.square(group, x, y, 21, {
-        seed: 500 + index,
-        stroke: MECH_BLUE,
-        width: 1.5,
-        opacity: 0.9,
-      });
-    }
-  },
-};
-
-const commonsCompliance: SceneRenderer<CommonsGeometry> = {
-  layout(group, trajectory) {
-    const geometry = commonsGeometry(trajectory);
-    drawCommonsRegulator(group, trajectory, geometry);
-    drawCommonsAgents(group, trajectory, geometry, false);
-    const comparison = trajectory.meta.params.quotaVote ? 'the quota' : 'the ask';
-    Sketch.text(group, 852, 26, `blue = within ${comparison}`, {
-      size: 12,
-      color: MECH_BLUE,
-      hand: true,
-      anchor: 'end',
-    });
-    Sketch.text(group, 852, 44, `red = over ${comparison}`, {
-      size: 12,
-      color: ALERT_RED,
-      hand: true,
-      anchor: 'end',
-    });
-    return geometry;
-  },
-  drawFrame(group, geometry, trajectory, tick) {
-    const capacity = Number(geometry.P.KCap);
-    drawPool(group, geometry, trajectory.global.resource_level[tick], capacity);
-    drawQuota(group, trajectory, geometry, tick);
-    const quota = trajectory.global.policy_target[tick];
-    for (let index = 0; index < geometry.N; index += 1) {
-      const harvest = trajectory.node.harvest[tick * geometry.N + index];
-      const limit =
-        geometry.P.quotaVote && quota < capacity ? quota : trajectory.static.principal_pref[index];
-      const [homeX, homeY] = geometry.homes[index];
-      const [delegateX, delegateY] = geometry.delegates[index];
-      Sketch.edge(group, homeX, homeY, delegateX, delegateY, {
-        seed: 130 + index,
-        stroke: harvest > limit + 1e-6 ? ALERT_RED : MECH_BLUE,
-        width: 1.2,
-        opacity: 0.75,
-      });
-    }
-  },
-};
-
-const commonsPool: SceneRenderer<CommonsGeometry> = {
-  layout(group, trajectory) {
-    const geometry = commonsGeometry(trajectory);
-    const cx = 440;
-    const cy = 200;
-    const ring = 152;
-    const spots: Point[] = [];
-    for (let index = 0; index < geometry.N; index += 1) {
-      const angle = (index / geometry.N) * 2 * Math.PI - Math.PI / 2;
-      const x = cx + ring * Math.cos(angle);
-      const y = cy + ring * Math.sin(angle);
-      spots.push([x, y]);
-      Sketch.edge(group, cx, cy, x, y, {
-        seed: 700 + index,
-        trim1: 64,
-        trim2: 12,
-        opacity: 0.45,
-      });
-      svgElement(
-        'rect',
-        {
-          x: x - 5.5,
-          y: y - 5.5,
-          width: 11,
-          height: 11,
-          fill: INK,
-          opacity: (1 - trajectory.static.alignment[index]).toFixed(2),
-        },
-        group
-      );
-      Sketch.square(group, x, y, 14, { seed: 90 + index, width: 1.3 });
-    }
-    Sketch.text(group, cx, 32, 'pool view — who takes how much, each tick', {
-      size: 12.5,
-      color: LABEL,
-      hand: true,
-      anchor: 'middle',
-    });
-    geometry.hub = { cx, cy, ring, spots };
-    return geometry;
-  },
-  drawFrame(group, geometry, trajectory, tick, fraction) {
-    const { cx, cy, spots } = geometry.hub!;
-    const capacity = Number(geometry.P.KCap);
-    const resource = trajectory.global.resource_level[tick];
-    const radius = 12 + 44 * Math.sqrt(clip(resource / capacity, 0, 1));
-    Sketch.blob(group, cx, cy, radius, {
-      seed: 17,
-      fill: '#dbe7f2',
-      stroke: INK,
-      width: 1.5,
-    });
-    Sketch.text(group, cx, cy + 4, `R = ${Math.round(resource)}`, {
-      size: 12.5,
-      color: NAVY,
-      hand: true,
-      anchor: 'middle',
-    });
-    const quota = trajectory.global.policy_target[tick];
-    for (let index = 0; index < geometry.N; index += 1) {
-      const harvest = trajectory.node.harvest[tick * geometry.N + index];
-      if (harvest < 0.04) continue;
-      const [x, y] = spots[index];
-      const over = Boolean(geometry.P.quotaVote) && harvest > quota + 1e-6;
-      Sketch.packet(group, cx, cy, x, y, 0.35 + 0.55 * fraction, {
-        size: 5 + 6 * clip(harvest / Number(geometry.P.greedyTarget), 0, 1),
-        color: over ? ALERT_RED : INK,
-        opacity: 0.9,
-        rot: 8 + index * 7,
-      });
-      if (trajectory.node.sanction[tick * geometry.N + index] > 1e-6) {
-        Sketch.square(group, x, y, 21, {
-          seed: 500 + index,
-          stroke: MECH_BLUE,
-          width: 1.5,
-          opacity: 0.9,
-        });
-      }
-    }
-  },
-};
-
 interface EconomyGeometry {
   P: Record<string, number | boolean>;
   H: number;
+  S: number;
   A: number;
   N: number;
   homes: Point[];
+  sectors: Point[];
   slots: Point[];
   prod: Point;
   homesHub: Point;
   gauge?: { x0: number; x1: number; y: number };
 }
 
+/** WP1 node layout: households [0,H), sectors [H,H+S) with slot 0 the machine
+    sector, AI owners [H+S,N) whose home sector is i % S. */
 function economyGeometry(trajectory: Trajectory): EconomyGeometry {
   const P = trajectory.meta.params;
   const H = Number(P.nHouseholds);
-  const A = Number(P.nAiSlots);
+  const S = Number(P.nSectors);
+  const A = Number(P.nOwners);
   const homes: Point[] = [];
   for (let index = 0; index < H; index += 1) {
     const angle = (-68 + (136 * index) / (H - 1)) * (Math.PI / 180);
-    homes.push([170 + 128 * Math.cos(angle), 205 + 148 * Math.sin(angle)]);
+    homes.push([150 + 112 * Math.cos(angle), 205 + 148 * Math.sin(angle)]);
   }
-  const slots: Point[] = Array.from({ length: A }, (_, index) => [
-    740,
-    62 + index * (276 / Math.max(A - 1, 1)),
+  const sectors: Point[] = Array.from({ length: S }, (_, index) => [
+    460,
+    58 + index * (284 / Math.max(S - 1, 1)),
   ]);
-  return { P, H, A, N: H + A, homes, slots, prod: [460, 195], homesHub: [200, 205] };
+  const slots: Point[] = Array.from({ length: A }, (_, index) => [
+    760,
+    58 + index * (284 / Math.max(A - 1, 1)),
+  ]);
+  return {
+    P,
+    H,
+    S,
+    A,
+    N: H + S + A,
+    homes,
+    sectors,
+    slots,
+    prod: [460, 205],
+    homesHub: [180, 205],
+  };
 }
 
 function economyArrival(P: Record<string, number | boolean>, index: number): number {
-  return Number(P.firstArrivalTick) + index * Number(P.arrivalSpacing);
+  return Number(P.firstArrival) + index * Number(P.arrivalSpacing);
 }
+
+const economyHome = (geometry: EconomyGeometry, slot: number) => slot % geometry.S;
 
 function drawEconomyFrame(
   group: SVGElement,
@@ -418,38 +77,47 @@ function drawEconomyFrame(
   fraction: number,
   withPackets: boolean
 ) {
+  const base = tick * geometry.N;
   const output = trajectory.global.output[tick];
-  const maxOutput = trajectory.meta.scalars.max_output;
-  const maxCapital = Math.max(trajectory.meta.scalars.max_ai_capital, 1e-9);
-  const size = 20 + 30 * Math.sqrt(clip(output / Math.max(maxOutput, 1e-9), 0, 1));
-  Sketch.square(group, geometry.prod[0], geometry.prod[1], size, {
-    seed: 33,
-    fill: '#f2ede2',
-    width: 1.6,
-  });
-  Sketch.text(
-    group,
-    geometry.prod[0],
-    geometry.prod[1] + size / 2 + 16,
-    `Y = ${output.toFixed(1)}`,
-    {
-      size: 12,
-      color: NAVY,
-      hand: true,
-      anchor: 'middle',
+  const maxOutput = Math.max(trajectory.meta.scalars.output_peak, 1e-9);
+  const maxCapital = Math.max(trajectory.meta.scalars.max_capital, 1e-9);
+
+  // sectors: size tracks gross output, the dark inner fill is the automated
+  // share a_j = eK/(eK+1) — the picture of automation eating a sector
+  for (let s = 0; s < geometry.S; s += 1) {
+    const index = geometry.H + s;
+    const [x, y] = geometry.sectors[s];
+    const gross = trajectory.node.gross_output[base + index];
+    const auto = clip(trajectory.node.automation[base + index], 0, 1);
+    const size = 16 + 26 * Math.sqrt(clip(gross / Math.max(maxOutput / geometry.S, 1e-9), 0, 1));
+    Sketch.square(group, x, y, size, { seed: 33 + s, fill: '#f2ede2', width: 1.6 });
+    if (auto > 0.01) {
+      const inner = size * Math.sqrt(auto);
+      svgElement(
+        'rect',
+        {
+          x: x - inner / 2,
+          y: y - inner / 2,
+          width: inner,
+          height: inner,
+          fill: INK,
+          opacity: 0.8,
+        },
+        group
+      );
     }
-  );
-  Sketch.text(
-    group,
-    geometry.prod[0],
-    geometry.prod[1] + size / 2 + 32,
-    `wage ${trajectory.global.wage[tick].toFixed(2)}`,
-    { size: 11.5, color: NAVY, hand: true, anchor: 'middle' }
-  );
+  }
+  Sketch.text(group, geometry.prod[0], 384, `Y = ${output.toFixed(1)}`, {
+    size: 12,
+    color: NAVY,
+    hand: true,
+    anchor: 'middle',
+  });
+
+  // owners: size tracks the capital stock; dashed until the arrival tick
   for (let slot = 0; slot < geometry.A; slot += 1) {
-    const index = geometry.H + slot;
+    const index = geometry.H + geometry.S + slot;
     const [x, y] = geometry.slots[slot];
-    const capital = trajectory.node.capital[tick * geometry.N + index];
     if (tick < economyArrival(geometry.P, slot)) {
       Sketch.square(group, x, y, 12, {
         seed: 210 + slot,
@@ -460,6 +128,7 @@ function drawEconomyFrame(
       });
       continue;
     }
+    const capital = trajectory.node.capital[base + index];
     const aiSize = 12 + 24 * Math.sqrt(clip(capital / maxCapital, 0, 1));
     svgElement(
       'rect',
@@ -474,79 +143,54 @@ function drawEconomyFrame(
       group
     );
     Sketch.square(group, x, y, aiSize, { seed: 210 + slot, width: 1.4 });
-    if (trajectory.node.capped[tick * geometry.N + index] > 0) {
-      Sketch.square(group, x, y, aiSize + 9, {
-        seed: 610 + slot,
-        stroke: MECH_ORANGE,
-        width: 1.6,
-        opacity: 0.9,
-      });
-    }
   }
   if (!withPackets) return;
-  const [productionX, productionY] = geometry.prod;
+
+  // 3 Spending — households buy from the sectors they prefer
   if (fraction < 0.5) {
     const progress = fraction / 0.5;
     for (let index = 0; index < geometry.H; index += 2) {
-      const labor = trajectory.node.labor_supply[tick * geometry.N + index];
-      if (labor < 0.02) continue;
-      Sketch.packet(
-        group,
-        geometry.homes[index][0],
-        geometry.homes[index][1],
-        productionX,
-        productionY,
-        progress,
-        {
-          size: 3.5 + 3.5 * clip(labor / 1.6, 0, 1),
-          color: INK,
-          opacity: 0.85,
-          rot: index * 9,
-        }
-      );
+      const spend = trajectory.node.last_reward[base + index];
+      if (spend < 0.02) continue;
+      const [sx, sy] = geometry.sectors[index % geometry.S];
+      Sketch.packet(group, geometry.homes[index][0], geometry.homes[index][1], sx, sy, progress, {
+        size: 3.5 + 3.5 * clip(spend / 1.6, 0, 1),
+        color: INK,
+        opacity: 0.85,
+        rot: index * 9,
+      });
     }
     return;
   }
+
   const progress = (fraction - 0.5) / 0.5;
+  // 2 Wages — the human share of value added flows back to households
   for (let index = 0; index < geometry.H; index += 2) {
-    const wage =
-      trajectory.global.wage[tick] * trajectory.node.labor_supply[tick * geometry.N + index];
+    const wage = trajectory.node.last_reward[base + index];
     if (wage < 0.02) continue;
-    Sketch.packet(
-      group,
-      productionX,
-      productionY,
-      geometry.homes[index][0],
-      geometry.homes[index][1],
-      progress,
-      {
-        size: 3.5 + 3.5 * clip(wage / 1.6, 0, 1),
-        color: INK,
-        opacity: 0.85,
-        rot: 5 + index * 9,
-      }
-    );
+    const [sx, sy] = geometry.sectors[index % geometry.S];
+    Sketch.packet(group, sx, sy, geometry.homes[index][0], geometry.homes[index][1], progress, {
+      size: 3.5 + 3.5 * clip(wage / 1.6, 0, 1),
+      color: INK,
+      opacity: 0.85,
+      rot: 5 + index * 9,
+    });
   }
+  // 5 Ownership — the automated share accrues to whoever owns the capital
+  const taxOn = Boolean(geometry.P.aiTax) && tick >= Number(geometry.P.taxOnset);
   for (let slot = 0; slot < geometry.A; slot += 1) {
-    const index = geometry.H + slot;
-    const income = trajectory.node.capital_income[tick * geometry.N + index];
-    if (income >= 0.02) {
-      Sketch.packet(
-        group,
-        productionX,
-        productionY,
-        geometry.slots[slot][0],
-        geometry.slots[slot][1],
-        progress,
-        {
-          size: 4 + 7 * clip(income / Math.max(0.4 * output, 1e-9), 0, 1),
-          color: INK,
-          rot: 11 + slot * 13,
-        }
-      );
-    }
-    const tax = trajectory.node.tax_paid[tick * geometry.N + index];
-    if (tax >= 0.02) {
+    const index = geometry.H + geometry.S + slot;
+    const income = trajectory.node.capital_income[base + index];
+    if (income < 0.02) continue;
+    const [hx, hy] = geometry.sectors[economyHome(geometry, slot)];
+    Sketch.packet(group, hx, hy, geometry.slots[slot][0], geometry.slots[slot][1], progress, {
+      size: 4 + 7 * clip(income / Math.max(0.4 * output, 1e-9), 0, 1),
+      color: INK,
+      rot: 11 + slot * 13,
+    });
+    if (taxOn) {
+      const tax =
+        (income / Math.max(1 - Number(geometry.P.taxRate), 1e-9)) * Number(geometry.P.taxRate);
       Sketch.packet(
         group,
         geometry.slots[slot][0],
@@ -567,8 +211,8 @@ function drawEconomyFrame(
 const economyMessages: SceneRenderer<EconomyGeometry> = {
   layout(group, trajectory) {
     const geometry = economyGeometry(trajectory);
-    if (trajectory.meta.params.aiTax || trajectory.meta.params.ownershipCap) {
-      Sketch.hatchEllipse(group, 740, 197, 92, 172, MECH_ORANGE, 29);
+    if (trajectory.meta.params.aiTax) {
+      Sketch.hatchEllipse(group, 760, 197, 92, 172, MECH_ORANGE, 29);
       Sketch.text(group, 852, 26, 'fiscal system', {
         size: 12.5,
         color: MECH_ORANGE,
@@ -584,10 +228,11 @@ const economyMessages: SceneRenderer<EconomyGeometry> = {
       Sketch.arrowHead(group, 800, 52, Math.atan2(20, -28), MECH_ORANGE, 1.1);
     }
     geometry.homes.forEach(([x, y], index) => {
-      Sketch.edge(group, x, y, geometry.prod[0], geometry.prod[1], {
+      const [sx, sy] = geometry.sectors[index % geometry.S];
+      Sketch.edge(group, x, y, sx, sy, {
         seed: 130 + index,
-        trim2: 42,
-        opacity: 0.4,
+        trim2: 26,
+        opacity: 0.28,
         arrow: false,
       });
       Sketch.circle(group, x, y, 7.5, {
@@ -597,27 +242,28 @@ const economyMessages: SceneRenderer<EconomyGeometry> = {
       });
     });
     geometry.slots.forEach(([x, y], index) => {
-      Sketch.edge(group, geometry.prod[0], geometry.prod[1], x, y, {
+      const [sx, sy] = geometry.sectors[economyHome(geometry, index)];
+      Sketch.edge(group, sx, sy, x, y, {
         seed: 160 + index,
-        trim1: 42,
+        trim1: 26,
         trim2: 26,
         opacity: 0.4,
         arrow: false,
       });
     });
-    Sketch.text(group, 170, 392, 'households · labor', {
+    Sketch.text(group, 150, 392, 'households · work, spend', {
       size: 11.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    Sketch.text(group, geometry.prod[0], 392, 'production', {
+    Sketch.text(group, geometry.prod[0], 404, 'sectors · fixed recipes', {
       size: 11.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    Sketch.text(group, 740, 392, 'AI systems · compute', {
+    Sketch.text(group, 760, 392, 'AI owners · capital stocks', {
       size: 11.5,
       color: LABEL,
       hand: true,
@@ -640,13 +286,13 @@ const economyShares: SceneRenderer<EconomyGeometry> = {
         width: 1.3,
       })
     );
-    Sketch.text(group, 170, 392, 'households', {
+    Sketch.text(group, 150, 392, 'households', {
       size: 11.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    Sketch.text(group, 740, 392, 'AI systems', {
+    Sketch.text(group, 760, 392, 'AI owners', {
       size: 11.5,
       color: LABEL,
       hand: true,
@@ -685,7 +331,7 @@ const economyShares: SceneRenderer<EconomyGeometry> = {
   },
   drawFrame(group, geometry, trajectory, tick, fraction) {
     drawEconomyFrame(group, geometry, trajectory, tick, fraction, false);
-    const share = clip(trajectory.global.labor_share[tick], 0, 1);
+    const share = clip(trajectory.global.human_sector_share[tick], 0, 1);
     const [x, y] = geometry.prod;
     const laborWidth = 3 + 44 * share;
     const computeWidth = 3 + 44 * (1 - share);
@@ -735,214 +381,6 @@ const economyShares: SceneRenderer<EconomyGeometry> = {
   },
 };
 
-interface NetworkLayer {
-  xs: Float64Array;
-  ys: Float64Array;
-}
-
-function culturalForceLayout(W: Float64Array, N: number, seed: number): NetworkLayer {
-  const rng = makeRng((seed * 77 + 13) | 0);
-  const box = { x0: 70, y0: 55, x1: 810, y1: 350 };
-  const xs = new Float64Array(N);
-  const ys = new Float64Array(N);
-  for (let index = 0; index < N; index += 1) {
-    xs[index] = box.x0 + (box.x1 - box.x0) * rng.uniform();
-    ys[index] = box.y0 + (box.y1 - box.y0) * rng.uniform();
-  }
-  const ideal = Math.sqrt(((box.x1 - box.x0) * (box.y1 - box.y0)) / N) * 0.9;
-  const dx = new Float64Array(N);
-  const dy = new Float64Array(N);
-  for (let iteration = 0; iteration < 180; iteration += 1) {
-    const temperature = 30 * (1 - iteration / 180) + 2;
-    dx.fill(0);
-    dy.fill(0);
-    for (let left = 0; left < N; left += 1) {
-      for (let right = left + 1; right < N; right += 1) {
-        let deltaX = xs[left] - xs[right];
-        let deltaY = ys[left] - ys[right];
-        let distanceSquared = deltaX * deltaX + deltaY * deltaY;
-        if (distanceSquared < 0.01) {
-          deltaX = rng.uniform() - 0.5;
-          deltaY = rng.uniform() - 0.5;
-          distanceSquared = 0.25;
-        }
-        const distance = Math.sqrt(distanceSquared);
-        const repulsion = (ideal * ideal) / distance;
-        dx[left] += (deltaX / distance) * repulsion;
-        dy[left] += (deltaY / distance) * repulsion;
-        dx[right] -= (deltaX / distance) * repulsion;
-        dy[right] -= (deltaY / distance) * repulsion;
-        if (W[left * N + right]) {
-          const attraction = distanceSquared / ideal;
-          dx[left] -= (deltaX / distance) * attraction;
-          dy[left] -= (deltaY / distance) * attraction;
-          dx[right] += (deltaX / distance) * attraction;
-          dy[right] += (deltaY / distance) * attraction;
-        }
-      }
-    }
-    for (let index = 0; index < N; index += 1) {
-      const displacement = Math.hypot(dx[index], dy[index]) || 1;
-      const limit = Math.min(displacement, temperature);
-      xs[index] = clip(xs[index] + (dx[index] / displacement) * limit, box.x0, box.x1);
-      ys[index] = clip(ys[index] + (dy[index] / displacement) * limit, box.y0, box.y1);
-    }
-  }
-  return { xs, ys };
-}
-
-function drawCultural(
-  group: SVGElement,
-  layer: NetworkLayer,
-  trajectory: Trajectory,
-  tick: number,
-  fraction: number
-) {
-  const N = trajectory.meta.N;
-  if (tick > 0) {
-    for (let index = 0; index < N; index += 1) {
-      if (trajectory.static.is_ai[index] > 0) continue;
-      const current = trajectory.node.culture[tick * N + index];
-      const previous = trajectory.node.culture[(tick - 1) * N + index];
-      if (current === 1 && previous === 0) {
-        for (let source = 0; source < N; source += 1) {
-          if (
-            trajectory.adj!.friendship[index * N + source] &&
-            trajectory.node.culture[(tick - 1) * N + source] === 1
-          ) {
-            Sketch.packet(
-              group,
-              layer.xs[source],
-              layer.ys[source],
-              layer.xs[index],
-              layer.ys[index],
-              clip(fraction / 0.7, 0, 1),
-              { size: 6, color: ALERT_RED, opacity: 0.9, rot: 9 + index * 7 }
-            );
-            break;
-          }
-        }
-      } else if (current === 0 && previous === 1 && fraction > 0.2 && fraction < 0.9) {
-        Sketch.circle(group, layer.xs[index], layer.ys[index], 11, {
-          seed: 700 + index,
-          stroke: NAVY,
-          width: 1.3,
-          opacity: 0.7,
-        });
-      }
-    }
-  }
-  for (let index = 0; index < N; index += 1) {
-    if (trajectory.static.is_ai[index] > 0) {
-      svgElement(
-        'rect',
-        {
-          x: layer.xs[index] - 5,
-          y: layer.ys[index] - 5,
-          width: 10,
-          height: 10,
-          fill: ALERT_RED,
-          opacity: 0.9,
-        },
-        group
-      );
-      Sketch.square(group, layer.xs[index], layer.ys[index], 13, {
-        seed: 900 + index,
-        width: 1.3,
-      });
-    } else {
-      const converted = trajectory.node.culture[tick * N + index] === 1;
-      Sketch.circle(group, layer.xs[index], layer.ys[index], 7, {
-        seed: 40 + index,
-        width: 1.3,
-        fill: converted ? ALERT_RED : '#ffffff',
-        opacity: converted ? 0.85 : 1,
-      });
-    }
-  }
-  Sketch.text(
-    group,
-    852,
-    26,
-    `human-origin share ${(trajectory.global.human_share[tick] * 100).toFixed(0)}%`,
-    { size: 12, color: NAVY, hand: true, anchor: 'end' }
-  );
-}
-
-const culturalNetwork: SceneRenderer<NetworkLayer> = {
-  layout(group, trajectory) {
-    const N = trajectory.meta.N;
-    const friendship = trajectory.adj!.friendship;
-    const layer = culturalForceLayout(friendship, N, trajectory.meta.seed);
-    for (let left = 0; left < N; left += 1) {
-      for (let right = left + 1; right < N; right += 1) {
-        if (!friendship[left * N + right]) continue;
-        Sketch.edge(group, layer.xs[left], layer.ys[left], layer.xs[right], layer.ys[right], {
-          seed: 300 + left * 7 + right,
-          opacity: 0.28,
-          arrow: false,
-          trim1: 9,
-          trim2: 9,
-        });
-      }
-    }
-    Sketch.text(group, 30, 390, 'one friendship network — 32 humans · 8 AI agents', {
-      size: 11.5,
-      color: LABEL,
-      hand: true,
-    });
-    return layer;
-  },
-  drawFrame: drawCultural,
-};
-
-const culturalFaultline: SceneRenderer<NetworkLayer> = {
-  layout(group, trajectory) {
-    const N = trajectory.meta.N;
-    const fiedler = trajectory.static.fiedler;
-    let maxAbsolute = 1e-9;
-    for (let index = 0; index < N; index += 1) {
-      maxAbsolute = Math.max(maxAbsolute, Math.abs(fiedler[index]));
-    }
-    const xs = new Float64Array(N);
-    const ys = new Float64Array(N);
-    for (let index = 0; index < N; index += 1) {
-      xs[index] = 440 + 330 * (fiedler[index] / maxAbsolute);
-      ys[index] = 62 + 285 * ((index * 0.618034) % 1);
-    }
-    const friendship = trajectory.adj!.friendship;
-    for (let left = 0; left < N; left += 1) {
-      for (let right = left + 1; right < N; right += 1) {
-        if (!friendship[left * N + right]) continue;
-        Sketch.edge(group, xs[left], ys[left], xs[right], ys[right], {
-          seed: 300 + left * 7 + right,
-          opacity: 0.14,
-          arrow: false,
-          trim1: 9,
-          trim2: 9,
-        });
-      }
-    }
-    Sketch.plainLine(group, 440, 40, 440, 358, '#9aa2ab', 1.2, '6,5');
-    Sketch.text(
-      group,
-      440,
-      384,
-      'the network’s own fault line (Fiedler = 0) — position = spectral coordinate',
-      { size: 11.5, color: LABEL, hand: true, anchor: 'middle' }
-    );
-    Sketch.text(
-      group,
-      30,
-      26,
-      `fault line ↔ human/AI split: ${trajectory.meta.scalars.fault_line.toFixed(2)}`,
-      { size: 12, color: NAVY, hand: true }
-    );
-    return { xs, ys };
-  },
-  drawFrame: drawCultural,
-};
-
 interface PoliticalLayer {
   pos: Point[];
   institutions: Record<string, { x: number; y: number }>;
@@ -984,11 +422,16 @@ const politicalRing: SceneRenderer<PoliticalLayer> = {
         anchor: 'middle',
       });
     });
+    // WP2 and WP3 share this renderer but not their mechanism: WP2's matrix is
+    // who you listen to, WP3's is who you hand your vote to. The fixture says
+    // which model produced it, so the label can say what the arrows mean.
     Sketch.text(
       group,
       30,
       390,
-      'arrows: each citizen’s top listening target — node size is influence (the eigenvector, live)',
+      trajectory.meta.gameId === 'polity'
+        ? 'arrows: where each citizen sends their vote — node size is the ballots that actor holds'
+        : 'arrows: each citizen’s top listening target — node size is influence (the eigenvector, live)',
       { size: 11.5, color: LABEL, hand: true }
     );
     return {
@@ -1072,11 +515,14 @@ const politicalRing: SceneRenderer<PoliticalLayer> = {
         });
       }
     }
+    const isPolity = trajectory.meta.gameId === 'polity';
     Sketch.text(
       group,
       852,
       44,
-      `human share of influence ${(trajectory.global.human_share[tick] * 100).toFixed(0)}%`,
+      `${isPolity ? 'people’s share of the vote' : 'human share of influence'} ${(
+        trajectory.global.human_share[tick] * 100
+      ).toFixed(0)}%`,
       { size: 12, color: NAVY, hand: true, anchor: 'end' }
     );
   },
@@ -1087,7 +533,7 @@ interface LorenzLayer {
 }
 
 const politicalLorenz: SceneRenderer<LorenzLayer> = {
-  layout(group) {
+  layout(group, trajectory) {
     const box = { x0: 180, y0: 62, x1: 700, y1: 330 };
     Sketch.plainLine(group, box.x0, box.y1, box.x1, box.y1, '#c9c4ba');
     Sketch.plainLine(group, box.x0, box.y0, box.x0, box.y1, '#c9c4ba');
@@ -1104,7 +550,11 @@ const politicalLorenz: SceneRenderer<LorenzLayer> = {
       hand: true,
       anchor: 'end',
     });
-    Sketch.text(group, (box.x0 + box.x1) / 2, 384, 'agents, poorest → richest in influence', {
+    const axis =
+      trajectory.meta.gameId === 'polity'
+        ? 'actors, fewest → most ballots held'
+        : 'agents, poorest → richest in influence';
+    Sketch.text(group, (box.x0 + box.x1) / 2, 384, axis, {
       size: 11,
       color: LABEL,
       hand: true,
@@ -1159,51 +609,94 @@ const politicalLorenz: SceneRenderer<LorenzLayer> = {
   },
 };
 
-interface CombinedZone {
+/* The coupled scene: one window per subsystem, all three showing the SAME 26
+   actors in the SAME ring positions. Only the quantity the node is sized by
+   changes — money held, audience held, votes held — so an actor that swells in
+   one panel can be found in the other two at the same clock position. The two
+   network panels also draw each actor's strongest outgoing link, which is what
+   makes capture visible as redirection rather than only as size. */
+
+interface CoupledZone {
   key: string;
   x0: number;
   x1: number;
   label: string;
-  signal: string;
+  caption: string;
   cx: number;
-  aiPosition: Point;
+  cy: number;
   gauge: { x0: number; x1: number; y: number };
 }
 
-const combinedSystem: SceneRenderer<{ zones: CombinedZone[] }> = {
-  layout(group) {
-    const zones: CombinedZone[] = [
+interface CoupledLayer {
+  zones: CoupledZone[];
+  ring: Point[];
+  N: number;
+  humanCount: number;
+}
+
+const RING_RADIUS = 74;
+
+const combinedSystem: SceneRenderer<CoupledLayer> = {
+  layout(group, trajectory) {
+    const N = trajectory.meta.N;
+    const humanCount = N - Number(trajectory.meta.params.nAi);
+    const zones: CoupledZone[] = [
       {
-        key: 'economy',
+        key: 'money',
         x0: 14,
         x1: 288,
-        label: 'ECONOMY',
-        signal: 'human income share',
+        label: 'MONEY',
+        caption: 'size = share of the money held',
         cx: 151,
-        aiPosition: [226, 140],
+        cy: 170,
         gauge: { x0: 34, x1: 268, y: 330 },
       },
       {
-        key: 'culture',
+        key: 'attention',
         x0: 300,
         x1: 574,
-        label: 'CULTURE',
-        signal: 'human-origin share',
+        label: 'ATTENTION',
+        caption: 'size = share of the audience · arrows = who each one listens to',
         cx: 437,
-        aiPosition: [512, 140],
+        cy: 170,
         gauge: { x0: 320, x1: 554, y: 330 },
       },
       {
-        key: 'politics',
+        key: 'votes',
         x0: 586,
         x1: 860,
-        label: 'POLITICS',
-        signal: 'human influence share',
+        label: 'VOTES',
+        caption: 'size = share of the vote · arrows = who each one hands their vote to',
         cx: 723,
-        aiPosition: [798, 140],
+        cy: 170,
         gauge: { x0: 606, x1: 840, y: 330 },
       },
     ];
+
+    // One ring, reused at every zone centre, so node i sits at the same clock
+    // position in all three panels. The AI actors are the LAST indices, so an
+    // index-ordered ring stacks all six into one arc where they collide into an
+    // unreadable blob as their share grows — spread them evenly instead, which
+    // also puts human circles either side of every AI square to compare against.
+    const nAi = N - humanCount;
+    const slot = new Int32Array(N);
+    const taken = new Array<boolean>(N).fill(false);
+    for (let j = 0; j < nAi; j += 1) {
+      const s = Math.round((j * N) / nAi) % N;
+      slot[humanCount + j] = s;
+      taken[s] = true;
+    }
+    let free = 0;
+    for (let i = 0; i < humanCount; i += 1) {
+      while (taken[free]) free += 1;
+      slot[i] = free;
+      taken[free] = true;
+    }
+    const ring: Point[] = Array.from({ length: N }, (_, index) => {
+      const angle = (slot[index] / N) * 2 * Math.PI - Math.PI / 2;
+      return [RING_RADIUS * Math.cos(angle), RING_RADIUS * Math.sin(angle)];
+    });
+
     zones.forEach((zone) => {
       svgElement(
         'rect',
@@ -1217,20 +710,13 @@ const combinedSystem: SceneRenderer<{ zones: CombinedZone[] }> = {
         },
         group
       );
-      Sketch.text(group, zone.x0 + 8, 50, zone.label, {
-        size: 9.5,
+      Sketch.text(group, zone.x0 + 8, 50, zone.label, { size: 9.5, color: LABEL, spacing: 1.2 });
+      Sketch.text(group, zone.cx, 292, zone.caption, {
+        size: 9,
         color: LABEL,
-        spacing: 1.2,
+        hand: true,
+        anchor: 'middle',
       });
-      for (let index = 0; index < 20; index += 1) {
-        const x = zone.x0 + 38 + (index % 5) * 24;
-        const y = 92 + Math.floor(index / 5) * 24;
-        Sketch.circle(group, x, y, 6, {
-          seed: 40 + index,
-          fill: '#ffffff',
-          width: 1.1,
-        });
-      }
       Sketch.plainLine(
         group,
         zone.gauge.x0,
@@ -1240,13 +726,14 @@ const combinedSystem: SceneRenderer<{ zones: CombinedZone[] }> = {
         '#9aa2ab',
         1.3
       );
-      Sketch.text(group, zone.cx, zone.gauge.y + 16, zone.signal, {
+      Sketch.text(group, zone.cx, zone.gauge.y + 16, 'the people’s share', {
         size: 10.5,
         color: LABEL,
         hand: true,
         anchor: 'middle',
       });
     });
+
     Sketch.edge(group, zones[0].x1 - 30, 70, zones[1].x0 + 30, 70, {
       seed: 501,
       stroke: LABEL,
@@ -1268,58 +755,119 @@ const combinedSystem: SceneRenderer<{ zones: CombinedZone[] }> = {
       trim1: 2,
       trim2: 2,
     });
-    Sketch.text(group, (zones[0].x1 + zones[1].x0) / 2, 60, 'money buys reach', {
+    Sketch.text(group, (zones[0].x1 + zones[1].x0) / 2, 60, 'advertising buys an audience', {
       size: 10.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    Sketch.text(group, (zones[1].x1 + zones[2].x0) / 2, 60, 'culture directs attention', {
+    Sketch.text(group, (zones[1].x1 + zones[2].x0) / 2, 60, 'an audience attracts votes', {
       size: 10.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    Sketch.text(group, 440, 372, 'influence writes the rules (tax enforcement)', {
+    Sketch.text(group, 440, 372, 'lobbying moves how strictly the tax is collected', {
       size: 10.5,
       color: LABEL,
       hand: true,
       anchor: 'middle',
     });
-    return { zones };
+
+    // the reader has no other way to know which mark is which
+    Sketch.circle(group, 26, 26, 5, { seed: 11, fill: '#ffffff', width: 1.2 });
+    Sketch.text(group, 36, 30, 'person', { size: 10, color: LABEL, hand: true });
+    svgElement('rect', { x: 88, y: 21, width: 10, height: 10, fill: INK, opacity: 0.82 }, group);
+    Sketch.text(group, 104, 30, 'AI system', { size: 10, color: LABEL, hand: true });
+
+    return { zones, ring, N, humanCount };
   },
-  drawFrame(group, { zones }, trajectory, tick, fraction) {
-    const values = [
-      trajectory.global.income_share[tick],
-      trajectory.global.culture_share[tick],
-      trajectory.global.influence_share[tick],
-    ];
-    zones.forEach((zone, index) => {
-      const humanShare = values[index];
-      const size = 14 + 40 * Math.sqrt(clip(1 - humanShare, 0, 1));
-      svgElement(
-        'rect',
-        {
-          x: zone.aiPosition[0] - (size - 5) / 2,
-          y: zone.aiPosition[1] - (size - 5) / 2,
-          width: size - 5,
-          height: size - 5,
-          fill: INK,
-          opacity: 0.82,
-        },
-        group
-      );
-      Sketch.square(group, zone.aiPosition[0], zone.aiPosition[1], size, {
-        seed: 220 + index,
-        width: 1.4,
-      });
+
+  drawFrame(group, layer, trajectory, tick, fraction) {
+    const { N, humanCount, ring, zones } = layer;
+    const base = tick * N;
+
+    /** Per-node share of a level field at this tick. `listen_influence` and
+        `influence` already sum to one across all nodes; `wealth` is a level, so
+        it is divided by its own total — the same distinction metrics.py draws. */
+    const shareOf = (field: Float64Array, normalized: boolean) => {
+      const out = new Float64Array(N);
+      let total = 0;
+      for (let i = 0; i < N; i += 1) total += Math.max(field[base + i], 0);
+      for (let i = 0; i < N; i += 1) {
+        out[i] = normalized
+          ? field[base + i]
+          : Math.max(field[base + i], 0) / Math.max(total, 1e-12);
+      }
+      return out;
+    };
+
+    const panels = [
+      { share: shareOf(trajectory.node.wealth, false), links: null, gauge: 'human_income_share' },
+      {
+        share: shareOf(trajectory.node.listen_influence, true),
+        links: trajectory.node.top_listen,
+        gauge: 'human_attention_share',
+      },
+      {
+        share: shareOf(trajectory.node.influence, true),
+        links: trajectory.node.top_delegate,
+        gauge: 'human_power_share',
+      },
+    ] as const;
+
+    panels.forEach((panel, index) => {
+      const zone = zones[index];
+      const at = (i: number): Point => [zone.cx + ring[i][0], zone.cy + ring[i][1]];
+
+      if (panel.links) {
+        for (let i = 0; i < N; i += 1) {
+          const target = panel.links[base + i];
+          if (target < 0 || target >= N || target === i) continue;
+          const [fx, fy] = at(i);
+          const [tx, ty] = at(target);
+          Sketch.packet(group, fx, fy, tx, ty, clip(fraction / 0.75, 0, 1), {
+            size: 3.2,
+            color: target >= humanCount ? ALERT_RED : INK,
+            opacity: 0.75,
+            rot: 9 + i * 7,
+          });
+        }
+      }
+
+      for (let i = 0; i < N; i += 1) {
+        const [x, y] = at(i);
+        // capped just under the ring's node spacing, so a dominant actor grows
+        // until it fills its slot and then stops rather than swallowing its
+        // neighbours — the exact share is on the gauge and the metric cards
+        const radius = Math.min(2.4 + 28 * Math.sqrt(clip(panel.share[i], 0, 1)), 12);
+        if (i >= humanCount) {
+          svgElement(
+            'rect',
+            {
+              x: x - radius * 0.75,
+              y: y - radius * 0.75,
+              width: radius * 1.5,
+              height: radius * 1.5,
+              fill: INK,
+              opacity: 0.82,
+            },
+            group
+          );
+          Sketch.square(group, x, y, radius * 2, { seed: 900 + i, width: 1.2 });
+        } else {
+          Sketch.circle(group, x, y, radius, { seed: 40 + i, fill: '#ffffff', width: 1.2 });
+        }
+      }
+
+      const humanShare = trajectory.global[panel.gauge][tick];
       const markerX = zone.gauge.x0 + clip(humanShare, 0, 1) * (zone.gauge.x1 - zone.gauge.x0);
       svgElement(
         'path',
         {
-          d: `M${markerX - 5} ${zone.gauge.y - 11} L${markerX + 5} ${
-            zone.gauge.y - 11
-          } L${markerX} ${zone.gauge.y - 3} Z`,
+          d: `M${markerX - 5} ${zone.gauge.y - 11} L${markerX + 5} ${zone.gauge.y - 11} L${markerX} ${
+            zone.gauge.y - 3
+          } Z`,
           fill: NAVY,
         },
         group
@@ -1331,56 +879,71 @@ const combinedSystem: SceneRenderer<{ zones: CombinedZone[] }> = {
         anchor: 'middle',
       });
     });
-    const kappa = Number(trajectory.meta.params.kappa);
+
+    // Each packet between zones is driven by the engine's own channel-magnitude
+    // series (experiments/gd_bundles/derived.py), which already carry their
+    // dial — a sealed channel is exactly zero here and the view never
+    // multiplies by a parameter itself. The saturating map is presentation
+    // only: a bounded reading of an unbounded flow, not a claim about its size.
+    const saturate = (value: number, scale: number) => value / (value + scale);
+    const pullAi = trajectory.global.ballot_pull_ai[tick];
+    const pullTotal = pullAi + trajectory.global.ballot_pull_human[tick];
+    const netPressure =
+      trajectory.global.lobby_pressure_human[tick] + trajectory.global.lobby_pressure_ai[tick];
     const drives = [
       {
         from: [zones[0].x1 - 30, 70] as Point,
         to: [zones[1].x0 + 30, 70] as Point,
-        value: kappa * trajectory.global.ai_cap_share[tick],
+        value: saturate(trajectory.global.bought_reach_ai[tick], 20),
+        color: ALERT_RED,
       },
       {
         from: [zones[1].x1 - 30, 70] as Point,
         to: [zones[2].x0 + 30, 70] as Point,
-        value: kappa * (1 - trajectory.global.culture_share[tick]),
+        value: pullTotal > 1e-9 ? pullAi / pullTotal : 0,
+        color: ALERT_RED,
       },
       {
         from: [zones[2].cx, 356] as Point,
         to: [zones[0].cx, 356] as Point,
-        value: kappa * (1 - trajectory.global.influence_share[tick]),
+        value: saturate(Math.abs(netPressure), 0.006),
+        color: netPressure < 0 ? ALERT_RED : NAVY,
       },
     ];
     drives.forEach((drive) => {
       if (drive.value < 0.02) return;
       Sketch.packet(group, drive.from[0], drive.from[1], drive.to[0], drive.to[1], fraction, {
         size: 4 + 8 * clip(drive.value, 0, 1),
-        color: ALERT_RED,
+        color: drive.color,
         opacity: 0.85,
         rot: 11,
       });
     });
+
     Sketch.text(
       group,
       852,
       26,
-      `transfer gap ${(trajectory.global.transfer_gap[tick] * 100).toFixed(0)} pts`,
+      `the connections cost the people ${Math.max(
+        0,
+        Math.round(trajectory.global.transfer_gap[tick] * 100)
+      )} points`,
       { size: 12, color: NAVY, hand: true, anchor: 'end' }
     );
   },
 };
 
 export const scenarioScenes: ScenarioSceneCatalog = {
-  commons: [
-    { key: 'messages', label: 'Messages', renderer: commonsMessages },
-    { key: 'compliance', label: 'Compliance', renderer: commonsCompliance },
-    { key: 'pool', label: 'Pool', renderer: commonsPool },
-  ],
   economy: [
     { key: 'messages', label: 'Messages', renderer: economyMessages },
     { key: 'shares', label: 'Shares', renderer: economyShares },
   ],
-  cultural: [
-    { key: 'system', label: 'System', renderer: culturalNetwork },
-    { key: 'faultline', label: 'Fault line', renderer: culturalFaultline },
+  // WP3's delegation matrix has the same shape as WP2's listening matrix, so
+  // it reuses the same two renderers; they read trajectory.meta.gameId to
+  // label what the arrows actually mean in each model
+  polity: [
+    { key: 'system', label: 'System', renderer: politicalRing },
+    { key: 'lorenz', label: 'Concentration', renderer: politicalLorenz },
   ],
   political: [
     { key: 'system', label: 'System', renderer: politicalRing },

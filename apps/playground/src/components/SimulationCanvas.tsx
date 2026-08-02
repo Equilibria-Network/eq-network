@@ -70,47 +70,6 @@ function drawNode(
   context.globalAlpha = 1;
 }
 
-function ringPoint(index: number, total: number, cx: number, cy: number, radius: number) {
-  const angle = -Math.PI / 2 + (index / total) * Math.PI * 2;
-  return { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius };
-}
-
-function drawCommons(
-  context: CanvasRenderingContext2D,
-  trajectory: Trajectory,
-  tick: number,
-  width: number,
-  height: number
-): void {
-  const n = trajectory.meta.N;
-  const cx = width * 0.5;
-  const cy = height * 0.5;
-  const orbit = Math.min(width, height) * 0.35;
-  const stock = trajectory.global.resource_level[tick] ?? 0;
-  const cap = Number(trajectory.meta.params.KCap) || 500;
-  const stockShare = Math.max(0, Math.min(1, stock / cap));
-
-  context.fillStyle = PALE;
-  context.beginPath();
-  context.arc(cx, cy, 34 + 48 * Math.sqrt(stockShare), 0, Math.PI * 2);
-  context.fill();
-  context.strokeStyle = NAVY;
-  context.lineWidth = 2;
-  context.stroke();
-  context.fillStyle = NAVY;
-  context.font = '500 26px "Space Grotesk", sans-serif';
-  context.textAlign = 'center';
-  context.fillText(`${Math.round(stockShare * 100)}%`, cx, cy + 2);
-  context.font = '11px "IBM Plex Mono", monospace';
-  context.fillText('COMMON STOCK', cx, cy + 20);
-
-  for (let i = 0; i < n; i += 1) {
-    const point = ringPoint(i, n, cx, cy, orbit);
-    const harvest = valueAt(trajectory.node.harvest, tick, i, n);
-    drawNode(context, point.x, point.y, 4 + Math.min(7, harvest), harvest > 2.5 ? BLUE : NAVY);
-  }
-}
-
 function drawEconomy(
   context: CanvasRenderingContext2D,
   trajectory: Trajectory,
@@ -201,9 +160,9 @@ function drawCombined(
   height: number
 ): void {
   const domains = [
-    ['ECONOMY', trajectory.global.income_share[tick] ?? 0],
-    ['CULTURE', trajectory.global.culture_share[tick] ?? 0],
-    ['POLITICS', trajectory.global.influence_share[tick] ?? 0],
+    ['MONEY', trajectory.global.human_income_share[tick] ?? 0],
+    ['ATTENTION', trajectory.global.human_attention_share[tick] ?? 0],
+    ['VOTES', trajectory.global.human_power_share[tick] ?? 0],
   ] as const;
   const centerY = height * 0.52;
   const centers = domains.map((_, i) => ({ x: width * (0.2 + i * 0.3), y: centerY }));
@@ -250,10 +209,9 @@ export default function SimulationCanvas({ scenario, trajectory, tick }: Props) 
       if (!context) return;
       const { width, height } = canvas.getBoundingClientRect();
       drawGrid(context, width, height);
-      if (scenario === 'commons') drawCommons(context, trajectory, tick, width, height);
       if (scenario === 'economy') drawEconomy(context, trajectory, tick, width, height);
-      if (scenario === 'cultural') drawNetwork(context, trajectory, tick, width, height, false);
-      if (scenario === 'political') drawNetwork(context, trajectory, tick, width, height, true);
+      if (scenario === 'political' || scenario === 'polity')
+        drawNetwork(context, trajectory, tick, width, height, true);
       if (scenario === 'combined') drawCombined(context, trajectory, tick, width, height);
     };
     draw();

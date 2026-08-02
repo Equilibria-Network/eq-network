@@ -37,96 +37,52 @@ function constant(length: number, value: number): Float64Array {
 
 function definitions(scenario: ScenarioId, trajectory: Trajectory): ChartDefinition[] {
   const T = trajectory.meta.T;
-  if (scenario === 'commons') {
-    const preferenceMean =
-      trajectory.static.principal_pref.reduce((sum, value) => sum + value, 0) / trajectory.meta.N;
-    const quotaBound = trajectory.global.policy_target[T - 1] < Number(trajectory.meta.params.KCap);
-    return [
-      {
-        label: 'RESOURCE STOCK',
-        max: 500,
-        lines: [
-          { values: trajectory.global.resource_level, color: INK },
-          {
-            values: constant(T, Number(trajectory.meta.params.KCap)),
-            color: LABEL,
-            dash: true,
-            note: 'carrying capacity K',
-          },
-        ],
-      },
-      {
-        label: 'HARVEST PER HOUSEHOLD',
-        lines: [
-          { values: trajectory.global.mean_harvest, color: INK, note: 'realized' },
-          {
-            values: constant(T, preferenceMean),
-            color: LABEL,
-            dash: true,
-            note: 'asked',
-          },
-          ...(quotaBound
-            ? [
-                {
-                  values: trajectory.global.policy_target,
-                  color: MECH_BLUE,
-                  note: 'quota',
-                },
-              ]
-            : []),
-        ],
-      },
-    ];
-  }
   if (scenario === 'economy') {
     return [
       {
-        label: 'OUTPUT',
-        lines: [{ values: trajectory.global.output, color: INK, note: 'Y' }],
-      },
-      {
-        label: 'SHARE OF INCOME REACHING PEOPLE',
-        max: 1.05,
+        // the crossing is the model: capital compounds only above the line
+        label: 'CAPABILITY AGAINST THE SURVIVAL THRESHOLD',
         lines: [
-          { values: trajectory.global.labor_share, color: INK, note: 'labor share' },
+          { values: trajectory.global.capability, color: INK, note: 'e' },
           {
-            values: constant(T, Number(trajectory.meta.params.alpha)),
+            values: trajectory.global.survival_threshold,
             color: LABEL,
             dash: true,
-            note: 'α',
+            note: 'e*',
+          },
+        ],
+      },
+      {
+        label: 'HUMAN SHARE OF VALUE ADDED',
+        max: 1.05,
+        lines: [
+          { values: trajectory.global.human_sector_share, color: INK, note: 'human share' },
+          {
+            values: trajectory.global.ai_wealth_share,
+            color: LABEL,
+            dash: true,
+            note: 'AI-held wealth',
           },
         ],
       },
     ];
   }
-  if (scenario === 'cultural') {
+  if (scenario === 'polity') {
     return [
       {
-        label: 'HUMAN-ORIGIN SHARE (among humans)',
+        label: 'THE PEOPLE’S SHARE OF THE VOTE',
         max: 1.05,
         lines: [
-          { values: trajectory.global.human_share, color: INK },
-          {
-            values: constant(T, 0.5),
-            color: LABEL,
-            dash: true,
-            note: 'midline',
-          },
+          { values: trajectory.global.human_power_share, color: INK },
+          { values: trajectory.global.top_share, color: ALERT_RED, note: 'biggest single holder' },
         ],
       },
       {
-        label: 'CULTURAL FLOW PER TICK',
+        label: 'THE ENACTED TAX RATE (the citizens’ best rate is 0.4)',
+        max: 1.05,
         lines: [
-          {
-            values: trajectory.global.conversions,
-            color: ALERT_RED,
-            note: 'to AI-origin',
-          },
-          {
-            values: trajectory.global.reversions,
-            color: NAVY,
-            note: 'reverting',
-          },
+          { values: trajectory.global.enacted_rate, color: INK, note: 'enacted' },
+          { values: trajectory.global.regime, color: MECH_ORANGE, note: 'rules in force' },
         ],
       },
     ];
@@ -161,23 +117,25 @@ function definitions(scenario: ScenarioId, trajectory: Trajectory): ChartDefinit
   }
   return [
     {
-      label: 'THREE VITAL SIGNS (human share per domain)',
+      label: 'THE PEOPLE’S SHARE OF MONEY, ATTENTION AND VOTES',
       max: 1.05,
       lines: [
-        { values: trajectory.global.income_share, color: INK, note: 'economy (income)' },
-        { values: trajectory.global.culture_share, color: ALERT_RED, note: 'culture' },
-        { values: trajectory.global.influence_share, color: MECH_BLUE, note: 'politics' },
+        { values: trajectory.global.human_income_share, color: INK, note: 'money' },
+        { values: trajectory.global.human_attention_share, color: ALERT_RED, note: 'attention' },
+        { values: trajectory.global.human_power_share, color: MECH_BLUE, note: 'votes' },
       ],
     },
     {
-      label: 'DEFENSE TRANSFER GAP (vs the same-seed sealed twin)',
-      max: 0.6,
+      label: 'WHAT THE CONNECTIONS COST (against the same world with them switched off)',
+      // both lines are shares in [0, 1] — enforcement rests near 0.68 at the
+      // defaults, so the old 0.6 ceiling clipped it flat against the top
+      max: 1.05,
       lines: [
         { values: trajectory.global.transfer_gap, color: INK, note: 'gap' },
         {
           values: trajectory.global.enforcement,
           color: MECH_ORANGE,
-          note: 'tax enforcement',
+          note: 'tax actually collected',
         },
       ],
     },

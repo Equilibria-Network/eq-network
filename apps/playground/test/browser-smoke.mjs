@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const targetUrl = process.env.PLAYGROUND_URL || 'http://127.0.0.1:4321/playground/';
-const initialScenario = process.env.PLAYGROUND_SCENARIO || 'commons';
+const initialScenario = process.env.PLAYGROUND_SCENARIO || 'combined';
 const chromeBin = process.env.CHROME_BIN || '/usr/bin/google-chrome';
 const debugPort = 9333;
 const profile = await mkdtemp(join(tmpdir(), 'eq-playground-chrome-'));
@@ -235,7 +235,7 @@ try {
   assert.equal(initial.heroMeta, false);
   assert.ok(initial.heroTitleLines <= 2);
   assert.match(initial.heroSummary, /^Usually coordination systems are tested in the real world/);
-  assert.equal(initial.scenarios, 5);
+  assert.equal(initial.scenarios, 4);
   assert.equal(initial.scene, true);
   assert.equal(initial.sceneViewBox, '0 0 880 400');
   assert.equal(initial.charts, true);
@@ -327,13 +327,13 @@ try {
   await evaluate(`document.querySelector('.scenario-story ol li:nth-child(4) > button').click()`);
   await waitFor(
     `document.querySelector('.scenario-story ol li:nth-child(4) > button').getAttribute('aria-current') === 'step' &&
-      document.querySelector('.view-tabs button[aria-selected="true"]').textContent.trim() === 'Messages' &&
+      document.querySelector('.view-tabs button[aria-selected="true"]').textContent.trim() === 'System' &&
       Number(document.querySelector('.transport input[type="range"]').value) > 0`,
-    'The commons story did not drive its view and playback.'
+    'The coupled story did not drive its view and playback.'
   );
   assert.equal(
     await evaluate(
-      `[...document.querySelectorAll('.condition-options button')].find((button) => button.textContent.trim() === 'Slow tragedy').getAttribute('aria-pressed')`
+      `[...document.querySelectorAll('.condition-options button')].find((button) => button.textContent.trim() === 'People lobby too').getAttribute('aria-pressed')`
     ),
     'true',
     'A story step must activate its authored scenario condition.'
@@ -388,7 +388,7 @@ try {
     if (scrollTop > 0) await evaluate('window.scrollTo(0, 0)');
   }
 
-  await evaluate(`document.querySelectorAll('.scenario-toggle')[3].click()`);
+  await evaluate(`document.querySelectorAll('.scenario-toggle')[2].click()`);
   await waitFor(
     `location.hash === '#political' && Boolean(document.querySelector('.engine-status.ready'))`,
     'The political scenario did not become ready.'
@@ -420,7 +420,7 @@ try {
     `Political metrics must be playhead-driven. t0=${politicalAtStart} t150=${politicalAt150}`
   );
 
-  await evaluate(`document.querySelectorAll('.scenario-toggle')[4].click()`);
+  await evaluate(`document.querySelectorAll('.scenario-toggle')[0].click()`);
   await waitFor(
     `location.hash === '#combined' && Boolean(document.querySelector('.engine-status.ready'))`,
     'The combined scenario did not become ready.'
@@ -446,8 +446,12 @@ try {
     settingsInDetails: Boolean(document.querySelector('.details-panel > .details-settings')),
     storyInLeftRail: Boolean(document.querySelector('.scenario-story')),
     modalBackdrop: Boolean(document.querySelector('.settings-backdrop')),
-    evidenceVisible: document.querySelector('.details-panel').textContent.includes('Backend ladder'),
-    assumptionsVisible: document.querySelector('.details-panel').textContent.includes('The floor is itemized'),
+    // Structural, not textual: these used to assert on literal sentences from
+    // one scenario's copy, so rewording the page broke the smoke test. Matched
+    // case-insensitively because the headings are uppercased by CSS, and
+    // textContent reports the DOM's own casing.
+    evidenceVisible: /evidence anchor/i.test(document.querySelector('.details-panel').textContent),
+    assumptionsVisible: /modelling assumptions/i.test(document.querySelector('.details-panel').textContent),
     shareRun: document.querySelector('.details-panel').textContent.includes('Share run'),
     settingsPressed: document.querySelector('.settings-trigger[aria-label="Open model settings"]').getAttribute('aria-pressed'),
     panelShadow: getComputedStyle(document.querySelector('.details-panel')).boxShadow,
@@ -520,6 +524,12 @@ try {
     'The player toggle did not reopen model settings.'
   );
   const before = await evaluate(`document.querySelector('.run-tools input').value`);
+  const statusBefore = await evaluate(
+    `document.querySelector('.engine-status').textContent.trim()`
+  );
+  const metricsBefore = await evaluate(
+    `[...document.querySelectorAll('[data-metric]')].map((node) => node.textContent).join('|')`
+  );
   await evaluate(`(() => {
     const input = document.querySelector('.run-tools input');
     const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
@@ -530,12 +540,15 @@ try {
     `document.querySelector('.run-tools input').value !== ${JSON.stringify(before)}`,
     'The seed control did not update.'
   );
+  // The coupled model recomputes in tens of milliseconds, so the transient
+  // `running` class can come and go between polls. Assert the OUTCOME — a
+  // finished run whose numbers actually moved — rather than catching the
+  // in-flight state, which was a race the model's speed exposed.
   await waitFor(
-    `Boolean(document.querySelector('.engine-status.running'))`,
-    'The parameter change did not start a worker run.'
-  );
-  await waitFor(
-    `Boolean(document.querySelector('.engine-status.ready'))`,
+    `Boolean(document.querySelector('.engine-status.ready')) &&
+      (document.querySelector('.engine-status').textContent.trim() !== ${JSON.stringify(statusBefore)} ||
+        [...document.querySelectorAll('[data-metric]')].map((node) => node.textContent).join('|') !==
+          ${JSON.stringify(metricsBefore)})`,
     'A parameter change did not recompute the trajectory.'
   );
 
@@ -616,9 +629,9 @@ try {
   ].find((link) => link.textContent.trim() === 'Playground').click()`);
   await waitFor(
     `location.pathname === '/playground/' &&
-      location.hash === '#commons' &&
-      document.querySelector('.scenario-list > li.active > .scenario-toggle strong')?.textContent.trim() === 'Commons'`,
-    'The top-bar Playground link did not return the app to Commons.'
+      location.hash === '#combined' &&
+      document.querySelector('.scenario-list > li.active > .scenario-toggle strong')?.textContent.trim() === 'Coupled'`,
+    'The top-bar Playground link did not return the app to the coupled scenario.'
   );
 
   console.log(
