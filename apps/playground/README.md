@@ -13,8 +13,8 @@ The app leads with the coupled model and lets you drill into each of its three l
 4. **Politics** — the votes leg, on its own (`delegative_polity`, WP3)
 
 Each leg is named after the paper that specifies it, which is worth stating because the page got this
-wrong until 2026-08-02: WP2 is the *culture* paper ("Who Fills Your Head?") and its engine model is
-`influence_exchange`, while WP3 is the *politics* paper and its model is `delegative_polity`. The two
+wrong until 2026-08-02: WP2 is the _culture_ paper ("Who Fills Your Head?") and its engine model is
+`influence_exchange`, while WP3 is the _politics_ paper and its model is `delegative_polity`. The two
 scenarios had been labelled the other way round — "Politics" over WP2 and "Polity" over WP3 — which
 also produced two adjacent near-synonyms in the rail that readers could not tell apart.
 
