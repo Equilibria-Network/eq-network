@@ -7,8 +7,8 @@ import { scenarios } from '../src/scenarios/registry.ts';
 const viewsByScenario = {
   combined: new Set(['system']),
   economy: new Set(['messages', 'shares']),
-  political: new Set(['system', 'lorenz']),
-  polity: new Set(['system', 'lorenz']),
+  culture: new Set(['system', 'lorenz']),
+  politics: new Set(['system', 'lorenz']),
 };
 
 test('every scenario exposes a complete UI and engine contract', () => {
@@ -18,7 +18,7 @@ test('every scenario exposes a complete UI and engine contract', () => {
   // money (WP1), attention (WP2), votes (WP3)
   assert.deepEqual(
     scenarios.map(({ id }) => id),
-    ['combined', 'economy', 'political', 'polity']
+    ['combined', 'economy', 'culture', 'politics']
   );
 
   for (const scenario of scenarios) {

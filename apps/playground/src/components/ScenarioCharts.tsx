@@ -67,7 +67,7 @@ function definitions(scenario: ScenarioId, trajectory: Trajectory): ChartDefinit
       },
     ];
   }
-  if (scenario === 'polity') {
+  if (scenario === 'politics') {
     return [
       {
         label: 'THE PEOPLE’S SHARE OF THE VOTE',
@@ -87,7 +87,7 @@ function definitions(scenario: ScenarioId, trajectory: Trajectory): ChartDefinit
       },
     ];
   }
-  if (scenario === 'political') {
+  if (scenario === 'culture') {
     return [
       {
         label: 'HUMAN SHARE OF INFLUENCE',

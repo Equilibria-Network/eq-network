@@ -106,13 +106,16 @@ function drawEconomy(
   context.fillText('AI CAPITAL', width - 28, height - 18);
 }
 
+/** Both surviving network scenarios — WP2's culture (listening) and WP3's
+    politics (delegation) — carry a row-stochastic matrix under `adj.listening`
+    plus a per-node influence, so the flag that used to switch this between a
+    listening graph and the deleted contagion model's friendship graph is gone. */
 function drawNetwork(
   context: CanvasRenderingContext2D,
   trajectory: Trajectory,
   tick: number,
   width: number,
-  height: number,
-  political: boolean
+  height: number
 ): void {
   const n = trajectory.meta.N;
   const cols = Math.ceil(Math.sqrt(n * (width / height)));
@@ -127,14 +130,14 @@ function drawNetwork(
       y: 40 + (row / Math.max(1, rows - 1)) * (height - 80) + jitterY,
     };
   });
-  const adjacency = political ? trajectory.adj?.listening : trajectory.adj?.friendship;
+  const adjacency = trajectory.adj?.listening;
   if (adjacency) {
     context.strokeStyle = 'rgba(0, 59, 126, 0.12)';
     context.lineWidth = 0.7;
     for (let i = 0; i < n; i += 1) {
       for (let j = i + 1; j < n; j += 1) {
         const edge = adjacency[i * n + j] ?? adjacency[j * n + i] ?? 0;
-        if (edge <= (political ? 0.08 : 0)) continue;
+        if (edge <= 0.08) continue;
         context.beginPath();
         context.moveTo(points[i].x, points[i].y);
         context.lineTo(points[j].x, points[j].y);
@@ -144,11 +147,9 @@ function drawNetwork(
   }
   for (let i = 0; i < n; i += 1) {
     const isAi = (trajectory.static.is_ai?.[i] ?? 0) > 0.5;
-    const culture = valueAt(trajectory.node.culture, tick, i, n);
     const influence = valueAt(trajectory.node.influence, tick, i, n);
-    const fill = isAi || (!political && culture > 0.5) ? BLUE : NAVY;
-    const radius = political ? 4 + Math.min(13, influence * n * 2.2) : isAi ? 7 : 5;
-    drawNode(context, points[i].x, points[i].y, radius, fill);
+    const radius = 4 + Math.min(13, influence * n * 2.2);
+    drawNode(context, points[i].x, points[i].y, radius, isAi ? BLUE : NAVY);
   }
 }
 
@@ -210,8 +211,8 @@ export default function SimulationCanvas({ scenario, trajectory, tick }: Props) 
       const { width, height } = canvas.getBoundingClientRect();
       drawGrid(context, width, height);
       if (scenario === 'economy') drawEconomy(context, trajectory, tick, width, height);
-      if (scenario === 'political' || scenario === 'polity')
-        drawNetwork(context, trajectory, tick, width, height, true);
+      if (scenario === 'culture' || scenario === 'politics')
+        drawNetwork(context, trajectory, tick, width, height);
       if (scenario === 'combined') drawCombined(context, trajectory, tick, width, height);
     };
     draw();

@@ -11,13 +11,20 @@ The coupled model leads and the other three are its legs, taken one at a time:
    to reach across is to spend. Advertising buys an audience, an audience attracts votes, lobbying moves
    how strictly the tax is collected. No channel asks whether the spender is a person or a machine.
 2. **Economy** (WP1): the money leg alone — AI capital can compound while human labor loses bargaining weight.
-3. **Politics** (WP2): the attention leg alone — amplification turns attention structure into concentrated influence.
-4. **Polity** (WP3): the votes leg alone — delegation drifts toward whoever already holds ballots.
+3. **Culture** (WP2): the attention leg alone — amplification turns attention structure into concentrated influence.
+4. **Politics** (WP3): the votes leg alone — delegation drifts toward whoever already holds ballots.
 
 Restructured 2026-08-02. Scenarios 2–4 are the standalone versions of the coupled model's three
 panels, which is why the drill-down is exhaustive rather than a sampler. The governed commons and
-cultural contagion were removed: neither is a leg of the coupled model, so neither had anywhere to
-sit in that structure.
+`value_contagion` were removed: neither is a leg of the coupled model, and `value_contagion` has no
+paper behind it.
+
+**Name the legs after their papers.** WP2 is the culture paper ("Who Fills Your Head?") and its
+engine model is `influence_exchange`; WP3 is the politics paper and its model is
+`delegative_polity`. Until 2026-08-02 the page had these labels swapped — WP2 shown as "Politics",
+WP3 as "Polity" — which was both wrong and the source of the rail's worst readability problem, two
+adjacent near-synonyms a reader had no way to tell apart. The confusing scenario formerly called
+"Culture" was `value_contagion`, a different model that is not WP2.
 
 ## Interaction grammar
 

@@ -39,12 +39,12 @@ export function metricValueAt(
     return trajectory.global[seriesKey]?.[tick] ?? trajectory.meta.scalars[metric.key];
   }
 
-  if (scenario === 'political') {
+  if (scenario === 'culture') {
     const seriesKey = metric.key === 'human_influence_share' ? 'human_share' : metric.key;
     return trajectory.global[seriesKey]?.[tick] ?? trajectory.meta.scalars[metric.key];
   }
 
-  if (scenario === 'polity') {
+  if (scenario === 'politics') {
     // WP3's four readouts are all per-tick series on the trajectory. Without
     // this branch every card fell through to meta.scalars — the late-window
     // average of the whole run — and sat frozen while the playhead moved.

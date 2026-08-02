@@ -941,11 +941,11 @@ export const scenarioScenes: ScenarioSceneCatalog = {
   // WP3's delegation matrix has the same shape as WP2's listening matrix, so
   // it reuses the same two renderers; they read trajectory.meta.gameId to
   // label what the arrows actually mean in each model
-  polity: [
+  politics: [
     { key: 'system', label: 'System', renderer: politicalRing },
     { key: 'lorenz', label: 'Concentration', renderer: politicalLorenz },
   ],
-  political: [
+  culture: [
     { key: 'system', label: 'System', renderer: politicalRing },
     { key: 'lorenz', label: 'Concentration', renderer: politicalLorenz },
   ],

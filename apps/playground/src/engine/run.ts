@@ -4,8 +4,8 @@ import type { NumericParams, ScenarioId, Trajectory } from './types';
 const runners = {
   combined: runCombined,
   economy: runEconomy,
-  political: runPolitical,
-  polity: runPolity,
+  culture: runPolitical,
+  politics: runPolity,
 } satisfies Record<ScenarioId, (params: NumericParams, seed: number) => Trajectory>;
 
 export function runScenario(scenario: ScenarioId, params: NumericParams, seed: number): Trajectory {

@@ -390,7 +390,7 @@ try {
 
   await evaluate(`document.querySelectorAll('.scenario-toggle')[2].click()`);
   await waitFor(
-    `location.hash === '#political' && Boolean(document.querySelector('.engine-status.ready'))`,
+    `location.hash === '#culture' && Boolean(document.querySelector('.engine-status.ready'))`,
     'The political scenario did not become ready.'
   );
   await evaluate(`(() => {

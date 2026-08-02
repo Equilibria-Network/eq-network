@@ -1,4 +1,4 @@
-export type ScenarioId = 'combined' | 'economy' | 'political' | 'polity';
+export type ScenarioId = 'combined' | 'economy' | 'culture' | 'politics';
 export type NumericParams = Record<string, number | boolean>;
 
 export interface Trajectory {

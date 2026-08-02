@@ -9,8 +9,14 @@ The app leads with the coupled model and lets you drill into each of its three l
 1. **A coupled society** — one population on three conserved ledgers, where cross-system influence
    is bought rather than assumed (`cilib.environments.ledger_society`)
 2. **Economy** — the money leg, on its own (`capital_economy`, WP1)
-3. **Politics** — the attention leg, on its own (`influence_exchange`, WP2)
-4. **Polity** — the votes leg, on its own (`delegative_polity`, WP3)
+3. **Culture** — the attention leg, on its own (`influence_exchange`, WP2)
+4. **Politics** — the votes leg, on its own (`delegative_polity`, WP3)
+
+Each leg is named after the paper that specifies it, which is worth stating because the page got this
+wrong until 2026-08-02: WP2 is the *culture* paper ("Who Fills Your Head?") and its engine model is
+`influence_exchange`, while WP3 is the *politics* paper and its model is `delegative_polity`. The two
+scenarios had been labelled the other way round — "Politics" over WP2 and "Polity" over WP3 — which
+also produced two adjacent near-synonyms in the rail that readers could not tell apart.
 
 That order is the structure, not a preference: `environments/attachment.py` names the shared kernel
 as "attention in `influence_exchange`, ballots in `delegative_polity`, both in `ledger_society`",

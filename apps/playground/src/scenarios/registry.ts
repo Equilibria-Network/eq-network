@@ -571,9 +571,9 @@ export const scenarios: ScenarioDefinition[] = [
     ],
   },
   {
-    id: 'political',
+    id: 'culture',
     index: '03',
-    shortLabel: 'Politics',
+    shortLabel: 'Culture',
     title: 'Who fills your head?',
     question: 'Who governs the consensus when attention rewires toward the already influential?',
     description:
@@ -762,16 +762,16 @@ export const scenarios: ScenarioDefinition[] = [
     ],
   },
   {
-    id: 'polity',
+    id: 'politics',
     index: '04',
-    shortLabel: 'Polity',
+    shortLabel: 'Politics',
     title: 'Delegated away',
     question: 'When does handing your vote to a delegate stop being representation?',
     description:
       'Thirty citizens and four AI delegates share one delegation matrix. Power is the ballots in your hand, the power-weighted median sets a tax rate, and delegation drifts toward whoever already holds ballots.',
     assumption:
       'Ballots are conserved and one-hop; every citizen keeps an un-delegatable slice of their own vote; delegates declare their own conscience, not their delegators’.',
-    paper: 'WP3 — the delegative polity',
+    paper: 'WP3 — Where Does the Power Go? (the delegative polity)',
     evidence:
       'WP3 (in the vault). The takeover threshold a* = 1 + r/u was committed before any simulation ran. Defaults are calibration choices that separate the four conditions at T = 400, not measurements. This page shows one seed.',
     modellingNotes: [
