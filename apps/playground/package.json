@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/embed.ts",
-    "./embed": "./src/embed.ts"
+    "./embed": "./src/embed.ts",
+    "./showcase": "./src/embed-showcase.ts"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -13,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test test/*.test.js",
     "smoke:browser": "node ./test/browser-smoke.mjs",
+    "smoke:showcase": "node ./test/showcase-smoke.mjs",
     "check": "pnpm test && pnpm build"
   },
   "dependencies": {

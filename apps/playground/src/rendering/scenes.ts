@@ -318,14 +318,6 @@ const economyShares: SceneRenderer<EconomyGeometry> = {
         anchor: 'middle',
       });
     }
-    const alphaX = gauge.x0 + Number(trajectory.meta.params.alpha) * (gauge.x1 - gauge.x0);
-    Sketch.plainLine(group, alphaX, gauge.y - 7, alphaX, gauge.y + 7, LABEL, 1.2);
-    Sketch.text(group, alphaX, gauge.y - 12, 'α', {
-      size: 11.5,
-      color: LABEL,
-      hand: true,
-      anchor: 'middle',
-    });
     geometry.gauge = gauge;
     return geometry;
   },

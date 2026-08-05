@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import PipelineView from './components/PipelineView';
+import PlayerIcon from './components/PlayerIcon';
 import ResizableRailHandle from './components/ResizableRailHandle';
 import ScenarioCharts from './components/ScenarioCharts';
 import ShowcaseScene from './components/ShowcaseScene';
@@ -18,17 +19,6 @@ interface Snapshot {
 }
 
 type DetailsMode = 'settings' | 'closed';
-
-function PlayerIcon({ name }: { name: string }) {
-  return (
-    <img
-      alt=""
-      aria-hidden="true"
-      className="player-icon"
-      src={`/img/icons/playground/${name}.svg`}
-    />
-  );
-}
 
 function scenarioFromLocation(): ScenarioId {
   if (typeof window === 'undefined') return 'combined';

@@ -1,0 +1,11 @@
+---
+import ShowcaseApp from '@eq-network/playground/showcase';
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import { showcasePageContent } from '@content/showcase';
+---
+
+<Layout seo={showcasePageContent.seo}>
+  <PageHeader {...showcasePageContent.header} />
+  <ShowcaseApp client:load />
+</Layout>

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import type { ScenarioId, Trajectory } from '../engine/types';
 import { scenarioScenes } from '../rendering/scenes';
+import type { ScenarioSceneCatalog } from '../rendering/types';
 
 interface Props {
   fraction: number;
@@ -8,15 +9,24 @@ interface Props {
   tick: number;
   trajectory: Trajectory;
   view: string;
+  /** Which view catalog to resolve against; /playground uses the default. */
+  catalog?: ScenarioSceneCatalog;
 }
 
-export default function ShowcaseScene({ fraction, scenario, tick, trajectory, view }: Props) {
+export default function ShowcaseScene({
+  fraction,
+  scenario,
+  tick,
+  trajectory,
+  view,
+  catalog = scenarioScenes,
+}: Props) {
   const staticRef = useRef<SVGGElement>(null);
   const dynamicRef = useRef<SVGGElement>(null);
   const layerRef = useRef<unknown>(null);
   const renderer =
-    scenarioScenes[scenario].find((candidate) => candidate.key === view)?.renderer ??
-    scenarioScenes[scenario][0].renderer;
+    catalog[scenario].find((candidate) => candidate.key === view)?.renderer ??
+    catalog[scenario][0].renderer;
   const safeTick = Math.max(0, Math.min(tick, trajectory.meta.T - 1));
   const safeFraction = Math.max(0, Math.min(fraction, 0.999));
 
