@@ -70,7 +70,7 @@ export const siteContent: SiteContent = {
       { href: '/', label: 'Home' },
       { href: '/thesis', label: 'Thesis' },
       { href: '/roadmap', label: 'Roadmap' },
-      { href: '/playground/', label: 'Playground' },
+      { href: '/showcase/', label: 'Showcase' },
       { href: '/about', label: 'About' },
     ],
   },
