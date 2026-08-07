@@ -1,0 +1,4 @@
+# PDFs are binary: never line-ending-normalize or diff them. Added when
+# git classified one hosted paper as text (task-0007); protects every
+# existing and future file under apps/site/public/pdfs/.
+*.pdf binary
