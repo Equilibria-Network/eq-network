@@ -6,6 +6,7 @@ export default function VisualEssay<State extends string>({
   document,
   Visual,
   showHeader = true,
+  anchorPrefix = 'step',
 }: VisualEssayProps<State>) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -15,7 +16,7 @@ export default function VisualEssay<State extends string>({
 
   useEffect(() => {
     setIsHydrated(true);
-    const match = window.location.hash.match(/^#step-(\d+)$/);
+    const match = window.location.hash.match(new RegExp(`^#${anchorPrefix}-(\\d+)$`));
     if (match) {
       const requested = Number(match[1]) - 1;
       setActiveIndex(Math.max(0, Math.min(document.steps.length - 1, requested)));
@@ -47,7 +48,7 @@ export default function VisualEssay<State extends string>({
       window.removeEventListener('resize', onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [document.steps.length]);
+  }, [anchorPrefix, document.steps.length]);
 
   const setStepRef = useCallback(
     (index: number) => (node: HTMLElement | null) => {
@@ -101,7 +102,7 @@ export default function VisualEssay<State extends string>({
             return (
               <article
                 key={step.id}
-                id={`step-${index + 1}`}
+                id={`${anchorPrefix}-${index + 1}`}
                 ref={setStepRef(index)}
                 data-step-index={index}
                 aria-current={activeIndex === index ? 'step' : undefined}
@@ -129,29 +130,31 @@ export default function VisualEssay<State extends string>({
         </div>
       </div>
 
-      <section className={styles.closing}>
-        <div className={styles.sectionRule}>
-          <span>{document.closingLabel}</span>
-        </div>
-        <div className={styles.closingGrid}>
-          <div>
-            <span className={styles.closingIndex}>
-              {String(document.steps.length).padStart(2, '0')} → ∞
-            </span>
-            <h2>{document.closing.headline}</h2>
-            <p>{document.closing.body}</p>
+      {document.closing && (
+        <section className={styles.closing}>
+          <div className={styles.sectionRule}>
+            <span>{document.closingLabel}</span>
           </div>
-          <div className={styles.linkGrid}>
-            {document.closing.links.map((link, index) => (
-              <a href={link.href} key={link.href}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{link.label}</strong>
-                <small>{link.description}</small>
-              </a>
-            ))}
+          <div className={styles.closingGrid}>
+            <div>
+              <span className={styles.closingIndex}>
+                {String(document.steps.length).padStart(2, '0')} → ∞
+              </span>
+              <h2>{document.closing.headline}</h2>
+              <p>{document.closing.body}</p>
+            </div>
+            <div className={styles.linkGrid}>
+              {document.closing.links.map((link, index) => (
+                <a href={link.href} key={link.href}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{link.label}</strong>
+                  <small>{link.description}</small>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

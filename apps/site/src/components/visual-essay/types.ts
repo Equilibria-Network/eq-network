@@ -24,9 +24,11 @@ export interface VisualEssayDocument<State extends string> {
   scrollPrompt: string;
   figureLabel: string;
   statusLabel: string;
-  closingLabel: string;
+  /** Required whenever `closing` is present. */
+  closingLabel?: string;
   steps: VisualEssayStep<State>[];
-  closing: {
+  /** Optional so a page can stack several essay segments and close once. */
+  closing?: {
     headline: string;
     body: string;
     links: VisualEssayLink[];
@@ -43,4 +45,8 @@ export interface VisualEssayProps<State extends string> {
   document: VisualEssayDocument<State>;
   Visual: ComponentType<VisualEssayRendererProps<State>>;
   showHeader?: boolean;
+  /** Prefix for step anchor ids (`#<prefix>-N`). Defaults to `step`; a page
+      stacking several essay segments must give each a distinct prefix so
+      anchors stay unique and deep links land on the right segment. */
+  anchorPrefix?: string;
 }
