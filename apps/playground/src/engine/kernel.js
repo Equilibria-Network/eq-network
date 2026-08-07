@@ -405,7 +405,10 @@ const POLITY_SYSTEM = {
   ],
 };
 const POLITY_SYS_TOGGLES = [];
-const LEDGER_SYSTEM = {
+// Exported for the influence-diagram traceability test (scroll prototype):
+// the reader-facing diagram's nodes and edges must map onto these declared
+// fields and transforms, so the figure cannot drift from the port.
+export const LEDGER_SYSTEM = {
   nodes: [
     { id: 'wealth', kind: 'field', family: 'node_attrs', shape: [26] },
     { id: 'last_income', kind: 'field', family: 'node_attrs', shape: [26] },

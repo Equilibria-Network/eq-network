@@ -1,4 +1,5 @@
 import { scenarioById } from '../scenarios/registry';
+import AssumptionCards from './AssumptionCards';
 import ChapterStage from './ChapterStage';
 import PlaygroundLite from './PlaygroundLite';
 import { showcaseChapters } from './script';
@@ -12,36 +13,7 @@ function ChapterBody({ chapter }: { chapter: ShowcaseChapter }) {
     return <PlaygroundLite chapter={chapter} definition={scenarioById[chapter.scenario]} />;
   }
   if (chapter.blocks) {
-    return (
-      <div className="assumption-grid">
-        {chapter.blocks.map((block, index) => (
-          <article className="assumption-block" key={block.id}>
-            <header>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{block.title}</h3>
-            </header>
-            <ol>
-              {block.assumptions.map((assumption) => (
-                <li key={assumption}>{assumption}</li>
-              ))}
-            </ol>
-            {block.input && block.output && (
-              <dl>
-                <div>
-                  <dt>In</dt>
-                  <dd>{block.input}</dd>
-                </div>
-                <div>
-                  <dt>Out</dt>
-                  <dd>{block.output}</dd>
-                </div>
-              </dl>
-            )}
-            {block.source && <p className="assumption-source">{block.source}</p>}
-          </article>
-        ))}
-      </div>
-    );
+    return <AssumptionCards blocks={chapter.blocks} />;
   }
   return null;
 }

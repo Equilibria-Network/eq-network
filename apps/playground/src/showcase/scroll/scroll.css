@@ -1,0 +1,113 @@
+/* Scroll-prototype chrome (task-0007 P1). Namespaced under .showcase-scroll;
+   everything else reuses showcase.css atoms unchanged. The essay grid and
+   step styling belong to the site's VisualEssay module. */
+
+.showcase-scroll {
+  padding-bottom: clamp(72px, 8vw, 128px);
+}
+
+.showcase-scroll .scroll-segment-head,
+.showcase-scroll .scroll-segment-intro {
+  width: min(1020px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.showcase-scroll .scroll-segment-head {
+  margin-top: clamp(64px, 9vw, 128px);
+}
+
+.showcase-scroll .scroll-segment-intro {
+  margin-bottom: clamp(24px, 4vh, 48px);
+}
+
+.showcase-scroll .scroll-interlude {
+  margin-block: clamp(48px, 7vw, 96px);
+}
+
+.showcase-scroll .scroll-interlude .eyebrow {
+  margin-bottom: 0;
+}
+
+/* The sticky figure: the stage border comes from .showcase-stage; kill the
+   chapter-flow top margin so it sits flush in the essay's figure frame. */
+.showcase-scroll .scroll-stage {
+  margin: 0;
+}
+
+/* The manual play/pause backup: autoplay on view is the default, the
+   button recovers a stage that did not start. Overlaid in the frame's
+   corner so the layout never shifts. */
+.showcase-scroll .scroll-play {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--pg-line);
+  background: var(--pg-white);
+  opacity: 0.85;
+}
+
+.showcase-scroll .scroll-play:hover,
+.showcase-scroll .scroll-play:focus-visible {
+  border-color: var(--pg-navy);
+  opacity: 1;
+}
+
+/* The diagram is taller than the run scenes; let its frame take the svg's
+   own aspect instead of the fixed clamp that would clip the legend. */
+.showcase-scroll .stage-frame-diagram {
+  height: auto;
+  max-height: none;
+  aspect-ratio: 880 / 520;
+}
+
+.showcase-scroll .scroll-diagram {
+  padding: 12px 10px 6px;
+}
+
+.showcase-scroll .scroll-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.showcase-scroll .scroll-placeholder {
+  display: grid;
+  gap: 10px;
+  place-content: center;
+  min-height: clamp(260px, 38vh, 420px);
+  padding: 32px;
+  border: 1px dashed var(--pg-line);
+  margin: 12px;
+  text-align: center;
+}
+
+.showcase-scroll .scroll-placeholder strong {
+  color: var(--pg-navy);
+  font:
+    500 13px/1.4 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.showcase-scroll .scroll-placeholder span {
+  max-width: 46ch;
+  margin-inline: auto;
+  color: var(--pg-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.showcase-scroll .scroll-prose {
+  max-width: 720px;
+}
+
+.showcase-scroll .scroll-prose p {
+  margin: 14px 0 0;
+  color: var(--pg-graphite);
+  font-size: 16px;
+  line-height: 1.65;
+}

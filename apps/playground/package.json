@@ -6,7 +6,8 @@
   "exports": {
     ".": "./src/embed.ts",
     "./embed": "./src/embed.ts",
-    "./showcase": "./src/embed-showcase.ts"
+    "./showcase": "./src/embed-showcase.ts",
+    "./showcase-scroll": "./src/embed-showcase-scroll.ts"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
