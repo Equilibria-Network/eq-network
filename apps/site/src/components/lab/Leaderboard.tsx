@@ -6,10 +6,19 @@ const { leaderboard: leaderboardUi } = labContent.ui;
 
 interface LeaderboardProps {
   leaderboard: LabContent['leaderboard'];
-  scenarios: Scenario[];
+  /** Only id and shortName are read, so reusers (the showcase scoreboard)
+      can pass a light column-name list instead of full lab scenarios. */
+  scenarios: Pick<Scenario, 'id' | 'shortName'>[];
+  /** Overrides the first-column header; defaults to the lab's "Mechanism".
+      The showcase passes "Portfolio" — its rows are compositions. */
+  firstColumnHeader?: string;
 }
 
-export default function Leaderboard({ leaderboard, scenarios }: LeaderboardProps) {
+export default function Leaderboard({
+  leaderboard,
+  scenarios,
+  firstColumnHeader,
+}: LeaderboardProps) {
   const shortNames = new Map<ScenarioId, string>(
     scenarios.map((scenario) => [scenario.id, scenario.shortName])
   );
@@ -27,7 +36,9 @@ export default function Leaderboard({ leaderboard, scenarios }: LeaderboardProps
           <table className={styles.table}>
             <thead>
               <tr>
-                <th className={styles.mechanismHeader}>{leaderboardUi.mechanismHeader}</th>
+                <th className={styles.mechanismHeader}>
+                  {firstColumnHeader ?? leaderboardUi.mechanismHeader}
+                </th>
                 {leaderboard.columns.map((columnId) => (
                   <th
                     key={columnId}

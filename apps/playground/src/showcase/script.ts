@@ -355,10 +355,28 @@ export const showcaseChapters: ShowcaseChapter[] = [
           'Every dial of every model, presets, A/B comparison, and the modelling notes behind each slider.',
       },
       {
-        href: '/research',
-        label: 'The working papers',
+        href: '/pdfs/wp1-where-does-the-money-go.pdf',
+        label: 'WP1 — Where Does the Money Go? (PDF)',
         description:
-          'Each subsystem model is specified by a paper: where the money, the votes, and the attention go.',
+          'The capital-economy model behind the money section: assumptions, the survival threshold, and its validation.',
+      },
+      {
+        href: '/pdfs/wp2-who-fills-your-head.pdf',
+        label: 'WP2 — Who Fills Your Head? (PDF)',
+        description:
+          'The listening-network model behind the attention section: pooling, amplification, and the defences aimed at attention itself.',
+      },
+      {
+        href: '/pdfs/wp3-where-does-the-power-go.pdf',
+        label: 'WP3 — Where Does the Power Go? (PDF)',
+        description:
+          'The delegative-polity model behind the votes section: conserved ballots, the power-weighted median, and the takeover threshold.',
+      },
+      {
+        href: '/pdfs/cilib-whitepaper.pdf',
+        label: 'The CI Library whitepaper (PDF)',
+        description:
+          'The framework all of this runs on: the engine, the contribution protocol, the measurement layer, and when a result may be believed.',
       },
       {
         href: 'https://github.com/eq-network/Collective-Intelligence-Library',

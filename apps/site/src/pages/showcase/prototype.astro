@@ -2,10 +2,10 @@
 import ShowcaseScroll from '@components/showcase/ShowcaseScroll';
 import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@components/layout/PageHeader.astro';
-import { showcasePageContent } from '@content/showcase';
+import { showcaseScrollPrototypeContent } from '@content/showcase-prototype';
 ---
 
-<Layout seo={showcasePageContent.seo}>
-  <PageHeader {...showcasePageContent.header} />
+<Layout seo={showcaseScrollPrototypeContent.seo}>
+  <PageHeader {...showcaseScrollPrototypeContent.header} />
   <ShowcaseScroll client:load />
 </Layout>

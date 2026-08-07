@@ -195,16 +195,10 @@ export const combinedAdapter: NetworkAdapter = {
         rot: 11,
       });
     });
-    Sketch.text(
-      group,
-      852,
-      26,
-      `the connections cost the people ${Math.max(
-        0,
-        Math.round(trajectory.global.transfer_gap[tick] * 100)
-      )} points`,
-      { size: 12, color: NAVY, hand: true, anchor: 'end' }
-    );
+    // The transfer-gap corner annotation ("the connections cost the people
+    // N points") was removed on owner direction (2026-08-07): a live
+    // magnitude with no context reads as nonsense, and the claims
+    // discipline keeps magnitudes out of scene chrome anyway.
   },
 };
 
