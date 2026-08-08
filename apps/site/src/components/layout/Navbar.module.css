@@ -76,6 +76,63 @@
   color: var(--color-primary);
 }
 
+/* Dropdown group */
+.navGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navGroupTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  min-width: 10rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.navGroup:hover .dropdown,
+.navGroup:focus-within .dropdown,
+.navGroupOpen .dropdown {
+  display: flex;
+}
+
+.dropdownLink {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition:
+    background var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+}
+
+.dropdownLink:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+}
+
 /* Mobile Menu Button */
 .menuButton {
   display: none;
@@ -112,6 +169,26 @@
 
 .mobileNavLink:hover {
   background: rgba(0, 0, 0, 0.05);
+}
+
+.mobileNavGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobileNavGroupLabel {
+  margin: 0;
+  padding: 0.75rem 1rem 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.mobileNavSubLink {
+  padding-left: 1.75rem;
 }
 
 /* Mobile Responsive */

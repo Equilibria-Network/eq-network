@@ -42,6 +42,13 @@ jobs:
       - name: ESLint
         run: pnpm lint
 
+      # Site tests: ajv validation of the engine-exported explainer fixtures
+      # plus the explainer contracts (fixture refs, schedule golden, purity
+      # guard). Scoped to the site app; widening to `pnpm test` would newly
+      # gate the playground suite and is an owner call.
+      - name: Site tests (explainer fixtures + contracts)
+        run: pnpm --filter @eq-network/site test
+
       - name: Build
         env:
           PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}

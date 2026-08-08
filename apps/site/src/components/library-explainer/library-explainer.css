@@ -1,0 +1,907 @@
+/* CI Library explainer — namespaced under .libx-*, tokens from variables.css.
+   The VisualEssay shell brings its own module styles; this file covers the
+   segment chrome and the artifact scenes. */
+
+.libx {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding-bottom: 4rem;
+}
+
+.libx-segment-head {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.libx-eyebrow {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary, #003b7e);
+  margin-bottom: 0.4rem;
+}
+
+.libx-segment-head h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.libx-segment-intro {
+  max-width: 720px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+  color: var(--diagram-graphite, #263743);
+  line-height: 1.6;
+}
+
+/* --- shared scene chrome ------------------------------------------------- */
+
+.libx-scene {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100%;
+}
+
+.libx-scene svg {
+  width: 100%;
+  height: auto;
+}
+
+.libx-caption {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 72%, transparent);
+  margin: 0;
+}
+
+.libx-formula {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.9rem;
+  color: var(--diagram-graphite, #263743);
+  margin: 0;
+}
+
+/* --- schedule grid -------------------------------------------------------- */
+
+.libx-tickgrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.libx-tick {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 30%, transparent);
+  background: transparent;
+}
+
+.libx-tick-on {
+  background: var(--color-blue-accent, #4ab3f4);
+  border-color: var(--color-primary, #003b7e);
+}
+
+.libx-dials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.6rem;
+}
+
+.libx-dials label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--diagram-graphite, #263743);
+}
+
+.libx-dials input[type='range'] {
+  width: 130px;
+  accent-color: var(--color-primary, #003b7e);
+}
+
+/* --- transform cards ------------------------------------------------------ */
+
+.libx-cards {
+  gap: 0.8rem;
+}
+
+.libx-card {
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 22%, transparent);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  background: var(--bg-surface, #fff);
+}
+
+.libx-card-name {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0 0 0.6rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+}
+
+.libx-card-name b {
+  font-size: 1rem;
+  color: var(--text-color, #000);
+}
+
+.libx-card-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.libx-card-effects > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.libx-effects-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+  min-width: 3.4rem;
+}
+
+.libx-effect {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.libx-effect-read {
+  background: color-mix(in srgb, var(--diagram-field-css, #246fad) 12%, transparent);
+  border-color: color-mix(in srgb, var(--diagram-field-css, #246fad) 45%, transparent);
+}
+
+.libx-effect-write {
+  background: color-mix(in srgb, var(--diagram-uncertain, #a76500) 12%, transparent);
+  border-color: color-mix(in srgb, var(--diagram-uncertain, #a76500) 50%, transparent);
+}
+
+/* --- batch board ----------------------------------------------------------- */
+
+.libx-chiprow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.libx-chip {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 35%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 65%, transparent);
+  cursor: pointer;
+}
+
+.libx-chip-on {
+  background: var(--color-primary, #003b7e);
+  border-color: var(--color-primary, #003b7e);
+  color: #fff;
+}
+
+.libx-chip-sched {
+  font-size: 0.68rem;
+  margin-left: 0.45rem;
+  opacity: 0.75;
+}
+
+.libx-batches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 8.6rem;
+}
+
+.libx-batch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px dashed color-mix(in srgb, var(--color-primary, #003b7e) 40%, transparent);
+  border-radius: 8px;
+}
+
+.libx-batch-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 55%, transparent);
+  min-width: 4.4rem;
+}
+
+.libx-batch-item {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.82rem;
+  background: color-mix(in srgb, var(--color-blue-accent, #4ab3f4) 18%, transparent);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+}
+
+.libx-hazards {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 75%, transparent);
+}
+
+.libx-hazard {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0 0.35rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+
+.libx-hazard-raw {
+  background: color-mix(in srgb, var(--diagram-cooperate, #177a57) 15%, transparent);
+}
+
+.libx-hazard-war {
+  background: color-mix(in srgb, var(--diagram-uncertain, #a76500) 15%, transparent);
+}
+
+.libx-hazard-waw {
+  background: color-mix(in srgb, var(--diagram-defect, #c4433a) 15%, transparent);
+}
+
+/* --- system graph ---------------------------------------------------------- */
+
+.libx-system .libx-edge-read {
+  fill: none;
+  stroke: color-mix(in srgb, var(--diagram-graphite, #263743) 30%, transparent);
+  stroke-width: 1;
+}
+
+.libx-system .libx-edge-write {
+  fill: none;
+  stroke: color-mix(in srgb, var(--diagram-field-css, #246fad) 65%, transparent);
+  stroke-width: 1.6;
+}
+
+.libx-field circle {
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-field text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-field-dim {
+  opacity: 0.38;
+}
+
+.libx-transform rect {
+  fill: color-mix(in srgb, var(--color-primary, #003b7e) 7%, #fff);
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.2;
+}
+
+.libx-transform text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  fill: var(--text-color, #000);
+}
+
+/* --- run chart -------------------------------------------------------------- */
+
+.libx-chart {
+  position: relative;
+}
+
+.libx-grid {
+  stroke: color-mix(in srgb, var(--diagram-graphite, #263743) 12%, transparent);
+  stroke-width: 1;
+}
+
+.libx-axis {
+  stroke: color-mix(in srgb, var(--diagram-graphite, #263743) 45%, transparent);
+  stroke-width: 1;
+}
+
+.libx-axis-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  fill: color-mix(in srgb, var(--diagram-graphite, #263743) 65%, transparent);
+}
+
+.libx-axis-title {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  fill: color-mix(in srgb, var(--diagram-graphite, #263743) 75%, transparent);
+}
+
+.libx-line {
+  fill: none;
+  stroke-width: 2;
+}
+
+.libx-endlabel text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-tooltip {
+  position: absolute;
+  top: 0.4rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: var(--bg-surface, #fff);
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 25%, transparent);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--diagram-graphite, #263743);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
+
+.libx-tooltip-t {
+  font-weight: 600;
+}
+
+.libx-tooltip-mark {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 0.35rem;
+}
+
+.libx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--diagram-graphite, #263743);
+}
+
+/* --- slot filler ------------------------------------------------------------ */
+
+.libx-equation {
+  font-size: 1.05rem;
+}
+
+.libx-slot {
+  padding: 0 0.2rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.libx-slot-message,
+.libx-slot-message-row dt {
+  background: color-mix(in srgb, var(--diagram-field-css, #246fad) 16%, transparent);
+}
+
+.libx-slot-combine,
+.libx-slot-combine-row dt {
+  background: color-mix(in srgb, var(--diagram-uncertain, #a76500) 16%, transparent);
+}
+
+.libx-slot-update,
+.libx-slot-update-row dt {
+  background: color-mix(in srgb, var(--diagram-cooperate, #177a57) 16%, transparent);
+}
+
+.libx-slot-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.libx-slot-table > div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+
+.libx-slot-table dt {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.74rem;
+  min-width: 12.5rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  color: var(--diagram-graphite, #263743);
+}
+
+.libx-slot-table dd {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* --- state layers ------------------------------------------------------------ */
+
+.libx-layer {
+  border: 1px solid color-mix(in srgb, var(--color-primary, #003b7e) 25%, transparent);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  background: color-mix(in srgb, var(--color-primary, #003b7e) 4%, #fff);
+  transition: opacity 0.3s ease;
+}
+
+.libx-layer-dim {
+  opacity: 0.35;
+}
+
+.libx-layer-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+
+/* --- sketches ---------------------------------------------------------------- */
+
+.libx-sketch {
+  margin: 1.2rem 0 0;
+}
+
+.libx-sketch img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 15%, transparent);
+}
+
+.libx-sketch figcaption {
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+  margin-top: 0.35rem;
+}
+
+/* --- prose interlude --------------------------------------------------------- */
+
+.libx-prose-blocks {
+  max-width: 720px;
+  margin: 1.4rem auto 0;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.libx-prose-block {
+  border-top: 3px solid var(--color-primary, #003b7e);
+  padding-top: 0.6rem;
+}
+
+.libx-prose-block h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.02rem;
+}
+
+.libx-prose-block p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--diagram-graphite, #263743);
+}
+
+.libx-prose-coda {
+  margin-top: 1.2rem;
+}
+
+/* --- categorical diagrams ------------------------------------------------------ */
+
+.libx-cat-object circle {
+  fill: color-mix(in srgb, var(--color-primary, #003b7e) 7%, #fff);
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.4;
+}
+
+.libx-cat-object text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-cat-arrow {
+  fill: none;
+  stroke: color-mix(in srgb, var(--diagram-graphite, #263743) 65%, transparent);
+  stroke-width: 1.4;
+}
+
+.libx-cat-arrowhead {
+  fill: color-mix(in srgb, var(--diagram-graphite, #263743) 75%, transparent);
+}
+
+.libx-cat-arrow-composite {
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+
+.libx-cat-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-cat-label-composite {
+  fill: var(--color-primary, #003b7e);
+  font-weight: 700;
+}
+
+.libx-cat-box {
+  fill: none;
+  stroke-width: 1.2;
+}
+
+.libx-cat-box-read {
+  fill: color-mix(in srgb, var(--diagram-field-css, #246fad) 8%, transparent);
+  stroke: color-mix(in srgb, var(--diagram-field-css, #246fad) 55%, transparent);
+}
+
+.libx-cat-box-write {
+  fill: color-mix(in srgb, var(--diagram-uncertain, #a76500) 8%, transparent);
+  stroke: color-mix(in srgb, var(--diagram-uncertain, #a76500) 55%, transparent);
+}
+
+.libx-cat-boxlabel {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+}
+
+.libx-cat-field {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-cat-brace {
+  fill: none;
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.2;
+}
+
+/* --- code panel --------------------------------------------------------------- */
+
+.libx-codepanel {
+  border: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 22%, transparent);
+  border-radius: 8px;
+  margin-top: 0.9rem;
+  background: var(--bg-surface, #fff);
+}
+
+.libx-codepanel summary {
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.55rem 0.8rem;
+  color: var(--color-primary, #003b7e);
+}
+
+.libx-codepanel pre {
+  margin: 0;
+  padding: 0.8rem;
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--diagram-graphite, #263743) 5%, #fff);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.libx-codepanel code {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.libx-codepanel-footer {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+  padding: 0.45rem 0.8rem;
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 12%, transparent);
+}
+
+.libx-codepanel-footer a {
+  color: var(--color-primary, #003b7e);
+}
+
+.libx-codepanel-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0.45rem 0.8rem 0;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+}
+
+.libx-code-field {
+  font-size: 0.72rem;
+  padding: 0 0.35rem;
+}
+
+.libx-code-marker {
+  font-weight: 700;
+}
+
+.libx-code-marker-read {
+  color: var(--diagram-field-css, #246fad);
+}
+
+.libx-code-marker-write {
+  color: var(--diagram-uncertain, #a76500);
+}
+
+.libx-code-decorator {
+  font-weight: 700;
+  color: var(--color-primary, #003b7e);
+}
+
+/* --- message-passing picture -------------------------------------------------- */
+
+.libx-mp-picture .libx-mp-node {
+  fill: color-mix(in srgb, var(--color-primary, #003b7e) 10%, #fff);
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.4;
+}
+
+.libx-mp-picture .libx-mp-receiver {
+  fill: color-mix(in srgb, var(--color-blue-accent, #4ab3f4) 30%, #fff);
+  stroke-width: 2;
+}
+
+.libx-mp-picture .libx-mp-edge {
+  stroke: color-mix(in srgb, var(--diagram-graphite, #263743) 40%, transparent);
+  stroke-width: 1.2;
+}
+
+.libx-mp-picture .libx-mp-message {
+  fill: color-mix(in srgb, var(--diagram-field-css, #246fad) 18%, #fff);
+  stroke: var(--diagram-field-css, #246fad);
+}
+
+.libx-mp-picture .libx-mp-combine {
+  fill: color-mix(in srgb, var(--diagram-uncertain, #a76500) 16%, #fff);
+  stroke: var(--diagram-uncertain, #a76500);
+  stroke-width: 1.4;
+}
+
+.libx-mp-picture .libx-mp-gamma {
+  fill: color-mix(in srgb, var(--diagram-cooperate, #177a57) 16%, #fff);
+  stroke: var(--diagram-cooperate, #177a57);
+}
+
+.libx-mp-picture .libx-mp-update {
+  fill: none;
+  stroke: var(--diagram-cooperate, #177a57);
+  stroke-width: 1.6;
+}
+
+.libx-mp-picture .libx-mp-arrowhead {
+  fill: var(--diagram-cooperate, #177a57);
+}
+
+.libx-mp-picture .libx-mp-symbol {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-mp-picture .libx-mp-nodelabel {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  fill: var(--diagram-graphite, #263743);
+}
+
+.libx-mp-picture .libx-mp-caption {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  fill: color-mix(in srgb, var(--diagram-graphite, #263743) 60%, transparent);
+}
+
+/* --- schedule timeline --------------------------------------------------------- */
+
+.libx-timeline-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-x: auto;
+}
+
+.libx-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.libx-timeline-row .libx-tick {
+  width: 13px;
+  height: 13px;
+  flex: none;
+}
+
+.libx-timeline-name {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  min-width: 9.5rem;
+  color: var(--diagram-graphite, #263743);
+}
+
+.libx-timeline-live .libx-timeline-name {
+  font-weight: 700;
+  color: var(--color-primary, #003b7e);
+}
+
+.libx-timeline-live .libx-tick-on {
+  background: var(--color-primary, #003b7e);
+}
+
+.libx-timeline-axis .libx-timeline-ticklabel {
+  width: 13px;
+  flex: none;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.58rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 55%, transparent);
+  text-align: left;
+  margin-right: 3px;
+}
+
+/* --- graph-matrix scenes -------------------------------------------------------- */
+
+.libx-gm-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.libx-gm-pair figure {
+  flex: 1 1 220px;
+  margin: 0;
+}
+
+.libx-gm-pair figcaption {
+  font-size: 0.76rem;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 62%, transparent);
+  margin-top: 0.3rem;
+}
+
+.libx-gm-edge {
+  stroke: var(--diagram-graphite, #263743);
+  stroke-width: 0.7;
+}
+
+.libx-gm-edge-hot {
+  stroke: var(--color-primary, #003b7e);
+  stroke-width: 1.6;
+}
+
+.libx-gm-node {
+  stroke: #fff;
+  stroke-width: 0.8;
+}
+
+.libx-gm-node-ai {
+  stroke: var(--diagram-defect, #c4433a);
+  stroke-width: 2;
+}
+
+.libx-gm-cell {
+  fill: var(--color-primary, #003b7e);
+}
+
+.libx-gm-cell-hot {
+  fill: none;
+  stroke: var(--diagram-defect, #c4433a);
+  stroke-width: 1.2;
+}
+
+.libx-gm-eig {
+  stroke: color-mix(in srgb, var(--color-primary, #003b7e) 55%, transparent);
+  stroke-width: 2;
+}
+
+.libx-gm-eig-gap {
+  stroke: var(--diagram-defect, #c4433a);
+  stroke-width: 3;
+}
+
+.libx-gm-gaplabel {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  fill: var(--diagram-defect, #c4433a);
+}
+
+.libx-gm-stats {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.libx-gm-stats p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.libx-gm-stats b {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.libx-tooltip-ring {
+  background: transparent;
+  border: 2px solid var(--diagram-defect, #c4433a);
+  border-radius: 50%;
+}
+
+/* --- whitepaper closing ------------------------------------------------------ */
+
+.libx-whitepaper-link {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--color-primary, #003b7e);
+  border-radius: 8px;
+  color: var(--color-primary, #003b7e);
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.libx-whitepaper-link:hover {
+  background: var(--color-primary, #003b7e);
+  color: #fff;
+}
+
+/* --- provenance footer ------------------------------------------------------ */
+
+.libx-provenance {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--diagram-graphite, #263743) 65%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--diagram-graphite, #263743) 15%, transparent);
+  padding-top: 1.2rem;
+}

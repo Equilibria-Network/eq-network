@@ -10,6 +10,14 @@ export interface NavLink {
   external?: boolean;
 }
 
+/** A top-level nav entry: a direct link, or a labelled dropdown of links. */
+export interface NavItem {
+  label: string;
+  href?: string;
+  external?: boolean;
+  children?: NavLink[];
+}
+
 export interface SocialLink {
   name: string;
   icon: string;
@@ -21,7 +29,7 @@ export interface SiteContent {
   skipToContent: string;
   nav: {
     toggleMenuLabel: string;
-    links: NavLink[];
+    links: NavItem[];
   };
   /** Screen-reader-only page titles for routes whose design has no visible <h1>. */
   pageTitles: {
@@ -70,7 +78,13 @@ export const siteContent: SiteContent = {
       { href: '/', label: 'Home' },
       { href: '/thesis', label: 'Thesis' },
       { href: '/roadmap', label: 'Roadmap' },
-      { href: '/showcase/', label: 'Showcase' },
+      {
+        label: 'CI Library',
+        children: [
+          { href: '/showcase/', label: 'Showcase' },
+          { href: '/library/explanation/', label: 'Explanation' },
+        ],
+      },
       { href: '/about', label: 'About' },
     ],
   },

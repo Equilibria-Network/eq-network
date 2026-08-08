@@ -1,6 +1,6 @@
 // src/components/layout/Navbar.tsx
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { siteContent } from '@content/site';
 import styles from './Navbar.module.css';
 
@@ -11,6 +11,7 @@ interface NavbarProps {
 export default function Navbar({ currentPath = '/' }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   // Check if we're on the home page
   const isHomePage = currentPath === '/';
@@ -49,11 +50,36 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
 
         {/* Desktop Navigation */}
         <div className={styles.desktopNav}>
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className={styles.navLink}>
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.children ? (
+              <div
+                key={link.label}
+                className={`${styles.navGroup} ${openGroup === link.label ? styles.navGroupOpen : ''}`}
+              >
+                <button
+                  type="button"
+                  className={`${styles.navLink} ${styles.navGroupTrigger}`}
+                  aria-haspopup="true"
+                  aria-expanded={openGroup === link.label}
+                  onClick={() => setOpenGroup(openGroup === link.label ? null : link.label)}
+                >
+                  {link.label}
+                  <ChevronDown size={14} aria-hidden="true" />
+                </button>
+                <div className={styles.dropdown}>
+                  {link.children.map((child) => (
+                    <a key={child.href} href={child.href} className={styles.dropdownLink}>
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a key={link.label} href={link.href} className={styles.navLink}>
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -69,16 +95,32 @@ export default function Navbar({ currentPath = '/' }: NavbarProps) {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={styles.mobileNavLink}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.children ? (
+              <div key={link.label} className={styles.mobileNavGroup}>
+                <p className={styles.mobileNavGroupLabel}>{link.label}</p>
+                {link.children.map((child) => (
+                  <a
+                    key={child.href}
+                    href={child.href}
+                    className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className={styles.mobileNavLink}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
       )}
     </nav>

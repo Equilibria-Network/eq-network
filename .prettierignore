@@ -11,3 +11,6 @@ apps/site/prototypes/playground.html
 
 # Static assets
 apps/site/public/
+
+# Engine-exported fixtures (checksummed artifacts — never reformat)
+apps/site/src/data/library-explainer/

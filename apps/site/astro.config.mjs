@@ -14,7 +14,11 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.endsWith('/404/') && !page.includes('/explainer/'),
+      filter: (page) =>
+        !page.endsWith('/404/') &&
+        !page.includes('/explainer/') &&
+        // promoted to /library/explanation 2026-08-08; the prototype route stays unlisted
+        !page.includes('/library/prototype'),
     }),
   ],
   site: 'https://eq-network.org',

@@ -1,0 +1,11 @@
+---
+import LibraryExplainer from '@components/library-explainer/LibraryExplainer';
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import { libraryPrototypeContent } from '@content/library-prototype';
+---
+
+<Layout seo={libraryPrototypeContent.seo}>
+  <PageHeader {...libraryPrototypeContent.header} />
+  <LibraryExplainer client:load />
+</Layout>
