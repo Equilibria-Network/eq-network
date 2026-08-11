@@ -1,0 +1,12 @@
+---
+// src/pages/roadmap/prototype.astro
+// No-index prototype of the six-track development pipeline (task-0009).
+// The canonical /roadmap stays unchanged until owner approval.
+import Layout from '@/layouts/Layout.astro';
+import PipelinePrototype from '@components/roadmap/PipelinePrototype.astro';
+import { pipelinePrototypeContent } from '@content/roadmap/tracks';
+---
+
+<Layout seo={pipelinePrototypeContent.seo}>
+  <PipelinePrototype />
+</Layout>

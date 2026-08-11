@@ -1,0 +1,13 @@
+---
+// src/pages/library/roadmap.astro
+// Canonical CI Library development roadmap ("Dev Roadmap" in the nav).
+// /roadmap/prototype stays as the unlisted prototype rendering the same
+// component, per the prototype-programme promotion pattern.
+import Layout from '@/layouts/Layout.astro';
+import PipelinePrototype from '@components/roadmap/PipelinePrototype.astro';
+import { libraryRoadmapContent } from '@content/roadmap/tracks';
+---
+
+<Layout seo={libraryRoadmapContent.seo}>
+  <PipelinePrototype />
+</Layout>

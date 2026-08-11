@@ -83,6 +83,7 @@ export const siteContent: SiteContent = {
         children: [
           { href: '/showcase/', label: 'Showcase' },
           { href: '/library/explanation/', label: 'Explanation' },
+          { href: '/library/roadmap/', label: 'Dev Roadmap' },
         ],
       },
       { href: '/about', label: 'About' },
