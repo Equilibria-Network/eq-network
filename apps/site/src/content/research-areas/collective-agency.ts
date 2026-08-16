@@ -1,0 +1,210 @@
+// src/content/research-areas/collective-agency.ts
+import type { ResearchArea } from './types';
+
+export const collectiveAgency: ResearchArea = {
+  id: 'collective-agency',
+  index: 1,
+  eyebrow: 'AREA 01 / COLLECTIVE AGENCY',
+  name: 'When do many become one?',
+  oneLiner: 'What makes a group of agents count as one agent, and where its boundary sits.',
+  intro: [
+    'A market, an ant colony, a research field, a company. Each is made of parts that act on their own. Yet we talk about each as if it were one thing with its own goals. Sometimes that is a figure of speech. Sometimes it is literally true, and the whole has a state of its own that the parts do not.',
+    'This area asks when the second case holds. It is the foundation for everything else on this page. You cannot ask how a collective moves, or how to govern one, until you can say what counts as one.',
+  ],
+  figureLabel: 'Fig. 01 / many becoming one',
+  steps: [
+    {
+      state: 'question',
+      stageLabel: 'The question',
+      headline: 'Sixteen agents. How many things is that?',
+      body: 'Draw a handful of agents and the links between them. Every field has a name for what happens next. Biology says organism. Economics says firm. Physics says phase. Each of them draws a boundary around some of the dots and calls the inside one thing. The question is what licenses that move.',
+    },
+    {
+      state: 'why',
+      stageLabel: 'Why it matters',
+      headline: 'A boundary is a claim, and most claims are never checked',
+      body: 'Once you draw the boundary, you start assigning it goals, beliefs, and blame. That is how we talk about companies and states, and increasingly about groups of AI systems. If the boundary is in the wrong place, the whole story built on top of it is wrong. Our work treats the boundary as something to test: which parts move together, and does the whole behave as if it has a state the parts do not?',
+    },
+    {
+      state: 'shape',
+      stageLabel: 'How it looks',
+      headline: 'Parts that move together, and a whole that gets its own state',
+      body: 'The picture we work from has three layers. Agents at the bottom. Groups whose members are coupled tightly enough that they change together. And, sometimes, a whole made of those groups that has properties none of them have alone. Our papers give this an information-flow reading: a group is one agent for a given task once information moves through it faster than the task needs it to react.',
+    },
+    {
+      state: 'open',
+      stageLabel: 'What is open',
+      headline: 'Where exactly does the threshold sit?',
+      body: 'The criterion is stated. What is not settled is where the line falls in real systems, and how to detect it from the outside without already assuming the answer. That is what the current drafts work on: a formation criterion tested on simulated networks, and boundary-finding methods borrowed from graph theory.',
+    },
+  ],
+  pieces: [
+    {
+      id: 'models-of-society',
+      title: 'Models of Society Are Built on Models of Agents',
+      kind: 'post',
+      status: 'published',
+      year: 2026,
+      venue: 'Substack',
+      asks: 'What does a story about the future quietly assume about the agents in it?',
+      setup:
+        'An essay, the first post of the process-alignment series. It argues that every model of society inherits the model of the agent underneath it.',
+      href: 'https://equilibria1.substack.com/p/stories-of-the-future-are-undermined',
+    },
+    {
+      id: 'phylogeny-of-agents',
+      title: 'A Phylogeny of Agents',
+      kind: 'post',
+      status: 'published',
+      year: 2025,
+      venue: 'LessWrong',
+      asks: 'How did agency evolve, and what does that history say about which agents appear next?',
+      setup:
+        'An essay that traces agency from cells to institutions to AI systems as one family tree.',
+      href: 'https://www.lesswrong.com/posts/vqfT5QCWa66gsfziB/a-phylogeny-of-agents',
+    },
+    {
+      id: 'taxonomy-of-agents',
+      title: 'A Taxonomy of Agents From the Intentional Stance',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Why do biology, economics, and AI disagree about what counts as an agent?',
+      setup:
+        'A conceptual synthesis. It lines the fields up side by side and sorts the agent concepts each one uses.',
+      href: '/pdfs/taxonomy-of-agents.pdf',
+    },
+    {
+      id: 'open-questions-caf',
+      title: 'Open Questions in Collective Agent Foundations',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2025,
+      asks: 'When does a group of parts become one agent with goals of its own?',
+      setup:
+        'A map of open problems, written to invite collaboration rather than to settle anything.',
+      href: '/pdfs/open-questions-caf.pdf',
+    },
+    {
+      id: 'collective-agent-foundations',
+      title: 'Collective Agent Foundations',
+      kind: 'paper',
+      status: 'in-progress',
+      year: 2026,
+      asks: 'When does a group count as one agent, and when does that boundary break apart again?',
+      setup:
+        'A survey in progress that joins evolution and information theory around one idea: a group is one agent for a task once information crosses it faster than the task needs.',
+    },
+    {
+      id: 'when-do-many-become-one',
+      title: 'When Do Many Become One?',
+      kind: 'paper',
+      status: 'draft',
+      year: 2026,
+      asks: 'Is there a checkable criterion for when interacting agents form one collective agent?',
+      setup:
+        'A formal criterion built on spectral graph theory (reading a network through its vibration modes), tested on simulated networks.',
+    },
+    {
+      id: 'langlands-ci',
+      title: 'Towards a Langlands Program for Collective Intelligence',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Can the ways game theory, physics, and social science describe group behaviour be translated into each other?',
+      setup:
+        'A proposal, in the language of category theory (the mathematics of structure-preserving maps), for a set of correspondences between those descriptions.',
+      href: '/pdfs/towards-langlands-ci.pdf',
+    },
+    {
+      id: 'convergent-structures',
+      title: 'Convergent Structures in Collective Intelligence',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Are markets, networks, and democracies near-optimal structures rather than historical accidents?',
+      setup:
+        'A formal framework linking those structures to network theory and information theory.',
+      href: '/pdfs/convergent-structures.pdf',
+    },
+    {
+      id: 'markov-blanket-mincut',
+      title: 'Markov Blanket Discovery via Minimum Cut',
+      kind: 'paper',
+      status: 'working-paper',
+      asks: 'Can a classic graph-cutting algorithm find the natural statistical boundary of a system?',
+      setup:
+        'A short formal note: definitions plus one proved proposition linking Markov blankets (statistical boundaries) to minimum cuts in a graph.',
+      href: '/pdfs/markov-blanket-mincut.pdf',
+    },
+    {
+      id: 'agent-id-tpm',
+      title: 'Agent Identification through TPMs and Markov Blankets',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Can we detect where the agents are inside a system instead of assuming their boundaries?',
+      setup:
+        'A method that combines causal-emergence analysis (finding the scale with the most causal power) with structure learning on graphs.',
+      href: '/pdfs/agent-id-tpm.pdf',
+    },
+    {
+      id: 'natural-history-agency',
+      title: 'A Natural History of Agency',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2025,
+      asks: 'Can one principle explain why agency evolves in living and artificial systems alike?',
+      setup: 'A formal argument from stated assumptions about evolution and prediction.',
+      href: '/pdfs/natural-history-agency.pdf',
+    },
+    {
+      id: 'scalar-agency',
+      title: 'Scalar Properties of Agency',
+      kind: 'note',
+      status: 'notes',
+      year: 2025,
+      asks: 'Can traits like memory or planning be measured on a scale rather than as yes or no?',
+      setup: 'An experimental section that recasts agent traits as continuous quantities.',
+      href: '/pdfs/scalar-agency.pdf',
+    },
+    {
+      id: 'cultural-evolution-tools',
+      title: 'Cultural Evolution of Cognitive Tools in Multi-Agent AI Systems',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2025,
+      asks: 'What happens when AI agents discover and share tools the way cultures pass down ideas?',
+      setup:
+        'A framework proposal that models the agents and their shared toolkit as two systems evolving together.',
+      href: '/pdfs/cultural-evolution-cognitive.pdf',
+    },
+  ],
+  figure: {
+    title: 'Sixteen agents, grouped into two coupled clusters and one whole',
+    description:
+      'Open circles are agents. Solid links are couplings. Dashed links are exchange with the outside. A dashed loop is a candidate boundary. A solid loop is a group that acts as one. In the last beat the outer boundary is only partly drawn, marking the open question of where the threshold sits.',
+    captions: {
+      question: 'many agents. how many things?',
+      why: 'a boundary is a claim',
+      shape: 'parts move together, the whole gets a state',
+      open: 'where does the line fall?',
+    },
+    annotations: {
+      groupA: 'one',
+      groupB: 'one',
+      whole: 'one?',
+      questionNote: 'every field draws the loop somewhere',
+      whyNote: 'the loop is a claim:\ndo these move together?',
+      shapeNote: 'coupling inside is stronger than exchange outside',
+      openNote: 'the criterion is stated. the threshold in real systems is not.',
+    },
+    legend: [
+      { glyph: 'circle', label: 'agent' },
+      { glyph: 'line', label: 'coupling' },
+      { glyph: 'dashed-line', label: 'exchange outside' },
+      { glyph: 'dashed-loop', label: 'candidate boundary' },
+      { glyph: 'solid-loop', label: 'acts as one' },
+    ],
+  },
+};

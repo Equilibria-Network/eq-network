@@ -1,0 +1,204 @@
+// src/content/research-areas/governance.ts
+import type { ResearchArea } from './types';
+
+export const governance: ResearchArea = {
+  id: 'governance',
+  index: 3,
+  eyebrow: 'AREA 03 / ADAPTIVE INSTITUTIONS',
+  name: 'Who absorbs the shocks?',
+  oneLiner:
+    'Institutions as regulators: how much variety they need, and what happens when they cannot keep up.',
+  intro: [
+    'A group that acts as one still lives in a world that keeps hitting it. Prices move, technologies arrive, someone defects. Institutions are the parts of a society whose job is to absorb those shocks: courts, markets, voting rules, norms. Ashby’s old law says a regulator needs at least as much variety as the disturbances it faces. Variety here means the number of distinct responses a system can produce.',
+    'AI systems change what institutions face. They add actors that adapt faster than the rules around them update. This area asks how institutions can keep their variety, how they get captured, and how a rule system can change its own rules without losing itself.',
+  ],
+  figureLabel: 'Fig. 03 / a regulator and its variety',
+  steps: [
+    {
+      state: 'question',
+      stageLabel: 'The question',
+      headline: 'Shocks arrive faster than rules change',
+      body: 'Picture a row of people, and disturbances coming in from the side. Each shock needs a response. Left alone, each person absorbs what they can and passes the rest on. The question a society answers, one way or another, is who holds the responses that no single person can.',
+    },
+    {
+      state: 'why',
+      stageLabel: 'Why it matters',
+      headline: 'A regulator needs as much variety as what hits it',
+      body: 'Put an institution above the row. It regulates: it takes in what is happening and pushes responses back down. Ashby’s law says this works only if the institution can produce at least as many distinct responses as there are distinct shocks. When the shocks gain variety, as they do when fast-adapting AI actors join, an institution that keeps its old rule set falls behind. That is the failure mode we model.',
+    },
+    {
+      state: 'shape',
+      stageLabel: 'How it looks',
+      headline: 'An institution that can change its own rules',
+      body: 'The picture we work from adds a second layer: something above the institution that can rewire it. Constitutions do this. So do the meta-rules of a commons, and the process by which a scientific field changes what counts as evidence. Signals go up. Rewiring comes down. The papers here ask what makes that loop adaptive rather than frozen or captured.',
+    },
+    {
+      state: 'open',
+      stageLabel: 'What is open',
+      headline: 'Capture and lock-in are the same loop gone wrong',
+      body: 'The open questions live at the top of the picture. If one actor gets a strong path into the rule-maker, the loop becomes capture. If the rewiring stops, it becomes lock-in. We do not yet have a clean measure that separates a healthy adaptive loop from those two. The current drafts propose candidate variety measures and a dynamic version of Ashby’s law, and they say clearly that nothing there is established yet.',
+    },
+  ],
+  pieces: [
+    {
+      id: 'requisite-variety-emergence',
+      title: 'Requisite variety emergence (working title)',
+      kind: 'paper',
+      status: 'draft',
+      year: 2026,
+      asks: 'Why can an economy stay regulated when no single regulator could track everything in it?',
+      setup:
+        'A theory paper that joins Ashby’s requisite variety to Ostrom’s polycentric governance. The link is measured with effective information (an information-theory measure of causal power) on a computed synthetic network.',
+    },
+    {
+      id: 'adaptive-institutions',
+      title: 'Adaptive Institutions',
+      kind: 'paper',
+      status: 'draft',
+      year: 2026,
+      asks: 'When AI agents change faster than the institutions around them, how should those institutions be redesigned?',
+      setup:
+        'A position essay from a working group. It treats an institution as a self-regulating living system, drawing on Levin’s biology and Ashby’s law, with a technical companion note on candidate variety measures.',
+    },
+    {
+      id: 'procedural-alignment',
+      title: 'Procedural Alignment',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Can an AI system stay aligned without locking in one fixed set of moral answers?',
+      setup:
+        'A proposal built on an analogy to biological self-regulation: align the process by which values change, not a fixed target.',
+      href: '/pdfs/procedural-alignment.pdf',
+    },
+    {
+      id: 'predictive-governance',
+      title: 'A Model of Predictive Governance',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Can governance work faster and better if a society is treated as a self-correcting control system?',
+      setup:
+        'A conceptual proposal that applies control theory and the free energy principle (a theory of prediction-driven self-maintenance) to governance design.',
+      href: '/pdfs/predictive-governance.pdf',
+    },
+    {
+      id: 'active-inference-vsm',
+      title: 'Active Inference and the Viable Systems Model',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Does Beer’s classic model of a viable organisation already describe the computations a self-sustaining system must do?',
+      setup:
+        'A reformulation of Beer’s model in graph and active-inference terms, with a diagram. A blog version is being revised.',
+      href: '/pdfs/active-inference-vsm.pdf',
+    },
+    {
+      id: 'norms-as-precision-priors',
+      title: 'Norms as Shared Precision Priors',
+      kind: 'paper',
+      status: 'draft',
+      year: 2026,
+      asks: 'How do shared values get installed across a community whose members start with different preferences?',
+      setup:
+        'A theory paper that treats values as prior preferences and prestige as turning up the volume on which behaviours get copied, with a proposed multi-agent simulation to test three outcomes.',
+    },
+    {
+      id: 'planaria-to-polities',
+      title: 'From Planaria to Polities',
+      kind: 'paper',
+      status: 'draft',
+      year: 2026,
+      asks: 'Can the properties that keep biological systems resilient explain why social systems fail, and point to better designs?',
+      setup:
+        'A perspectives paper. It defines three network measures (organisation, redundancy, openness) and applies them to one case each from biology, neuroscience, and cultural evolution, then to social systems.',
+    },
+    {
+      id: 'open-problems-epistemic',
+      title: 'Open Problems in AI-Mediated Epistemic Resilience',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'How do AI systems that filter information push whole societies toward the same wrong beliefs?',
+      setup:
+        'A synthesis of failure patterns in information systems, opening from a historical intelligence failure, written to invite critique.',
+      href: '/pdfs/open-problems-epistemic.pdf',
+    },
+    {
+      id: 'red-teaming-democracy',
+      title: 'Red Teaming Democracy',
+      kind: 'paper',
+      status: 'published',
+      year: 2025,
+      venue: 'Bachelor’s thesis',
+      asks: 'Do digital-democracy voting mechanisms hold up under adversarial pressure?',
+      setup: 'A simulation of democratic mechanisms with language-model agents as the adversaries.',
+      href: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=uJLG7dcAAAAJ&citation_for_view=uJLG7dcAAAAJ:u5HHmVD_uO8C',
+    },
+    {
+      id: 'rl-red-teaming-democracy',
+      title: 'RL Red Teaming Democracy',
+      kind: 'paper',
+      status: 'in-progress',
+      year: 2026,
+      asks: 'Do the same mechanisms hold up against an adversary trained to break them optimally?',
+      setup:
+        'The planned follow-up. Reinforcement-learning adversaries replace the language-model ones, on three mechanisms in a resource-allocation game. Experiments not yet run.',
+    },
+    {
+      id: 'hom-predictions',
+      title: 'Improving High Output Management through Predictions',
+      kind: 'paper',
+      status: 'working-paper',
+      year: 2026,
+      asks: 'Should decision authority go to whoever has the best prediction track record, rather than to fixed roles?',
+      setup:
+        'An agent-based simulation comparing three decision-routing designs (direct, representative, liquid delegation) under adversarial conditions.',
+      href: '/pdfs/improving-hom-predictions.pdf',
+    },
+    {
+      id: 'bottlenecks-desci',
+      title: 'Modelling Bottlenecks in Decentralised Science',
+      kind: 'note',
+      status: 'notes',
+      year: 2026,
+      asks: 'Can effective resistance, an idea from electrical circuits, show where information gets stuck in open-science networks?',
+      setup:
+        'Working notes that apply graph-Laplacian resistance to information flow between researchers.',
+      href: '/pdfs/bottlenecks-desci.pdf',
+    },
+  ],
+  figure: {
+    title: 'A row of agents, an institution above them, and a rule-maker above that',
+    description:
+      'Circles are agents. Squares are institutions; the upper dashed square is the rule-maker that can rewire the institution. Dashed arrows are disturbances arriving from the left. Solid arrows are regulation flowing down. Dotted arrows are signals flowing up. In the last beat a bold path from one agent into the rule-maker marks capture.',
+    captions: {
+      question: 'shocks arrive. who absorbs them?',
+      why: 'a regulator needs as much variety as what hits it',
+      shape: 'an institution that can change its own rules',
+      open: 'capture and lock-in: the loop gone wrong',
+    },
+    annotations: {
+      shocks: 'disturbances',
+      institution: 'institution',
+      meta: 'rule-maker',
+      rewire: 'rewires the rules',
+      capture: 'capture',
+      lockIn: 'lock-in: the rewiring stops',
+      questionNote: 'nobody yet holds the responses no single person can',
+      varietyTitle: 'variety',
+      varietyShocks: 'of the shocks',
+      varietyRules: 'of the rules',
+      varietyNote: 'when the lower bar is shorter,\nthe institution falls behind',
+      shapeNote: 'signals up,\nrewiring down',
+    },
+    legend: [
+      { glyph: 'circle', label: 'agent' },
+      { glyph: 'square', label: 'institution' },
+      { glyph: 'dashed-arrow', label: 'disturbance' },
+      { glyph: 'arrow', label: 'regulation' },
+      { glyph: 'dotted-arrow', label: 'signal' },
+      { glyph: 'strong-line', label: 'capture path' },
+    ],
+  },
+};

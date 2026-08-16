@@ -1,0 +1,706 @@
+/* Research areas page: index strip, chapter heads, figures, and piece shelves.
+   Colors come from the site tokens; the figure inherits the thesis world's
+   ink/paper/graphite mapping so the pen matches across pages. */
+
+.root {
+  --ink: var(--color-primary);
+  --paper: var(--bg-color);
+  --accent: var(--color-blue-accent);
+  --graphite: var(--diagram-graphite);
+  --uncertain: var(--diagram-uncertain);
+  --defect: var(--diagram-defect);
+  --line: color-mix(in srgb, var(--ink) 18%, transparent);
+  --line-strong: color-mix(in srgb, var(--ink) 42%, transparent);
+  --hatch: color-mix(in srgb, var(--ink) 7%, transparent);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+}
+
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.column {
+  width: min(1500px, calc(100% - clamp(3rem, 6vw, 6rem)));
+  margin-inline: auto;
+}
+
+/* ---------- index strip ---------- */
+
+.index {
+  padding-block: clamp(2rem, 4vh, 3.5rem) clamp(2.5rem, 5vh, 4rem);
+}
+
+.rule {
+  position: relative;
+  border-top: 1px solid var(--line-strong);
+  margin-bottom: 1.6rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rule span {
+  position: relative;
+  top: -0.6em;
+  padding-right: 0.8rem;
+  background: var(--paper);
+}
+
+.indexGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
+}
+
+.indexCard {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  min-height: 11rem;
+  padding: 1.2rem 1.2rem 1.4rem;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 220ms ease;
+}
+
+.indexCard::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 8px -8px -8px 8px;
+  opacity: 0;
+  background: repeating-linear-gradient(135deg, transparent 0 7px, var(--hatch) 7px 8px);
+  transition: opacity 220ms ease;
+}
+
+.indexCard:hover,
+.indexCard:focus-visible {
+  transform: translate(-3px, -3px);
+}
+
+.indexCard:hover::after,
+.indexCard:focus-visible::after {
+  opacity: 1;
+}
+
+.indexCard span,
+.indexCard small {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.indexCard strong {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.indexCard p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+
+.indexCard small {
+  margin-top: auto;
+  opacity: 0.62;
+}
+
+.indexHint {
+  margin: 1.4rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  max-width: 62ch;
+}
+
+/* ---------- chapter head ---------- */
+
+.area {
+  scroll-margin-top: calc(var(--navbar-height) + 1rem);
+}
+
+.chapterHead {
+  padding-top: clamp(4rem, 8vh, 6rem);
+}
+
+.chapterGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+  /* The essay's first sticky step heading paints a mask one navbar-height
+     tall above itself; keep the intro clear of it. */
+  padding-bottom: calc(var(--navbar-height) + 1.5rem);
+}
+
+.chapterHead h2 {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.chapterIntro p {
+  margin: 0 0 1rem;
+  font-size: 1.07rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, currentColor 80%, transparent);
+}
+
+.chapterIntro p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- shelf (the pieces) ---------- */
+
+.shelf {
+  padding-block: clamp(2rem, 4vh, 3.5rem) clamp(4rem, 8vh, 6rem);
+}
+
+.shelfNote {
+  margin: -0.4rem 0 1.6rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, currentColor 66%, transparent);
+  max-width: 70ch;
+}
+
+.shelfGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
+}
+
+.piece {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.7rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.pieceMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.status {
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+
+.statusPublished,
+.statusAccepted {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.statusWorking {
+  border-color: var(--ink);
+}
+
+.statusDraft,
+.statusProgress {
+  border-style: dashed;
+}
+
+.statusNotes {
+  border-style: dotted;
+  opacity: 0.8;
+}
+
+.piece h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.piece h3 a {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+}
+
+.piece h3 a:hover,
+.piece h3 a:focus-visible {
+  background-size: 100% 2px;
+}
+
+.pieceBody {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+
+.pieceBody em {
+  font-style: normal;
+  color: var(--ink);
+}
+
+.pieceFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pieceFoot a {
+  color: var(--ink);
+}
+
+.pieceFoot span {
+  opacity: 0.55;
+}
+
+/* ---------- closing ---------- */
+
+.closing {
+  padding-block: clamp(4rem, 8vw, 7rem) clamp(5rem, 10vw, 9rem);
+}
+
+.closingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.closing h2 {
+  margin: 0 0 1.4rem;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(2rem, 3vw, 3.1rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+}
+
+.closing p {
+  margin: 0;
+  font-size: 1.07rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, currentColor 80%, transparent);
+}
+
+.linkGrid {
+  display: grid;
+  align-content: start;
+  border-top: 1px solid var(--line-strong);
+}
+
+.linkGrid a {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.25rem 1rem;
+  position: relative;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1.2rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 220ms ease;
+}
+
+.linkGrid a::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 8px -8px -8px 8px;
+  opacity: 0;
+  background: repeating-linear-gradient(135deg, transparent 0 7px, var(--hatch) 7px 8px);
+  transition: opacity 220ms ease;
+}
+
+.linkGrid a:hover,
+.linkGrid a:focus-visible {
+  transform: translate(-3px, -3px);
+}
+
+.linkGrid a:hover::after,
+.linkGrid a:focus-visible::after {
+  opacity: 1;
+}
+
+.linkGrid span,
+.linkGrid small {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.65rem;
+}
+
+.linkGrid strong {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.1rem;
+}
+
+.linkGrid small {
+  grid-column: 2;
+  opacity: 0.62;
+}
+
+/* ---------- figure ---------- */
+
+.svg {
+  display: block;
+  width: 100%;
+  height: min(750px, calc(100svh - var(--navbar-height) - 10.5rem));
+  min-height: 520px;
+  background: var(--paper);
+}
+
+.scene {
+  animation: sceneIn 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    animation: none;
+  }
+  .indexCard,
+  .linkGrid a {
+    transition: none;
+  }
+}
+
+.grid path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.035;
+}
+
+.hatchLine {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.8;
+  stroke-opacity: 0.4;
+}
+
+.caption {
+  fill: var(--ink);
+  font-family: 'Kalam', cursive;
+  font-size: 19px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.node path {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.node .nodeCorrection {
+  fill: none;
+  stroke-opacity: 0.55;
+}
+
+.nodeHatched path:first-child {
+  fill: url('#ra-hatch');
+}
+
+.nodeSolid path:first-child {
+  fill: var(--ink);
+}
+
+.nodeStrong path {
+  stroke-width: 2.4;
+}
+
+.nodeDashed path {
+  stroke-dasharray: 6 6;
+}
+
+.nodeMuted {
+  opacity: 0.4;
+}
+
+.nodeAccent path {
+  stroke: var(--accent);
+}
+
+.nodeLabel {
+  fill: var(--ink);
+  font-family: 'Kalam', cursive;
+  font-size: 15px;
+  text-anchor: middle;
+}
+
+.nodeLabelInside {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nodeLabelRight {
+  text-anchor: start;
+}
+
+.edge path {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.edgeDashed path:first-child {
+  stroke-dasharray: 6 6;
+}
+
+.edgeDotted path:first-child {
+  stroke-dasharray: 1 4.5;
+}
+
+.edgeStrong path {
+  stroke: var(--ink);
+  stroke-width: 2.6;
+}
+
+.edgeMuted {
+  opacity: 0.35;
+}
+
+.edgeAccent path {
+  stroke: var(--accent);
+}
+
+.arrowHead {
+  fill: none;
+  stroke-dasharray: none !important;
+}
+
+.loop path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.loopDashed path {
+  stroke-dasharray: 7 7;
+  stroke-opacity: 0.75;
+}
+
+.loopStrong path {
+  stroke-width: 2.4;
+}
+
+.loopPartial path {
+  stroke-dasharray: 60 34;
+  stroke-opacity: 0.85;
+}
+
+.loopAccent path {
+  stroke: var(--accent);
+}
+
+.loopLabel {
+  fill: var(--ink);
+  font-family: 'Kalam', cursive;
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.note {
+  fill: var(--ink);
+  font-family: 'Kalam', cursive;
+  font-size: 15px;
+}
+
+.noteStrong {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.noteMuted {
+  opacity: 0.6;
+}
+
+.leader path {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.axis {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.axisLine {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.bar {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.barSolid {
+  fill: var(--ink);
+}
+
+.barAccent {
+  stroke: var(--accent);
+  fill: color-mix(in srgb, var(--accent) 22%, var(--paper));
+}
+
+.trace {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.traceAccent {
+  stroke: var(--accent);
+}
+
+.traceGhost {
+  stroke: var(--graphite);
+  stroke-dasharray: 6 6;
+}
+
+.gap {
+  fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  stroke: none;
+}
+
+.mark {
+  fill: var(--uncertain);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.legendRow text {
+  fill: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legendShape {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.legendLine,
+.legendLine path {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.legendDashed {
+  stroke-dasharray: 5 5;
+}
+
+.legendStrong {
+  stroke-width: 2.2;
+}
+
+.legendDotted {
+  stroke-dasharray: 1 4.5;
+}
+
+.legendBar {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.15;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .indexGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .chapterGrid,
+  .closingGrid {
+    grid-template-columns: 1fr;
+  }
+  .svg {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 900 / 720;
+  }
+}
+
+@media (max-width: 640px) {
+  .indexGrid {
+    grid-template-columns: 1fr;
+  }
+  .indexCard {
+    min-height: 0;
+  }
+}
