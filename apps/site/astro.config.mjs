@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   redirects: {
     '/lab/playground': '/playground',
+    '/prototype': '/',
     '/explainer': '/thesis',
     '/explainer/prototype': '/thesis',
     '/explainer/notebook-prototype': '/thesis',
