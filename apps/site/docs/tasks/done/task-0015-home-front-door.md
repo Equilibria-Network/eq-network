@@ -100,11 +100,11 @@ home is promoted first, the link lands on the sketch version until then.
 
 ## What was built
 
-| Piece                                                        | Where                                                      |
-| ------------------------------------------------------------ | ---------------------------------------------------------- |
-| Typed contract + copy (`HomeFrontContent`, `latestPieces`)   | `src/content/home.ts` (appended; legacy content untouched) |
-| Sections below the hero (thesis … people, closing)           | `src/components/home-front/FrontDoor.astro`                |
-| Route (canonical `/`; `/prototype` redirects to it)          | `src/pages/index.astro`                                    |
+| Piece                                                      | Where                                                      |
+| ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Typed contract + copy (`HomeFrontContent`, `latestPieces`) | `src/content/home.ts` (appended; legacy content untouched) |
+| Sections below the hero (thesis … people, closing)         | `src/components/home-front/FrontDoor.astro`                |
+| Route (canonical `/`; `/prototype` redirects to it)        | `src/pages/index.astro`                                    |
 
 - The hero reuses the shared `PageHeader` (editorial variant) with the existing `LorenzAttractor`
   island in its `visual` slot. No fork of the header.
