@@ -99,6 +99,9 @@ graph accessibility and asset-loading conventions.
 - [x] **Thesis** — the approved connector-grammar renderer now uses the typed `VisualEssay` contract and
       persistent 20-node world model at canonical `/thesis`. The earlier `/explainer` comparison and
       prototype URLs redirect to `/thesis`.
+- [x] **Home** — the front door ([task-0015](../done/task-0015-home-front-door.md)) is canonical `/`
+      as of 2026-08-26: landing `PageHeader` with the Lorenz attractor, then `FrontDoor`. `/prototype`
+      redirects to `/`; the legacy `Hero`/`Publications`/`Audience` islands and `homeContent` are gone.
 - [x] **Lab playground** — the owner selected an integrated app rather than a duplicate prototype route.
       `apps/playground` supplies a stable React package export mounted at canonical, indexable
       `/playground` inside site chrome; the former Lab route redirects. See the
