@@ -1,18 +1,96 @@
 ---
 // src/pages/index.astro
+// The home (task-0015), promoted from /prototype on 2026-08-26: a full-height
+// landing hero that gives the Lorenz attractor the room it had on the legacy
+// home, then a map of the site. /prototype redirects here (astro.config.mjs).
 import Layout from '@/layouts/Layout.astro';
-import Hero from '@components/home/Hero';
-import Publications from '@components/home/Publications';
-import Audience from '@components/home/Audience';
-import { siteContent } from '@content/site';
+import PageHeader from '@components/layout/PageHeader.astro';
+import FrontDoor from '@components/home-front/FrontDoor.astro';
+import LorenzAttractor from '@components/home/LorenzAttractor';
+import { homeFrontContent } from '@content/home';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+
+const { header, index } = homeFrontContent;
 ---
 
-<Layout
-  title="Equilibria Network — Designing New Forms of Collective Intelligence"
-  description="Researching and building better coordination systems through simulations, mathematical foundations, and collective intelligence."
->
-  <h1 class="sr-only">{siteContent.pageTitles.home}</h1>
-  <Hero client:load />
-  <Publications client:load />
-  <Audience client:load />
+<Layout seo={homeFrontContent.seo}>
+  <PageHeader {...header} variant="landing" asideWidth="half">
+    <div class="lorenzFrame" slot="visual" aria-hidden="true">
+      <LorenzAttractor client:load />
+    </div>
+    <nav class="pageIndex" slot="after-copy" aria-label={index.label}>
+      <span class="indexLabel">{index.label}</span>
+      <ul>
+        {
+          index.links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </PageHeader>
+  <FrontDoor />
 </Layout>
+
+<style>
+  /* The attractor projects into min(width, height) of its box, so a tall
+     frame that fills the column reproduces the legacy hero's figure size. */
+  .lorenzFrame {
+    width: 100%;
+    height: clamp(420px, 72vh, 760px);
+  }
+
+  /* In-page index under the hero copy: the first screen routes the visitor. */
+  .pageIndex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.5rem;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 59, 126, 0.17);
+  }
+
+  .indexLabel,
+  .pageIndex a {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .indexLabel {
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  .pageIndex ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pageIndex a {
+    color: #003b7e;
+    text-decoration: none;
+  }
+
+  .pageIndex a:hover,
+  .pageIndex a:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 760px) {
+    .lorenzFrame {
+      height: min(60vh, 480px);
+    }
+  }
+</style>

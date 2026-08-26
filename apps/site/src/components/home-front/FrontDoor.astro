@@ -1,0 +1,845 @@
+---
+// src/components/home-front/FrontDoor.astro
+// Everything below the front-door header. The home is a map of the site:
+// each section stands for one page and, wherever it can, borrows that page's
+// own copy and pictures, so the home cannot drift from what it points at. The
+// thesis and the closing are the exceptions: they are written for this page.
+// Static by design; the only island on the page is the Lorenz attractor in
+// the header.
+import { homeFrontContent, splitWriting, phaseSummary, areaTopic } from '@content/home';
+import { researchAreas, researchAreasContent } from '@content/research-areas';
+import { roadmapPhases } from '@content/roadmap';
+import { labContent } from '@content/lab';
+import { teamMembers } from '@content/team';
+import { advisors } from '@content/about';
+
+const { thesis, roadmap, library, research, writing, people, closing } = homeFrontContent;
+
+const sketches = labContent.pipeline.steps;
+/** The photograph where the about prototype has one, the line sketch otherwise. */
+const photo = (person: { image: string; prototypeImage?: string }) =>
+  person.prototypeImage ?? person.image;
+const { piecesLabel } = researchAreasContent.ui;
+const { featured, more } = splitWriting(writing.posts);
+---
+
+<section id="thesis" class="thesis" aria-labelledby="thesis-title">
+  <div class="inner split">
+    <div class="intro">
+      <div class="rule"><span>{thesis.label}</span></div>
+      <h2 id="thesis-title">{thesis.title}</h2>
+      <p class="body">{thesis.body}</p>
+      <a class="exit" href={thesis.link.href}>{thesis.link.label} →</a>
+    </div>
+    <ol class="points">
+      {
+        thesis.points.map((point, i) => (
+          <li class="point">
+            <span class="pointIndex">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{point.title}</h3>
+            <p>{point.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<section id="roadmap" class="roadmap" aria-labelledby="roadmap-title">
+  <div class="inner">
+    <div class="intro wideIntro">
+      <div class="rule"><span>{roadmap.label}</span></div>
+      <h2 id="roadmap-title">{roadmap.title}</h2>
+      <p class="body">{roadmap.body}</p>
+    </div>
+    <ol class="phases">
+      {
+        roadmapPhases.map((phase) => (
+          <li>
+            <a class="phase" href={roadmap.link.href}>
+              <span class="portrait">
+                <img
+                  src={phase.researcher.image}
+                  alt={`Line portrait of ${phase.researcher.fullName}`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span class="phaseIndex">
+                Phase {phase.id} · {phase.researcher.lastName}
+              </span>
+              <span class="phaseName">{phase.name}</span>
+              <span class="phaseLine">{phaseSummary(phase.details.tagline)}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <a class="exit" href={roadmap.link.href}>{roadmap.link.label} →</a>
+  </div>
+</section>
+
+<section id="library" class="library" aria-labelledby="library-title">
+  <div class="inner split">
+    <div class="intro">
+      <div class="rule"><span>{library.label}</span></div>
+      <h2 id="library-title">{library.title}</h2>
+      <p class="body">{library.body}</p>
+      <a class="exit" href={library.link.href}>{library.link.label} →</a>
+      <ul class="libraryLinks">
+        {
+          library.links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                rel={link.external ? 'noopener' : undefined}
+                target={link.external ? '_blank' : undefined}
+              >
+                <span class="linkLabel">{link.label} →</span>
+                {link.sublabel && <span class="linkSub">{link.sublabel}</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <figure class="sketches">
+      <div class="sketchGrid">
+        {
+          sketches.map((sketch, i) => (
+            <a class="sketch" href={library.link.href}>
+              <span class="sketchImage">
+                <img src={sketch.img} alt={sketch.alt} loading="lazy" decoding="async" />
+              </span>
+              <span class="sketchTitle">
+                {String(i + 1).padStart(2, '0')} {sketch.title}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+      <figcaption>{library.sketchNote}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="research" class="research" aria-labelledby="research-title">
+  <div class="inner">
+    <div class="intro wideIntro">
+      <div class="rule"><span>{research.label}</span></div>
+      <h2 id="research-title">{research.title}</h2>
+      <p class="body">{research.body}</p>
+    </div>
+    <div class="areaGrid">
+      {
+        researchAreas.map((area) => (
+          <a class="area" href={research.link.href}>
+            <span class="areaIndex">
+              {String(area.index).padStart(2, '0')} /{' '}
+              {String(researchAreas.length).padStart(2, '0')}
+            </span>
+            <span class="areaName">{areaTopic(area.eyebrow)}</span>
+            <span class="areaLine">{area.oneLiner}</span>
+            <span class="areaCount">
+              {area.pieces.length} {piecesLabel}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <a class="exit" href={research.link.href}>{research.link.label} →</a>
+  </div>
+</section>
+
+<section id="writing" class="writing" aria-label={writing.label}>
+  <div class="inner">
+    <div class="rule"><span>{writing.label}</span></div>
+    <div class="postGrid">
+      {
+        featured.map((post) => (
+          <a class="post" href={post.href} rel="noopener" target="_blank">
+            <span class="postImage">
+              <img src={post.image} alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="postDate">{post.date}</span>
+            <span class="postTitle">{post.title}</span>
+            <span class="postSub">{post.subtitle}</span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="rule more"><span>{writing.moreLabel}</span></div>
+    <ul class="postList">
+      {
+        more.map((post) => (
+          <li>
+            <a href={post.href} rel="noopener" target="_blank">
+              <span class="postDate">{post.date}</span>
+              <span class="postListTitle">{post.title}</span>
+              <span class="postSub">{post.subtitle}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="exit" href={writing.allHref} rel="noopener" target="_blank">{writing.allLabel} →</a>
+  </div>
+</section>
+
+<section id="people" class="people" aria-labelledby="people-title">
+  <div class="inner">
+    <div class="intro wideIntro">
+      <div class="rule"><span>{people.label}</span></div>
+      <h2 id="people-title">{people.title}</h2>
+      <p class="body">{people.body}</p>
+      <a class="exit" href={people.link.href}>{people.link.label} →</a>
+    </div>
+    <div class="peopleGrid">
+      <div class="group">
+        <h3>{people.teamLabel}</h3>
+        <ul class="persons">
+          {
+            teamMembers.map((member) => (
+              <li>
+                <a class="person" href={people.link.href}>
+                  <img src={photo(member)} alt="" loading="lazy" decoding="async" />
+                  <span class="personName">{member.name}</span>
+                  <span class="personMeta">{member.role}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="group">
+        <h3>{people.advisorsLabel}</h3>
+        <ul class="persons">
+          {
+            advisors.map((advisor) => (
+              <li>
+                <a class="person" href={people.link.href}>
+                  <img src={photo(advisor)} alt="" loading="lazy" decoding="async" />
+                  <span class="personName">{advisor.name}</span>
+                  <span class="personMeta">{advisor.affiliation}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="collaborate" class="closing" aria-label={closing.label}>
+  <div class="inner">
+    <p class="label">{closing.label}</p>
+    <h2 class="closingTitle">{closing.title}</h2>
+    <p class="body">{closing.body}</p>
+    <p class="closingLinks">
+      {
+        closing.links.map((link) => (
+          <a
+            href={link.href}
+            rel={link.external ? 'noopener' : undefined}
+            target={link.external ? '_blank' : undefined}
+          >
+            {link.label} →
+          </a>
+        ))
+      }
+    </p>
+  </div>
+</section>
+
+<style>
+  section {
+    --ink: #003b7e;
+    --line: rgba(0, 59, 126, 0.17);
+    --muted: rgba(11, 31, 58, 0.75);
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'Space Grotesk', system-ui, sans-serif;
+    color: #0b1f3a;
+    background: #fff;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--navbar-height) + 1rem);
+  }
+
+  .inner {
+    width: min(1180px, 100%);
+    margin-inline: auto;
+    padding: clamp(2.5rem, 5vw, 4.5rem) 1.5rem;
+  }
+
+  /* Two-column sections: the intro on the left, the evidence on the right. */
+  .inner.split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .label,
+  .rule span {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .label {
+    margin: 0 0 1rem;
+    color: #4ab3f4;
+  }
+
+  /* Annotated rule: hairline with a mono label riding on it. */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .rule span {
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .intro .body {
+    max-width: 60ch;
+    margin: 1rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .wideIntro {
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+  }
+
+  .exit {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .exit:hover,
+  .exit:focus-visible {
+    text-decoration: underline;
+  }
+
+  /* Thesis points */
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .point {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .point:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pointIndex {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  .point h3 {
+    margin: 0.45rem 0 0;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .point p {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* Roadmap phases: five portraits in a row. */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .phase {
+    display: block;
+    text-decoration: none;
+  }
+
+  .portrait {
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 300ms ease;
+  }
+
+  .phase:hover .portrait img,
+  .phase:focus-visible .portrait img {
+    transform: scale(1.03);
+  }
+
+  .phaseIndex,
+  .areaIndex,
+  .sketchTitle {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  .phaseIndex {
+    margin-top: 0.85rem;
+  }
+
+  .phaseName,
+  .areaName {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .phase:hover .phaseName,
+  .phase:focus-visible .phaseName,
+  .area:hover .areaName,
+  .area:focus-visible .areaName {
+    text-decoration: underline;
+  }
+
+  .phaseLine,
+  .areaLine {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* Library: sketches on the right, links under the intro. */
+  .libraryLinks {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .libraryLinks li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .libraryLinks a {
+    display: block;
+    padding: 0.8rem 0;
+    text-decoration: none;
+  }
+
+  .linkLabel {
+    display: block;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+
+  .libraryLinks a:hover .linkLabel,
+  .libraryLinks a:focus-visible .linkLabel {
+    text-decoration: underline;
+  }
+
+  .linkSub {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .sketches {
+    margin: 0;
+  }
+
+  .sketchGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .sketch {
+    display: block;
+    text-decoration: none;
+  }
+
+  .sketchImage {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .sketchImage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .sketchTitle {
+    margin-top: 0.5rem;
+    color: var(--ink);
+  }
+
+  .sketch:hover .sketchTitle,
+  .sketch:focus-visible .sketchTitle {
+    text-decoration: underline;
+  }
+
+  .sketches figcaption {
+    margin-top: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  /* Research areas */
+  .areaGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .area {
+    display: block;
+    text-decoration: none;
+    border-top: 2px solid var(--ink);
+    padding-top: 0.85rem;
+  }
+
+  .areaCount {
+    display: block;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  /* Writing: picture cards, then a compact list. */
+  .postGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .post {
+    display: block;
+    text-decoration: none;
+  }
+
+  .postImage {
+    display: block;
+    margin-bottom: 0.75rem;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .postImage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .postDate {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0, 31, 69, 0.55);
+  }
+
+  .postTitle,
+  .postListTitle {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .post:hover .postTitle,
+  .post:focus-visible .postTitle,
+  .postList a:hover .postListTitle,
+  .postList a:focus-visible .postListTitle {
+    text-decoration: underline;
+  }
+
+  .postSub {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .rule.more {
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  .postList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .postList li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .postList a {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    grid-template-areas:
+      'date title'
+      'date sub';
+    column-gap: 1rem;
+    padding: 0.85rem 0;
+    text-decoration: none;
+  }
+
+  .postList .postDate {
+    grid-area: date;
+    padding-top: 0.3rem;
+  }
+
+  .postListTitle {
+    grid-area: title;
+    margin-top: 0;
+  }
+
+  .postList .postSub {
+    grid-area: sub;
+    margin-top: 0.2rem;
+  }
+
+  /* People */
+  .peopleGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .group h3 {
+    margin: 0 0 1rem;
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .persons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.5rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .person {
+    display: block;
+    text-decoration: none;
+  }
+
+  /* Photographs in the about prototype's graphite treatment, on the same 4:5
+     plate as the roadmap portraits so the page keeps one portrait idiom.
+     Colour comes back on hover. */
+  .person img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--line);
+    background: #fff;
+    filter: grayscale(1);
+    transition: filter 300ms ease;
+  }
+
+  .person:hover img,
+  .person:focus-visible img {
+    filter: grayscale(0);
+  }
+
+  .personName {
+    display: block;
+    margin-top: 0.6rem;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .person:hover .personName,
+  .person:focus-visible .personName {
+    text-decoration: underline;
+  }
+
+  .personMeta {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  /* Closing: hatched information strip idiom. */
+  .closing {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(0, 59, 126, 0.04) 0,
+        rgba(0, 59, 126, 0.04) 1px,
+        transparent 1px,
+        transparent 10px
+      ),
+      #fff;
+  }
+
+  .closingTitle {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+  }
+
+  .closing .body {
+    max-width: 62ch;
+    margin: 1rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .closingLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    margin: 1.25rem 0 0;
+  }
+
+  .closingLinks a {
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .closingLinks a:hover,
+  .closingLinks a:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1000px) {
+    .inner.split {
+      grid-template-columns: 1fr;
+    }
+
+    .phases {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .areaGrid,
+    .postGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .peopleGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .phases {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .areaGrid,
+    .postGrid,
+    .sketchGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .postList a {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'date'
+        'title'
+        'sub';
+    }
+  }
+</style>
