@@ -181,6 +181,28 @@ export function Edge({
   );
 }
 
+export type ChannelMarkKind = 'attenuator' | 'amplifier';
+
+/**
+ * Beer's variety marks, drawn on a channel. An attenuator is a bow-tie (the
+ * channel narrows); an amplifier is a triangle pointing along the flow (the
+ * channel widens). dir is +1 for a rightward flow, -1 for leftward.
+ */
+export function channelMarkPath(
+  kind: ChannelMarkKind,
+  cx: number,
+  cy: number,
+  size: number,
+  dir: 1 | -1
+) {
+  const s = size;
+  const h = size * 0.8;
+  if (kind === 'attenuator') {
+    return `M${cx - s},${cy - h} L${cx + s},${cy + h} L${cx + s},${cy - h} L${cx - s},${cy + h} Z`;
+  }
+  return `M${cx + dir * s},${cy} L${cx - dir * s},${cy - h} L${cx - dir * s},${cy + h} Z`;
+}
+
 interface LoopProps {
   seed: number;
   cx: number;
@@ -364,6 +386,17 @@ function LegendGlyphMark({ glyph }: { glyph: LegendGlyph }) {
       return <rect className={styles.legendBar} x="-6" y="-9" width="12" height="18" />;
     case 'wave':
       return <path className={styles.legendLine} d="M-12 0C-8 -9 -4 -9 0 0S8 9 12 0" />;
+    case 'attenuator':
+    case 'amplifier':
+      return (
+        <g>
+          <g className={styles.legendLine}>
+            <path d="M-14 0H-8" />
+            <path d="M8 0H14" />
+          </g>
+          <path className={styles.legendShape} d={channelMarkPath(glyph, 0, 0, 8, 1)} />
+        </g>
+      );
     default:
       return null;
   }
@@ -372,26 +405,43 @@ function LegendGlyphMark({ glyph }: { glyph: LegendGlyph }) {
 /**
  * One compact legend row aligned lower-left (policy: shape/fill first, then
  * connections). Entry widths are estimated from label length so entries never
- * overlap at the desktop presentation size.
+ * overlap at the desktop presentation size. A figure that needs more channels
+ * than one row holds wraps onto a second row above, keeping the last row on
+ * the baseline every figure shares.
  */
 export function LegendRow({ entries }: { entries: LegendEntry[] }) {
+  const maxWidth = FIG_W - 84;
+  const rowGap = 22;
   let cursor = 0;
+  let row = 0;
+  const placed = entries.map((entry) => {
+    const width = 34 + entry.label.length * 6.9 + 26;
+    if (cursor > 0 && cursor + width > maxWidth) {
+      row += 1;
+      cursor = 0;
+    }
+    const item = { entry, x: cursor, row };
+    cursor += width;
+    return item;
+  });
+  const top = 684 - row * rowGap;
   return (
-    <g className={styles.legendRow} transform="translate(42 684)" role="group" aria-label="legend">
-      {entries.map((entry) => {
-        const x = cursor;
-        cursor += 34 + entry.label.length * 6.9 + 26;
-        return (
-          <g key={`${entry.glyph}-${entry.label}`} transform={`translate(${x} 0)`}>
-            <g transform="translate(12 0)">
-              <LegendGlyphMark glyph={entry.glyph} />
-            </g>
-            <text x="32" y="4">
-              {entry.label}
-            </text>
+    <g
+      className={styles.legendRow}
+      transform={`translate(42 ${top})`}
+      role="group"
+      aria-label="legend"
+    >
+      {placed.map(({ entry, x, row: r }) => (
+        <g key={`${entry.glyph}-${entry.label}`} transform={`translate(${x} ${r * rowGap})`}>
+          <g transform="translate(12 0)">
+            <LegendGlyphMark glyph={entry.glyph} />
           </g>
-        );
-      })}
+          <text x="32" y="4">
+            {entry.label}
+          </text>
+        </g>
+      ))}
     </g>
   );
 }

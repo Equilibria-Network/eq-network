@@ -81,7 +81,9 @@ export type LegendGlyph =
   | 'dashed-arrow'
   | 'dotted-arrow'
   | 'bar'
-  | 'wave';
+  | 'wave'
+  | 'attenuator'
+  | 'amplifier';
 
 export interface LegendEntry {
   glyph: LegendGlyph;

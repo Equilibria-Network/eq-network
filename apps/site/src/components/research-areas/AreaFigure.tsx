@@ -14,6 +14,7 @@ import {
   Node,
   Note,
   Paper,
+  channelMarkPath,
   nodeRadius,
 } from './figurePrimitives';
 import styles from './research-areas.module.css';
@@ -401,133 +402,238 @@ function DynamicsFigure({ state, labels }: FigureProps) {
 }
 
 /* ------------------------------------------------------------------ */
-/* 03  Governance: institutions that keep their variety                */
+/* 03  Governance: a regulator, its system, and the variety between    */
 /* ------------------------------------------------------------------ */
 
-const CITIZENS: P[] = [140, 240, 340, 440, 540, 640, 740].map((x) => ({ x, y: 500 }));
-const INSTITUTION: P = { x: 440, y: 300 };
-const META: P = { x: 440, y: 140 };
-const SHOCK_ORIGIN: P = { x: 40, y: 600 };
+// Beer's triad, left to right: the outside, the regulated system, the
+// regulator. The rule-maker sits above the regulator.
+const SYSTEM: P = { x: 410, y: 390 };
+const SYSTEM_RX = 165;
+const SYSTEM_RY = 150;
+const OUTSIDE: P = { x: 120, y: 380 };
+const REGULATOR: P = { x: 745, y: 390 };
+const RULE_MAKER: P = { x: 745, y: 175 };
+const CHANNEL_X = 655;
+const SIGNAL_Y = 372;
+const REGULATION_Y = 408;
+
+function ring(count: number, radius: number, phase = 0): P[] {
+  return Array.from({ length: count }, (_, i) => {
+    const angle = phase + (i / count) * Math.PI * 2;
+    return {
+      x: Math.round(SYSTEM.x + Math.cos(angle) * radius),
+      y: Math.round(SYSTEM.y + Math.sin(angle) * radius),
+    };
+  });
+}
+
+/** x on the system boundary at a given y, for arrows that stop at the edge. */
+function boundaryX(y: number, side: 1 | -1) {
+  const t = (y - SYSTEM.y) / SYSTEM_RY;
+  return SYSTEM.x + side * SYSTEM_RX * Math.sqrt(Math.max(0, 1 - t * t));
+}
+
+/** Eight agents in balance, then eleven marks on the same ring once the system has resettled. */
+const SETTLED = ring(8, 100);
+const RESETTLED = ring(11, 100, -Math.PI / 2);
+/** Which resettled slots the new actors take (the first sits upper right, for the capture path). */
+const NEW_SLOTS = [2, 6, 9];
+/** Where the new actors wait outside, then where they push in. */
+const ARRIVING: P[] = [
+  { x: 102, y: 318 },
+  { x: 140, y: 386 },
+  { x: 100, y: 452 },
+];
+const PUSHED_IN: P[] = [
+  { x: 352, y: 392 },
+  { x: 412, y: 346 },
+  { x: 396, y: 436 },
+];
+/** The agents the new actors push out of place, and where they land. */
+const DISPLACED: Record<number, P> = {
+  3: { x: 255, y: 562 },
+  4: { x: 330, y: 204 },
+  5: { x: 560, y: 214 },
+};
 
 function GovernanceFigure({ state, labels }: FigureProps) {
   const a = labels.annotations;
   const past = (s: AreaStepState) => ORDER.indexOf(state) >= ORDER.indexOf(s);
   const rI = nodeRadius(97) * 1.35;
+  const resettled = past('shape');
+  const actors = resettled
+    ? NEW_SLOTS.map((slot) => RESETTLED[slot])
+    : state === 'why'
+      ? PUSHED_IN
+      : ARRIVING;
+  const varietyBars = state === 'why' ? [150, 96] : state === 'shape' ? [118, 118] : null;
   return (
     <g className={styles.scene} key={state}>
       <Caption>{labels.captions[state]}</Caption>
 
-      {/* disturbances arriving from the left */}
-      {CITIZENS.slice(0, 4).map((c, i) => (
-        <Edge
-          key={`shock-${i}`}
-          from={{ x: SHOCK_ORIGIN.x + i * 12, y: SHOCK_ORIGIN.y + i * 6 }}
-          to={{ x: c.x, y: c.y + 8 }}
-          fromGap={0}
-          toGap={nodeRadius(50 + i)}
-          index={70 + i}
-          pattern="dashed"
-          arrow
-          bend={-30 - i * 8}
-        />
-      ))}
-      <Note x={40} y={650}>
-        {a.shocks}
-      </Note>
+      {/* the outside, where the new actors come from */}
+      <Loop seed={53} cx={OUTSIDE.x} cy={OUTSIDE.y} rx={82} ry={140} dashed label={a.outside} />
 
-      {/* regulation from the institution */}
-      {past('why') &&
-        CITIZENS.map((c, i) => (
+      {/* the regulated system's boundary: whole, broken, then whole again */}
+      <Loop
+        seed={57}
+        cx={SYSTEM.x}
+        cy={SYSTEM.y}
+        rx={SYSTEM_RX}
+        ry={SYSTEM_RY}
+        strong={state !== 'why'}
+        partial={state === 'why'}
+      />
+
+      {/* arrivals, at the door */}
+      {state === 'question' &&
+        ARRIVING.map((p, i) => (
           <Edge
-            key={`reg-${i}`}
-            from={INSTITUTION}
-            to={c}
-            fromGap={rI}
-            toGap={nodeRadius(50 + i)}
-            index={80 + i}
+            key={`arrive-${i}`}
+            from={p}
+            to={{ x: boundaryX(p.y + 4, -1), y: p.y + 4 }}
+            fromGap={nodeRadius(58 + i)}
+            toGap={4}
+            index={70 + i}
+            pattern="dashed"
             arrow
-            strong={state === 'open' && i === 5}
-            accent={state === 'open' && i === 5}
+            accent
+            bend={i === 1 ? 0 : i === 0 ? -10 : 10}
           />
         ))}
-      {/* signals back up */}
-      {past('shape') &&
-        [1, 3, 5].map((i) => (
-          <Edge
-            key={`sig-${i}`}
-            from={CITIZENS[i]}
-            to={INSTITUTION}
-            fromGap={nodeRadius(50 + i)}
-            toGap={rI}
-            index={90 + i}
-            pattern="dotted"
-            arrow
-            bend={i === 3 ? 44 : i < 3 ? 40 : -40}
-          />
-        ))}
-      {/* the meta rule that rewires the institution */}
-      {past('shape') && (
+
+      {/* the two channels between system and regulator */}
+      <Edge
+        from={{ x: boundaryX(SIGNAL_Y, 1), y: SIGNAL_Y }}
+        to={{ x: REGULATOR.x, y: SIGNAL_Y }}
+        fromGap={0}
+        toGap={rI}
+        index={80}
+        pattern="dotted"
+        arrow
+        bend={0}
+        strong={state === 'why'}
+        accent={state === 'why'}
+      />
+      <Edge
+        from={{ x: REGULATOR.x, y: REGULATION_Y }}
+        to={{ x: boundaryX(REGULATION_Y, 1), y: REGULATION_Y }}
+        fromGap={rI}
+        toGap={0}
+        index={81}
+        arrow
+        bend={0}
+      />
+      {resettled && (
         <>
-          <Edge from={META} to={INSTITUTION} fromGap={rI} toGap={rI} index={100} arrow bend={0} />
+          <path
+            className={styles.channelMark}
+            d={channelMarkPath('attenuator', CHANNEL_X, SIGNAL_Y, 11, 1)}
+          />
+          <path
+            className={styles.channelMark}
+            d={channelMarkPath('amplifier', CHANNEL_X, REGULATION_Y, 11, -1)}
+          />
+          <Note x={CHANNEL_X} y={SIGNAL_Y - 18} anchor="middle">
+            {a.attenuate}
+          </Note>
+          <Note x={CHANNEL_X} y={REGULATION_Y + 28} anchor="middle">
+            {a.amplify}
+          </Note>
+        </>
+      )}
+
+      {/* the rule-maker that rewires the regulator */}
+      {resettled && (
+        <>
           <Edge
-            from={INSTITUTION}
-            to={META}
+            from={RULE_MAKER}
+            to={REGULATOR}
+            fromGap={rI}
+            toGap={rI}
+            index={100}
+            arrow
+            bend={0}
+            muted={state === 'open'}
+          />
+          <Edge
+            from={REGULATOR}
+            to={RULE_MAKER}
             fromGap={rI}
             toGap={rI}
             index={101}
             pattern="dotted"
             arrow
-            bend={40}
+            bend={-40}
           />
-          <Note x={520} y={215}>
-            {a.rewire}
+          <Note x={768} y={292}>
+            {state === 'open' ? a.lockIn : a.rewire}
           </Note>
         </>
       )}
-      {/* capture: one strong path back into the rule-maker */}
+
+      {/* capture: one strong path from a new actor into the rule-maker */}
       {state === 'open' && (
         <>
           <Edge
-            from={CITIZENS[5]}
-            to={META}
-            fromGap={nodeRadius(55)}
+            from={RESETTLED[NEW_SLOTS[0]]}
+            to={RULE_MAKER}
+            fromGap={nodeRadius(58)}
             toGap={rI}
             index={102}
             arrow
             strong
             accent
-            bend={-70}
+            bend={-60}
           />
-          <Note x={700} y={250} strong>
+          <Note x={600} y={250} strong>
             {a.capture}
           </Note>
-          <Note x={575} y={80}>
-            {a.lockIn}
-          </Note>
-          <Leader from={{ x: 570, y: 88 }} to={{ x: 480, y: 118 }} index={6} bend={10} />
         </>
       )}
 
-      {/* marks */}
-      {CITIZENS.map((c, i) => (
-        <Node key={i} id={50 + i} x={c.x} y={c.y} strong={state === 'open' && i === 5} />
-      ))}
-      {past('why') && (
+      {/* marks: agents, new actors, regulator, rule-maker */}
+      {resettled
+        ? RESETTLED.map((p, i) =>
+            NEW_SLOTS.includes(i) ? null : <Node key={`agent-${i}`} id={50 + i} x={p.x} y={p.y} />
+          )
+        : SETTLED.map((p, i) => {
+            const out = state === 'why' ? DISPLACED[i] : undefined;
+            return (
+              <Node
+                key={`agent-${i}`}
+                id={50 + i}
+                x={out ? out.x : p.x}
+                y={out ? out.y : p.y}
+                muted={Boolean(out)}
+              />
+            );
+          })}
+      {actors.map((p, i) => (
         <Node
-          id={97}
-          x={INSTITUTION.x}
-          y={INSTITUTION.y}
-          shape="rounded-square"
-          scale={2.1}
-          label={a.institution}
-          labelPlacement="right"
+          key={`actor-${i}`}
+          id={58 + i}
+          x={p.x}
+          y={p.y}
+          shape="triangle"
+          dashed={state === 'question'}
+          accent={!resettled}
+          strong={state === 'open' && i === 0}
         />
-      )}
-      {past('shape') && (
+      ))}
+      <Node
+        id={97}
+        x={REGULATOR.x}
+        y={REGULATOR.y}
+        shape="rounded-square"
+        scale={2.1}
+        label={a.institution}
+      />
+      {resettled && (
         <Node
           id={83}
-          x={META.x}
-          y={META.y}
+          x={RULE_MAKER.x}
+          y={RULE_MAKER.y}
           shape="rounded-square"
           scale={2.1}
           dashed
@@ -536,40 +642,73 @@ function GovernanceFigure({ state, labels }: FigureProps) {
         />
       )}
 
-      {/* variety bars: disturbances vs regulator */}
-      {state === 'why' && (
-        <g transform="translate(640 120)">
+      {/* variety bars: the system against its regulator */}
+      {varietyBars && (
+        <g transform="translate(60 96)">
           <text className={styles.axis} x="0" y="-8">
             {a.varietyTitle}
           </text>
-          <rect className={styles.bar} x="0" y="10" width="150" height="14" />
+          <rect className={styles.bar} x="0" y="10" width={varietyBars[0]} height="14" />
           <rect
-            className={`${styles.bar} ${styles.barAccent}`}
+            className={`${styles.bar} ${state === 'why' ? styles.barAccent : ''}`}
             x="0"
             y="34"
-            width="96"
+            width={varietyBars[1]}
             height="14"
           />
-          <text className={styles.axis} x="156" y="21">
-            {a.varietyShocks}
+          <text className={styles.axis} x="160" y="21">
+            {a.varietySystem}
           </text>
-          <text className={styles.axis} x="156" y="45">
+          <text className={styles.axis} x="160" y="45">
             {a.varietyRules}
           </text>
-          <Note x={0} y={82}>
-            {a.varietyNote}
+          <Note x={0} y={80}>
+            {state === 'why' ? a.varietyNote : a.varietyMatched}
           </Note>
         </g>
       )}
+
+      {/* notes per beat */}
       {state === 'question' && (
-        <Note x={450} y={330} anchor="middle" muted>
-          {a.questionNote}
-        </Note>
+        <>
+          <Note x={205} y={262} anchor="middle" strong>
+            ?
+          </Note>
+          <Note x={OUTSIDE.x} y={556} anchor="middle">
+            {a.arrive}
+          </Note>
+          <Note x={SYSTEM.x} y={578} anchor="middle">
+            {a.balance}
+          </Note>
+          <Note x={SYSTEM.x} y={616} anchor="middle" muted>
+            {a.questionNote}
+          </Note>
+        </>
+      )}
+      {state === 'why' && (
+        <>
+          <Note x={592} y={220}>
+            {a.pushedOut}
+          </Note>
+          <Note x={SYSTEM.x} y={600} anchor="middle">
+            {a.broken}
+          </Note>
+        </>
       )}
       {state === 'shape' && (
-        <Note x={640} y={420}>
-          {a.shapeNote}
+        <Note x={SYSTEM.x} y={600} anchor="middle">
+          {a.resettled}
         </Note>
+      )}
+      {state === 'open' && (
+        <>
+          <Note x={690} y={120} strong>
+            ?
+          </Note>
+          <Note x={SYSTEM.x} y={596} anchor="middle">
+            {a.openNote}
+          </Note>
+        </>
       )}
 
       <LegendRow entries={labels.legend} />

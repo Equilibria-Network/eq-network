@@ -692,6 +692,15 @@
   fill: var(--ink);
 }
 
+/* Beer's channel marks: paper-filled so the channel line breaks around them. */
+.channelMark {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
 .barAccent {
   stroke: var(--accent);
   fill: color-mix(in srgb, var(--accent) 22%, var(--paper));
