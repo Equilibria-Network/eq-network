@@ -4,6 +4,7 @@
 // Pipeline visualization: one lane per track, milestones as nodes on the lane.
 // Static editorial page: no island, readable without JS, no motion.
 import PageHeader from '@components/layout/PageHeader.astro';
+import TaggedHeader from '@components/layout/TaggedHeader.astro';
 import { pipelinePrototypeContent } from '@content/roadmap/tracks';
 import type { MilestoneStatus } from '@content/roadmap/tracks';
 import '@fontsource/space-grotesk/400.css';
@@ -24,7 +25,9 @@ const legendOrder: MilestoneStatus[] = ['done', 'active', 'next', 'later'];
 ---
 
 <article class="pipelinePrototype">
-  <PageHeader {...header} meta={headerMeta} />
+  <TaggedHeader level="mainly">
+    <PageHeader {...header} meta={headerMeta} />
+  </TaggedHeader>
 
   <div class="container">
     <section aria-labelledby="pipeline-phases-label">

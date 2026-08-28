@@ -1,0 +1,24 @@
+---
+// Wraps a page header and pins the "AI-assisted text" tag to its top-right
+// corner. A wrapper rather than a PageHeader prop so the header component
+// stays untouched; the tag positions itself against this relative box.
+import type { AuthorshipLevel } from '@content/authorship';
+import AuthorshipTag from './AuthorshipTag.astro';
+
+interface Props {
+  level: AuthorshipLevel;
+}
+
+const { level } = Astro.props;
+---
+
+<div class="taggedHeader">
+  <slot />
+  <AuthorshipTag level={level} />
+</div>
+
+<style>
+  .taggedHeader {
+    position: relative;
+  }
+</style>

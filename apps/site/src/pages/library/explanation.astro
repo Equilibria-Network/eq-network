@@ -2,10 +2,13 @@
 import LibraryExplainer from '@components/library-explainer/LibraryExplainer';
 import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@components/layout/PageHeader.astro';
+import TaggedHeader from '@components/layout/TaggedHeader.astro';
 import { libraryExplanationContent } from '@content/library-prototype';
 ---
 
 <Layout seo={libraryExplanationContent.seo}>
-  <PageHeader {...libraryExplanationContent.header} />
+  <TaggedHeader level="mainly">
+    <PageHeader {...libraryExplanationContent.header} />
+  </TaggedHeader>
   <LibraryExplainer client:load />
 </Layout>

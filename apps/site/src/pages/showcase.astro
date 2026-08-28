@@ -2,10 +2,13 @@
 import ShowcaseScroll from '@components/showcase/ShowcaseScroll';
 import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@components/layout/PageHeader.astro';
+import TaggedHeader from '@components/layout/TaggedHeader.astro';
 import { showcasePageContent } from '@content/showcase';
 ---
 
 <Layout seo={showcasePageContent.seo}>
-  <PageHeader {...showcasePageContent.header} />
+  <TaggedHeader level="partly">
+    <PageHeader {...showcasePageContent.header} />
+  </TaggedHeader>
   <ShowcaseScroll client:load />
 </Layout>

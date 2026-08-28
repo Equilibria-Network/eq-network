@@ -1,0 +1,123 @@
+---
+// The "AI-assisted text" tag: a small pill pinned to the top-right corner of
+// a page header (via TaggedHeader), with a short note that appears on hover
+// or keyboard focus. No JS: the note is plain markup revealed with CSS and
+// always available to assistive technology through aria-describedby.
+// Styling follows the canonical tooltip specimen on /brand/prototype.
+import { authorshipContent, type AuthorshipLevel } from '@content/authorship';
+
+interface Props {
+  level: AuthorshipLevel;
+  /** Override when two tags share a page; ids must stay unique. */
+  id?: string;
+}
+
+const { level, id = 'authorship-note' } = Astro.props;
+const note = authorshipContent.notes[level];
+---
+
+<div class="authorship">
+  <button type="button" class="tag" aria-label={authorshipContent.ariaLabel} aria-describedby={id}>
+    <span class="mark" aria-hidden="true"></span>
+    {authorshipContent.label}
+  </button>
+  <span role="tooltip" id={id} class="note">
+    <strong>{note.title}</strong>
+    {note.body}
+  </span>
+</div>
+
+<style>
+  /* Pinned to the header's top-right, aligned with the header's own content
+     column (1180px, 1.5rem inline padding) on wide screens and with its
+     padding edge on narrow ones. */
+  .authorship {
+    position: absolute;
+    z-index: 3;
+    top: 1.1rem;
+    right: max(1.5rem, calc((100% - 1180px) / 2 + 1.5rem));
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.7rem 0.35rem 0.6rem;
+    border: 1px solid var(--header-line, rgba(0, 59, 126, 0.17));
+    border-radius: 999px;
+    background: #fff;
+    color: var(--header-ink, #003b7e);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: help;
+  }
+
+  .tag:hover,
+  .tag:focus-visible {
+    border-color: var(--header-ink, #003b7e);
+  }
+
+  .tag:focus-visible {
+    outline: 2px solid var(--color-blue-accent, #4ab3f4);
+    outline-offset: 2px;
+  }
+
+  .mark {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--color-blue-accent, #4ab3f4);
+  }
+
+  .note {
+    position: absolute;
+    z-index: 4;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    width: min(280px, calc(100vw - 3rem));
+    padding: 0.8rem 0.9rem;
+    border-radius: 4px;
+    background: var(--header-ink, #003b7e);
+    color: #fff;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    line-height: 1.55;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0;
+    transform: translateY(-0.3rem);
+    pointer-events: none;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .note strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  .authorship:hover .note,
+  .authorship:focus-within .note {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 760px) {
+    .authorship {
+      top: 0.7rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .note {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
