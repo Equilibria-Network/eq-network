@@ -1,0 +1,150 @@
+/* Editorial blocks specific to the simulation-standards page: the numbered
+   requirements and the validation levels. Page chrome (column, rule, chapter head, closing)
+   and every drawing class come from the research-areas module so the two
+   pages share one pen. */
+
+.section {
+  padding-block: clamp(3.5rem, 7vw, 6rem) 0;
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.section h2 {
+  margin: 0 0 1.2rem;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.intro p {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, currentColor 80%, transparent);
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: item;
+  border-top: 1px solid var(--line-strong);
+}
+
+.items li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 0 1.2rem;
+  border-bottom: 1px solid var(--line-strong);
+  counter-increment: item;
+}
+
+.items li::before {
+  content: counter(item, decimal-leading-zero);
+  grid-row: span 2;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+  padding-top: 0.35rem;
+}
+
+.items h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.items p {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+
+.note {
+  margin: 1.6rem 0 0;
+  padding: 1.1rem 1.25rem;
+  border-left: 2px solid var(--color-blue-accent, currentColor);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+
+.levels {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+
+.levels li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0.2rem 1rem;
+  padding: 1rem 0 1.1rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.levelCode {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding-top: 0.25rem;
+}
+
+.levelName {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.levels p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+
+/* Figure-only classes: the hatched "landscape is moving" region and the
+   potential landscape curve. Everything else comes from the shared module. */
+.moving {
+  fill: url(#ra-hatch);
+  stroke: none;
+  opacity: 0.55;
+}
+
+.landscape {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+@media (max-width: 992px) {
+  .sectionGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .levels li {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+
+  .levels p {
+    grid-column: 2;
+  }
+}

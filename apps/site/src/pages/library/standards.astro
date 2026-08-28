@@ -1,0 +1,25 @@
+---
+// src/pages/library/standards.astro
+// The simulation-standards page (task-0016, owner request 2026-08-24): why a
+// simulation result needs a standard before it is reported, and the standard
+// itself. Sits under CI Library in the nav next to the explainer.
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import TaggedHeader from '@components/layout/TaggedHeader.astro';
+import StandardsStory from '@components/standards/StandardsStory';
+import { standardsContent } from '@content/standards';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
+---
+
+<Layout seo={standardsContent.seo}>
+  <TaggedHeader level="mainly">
+    <PageHeader {...standardsContent.header} />
+  </TaggedHeader>
+  <StandardsStory client:load />
+</Layout>
