@@ -34,7 +34,6 @@ export interface SiteContent {
   /** Screen-reader-only page titles for routes whose design has no visible <h1>. */
   pageTitles: {
     home: string;
-    research: string;
     thesis: string;
   };
   footer: {
@@ -77,6 +76,7 @@ export const siteContent: SiteContent = {
     links: [
       { href: '/', label: 'Home' },
       { href: '/thesis', label: 'Thesis' },
+      { href: '/research', label: 'Research' },
       { href: '/roadmap', label: 'Roadmap' },
       {
         label: 'CI Library',
@@ -91,7 +91,6 @@ export const siteContent: SiteContent = {
   },
   pageTitles: {
     home: 'Equilibria Network',
-    research: 'Research',
     thesis: 'Thesis',
   },
   footer: {

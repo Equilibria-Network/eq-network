@@ -1,14 +1,23 @@
 ---
 // src/pages/research.astro
+// Canonical research page: four areas as stacked scroll stories (task-0014,
+// promoted 2026-08-20 by owner direction, replacing the pipeline graph).
+// /research/prototype stays as the unlisted prototype rendering the same
+// component, per the prototype-programme promotion pattern.
 import Layout from '@/layouts/Layout.astro';
-import ResearchGraph from '@components/research/ResearchGraph';
-import { siteContent } from '@content/site';
+import PageHeader from '@components/layout/PageHeader.astro';
+import ResearchAreasStory from '@components/research-areas/ResearchAreasStory';
+import { researchAreasContent } from '@content/research-areas';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/kalam/400.css';
+import '@fontsource/kalam/700.css';
 ---
 
-<Layout
-  title="Research — Equilibria Network"
-  description="Explore Equilibria Network's research pipeline, from mathematical foundations to real-world coordination systems."
->
-  <h1 class="sr-only">{siteContent.pageTitles.research}</h1>
-  <ResearchGraph client:load />
+<Layout seo={researchAreasContent.seo}>
+  <PageHeader {...researchAreasContent.header} />
+  <ResearchAreasStory client:load />
 </Layout>

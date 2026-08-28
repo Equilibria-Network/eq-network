@@ -1,12 +1,12 @@
 ---
 // src/pages/research/prototype.astro
-// Research areas as stacked scroll stories (task-0014). Prototype-programme
-// route: noindex, out of the sitemap, and the canonical /research page is
-// unchanged until the owner promotes this.
+// Unlisted prototype twin of the canonical /research page (task-0014,
+// promoted 2026-08-20). Same content and component; noindex and out of the
+// sitemap, kept for comparison per the prototype-programme pattern.
 import Layout from '@/layouts/Layout.astro';
 import PageHeader from '@components/layout/PageHeader.astro';
 import ResearchAreasStory from '@components/research-areas/ResearchAreasStory';
-import { researchAreasContent } from '@content/research-areas';
+import { researchAreasPrototypeContent } from '@content/research-areas';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
@@ -16,7 +16,7 @@ import '@fontsource/kalam/400.css';
 import '@fontsource/kalam/700.css';
 ---
 
-<Layout seo={researchAreasContent.seo}>
-  <PageHeader {...researchAreasContent.header} />
+<Layout seo={researchAreasPrototypeContent.seo}>
+  <PageHeader {...researchAreasPrototypeContent.header} />
   <ResearchAreasStory client:load />
 </Layout>
