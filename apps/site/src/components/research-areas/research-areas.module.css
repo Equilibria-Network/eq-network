@@ -128,6 +128,55 @@
   max-width: 62ch;
 }
 
+/* ---------- tag legend ---------- */
+
+.markers {
+  margin-top: 2.2rem;
+  max-width: 62ch;
+}
+
+.markersIntro,
+.markersNote {
+  margin: 0.9rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+}
+
+.markersList {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.markersList > div {
+  display: grid;
+  grid-template-columns: 11.5rem 1fr;
+  gap: 0.3rem 1rem;
+  align-items: baseline;
+}
+
+.markersList dt {
+  margin: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.markersList dd {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  .markersList > div {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- chapter head ---------- */
 
 .area {
@@ -233,6 +282,49 @@
 .statusNotes {
   border-style: dotted;
   opacity: 0.8;
+}
+
+/* Confidence: a three-cell meter drawn from the same ink, then the word. */
+.confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.confidence::before {
+  content: '';
+  display: inline-block;
+  width: 0.95rem;
+  height: 0.42rem;
+  border: 1px solid currentColor;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: var(--meter, 0%) 100%;
+}
+
+.confidenceHigh {
+  --meter: 100%;
+}
+
+.confidenceMedium {
+  --meter: 62%;
+}
+
+.confidenceLow {
+  --meter: 28%;
+  opacity: 0.85;
+}
+
+/* Provenance: dotted frame, so it reads as a note about the text, not a rank. */
+.provenance {
+  padding: 0.1rem 0.45rem;
+  border: 1px dotted var(--ink);
+  border-radius: 2px;
+  white-space: nowrap;
 }
 
 .piece h3 {

@@ -33,11 +33,29 @@ export type PieceKind = 'paper' | 'post' | 'note' | 'software';
 export type PieceStatus =
   'published' | 'accepted' | 'working-paper' | 'draft' | 'in-progress' | 'notes';
 
+/**
+ * Our own credence that the piece's central claims hold up, today. This is
+ * separate from status: a working paper can be high confidence, a published
+ * post can be low. Absent means we have not rated it yet (early drafts).
+ */
+export type PieceConfidence = 'high' | 'medium' | 'low';
+
+/**
+ * How the text was produced, when AI did a meaningful share of the writing.
+ * Absent means written by hand.
+ * - ai-drafted: a language model wrote a large part of the text under our
+ *   direction; we set the question and the frame and read the result
+ * - ai-assisted: AI helped with parts of the writing or the derivations
+ */
+export type PieceProvenance = 'ai-drafted' | 'ai-assisted';
+
 export interface AreaPiece {
   id: string;
   title: string;
   kind: PieceKind;
   status: PieceStatus;
+  confidence?: PieceConfidence;
+  provenance?: PieceProvenance;
   year?: number;
   /** One sentence: the question the piece asks. */
   asks: string;
@@ -82,6 +100,15 @@ export interface AreaFigureLabels {
   legend: LegendEntry[];
 }
 
+/** One sentence per tag value, so a reader can tell the axes apart. */
+export interface PieceMarkersLegend {
+  eyebrow: string;
+  intro: string;
+  statusNote: string;
+  confidence: Record<PieceConfidence, string>;
+  provenance: Record<PieceProvenance, string>;
+}
+
 export interface ResearchArea {
   id: AreaId;
   /** 1-based, used for the "01 / 04" marks. */
@@ -120,7 +147,11 @@ export interface ResearchAreasPageContent {
     readLabel: string;
     notPublicLabel: string;
     statusLabels: Record<PieceStatus, string>;
+    confidenceLabels: Record<PieceConfidence, string>;
+    provenanceLabels: Record<PieceProvenance, string>;
     kindLabels: Record<PieceKind, string>;
+    /** The legend that explains the three tag axes, printed under the index strip. */
+    markers: PieceMarkersLegend;
     closingLabel: string;
   };
   closing: {

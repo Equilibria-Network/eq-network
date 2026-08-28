@@ -68,6 +68,8 @@ export const collectiveAgency: ResearchArea = {
       title: 'A Taxonomy of Agents From the Intentional Stance',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
+      provenance: 'ai-drafted',
       year: 2026,
       asks: 'Why do biology, economics, and AI disagree about what counts as an agent?',
       setup:
@@ -79,6 +81,8 @@ export const collectiveAgency: ResearchArea = {
       title: 'Open Questions in Collective Agent Foundations',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
+      provenance: 'ai-drafted',
       year: 2025,
       asks: 'When does a group of parts become one agent with goals of its own?',
       setup:
@@ -110,7 +114,9 @@ export const collectiveAgency: ResearchArea = {
       title: 'Towards a Langlands Program for Collective Intelligence',
       kind: 'paper',
       status: 'working-paper',
-      year: 2026,
+      confidence: 'high',
+      provenance: 'ai-drafted',
+      year: 2025,
       asks: 'Can the ways game theory, physics, and social science describe group behaviour be translated into each other?',
       setup:
         'A proposal, in the language of category theory (the mathematics of structure-preserving maps), for a set of correspondences between those descriptions.',
@@ -121,6 +127,8 @@ export const collectiveAgency: ResearchArea = {
       title: 'Convergent Structures in Collective Intelligence',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'low',
+      provenance: 'ai-drafted',
       year: 2026,
       asks: 'Are markets, networks, and democracies near-optimal structures rather than historical accidents?',
       setup:
@@ -132,6 +140,8 @@ export const collectiveAgency: ResearchArea = {
       title: 'Markov Blanket Discovery via Minimum Cut',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'high',
+      provenance: 'ai-assisted',
       asks: 'Can a classic graph-cutting algorithm find the natural statistical boundary of a system?',
       setup:
         'A short formal note: definitions plus one proved proposition linking Markov blankets (statistical boundaries) to minimum cuts in a graph.',
@@ -142,6 +152,7 @@ export const collectiveAgency: ResearchArea = {
       title: 'Agent Identification through TPMs and Markov Blankets',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can we detect where the agents are inside a system instead of assuming their boundaries?',
       setup:
@@ -153,6 +164,7 @@ export const collectiveAgency: ResearchArea = {
       title: 'A Natural History of Agency',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'low',
       year: 2025,
       asks: 'Can one principle explain why agency evolves in living and artificial systems alike?',
       setup: 'A formal argument from stated assumptions about evolution and prediction.',
@@ -163,6 +175,7 @@ export const collectiveAgency: ResearchArea = {
       title: 'Scalar Properties of Agency',
       kind: 'note',
       status: 'notes',
+      confidence: 'low',
       year: 2025,
       asks: 'Can traits like memory or planning be measured on a scale rather than as yes or no?',
       setup: 'An experimental section that recasts agent traits as continuous quantities.',
@@ -173,6 +186,7 @@ export const collectiveAgency: ResearchArea = {
       title: 'Cultural Evolution of Cognitive Tools in Multi-Agent AI Systems',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'low',
       year: 2025,
       asks: 'What happens when AI agents discover and share tools the way cultures pass down ideas?',
       setup:

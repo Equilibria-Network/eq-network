@@ -44,6 +44,7 @@ export const dynamics: ResearchArea = {
       title: 'Paradigm Shifts: Motivated Inference on Webs of Belief',
       kind: 'paper',
       status: 'accepted',
+      confidence: 'high',
       year: 2026,
       venue: 'IWAI 2026, proceedings and oral',
       asks: 'Why do communities sometimes defend an old idea and sometimes shift together to a new one?',
@@ -55,6 +56,7 @@ export const dynamics: ResearchArea = {
       title: 'Spectral Signatures of Gradual Disempowerment',
       kind: 'post',
       status: 'published',
+      confidence: 'high',
       year: 2026,
       venue: 'Substack',
       asks: 'Can the slow loss of human influence be seen in the spectrum of the network that carries it?',
@@ -66,6 +68,7 @@ export const dynamics: ResearchArea = {
       title: 'A Spectral Model of Collective Active Inference',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can network mathematics explain how individual belief updating adds up to group agreement or disagreement?',
       setup:
@@ -77,6 +80,7 @@ export const dynamics: ResearchArea = {
       title: 'Spectral speed limits (working title)',
       kind: 'paper',
       status: 'draft',
+      confidence: 'medium',
       year: 2026,
       asks: 'How fast can a group get in sync and act as one, and how does that depend on its size and the shape of its network?',
       setup:
@@ -87,6 +91,7 @@ export const dynamics: ResearchArea = {
       title: 'When Does the One Change Its Mind?',
       kind: 'paper',
       status: 'in-progress',
+      confidence: 'low',
       year: 2026,
       asks: 'When a collective changes its mind, is that a real shift or a new average?',
       setup:
@@ -97,6 +102,7 @@ export const dynamics: ResearchArea = {
       title: 'Graph-coupled games (working title)',
       kind: 'paper',
       status: 'draft',
+      confidence: 'low',
       year: 2026,
       asks: 'When can a cluster of connected agents be treated as one player in the game one level up?',
       setup:
@@ -107,6 +113,7 @@ export const dynamics: ResearchArea = {
       title: 'The Spectral Theory of Memetic Evolution',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Why do some ideas spread easily while others split a community?',
       setup:

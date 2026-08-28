@@ -45,6 +45,7 @@ export const infrastructure: ResearchArea = {
       title: 'The Collective Intelligence Library',
       kind: 'software',
       status: 'published',
+      confidence: 'high',
       venue: 'GitHub',
       asks: 'Can markets, networks, and democracies be modelled in one composable framework instead of separate tools?',
       setup:
@@ -56,6 +57,7 @@ export const infrastructure: ResearchArea = {
       title: 'The CI Library whitepaper',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'What is the engine, how do contributions enter it, and when may a result from it be believed?',
       setup:
@@ -67,6 +69,7 @@ export const infrastructure: ResearchArea = {
       title: 'WP1: Where Does the Money Go?',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'How does influence drain from human hands in a capital economy with AI labour?',
       setup:
@@ -78,6 +81,7 @@ export const infrastructure: ResearchArea = {
       title: 'WP2: Who Fills Your Head?',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'How does an attention network pool and amplify influence?',
       setup:
@@ -89,6 +93,7 @@ export const infrastructure: ResearchArea = {
       title: 'WP3: Where Does the Power Go?',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'How does delegated voting concentrate power?',
       setup:
@@ -100,6 +105,7 @@ export const infrastructure: ResearchArea = {
       title: 'CI Lab: A Functional Simulation Engine',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can a functional-programming approach to multi-agent simulation be both rigorous and fast?',
       setup:
@@ -111,6 +117,7 @@ export const infrastructure: ResearchArea = {
       title: 'Adaptive Resolution Modelling',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can a simulation zoom into fine detail only near a tipping point, and stay coarse otherwise?',
       setup:
@@ -122,6 +129,7 @@ export const infrastructure: ResearchArea = {
       title: 'When to Disaggregate',
       kind: 'paper',
       status: 'draft',
+      confidence: 'low',
       year: 2026,
       asks: 'Can a cheap aggregate model run by default, with a live test that says when to switch to the expensive detailed one?',
       setup:
@@ -132,6 +140,7 @@ export const infrastructure: ResearchArea = {
       title: 'Evidence Standards for Computational Mechanism Design',
       kind: 'paper',
       status: 'draft',
+      confidence: 'medium',
       year: 2026,
       asks: 'How should we judge whether a designed institution will hold up, when no single test method is complete?',
       setup:

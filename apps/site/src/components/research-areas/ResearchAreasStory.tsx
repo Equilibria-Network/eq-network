@@ -9,6 +9,8 @@ import { researchAreasContent } from '@content/research-areas';
 import type {
   AreaPiece,
   AreaStepState,
+  PieceConfidence,
+  PieceProvenance,
   PieceStatus,
   ResearchArea,
 } from '@content/research-areas/types';
@@ -25,6 +27,15 @@ const STATUS_CLASS: Record<PieceStatus, string> = {
   'in-progress': styles.statusProgress,
   notes: styles.statusNotes,
 };
+
+const CONFIDENCE_CLASS: Record<PieceConfidence, string> = {
+  high: styles.confidenceHigh,
+  medium: styles.confidenceMedium,
+  low: styles.confidenceLow,
+};
+
+const CONFIDENCE_KEYS: PieceConfidence[] = ['high', 'medium', 'low'];
+const PROVENANCE_KEYS: PieceProvenance[] = ['ai-drafted', 'ai-assisted'];
 
 function pad(value: number) {
   return String(value).padStart(2, '0');
@@ -72,7 +83,42 @@ function IndexStrip() {
         ))}
       </div>
       <p className={styles.indexHint}>{content.ui.indexHint}</p>
+      <MarkersLegend />
     </nav>
+  );
+}
+
+/** The tag legend: one line per confidence and provenance value, plus the status note. */
+function MarkersLegend() {
+  const { markers, confidenceLabels, provenanceLabels } = content.ui;
+  return (
+    <section className={styles.markers} aria-label={markers.eyebrow}>
+      <div className={styles.rule}>
+        <span>{markers.eyebrow}</span>
+      </div>
+      <p className={styles.markersIntro}>{markers.intro}</p>
+      <dl className={styles.markersList}>
+        {CONFIDENCE_KEYS.map((key) => (
+          <div key={key}>
+            <dt>
+              <span className={`${styles.confidence} ${CONFIDENCE_CLASS[key]}`}>
+                {confidenceLabels[key]}
+              </span>
+            </dt>
+            <dd>{markers.confidence[key]}</dd>
+          </div>
+        ))}
+        {PROVENANCE_KEYS.map((key) => (
+          <div key={key}>
+            <dt>
+              <span className={styles.provenance}>{provenanceLabels[key]}</span>
+            </dt>
+            <dd>{markers.provenance[key]}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className={styles.markersNote}>{markers.statusNote}</p>
+    </section>
   );
 }
 
@@ -84,6 +130,14 @@ function PieceCard({ piece }: { piece: AreaPiece }) {
     <article className={styles.piece}>
       <div className={styles.pieceMeta}>
         <span className={`${styles.status} ${STATUS_CLASS[piece.status]}`}>{status}</span>
+        {piece.confidence && (
+          <span className={`${styles.confidence} ${CONFIDENCE_CLASS[piece.confidence]}`}>
+            {content.ui.confidenceLabels[piece.confidence]}
+          </span>
+        )}
+        {piece.provenance && (
+          <span className={styles.provenance}>{content.ui.provenanceLabels[piece.provenance]}</span>
+        )}
         <span>{kind}</span>
         {piece.year && <span>{piece.year}</span>}
         {piece.venue && <span>{piece.venue}</span>}

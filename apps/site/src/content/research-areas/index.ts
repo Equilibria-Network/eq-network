@@ -1,9 +1,10 @@
 // src/content/research-areas/index.ts
 //
 // The research-areas page: four areas, each a short scroll story plus a
-// shelf of pieces with honest status tags. Prototype route only
-// (/research/prototype, noindex) until the owner promotes it; the canonical
-// /research page is unchanged.
+// shelf of pieces with honest status tags. Promoted 2026-08-20 (owner
+// direction): the canonical page lives at /research, replacing the old
+// pipeline graph; /research/prototype stays as the unlisted prototype route
+// rendering the same component, per the prototype-programme pattern.
 import { collectiveAgency } from './collective-agency';
 import { dynamics } from './dynamics';
 import { governance } from './governance';
@@ -18,7 +19,10 @@ export type {
   AreaStepState,
   LegendEntry,
   LegendGlyph,
+  PieceConfidence,
   PieceKind,
+  PieceMarkersLegend,
+  PieceProvenance,
   PieceStatus,
   ResearchArea,
   ResearchAreasPageContent,
@@ -31,9 +35,7 @@ export const researchAreasContent: ResearchAreasPageContent = {
     title: 'Research areas — Equilibria Network',
     description:
       'Four research areas, each shown as work in progress: when many agents become one, how fast a collective moves, how institutions keep their variety, and the simulation library where all of it gets tested.',
-    canonicalPath: '/research/prototype',
-    // Prototype gate (task-0009 programme): noindex until owner review.
-    noindex: true,
+    canonicalPath: '/research',
   },
   header: {
     eyebrow: 'RESEARCH / AREAS',
@@ -45,7 +47,7 @@ export const researchAreasContent: ResearchAreasPageContent = {
   ui: {
     indexEyebrow: 'Four areas',
     indexHint:
-      'Every piece on this page carries a status tag. Published and accepted work has been reviewed by someone else. Working papers are public and still changing. Drafts and in-progress items are named so you can see what is coming; ask if you want an early copy.',
+      'Every piece on this page carries a status tag, most carry a confidence tag, and some carry a provenance tag. The legend below says what each one means. Drafts and in-progress items are named so you can see what is coming; ask if you want an early copy.',
     piecesLabel: 'pieces',
     scrollPrompt: 'Scroll',
     figureStatusLabel: 'Beat',
@@ -61,6 +63,32 @@ export const researchAreasContent: ResearchAreasPageContent = {
       draft: 'Draft',
       'in-progress': 'In progress',
       notes: 'Notes',
+    },
+    confidenceLabels: {
+      high: 'High confidence',
+      medium: 'Medium confidence',
+      low: 'Low confidence',
+    },
+    provenanceLabels: {
+      'ai-drafted': 'AI-drafted',
+      'ai-assisted': 'AI-assisted',
+    },
+    markers: {
+      eyebrow: 'How to read the tags',
+      intro:
+        'Status says where a piece stands in the world. Confidence says how much we ourselves would bet on its central claims today. Provenance says how the text was made, when AI did a real share of the writing. The three are independent: a working paper can be high confidence, and a published post can be low.',
+      statusNote:
+        'Published and accepted work has been reviewed by someone else. Working papers are public and still changing.',
+      confidence: {
+        high: 'We believe in the core argument.',
+        medium: 'We stand behind the model, and we expect to change it in the future.',
+        low: 'An exploratory direction, which may or may not hold up.',
+      },
+      provenance: {
+        'ai-drafted':
+          'A language model wrote a large part of the text under our direction. We set the question and the frame and read the result.',
+        'ai-assisted': 'AI helped with parts of the writing or the derivations.',
+      },
     },
     kindLabels: {
       paper: 'Paper',
@@ -97,4 +125,14 @@ export const researchAreasContent: ResearchAreasPageContent = {
     ],
   },
   areas: researchAreas,
+};
+
+export const researchAreasPrototypeContent: ResearchAreasPageContent = {
+  ...researchAreasContent,
+  seo: {
+    ...researchAreasContent.seo,
+    title: 'Research areas — prototype — Equilibria Network',
+    canonicalPath: '/research/prototype',
+    noindex: true,
+  },
 };

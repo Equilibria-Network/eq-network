@@ -65,6 +65,7 @@ export const governance: ResearchArea = {
       title: 'Procedural Alignment',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can an AI system stay aligned without locking in one fixed set of moral answers?',
       setup:
@@ -76,6 +77,7 @@ export const governance: ResearchArea = {
       title: 'A Model of Predictive Governance',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'high',
       year: 2026,
       asks: 'Can governance work faster and better if a society is treated as a self-correcting control system?',
       setup:
@@ -87,6 +89,7 @@ export const governance: ResearchArea = {
       title: 'Active Inference and the Viable Systems Model',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'medium',
       year: 2026,
       asks: 'Does Beer’s classic model of a viable organisation already describe the computations a self-sustaining system must do?',
       setup:
@@ -98,6 +101,7 @@ export const governance: ResearchArea = {
       title: 'Norms as Shared Precision Priors',
       kind: 'paper',
       status: 'draft',
+      confidence: 'low',
       year: 2026,
       asks: 'How do shared values get installed across a community whose members start with different preferences?',
       setup:
@@ -108,6 +112,7 @@ export const governance: ResearchArea = {
       title: 'From Planaria to Polities',
       kind: 'paper',
       status: 'draft',
+      confidence: 'medium',
       year: 2026,
       asks: 'Can the properties that keep biological systems resilient explain why social systems fail, and point to better designs?',
       setup:
@@ -118,6 +123,7 @@ export const governance: ResearchArea = {
       title: 'Open Problems in AI-Mediated Epistemic Resilience',
       kind: 'paper',
       status: 'working-paper',
+      confidence: 'low',
       year: 2026,
       asks: 'How do AI systems that filter information push whole societies toward the same wrong beliefs?',
       setup:
@@ -129,6 +135,7 @@ export const governance: ResearchArea = {
       title: 'Red Teaming Democracy',
       kind: 'paper',
       status: 'published',
+      confidence: 'high',
       year: 2025,
       venue: 'Bachelor’s thesis',
       asks: 'Do digital-democracy voting mechanisms hold up under adversarial pressure?',
@@ -146,21 +153,11 @@ export const governance: ResearchArea = {
         'The planned follow-up. Reinforcement-learning adversaries replace the language-model ones, on three mechanisms in a resource-allocation game. Experiments not yet run.',
     },
     {
-      id: 'hom-predictions',
-      title: 'Improving High Output Management through Predictions',
-      kind: 'paper',
-      status: 'working-paper',
-      year: 2026,
-      asks: 'Should decision authority go to whoever has the best prediction track record, rather than to fixed roles?',
-      setup:
-        'An agent-based simulation comparing three decision-routing designs (direct, representative, liquid delegation) under adversarial conditions.',
-      href: '/pdfs/improving-hom-predictions.pdf',
-    },
-    {
       id: 'bottlenecks-desci',
       title: 'Modelling Bottlenecks in Decentralised Science',
       kind: 'note',
       status: 'notes',
+      confidence: 'low',
       year: 2026,
       asks: 'Can effective resistance, an idea from electrical circuits, show where information gets stuck in open-science networks?',
       setup:
