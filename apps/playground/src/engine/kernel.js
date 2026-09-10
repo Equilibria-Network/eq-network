@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+/* Hand-ported models from the CI Library engine (the engine is the source of
+   truth; see the engine repo's CLAUDE.md boundary section). Parity status,
+   audited 2026-08-14:
+     runEconomy, runPolitical (2026-07-30) — parity vs engine UNMEASURED
+     ledger/runCombined (2026-08-01 swap) — measured: 48 seeds/side, means ± SE
+     runPolity (2026-08-07, WP3 delegative_polity) — parity vs engine UNMEASURED
+   Do not add models here: new dynamics reach the page via the run-record path. */
+
 function makeRng(seed) {
   let s = seed | 0,
     spare = null;
