@@ -1,0 +1,18 @@
+---
+// /showcase/judgment — the WP4 model (delegated judgment, oversight erosion)
+// as a replay page over the engine-exported bundle at
+// /lab/runs/delegated-judgment-erosion-v1/. Prototype-programme route:
+// noindex until owner copy review (content/judgment.ts).
+import JudgmentShowcase from '@components/showcase/JudgmentShowcase';
+import Layout from '@/layouts/Layout.astro';
+import PageHeader from '@components/layout/PageHeader.astro';
+import TaggedHeader from '@components/layout/TaggedHeader.astro';
+import { judgmentPageContent } from '@content/judgment';
+---
+
+<Layout seo={judgmentPageContent.seo}>
+  <TaggedHeader level="partly">
+    <PageHeader {...judgmentPageContent.header} />
+  </TaggedHeader>
+  <JudgmentShowcase client:load />
+</Layout>

@@ -1,0 +1,210 @@
+/* /showcase/judgment — layout for the replay stage and the dial tray. The
+   typography and card classes come from the playground's showcase styles
+   (imported through the showcase-scroll entry); this file owns only what is
+   new here. */
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.stage svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.stageNote {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--pg-muted, #7b8494);
+}
+
+.vitals {
+  display: grid;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vital {
+  display: grid;
+  grid-template-columns: 6.2rem minmax(0, 1fr) 3.2rem;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--pg-graphite, #4b5563);
+}
+
+.vital strong {
+  font-weight: 500;
+  color: var(--pg-navy, #1f2a44);
+  text-align: right;
+}
+
+.rules {
+  counter-reset: rule;
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 8px;
+  list-style: none;
+}
+
+.rules li {
+  counter-increment: rule;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 10px;
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+.rules li::before {
+  content: counter(rule, decimal-leading-zero);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--pg-blue, #2563eb);
+  padding-top: 0.2rem;
+}
+
+.tray {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.dials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.dial {
+  display: grid;
+  gap: 6px;
+}
+
+.dial span {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--pg-muted, #7b8494);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  border: 1px solid var(--pg-line, #d8dce3);
+  background: var(--pg-white, #fff);
+  color: var(--pg-navy, #1f2a44);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.chipActive {
+  background: var(--pg-navy, #1f2a44);
+  color: var(--pg-white, #fff);
+  border-color: var(--pg-navy, #1f2a44);
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tile {
+  border: 1px solid var(--pg-line, #d8dce3);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--pg-white, #fff);
+  display: grid;
+  gap: 2px;
+}
+
+.tile span {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: var(--pg-muted, #7b8494);
+}
+
+.tile strong {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--pg-navy, #1f2a44);
+}
+
+.tile em {
+  font-style: normal;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--pg-muted, #7b8494);
+}
+
+.plane {
+  display: grid;
+  gap: 6px;
+}
+
+.plane span {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--pg-muted, #7b8494);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 1px solid var(--pg-navy, #1f2a44);
+  background: var(--pg-navy, #1f2a44);
+  color: var(--pg-white, #fff);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.buttonQuiet {
+  background: var(--pg-white, #fff);
+  color: var(--pg-navy, #1f2a44);
+}
+
+.muted {
+  color: var(--pg-muted, #7b8494);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .stage,
+  .readout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
