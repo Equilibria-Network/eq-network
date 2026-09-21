@@ -34,7 +34,7 @@ each page.
   than a header prop, so `PageHeader.astro` (being edited in another session) stays untouched:
   - `/showcase` → `partly`
   - `/library/explanation` → `mainly`
-  - `/library/standards` → `mainly`
+  - `/library/standards` → `mainly` (page withdrawn 2026-09-21, see task-0016 in `deferred/`)
   - `/library/roadmap` → `mainly` (the slot is passed inside `PipelinePrototype.astro`, which owns that
     page's header)
 

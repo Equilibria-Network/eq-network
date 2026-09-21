@@ -11,7 +11,11 @@
   (shared contracts); [`task-0014-research-areas-prototype.md`](task-0014-research-areas-prototype.md)
   (the page reuses its shell, drawing primitives, and page chrome);
   [`../../../../../DIAGRAMS.md`](../../../../../DIAGRAMS.md).
-- Status: in-progress, second build (2026-08-26), awaiting owner review
+- Status: withdrawn from the site 2026-09-21 (owner direction). The page stated one standard for every
+  simulation result. The owner's current view is that the fitting standard depends on the question a
+  model is asked (forecast, counterfactual, phase map, illustration), so the page came down until the
+  text is rethought. Page, components and content file were removed; restore them from commit
+  `5cb2b6c` if the page returns.
 - Owner: Claude session 2026-08-26
 - Priority: now
 
